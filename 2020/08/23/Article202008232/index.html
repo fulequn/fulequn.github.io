@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>EL表达式 （详解） - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-23 21:49" pubdate>
+      2020年8月23日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">EL表达式 （详解）</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>原文：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/android-blogs/p/5640872.html">https://www.cnblogs.com/android-blogs/p/5640872.html</a></p>
+<p>EL表达式<br>     1、EL简介<br>1）语法结构<br>       ${expression}<br>2）[]与.运算符<br>     EL 提供.和[]两种运算符来存取数据。<br>     当要存取的属性名称中包含一些特殊字符，如.或?等并非字母或数字的符号，就一定要使用 []。<br>例如：<br>         ${user.My-Name}应当改为${user[“My-Name”] }<br>     如果要动态取值时，就可以用[]来做，而.无法做到动态取值。例如：<br>         ${sessionScope.user[data]}中data 是一个变量<br>3）变量<br>     EL存取变量数据的方法很简单，例如：${username}。它的意思是取出某一范围中名称为<br>username的变量。<br>     因为我们并没有指定哪一个范围的username，所以它会依序从Page、Request、Session、<br>Application范围查找。<br>     假如途中找到username，就直接回传，不再继续找下去，但是假如全部的范围都没有找到时，<br>就回传null。<br>     属性范围在EL中的名称<br>         Page         PageScope<br>         Request         RequestScope<br>         Session         SessionScope<br>         Application     ApplicationScope<br>4) 1–EL表达式用${}表示,可用在所有的HTML和JSP标签中作用是代替JSP页面中复杂的JAVA代码.<br>2–EL表达式可操作常量 变量 和隐式对象. 最常用的 隐式对象有${param}和${paramValues}.<br>${param}表示返回请求参数中单个字符串的值. ${paramValues}表示返回请求参数的一组<br>值.pageScope表示页面范围的变量.requestScope表示请求对象的变量. sessionScope表示会话<br>范围内的变量.applicationScope表示应用范围的变量.<br>3 –&lt;%@ page isELIgnored=”true”%&gt; 表示是否禁用EL语言,TRUE表示禁止.FALSE表示不禁<br>止.JSP2.0中默认的启用EL语言.<br>             4– EL语言可显示 逻辑表达式如${true and false}结果是false     关系表达式如${5&gt;6} 结<br>果是false     算术表达式如 ${5+5} 结果是10<br>             5–EL中的变量搜索范围是:page request session application   点运算符(.)和”[ ]”都是<br>表示获取变量的值.区别是[ ]可以显示非词类的变量</p>
+<p>2、EL隐含对象<br>1)与范围有关的隐含对象<br>与范围有关的EL 隐含对象包含以下四个：pageScope、requestScope、sessionScope 和<br>applicationScope；<br>它们基本上就和JSP的pageContext、request、session和application一样；<br>在EL中，这四个隐含对象只能用来取得范围属性值，即getAttribute(String name)，却不能取得<br>其他相关信息。<br>例如：我们要取得session中储存一个属性username的值，可以利用下列方法：<br>     session.getAttribute(“username”) 取得username的值，<br>在EL中则使用下列方法<br>     ${sessionScope.username}<br>2)与输入有关的隐含对象<br>与输入有关的隐含对象有两个：param和paramValues，它们是EL中比较特别的隐含对象。<br>例如我们要取得用户的请求参数时，可以利用下列方法：<br>     request.getParameter(String name)<br>     request.getParameterValues(String name)<br>在EL中则可以使用param和paramValues两者来取得数据。<br>     ${param.name}<br>     ${paramValues.name}</p>
+<p>3.其他隐含对象<br>1)cookie<br>JSTL并没有提供设定cookie的动作，<br>例：要取得cookie中有一个设定名称为userCountry的值，可以使用${cookie.userCountry}     来<br>取得它。<br>2)header和headerValues<br>header 储存用户浏览器和服务端用来沟通的数据<br>例：要取得用户浏览器的版本，可以使用${header[“User-Agent”]}。<br>另外在鲜少机会下，有可能同一标头名称拥有不同的值，此时必须改为使用headerValues 来取得<br>这些值。<br>3)initParam<br>initParam取得设定web站点的环境参数(Context)<br>例：一般的方法String userid = (String)application.getInitParameter(“userid”);<br>     可以使用 ${initParam.userid}来取得名称为userid<br>4)pageContext<br>pageContext取得其他有关用户要求或页面的详细信息。<br>     ${pageContext.request.queryString}         取得请求的参数字符串<br>     ${pageContext.request.requestURL}         取得请求的URL，但不包括请求之参数字符串<br>     ${pageContext.request.contextPath}         服务的web application 的名称<br>     ${pageContext.request.method}           取得HTTP 的方法(GET、POST)<br>     ${pageContext.request.protocol}         取得使用的协议(HTTP/1.1、HTTP/1.0)<br>     ${pageContext.request.remoteUser}         取得用户名称<br>     ${pageContext.request.remoteAddr }         取得用户的IP 地址<br>     ${pageContext.session.new}             判断session 是否为新的<br>     ${pageContext.session.id}               取得session 的ID<br>     ${pageContext.servletContext.serverInfo}   取得主机端的服务信息<br>   4) 条件标签&gt;<br>1.算术运算符有五个：+、-、<em>或$、/或div、%或mod<br>2.关系运算符有六个：==或eq、!=或ne、&lt;或lt、&gt;或gt、&lt;=或le、&gt;=或ge<br>3.逻辑运算符有三个：&amp;&amp;或and、||或or、!或not<br>4.其它运算符有三个：Empty运算符、条件运算符、()运算符<br>     例：${empty param.name}、${A?B:C}、${A</em>(B+C)}<br>5) EL函数(functions)<br>语法：ns:function( arg1, arg2, arg3 …. argN)<br>其中ns为前置名称(prefix)，它必须和taglib 指令的前置名称一置<br>       6) 补充：<br>&lt;%@ taglib prefix=”c” <a target="_blank" rel="noopener" href="http://java.sun.com/jstl/core_rt&quot;&gt;http://java.sun.com/jstl/core_rt&quot;">http://java.sun.com/jstl/core_rt&quot;&gt;http://java.sun.com/jstl/core_rt&quot;</a> %&gt;<br>FOREACH:<br>&lt;c:forEach items=”${messages}”<br>var=”item”<br>begin=”0”<br>end=”9”<br>step=”1”<br>varStatus=”var”&gt;<br>……<br><br>OUT:<br>&lt;c:out value=”/${logininfo.username}”/&gt;<br>c:out&gt;将value 中的内容输出到当前位置，这里也就是把logininfo 对象的<br>username属性值输出到页面当前位置。<br>${……}是JSP2.0 中的Expression Language（EL）的语法。它定义了一个表达式，<br>其中的表达式可以是一个常量（如上），也可以是一个具体的表达语句（如forEach循环体中<br>的情况）。典型案例如下：<br>? ${logininfo.username}<br>这表明引用logininfo 对象的username 属性。我们可以通过“.”操作符引<br>用对象的属性，也可以用“[]”引用对象属性，如${logininfo[username]}<br>与${logininfo.username}达到了同样的效果。<br>“[]”引用方式的意义在于，如果属性名中出现了特殊字符，如“.”或者“-”，<br>此时就必须使用“[]”获取属性值以避免语法上的冲突（系统开发时应尽量避免<br>这一现象的出现）。<br>与之等同的JSP Script大致如下：<br>LoginInfo logininfo =<br>(LoginInfo)session.getAttribute(“logininfo”);<br>String username = logininfo.getUsername();<br>可以看到，EL大大节省了编码量。<br>这里引出的另外一个问题就是，EL 将从哪里找到logininfo 对象，对于<br>${logininfo.username}这样的表达式而言，首先会从当前页面中寻找之前是<br>否定义了变量logininfo，如果没有找到则依次到Request、Session、<br>Application 范围内寻找，直到找到为止。如果直到最后依然没有找到匹配的<br>变量，则返回null.<br>如果我们需要指定变量的寻找范围，可以在EL表达式中指定搜寻范围：<br>${pageScope.logininfo.username}<br>${requestScope.logininfo.username}<br>${sessionScope.logininfo.username}<br>${applicationScope.logininfo.username}<br>在Spring 中，所有逻辑处理单元返回的结果数据，都将作为Attribute 被放<br>置到HttpServletRequest 对象中返回（具体实现可参见Spring 源码中<br>org.springframework.web.servlet.view.InternalResourceView.<br>exposeModelAsRequestAttributes方法的实现代码），也就是说Spring<br>MVC 中，结果数据对象默认都是requestScope。因此，在Spring MVC 中，<br>以下寻址方法应慎用：<br>${sessionScope.logininfo.username}<br>${applicationScope.logininfo.username}<br>? ${1＋2}<br>结果为表达式计算结果，即整数值3。<br>? ${i&gt;1}<br>如果变量值i&gt;1的话，将返回bool类型true。与上例比较，可以发现EL会自<br>动根据表达式计算结果返回不同的数据类型。<br>表达式的写法与java代码中的表达式编写方式大致相同。<br>IF / CHOOSE:<br>&lt;c:if test=”${var.index % 2 == 0}”&gt;<br>*<br><br>判定条件一般为一个EL表达式。<br>&lt;c:if&gt;并没有提供else子句，使用的时候可能有些不便，此时我们可以通过&lt;c:choose&gt;<br>tag来达到类似的目的：<br>&lt;c:choose&gt;<br>&lt;c:when test=”${var.index % 2 == 0}”&gt;<br>*<br><br>&lt;c:otherwise&gt;<br>!<br><br><br>类似Java 中的switch 语句，&lt;c:choose&gt;提供了复杂判定条件下的简化处理手法。其<br>中&lt;c:when&gt;子句类似case子句，可以出现多次。上面的代码，在奇数行时输出“*”号，<br>而偶数行时输出“!”。<br>经验：1、如果EL表达式无法解析：– &lt;%@ page isELIgnored=”false” %&gt;</p>
+<p>一、           JSTL</p>
+<p>1、EL运算符&gt;;<br>       2)var指定变量，并把EL运算结果赋值给该变量值为true/false；<br>       3）scope:指定 var变量的范围；</p>
+<p>6、迭代标签<br>语法：&lt;c:forEach items=“collection” var=“name” varStatus=“status” begin=“int“<br>end=”int” step=“int” &gt;<br>           //循环体<br>           <br>     说明:1)items:是集合，用EL表达式；<br>       2)var:变量名，存放items<br>       3)varStatus: 显示循环状态的变量<br>①index:从0开始;<br>                     ②count:元素位置,从1开始;<br>                     ③first:如果是第一个元素则显示true;<br>                     ④last:如果是最后一个元素则显示true;<br>       4)begin:循环的初始值(整型)；<br>       5)end: 循环结束 ;<br>       6)step:步长,循环间隔的数值；<br>7、&lt;c:otherwise&gt;标签<br>     例：<br>如果user.wealthy值true，则显示user.wealthy is true.<br>&lt;c:choose&gt;<br>&lt;c:when test=””&gt;<br>user.generous is true.<br><br>&lt;c:when test=””&gt;<br>user.stingy is true.<br><br>&lt;c:otherwise&gt;<br>user.generous and user.stingy are false.<br><br><br>说明：只有当条件user.generous返回值是true时，才显示user.generous is true.<br>只有当条件user.stingy返回值是true时，才显示user.stingy is true.<br>其它所有的情况（即user.generous和user.stingy的值都不为true）全部显示user.generous and<br>user.stingy are false.<br>由于JSTL没有形如if (){…} else {…}的条件语句，所以这种形式的语句只能用&lt;c:choose&gt;、<br>&lt;c:when&gt;和&lt;c:otherwise&gt;标签共同来完成了。<br>8、c:forTokens&gt;标签<br>说明：<br>items 进行循环的项目 是 无<br>delims 分割符 是 无<br>begin 开始条件 否 0<br>end 结束条件 否 集合中的最后一个项目<br>step 步长 否 1<br>var 代表当前项目的变量名 否 无<br>varStatus 显示循环状态的变量 否 无<br>例子:<br>&lt;c:forTokens items=”a:b:c:d” delims=”:” var=”token”&gt;<br>&lt;c:out value=””/&gt;<br><br>这个标签的使用相当于java.util.StringTokenizer类。在这里将字符串a:b:c:d以：分开循环四次，<br>token是循环到当前分割到的字符串。<br>9、&lt;c:redirect&gt;标签<br>     说明：标签将请求重新定向到另外一个页面，它有以下属性 属性 描 述 是否必须 缺省值<br>url url地址 是 无<br>context /后跟本地web应用程序的名字 否 当前应用程序<br>例子：<br>&lt;c:redirect /‘&gt;<a target="_blank" rel="noopener" href="http://www.yourname.com/login.jsp&quot;/&gt;">http://www.yourname.com/login.jsp&quot;/&gt;</a><br>将请求重新定向到<a target="_blank" rel="noopener" href="http://www.yourname.com/login.jsp%E9%A1%B5%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8Eresponse.setRedirect">http://www.yourname.com/login.jsp页，相当于response.setRedirect</a><br>(“<a target="_blank" rel="noopener" href="http://www.yourname.com/login.jsp&quot;">http://www.yourname.com/login.jsp&quot;</a>);<br>10、&lt;c:param&gt;标签<br>     说明：&lt;c:param&gt;标签用来传递参数给一个重定向或包含页面，它有以下属性属 性 描 述 是否<br>必须 缺省值<br>name 在request参数中设置的变量名 是 无<br>value 在request参数中设置的变量值 否 无<br>例子：<br>&lt;c:redirect url=”login.jsp”&gt;<br>&lt;c:param name=”id” value=”888”/&gt;<br><br>将参数888以id为名字传递到login.jsp页面，相当于login.jsp?id=888<br>11、<a href="fmt:">fmt:</a>格式化标签<br>     说明：需要导入   &lt;%@ taglib prefix=”fmt” <a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/fmt&quot;&gt;http://java.sun.com/jsp/jstl/fmt&quot;">http://java.sun.com/jsp/jstl/fmt&quot;&gt;http://java.sun.com/jsp/jstl/fmt&quot;</a> %&gt;<br>     1）格式化日期&lt;fmt:formatDate value=“” pattern=“yyyy-MM-dd HH:mm:ss”/&gt;<br>               Value:通过EL表达式或&lt;%new Date() %&gt; 取的日期值；<br>               Pattern:输出的日期格式；<br>    2) 格式化数字&lt;fmt:formatNumber<br>value=”${n}” pattern=”###,###.##” /&gt;</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/JSP%E7%BD%91%E9%A1%B5/">JSP网页</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/24/Article202008241/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Word文档最后一页总是删除不掉怎么办？</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/23/Article202008231/">
+                        <span class="hidden-mobile">Hexo一篇文章多个categories</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "EL表达式 （详解）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
