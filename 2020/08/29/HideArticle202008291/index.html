@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Hexo的Fluid主题设置文章隐藏 - FuLeQun&#39;s Blog</title>
+  <title>度盘高级操作，秒传链接使用方法 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -160,8 +160,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-26 17:04" pubdate>
-      2020年8月26日 下午
+    <time datetime="2020-08-29 20:06" pubdate>
+      2020年8月29日 晚上
     </time>
   </div>
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      103 字
+      853 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      18
        分钟
     </span>
   
@@ -211,23 +211,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Hexo的Fluid主题设置文章隐藏</h1>
+            <h1 style="display: none">度盘高级操作，秒传链接使用方法</h1>
             
             <div class="markdown-body" id="post-body">
-              <h3 id="隐藏文章"><a href="#隐藏文章" class="headerlink" title="隐藏文章"></a>隐藏文章</h3><p>如果想把某些文章隐藏起来，不在首页和其他分类里展示，可以在文章开头 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a> 中配置 <code>hide: true</code> 属性。</p>
-<pre><code class="hljs yaml"><span class="hljs-meta">---</span>
-<span class="hljs-attr">title:</span> <span class="hljs-string">文章标题</span>
-<span class="hljs-attr">index_img:</span> <span class="hljs-string">/img/example.jpg</span>
-<span class="hljs-attr">date:</span> <span class="hljs-number">2019-10-10 10:00:00</span>
-<span class="hljs-attr">hide:</span> <span class="hljs-literal">true</span>
-<span class="hljs-meta">---</span>
-<span class="hljs-string">以下是文章内容</span></code></pre>
-
-<p>TIP</p>
-<blockquote>
-<p>隐藏会使文章在分类和标签类里都不显示</p>
-<p>隐藏后依然可以通过文章链接访问</p>
-</blockquote>
+              <p>今后各位可能会在帖子里碰到类似这样：</p>
+<p>BaiduPCS-Go rapidupload -length=1710630793 -md5=b3a90c47ea23b00aad062a09e33d6ce7 -slicemd5=5b1cfe5072aabc737e6facce6d1c3be8 -crc32=3904532780 “/樱花树下实现/AIR/数理化.doc”</p>
+<p>或者这样：</p>
+<p>05D8BC73ED9634941FB6834964DEE7BE#B8EEC2D9A48A715B8F512B3E804DB2D7#68988777#[CANGKU]307628360.7z</p>
+<p>或者：</p>
+<p>bdpan://44CMMDHjgI0ucmFyfDU3NDA3MTUzNnxiNmE1NTczZjk1MTEyZWQ2NmU1NzE1ZDRlMDQ4MzIyZnxlZTAyOTJlNmY2YzUyMzA4ZGNjZTM3ZjZlNzYyMzUyMw==</p>
+<p>的内容，本帖会介绍如何通过这种看似意义不明的一大串字符获取到资源文件</p>
+<p>PS：本帖仅介绍转存文件，不涉及下载，对于使用秒传转存的资源，实测并不会出现无法下载的情况，若出现各类下载问题，请不要怪罪到秒传头上，不然你也可以将文件分享再转存再下载，这样就不是秒传了(迫真)。</p>
+<p><strong>面向人群：</strong></p>
+<hr>
+<ol>
+<li>chrome内核用户 (包括chrome以及大部分国产浏览器)</li>
+<li>PC用户以及手机端安卓用户(IOS用户另请高明)</li>
+</ol>
+<hr>
+<p><strong>准备工作：</strong></p>
+<hr>
+<p>1.在浏览器上安装油猴插件：以360为例，在插件商店搜索Tampermonkey即可：<br><img src="/2020/08/29/HideArticle202008291/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p>安卓爪机请安装kiwi浏览器，并加载油猴插件的crx文件(度盘内附安装包及crx文件)：<br><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1g0uXzRjwKK3KOBagqz-uPA">kiwi+油猴crx</a> 提取码: kqu8<br>kiwi右上角菜单内进入扩展程序页，勾选开发者模式，再加载crx文件，再勾选右下启用即可<br><img src="/2020/08/29/HideArticle202008291/2.jpg" srcset="/img/loading.gif" alt="2"><br><img src="/2020/08/29/HideArticle202008291/3.jpg" srcset="/img/loading.gif" alt="3"></p>
+<p>PC浏览器也可以通过同样的方法安装crx文件(PC浏览器加载插件时可能需要先将crx改zip后缀解压，再加载文件夹)<br>当然无论PC还是安卓，都可以通过 <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">谷歌商店</a> 安装油猴插件（需梯子）</p>
+<p><strong>2.安装秒传脚本</strong><br>启用油猴插件Tampermonkey后，前往 <a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/397324">脚本地址</a> 或者 <a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mengzonefire/dupan-rapid-extract@master/%E7%A7%92%E4%BC%A0%E9%93%BE%E6%8E%A5%E6%8F%90%E5%8F%96.user.js">备用地址</a> 安装即可<br>PS. 火狐浏览器请前往<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/3285">脚本地址(支持火狐)</a>（暂不支持提取Go格式秒传）</p>
+<p><strong>3.秒传脚本的使用</strong><br>脚本安装完成后，刷新网页版度盘页面即可看到秒传按钮</p>
+<p>PS：<br>1.手机用户请切换到 [桌面版网站]，脚本在手机版度盘页面是不运行的<br>\2. BaiduPCS-Go 格式的链接目前只有 [秒传链接提取] 脚本支持，[仓库用度盘投稿助手] 暂不支持<br>3.请不要同时启用 [秒传链接提取] 和 [仓库用度盘投稿助手]，会导致冲突</p>
+<p><img src="/2020/08/29/HideArticle202008291/4.jpg" srcset="/img/loading.gif" alt="4"></p>
+<p>点击后在弹窗内输入秒传链接即可，支持多行批量，可以把几条一起复制进去再按提示输入保存路径，再耐心等待提取完成即可。<br><img src="/2020/08/29/HideArticle202008291/5.png" srcset="/img/loading.gif" alt="5"></p>
+<p>可能碰到的问题(请认真阅读！)：</p>
+<ol>
+<li>点击秒传按钮无反应：请确认油猴插件的版本为4.9以上</li>
+<li>找不到秒传按钮：请确认插件版本4.9以上，确认安装步骤，360浏览器用户请切换为极速模式</li>
+<li>弹窗提示 非法路径#2：请尝试刷新页面/重新登录百度账号</li>
+<li>弹窗提示 未知错误#-10：网盘容量满了</li>
+<li>火狐用户请使用 [仓库用度盘投稿助手 ] 脚本(目前暂不支持Go格式秒传)</li>
+<li>傲游用户到自带插件商店安装 暴力猴 插件</li>
+<li>安装脚本报编译错误：请使用油猴插件安装而不是直接浏览器安装</li>
+<li>找不到秒传按钮：尝试刷新页面/重启电脑/重启浏览器/更换浏览器</li>
+<li>点击秒传按钮卡死：同上</li>
+</ol>
 
             </div>
             <hr>
@@ -237,9 +260,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Hexo/%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/">高级配置</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a>
                     
                   </div>
                 
@@ -247,9 +268,13 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
-                    
                       <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%A7%92%E4%BC%A0%E9%93%BE%E6%8E%A5/">秒传链接</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tampermonkey/">Tampermonkey</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/">百度网盘</a>
                     
                   </div>
                 
@@ -257,29 +282,6 @@
               
                 <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/08/27/hello-world/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/08/26/Article202008264/">
-                        <span class="hidden-mobile">Java获取随机数</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
@@ -445,7 +447,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Hexo的Fluid主题设置文章隐藏&nbsp;",
+        "度盘高级操作，秒传链接使用方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
