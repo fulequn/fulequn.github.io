@@ -1,0 +1,845 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>Java读写串口数据 - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-30 23:34" pubdate>
+      2020年8月30日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      55
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Java读写串口数据</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/new-life/p/9345849.html">https://www.cnblogs.com/new-life/p/9345849.html</a></p>
+</blockquote>
+<p>没想到挺多人需要这个的，很高兴这篇文章能对大家有帮助，主要的工具类博文里已经有了，当然，要小工具源码的留言邮箱即可。  </p>
+<p>最近接触到了串口及其读写，在此记录java进行串口读写的过程。</p>
+<p><strong>1.导入支持java串口通信的jar包：</strong></p>
+<p>在maven项目的pom.xml中添加RXTXcomm的依赖 或者 下载RXTXcomm.jar并导入到项目中。</p>
+<p>支持Java串口通信操作的jar包，java.comm比较老，而且不支持64位系统，推荐使用Rxtx这个jar包（32位/64位均支持）。</p>
+<p>下载地址：</p>
+<p><a target="_blank" rel="noopener" href="http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x86.zip">http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x86.zip</a> （32位）</p>
+<p><a target="_blank" rel="noopener" href="http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x64.zip">http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x64.zip</a> （64位）</p>
+<p><strong>注意：运行过程中抛出 java.lang.UnsatisfiedLinkError 错误或 gnu.io 下的类找不到时，将rxtx解压包中的 rxtxParallel.dll，rxtxSerial.dll 这两个文件复制到 C:\Windows\System32 目录下可解决该错误。（这个需要注意自己电脑的位数）</strong></p>
+<p><strong>2.编写代码操作串口：</strong></p>
+<p>串口必要参数类：包含连接串口所必须的参数，方便在调用串口时设置和传递串口参数。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 串口必要参数接收类</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: LinWenLi</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2018年7月21日 下午4:30:40</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParamConfig</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> String serialNumber;<span class="hljs-comment">// 串口号</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> baudRate;        <span class="hljs-comment">// 波特率</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> checkoutBit;    <span class="hljs-comment">// 校验位</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> dataBit;        <span class="hljs-comment">// 数据位</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> stopBit;        <span class="hljs-comment">// 停止位</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParamConfig</span><span class="hljs-params">()</span> </span>&#123;&#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 构造方法</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> serialNumber    串口号</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> baudRate        波特率</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> checkoutBit    校验位</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> dataBit        数据位</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> stopBit        停止位</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParamConfig</span><span class="hljs-params">(String serialNumber, <span class="hljs-keyword">int</span> baudRate, <span class="hljs-keyword">int</span> checkoutBit, <span class="hljs-keyword">int</span> dataBit, <span class="hljs-keyword">int</span> stopBit)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.serialNumber = serialNumber;
+        <span class="hljs-keyword">this</span>.baudRate = baudRate;
+        <span class="hljs-keyword">this</span>.checkoutBit = checkoutBit;
+        <span class="hljs-keyword">this</span>.dataBit = dataBit;
+        <span class="hljs-keyword">this</span>.stopBit = stopBit;
+    &#125;
+    getter()...
+    setter()...
+&#125;</code></pre>
+
+<p>串口操作类：（其中包含的CustomException是自定义异常类，仅用于抛出异常原因。）</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> gnu.io.CommPortIdentifier;
+<span class="hljs-keyword">import</span> gnu.io.PortInUseException;
+<span class="hljs-keyword">import</span> gnu.io.SerialPort;
+<span class="hljs-keyword">import</span> gnu.io.SerialPortEvent;
+<span class="hljs-keyword">import</span> gnu.io.SerialPortEventListener;
+<span class="hljs-keyword">import</span> gnu.io.UnsupportedCommOperationException;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 串口参数的配置 串口一般有如下参数可以在该串口打开以前进行配置： 包括串口号，波特率，输入/输出流控制，数据位数，停止位和奇偶校验。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-comment">// 注：串口操作类一定要继承SerialPortEventListener</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SerialPortUtils</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">SerialPortEventListener</span> </span>&#123;
+    <span class="hljs-comment">// 检测系统中可用的通讯端口类</span>
+    <span class="hljs-keyword">private</span> CommPortIdentifier commPortId;
+    <span class="hljs-comment">// 枚举类型</span>
+    <span class="hljs-keyword">private</span> Enumeration&lt;CommPortIdentifier&gt; portList;
+    <span class="hljs-comment">// RS232串口</span>
+    <span class="hljs-keyword">private</span> SerialPort serialPort;
+    <span class="hljs-comment">// 输入流</span>
+    <span class="hljs-keyword">private</span> InputStream inputStream;
+    <span class="hljs-comment">// 输出流</span>
+    <span class="hljs-keyword">private</span> OutputStream outputStream;
+    <span class="hljs-comment">// 保存串口返回信息</span>
+    <span class="hljs-keyword">private</span> String data;
+    <span class="hljs-comment">// 保存串口返回信息十六进制</span>
+    <span class="hljs-keyword">private</span> String dataHex;<span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 初始化串口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@author</span> LinWenLi</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@date</span> 2018年7月21日下午3:44:16</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: TODO</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span>: paramConfig  存放串口连接必要参数的对象（会在下方给出类代码）    </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span>: void      </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@throws</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ParamConfig paramConfig)</span> </span>&#123;
+        <span class="hljs-comment">// 获取系统中所有的通讯端口</span>
+        portList = CommPortIdentifier.getPortIdentifiers();
+        <span class="hljs-comment">// 记录是否含有指定串口</span>
+        <span class="hljs-keyword">boolean</span> isExsist = <span class="hljs-keyword">false</span>;
+        <span class="hljs-comment">// 循环通讯端口</span>
+        <span class="hljs-keyword">while</span> (portList.hasMoreElements()) &#123;
+            commPortId = portList.nextElement();
+            <span class="hljs-comment">// 判断是否是串口</span>
+            <span class="hljs-keyword">if</span> (commPortId.getPortType() == CommPortIdentifier.PORT_SERIAL) &#123;
+                <span class="hljs-comment">// 比较串口名称是否是指定串口</span>
+                <span class="hljs-keyword">if</span> (paramConfig.getSerialNumber().equals(commPortId.getName())) &#123;
+                    <span class="hljs-comment">// 串口存在</span>
+                    isExsist = <span class="hljs-keyword">true</span>;
+                    <span class="hljs-comment">// 打开串口</span>
+                    <span class="hljs-keyword">try</span> &#123;
+                        <span class="hljs-comment">// open:（应用程序名【随意命名】，阻塞时等待的毫秒数）</span>
+                        serialPort = (SerialPort) commPortId.open(Object.class.getSimpleName(), <span class="hljs-number">2000</span>);
+                        <span class="hljs-comment">// 设置串口监听</span>
+                        serialPort.addEventListener(<span class="hljs-keyword">this</span>);
+                        <span class="hljs-comment">// 设置串口数据时间有效(可监听)</span>
+                        serialPort.notifyOnDataAvailable(<span class="hljs-keyword">true</span>);
+                        <span class="hljs-comment">// 设置串口通讯参数:波特率，数据位，停止位,校验方式</span>
+                        serialPort.setSerialPortParams(paramConfig.getBaudRate(), paramConfig.getDataBit(),
+                                paramConfig.getStopBit(), paramConfig.getCheckoutBit());
+                    &#125; <span class="hljs-keyword">catch</span> (PortInUseException e) &#123;
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;端口被占用&quot;</span>);
+                    &#125; <span class="hljs-keyword">catch</span> (TooManyListenersException e) &#123;
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;监听器过多&quot;</span>);
+                    &#125; <span class="hljs-keyword">catch</span> (UnsupportedCommOperationException e) &#123;
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;不支持的COMM端口操作异常&quot;</span>);
+                    &#125;
+                    <span class="hljs-comment">// 结束循环</span>
+                    <span class="hljs-keyword">break</span>;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-comment">// 若不存在该串口则抛出异常</span>
+        <span class="hljs-keyword">if</span> (!isExsist) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;不存在该串口！&quot;</span>);
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 实现接口SerialPortEventListener中的方法 读取从串口中接收的数据</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">serialEvent</span><span class="hljs-params">(SerialPortEvent event)</span> </span>&#123;
+        <span class="hljs-keyword">switch</span> (event.getEventType()) &#123;
+        <span class="hljs-keyword">case</span> SerialPortEvent.BI: <span class="hljs-comment">// 通讯中断</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.OE: <span class="hljs-comment">// 溢位错误</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.FE: <span class="hljs-comment">// 帧错误</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.PE: <span class="hljs-comment">// 奇偶校验错误</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.CD: <span class="hljs-comment">// 载波检测</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.CTS: <span class="hljs-comment">// 清除发送</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.DSR: <span class="hljs-comment">// 数据设备准备好</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.RI: <span class="hljs-comment">// 响铃侦测</span>
+        <span class="hljs-keyword">case</span> SerialPortEvent.OUTPUT_BUFFER_EMPTY: <span class="hljs-comment">// 输出缓冲区已清空</span>
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> SerialPortEvent.DATA_AVAILABLE: <span class="hljs-comment">// 有数据到达</span>
+            <span class="hljs-comment">// 调用读取数据的方法</span>
+            readComm();
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 读取串口返回信息</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@author</span> LinWenLi</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@date</span> 2018年7月21日下午3:43:04</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span>: void      </span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readComm</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">try</span> &#123;
+            inputStream = serialPort.getInputStream();
+            <span class="hljs-comment">// 通过输入流对象的available方法获取数组字节长度</span>
+            <span class="hljs-keyword">byte</span>[] readBuffer = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[inputStream.available()];
+            <span class="hljs-comment">// 从线路上读取数据流</span>
+            <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">while</span> ((len = inputStream.read(readBuffer)) != -<span class="hljs-number">1</span>) &#123;　　　　　　　　　<span class="hljs-comment">// 直接获取到的数据</span>
+                data = <span class="hljs-keyword">new</span> String(readBuffer, <span class="hljs-number">0</span>, len).trim();　　　　　　　　　<span class="hljs-comment">// 转为十六进制数据</span>
+                dataHex = bytesToHexString(readBuffer);
+                System.out.println(<span class="hljs-string">&quot;data:&quot;</span> + data);
+                System.out.println(<span class="hljs-string">&quot;dataHex:&quot;</span> + dataHex);<span class="hljs-comment">// 读取后置空流对象</span>
+                inputStream.close();
+                inputStream = <span class="hljs-keyword">null</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;
+        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;读取串口数据时发生IO异常&quot;</span>);
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 发送信息到串口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@author</span> LinWenLi</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@date</span> 2018年7月21日下午3:45:22</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span>: data      </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span>: void      </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@throws</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendComm</span><span class="hljs-params">(String data)</span> </span>&#123;
+        <span class="hljs-keyword">byte</span>[] writerBuffer = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> &#123;
+            writerBuffer = hexToByteArray(data);
+        &#125; <span class="hljs-keyword">catch</span> (NumberFormatException e) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;命令格式错误！&quot;</span>);
+        &#125;
+        <span class="hljs-keyword">try</span> &#123;
+            outputStream = serialPort.getOutputStream();
+            outputStream.write(writerBuffer);
+            outputStream.flush();
+        &#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;找不到串口。&quot;</span>);
+        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;发送信息到串口时发生IO异常&quot;</span>);
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 关闭串口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@author</span> LinWenLi</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@date</span> 2018年7月21日下午3:45:43</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@Description</span>: 关闭串口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span>:       </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span>: void      </span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@throws</span></span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">closeSerialPort</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (serialPort != <span class="hljs-keyword">null</span>) &#123;
+            serialPort.notifyOnDataAvailable(<span class="hljs-keyword">false</span>);
+            serialPort.removeEventListener();
+            <span class="hljs-keyword">if</span> (inputStream != <span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    inputStream.close();
+                    inputStream = <span class="hljs-keyword">null</span>;
+                &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;关闭输入流时发生IO异常&quot;</span>);
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (outputStream != <span class="hljs-keyword">null</span>) &#123;
+                <span class="hljs-keyword">try</span> &#123;
+                    outputStream.close();
+                    outputStream = <span class="hljs-keyword">null</span>;
+                &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CustomException(<span class="hljs-string">&quot;关闭输出流时发生IO异常&quot;</span>);
+                &#125;
+            &#125;
+            serialPort.close();
+            serialPort = <span class="hljs-keyword">null</span>;
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 十六进制串口返回值获取</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDataHex</span><span class="hljs-params">()</span> </span>&#123;
+        String result = dataHex;
+        <span class="hljs-comment">// 置空执行结果</span>
+        dataHex = <span class="hljs-keyword">null</span>;
+        <span class="hljs-comment">// 返回执行结果</span>
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 串口返回值获取</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getData</span><span class="hljs-params">()</span> </span>&#123;
+        String result = data;
+        <span class="hljs-comment">// 置空执行结果</span>
+        data = <span class="hljs-keyword">null</span>;
+        <span class="hljs-comment">// 返回执行结果</span>
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Hex字符串转byte</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> inHex 待转换的Hex字符串</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 转换后的byte</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span> <span class="hljs-title">hexToByte</span><span class="hljs-params">(String inHex)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">byte</span>) Integer.parseInt(inHex, <span class="hljs-number">16</span>);
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * hex字符串转byte数组</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> inHex 待转换的Hex字符串</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 转换后的byte数组结果</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span>[] hexToByteArray(String inHex) &#123;
+        <span class="hljs-keyword">int</span> hexlen = inHex.length();
+        <span class="hljs-keyword">byte</span>[] result;
+        <span class="hljs-keyword">if</span> (hexlen % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;
+            <span class="hljs-comment">// 奇数</span>
+            hexlen++;
+            result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[(hexlen / <span class="hljs-number">2</span>)];
+            inHex = <span class="hljs-string">&quot;0&quot;</span> + inHex;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 偶数</span>
+            result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[(hexlen / <span class="hljs-number">2</span>)];
+        &#125;
+        <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; hexlen; i += <span class="hljs-number">2</span>) &#123;
+            result[j] = hexToByte(inHex.substring(i, i + <span class="hljs-number">2</span>));
+            j++;
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 数组转换成十六进制字符串</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> byte[]</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> HexString</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String <span class="hljs-title">bytesToHexString</span><span class="hljs-params">(<span class="hljs-keyword">byte</span>[] bArray)</span> </span>&#123;
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(bArray.length);
+        String sTemp;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; bArray.length; i++) &#123;
+            sTemp = Integer.toHexString(<span class="hljs-number">0xFF</span> &amp; bArray[i]);
+            <span class="hljs-keyword">if</span> (sTemp.length() &lt; <span class="hljs-number">2</span>)
+                sb.append(<span class="hljs-number">0</span>);
+            sb.append(sTemp.toUpperCase());
+        &#125;
+        <span class="hljs-keyword">return</span> sb.toString();
+    &#125;
+&#125;</code></pre>
+
+<p>调用串口操作类的代码：</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+         <span class="hljs-comment">// 实例化串口操作类对象</span>
+         SerialPortUtils serialPort = <span class="hljs-keyword">new</span> SerialPortUtils();
+         <span class="hljs-comment">// 创建串口必要参数接收类并赋值，赋值串口号，波特率，校验位，数据位，停止位</span>
+         ParamConfig paramConfig = <span class="hljs-keyword">new</span> ParamConfig(<span class="hljs-string">&quot;COM4&quot;</span>, <span class="hljs-number">9600</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>);
+         <span class="hljs-comment">// 初始化设置,打开串口，开始监听读取串口数据</span>
+         serialPort.init(paramConfig);
+         <span class="hljs-comment">// 调用串口操作类的sendComm方法发送数据到串口</span>
+         serialPort.sendComm(<span class="hljs-string">&quot;FEF10A000000000000000AFF&quot;</span>);
+         <span class="hljs-comment">// 关闭串口</span>
+         serialPort.closeSerialPort();
+     &#125;</code></pre>
+
+<p>当执行main方法中的代码且未执行关闭串口时，程序将一直处于开启状态，自动监听，接收读取来自串口的数据。</p>
+<p>注意：一个串口只能打开一次，并只支持一个程序调用。</p>
+<p> 以上所记录的是简单测试java是否能成功操作串口数据，至于本人所写的Web端的读卡器调试功能则是在串口操作类的基础上编写网页界面，通过请求来控制串口的开启关闭及相应的设置，功能比较简单，放个界面记录一下：</p>
+<p><img src="/2020/08/30/Article202008303/1.png" srcset="/img/loading.gif" alt="1"><img src="/2020/08/30/Article202008303/2.png" srcset="/img/loading.gif" alt="2"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">串口通信</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">串口通信</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/30/Article202008304/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java comm串口通信Utils类</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/30/Article202008302/">
+                        <span class="hidden-mobile">Java中Hex（十六进制）和byte[]之间相互转化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Java读写串口数据&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
