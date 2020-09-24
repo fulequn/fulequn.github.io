@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.5k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      47
        分钟
     </span>
   
@@ -214,7 +214,117 @@
             <h1 style="display: none">Python中Pandas的分组group详解及应用</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lemonbit/p/6810972.html">https://www.cnblogs.com/lemonbit/p/6810972.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011675334/article/details/105328857">https://blog.csdn.net/u011675334/article/details/105328857</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>pandas提供了一个灵活高效的groupby功能，它使你能以一种自然的方式对数据集进行切片、切块、摘要等操作。根据一个或多个键（可以是函数、数组或DataFrame列名）拆分pandas对象。计算分组摘要统计，如计数、平均值、标准差，或用户自定义函数。对DataFrame的列应用各种各样的函数。应用组内转换或其他运算，如规格化、线性回归、排名或选取子集等。计算透视表或交叉表。执行分位数分析以及其他分组分析。</p>
+<p>groupby分组函数：</p>
+<p>返回值：返回重构格式的DataFrame，特别注意，groupby里面的字段内的数据重构后都会变成索引</p>
+<p>groupby()一般和sum()、mean()一起使用。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="引入相关package"><a href="#引入相关package" class="headerlink" title="引入相关package"></a>引入相关package</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</code></pre>
+
+<h3 id="声明一个DataFrame"><a href="#声明一个DataFrame" class="headerlink" title="声明一个DataFrame"></a>声明一个DataFrame</h3><pre><code class="hljs python">df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;A&#x27;</span>: [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>], <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-number">2</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>],<span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">102</span>, <span class="hljs-number">98</span>, <span class="hljs-number">107</span>, <span class="hljs-number">104</span>, <span class="hljs-number">115</span>, <span class="hljs-number">87</span>, <span class="hljs-number">92</span>, <span class="hljs-number">123</span>]&#125;)</code></pre>
+
+<h3 id="按A列分组（groupby），获取其他列的均值"><a href="#按A列分组（groupby），获取其他列的均值" class="headerlink" title="按A列分组（groupby），获取其他列的均值"></a>按A列分组（groupby），获取其他列的均值</h3><pre><code class="hljs python">df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>).mean()</code></pre>
+
+<h3 id="按多列进行分组（groupby）"><a href="#按多列进行分组（groupby）" class="headerlink" title="按多列进行分组（groupby）"></a>按多列进行分组（groupby）</h3><pre><code class="hljs python">df.groupby([<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>]).mean()</code></pre>
+
+<h3 id="分组后选择列进行运算"><a href="#分组后选择列进行运算" class="headerlink" title="分组后选择列进行运算"></a>分组后选择列进行运算</h3><p>分组后，可以选取单列数据，或者多个列组成的列表（list）进行运算</p>
+<pre><code class="hljs python">df = pd.DataFrame([[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], columns=[<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>])
+g = df.groupby(<span class="hljs-string">&quot;A&quot;</span>)
+<span class="hljs-comment"># 仅选择B列</span>
+g[<span class="hljs-string">&#x27;B&#x27;</span>].mean() 
+<span class="hljs-comment"># 选择B、C列</span>
+g[[<span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>]].mean()</code></pre>
+
+<h3 id="针对不同的列选用不同的聚合方法"><a href="#针对不同的列选用不同的聚合方法" class="headerlink" title="针对不同的列选用不同的聚合方法"></a>针对不同的列选用不同的聚合方法</h3><pre><code class="hljs python">g.agg(&#123;<span class="hljs-string">&#x27;B&#x27;</span>:<span class="hljs-string">&#x27;mean&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>:<span class="hljs-string">&#x27;sum&#x27;</span>&#125;)</code></pre>
+
+<h3 id="聚合方法size-和count"><a href="#聚合方法size-和count" class="headerlink" title="聚合方法size()和count()"></a>聚合方法size()和count()</h3><p><strong>size跟count的区别： size计数时包含NaN值，而count不包含NaN值</strong></p>
+<pre><code class="hljs python">df = pd.DataFrame(&#123;<span class="hljs-string">&quot;Name&quot;</span>:[<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Mallory&quot;</span>, <span class="hljs-string">&quot;Mallory&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span> , <span class="hljs-string">&quot;Mallory&quot;</span>],<span class="hljs-string">&quot;City&quot;</span>:[<span class="hljs-string">&quot;Seattle&quot;</span>, <span class="hljs-string">&quot;Seattle&quot;</span>, <span class="hljs-string">&quot;Portland&quot;</span>, <span class="hljs-string">&quot;Seattle&quot;</span>, <span class="hljs-string">&quot;Seattle&quot;</span>, <span class="hljs-string">&quot;Portland&quot;</span>],<span class="hljs-string">&quot;Val&quot;</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,np.nan,np.nan,<span class="hljs-number">4</span>]&#125;)</code></pre>
+
+<p><strong>count()</strong></p>
+<pre><code class="hljs python">df.groupby([<span class="hljs-string">&quot;Name&quot;</span>, <span class="hljs-string">&quot;City&quot;</span>], as_index=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;Val&#x27;</span>].count()</code></pre>
+
+<p><strong>size()</strong></p>
+<pre><code class="hljs python">df.groupby([<span class="hljs-string">&quot;Name&quot;</span>, <span class="hljs-string">&quot;City&quot;</span>])[<span class="hljs-string">&#x27;Val&#x27;</span>].size().reset_index(name=<span class="hljs-string">&#x27;Size&#x27;</span>)</code></pre>
+
+<h3 id="分组运算方法-agg"><a href="#分组运算方法-agg" class="headerlink" title="分组运算方法 agg()"></a>分组运算方法 agg()</h3><p>针对某列使用agg()时进行不同的统计运算</p>
+<pre><code class="hljs python">df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;A&#x27;</span>: list(<span class="hljs-string">&#x27;XYZXYZXYZX&#x27;</span>), <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>],<span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">12</span>, <span class="hljs-number">14</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">16</span>, <span class="hljs-number">12</span>, <span class="hljs-number">10</span>, <span class="hljs-number">19</span>]&#125;)
+df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>)[<span class="hljs-string">&#x27;B&#x27;</span>].agg(&#123;<span class="hljs-string">&#x27;mean&#x27;</span>:np.mean, <span class="hljs-string">&#x27;standard deviation&#x27;</span>: np.std&#125;)</code></pre>
+
+<p><strong>针对不同的列应用多种不同的统计方法</strong></p>
+<pre><code class="hljs python">df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>).agg(&#123;<span class="hljs-string">&#x27;B&#x27;</span>:[np.mean, <span class="hljs-string">&#x27;sum&#x27;</span>], <span class="hljs-string">&#x27;C&#x27;</span>:[<span class="hljs-string">&#x27;count&#x27;</span>,np.std]&#125;)</code></pre>
+
+<h3 id="分组运算方法-apply"><a href="#分组运算方法-apply" class="headerlink" title="分组运算方法 apply()"></a>分组运算方法 apply()</h3><p>apply函数针对groupby后的DataFrame执行参数中所指定的函数。</p>
+<pre><code class="hljs python">df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;A&#x27;</span>: list(<span class="hljs-string">&#x27;XYZXYZXYZX&#x27;</span>), <span class="hljs-string">&#x27;B&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>],<span class="hljs-string">&#x27;C&#x27;</span>: [<span class="hljs-number">12</span>, <span class="hljs-number">14</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">16</span>, <span class="hljs-number">12</span>, <span class="hljs-number">10</span>, <span class="hljs-number">19</span>]&#125;)
+
+df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>).apply(np.mean) 
+<span class="hljs-comment"># 跟下面的方法的运行结果是一致的</span>
+<span class="hljs-comment"># df.groupby(&#x27;A&#x27;).mean()</span></code></pre>
+
+<p><code>apply()</code>方法可以应用lambda函数，举例如下:</p>
+<pre><code class="hljs python">df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>).apply(<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-string">&#x27;C&#x27;</span>]-x[<span class="hljs-string">&#x27;B&#x27;</span>])
+
+df.groupby(<span class="hljs-string">&#x27;A&#x27;</span>).apply(<span class="hljs-keyword">lambda</span> x: (x[<span class="hljs-string">&#x27;C&#x27;</span>]-x[<span class="hljs-string">&#x27;B&#x27;</span>]).mean())</code></pre>
+
+<h3 id="分组运算方法-transform"><a href="#分组运算方法-transform" class="headerlink" title="分组运算方法 transform()"></a>分组运算方法 transform()</h3><p>前面进行聚合运算的时候，得到的结果是一个以分组名为 index 的结果对象。如果我们想使用原数组的 index 的话，就需要进行 merge 转换。</p>
+<p>transform(func, *args, **kwargs) 方法简化了这个过程，它会把 func 参数应用到所有分组，然后把结果放置到原数组的 index 上（如果结果是一个标量，就进行广播）：</p>
+<pre><code class="hljs python">df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;group1&#x27;</span>:[<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>],<span class="hljs-string">&#x27;group2&#x27;</span>:[<span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;E&#x27;</span>, <span class="hljs-string">&#x27;E&#x27;</span>, <span class="hljs-string">&#x27;F&#x27;</span>, <span class="hljs-string">&#x27;F&#x27;</span>],<span class="hljs-string">&#x27;B&#x27;</span>:[<span class="hljs-string">&#x27;one&#x27;</span>, np.NaN, np.NaN, np.NaN,np.NaN, <span class="hljs-string">&#x27;two&#x27;</span>, np.NaN, np.NaN],<span class="hljs-string">&#x27;C&#x27;</span>: [np.NaN, <span class="hljs-number">1</span>, np.NaN, np.NaN,np.NaN, np.NaN, np.NaN, <span class="hljs-number">4</span>]&#125;)           
+
+df.groupby([<span class="hljs-string">&#x27;group1&#x27;</span>, <span class="hljs-string">&#x27;group2&#x27;</span>])[<span class="hljs-string">&#x27;B&#x27;</span>].transform(<span class="hljs-string">&#x27;count&#x27;</span>)
+
+df[<span class="hljs-string">&#x27;count_B&#x27;</span>]=df.groupby([<span class="hljs-string">&#x27;group1&#x27;</span>, <span class="hljs-string">&#x27;group2&#x27;</span>])[<span class="hljs-string">&#x27;B&#x27;</span>].transform(<span class="hljs-string">&#x27;count&#x27;</span>)</code></pre>
+
+<h3 id="将某列数据按数据值分成不同范围段进行分组（groupby）运算"><a href="#将某列数据按数据值分成不同范围段进行分组（groupby）运算" class="headerlink" title="将某列数据按数据值分成不同范围段进行分组（groupby）运算"></a>将某列数据按数据值分成不同范围段进行分组（groupby）运算</h3><pre><code class="hljs python">np.random.seed(<span class="hljs-number">0</span>)
+df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;Age&#x27;</span>: np.random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">70</span>, <span class="hljs-number">100</span>),<span class="hljs-string">&#x27;Sex&#x27;</span>: np.random.choice([<span class="hljs-string">&#x27;Male&#x27;</span>, <span class="hljs-string">&#x27;Female&#x27;</span>], <span class="hljs-number">100</span>),<span class="hljs-string">&#x27;number_of_foo&#x27;</span>: np.random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>, <span class="hljs-number">100</span>)&#125;)</code></pre>
+
+<p>这里将“Age”列分成三类，有两种方法可以实现：</p>
+<p>（a）bins=4（指定分组个数）</p>
+<p>（b）bins=[19, 40, 65, np.inf]（指定界限范围）</p>
+<pre><code class="hljs python">pd.cut(df[<span class="hljs-string">&#x27;Age&#x27;</span>], bins=<span class="hljs-number">4</span>)<span class="hljs-comment">#通过指定分组个数</span>
+pd.cut(df[<span class="hljs-string">&#x27;Age&#x27;</span>], bins=[<span class="hljs-number">19</span>,<span class="hljs-number">40</span>,<span class="hljs-number">65</span>,np.inf])<span class="hljs-comment">#通过指定界限范围</span></code></pre>
+
+<p>分组结果范围结果如下：</p>
+<p><img src="/2020/09/11/Article202009111/1.jpg" srcset="/img/loading.gif" alt="1"></p>
+<pre><code class="hljs python">age_groups = pd.cut(df[<span class="hljs-string">&#x27;Age&#x27;</span>], bins=[<span class="hljs-number">19</span>,<span class="hljs-number">40</span>,<span class="hljs-number">65</span>,np.inf])
+df.groupby(age_groups).mean()</code></pre>
+
+<p>运行结果如下：</p>
+<p><img src="/2020/09/11/Article202009111/2.jpg" srcset="/img/loading.gif" alt="2"></p>
+<p>按‘Age’分组范围和性别（sex）进行制作交叉表</p>
+<pre><code class="hljs python">pd.crosstab(age_groups, df[<span class="hljs-string">&#x27;Sex&#x27;</span>])</code></pre>
+
+<p>运行结果如下：</p>
+<p><img src="/2020/09/11/Article202009111/3.jpg" srcset="/img/loading.gif" alt="3"></p>
+<h3 id="分组结果保存成DataFrame"><a href="#分组结果保存成DataFrame" class="headerlink" title="分组结果保存成DataFrame"></a>分组结果保存成DataFrame</h3><p>通过reset_index()函数将groupby()的分组结果转换成DataFrame对象。</p>
+<p>代码举例：</p>
+<pre><code class="hljs python">total = df.groupby([<span class="hljs-string">&#x27;A&#x27;</span>])[<span class="hljs-string">&#x27;B&#x27;</span>].count()
+total = pd.DataFrame(&#123;<span class="hljs-string">&#x27;total&#x27;</span>:total&#125;)
+bad = df.groupby([<span class="hljs-string">&#x27;A&#x27;</span>])[<span class="hljs-string">&#x27;B&#x27;</span>].sum()
+bad = pd.DataFrame(&#123;<span class="hljs-string">&#x27;bad&#x27;</span>:bad&#125;)
+<span class="hljs-comment">#DataFrame合并</span>
+regroup =  total.merge(bad,left_index=<span class="hljs-literal">True</span>,right_index=<span class="hljs-literal">True</span>, how=<span class="hljs-string">&#x27;left&#x27;</span>)
+regroup.reset_index(inplace=<span class="hljs-literal">True</span>)<span class="hljs-comment">#保存成DataFrame对象</span></code></pre>
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="Pandas报错AttributeError-Cannot-access-callable-attribute-‘sort-values’-of-‘DataFrameGroupBy’-objects"><a href="#Pandas报错AttributeError-Cannot-access-callable-attribute-‘sort-values’-of-‘DataFrameGroupBy’-objects" class="headerlink" title="Pandas报错AttributeError: Cannot access callable attribute ‘sort_values’ of ‘DataFrameGroupBy’ objects"></a>Pandas报错AttributeError: Cannot access callable attribute ‘sort_values’ of ‘DataFrameGroupBy’ objects</h3><p>完整报错如下：</p>
+<pre><code class="hljs python">AttributeError: Cannot access callable attribute <span class="hljs-string">&#x27;sort_values&#x27;</span> of <span class="hljs-string">&#x27;DataFrameGroupBy&#x27;</span> objects, <span class="hljs-keyword">try</span> using the <span class="hljs-string">&#x27;apply&#x27;</span> method</code></pre>
+
+<p>报错代码如下：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+data = pf.read_csv(<span class="hljs-string">&#x27;test.csv&#x27;</span>,header = <span class="hljs-number">0</span>)
+df = pd.DataFrame(data)
+df = df.groupby(<span class="hljs-string">&#x27;date&#x27;</span>, group_keys=<span class="hljs-literal">False</span>).sort_values(<span class="hljs-string">&#x27;Value&#x27;</span>, ascending=<span class="hljs-literal">False</span>).groupby(<span class="hljs-string">&#x27;date&#x27;</span>).head(<span class="hljs-number">10</span>).reset_index()
+print(df)</code></pre>
+
+<p>报错原因：</p>
+<p>groupby 之后变成了 DataFrameGroupBy，不能直接调用 sort_values() 函数，<strong>需使用 apply() 函数</strong>，代码更改为如下：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+data = pf.read_csv(<span class="hljs-string">&#x27;test.csv&#x27;</span>,header = <span class="hljs-number">0</span>)
+df = pd.DataFrame(data)
+<span class="hljs-comment">#语句更改后</span>
+df = df.groupby(<span class="hljs-string">&#x27;date&#x27;</span>, group_keys=<span class="hljs-literal">False</span>).apply(<span class="hljs-keyword">lambda</span> x: x.sort_values(<span class="hljs-string">&#x27;virus_connectivity&#x27;</span>, ascending=<span class="hljs-literal">False</span>)).groupby(<span class="hljs-string">&#x27;date&#x27;</span>).head(<span class="hljs-number">10</span>).reset_index()
+print(df)</code></pre>
             </div>
             <hr>
             <div>
@@ -233,9 +343,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
-                    
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
                     
                       <a class="hover-with-bg" href="/tags/Pandas/">Pandas</a>
                     

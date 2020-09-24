@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      851 字
+      1.5k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      36
        分钟
     </span>
   
@@ -260,7 +260,60 @@
 <p>行比较。</p>
 <p>• M在Q的下方，取P2为下一个象素点；</p>
 <p>• M在Q的上方，取P1为下一点。</p>
-<h4 id="3、Bresenham算法"><a href="#3、Bresenham算法" class="headerlink" title="3、Bresenham算法"></a>3、Bresenham算法</h4><h2 id="圆弧的扫描转换算法"><a href="#圆弧的扫描转换算法" class="headerlink" title="圆弧的扫描转换算法"></a>圆弧的扫描转换算法</h2><h2 id="多边形的扫描转换与区域填充算法"><a href="#多边形的扫描转换与区域填充算法" class="headerlink" title="多边形的扫描转换与区域填充算法"></a>多边形的扫描转换与区域填充算法</h2><h2 id="裁剪算法"><a href="#裁剪算法" class="headerlink" title="裁剪算法"></a>裁剪算法</h2><h2 id="反走样算法"><a href="#反走样算法" class="headerlink" title="反走样算法"></a>反走样算法</h2><h2 id="消隐算法"><a href="#消隐算法" class="headerlink" title="消隐算法"></a>消隐算法</h2>
+<p><img src="/2020/08/31/Article202008313/4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>每次在最大位移方向上走一步，而另一个方向是走 步还是不走步要取决于中点误差项的判断。</p>
+<p>假定：0≤|k|≤1。因此，每次在x方向上加1，y方向上加1或不变需要判断。</p>
+<p><img src="/2020/08/31/Article202008313/5.png" srcset="/img/loading.gif" alt="5"></p>
+<p>当M在Q的下方，则Pu离直线近，应为下一个象素点。</p>
+<p>当M在Q的上方，应取Pd为下一点。</p>
+<p><img src="/2020/08/31/Article202008313/6.png" srcset="/img/loading.gif" alt="6"></p>
+<p><strong>如何判断Q在M的上方还是下方？</strong></p>
+<p>把M代入理想直线方程：<em>F</em> ( xm ，ym) = Ax + By + C</p>
+<p><img src="/2020/08/31/Article202008313/7.png" srcset="/img/loading.gif" alt="7"></p>
+<p><img src="/2020/08/31/Article202008313/8.png" srcset="/img/loading.gif" alt="8"></p>
+<p>为了求出d值，需要两个乘法，四个加法。</p>
+<p><strong>能否也采用增量计算，提高运算效率呢？</strong></p>
+<p>d是x,y的线性函数，采用增量计算是可行的。</p>
+<p>如何推导出<strong>d</strong>值的递推公式？</p>
+<p><img src="/2020/08/31/Article202008313/9.png" srcset="/img/loading.gif" alt="9"></p>
+<p>下面计算d的初始值d0，直线的第一个像素P0(x0,y0) 在直线上，因此相应的d的初始值计算如下：</p>
+<p><img src="/2020/08/31/Article202008313/10.png" srcset="/img/loading.gif" alt="10"></p>
+<p><img src="/2020/08/31/Article202008313/11.png" srcset="/img/loading.gif" alt="11"></p>
+<p>至此，中点算法至少可以和DDA算法一样好！</p>
+<p>可以用2d代替d来摆脱浮点运算，写出仅包含整数运的算法。</p>
+<p>这样，中点生成直线的算法提高到整数加法，优于DDA算法。</p>
+<p>伪代码如下：</p>
+<pre><code class="hljs gml">void Midpoint Line (int x0,int y0,int x1, int y1,int color)
+     &#123;   
+          int a, b, d1, d2, d, <span class="hljs-symbol">x</span>, <span class="hljs-symbol">y</span>;
+    a=y0-y1, b=x1-x0, d=<span class="hljs-number">2</span>*a+b;
+    d1=<span class="hljs-number">2</span>*a, d2=<span class="hljs-number">2</span>* (a+b);
+    <span class="hljs-symbol">x</span>=x0, <span class="hljs-symbol">y</span>=y0;
+    drawpixel(<span class="hljs-symbol">x</span>, <span class="hljs-symbol">y</span>, color);
+    <span class="hljs-keyword">while</span> (<span class="hljs-symbol">x</span>&lt;x1)
+    &#123; <span class="hljs-keyword">if</span> (d&lt;<span class="hljs-number">0</span>)       &#123;<span class="hljs-symbol">x</span>++, <span class="hljs-symbol">y</span>++, d+=d2; &#125;
+     <span class="hljs-keyword">else</span>       &#123;<span class="hljs-symbol">x</span>++, d+=d1;&#125;
+     drawpixel (<span class="hljs-symbol">x</span>, <span class="hljs-symbol">y</span>, color);
+     &#125;  <span class="hljs-comment">/* while */</span>
+ &#125; <span class="hljs-comment">/* mid PointLine */</span>
+
+</code></pre>
+
+<p><strong>小结</strong></p>
+<p>(1) Ax + By + C = 0</p>
+<p>(2) 通过判断中点的符号，最终可以只进行整数加法。</p>
+<p><strong>这个算法是否还有改进的余地？</strong></p>
+<p>能否提出一个算法，使这个算法不但能解决画直线，还能解决圆弧、抛物线甚至自由曲线的光栅化问 题，使算法的覆盖域扩大。</p>
+<h4 id="3、Bresenham算法"><a href="#3、Bresenham算法" class="headerlink" title="3、Bresenham算法"></a>3、Bresenham算法</h4><p>DDA把算法效率提高到每步只做一个加法。</p>
+<p>中点算法进一步把效率提高到每步只做一个整数加法</p>
+<p>Bresenham提供了一个更一般的算法。该算法不仅有好的效率，而且有更广泛的适用范围。</p>
+<p>该算法的思想是通过各行、各列像素中心构造一组虚拟网格线，按照直线起点到终点的顺序，计算直线与各垂直网格线的交点，然后根据误差项的符号确定该列象素中与此交点最近的象素。</p>
+<p>假设每次x+1，y的递增（减）量为0或1，它取决于实际直线与最近光栅网格点的距离，这个距离的最大误差为0.5。</p>
+<p>误差项d的初值d0＝0</p>
+<p>d＝d＋k</p>
+<p>一旦d≥1，就把它减去1，保证d的相对性,且在0、1之间。</p>
+<p><img src="/2020/08/31/Article202008313/12.png" srcset="/img/loading.gif" alt="12"></p>
+<h2 id="圆弧的扫描转换算法"><a href="#圆弧的扫描转换算法" class="headerlink" title="圆弧的扫描转换算法"></a>圆弧的扫描转换算法</h2><h2 id="多边形的扫描转换与区域填充算法"><a href="#多边形的扫描转换与区域填充算法" class="headerlink" title="多边形的扫描转换与区域填充算法"></a>多边形的扫描转换与区域填充算法</h2><h2 id="裁剪算法"><a href="#裁剪算法" class="headerlink" title="裁剪算法"></a>裁剪算法</h2><h2 id="反走样算法"><a href="#反走样算法" class="headerlink" title="反走样算法"></a>反走样算法</h2><h2 id="消隐算法"><a href="#消隐算法" class="headerlink" title="消隐算法"></a>消隐算法</h2>
             </div>
             <hr>
             <div>
