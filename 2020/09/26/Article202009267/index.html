@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009267 - FuLeQun&#39;s Blog</title>
+  <title>Matplotlib中xlim，ylim，axis结构与用法 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      358 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -211,15 +211,117 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009267</h1>
+            <h1 style="display: none">Matplotlib中xlim，ylim，axis结构与用法</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/The_Time_Runner/article/details/89928057">https://blog.csdn.net/The_Time_Runner/article/details/89928057</a></p>
+</blockquote>
+<ul>
+<li><h2 id="matplotlib-pyplot-xlim-官方文档"><a href="#matplotlib-pyplot-xlim-官方文档" class="headerlink" title="matplotlib.pyplot.xlim() 官方文档"></a>matplotlib.pyplot.xlim() <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlim.html">官方文档</a></h2></li>
+</ul>
+<pre><code class="hljs python">matplotlib.pyplot.xlim(*args, **kwargs)</code></pre>
+
+<p>获取或者是设定x座标轴的范围，当前axes上的座标轴。</p>
+<p>有两种参数输入方式</p>
+<ol>
+<li><pre><code class="python">plt.xlim(num1, num2)
+&lt;!--hexoPostRenderEscape:&lt;pre&gt;&lt;code class=&quot;hljs markdown&quot;&gt;
+![&lt;span class=&quot;hljs-string&quot;&gt;1&lt;/span&gt;](&lt;span class=&quot;hljs-link&quot;&gt;Article202009267/1.png&lt;/span&gt;)
+</code></pre>
+</li>
+</ol>
+<p><span class="hljs-bullet">1.</span> <span class="hljs-code">```python</span><br><span class="hljs-code">   plt.xlim(xmin=num1,xmax=num2)</span>:hexoPostRenderEscape–&gt;</p>
+<p><img src="https://img-blog.csdnimg.cn/20190507194847203.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoZV9UaW1lX1J1bm5lcg==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<ul>
+<li><h2 id="matplotlib-pyplot-ylim-官方文档"><a href="#matplotlib-pyplot-ylim-官方文档" class="headerlink" title="matplotlib.pyplot.ylim 官方文档"></a>matplotlib.pyplot.ylim <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylim.html#matplotlib.pyplot.ylim">官方文档</a></h2></li>
+</ul>
+<p>内容与x一样</p>
+<ul>
+<li><h2 id="matplotlib-pyplot-axis-官方文档"><a href="#matplotlib-pyplot-axis-官方文档" class="headerlink" title="matplotlib.pyplot.axis 官方文档"></a>matplotlib.pyplot.axis <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis">官方文档</a></h2></li>
+</ul>
+<pre><code class="hljs python">matplotlib.pyplot.axis(*v, **kwargs)</code></pre>
+
+<p><strong>参数详解：</strong></p>
+<ol>
+<li><p><strong>xmin, xmax, ymin, ymax</strong> : float, optional（浮点数，可选）</p>
+</li>
+<li><p><strong>option</strong> : str</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>‘on’</td>
+<td>Turn on axis lines and labels.（启用轴线和标签。）</td>
+</tr>
+<tr>
+<td>‘off’</td>
+<td>Turn off axis lines and labels.</td>
+</tr>
+<tr>
+<td>‘equal’</td>
+<td>Set equal scaling (i.e., make circles circular) by changing axis limits.（通过更改轴限制来设置等比例缩放（即使圆成为圆形）。）</td>
+</tr>
+<tr>
+<td>‘scaled’</td>
+<td>Set equal scaling (i.e., make circles circular) by changing dimensions of the plot box.（通过更改绘图框的尺寸设置等比例缩放（即使圆成为圆形）。）</td>
+</tr>
+<tr>
+<td>‘tight’</td>
+<td>Set limits just large enough to show all data.（设置足够大的限制以显示所有数据。）</td>
+</tr>
+<tr>
+<td>‘auto’</td>
+<td>Automatic scaling (fill plot box with data).（自动缩放（用数据填充绘图框）。）</td>
+</tr>
+<tr>
+<td>‘normal’</td>
+<td>Same as ‘auto’; deprecated.（废弃）</td>
+</tr>
+<tr>
+<td>‘image’</td>
+<td>‘scaled’ with axis limits equal to data limits.（轴限制等于数据限制的“缩放”。）</td>
+</tr>
+<tr>
+<td>‘square’</td>
+<td>Square plot; similar to ‘scaled’, but initially forcing <code>xmax-xmin = ymax-ymin</code>.（正方形图；类似于“scaled”，但最初强制使用“xmax xmin=ymax ymin”。）</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>emit</strong> : bool, optional, default <em>True</em></p>
+</li>
+</ol>
+<p><img src="/2020/09/26/Article202009267/3.png" srcset="/img/loading.gif" alt="3"></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +334,7 @@
                     
                       <a href="/2020/09/26/Article202009268/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202009268</span>
+                        <span class="hidden-mobile">Python设置默认字典</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +343,7 @@
                     
                     
                       <a href="/2020/09/26/Article202009266/">
-                        <span class="hidden-mobile">Article202009266</span>
+                        <span class="hidden-mobile">pandas按行按列遍历DataFrame</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +515,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009267&nbsp;",
+        "Matplotlib中xlim，ylim，axis结构与用法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

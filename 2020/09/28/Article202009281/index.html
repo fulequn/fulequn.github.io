@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>Matplotlib中图层叠加问题 - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-28 07:49" pubdate>
+      2020年9月28日 早上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Matplotlib中图层叠加问题</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sunsoda/article/details/82431770">https://blog.csdn.net/sunsoda/article/details/82431770</a></p>
+</blockquote>
+<h1 id="matplotlib中的多图层叠加的问题"><a href="#matplotlib中的多图层叠加的问题" class="headerlink" title="matplotlib中的多图层叠加的问题"></a>matplotlib中的多图层叠加的问题</h1><h2 id="问题的引出"><a href="#问题的引出" class="headerlink" title="问题的引出"></a>问题的引出</h2><blockquote>
+<p>老板提出希望在之前绘制的降水分布图基础上，叠加上一下线路、变电站的分布。简单一想这个任务很简单，只需要知道线路，变电站经纬度，再叠加到图层即可。但是在实际操作却遇到一个小问题，即如何保证叠加的顺序，通过查阅<code>matplotlib</code>手册了解到一个<code>set_zorder</code>这个属性，可以完美解决图层叠加问题,因此在这里记录以下。</p>
+</blockquote>
+<p>我们先从下面这个例子讲起</p>
+<pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">Created on Mon Sep 28 08:28:12 2020</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">@author: 23820</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-keyword">import</span> matplotlib.lines <span class="hljs-keyword">as</span> mlines
+<span class="hljs-keyword">import</span> matplotlib.patches <span class="hljs-keyword">as</span> mpatches
+<span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-comment">##################################################</span>
+<span class="hljs-comment">#  解决中文字体显示问题</span>
+font = &#123;
+    <span class="hljs-string">&#x27;family&#x27;</span> : <span class="hljs-string">&#x27;SimHei&#x27;</span>
+&#125;;
+mpl.rc(<span class="hljs-string">&#x27;font&#x27;</span>, **font);
+<span class="hljs-comment">##################################################</span>
+<span class="hljs-comment"># 随机设置坐标值</span>
+<span class="hljs-comment"># %matplotlib inline</span>
+N = <span class="hljs-number">3</span>
+x = np.random.rand(N)
+y = np.random.rand(N)
+<span class="hljs-comment">##################################################</span>
+fig = plt.figure(figsize=[<span class="hljs-number">8</span>,<span class="hljs-number">4</span>])
+ax = fig.add_subplot(<span class="hljs-number">121</span>)
+<span class="hljs-comment"># 绘制circle</span>
+<span class="hljs-keyword">for</span> xi,yi <span class="hljs-keyword">in</span> zip(x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.05</span>, ec=<span class="hljs-string">&quot;blue&quot;</span>,fc=<span class="hljs-string">&#x27;blue&#x27;</span>)
+    ax.add_patch(circle)
+<span class="hljs-comment"># 绘制Line </span>
+line = mlines.Line2D(x,y,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,color=<span class="hljs-string">&#x27;red&#x27;</span>)
+ax.add_line(line)
+ax.set_title(<span class="hljs-string">&#x27;先圆后线&#x27;</span>)
+
+<span class="hljs-comment">############################################</span>
+ax = fig.add_subplot(<span class="hljs-number">122</span>)
+<span class="hljs-comment"># 绘制Line </span>
+line = mlines.Line2D(x,y,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,color=<span class="hljs-string">&#x27;red&#x27;</span>)
+ax.add_line(line)
+
+<span class="hljs-comment"># 绘制circle</span>
+<span class="hljs-keyword">for</span> xi,yi <span class="hljs-keyword">in</span> zip(x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.05</span>, ec=<span class="hljs-string">&quot;blue&quot;</span>,fc=<span class="hljs-string">&#x27;blue&#x27;</span>)
+    ax.add_patch(circle)
+ax.set_title(<span class="hljs-string">&#x27;先线后圆&#x27;</span>)</code></pre>
+
+<p><img src="/2020/09/28/Article202009281/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p>这个例子，正是我在作图时遇到的问题，无论我是先画圆，还是先画线条，圆圈总是在线条之下，如何才能把圆圈调换到线条上来呢？这里我就联想到PS处理图片时最终的概念<code>图层</code>,调换不同的图层的叠加顺序，即会呈现出不一样的图片，那么在<code>matplotlib</code>中，是否也存在这样的接口，可以让我来设置图层的叠加顺序呢？通过查阅<a target="_blank" rel="noopener" href="https://matplotlib.org/"><code>matplolib</code>的官网</a>终于找到这个大杀器<code>set_zorder</code></p>
+<h2 id="set-zorder"><a href="#set-zorder" class="headerlink" title="set_zorder"></a>set_zorder</h2><p><code>set_zorder</code>顾名思义，set：设置，z：对象，order：顺序，<code>set_zorder</code>即设置对象的顺序。matplotlib为多个对象都提供了这个函数。在官网搜索set_zorder即可看到</p>
+<ul>
+<li>matplotlib.artist.Artist.set_zorder (Python method, in matplotlib.artist.Artist.set_zorder)</li>
+<li>matplotlib.axes.Axes.set_zorder (Python method, in matplotlib.axes.Axes.set_zorder)</li>
+<li>matplotlib.axis.Axis.set_zorder (Python method, in matplotlib.axis.Axis.set_zorder)</li>
+<li>matplotlib.axis.Tick.set_zorder (Python method, in matplotlib.axis.Tick.set_zorder)</li>
+<li>matplotlib.axis.XAxis.set_zorder (Python method, in matplotlib.axis.XAxis.set_zorder)</li>
+<li>matplotlib.axis.XTick.set_zorder (Python method, in matplotlib.axis.XTick.set_zorder)</li>
+<li>matplotlib.axis.YAxis.set_zorder (Python method, in matplotlib.axis.YAxis.set_zorder)-</li>
+<li>matplotlib.axis.YTick.set_zorder (Python method, in matplotlib.axis.YTick.set_zorder)</li>
+</ul>
+<p>可以看出，针对matplotlib中不同对象，都提供了set_zorder这个method，其规则如下：</p>
+<blockquote>
+<p>Set the zorder for the artist. Artists with lower zorder values are drawn first. order值越小，越先画</p>
+</blockquote>
+<p>因此，在我们上面那个case,就可以完美破解，希望圆圈画在线上，我们只需要把圆圈设个较大的zorder值，线条设个较小的zorder值即可</p>
+<p>主要添加了<code>circle.set_zorder(1)</code>和<code>line.set_zorder(0)</code>这两行代码</p>
+<pre><code class="hljs python">fig = plt.figure(figsize=[<span class="hljs-number">8</span>,<span class="hljs-number">4</span>])
+ax = fig.add_subplot(<span class="hljs-number">121</span>)
+<span class="hljs-comment"># 绘制circle</span>
+<span class="hljs-keyword">for</span> xi,yi <span class="hljs-keyword">in</span> zip(x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.05</span>, ec=<span class="hljs-string">&quot;blue&quot;</span>,fc=<span class="hljs-string">&#x27;blue&#x27;</span>)
+    circle.set_zorder(<span class="hljs-number">0</span>)
+    ax.add_patch(circle)
+<span class="hljs-comment"># 绘制Line </span>
+line = mlines.Line2D(x,y,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,color=<span class="hljs-string">&#x27;red&#x27;</span>)
+
+line.set_zorder(<span class="hljs-number">1</span>)<span class="hljs-comment">#设置后面显示</span>
+
+ax.add_line(line)
+ax.set_title(<span class="hljs-string">&#x27;先圆后线&#x27;</span>)
+
+ax = fig.add_subplot(<span class="hljs-number">122</span>)
+<span class="hljs-comment"># 绘制circle</span>
+<span class="hljs-keyword">for</span> xi,yi <span class="hljs-keyword">in</span> zip(x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.05</span>, ec=<span class="hljs-string">&quot;blue&quot;</span>,fc=<span class="hljs-string">&#x27;blue&#x27;</span>)
+    circle.set_zorder(<span class="hljs-number">1</span>)
+    ax.add_patch(circle)
+<span class="hljs-comment"># 绘制Line </span>
+line = mlines.Line2D(x,y,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,color=<span class="hljs-string">&#x27;red&#x27;</span>)
+
+line.set_zorder(<span class="hljs-number">0</span>)<span class="hljs-comment">#设置优先显示</span>
+
+ax.add_line(line)
+ax.set_title(<span class="hljs-string">&#x27;先线后圆&#x27;</span>)
+t=ax.get_xaxis()</code></pre>
+
+<p><img src="/2020/09/28/Article202009281/2.png" srcset="/img/loading.gif" alt="2"></p>
+<h3 id="try"><a href="#try" class="headerlink" title="try"></a>try</h3><p>最后现学现卖，送朵花花给大家,虽然这个代码不用zorder似乎也可以~~哈哈哈</p>
+<pre><code class="hljs python">fig = plt.figure(figsize=[<span class="hljs-number">8</span>,<span class="hljs-number">4</span>])
+ax = fig.add_subplot(<span class="hljs-number">121</span>)
+<span class="hljs-comment"># 绘制circle</span>
+x=np.array([<span class="hljs-number">0.4</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.6</span>,<span class="hljs-number">0.55</span>,<span class="hljs-number">0.45</span>])*<span class="hljs-number">2</span>
+y=np.array([<span class="hljs-number">0.4</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.3</span>,<span class="hljs-number">0.3</span>])*<span class="hljs-number">2</span>
+
+colors=[<span class="hljs-string">&#x27;red&#x27;</span>,<span class="hljs-string">&#x27;orange&#x27;</span>,<span class="hljs-string">&#x27;yellow&#x27;</span>,<span class="hljs-string">&#x27;green&#x27;</span>,<span class="hljs-string">&#x27;blue&#x27;</span>]
+<span class="hljs-keyword">for</span> i,xi,yi <span class="hljs-keyword">in</span> zip(np.arange(len(x)),x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.2</span>, ec=<span class="hljs-string">&#x27;pink&#x27;</span>,fc=<span class="hljs-string">&#x27;pink&#x27;</span>)
+    circle.set_zorder(i)
+    ax.add_patch(circle)
+
+circle = mpatches.Circle((<span class="hljs-number">1</span>,<span class="hljs-number">0.8</span>), <span class="hljs-number">0.1</span>, ec=<span class="hljs-string">&quot;white&quot;</span>,fc=<span class="hljs-string">&quot;white&quot;</span>)
+ax.add_patch(circle)
+circle.set_zorder(<span class="hljs-number">10</span>)
+
+x=np.array([<span class="hljs-number">0.4</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.6</span>,<span class="hljs-number">0.55</span>,<span class="hljs-number">0.45</span>])*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>
+y=np.array([<span class="hljs-number">0.4</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.3</span>,<span class="hljs-number">0.3</span>])*<span class="hljs-number">2</span>
+
+xl=[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]
+yl=[<span class="hljs-number">0</span>,<span class="hljs-number">0.55</span>]
+line = mlines.Line2D(xl,yl,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,color=<span class="hljs-string">&#x27;green&#x27;</span>)
+line.set_zorder(<span class="hljs-number">0</span>)
+ax.add_line(line)
+colors=[<span class="hljs-string">&#x27;red&#x27;</span>,<span class="hljs-string">&#x27;orange&#x27;</span>,<span class="hljs-string">&#x27;yellow&#x27;</span>,<span class="hljs-string">&#x27;green&#x27;</span>,<span class="hljs-string">&#x27;blue&#x27;</span>]
+<span class="hljs-keyword">for</span> i,xi,yi <span class="hljs-keyword">in</span> zip(np.arange(len(x)),x,y):
+    circle = mpatches.Circle((xi,yi), <span class="hljs-number">0.2</span>, ec=colors[i],fc=colors[i])
+    circle.set_zorder(i)
+    ax.add_patch(circle)
+
+circle = mpatches.Circle((<span class="hljs-number">2</span>,<span class="hljs-number">0.8</span>), <span class="hljs-number">0.1</span>, ec=<span class="hljs-string">&quot;white&quot;</span>,fc=<span class="hljs-string">&quot;white&quot;</span>)
+ax.add_patch(circle)
+circle.set_zorder(<span class="hljs-number">10</span>)
+
+xl=[<span class="hljs-number">2</span>,<span class="hljs-number">2</span>]
+yl=[<span class="hljs-number">0</span>,<span class="hljs-number">0.55</span>]
+line = mlines.Line2D(xl,yl,lw=<span class="hljs-number">3.</span>,ls=<span class="hljs-string">&#x27;-&#x27;</span>,alpha=<span class="hljs-number">1</span>,c=<span class="hljs-string">&#x27;green&#x27;</span>)
+line.set_zorder(<span class="hljs-number">0</span>)
+ax.add_line(line)
+ax.set_xlim([<span class="hljs-number">0</span>,<span class="hljs-number">2.5</span>])
+ax.set_ylim([<span class="hljs-number">0</span>,<span class="hljs-number">2.5</span>])</code></pre>
+
+<p><img src="/2020/09/28/Article202009281/3.png" srcset="/img/loading.gif" alt="3"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/28/Article202009282/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">R语言DataFrame数据框类型的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/26/Article202009268/">
+                        <span class="hidden-mobile">Python设置默认字典</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Matplotlib中图层叠加问题&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

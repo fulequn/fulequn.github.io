@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009262 - FuLeQun&#39;s Blog</title>
+  <title>Python中的andas进行组合筛选和范围筛选 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      413 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      12
        分钟
     </span>
   
@@ -211,15 +211,81 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009262</h1>
+            <h1 style="display: none">Python中的andas进行组合筛选和范围筛选</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/orangefly0214/article/details/82712117">https://blog.csdn.net/orangefly0214/article/details/82712117</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/beyondChan/p/10861045.html">https://www.cnblogs.com/beyondChan/p/10861045.html</a> </p>
+</blockquote>
+<p>对pandas中的DataFrame进行条件筛选，即筛选出符合条件的数据条；这里经常会遇到以下几种情况，下面举例说明：</p>
+<pre><code class="hljs angelscript">df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;A&#x27;</span>:[<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>, <span class="hljs-number">400</span>, <span class="hljs-number">500</span>],<span class="hljs-string">&#x27;B&#x27;</span>:[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>],<span class="hljs-string">&#x27;C&#x27;</span>:[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]&#125;)
+df
+        A    B    C
+ <span class="hljs-number">0</span>    <span class="hljs-number">100</span>    a    <span class="hljs-number">1</span>
+ <span class="hljs-number">1</span>    <span class="hljs-number">200</span>    b    <span class="hljs-number">2</span>
+ <span class="hljs-number">2</span>    <span class="hljs-number">300</span>    c    <span class="hljs-number">3</span>
+ <span class="hljs-number">3</span>    <span class="hljs-number">400</span>    d    <span class="hljs-number">4</span>
+ <span class="hljs-number">4</span>    <span class="hljs-number">500</span>    e    <span class="hljs-number">5</span></code></pre>
+
+<p><strong>（1）找出df中A列值为100的所有数据</strong></p>
+<pre><code class="hljs angelscript">df[df.A==<span class="hljs-number">100</span>]
+df[df[<span class="hljs-string">&#x27;A&#x27;</span>] == <span class="hljs-number">100</span>]
+ 　　　　A    B    C
+ <span class="hljs-number">0</span>    <span class="hljs-number">100</span>    a    <span class="hljs-number">1</span></code></pre>
+
+<p>这里也可以是小于（&lt;）、大于（&gt;）、小于等于（&lt;=）、大于等于（&gt;=）、不等于（!=）等情况。</p>
+<p><strong>（2）找出df中A列值为100、200、300的所有数据</strong></p>
+<pre><code class="hljs yaml"><span class="hljs-string">num</span> <span class="hljs-string">=</span> [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>]
+<span class="hljs-comment">#df[df[&#x27;A&#x27;].isin(num)]</span>
+<span class="hljs-string">df[df.A.isin(num)]</span>     <span class="hljs-comment">#筛选出A列值在num列表的数据条</span>
+        <span class="hljs-string">A</span>    <span class="hljs-string">B</span>    <span class="hljs-string">C</span>
+ <span class="hljs-number">0</span>    <span class="hljs-number">100</span>    <span class="hljs-string">a</span>    <span class="hljs-number">1</span>
+ <span class="hljs-number">1</span>    <span class="hljs-number">200</span>    <span class="hljs-string">b</span>    <span class="hljs-number">2</span>
+ <span class="hljs-number">2</span>    <span class="hljs-number">300</span>    <span class="hljs-string">c</span>    <span class="hljs-number">3</span></code></pre>
+
+<p>要用.isin 而不能用in,用 in以后选出来的值都是True 和False，然后报错：</p>
+<p><code>ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any()</code></p>
+<p><strong>（3）找出df中A列值为100且B列值为‘a’的所有数据</strong></p>
+<pre><code class="hljs angelscript">df[(df.A==<span class="hljs-number">100</span>)&amp;(df.B==<span class="hljs-string">&#x27;a&#x27;</span>)]
+        A    B    C
+ <span class="hljs-number">0</span>    <span class="hljs-number">100</span>    a    <span class="hljs-number">1</span></code></pre>
+
+<p><strong>（4）找出df中A列值为100或B列值为‘b’的所有数据</strong></p>
+<pre><code class="hljs angelscript">df[(df.A==<span class="hljs-number">100</span>)|(df.B==<span class="hljs-string">&#x27;b&#x27;</span>)]
+        A    B    C
+ <span class="hljs-number">0</span>    <span class="hljs-number">100</span>    a    <span class="hljs-number">1</span>
+ <span class="hljs-number">1</span>    <span class="hljs-number">200</span>    b    <span class="hljs-number">2</span></code></pre>
+
+<p>这里需要注意的是，多条件筛选的时候，必须加括号’()’。</p>
+<p>判断值是否在某一个范围内进行筛选的时候需要使用DataFrame.isin()的isin()函数，而不能使用in。</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/Pandas/">Pandas</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Pandas/">Pandas</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +298,7 @@
                     
                       <a href="/2020/09/26/Article202009263/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202009263</span>
+                        <span class="hidden-mobile">Python中Pandas的DataFrame对象的行以及列的增删改查</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +307,7 @@
                     
                     
                       <a href="/2020/09/26/Article202009261/">
-                        <span class="hidden-mobile">Article202009261</span>
+                        <span class="hidden-mobile">“带BOM的UTF-8”和“无BOM的UTF-8”的区别</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +479,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009262&nbsp;",
+        "Python中的andas进行组合筛选和范围筛选&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

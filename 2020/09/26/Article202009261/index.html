@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009261 - FuLeQun&#39;s Blog</title>
+  <title>“带BOM的UTF-8”和“无BOM的UTF-8”的区别 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      389 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      11
        分钟
     </span>
   
@@ -211,15 +211,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009261</h1>
+            <h1 style="display: none">“带BOM的UTF-8”和“无BOM的UTF-8”的区别</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20167122/answer/14194448">https://www.zhihu.com/question/20167122/answer/14194448</a></p>
+</blockquote>
+<p>UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。<br>所以不含 BOM 的 UTF-8 才是标准形式，在 UTF-8 文件中放置 BOM 主要是微软的习惯（顺便提一下：把带有 BOM 的小端序 UTF-16 称作「Unicode」而又不详细说明，这也是微软的习惯）。<br>BOM（byte order mark）是为 UTF-16 和 UTF-32 准备的，用于标记字节序（byte order）。微软在 UTF-8 中使用 BOM 是因为这样可以把 UTF-8 和 ASCII 等编码明确区分开，但这样的文件在 Windows 之外的操作系统里会带来问题。</p>
+<p>「UTF-8」和「带 BOM 的 UTF-8」的区别就是有没有 BOM。即文件开头有没有 U+FEFF。</p>
+<p>UTF-8 的网页代码不应使用 BOM，否则常常会出错。这是一个小例子： <a target="_blank" rel="noopener" href="http://www.zhihu.com/question/20138814">为什么这个网页代码  内的信息会被浏览器理解为在  内？</a></p>
+<p>另附《The Unicode Standard, Version 6.0》之 3.10 D95 UTF-8 encoding scheme 的一段话：</p>
+<blockquote>
+<p>While there is obviously no need for a byte order signature when using UTF-8, there are occasions when processes convert UTF-16 or UTF-32 data containing a byte order mark into UTF-8. When represented in UTF-8, the byte order mark turns into the byte sequence. Its usage at the beginning of a UTF-8 data stream is neither required nor recommended by the Unicode Standard, but its presence does not affect conformance to the UTF-8 encoding scheme. Identification of the byte sequence at the beginning of a data stream can, however, be taken as a near-certain indication that the data stream is using the UTF-8 encoding scheme.</p>
+</blockquote>
+<p><a href="https://link.zhihu.com/?target=http://www.unicode.org/versions/Unicode6.0.0/ch03.pdf">http://www.unicode.org/versions/Unicode6.0.0/ch03.pdf</a></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CharSet/">CharSet</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CharSet/">CharSet</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +259,7 @@
                     
                       <a href="/2020/09/26/Article202009262/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202009262</span>
+                        <span class="hidden-mobile">Python中的andas进行组合筛选和范围筛选</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -413,7 +440,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009261&nbsp;",
+        "“带BOM的UTF-8”和“无BOM的UTF-8”的区别&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

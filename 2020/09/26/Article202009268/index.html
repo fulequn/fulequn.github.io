@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009268 - FuLeQun&#39;s Blog</title>
+  <title>Python设置默认字典 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      287 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -211,15 +211,64 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009268</h1>
+            <h1 style="display: none">Python设置默认字典</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyueyouyi/p/9561057.html">https://www.cnblogs.com/wangyueyouyi/p/9561057.html</a></p>
+</blockquote>
+<p>访问字典中某个‘键’时，若键不存在则会报错，比如</p>
+<pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>dic = &#123;<span class="hljs-string">&#x27;a&#x27;</span> : <span class="hljs-number">1</span>&#125;
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic[<span class="hljs-string">&#x27;b&#x27;</span>]
+Traceback (most recent call last):
+  File <span class="hljs-string">&quot;&lt;pyshell#24&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
+    dic[<span class="hljs-string">&#x27;b&#x27;</span>]
+KeyError: <span class="hljs-string">&#x27;b&#x27;</span></code></pre>
+
+<p>如果不想报错，可以给字典设置默认值。即当键存在时，返回键对应的值；键不存在时，返回默认值：</p>
+<p>1 字典自带的 setdefault 函数</p>
+<pre><code class="hljs python">&gt;&gt;&gt;dic = &#123;<span class="hljs-string">&#x27;a&#x27;</span> : <span class="hljs-number">1</span>&#125;
+
+<span class="hljs-comment">#此时访问 dic[&#x27;b&#x27;] 会报错，因为dic不存在键 ‘b’</span>
+<span class="hljs-comment">#设置默认值</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic.setdefault(<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-number">2</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic[<span class="hljs-string">&#x27;b&#x27;</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">2</span></code></pre>
+
+<p> 2 collections 模块的 defaultdict 函数</p>
+<pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic = defaultdict(int)
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic[<span class="hljs-string">&#x27;a&#x27;</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">0</span>
+<span class="hljs-comment"># dic = defaultdict(int) 该式中的int 可以替换为 str flaot等。</span>
+<span class="hljs-comment"># 为 int 时的默认值为 0</span>
+<span class="hljs-comment"># 为 str 时的默认值为 &#x27;&#x27;</span>
+<span class="hljs-comment">#若想设置默认值为一给定的值 比如 &#x27;oppo&#x27; 则如下</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic = defaultdict(<span class="hljs-keyword">lambda</span> : <span class="hljs-string">&#x27;oppo&#x27;</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>dic[<span class="hljs-string">&#x27;a&#x27;</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-string">&#x27;oppo&#x27;</span>
+</code></pre>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
                 
               </div>
               
@@ -230,12 +279,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/09/28/Article202009281/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Matplotlib中图层叠加问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
                       <a href="/2020/09/26/Article202009267/">
-                        <span class="hidden-mobile">Article202009267</span>
+                        <span class="hidden-mobile">Matplotlib中xlim，ylim，axis结构与用法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -407,7 +462,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009268&nbsp;",
+        "Python设置默认字典&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

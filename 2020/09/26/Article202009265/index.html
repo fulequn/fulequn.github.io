@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009265 - FuLeQun&#39;s Blog</title>
+  <title>pandas+matplotlib画图，两张图叠加 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      439 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      13
        分钟
     </span>
   
@@ -211,15 +211,85 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009265</h1>
+            <h1 style="display: none">pandas+matplotlib画图，两张图叠加</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/o1101574955/article/details/51623018">https://blog.csdn.net/o1101574955/article/details/51623018</a></p>
+</blockquote>
+<p>《python数据分析与挖掘实战》原书上的例子：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>] <span class="hljs-comment">#用来正常显示中文标签</span>
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span> <span class="hljs-comment">#用来正常显示负号</span>
+x=pd.Series(np.exp(np.arange(<span class="hljs-number">20</span>)))
+x.plot(label=<span class="hljs-string">u&#x27;原始数据图&#x27;</span>,legend=<span class="hljs-literal">True</span>)
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()
+x.plot(logy=<span class="hljs-literal">True</span>,label=<span class="hljs-string">u&#x27;对数数据图&#x27;</span>,legend=<span class="hljs-literal">True</span>) <span class="hljs-comment">#这个函数里的参数logy=True时，是以10为底的</span>
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre>
+
+<p>效果图如下：</p>
+<p><img src="/2020/09/26/Article202009265/1.jpg" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="/2020/09/26/Article202009265/2.jpg" srcset="/img/loading.gif" alt="2"></p>
+<p>现在想把它俩画在一张图上，是可以画一起的，但是，图例没法显示出来，最后查了官网的资料，需要使用<a target="_blank" rel="noopener" href="http://matplotlib.org/users/legend_guide.html#using-proxy-artist">using-proxy-artist</a> ,代码如下：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.lines <span class="hljs-keyword">as</span> mlines
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>] <span class="hljs-comment">#用来正常显示中文标签</span>
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span> <span class="hljs-comment">#用来正常显示负号</span>
+plt.figure()
+x=pd.Series(np.exp(np.arange(<span class="hljs-number">20</span>)))
+p1=x.plot(label=<span class="hljs-string">u&#x27;原始数据图&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;正常坐标&#x27;</span>)
+x2=pd.Series(np.log10(x)) <span class="hljs-comment">#np.log()是以e为底的</span>
+p2=x2.plot(secondary_y=<span class="hljs-literal">True</span>,style=<span class="hljs-string">&#x27;--&#x27;</span>,color=<span class="hljs-string">&#x27;r&#x27;</span>,)
+plt.yticks(plt.yticks()[<span class="hljs-number">0</span>],[<span class="hljs-string">&#x27;$10^%d$&#x27;</span>%w <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> range(len(plt.yticks()[<span class="hljs-number">0</span>]))])
+<span class="hljs-comment">#x.plot(logy=True,label=u&#x27;对数数据图&#x27;,legend=True,secondary_y=True,style=&#x27;--&#x27;,color=&#x27;r&#x27;) #这里不能用这个，因为它会同时改变图中的x坐标轴和y坐标轴</span>
+plt.ylabel(<span class="hljs-string">&#x27;指数坐标&#x27;</span>)
+blue_line = mlines.Line2D([],[],linestyle=<span class="hljs-string">&#x27;-&#x27;</span>,color=<span class="hljs-string">&#x27;blue&#x27;</span>,markersize=<span class="hljs-number">2</span>, label=<span class="hljs-string">u&#x27;原始数据图&#x27;</span>)
+red_line= mlines.Line2D([],[],linestyle=<span class="hljs-string">&#x27;--&#x27;</span>,color=<span class="hljs-string">&#x27;red&#x27;</span>,markersize=<span class="hljs-number">2</span>, label=<span class="hljs-string">u&#x27;对数数据图&#x27;</span>)
+plt.legend(handles=[blue_line,red_line],loc=<span class="hljs-string">&#x27;upper left&#x27;</span>)
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre>
+
+<p>效果如下：</p>
+<p><img src="/2020/09/26/Article202009265/3.jpg" srcset="/img/loading.gif" alt="3"></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Matplotlib/">Matplotlib</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Matplotlib/Pandas/">Pandas</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Pandas/">Pandas</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +302,7 @@
                     
                       <a href="/2020/09/26/Article202009266/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202009266</span>
+                        <span class="hidden-mobile">pandas按行按列遍历DataFrame</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +311,7 @@
                     
                     
                       <a href="/2020/09/26/Article202009264/">
-                        <span class="hidden-mobile">Article202009264</span>
+                        <span class="hidden-mobile">Python操作DataFrame遇到TypeError异常</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +483,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009265&nbsp;",
+        "pandas+matplotlib画图，两张图叠加&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

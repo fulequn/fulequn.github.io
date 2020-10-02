@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202009266 - FuLeQun&#39;s Blog</title>
+  <title>pandas按行按列遍历DataFrame - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      324 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      9
        分钟
     </span>
   
@@ -211,15 +211,77 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202009266</h1>
+            <h1 style="display: none">pandas按行按列遍历DataFrame</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_29675423/article/details/87972498">https://blog.csdn.net/sinat_29675423/article/details/87972498</a></p>
+</blockquote>
+<p>遍历数据有以下三种方法：</p>
+<p><img src="/2020/09/26/Article202009266/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p>简单对上面三种方法进行说明：</p>
+<ul>
+<li>iterrows(): 按行遍历，将DataFrame的每一行迭代为(index, Series)对，可以通过row[name]对元素进行访问。</li>
+<li>itertuples(): 按行遍历，将DataFrame的每一行迭代为元祖，可以通过row[name]对元素进行访问，比iterrows()效率高。</li>
+<li>iteritems():按列遍历，将DataFrame的每一列迭代为(列名, Series)对，可以通过row[index]对元素进行访问。</li>
+</ul>
+<p>示例数据</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+inp = [&#123;<span class="hljs-string">&#x27;c1&#x27;</span>:<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c2&#x27;</span>:<span class="hljs-number">100</span>&#125;, &#123;<span class="hljs-string">&#x27;c1&#x27;</span>:<span class="hljs-number">11</span>, <span class="hljs-string">&#x27;c2&#x27;</span>:<span class="hljs-number">110</span>&#125;, &#123;<span class="hljs-string">&#x27;c1&#x27;</span>:<span class="hljs-number">12</span>, <span class="hljs-string">&#x27;c2&#x27;</span>:<span class="hljs-number">123</span>&#125;]
+df = pd.DataFrame(inp)
+
+print(df)</code></pre>
+
+<p><img src="https://img-blog.csdnimg.cn/20190227143422984.png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h1 id="按行遍历iterrows"><a href="#按行遍历iterrows" class="headerlink" title="按行遍历iterrows():"></a>按行遍历iterrows():</h1><pre><code class="hljs perl"><span class="hljs-keyword">for</span> <span class="hljs-keyword">index</span>, row in df.iterrows():
+    <span class="hljs-keyword">print</span>(<span class="hljs-keyword">index</span>) <span class="hljs-comment"># 输出每行的索引值</span></code></pre>
+
+<p><img src="/2020/09/26/Article202009266/3.png" srcset="/img/loading.gif" alt="3"><br>row[‘name’]可以获取这一行对应列的值</p>
+<pre><code class="hljs python"><span class="hljs-comment"># 对于每一行，通过列名name访问对应的元素</span>
+<span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> df.iterrows():
+    print(row[<span class="hljs-string">&#x27;c1&#x27;</span>], row[<span class="hljs-string">&#x27;c2&#x27;</span>]) <span class="hljs-comment"># 输出每一行</span></code></pre>
+
+<p><img src="/2020/09/26/Article202009266/4.png" srcset="/img/loading.gif" alt="4"></p>
+<h1 id="按行遍历itertuples"><a href="#按行遍历itertuples" class="headerlink" title="按行遍历itertuples():"></a>按行遍历itertuples():</h1><p>getattr(row, ‘name’)与row[‘name’]类似，也是获取对应的属性值</p>
+<pre><code class="hljs python"><span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> df.itertuples():
+    print(getattr(row, <span class="hljs-string">&#x27;c1&#x27;</span>), getattr(row, <span class="hljs-string">&#x27;c2&#x27;</span>)) <span class="hljs-comment"># 输出每一行</span></code></pre>
+
+<p><img src="/2020/09/26/Article202009266/5.png" srcset="/img/loading.gif" alt="5"></p>
+<h1 id="按列遍历iteritems"><a href="#按列遍历iteritems" class="headerlink" title="按列遍历iteritems():"></a>按列遍历iteritems():</h1><pre><code class="hljs python"><span class="hljs-keyword">for</span> index, row <span class="hljs-keyword">in</span> df.iteritems():
+    print(index) <span class="hljs-comment"># 输出列名</span></code></pre>
+
+<p><img src="/2020/09/26/Article202009266/6.png" srcset="/img/loading.gif" alt="6"></p>
+<pre><code class="hljs python"><span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> df.iteritems():
+    print(row[<span class="hljs-number">0</span>], row[<span class="hljs-number">1</span>], row[<span class="hljs-number">2</span>]) <span class="hljs-comment"># 输出各列</span></code></pre>
+
+<p><img src="/2020/09/26/Article202009266/7.png" srcset="/img/loading.gif" alt="7"></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/Pandas/">Pandas</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Pandas/">Pandas</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +294,7 @@
                     
                       <a href="/2020/09/26/Article202009267/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202009267</span>
+                        <span class="hidden-mobile">Matplotlib中xlim，ylim，axis结构与用法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +303,7 @@
                     
                     
                       <a href="/2020/09/26/Article202009265/">
-                        <span class="hidden-mobile">Article202009265</span>
+                        <span class="hidden-mobile">pandas+matplotlib画图，两张图叠加</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +475,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202009266&nbsp;",
+        "pandas按行按列遍历DataFrame&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
