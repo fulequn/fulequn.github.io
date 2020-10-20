@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202010022 - FuLeQun&#39;s Blog</title>
+  <title>Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.8k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      52
        分钟
     </span>
   
@@ -211,15 +211,239 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202010022</h1>
+            <h1 style="display: none">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考文献：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qing0228/p/11183962.html">https://www.cnblogs.com/qing0228/p/11183962.html</a></p>
+</blockquote>
+<p>在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y) 。</p>
+<p>如若想要绘制一个图时写入标签，则写为 plt.plot(x,y,label=”figure1”)。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+
+<span class="hljs-comment">#生成数据</span>
+x = linspace(<span class="hljs-number">0</span>, <span class="hljs-number">2</span> * pi, <span class="hljs-number">50</span>)
+plt.plot(sin(x))
+
+plt.xlabel(<span class="hljs-string">&#x27;x-label&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;y-label&#x27;</span>, fontsize=<span class="hljs-string">&#x27;large&#x27;</span>)
+plt.title(<span class="hljs-string">&#x27;title&#x27;</span>)</code></pre>
+
+<p><img src="/2020/10/02/Article202010022/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p>以下先将整体代码插入，再分布讲解：</p>
+<pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">Created on Thu Oct 15 20:05:49 2020</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">@author: 23820</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+<span class="hljs-keyword">from</span> matplotlib.ticker <span class="hljs-keyword">import</span> MultipleLocator, FormatStrFormatter 
+
+<span class="hljs-comment">#获取最大最小值</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minmax_value</span>(<span class="hljs-params">list1</span>):</span>
+    minvalue=min(list1)
+    maxvalue=max(list1)
+    <span class="hljs-keyword">return</span> minvalue,maxvalue
+
+<span class="hljs-comment">#创建画布</span>
+plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">14</span>),dpi=<span class="hljs-number">98</span>)
+xmajorLocator = MultipleLocator(<span class="hljs-number">1</span>) <span class="hljs-comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="hljs-comment">#设置中文字体</span>
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;SimHei&#x27;</span>]  
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment">#生成1行2列的子图</span>
+p1 = plt.subplot(<span class="hljs-number">121</span>)<span class="hljs-comment">#第一行的左边</span>
+p2 = plt.subplot(<span class="hljs-number">122</span>)<span class="hljs-comment">#第一行的右边</span>
+
+
+<span class="hljs-comment">#图中展示点的数量</span>
+pointcount=<span class="hljs-number">5</span>
+
+<span class="hljs-comment">#生成数据</span>
+x=[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+print(x)
+<span class="hljs-comment">#生成数据</span>
+y1=[i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+y2=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+y3=[i*<span class="hljs-number">3</span>+<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+y4=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(x)<span class="hljs-number">-1</span>):
+    <span class="hljs-comment">#如果不够展示点的数量</span>
+    <span class="hljs-keyword">if</span> i&lt;pointcount:
+        minx,maxx=minmax_value(x[:pointcount])
+        minx,maxx=minmax_value(x[:pointcount])
+        minyA,maxyA=minmax_value(y1[:pointcount])
+        minyB,maxyB=minmax_value(y2[:pointcount])
+
+        maxy1=max(maxyA,maxyB)
+        miny1=min(minyA,minyB)
+        p1.axis([minx,maxx,miny1,maxy1])
+        p1.grid(<span class="hljs-literal">True</span>)
+        A,=p1.plot(x[:pointcount],y1[:pointcount],<span class="hljs-string">&quot;g-&quot;</span>)
+        B,=p1.plot(x[:pointcount],y2[:pointcount],<span class="hljs-string">&quot;b-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1.xaxis.set_major_locator(xmajorLocator)
+        legend=p1.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图1&quot;</span>,<span class="hljs-string">&quot;图2&quot;</span>])    
+
+
+        minx,maxx=minmax_value(x[:pointcount])
+        minx,maxx=minmax_value(x[:pointcount])
+        minyA,maxyA=minmax_value(y3[:pointcount])
+        minyB,maxyB=minmax_value(y4[:pointcount])
+
+        maxy1=max(maxyA,maxyB)
+        miny1=min(minyA,minyB)
+        p2.axis([minx,maxx,miny1,maxy1])
+        p2.grid(<span class="hljs-literal">True</span>)
+        A,=p2.plot(x[:pointcount],y3[:pointcount],<span class="hljs-string">&quot;r-&quot;</span>)
+        B,=p2.plot(x[:pointcount],y4[:pointcount],<span class="hljs-string">&quot;y-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2.xaxis.set_major_locator(xmajorLocator)
+        legend=p2.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图3&quot;</span>,<span class="hljs-string">&quot;图4&quot;</span>])  
+    <span class="hljs-keyword">elif</span> i&gt;=pointcount:
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minyA,maxyA=minmax_value(y1[i-pointcount:i])
+        minyB,maxyB=minmax_value(y2[i-pointcount:i])
+
+        maxy1=max(maxyA,maxyB)
+        miny1=min(minyA,minyB)
+        p1.axis([minx,maxx,miny1,maxy1])
+        p1.grid(<span class="hljs-literal">True</span>)
+        A,=p1.plot(x[i-pointcount:i],y1[i-pointcount:i],<span class="hljs-string">&quot;g-&quot;</span>)
+        B,=p1.plot(x[i-pointcount:i],y2[i-pointcount:i],<span class="hljs-string">&quot;b-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1.xaxis.set_major_locator(xmajorLocator)
+        legend=p1.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图1&quot;</span>,<span class="hljs-string">&quot;图2&quot;</span>])
+
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minyA,maxyA=minmax_value(y3[i-pointcount:i])
+        minyB,maxyB=minmax_value(y4[i-pointcount:i])
+
+        maxy1=max(maxyA,maxyB)
+        miny1=min(minyA,minyB)
+        p2.axis([minx,maxx,miny1,maxy1])
+        p2.grid(<span class="hljs-literal">True</span>)
+        A,=p2.plot(x[i-pointcount:i],y3[i-pointcount:i],<span class="hljs-string">&quot;r-&quot;</span>)
+        B,=p2.plot(x[i-pointcount:i],y4[i-pointcount:i],<span class="hljs-string">&quot;y-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2.xaxis.set_major_locator(xmajorLocator)
+        legend=p2.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图3&quot;</span>,<span class="hljs-string">&quot;图4&quot;</span>])
+
+
+    <span class="hljs-comment">#设置坐标轴标题以及图像的名称</span>
+    p1.set_xlabel(<span class="hljs-string">&quot;横轴属性名一&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p1.set_ylabel(<span class="hljs-string">&quot;纵轴属性名一&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p1.set_title(<span class="hljs-string">&quot;主题一&quot;</span>,fontsize=<span class="hljs-number">18</span>)
+
+    p2.set_xlabel(<span class="hljs-string">&quot;横轴属性名二&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p2.set_ylabel(<span class="hljs-string">&quot;纵轴属性名二&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p2.set_title(<span class="hljs-string">&quot;主题二&quot;</span>,fontsize=<span class="hljs-number">18</span>)
+
+
+    plt.pause(<span class="hljs-number">0.3</span>)
+    <span class="hljs-comment"># 调用 plt.ion() 可以使能交互绘图功能. plt.show( ) 显示所绘制的图形</span>
+    <span class="hljs-comment"># 调用 plt.pause(0.05) 不仅可以绘图而且鼠标可以继续交互</span>
+    plt.tight_layout(pad=<span class="hljs-number">4</span>, w_pad=<span class="hljs-number">4.0</span>, h_pad=<span class="hljs-number">3.0</span>)
+    <span class="hljs-comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+    <span class="hljs-comment"># 参数：</span>
+    <span class="hljs-comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+    <span class="hljs-comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+    <span class="hljs-comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre>
+
+<p>运行结果为:</p>
+<p><img src="/2020/10/02/Article202010022/2.gif" srcset="/img/loading.gif" alt="2"></p>
+<p>1、导入库</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+<span class="hljs-keyword">from</span> matplotlib.ticker <span class="hljs-keyword">import</span> MultipleLocator, FormatStrFormatter</code></pre>
+
+<p>2、由于绘图过程中多次使用获取最大最小值，将获取最大最小值写入函数，后面直接调用函数即可。</p>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minmax_value</span>(<span class="hljs-params">list1</span>):</span>
+    minvalue=min(list1)
+    maxvalue=max(list1)
+    <span class="hljs-keyword">return</span> minvalue,maxvalue</code></pre>
+
+<p>3、（1）创建自定义图像，并设置figured的长和宽以及dpi参数指定绘图对象的分辨率；（2）设置x轴刻度的间隔；（3）对本次绘图中的字体进行设置；（4）在matplotlib下，一个figure对象可以包含多个子图（Axes），使用subplot()快速绘制。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#创建画布</span>
+plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">14</span>),dpi=<span class="hljs-number">98</span>)
+xmajorLocator = MultipleLocator(<span class="hljs-number">1</span>) <span class="hljs-comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="hljs-comment">#设置中文字体</span>
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;SimHei&#x27;</span>]  
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment">#生成1行2列的子图</span>
+p1 = plt.subplot(<span class="hljs-number">121</span>)<span class="hljs-comment">#第一行的左边</span>
+p2 = plt.subplot(<span class="hljs-number">122</span>)<span class="hljs-comment">#第一行的右边</span></code></pre>
+
+<p>4、当数据量过多时，对数据一次性展示不能够达到对数据内部信息的解读。本例采用一次展示其中一部分数据，并动态的更新图片，于此同时，动态更新横纵坐标轴的取值范围。下面代码首先设置了每次展示点的数量，并获取了主题一中的所有数据值。根据x取值范围和值域y获取当前绘图过程中的横纵坐标取值范围，最后根据x,y的值进行绘图。</p>
+<p>下面将先在一个子图上显示两条静态折现。当使用动态的折线图时，只需动态更新数据和横纵坐标的取值范围。总体代码中已经写出，下面不再赘述。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#图中展示点的数量</span>
+pointcount=<span class="hljs-number">5</span>
+<span class="hljs-comment">#生成数据</span>
+x=[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+
+y1=[i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+y2=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20</span>)]
+
+minx,maxx=minmax_value(x[:pointcount])
+minyA,maxyA=minmax_value(y1[:pointcount])
+minyB,maxyB=minmax_value(y2[:pointcount])
+
+maxy1=max(maxyA,maxyB)
+miny1=min(minyA,minyB)
+p1.axis([minx,maxx,miny1,maxy1])
+p1.grid(<span class="hljs-literal">True</span>)<span class="hljs-comment">#绘图过程中出现的网格设置</span>
+A,=p1.plot(x[:pointcount],y1[:pointcount],<span class="hljs-string">&quot;g-&quot;</span>)
+B,=p1.plot(x[:pointcount],y2[:pointcount],<span class="hljs-string">&quot;b-&quot;</span>)<span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式p1.xaxis.set_major_locator(xmajorLocator)legend=p1.legend(handles=[A,B],labels=[&quot;图1&quot;,&quot;图2&quot;])</span></code></pre>
+
+<p>结果如下所示：</p>
+<p><img src="/2020/10/02/Article202010022/3.png" srcset="/img/loading.gif" alt="3"></p>
+<p>5、设置边界，不设置边界经常会因为横纵轴的字体太大等其他原因导致横纵轴或者标题只能显示其中一部分。</p>
+<pre><code class="hljs python">plt.tight_layout(pad=<span class="hljs-number">4</span>, w_pad=<span class="hljs-number">4.0</span>, h_pad=<span class="hljs-number">3.0</span>)
+<span class="hljs-comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+<span class="hljs-comment"># 参数：</span>
+<span class="hljs-comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+<span class="hljs-comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+<span class="hljs-comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +456,7 @@
                     
                       <a href="/2020/10/02/Article202010023/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202010023</span>
+                        <span class="hidden-mobile">R语言中的广义线性模型glm</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +465,7 @@
                     
                     
                       <a href="/2020/10/02/Article202010021/">
-                        <span class="hidden-mobile">Article202010021</span>
+                        <span class="hidden-mobile">MongoDB安装及使用（Windows下）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +637,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202010022&nbsp;",
+        "Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

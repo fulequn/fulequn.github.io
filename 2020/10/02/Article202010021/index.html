@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202010021 - FuLeQun&#39;s Blog</title>
+  <title>MongoDB安装及使用（Windows下） - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.1k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      25
        分钟
     </span>
   
@@ -211,15 +211,120 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202010021</h1>
+            <h1 style="display: none">MongoDB安装及使用（Windows下）</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>官网 ： <a target="_blank" rel="noopener" href="https://www.mongodb.org/downloads">https://www.mongodb.org/downloads</a></p>
+<p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://leisure.wang/procedural-framework/solution/486.html">https://leisure.wang/procedural-framework/solution/486.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanaolu4821/article/details/87614708">https://blog.csdn.net/zhanaolu4821/article/details/87614708</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yqwang75457/article/details/84949915">https://blog.csdn.net/yqwang75457/article/details/84949915</a></p>
+</blockquote>
+<p>首先先下载Windows下的安装包mongodb-windows-x86_64-4.4.0-signed.msi</p>
+<p><img src="/2020/10/02/Article202010021/1.png" srcset="/img/loading.gif" alt="1"></p>
+<h2 id="Windows-系统安装MongoDB"><a href="#Windows-系统安装MongoDB" class="headerlink" title="Windows 系统安装MongoDB"></a>Windows 系统安装MongoDB</h2><p><img src="/2020/10/02/Article202010021/2.png" srcset="/img/loading.gif" alt="2"></p>
+<p>按照正常的软件安装即可，也可以自定义安装位置，建议更改为其他盘符，或者是在后期通过配置config文件来设置存储数据的位置。</p>
+<p><img src="/2020/10/02/Article202010021/3.png" srcset="/img/loading.gif" alt="3"></p>
+<h2 id="启动MongoDB"><a href="#启动MongoDB" class="headerlink" title="启动MongoDB"></a>启动MongoDB</h2><p>这里的C:\mongodb\data需要更换为你想要存储的位置，必须预先新建。</p>
+<p><img src="/2020/10/02/Article202010021/4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>然后我们输入<code>http://localhost:27017/</code></p>
+<p>出现下图则表示成功</p>
+<p><img src="/2020/10/02/Article202010021/6.png" srcset="/img/loading.gif" alt="6"></p>
+<h3 id="可能出现的问题：双击mongod-exe直接闪退"><a href="#可能出现的问题：双击mongod-exe直接闪退" class="headerlink" title="可能出现的问题：双击mongod.exe直接闪退"></a>可能出现的问题：双击mongod.exe直接闪退</h3><p><strong>一次性解决（这个与我们启动时类似）</strong></p>
+<p>1）首先再D盘新建一个文件夹test</p>
+<p>2）在mongodb/bin目录下按住shift+鼠标右键，选择在此处打开Powershell窗口，在powershell内执行命令：</p>
+<pre><code class="hljs latex">.<span class="hljs-tag">\<span class="hljs-name">mongod</span></span> -dbpath d:<span class="hljs-tag">\<span class="hljs-name">test</span></span></code></pre>
+
+<blockquote>
+<p>此时mongod.exe程序就不会闪退了</p>
+</blockquote>
+<p>3）双击mongo.exe程序，即可打开mongo shell，然后就可以快乐的玩耍了。</p>
+<blockquote>
+<p>所谓一次性解决，就是在你关闭mongod窗口后，你还是得按照上面的方法启动mongod程序，比较麻烦，直接双击mongod.exe还是会闪退。</p>
+</blockquote>
+<p><strong>永久性解决</strong></p>
+<p>根据官方文档，mongod程序启动时，默认存储数据的目录是mongodb安装盘符的\data\db文件夹下，如果是安装在D盘，那么就会寻找D:\data\db，如果没有该目录就会闪退，所以最简单的办法就是在D盘新建目录：D:\data\db</p>
+<p>这样就可以直接双击mongod.exe启动MongoDB了，再双击mongo.exe就能使用MongoDB了。</p>
+<p><strong>安装MongoDB服务</strong></p>
+<p>1.在data文件夹下新建一个log文件夹，用于存放日志文件，在log文件夹下新建文件mongodb.log</p>
+<p>2.然后再在 mongodb的安装路径的文件夹下新建文件 mongo.config，设置dbpath和logpath路径</p>
+<p>其中关于mongo.config参数的问题</p>
+<pre><code class="hljs ini"><span class="hljs-comment">#数据库数据存放目录</span>
+<span class="hljs-attr">dbpath</span>=D:\MongoDB\data
+<span class="hljs-comment">#数据库日志存放目录</span>
+<span class="hljs-attr">logpath</span>=D:\MongoDB\log\mongodb.log 
+<span class="hljs-comment">#以追加的方式记录日志</span>
+<span class="hljs-attr">logappend</span> = <span class="hljs-literal">true</span>
+<span class="hljs-comment">#端口号 默认为27017</span>
+<span class="hljs-attr">port</span>=<span class="hljs-number">27017</span> 
+<span class="hljs-comment">#启用日志文件，默认启用</span>
+<span class="hljs-attr">journal</span>=<span class="hljs-literal">true</span> 
+<span class="hljs-comment">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span>
+<span class="hljs-attr">quiet</span>=<span class="hljs-literal">true</span></code></pre>
+
+<p>3.以管理员身份打开cmd命令框</p>
+<p>4.使用以下命令创建MongoDB的Windows服务。其中，–config后写明你配置文件的位置</p>
+<pre><code class="hljs jboss-cli">mongod <span class="hljs-params">--config</span> D:\mongodb\mongo.config <span class="hljs-params">--install</span> <span class="hljs-params">--serviceName</span> <span class="hljs-string">&quot;MongoDB&quot;</span> <span class="hljs-params">--journal</span></code></pre>
+
+<p>如下图所示</p>
+<p><img src="/2020/10/02/Article202010021/7.png" srcset="/img/loading.gif" alt="7"></p>
+<p>5.打开Windows服务，确认服务创建成功<img src="/2020/10/02/Article202010021/8.png" srcset="/img/loading.gif"></p>
+<h3 id="可能出现的问题：启动mongodb的服务，提示Windows无法启动MongoDB-Server服务-位于本地计算机上"><a href="#可能出现的问题：启动mongodb的服务，提示Windows无法启动MongoDB-Server服务-位于本地计算机上" class="headerlink" title="可能出现的问题：启动mongodb的服务，提示Windows无法启动MongoDB Server服务(位于本地计算机上)"></a>可能出现的问题：启动mongodb的服务，提示Windows无法启动MongoDB Server服务(位于本地计算机上)</h3><p>启动mongodb的服务，提示Windows无法启动MongoDB Server服务(位于本地计算机上)…</p>
+<p><strong>解决方法：</strong></p>
+<p><strong>1.添加环境变量MONGO_HOME</strong>（值为mongodb的安装路径）</p>
+<pre><code class="hljs java">变量名：MONGO_HOME
+变量值：C:\Program Files\MongoDB\Server\<span class="hljs-number">4.0</span></code></pre>
+
+<p><strong>2.添加到Path(注意分号，如果是win10直接添加在尾部即可，无需分号)</strong></p>
+<pre><code class="hljs mel">;%MONGO_HOME%\bin;</code></pre>
+
+<p><strong>3.管理员身份打开cmd，然后删除安装时默认创建的mongodb服务（这里写你的mongodb的服务名（serviceName））:</strong></p>
+<pre><code class="hljs actionscript">sc <span class="hljs-keyword">delete</span> MongoDB</code></pre>
+
+<p><strong>至此，服务列表中就已经不存在默认安装的MongoDB的服务。</strong></p>
+<p><strong>下面将手动创建一个新的可用的服务：</strong></p>
+<p><strong>4.手动创建目录C:\data\db 、 C:\data\logos</strong></p>
+<p><strong>5.手动创建文件：C:\data\logos\MongoDB.log</strong></p>
+<p><strong>6.命令行运行创建一个新的MongoDB服务（这个也可以将dbpath和logpath写入配置文件，通过设置配置文件也可以启动服务）</strong></p>
+<pre><code class="hljs dsconfig"><span class="hljs-string">mongod </span><span class="hljs-built_in">--dbpath=C:\data\db</span>  <span class="hljs-built_in">--logpath=C:\data\logs\MongoDB.log</span> <span class="hljs-built_in">--install</span> <span class="hljs-built_in">--serviceName</span> <span class="hljs-string">&quot;MongoDB&quot;</span></code></pre>
+
+<p><strong>至此，新的服务创建成功，你可手动切换启动类型，并且手动启动不再提示错误</strong></p>
+<p><strong>启动MongoDB客户端</strong></p>
+<p>双击bin文件夹下mongo.exe，出现如下图所示即可。</p>
+<p><img src="/2020/10/02/Article202010021/9.png" srcset="/img/loading.gif" alt="9"></p>
+<h2 id="关闭MongoDB"><a href="#关闭MongoDB" class="headerlink" title="关闭MongoDB"></a>关闭MongoDB</h2><ol>
+<li>关闭当前服务端窗口（不推荐）</li>
+<li>在当前服务窗口使用Ctrl+C（推荐）</li>
+<li>进入Mongo客户端运行命令停止（推荐）db.shutdownServer（）；</li>
+<li>关闭Windows服务（推荐）net stop MongoDB</li>
+</ol>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MongoDB/">MongoDB</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +337,7 @@
                     
                       <a href="/2020/10/02/Article202010022/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202010022</span>
+                        <span class="hidden-mobile">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -413,7 +518,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202010021&nbsp;",
+        "MongoDB安装及使用（Windows下）&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
