@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202010202 - FuLeQun&#39;s Blog</title>
+  <title>Python错误：ImportError:DLL load failed:找不到指定的模块问题终极解决方法 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      511 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      11
        分钟
     </span>
   
@@ -211,15 +211,50 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202010202</h1>
+            <h1 style="display: none">Python错误：ImportError:DLL load failed:找不到指定的模块问题终极解决方法</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase">https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase</a></p>
+</blockquote>
+<p>昨日在手机上的时间加起来不超过一小时，达到自律要求，后期继续加油。</p>
+<p>昨天import matploylib 库时遇到了ImportError: DLL load failed: 找不到指定的模块问题，记得之前sklearn也遇得到了这个问题，就是明明已经pip安装了某个库，但是在pycharm中却import不了，真是奇怪。<br>记得上次解决方式是将python3.7卸载，然后安装python3.6，再重新安装sklearn库才解决了这个问题，这次按照这个方法再次实验时又不行了，然后按照网上说的用whl方法安装还是不行，这就很无语了。最后呢，在第三方库的官网上找到了问题的所在。</p>
+<p><img src="/2020/10/20/Article202010202/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p>自己在计算机内搜索，我果然没有vs,就果断点击下载，然后安装，再次导入库就成功了。</p>
+<p>这里再总结一下这个问题的解决方式</p>
+<p>1、当发现安装了某个库，但是导入出现DLL load failed问题时，先卸载这个库（pip uninstall），然后再重新下载这个库（pip install ）<br>在下载后查看是否符合自己python的版本。</p>
+<p><img src="/2020/10/20/Article202010202/2.png" srcset="/img/loading.gif" alt="2"></p>
+<p><img src="/2020/10/20/Article202010202/3.png" srcset="/img/loading.gif" alt="3"></p>
+<p>2、如果在符合版本的情况还无法导入，就在计算机内查看是否有numpy,是否有vs。</p>
+<p><img src="/2020/10/20/Article202010202/4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>如果没有的话，就先pip numpy 再下载vs</p>
+<p>vs下载网站是：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%B9%9F%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%93%E7%9A%84%E7%BD%91%E7%AB%99%E3%80%82">https://www.lfd.uci.edu/~gohlke/pythonlibs/，这个也是所有库的网站。</a></p>
+<p><img src="/2020/10/20/Article202010202/5.png" srcset="/img/loading.gif" alt="5"></p>
+<p><img src="/2020/10/20/Article202010202/6.png" srcset="/img/loading.gif" alt="6"></p>
+<p>3、如果还是不能导入库，就将python降级，如从3.7降级到3.6，再次安装库，导入库。</p>
+<p>4、如果依然无法解决，就在<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/%E5%86%85%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84whl%E6%96%87%E4%BB%B6%EF%BC%8C%E5%86%8D%E7%94%A8pip%E5%AE%89%E8%A3%85%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%96%87%E7%AB%A0%E4%B8%AD%E6%9C%89%E4%BB%8B%E7%BB%8D%EF%BC%8C%E5%A6%82%E4%BD%95%E7%94%A8whl%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85%E5%BA%93%E3%80%82">https://www.lfd.uci.edu/~gohlke/pythonlibs/内下载对应版本的whl文件，再用pip安装，这个在之前的文章中有介绍，如何用whl文件安装库。</a></p>
+<p>5、如果还不行的话，那我只能说，咱也不知道为什么，咱也不敢问了。</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
                 
               </div>
               
@@ -230,12 +265,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/10/26/Article202010261/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux不能上网ping:unknown host问题怎么解决</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
                       <a href="/2020/10/20/Article202010201/">
-                        <span class="hidden-mobile">Article202010201</span>
+                        <span class="hidden-mobile">更改word中所有英文字体</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -407,7 +448,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202010202&nbsp;",
+        "Python错误：ImportError:DLL load failed:找不到指定的模块问题终极解决方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

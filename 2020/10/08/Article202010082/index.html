@@ -231,7 +231,7 @@
 <p>2、修改/etc/sysconfig/network-scripts/下以ifcfg开头的网络链接文件</p>
 <p>例如vim /etc/sysconfig/network-scripts/ifcfg-eth1</p>
 <p>将HWADDR=”00:0c:29:7f:76:e8″改为HWADDR=”00:0c:29:5d:6f:01″</p>
-<p>3、systemctl restart network.servic重启网络成功，这样状态既可正常。</p>
+<p>3、systemctl restart network.service重启网络成功，这样状态既可正常。</p>
 <p><strong>第二种方法、禁用NetworkManager</strong></p>
 <p>1、systemctl stop NetworkManager</p>
 <p>2、systemctl disable NetworkManager</p>
