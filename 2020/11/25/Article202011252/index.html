@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202011252 - FuLeQun&#39;s Blog</title>
+  <title>错误No module named &#39;cPickle&#39; - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      89 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -211,15 +211,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202011252</h1>
+            <h1 style="display: none">错误No module named &#39;cPickle&#39;</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/IMWTJ123/article/details/88547969">https://blog.csdn.net/IMWTJ123/article/details/88547969</a></p>
+</blockquote>
+<p>导入模块</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> cPickle <span class="hljs-keyword">as</span> pickle</code></pre>
+
+<p>运行程序时发现出现错误：</p>
+<pre><code class="hljs yaml"><span class="hljs-attr">ImportError:</span> <span class="hljs-literal">No</span> <span class="hljs-string">module</span> <span class="hljs-string">named</span> <span class="hljs-string">&#x27;cPickle&#x27;</span></code></pre>
+
+<p>其实是版本的问题，python3并不兼容python2</p>
+<p>因为在python3下，是没有cPickle。而python 2 中有cPickle，</p>
+<p>解决方法是在python3中将cPickle改为pickle，如下：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> pickle <span class="hljs-keyword">as</span> pk</code></pre>
+
+<p>注意 p 是小写。</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +255,7 @@
                     
                       <a href="/2020/11/25/Article202011253/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202011253</span>
+                        <span class="hidden-mobile">Python字符串前面加u,r,b,f的含义</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +264,7 @@
                     
                     
                       <a href="/2020/11/25/Article202011251/">
-                        <span class="hidden-mobile">Article202011251</span>
+                        <span class="hidden-mobile">不完美的勇气【5】</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +436,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202011252&nbsp;",
+        "错误No module named 'cPickle'&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

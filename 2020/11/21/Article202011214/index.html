@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202011214 - FuLeQun&#39;s Blog</title>
+  <title>更改Spyder的Python指定版本 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      120 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -211,10 +211,23 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202011214</h1>
+            <h1 style="display: none">更改Spyder的Python指定版本</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/HaoZiHuang/article/details/106995198">spyder指定python环境_我自横刀向天笑，笑完我就去睡觉-CSDN博客</a></p>
+<p>打开Spyder，Tools-&gt;Preferences-&gt;Python interpreter，将解释器换成用户需要的解释器即可。</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20210827093050.png" srcset="/img/loading.gif" alt="1"></p>
+<p>但是console可能出现错误，如下图所示。</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20210827094949.png" srcset="/img/loading.gif" alt="2"></p>
+<p>按照提示的语句直接复制，可能会出现错误。</p>
+<p>因为那个<code>‑</code>和咱们的<code>-</code>其实是不一样的</p>
+<p>所以要把那个<code>‑</code>改成负号就行：</p>
+<pre><code class="hljs shell">pip install spyder-kernels==0.*</code></pre>
+
+<p>重启console即可。</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20210827095220.png" srcset="/img/loading.gif" alt="3"></p>
+
             </div>
             <hr>
             <div>
@@ -232,7 +245,7 @@
                     
                       <a href="/2020/11/25/Article202011251/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202011251</span>
+                        <span class="hidden-mobile">不完美的勇气【5】</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +254,7 @@
                     
                     
                       <a href="/2020/11/21/Article202011213/">
-                        <span class="hidden-mobile">Article202011213</span>
+                        <span class="hidden-mobile">Kubernetes调度器插件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +426,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202011214&nbsp;",
+        "更改Spyder的Python指定版本&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

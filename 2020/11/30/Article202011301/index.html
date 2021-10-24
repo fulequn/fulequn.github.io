@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202011301 - FuLeQun&#39;s Blog</title>
+  <title>python的ModuleNotFoundError解决 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      88 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -211,15 +211,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202011301</h1>
+            <h1 style="display: none">python的ModuleNotFoundError解决</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/asis/p/6847148.html">修复python的ModuleNotFoundError - xiao.chun - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38068229/article/details/118691834">【经验】python运行报错ModuleNotFoundError: No module named XXX_进阶中的程序员吃吃的博客-CSDN博客</a></p>
+</blockquote>
+<p>运行代码时出现ModuleNotFoundError，本地存在相应的Python文件，解决办法如下：</p>
+<p>在文件开头加入</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> sys, os
+sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))</code></pre>
+
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +249,7 @@
                     
                       <a href="/2020/11/30/Article202011302/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202011302</span>
+                        <span class="hidden-mobile">Matplotlib使用subplot时标题与刻度重叠</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +258,7 @@
                     
                     
                       <a href="/2020/11/25/Article202011255/">
-                        <span class="hidden-mobile">Article202011255</span>
+                        <span class="hidden-mobile">使用显式循环版本计算Softmax损失函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +430,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202011301&nbsp;",
+        "python的ModuleNotFoundError解决&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

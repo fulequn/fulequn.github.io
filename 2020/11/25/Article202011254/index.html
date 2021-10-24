@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202011254 - FuLeQun&#39;s Blog</title>
+  <title>Python出现ImportError:cannot import name &#39;imread&#39; from &#39;scipy.misc&#39;问题 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      327 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -211,15 +211,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202011254</h1>
+            <h1 style="display: none">Python出现ImportError:cannot import name &#39;imread&#39; from &#39;scipy.misc&#39;问题</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43938093/article/details/102632520">(30条消息) ImportError: cannot import name ‘imread’ from ‘scipy.misc’问题的解决办法_二狗子的博客-CSDN博客</a></p>
+</blockquote>
+<p><strong>ImportError: cannot import name ‘imread’ from ‘scipy.misc’问题的解决办法</strong></p>
+<p><strong>wordcloud库做词云时常见的错误</strong></p>
+<p>如果您在使用python绘制词云时使用：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> scipy.misc <span class="hljs-keyword">import</span> imread
+mask=imread(<span class="hljs-string">&#x27;map1.png&#x27;</span>)</code></pre>
+
+<p>出现了 ImportError: cannot import name ‘imread’ from ‘scipy.misc’ 这样的错误，那么问题代码通常是导入scipy库的版本出现了问题。</p>
+<p><strong>解决方法</strong>：</p>
+<p>1.<code>pip install scipy==1.2.0</code></p>
+<p>将scipy库的版本还原至1.2.0版本</p>
+<p>2.<code>from imageio import imread</code></p>
+<p>使用imageio库同样能够完成此功能，推荐使用这个。能不更改为旧版本就不更改为旧版本。</p>
+<p><strong>问题分析</strong></p>
+<p>针对scipy库的版本问题：</p>
+<pre><code class="hljs python">python -c <span class="hljs-string">&quot;import scipy; print(scipy.__version__)&quot;</span></code></pre>
+
+<p>可以在cmd命令行查看scipy库的版本信息，笔者通过查询发现，scipy版本为1.3.1</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211022190053.png" srcset="/img/loading.gif" alt="QQ截图20211022185959"></p>
+<p>使用pip install scipy==1.2.0更换了版本之后就不会报出<strong>ImportError: cannot import name ‘imread’ from ‘scipy.misc’</strong>错误了。</p>
+<p>图中可以看到，scipy.imread(‘图片.格式’)的imread方法被更换成了1.2.0的版本，但最终系统还是使用了imageio.inread实现了词云的生成。因此，使用<strong>imageio库同样能够实现此功能</strong>。</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +263,7 @@
                     
                       <a href="/2020/11/25/Article202011255/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202011255</span>
+                        <span class="hidden-mobile">使用显式循环版本计算Softmax损失函数</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +272,7 @@
                     
                     
                       <a href="/2020/11/25/Article202011253/">
-                        <span class="hidden-mobile">Article202011253</span>
+                        <span class="hidden-mobile">Python字符串前面加u,r,b,f的含义</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +444,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202011254&nbsp;",
+        "Python出现ImportError:cannot import name 'imread' from 'scipy.misc'问题&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
