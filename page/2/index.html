@@ -176,7 +176,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011303/">Article202011303</a>
+        <a href="/2020/11/30/Article202011303/">编码实现全连接神经网络</a>
       </h1>
 
       <p class="index-excerpt">
@@ -185,7 +185,14 @@
           
             
           
-          
+          layers.py首先实现神经网络中仿射层、ReLU层以及组合单层神经元。
+#-*- coding: utf-8 -*-
+import numpy as np
+
+def affine_forward(x, w, b):
+    &quot;&quot;&quot;
+    计算神经网络当前层的前馈传播，该方法计算在全连接情况下的得分函数。
+    注：如果不理解affine仿射变换，简单的理解为在
         </a>
       </p>
 
@@ -199,6 +206,15 @@
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Deepearning/">Deepearning</a>
+            
+          </div>
         
       </div>
     </article>
