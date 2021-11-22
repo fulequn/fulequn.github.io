@@ -176,7 +176,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2021/01/10/Article202101103/">Article202101103</a>
+        <a href="/2021/01/10/Article202101103/">编码实现卷积神经网络</a>
       </h1>
 
       <p class="index-excerpt">
@@ -185,7 +185,16 @@
           
             
           
-          
+          cnn_layers.py实现卷积神经网络的前向后传播的函数。
+#-*- coding: utf-8 -*-
+import numpy as np
+from layers import *
+from bn_layers import *
+
+
+def conv_forward_naive(x, w, b, conv_param):
+    &quot;&quot;&quot;
+    卷积前向传播。
         </a>
       </p>
 
@@ -200,6 +209,15 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -209,7 +227,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2021/01/10/Article202101102/">Article202101102</a>
+        <a href="/2021/01/10/Article202101102/">Pytorch的view方法</a>
       </h1>
 
       <p class="index-excerpt">
@@ -219,6 +237,13 @@
             
           
           
+参考链接：
+https://blog.csdn.net/scut_salmon/article/details/82391320
+https://www.cnblogs.com/geeksongs/p/15034108.html
+
+结论：Pytorch里的view方法用于改变数据维度，与numpy的reshape方法类似。
+一.按照传入数字使数据维度进行转换示例
+a = torch.arange
         </a>
       </p>
 
@@ -233,6 +258,15 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/Pytorch/">Pytorch</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -242,7 +276,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2021/01/10/Article202101101/">Article202101101</a>
+        <a href="/2021/01/10/Article202101101/">Pytorch错误Expected input batch_size (324) to match target batch_size (4) Log In</a>
       </h1>
 
       <p class="index-excerpt">
@@ -252,6 +286,10 @@
             
           
           
+参考链接：
+https://blog.csdn.net/qq_41429220/article/details/104973805
+
+Pytorch Error: ValueError: Expected input batch_size (324) to match target batch_size (4) Log In1.ERROR原因使用pytorch训练一个自定义的模型，参照网上的博客
         </a>
       </p>
 
@@ -266,6 +304,17 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/Pytorch/">Pytorch</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -275,7 +324,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/12/03/Article202012035/">Article202012035</a>
+        <a href="/2020/12/03/Article202012035/">深度学习实战 第6章卷积神经网络笔记</a>
       </h1>
 
       <p class="index-excerpt">
@@ -284,7 +333,8 @@
           
             
           
-          
+          第6章 卷积神经网络**卷积神经网络(Convolutional Neural Network,CNN)**是在实际应用中最为成功的一种神经网络，其专门用于处理格状结构数据，比如图片数据就可以看成是由像素组成的二维格状数据。之所以称为“卷积”是因为其数据处理方式类似于数学中的卷积操作，该网络也是人工智能领域受生物启发最成功的模型之一，该模型儿乎垄断了机器视觉方面的研究。
+6.1 卷积操作1.卷积的
         </a>
       </p>
 
@@ -299,6 +349,15 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -308,7 +367,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/12/03/Article202012034/">Article202012034</a>
+        <a href="/2020/12/03/Article202012034/">python安装cv2</a>
       </h1>
 
       <p class="index-excerpt">
@@ -318,6 +377,15 @@
             
           
           
+参考链接：
+https://blog.csdn.net/weixin_39450145/article/details/104801730
+https://pypi.org/project/opencv-python/
+
+1.问题：ModuleNotFoundError: No module named ‘cv2’
+
+2.解决：安装cv2
+
+pip install opencv-python  
         </a>
       </p>
 
@@ -332,6 +400,13 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -341,7 +416,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/12/03/Article202012033/">Article202012033</a>
+        <a href="/2020/12/03/Article202012033/">Typora添加数学公式</a>
       </h1>
 
       <p class="index-excerpt">
@@ -351,6 +426,14 @@
             
           
           
+参考链接：
+https://blog.csdn.net/mingzhuo_126/article/details/82722455
+https://www.cnblogs.com/144823836yj/p/10263070.html
+https://zhuanlan.zhihu.com/p/262900046
+
+1.打开Typora选择数学模块
+点击“段落”—&gt;“公式块”
+快捷键Ctrl
         </a>
       </p>
 
@@ -365,6 +448,15 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Typora/">Typora</a>
+            
+              <a href="/tags/Latex/">Latex</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -374,7 +466,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/12/03/Article202012032/">Article202012032</a>
+        <a href="/2020/12/03/Article202012032/">编码实现深度学习优化</a>
       </h1>
 
       <p class="index-excerpt">
@@ -383,7 +475,13 @@
           
             
           
-          
+          dropout_layers.py包含了Dropout前向传播以及反向传播，组合Dropout传播层
+#-*- coding: utf-8 -*-
+import sys, os
+sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
+
+import numpy as np
+from layers 
         </a>
       </p>
 
@@ -398,6 +496,13 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -407,7 +512,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/12/03/Article202012031/">Article202012031</a>
+        <a href="/2020/12/03/Article202012031/">深度学习实战 第5章深度学习优化笔记</a>
       </h1>
 
       <p class="index-excerpt">
@@ -416,7 +521,9 @@
           
             
           
-          
+          第5章 深度学习优化5.1 神经网络优化困难1.深度学习所面临的优化挑战，包括了局部最优、鞍点、梯度悬崖及梯度消失问题。
+5.1.1 局部最优1.凸函数最显著的特征是能够找到一个局部最优解，并且此解是全局的最优解。但有时我们也并不执着于寻找最优的某一点，在某些凸函数的底部可能是一个貌如盆地的平坦区域，在该平坦区域取得的任何值也是可以接受的。
+2.在实践中我们发现，最优解附近的解其泛化性能通常要比最
         </a>
       </p>
 
@@ -431,6 +538,15 @@
         
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -440,7 +556,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011305/">Article202011305</a>
+        <a href="/2020/11/30/Article202011305/">编码实现Dropout正则化编码</a>
       </h1>
 
       <p class="index-excerpt">
@@ -449,7 +565,15 @@
           
             
           
-          
+          dropout_layers.py包含了Dropout前向传播以及反向传播，组合Dropout传播层
+#-*- coding: utf-8 -*-
+import numpy as np
+from .layers import *
+
+def dropout_forward(x, dropout_param):
+    &quot;&quot;&quot;
+    执行dropout前向传播过程。
+ 
         </a>
       </p>
 
@@ -463,6 +587,15 @@
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+          </div>
         
       </div>
     </article>
@@ -473,7 +606,7 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011304/">Article202011304</a>
+        <a href="/2020/11/30/Article202011304/">深度学习实战 第4章深度学习正则化笔记</a>
       </h1>
 
       <p class="index-excerpt">
@@ -482,7 +615,14 @@
           
             
           
-          
+          第4章 深度学习正则化1.机器学习的两个核心任务：
+
+尽可能地降低训练错误率
+提高模型的泛化能力（避免过拟合）
+
+2.可以使用正则化来尽可能地使训练错误率与测试错误率之间的差距变小。
+3.正则化就是降低验证错误率（有时需要牺牲训练错误率）的一系列方法。
+4.从降低泛化错误率的角度出发，伟大的前人们已经提出了大量的正则化策略，这其中最重要的方法就是限制学习能力。参数范数惩罚便是最具有代表性的通用参数
         </a>
       </p>
 
@@ -496,6 +636,15 @@
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
         
       </div>
     </article>

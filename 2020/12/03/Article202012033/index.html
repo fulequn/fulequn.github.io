@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202012033 - FuLeQun&#39;s Blog</title>
+  <title>Typora添加数学公式 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -171,7 +171,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      637 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      20
        分钟
     </span>
   
@@ -211,15 +211,531 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202012033</h1>
+            <h1 style="display: none">Typora添加数学公式</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mingzhuo_126/article/details/82722455">https://blog.csdn.net/mingzhuo_126/article/details/82722455</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/144823836yj/p/10263070.html">https://www.cnblogs.com/144823836yj/p/10263070.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/262900046">https://zhuanlan.zhihu.com/p/262900046</a></p>
+</blockquote>
+<h1 id="1-打开Typora选择数学模块"><a href="#1-打开Typora选择数学模块" class="headerlink" title="1.打开Typora选择数学模块"></a>1.打开Typora选择数学模块</h1><ul>
+<li>点击“段落”—&gt;“公式块”</li>
+<li>快捷键Ctrl+Shift+m</li>
+<li>“$$”+回车</li>
+</ul>
+<p>以上三种方式都能打开数学公式的编辑栏，如下：</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111152233472.png" srcset="/img/loading.gif" alt="1"></p>
+<p>Typora可以使用行内公式，行内公式需要开启设置。</p>
+<p>具体操作：<strong>文件→偏好设置→Markdown，勾选内联公式，重启typora</strong>。</p>
+<p>输入$，按Esc键会自动在后面加上一个$，然后在这两个$之间输入公式。</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111152239188.png" srcset="/img/loading.gif" alt="2"></p>
+<p>案例如下：</p>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111152240059.png" srcset="/img/loading.gif" alt="3"></p>
+<h1 id="2-添加数学公式"><a href="#2-添加数学公式" class="headerlink" title="2. 添加数学公式"></a>2. 添加数学公式</h1><p>输出美观规范的数学公式，要清楚它们的格式和代码，在编辑栏中输入代码，对应的公式会在下面实时显示。</p>
+<h1 id="3-常用公式的代码"><a href="#3-常用公式的代码" class="headerlink" title="3.常用公式的代码"></a>3.常用公式的代码</h1><p><strong>上/下标</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$x^{2}$</td>
+<td>$x^2$</td>
+</tr>
+<tr>
+<td>$y_1$</td>
+<td>$y_1$</td>
+</tr>
+</tbody></table>
+<p><strong>分式</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1/2</td>
+<td>$1/2$</td>
+</tr>
+<tr>
+<td>$\frac{1}{2} $</td>
+<td>$\frac{1}{2}$</td>
+</tr>
+</tbody></table>
+<p><strong>省略号</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\cdots$</td>
+<td>$\cdots$</td>
+</tr>
+<tr>
+<td>$\cdot$</td>
+<td>$\cdot$</td>
+</tr>
+</tbody></table>
+<p><strong>开根号</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\sqrt{2}$</td>
+<td>$\sqrt{2}$</td>
+</tr>
+<tr>
+<td>$\sqrt[a]{b}$</td>
+<td>$\sqrt[a]{b}$</td>
+</tr>
+</tbody></table>
+<p><strong>矢量</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\vec{a}$</td>
+<td>$\vec{a}$</td>
+</tr>
+</tbody></table>
+<p><strong>积分</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\int{x}dx$</td>
+<td>$\int{x}dx$</td>
+</tr>
+<tr>
+<td>$\int_{1}^{2}{x}dx$</td>
+<td>$\int_{1}^{2}{x}dx$</td>
+</tr>
+</tbody></table>
+<p><strong>极限</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lim{a+b}$</td>
+<td>$\lim{a+b}$</td>
+</tr>
+<tr>
+<td>$\lim_{n \rightarrow +\infty}$</td>
+<td>$\lim_{n \rightarrow +\infty}$</td>
+</tr>
+</tbody></table>
+<p><strong>累加</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\sum{a}$</td>
+<td>$\sum{a}$</td>
+</tr>
+<tr>
+<td>$\sum_{n=1}^{100}{a_n}$</td>
+<td>$\sum_{n=1}^{100}{a_n}$</td>
+</tr>
+</tbody></table>
+<p><strong>累乘</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\prod{x}$</td>
+<td>$\prod{x}$</td>
+</tr>
+<tr>
+<td>$\prod_{n=1}^{99}{x_n}$</td>
+<td>$\prod_{n=1}^{99}{x_n}$</td>
+</tr>
+</tbody></table>
+<p><strong>希腊字母</strong></p>
+<table>
+<thead>
+<tr>
+<th>大写</th>
+<th>Markdown</th>
+<th>小写</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$A$</td>
+<td>$A$</td>
+<td>$\alpha$</td>
+<td>$\alpha$</td>
+</tr>
+<tr>
+<td>$B$</td>
+<td>$B$</td>
+<td>$\beta$</td>
+<td>$\beta$</td>
+</tr>
+<tr>
+<td>$\Gamma$</td>
+<td>$\Gamma$</td>
+<td>$\gamma$</td>
+<td>$\gamma$</td>
+</tr>
+<tr>
+<td>$\Delta$</td>
+<td>$\Delta$</td>
+<td>$\delta$</td>
+<td>$\delta$</td>
+</tr>
+<tr>
+<td>$E$</td>
+<td>$E$</td>
+<td>$\epsilon$</td>
+<td>$\epsilon$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>$\varepsilon$</td>
+<td>$\varepsilon$</td>
+</tr>
+<tr>
+<td>$Z$</td>
+<td>$Z$</td>
+<td>$\zeta$</td>
+<td>$\zeta$</td>
+</tr>
+<tr>
+<td>$H$</td>
+<td>$H$</td>
+<td>$\eta$</td>
+<td>$\eta$</td>
+</tr>
+<tr>
+<td>$\Theta$</td>
+<td>$\Theta$</td>
+<td>$\theta$</td>
+<td>$\theta$</td>
+</tr>
+<tr>
+<td>$I$</td>
+<td>$I$</td>
+<td>$\iota$</td>
+<td>$\iota$</td>
+</tr>
+<tr>
+<td>$K$</td>
+<td>$K$</td>
+<td>$\kappa$</td>
+<td>$\kappa$</td>
+</tr>
+<tr>
+<td>$\Lambda$</td>
+<td>$\Lambda$</td>
+<td>$\lambda$</td>
+<td>$\lambda$</td>
+</tr>
+<tr>
+<td>$M$</td>
+<td>$M$</td>
+<td>$\mu$</td>
+<td>$\mu$</td>
+</tr>
+<tr>
+<td>$N$</td>
+<td>$N$</td>
+<td>$\nu$</td>
+<td>$\nu$</td>
+</tr>
+<tr>
+<td>$\Xi$</td>
+<td>$\Xi$</td>
+<td>$\xi$</td>
+<td>$\xi$</td>
+</tr>
+<tr>
+<td>$O$</td>
+<td>$O$</td>
+<td>$\omicron$</td>
+<td>$\omicron$</td>
+</tr>
+<tr>
+<td>$\Pi$</td>
+<td>$\Pi$</td>
+<td>$\pi$</td>
+<td>$\pi$</td>
+</tr>
+<tr>
+<td>$P$</td>
+<td>$P$</td>
+<td>$\rho$</td>
+<td>$\rho$</td>
+</tr>
+<tr>
+<td>$\Sigma$</td>
+<td>$\Sigma$</td>
+<td>$\sigma$</td>
+<td>$\sigma$</td>
+</tr>
+<tr>
+<td>$T$</td>
+<td>$T$</td>
+<td>$\tau$</td>
+<td>$\tau$</td>
+</tr>
+<tr>
+<td>$\Upsilon$</td>
+<td>$\Upsilon$</td>
+<td>$\upsilon$</td>
+<td>$\upsilon$</td>
+</tr>
+<tr>
+<td>$\Phi$</td>
+<td>$\Phi$</td>
+<td>$\phi$</td>
+<td>$\phi$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>$\varphi$</td>
+<td>$\varphi$</td>
+</tr>
+<tr>
+<td>$X$</td>
+<td>$X$</td>
+<td>$\chi$</td>
+<td>$\chi$</td>
+</tr>
+<tr>
+<td>$\Psi$</td>
+<td>$\Psi$</td>
+<td>$\psi$</td>
+<td>$\psi$</td>
+</tr>
+<tr>
+<td>$\Omega$</td>
+<td>$\Omega$</td>
+<td>$\omega$</td>
+<td>$\omega$</td>
+</tr>
+</tbody></table>
+<p><strong>三角函数</strong></p>
+<table>
+<thead>
+<tr>
+<th>三角函数</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\sin$</td>
+<td>$\sin$</td>
+</tr>
+<tr>
+<td>$\arcsin$</td>
+<td>$\arcsin$</td>
+</tr>
+<tr>
+<td>$\tan$</td>
+<td>$\tan$</td>
+</tr>
+</tbody></table>
+<p><strong>对数函数</strong></p>
+<table>
+<thead>
+<tr>
+<th>算式</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\ln2$</td>
+<td>$\ln2$</td>
+</tr>
+<tr>
+<td>$\log_28$</td>
+<td>$\log_28$</td>
+</tr>
+<tr>
+<td>$\lg10$</td>
+<td>$\lg10$</td>
+</tr>
+</tbody></table>
+<p><strong>关系运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\pm$</td>
+<td>$\pm$</td>
+</tr>
+<tr>
+<td>$\times$</td>
+<td>$\times$</td>
+</tr>
+<tr>
+<td>$\cdot$</td>
+<td>$\cdot$</td>
+</tr>
+<tr>
+<td>$\div$</td>
+<td>$\div$</td>
+</tr>
+<tr>
+<td>$\neq$</td>
+<td>$\neq$</td>
+</tr>
+<tr>
+<td>$\equiv$</td>
+<td>$\equiv$</td>
+</tr>
+<tr>
+<td>$\leq$</td>
+<td>$\leq$</td>
+</tr>
+<tr>
+<td>$\geq$</td>
+<td>$\geq$</td>
+</tr>
+<tr>
+<td>$\ll$</td>
+<td>$\ll$</td>
+</tr>
+<tr>
+<td>$\gg$</td>
+<td>$\gg$</td>
+</tr>
+<tr>
+<td>$\lll$</td>
+<td>$\lll$</td>
+</tr>
+<tr>
+<td>$\ggg$</td>
+<td>$\ggg$</td>
+</tr>
+<tr>
+<td>$&lt;$</td>
+<td>$&lt;$</td>
+</tr>
+<tr>
+<td>$&gt;$</td>
+<td>$&gt;$</td>
+</tr>
+</tbody></table>
+<p><strong>其它特殊字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\forall$</td>
+<td>$\forall$</td>
+</tr>
+<tr>
+<td>$\infty$</td>
+<td>$\infty$</td>
+</tr>
+<tr>
+<td>$\emptyset$</td>
+<td>$\emptyset$</td>
+</tr>
+<tr>
+<td>$\exists$</td>
+<td>$\exists$</td>
+</tr>
+<tr>
+<td>$\nabla$</td>
+<td>$\nabla$</td>
+</tr>
+<tr>
+<td>$\bot$</td>
+<td>$\bot$</td>
+</tr>
+<tr>
+<td>$\angle$</td>
+<td>$\angle$</td>
+</tr>
+<tr>
+<td>$\because$</td>
+<td>$\because$</td>
+</tr>
+<tr>
+<td>$\therefore$</td>
+<td>$\therefore$</td>
+</tr>
+<tr>
+<td>$\part$</td>
+<td>$\part$</td>
+</tr>
+</tbody></table>
+<h1 id="4-补充"><a href="#4-补充" class="headerlink" title="4.补充"></a>4.补充</h1><p><strong>花括号</strong><br>$$<br>c(u)=\begin{cases} \sqrt\frac{1}{N}，u=0\ \sqrt\frac{2}{N}， u\neq0\end{cases}<br>$$</p>
+<pre><code class="hljs latex">c(u)=<span class="hljs-tag">\<span class="hljs-name">begin</span><span class="hljs-string">&#123;cases&#125;</span></span> <span class="hljs-tag">\<span class="hljs-name">sqrt</span></span><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;1&#125;</span><span class="hljs-string">&#123;N&#125;</span></span>，u=0<span class="hljs-tag">\<span class="hljs-name">\</span></span> <span class="hljs-tag">\<span class="hljs-name">sqrt</span></span><span class="hljs-tag">\<span class="hljs-name">frac</span><span class="hljs-string">&#123;2&#125;</span><span class="hljs-string">&#123;N&#125;</span></span>， u<span class="hljs-tag">\<span class="hljs-name">neq</span></span>0<span class="hljs-tag">\<span class="hljs-name">end</span><span class="hljs-string">&#123;cases&#125;</span></span></code></pre>
+
+<p><strong>空格</strong><br>$$<br>a \quad b<br>$$</p>
+<pre><code class="hljs latex">a <span class="hljs-tag">\<span class="hljs-name">quad</span></span> b</code></pre>
+
+<p><strong>矩阵</strong><br>$$<br>a = \left[<br>\matrix{<br>  \alpha_1 &amp; test1\<br>  \alpha_2 &amp; test2\<br>  \alpha_3 &amp; test3<br>}<br>\right]<br>$$</p>
+<pre><code class="hljs latex">a = <span class="hljs-tag">\<span class="hljs-name">left</span><span class="hljs-string">[</span></span>
+<span class="hljs-tag"><span class="hljs-string">\matrix&#123;</span></span>
+<span class="hljs-tag"><span class="hljs-string">  \alpha_1 &amp; test1\\</span></span>
+<span class="hljs-tag"><span class="hljs-string">  \alpha_2 &amp; test2\\</span></span>
+<span class="hljs-tag"><span class="hljs-string">  \alpha_3 &amp; test3 </span></span>
+<span class="hljs-tag"><span class="hljs-string">&#125;</span></span>
+<span class="hljs-tag"><span class="hljs-string">\right]</span></span></code></pre>
+
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Typora/">Typora</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Latex/">Latex</a>
+                    
+                  </div>
                 
               </div>
               
@@ -232,7 +748,7 @@
                     
                       <a href="/2020/12/03/Article202012034/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202012034</span>
+                        <span class="hidden-mobile">python安装cv2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -241,7 +757,7 @@
                     
                     
                       <a href="/2020/12/03/Article202012032/">
-                        <span class="hidden-mobile">Article202012032</span>
+                        <span class="hidden-mobile">编码实现深度学习优化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -413,7 +929,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202012033&nbsp;",
+        "Typora添加数学公式&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
