@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -366,7 +370,7 @@
 <p>（5）易于过拟合；</p>
 <p>（6）对噪声数据较为敏感。</p>
 <p><strong>四、朴素贝叶斯(Naïve Bayes)法</strong></p>
-<p><strong>朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。</strong>朴素贝叶斯分类器的主要思路：通过联合概率P(x,y)=P(x|y)P(y)建模，运用贝叶斯定理求解后验概率P(y|x)；将后验概率最大者对应的的类别作为预测类别，因为后验概率最大化，可以使得期望风险最小化（期望风险是全局的，是基于所有样本点的损失函数最小化的）。</p>
+<p>**朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。**朴素贝叶斯分类器的主要思路：通过联合概率P(x,y)=P(x|y)P(y)建模，运用贝叶斯定理求解后验概率P(y|x)；将后验概率最大者对应的的类别作为预测类别，因为后验概率最大化，可以使得期望风险最小化（期望风险是全局的，是基于所有样本点的损失函数最小化的）。</p>
 <p>朴素贝叶斯分类器</p>
 <p>首先定义训练样本集，其类别</p>
 <p><img src="/2020/10/08/Article202010081/26.png" srcset="/img/loading.gif" alt="26"></p>
@@ -411,7 +415,7 @@
 <p>神经网络由“神经元”构成，一个“神经元”是一个运算单元f，该运算单元在神经网络中称作激活函数，激活函数通常设定为sigmoid函数（也可以设为其他函数），它可以输入一组加权系数的量，对这个量进行映射，如果这个映射结果达到或者超过了某个阈值，输出一个量。</p>
 <p><img src="/2020/10/08/Article202010081/38.jpeg" srcset="/img/loading.gif" alt="38"></p>
 <p>有监督神经网络</p>
-<p>在有监督任务中，<strong>神经网络算法能够提供一种复杂且非线性的假设模型，</strong>它具有网络参数W,b，可以以此参数来拟合数据。</p>
+<p>在有监督任务中，**神经网络算法能够提供一种复杂且非线性的假设模型，**它具有网络参数W,b，可以以此参数来拟合数据。</p>
 <p>如有输入值x1, x2, x3和它们的网络参数：</p>
 <p><img src="/2020/10/08/Article202010081/39.png" srcset="/img/loading.gif" alt="39"></p>
 <p>,输入值系数加权求和可以得到第二层网络中第一个“神经元”的输入，</p>

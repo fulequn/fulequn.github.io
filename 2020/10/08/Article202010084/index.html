@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -221,40 +225,37 @@
 <p>R中的线性回归函数比较简单，就是lm()，比较复杂的是对线性模型的诊断和调整。这里结合Statistical Learning和杜克大学的Data Analysis and Statistical Inference的章节以及《R语言实战》的OLS(Ordinary Least Square)回归模型章节来总结一下，诊断多元线性回归模型的操作分析步骤。</p>
 <p><strong>1、选择预测变量</strong></p>
 <p>因变量比较容易确定，多元回归模型中难在自变量的选择。自变量选择主要可分为向前选择（逐次加使RSS最小的自变量），向后选择（逐次扔掉p值最大的变量）。个人倾向于向后选择法，一来p值比较直观，模型返回结果直接给出了各变量的p值，却没有直接给出RSS；二来当自变量比较多时，一个个加比较麻烦。</p>
-<pre><code class="hljs R">Call:
-lm(formula = Sales ~ . + Income:Advertising + Age:Price, data = Carseats)
-Residuals:
-Min      1Q  Median      3Q     Max
--<span class="hljs-number">2.9208</span> -<span class="hljs-number">0.7503</span>  <span class="hljs-number">0.0177</span>  <span class="hljs-number">0.6754</span>  <span class="hljs-number">3.3413</span>
-Coefficients:
-Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)         <span class="hljs-number">6.5755654</span>  <span class="hljs-number">1.0087470</span>   <span class="hljs-number">6.519</span> <span class="hljs-number">2.22e-10</span> ***
-CompPrice           <span class="hljs-number">0.0929371</span>  <span class="hljs-number">0.0041183</span>  <span class="hljs-number">22.567</span>  &lt; <span class="hljs-number">2e-16</span> ***
-Income              <span class="hljs-number">0.0108940</span>  <span class="hljs-number">0.0026044</span>   <span class="hljs-number">4.183</span> <span class="hljs-number">3.57e-05</span> ***
-Advertising         <span class="hljs-number">0.0702462</span>  <span class="hljs-number">0.0226091</span>   <span class="hljs-number">3.107</span> <span class="hljs-number">0.002030</span> **
-Population          <span class="hljs-number">0.0001592</span>  <span class="hljs-number">0.0003679</span>   <span class="hljs-number">0.433</span> <span class="hljs-number">0.665330</span>
-Price              -<span class="hljs-number">0.1008064</span>  <span class="hljs-number">0.0074399</span> -<span class="hljs-number">13.549</span>  &lt; <span class="hljs-number">2e-16</span> ***
-ShelveLocGood       <span class="hljs-number">4.8486762</span>  <span class="hljs-number">0.1528378</span>  <span class="hljs-number">31.724</span>  &lt; <span class="hljs-number">2e-16</span> ***
-ShelveLocMedium     <span class="hljs-number">1.9532620</span>  <span class="hljs-number">0.1257682</span>  <span class="hljs-number">15.531</span>  &lt; <span class="hljs-number">2e-16</span> ***
-Age                -<span class="hljs-number">0.0579466</span>  <span class="hljs-number">0.0159506</span>  -<span class="hljs-number">3.633</span> <span class="hljs-number">0.000318</span> ***
-Education          -<span class="hljs-number">0.0208525</span>  <span class="hljs-number">0.0196131</span>  -<span class="hljs-number">1.063</span> <span class="hljs-number">0.288361</span>
-UrbanYes            <span class="hljs-number">0.1401597</span>  <span class="hljs-number">0.1124019</span>   <span class="hljs-number">1.247</span> <span class="hljs-number">0.213171</span>
-USYes              -<span class="hljs-number">0.1575571</span>  <span class="hljs-number">0.1489234</span>  -<span class="hljs-number">1.058</span> <span class="hljs-number">0.290729</span>
-Income:Advertising  <span class="hljs-number">0.0007510</span>  <span class="hljs-number">0.0002784</span>   <span class="hljs-number">2.698</span> <span class="hljs-number">0.007290</span> **
-Price:Age           <span class="hljs-number">0.0001068</span>  <span class="hljs-number">0.0001333</span>   <span class="hljs-number">0.801</span> <span class="hljs-number">0.423812</span>
----
-Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
-Residual standard error: <span class="hljs-number">1.011</span> on <span class="hljs-number">386</span> degrees of freedom
-Multiple R-squared:  <span class="hljs-number">0.8761</span>,    Adjusted R-squared:  <span class="hljs-number">0.8719</span>
-<span class="hljs-literal">F</span>-statistic:   <span class="hljs-number">210</span> on <span class="hljs-number">13</span> and <span class="hljs-number">386</span> DF,  p-value: &lt; <span class="hljs-number">2.2e-16</span></code></pre>
-
+<h2 id="hexopostrenderescapeprecode-classhljs-rcalllmformula-sales-~-incomeadvertising-ageprice-data-carseatsresidualsmin-1q-median-3q-max-span-classhljs-number29208span-span-classhljs-number07503span-span-classhljs-number00177span-span-classhljs-number06754span-span-classhljs-number33413spancoefficientsestimate-std-error-t-value-prtintercept-span-classhljs-number65755654span-span-classhljs-number10087470span-span-classhljs-number6519span-span-classhljs-number222e-10span-compprice-span-classhljs-number00929371span-span-classhljs-number00041183span-span-classhljs-number22567span-span-classhljs-number2e-16span-income-span-classhljs-number00108940span-span-classhljs-number00026044span-span-classhljs-number4183span-span-classhljs-number357e-05span-advertising-span-classhljs-number00702462span-span-classhljs-number00226091span-span-classhljs-number3107span-span-classhljs-number0002030span-population-span-classhljs-number00001592span-span-classhljs-number00003679span-span-classhljs-number0433span-span-classhljs-number0665330spanprice-span-classhljs-number01008064span-span-classhljs-number00074399span-span-classhljs-number13549span-span-classhljs-number2e-16span-shelvelocgood-span-classhljs-number48486762span-span-classhljs-number01528378span-span-classhljs-number31724span-span-classhljs-number2e-16span-shelvelocmedium-span-classhljs-number19532620span-span-classhljs-number01257682span-span-classhljs-number15531span-span-classhljs-number2e-16span-age-span-classhljs-number00579466span-span-classhljs-number00159506span-span-classhljs-number3633span-span-classhljs-number0000318span-education-span-classhljs-number00208525span-span-classhljs-number00196131span-span-classhljs-number1063span-span-classhljs-number0288361spanurbanyes-span-classhljs-number01401597span-span-classhljs-number01124019span-span-classhljs-number1247span-span-classhljs-number0213171spanusyes-span-classhljs-number01575571span-span-classhljs-number01489234span-span-classhljs-number1058span-span-classhljs-number0290729spanincomeadvertising-span-classhljs-number00007510span-span-classhljs-number00002784span-span-classhljs-number2698span-span-classhljs-number0007290span-priceage-span-classhljs-number00001068span-span-classhljs-number00001333span-span-classhljs-number0801span-span-classhljs-number0423812span"><a class="markdownIt-Anchor" href="#hexopostrenderescapeprecode-classhljs-rcalllmformula-sales-~-incomeadvertising-ageprice-data-carseatsresidualsmin-1q-median-3q-max-span-classhljs-number29208span-span-classhljs-number07503span-span-classhljs-number00177span-span-classhljs-number06754span-span-classhljs-number33413spancoefficientsestimate-std-error-t-value-prtintercept-span-classhljs-number65755654span-span-classhljs-number10087470span-span-classhljs-number6519span-span-classhljs-number222e-10span-compprice-span-classhljs-number00929371span-span-classhljs-number00041183span-span-classhljs-number22567span-span-classhljs-number2e-16span-income-span-classhljs-number00108940span-span-classhljs-number00026044span-span-classhljs-number4183span-span-classhljs-number357e-05span-advertising-span-classhljs-number00702462span-span-classhljs-number00226091span-span-classhljs-number3107span-span-classhljs-number0002030span-population-span-classhljs-number00001592span-span-classhljs-number00003679span-span-classhljs-number0433span-span-classhljs-number0665330spanprice-span-classhljs-number01008064span-span-classhljs-number00074399span-span-classhljs-number13549span-span-classhljs-number2e-16span-shelvelocgood-span-classhljs-number48486762span-span-classhljs-number01528378span-span-classhljs-number31724span-span-classhljs-number2e-16span-shelvelocmedium-span-classhljs-number19532620span-span-classhljs-number01257682span-span-classhljs-number15531span-span-classhljs-number2e-16span-age-span-classhljs-number00579466span-span-classhljs-number00159506span-span-classhljs-number3633span-span-classhljs-number0000318span-education-span-classhljs-number00208525span-span-classhljs-number00196131span-span-classhljs-number1063span-span-classhljs-number0288361spanurbanyes-span-classhljs-number01401597span-span-classhljs-number01124019span-span-classhljs-number1247span-span-classhljs-number0213171spanusyes-span-classhljs-number01575571span-span-classhljs-number01489234span-span-classhljs-number1058span-span-classhljs-number0290729spanincomeadvertising-span-classhljs-number00007510span-span-classhljs-number00002784span-span-classhljs-number2698span-span-classhljs-number0007290span-priceage-span-classhljs-number00001068span-span-classhljs-number00001333span-span-classhljs-number0801span-span-classhljs-number0423812span"></a> &lt;!–hexoPostRenderEscape:<pre><code class="hljs R">Call:<br>
+lm(formula = Sales ~ . + Income:Advertising + Age:Price, data = Carseats)<br>
+Residuals:<br>
+Min      1Q  Median      3Q     Max<br>
+-<span class="hljs-number">2.9208</span> -<span class="hljs-number">0.7503</span>  <span class="hljs-number">0.0177</span>  <span class="hljs-number">0.6754</span>  <span class="hljs-number">3.3413</span><br>
+Coefficients:<br>
+Estimate Std. Error t value Pr(&gt;|t|)<br>
+(Intercept)         <span class="hljs-number">6.5755654</span>  <span class="hljs-number">1.0087470</span>   <span class="hljs-number">6.519</span> <span class="hljs-number">2.22e-10</span> ***<br>
+CompPrice           <span class="hljs-number">0.0929371</span>  <span class="hljs-number">0.0041183</span>  <span class="hljs-number">22.567</span>  &lt; <span class="hljs-number">2e-16</span> ***<br>
+Income              <span class="hljs-number">0.0108940</span>  <span class="hljs-number">0.0026044</span>   <span class="hljs-number">4.183</span> <span class="hljs-number">3.57e-05</span> ***<br>
+Advertising         <span class="hljs-number">0.0702462</span>  <span class="hljs-number">0.0226091</span>   <span class="hljs-number">3.107</span> <span class="hljs-number">0.002030</span> **<br>
+Population          <span class="hljs-number">0.0001592</span>  <span class="hljs-number">0.0003679</span>   <span class="hljs-number">0.433</span> <span class="hljs-number">0.665330</span><br>
+Price              -<span class="hljs-number">0.1008064</span>  <span class="hljs-number">0.0074399</span> -<span class="hljs-number">13.549</span>  &lt; <span class="hljs-number">2e-16</span> ***<br>
+ShelveLocGood       <span class="hljs-number">4.8486762</span>  <span class="hljs-number">0.1528378</span>  <span class="hljs-number">31.724</span>  &lt; <span class="hljs-number">2e-16</span> ***<br>
+ShelveLocMedium     <span class="hljs-number">1.9532620</span>  <span class="hljs-number">0.1257682</span>  <span class="hljs-number">15.531</span>  &lt; <span class="hljs-number">2e-16</span> ***<br>
+Age                -<span class="hljs-number">0.0579466</span>  <span class="hljs-number">0.0159506</span>  -<span class="hljs-number">3.633</span> <span class="hljs-number">0.000318</span> ***<br>
+Education          -<span class="hljs-number">0.0208525</span>  <span class="hljs-number">0.0196131</span>  -<span class="hljs-number">1.063</span> <span class="hljs-number">0.288361</span><br>
+UrbanYes            <span class="hljs-number">0.1401597</span>  <span class="hljs-number">0.1124019</span>   <span class="hljs-number">1.247</span> <span class="hljs-number">0.213171</span><br>
+USYes              -<span class="hljs-number">0.1575571</span>  <span class="hljs-number">0.1489234</span>  -<span class="hljs-number">1.058</span> <span class="hljs-number">0.290729</span><br>
+Income:Advertising  <span class="hljs-number">0.0007510</span>  <span class="hljs-number">0.0002784</span>   <span class="hljs-number">2.698</span> <span class="hljs-number">0.007290</span> **<br>
+Price:Age           <span class="hljs-number">0.0001068</span>  <span class="hljs-number">0.0001333</span>   <span class="hljs-number">0.801</span> <span class="hljs-number">0.423812</span></code></pre></h2>
+<p>Signif. codes:  <span class="hljs-number">0</span> ‘<em><strong>’ <span class="hljs-number">0.001</span> ‘</strong>’ <span class="hljs-number">0.01</span> ‘</em>’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span><br>
+Residual standard error: <span class="hljs-number">1.011</span> on <span class="hljs-number">386</span> degrees of freedom<br>
+Multiple R-squared:  <span class="hljs-number">0.8761</span>,    Adjusted R-squared:  <span class="hljs-number">0.8719</span><br>
+<span class="hljs-literal">F</span>-statistic:   <span class="hljs-number">210</span> on <span class="hljs-number">13</span> and <span class="hljs-number">386</span> DF,  p-value: &lt; <span class="hljs-number">2.2e-16</span>:hexoPostRenderEscape–&gt;</p>
 <p>构建一个回归模型后，先看F统计量的p值，这是对整个模型的假设检验，原假设是各系数都为0，如果连这个p值都不显著，无法证明至少有一个自变量对因变量有显著性影响，这个模型便不成立。然后看Adjusted R2，每调整一次模型，应该使它变大；Adjusted R2越大说明模型中相关的自变量对因变量可解释的变异比例越大，模型的预测性就越好。</p>
 <p>构建了线性模型后，如果是一元线性回归，可以画模型图初步判断一下线性关系（多元回归模型不好可视化）：</p>
 <pre><code class="hljs R">par(mfrow=c(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))
 plot(medv~lstat,Boston)
 fit1=lm(medv~lstat,data=Boston)
 abline(fit1,col=<span class="hljs-string">&quot;red&quot;</span>)</code></pre>
-
 <p><img src="/2020/10/08/Article202010084/1.jpg" srcset="/img/loading.gif" alt="1"></p>
 <p><strong>2、模型诊断</strong></p>
 <p>确定了回归模型的自变量并初步得到一个线性回归模型，并不是直接可以拿来用的，还要进行验证和诊断。诊断之前，先回顾多元线性回归模型的假设前提（by Data Analysis and Statistical Inference）：</p>
@@ -290,19 +291,16 @@ Skewness           <span class="hljs-number">1.5374</span>  <span class="hljs-nu
 Kurtosis           <span class="hljs-number">0.6376</span>  <span class="hljs-number">0.4246</span> Assumptions acceptable.
 Link Function      <span class="hljs-number">0.1154</span>  <span class="hljs-number">0.7341</span> Assumptions acceptable.
 Heteroscedasticity <span class="hljs-number">0.4824</span>  <span class="hljs-number">0.4873</span> Assumptions acceptable.</code></pre>
-
 <p>最后的Global Stat是对4个假设条件进行综合验证，通过了即表示4个假设验证都通过了。最后的Heterosceasticity是进行异方差检测。注意这里假设检验的原假设都是假设成立，所以当p&gt;0.05时，假设才能能过验证。</p>
 <p>如果综合验证不通过，也有其他方法对4个假设条件分别验证：</p>
 <p><strong>线性假设</strong></p>
 <pre><code class="hljs R"><span class="hljs-keyword">library</span>(car)
 crPlots(fit)</code></pre>
-
 <p><img src="/2020/10/08/Article202010084/3.jpg" srcset="/img/loading.gif" alt="3"></p>
 <p>返回的图是各个自变量与残差（因变量）的线性关系图，若存着明显的非线性关系，则需要对自变量作非线性转化。书中说这张图表明线性关系良好。</p>
 <p><strong>正态性</strong></p>
 <pre><code class="hljs R"><span class="hljs-keyword">library</span>(car)
 qqPlot(fit,labels = row.names(states),id.method = <span class="hljs-string">&quot;identify&quot;</span>,simulate = <span class="hljs-literal">TRUE</span>,main = <span class="hljs-string">&quot;Q-Q Plot&quot;</span>)</code></pre>
-
 <p><img src="/2020/10/08/Article202010084/4.jpg" srcset="/img/loading.gif" alt="4"></p>
 <p>qqPlot()可以生成交互式的qq图，选中异常点，就返回该点的名称。该图中除了Nevad点，其他点都在直线附近，可见正态性良好。</p>
 <p><strong>同方差性</strong></p>
@@ -311,7 +309,6 @@ ncvTest(fit)
 Non-constant Variance Score Test
 Variance formula: ~ fitted.values
 Chisquare = <span class="hljs-number">1.746514</span>    Df = <span class="hljs-number">1</span>     p = <span class="hljs-number">0.1863156</span></code></pre>
-
 <p>p值大于0.05，可认为满足方差相同的假设。</p>
 <p><strong>独立性</strong></p>
 <pre><code class="hljs R"><span class="hljs-keyword">library</span>(car)
@@ -319,7 +316,6 @@ durbinWatsonTest(fit)
 lag Autocorrelation D-W Statistic p-value
 <span class="hljs-number">1</span>      -<span class="hljs-number">0.2006929</span>      <span class="hljs-number">2.317691</span>   <span class="hljs-number">0.258</span>
 Alternative hypothesis: rho != <span class="hljs-number">0</span></code></pre>
-
 <p>p值大于0.05，可认为误差之间相互独立。</p>
 <p>除了以上4点基本假设，还有其他方面需要进行诊断——</p>
 <p><strong>2、多重共线性</strong></p>
@@ -328,7 +324,6 @@ Alternative hypothesis: rho != <span class="hljs-number">0</span></code></pre>
 vif(fit)
 Population Illiteracy     Income      Frost
 <span class="hljs-number">1.245282</span>   <span class="hljs-number">2.165848</span>   <span class="hljs-number">1.345822</span>   <span class="hljs-number">2.082547</span></code></pre>
-
 <p>可见这4个自变量VIF都比较小，可认为不存在多重共线性的问题。</p>
 <p><strong>3、异常值检验</strong></p>
 <p>离群点</p>
@@ -339,13 +334,11 @@ abline(h=-<span class="hljs-number">3</span>,col=<span class="hljs-string">&quot
 which(abs(rstudent(fit))&gt;<span class="hljs-number">3</span>)
 Nevada
 <span class="hljs-number">28</span></code></pre>
-
 <p>还有一种方法是利用car包里的outlierTest()函数进行假设检验：</p>
 <pre><code class="hljs r"><span class="hljs-keyword">library</span>(car)
 outlierTest(fit)
 rstudent unadjusted p-value Bonferonni p
 Nevada <span class="hljs-number">3.542929</span>         <span class="hljs-number">0.00095088</span>     <span class="hljs-number">0.047544</span></code></pre>
-
 <p>这个函数用来检验最大的标准化残差值，如果p&gt;0.05，可以认为没有离群点；若p&lt;0.05，则该点是离群点，但不能说明只有一个离群点，可以把这个点删除之后再作检验。第三种方法可以与第二种方法结合起来使用。</p>
 <p><strong>高杠杆点</strong></p>
 <p>高杠杆值观测点，即是与其他预测变量有关的离群点。换句话说，它们是由许多异常的预测变量值组合起来的，与响应变量值没有关系。《统计学习》中给出了一个杠杆统计量，《R语言实战》中给出了一种具体的操作方法。（两本书也稍有出入，《统计学习》中平均杠杆值为(p+1)/n，而在《R语言实战》中平均杠杆值为p/n；事实上在样本量n比较大时，几乎没有差别。）</p>
@@ -357,7 +350,6 @@ abline(h=c(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>
 identify(<span class="hljs-number">1</span>:n, hatvalues(fit), names(hatvalues(fit)))  <span class="hljs-comment">#这句产生交互效果，选中某个点后，关闭后返回点的名称</span>
 &#125;
 hat.plot(fit)</code></pre>
-
 <p><img src="/2020/10/08/Article202010084/5.jpg" srcset="/img/loading.gif" alt="5"></p>
 <p>超过2倍或3倍的平均杠杆值即可认为是高杠杆点，这里把Alaska和California作为高杠杆点。</p>
 <p><strong>强影响点</strong></p>
@@ -365,10 +357,10 @@ hat.plot(fit)</code></pre>
 <pre><code class="hljs r">cutoff &lt;- <span class="hljs-number">4</span>/(nrow(states-length(fit$coefficients)-<span class="hljs-number">2</span>)) <span class="hljs-comment">#coefficients加上了截距项，因此要多减1</span>
 plot(fit,which=<span class="hljs-number">4</span>,cook.levels = cutoff)
 abline(h=cutoff,lty=<span class="hljs-number">2</span>,col=<span class="hljs-string">&quot;red&quot;</span>)</code></pre>
-
-
-
-<p>作者：真依然很拉风<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c6c8174f292">https://www.jianshu.com/p/4c6c8174f292</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>作者：真依然很拉风<br>
+链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4c6c8174f292">https://www.jianshu.com/p/4c6c8174f292</a><br>
+来源：简书<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
             </div>
             <hr>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -181,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      37
        分钟
     </span>
   
@@ -214,41 +218,56 @@
             <h1 style="display: none">计算机图形学-光栅图形学算法（2）</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="光栅图形学算法"><a href="#光栅图形学算法" class="headerlink" title="光栅图形学算法"></a>光栅图形学算法</h1><p>随着光栅显示器的出现，为了在计算机上处理、显 示图形，需要发展一套与之相适应的算法。</p>
+              <h1 id="光栅图形学算法"><a class="markdownIt-Anchor" href="#光栅图形学算法"></a> 光栅图形学算法</h1>
+<p>随着光栅显示器的出现，为了在计算机上处理、显 示图形，需要发展一套与之相适应的算法。</p>
 <p>光栅图形算法多数属于计算机图形的底层算法，很多图形学的基本概念和思想都在这一章。</p>
-<h2 id="直线段的扫描转换算法"><a href="#直线段的扫描转换算法" class="headerlink" title="直线段的扫描转换算法"></a>直线段的扫描转换算法</h2><h3 id="一、直线段的扫描转换算法"><a href="#一、直线段的扫描转换算法" class="headerlink" title="一、直线段的扫描转换算法"></a>一、直线段的扫描转换算法</h3><p>在数学上，直线上的点有无穷多个。但当在计算机 光栅显示器屏幕上表示这条直线时需要做一些处理。</p>
+<h2 id="直线段的扫描转换算法"><a class="markdownIt-Anchor" href="#直线段的扫描转换算法"></a> 直线段的扫描转换算法</h2>
+<h3 id="一-直线段的扫描转换算法"><a class="markdownIt-Anchor" href="#一-直线段的扫描转换算法"></a> 一、直线段的扫描转换算法</h3>
+<p>在数学上，直线上的点有无穷多个。但当在计算机 光栅显示器屏幕上表示这条直线时需要做一些处理。</p>
 <p><img src="/2020/08/31/Article202008313/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p><img src="/2020/08/31/Article202008313/2.png" srcset="/img/loading.gif" alt="2"></p>
 <p>为了在光栅显示器上用这些 离散的像素点逼近这条直 线，需要知道这些像素点的 x，y坐标。</p>
-<p>求出过P0,P1(直线的两个端点)的直线段方程：<br>$$<br>y = kx + b<br>\<br>k =(y1-y0)/(x1-x0)  \quad   (x1≠x0)<br>$$<br>假设x已知，即从x的起点x0开始，沿x方向前进一个像素（步长= 1)，可以计算出相应的y值。</p>
+<p>求出过P0,P1(直线的两个端点)的直线段方程：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mi>k</mi><mi>x</mi><mo>+</mo><mi>b</mi><mspace linebreak="newline"></mspace><mi>k</mi><mo>=</mo><mo stretchy="false">(</mo><mi>y</mi><mn>1</mn><mo>−</mo><mi>y</mi><mn>0</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>x</mi><mn>1</mn><mo>−</mo><mi>x</mi><mn>0</mn><mo stretchy="false">)</mo><mspace width="1em"><mo stretchy="false">(</mo><mi>x</mi><mn>1</mn><mi mathvariant="normal">≠</mi><mi>x</mi><mn>0</mn><mo stretchy="false">)</mo></mspace></mrow><annotation encoding="application/x-tex">y = kx + b
+\\
+k =(y1-y0)/(x1-x0)  \quad   (x1≠x0)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord">0</span><span class="mclose">)</span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">x</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:1em;"></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">x</span><span class="mord">0</span><span class="mclose">)</span></span></span></span></span></p>
+<p>假设x已知，即从x的起点x0开始，沿x方向前进一个像素（步长= 1)，可以计算出相应的y值。</p>
 <p>因为像素的坐标是整数，所以y值还要进行取整处理。</p>
 <p><strong>如何把数学上的一个点扫描转换一个屏幕像素点?    取整</strong></p>
 <p>直线是最基本的图形，一个动画或真实感图形往往需要调用成千上万次画线程序，因此直线算法的好坏与效率将直接影响图形的质量和显示速度。</p>
 <p>回顾一下刚才的算法：为了提高效率，把计算量减下来，关键问题 就是如何把乘法取消？</p>
-<h3 id="二、直线绘制的三个著名的常用算法"><a href="#二、直线绘制的三个著名的常用算法" class="headerlink" title="二、直线绘制的三个著名的常用算法"></a>二、直线绘制的三个著名的常用算法</h3><h4 id="1、数值微分法（DDA）"><a href="#1、数值微分法（DDA）" class="headerlink" title="1、数值微分法（DDA）"></a>1、数值微分法（DDA）</h4><p><strong>增量思想</strong></p>
+<h3 id="二-直线绘制的三个著名的常用算法"><a class="markdownIt-Anchor" href="#二-直线绘制的三个著名的常用算法"></a> 二、直线绘制的三个著名的常用算法</h3>
+<h4 id="1-数值微分法dda"><a class="markdownIt-Anchor" href="#1-数值微分法dda"></a> 1、数值微分法（DDA）</h4>
+<p><strong>增量思想</strong></p>
 <p><img src="/2020/08/31/Article202008313/3.png" srcset="/img/loading.gif" alt="3"></p>
 <p>用DDA扫描转换连接两点P0(0,0)和P1(5,3)的直线段。</p>
 <pre><code class="hljs reasonml">void <span class="hljs-constructor">DDALine(<span class="hljs-params">int</span> <span class="hljs-params">x0</span>,<span class="hljs-params">int</span> <span class="hljs-params">y0</span>,<span class="hljs-params">int</span> <span class="hljs-params">x1</span>,<span class="hljs-params">int</span> <span class="hljs-params">y1</span>,<span class="hljs-params">int</span> <span class="hljs-params">color</span>)</span>     
 &#123;
-    <span class="hljs-built_in">int</span> x；                            
-    <span class="hljs-built_in">float</span> dx, dy, y, k;                    
-    dx, = x1-x0, dy=y1-y0;                       
-    k=dy/dx, y=y0;                            
-    <span class="hljs-keyword">for</span> (x=x0; x&lt;=x1, x++)                       
-    &#123;  
-        drawpixel (x, <span class="hljs-built_in">int</span>(y+<span class="hljs-number">0.5</span>), color);           
-        y=y+k;
+    <span class="hljs-built_in">int</span> x；							
+	<span class="hljs-built_in">float</span> dx, dy, y, k;					
+	dx, = x1-x0, dy=y1-y0;					   
+	k=dy/dx, y=y0;	 					   
+	<span class="hljs-keyword">for</span> (x=x0; x&lt;=x1, x++)					   
+	&#123;  
+		drawpixel (x, <span class="hljs-built_in">int</span>(y+<span class="hljs-number">0.5</span>), color);		   
+		y=y+k;
     &#125;
 &#125;
 </code></pre>
-
 <p>采用增量思想的DDA算法，直观、易实现，每计算 一个象素坐标，只需计算一个加法。</p>
 <p>（1）改进效率。这个算法每步只做一个加法，能否再提高效率？</p>
 <p>一般情况下k与y都是小数，而且每一步运算都要对y 进行四舍五入后取整。</p>
 <p>唯一改进的途径是把浮点运算变成整数加法!</p>
 <p>（2）第二个思路是从直线方程类型做文章</p>
 <p>而直线的方程有许多类型，如两点式、一般式等。 如用其它的直线方程来表示这条直线会不会有出人意料的效果？</p>
-<h4 id="2、中点画线法"><a href="#2、中点画线法" class="headerlink" title="2、中点画线法"></a>2、中点画线法</h4><p>直线的一般式方程：<br>$$<br>F(x,y)=0<br>\<br>Ax+By+C=0<br>$$<br> 其中A = y0-y1, B = x1-x0, C = x0*y1-x1*y0.</p>
+<h4 id="2-中点画线法"><a class="markdownIt-Anchor" href="#2-中点画线法"></a> 2、中点画线法</h4>
+<p>直线的一般式方程：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mspace linebreak="newline"></mspace><mi>A</mi><mi>x</mi><mo>+</mo><mi>B</mi><mi>y</mi><mo>+</mo><mi>C</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F(x,y)=0
+\\
+Ax+By+C=0
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span></p>
+<p>其中A = y0-y1, B = x1-x0, C = x0*y1-x1*y0.</p>
 <ul>
 <li>对于直线上的点：<em>F</em> ( <em>x</em> , <em>y</em> ) = 0</li>
 <li>对于直线上方的点：<em>F</em> ( <em>x</em> , <em>y</em>  ) &gt; 0</li>
@@ -298,13 +317,13 @@
  &#125; <span class="hljs-comment">/* mid PointLine */</span>
 
 </code></pre>
-
 <p><strong>小结</strong></p>
 <p>(1) Ax + By + C = 0</p>
 <p>(2) 通过判断中点的符号，最终可以只进行整数加法。</p>
 <p><strong>这个算法是否还有改进的余地？</strong></p>
 <p>能否提出一个算法，使这个算法不但能解决画直线，还能解决圆弧、抛物线甚至自由曲线的光栅化问 题，使算法的覆盖域扩大。</p>
-<h4 id="3、Bresenham算法"><a href="#3、Bresenham算法" class="headerlink" title="3、Bresenham算法"></a>3、Bresenham算法</h4><p>DDA把算法效率提高到每步只做一个加法。</p>
+<h4 id="3-bresenham算法"><a class="markdownIt-Anchor" href="#3-bresenham算法"></a> 3、Bresenham算法</h4>
+<p>DDA把算法效率提高到每步只做一个加法。</p>
 <p>中点算法进一步把效率提高到每步只做一个整数加法</p>
 <p>Bresenham提供了一个更一般的算法。该算法不仅有好的效率，而且有更广泛的适用范围。</p>
 <p>该算法的思想是通过各行、各列像素中心构造一组虚拟网格线，按照直线起点到终点的顺序，计算直线与各垂直网格线的交点，然后根据误差项的符号确定该列象素中与此交点最近的象素。</p>
@@ -313,7 +332,12 @@
 <p>d＝d＋k</p>
 <p>一旦d≥1，就把它减去1，保证d的相对性,且在0、1之间。</p>
 <p><img src="/2020/08/31/Article202008313/12.png" srcset="/img/loading.gif" alt="12"></p>
-<h2 id="圆弧的扫描转换算法"><a href="#圆弧的扫描转换算法" class="headerlink" title="圆弧的扫描转换算法"></a>圆弧的扫描转换算法</h2><h2 id="多边形的扫描转换与区域填充算法"><a href="#多边形的扫描转换与区域填充算法" class="headerlink" title="多边形的扫描转换与区域填充算法"></a>多边形的扫描转换与区域填充算法</h2><h2 id="裁剪算法"><a href="#裁剪算法" class="headerlink" title="裁剪算法"></a>裁剪算法</h2><h2 id="反走样算法"><a href="#反走样算法" class="headerlink" title="反走样算法"></a>反走样算法</h2><h2 id="消隐算法"><a href="#消隐算法" class="headerlink" title="消隐算法"></a>消隐算法</h2>
+<h2 id="圆弧的扫描转换算法"><a class="markdownIt-Anchor" href="#圆弧的扫描转换算法"></a> 圆弧的扫描转换算法</h2>
+<h2 id="多边形的扫描转换与区域填充算法"><a class="markdownIt-Anchor" href="#多边形的扫描转换与区域填充算法"></a> 多边形的扫描转换与区域填充算法</h2>
+<h2 id="裁剪算法"><a class="markdownIt-Anchor" href="#裁剪算法"></a> 裁剪算法</h2>
+<h2 id="反走样算法"><a class="markdownIt-Anchor" href="#反走样算法"></a> 反走样算法</h2>
+<h2 id="消隐算法"><a class="markdownIt-Anchor" href="#消隐算法"></a> 消隐算法</h2>
+
             </div>
             <hr>
             <div>

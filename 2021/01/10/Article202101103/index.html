@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">编码实现卷积神经网络</h1>
             
             <div class="markdown-body" id="post-body">
-              <h3 id="cnn-layers-py"><a href="#cnn-layers-py" class="headerlink" title="cnn_layers.py"></a>cnn_layers.py</h3><p>实现卷积神经网络的前向后传播的函数。</p>
+              <h3 id="cnn_layerspy"><a class="markdownIt-Anchor" href="#cnn_layerspy"></a> cnn_layers.py</h3>
+<p>实现卷积神经网络的前向后传播的函数。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
@@ -254,7 +259,7 @@
     stride = conv_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
     <span class="hljs-comment"># 进行填充</span>
     x_pad = np.pad(x, ((<span class="hljs-number">0</span>,), (<span class="hljs-number">0</span>,), (pad,), (pad,)), <span class="hljs-string">&#x27;constant&#x27;</span>)
-
+    
     <span class="hljs-comment"># 计算循环次数</span>
     Hhat = int(<span class="hljs-number">1</span> + (H + <span class="hljs-number">2</span> * pad - HH) / stride)
     What= int(<span class="hljs-number">1</span> + (W + <span class="hljs-number">2</span> * pad - WW) / stride)
@@ -360,12 +365,12 @@
                     dw[fprime,cprime,i,j] = np.sum(
                             dout[:,fprime,:,:]*sub_xpad)
 
-
+    
     db = np.zeros((F))
     <span class="hljs-keyword">for</span> fprime <span class="hljs-keyword">in</span> range(F):
                 db[fprime] = np.sum(dout[:,fprime,:,:])
     dx = np.zeros((N, C, H, W))
-
+    
     <span class="hljs-keyword">for</span> nprime <span class="hljs-keyword">in</span> range(N):
         <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(H):
             <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(W):
@@ -431,13 +436,13 @@
             <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(F):
                 dw[k, :, :, :] += np.sum(x_pad_masked*(dout[:, k, i, j])[:,
                             <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>], axis=<span class="hljs-number">0</span>)
-
+            
             <span class="hljs-comment"># 计算dx_pad</span>
             <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> range(N):
                 dx_pad[n, :, i*stride:i*stride+HH, j*stride:j*stride+WW] += \
                     np.sum((w[:, :, :, :]*(dout[n, :, i, j])[:, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>]),
                            axis=<span class="hljs-number">0</span>)
-
+                    
     dx = dx_pad[:, :, pad:-pad, pad:-pad]
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-comment">#                              结束编码                                                                            #</span>
@@ -469,7 +474,7 @@
     HH = pool_param[<span class="hljs-string">&#x27;pool_height&#x27;</span>]
     WW = pool_param[<span class="hljs-string">&#x27;pool_width&#x27;</span>]
     stride = pool_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
-
+    
     <span class="hljs-comment"># 计算循环次数</span>
     H_out = int((H-HH)/stride+<span class="hljs-number">1</span>) 
     W_out = int((W-WW)/stride+<span class="hljs-number">1</span>)
@@ -509,11 +514,11 @@
     pool_height = pool_param[<span class="hljs-string">&#x27;pool_height&#x27;</span>]
     pool_width = pool_param[<span class="hljs-string">&#x27;pool_width&#x27;</span>]
     stride = pool_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
-
+    
     <span class="hljs-keyword">assert</span> pool_height == pool_width == stride, <span class="hljs-string">&#x27;Invalid pool params&#x27;</span>
     <span class="hljs-keyword">assert</span> H % pool_height == <span class="hljs-number">0</span>
     <span class="hljs-keyword">assert</span> W % pool_height == <span class="hljs-number">0</span>
-
+    
     x_reshaped = x.reshape(N, C, int(H / pool_height), pool_height,
                                                 int(W / pool_width), pool_width)
     out = x_reshaped.max(axis=<span class="hljs-number">3</span>).max(axis=<span class="hljs-number">4</span>)
@@ -631,7 +636,7 @@
     <span class="hljs-comment">#                       结束编码                                                                                     #</span>
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
-
+    
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_relu_forward</span>(<span class="hljs-params">x, w, b, conv_param</span>):</span>
     a, conv_cache = conv_forward_fast(x, w, b, conv_param)
@@ -676,8 +681,8 @@
     dx, dw, db = conv_backward_naive(da, conv_cache)
     <span class="hljs-keyword">return</span> dx, dw, db
 </code></pre>
-
-<h3 id="layers-py"><a href="#layers-py" class="headerlink" title="layers.py"></a>layers.py</h3><p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p>
+<h3 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h3>
+<p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -824,8 +829,8 @@
 
     <span class="hljs-keyword">return</span> loss, dx
 </code></pre>
-
-<h3 id="trainer-py"><a href="#trainer-py" class="headerlink" title="trainer.py"></a>trainer.py</h3><p>解耦训练器的实现</p>
+<h3 id="trainerpy"><a class="markdownIt-Anchor" href="#trainerpy"></a> <a target="_blank" rel="noopener" href="http://trainer.py">trainer.py</a></h3>
+<p>解耦训练器的实现</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -879,7 +884,7 @@
         self.y_train = data[<span class="hljs-string">&#x27;y_train&#x27;</span>]
         self.X_val = data[<span class="hljs-string">&#x27;X_val&#x27;</span>]
         self.y_val = data[<span class="hljs-string">&#x27;y_val&#x27;</span>]
-
+        
         <span class="hljs-comment"># 弹出可选参数，进行相关配置</span>
         self.update_rule = kwargs.pop(<span class="hljs-string">&#x27;update_rule&#x27;</span>, <span class="hljs-string">&#x27;sgd&#x27;</span>)
         self.updater_config = kwargs.pop(<span class="hljs-string">&#x27;updater_config&#x27;</span>, &#123;&#125;)
@@ -952,7 +957,7 @@
 <span class="hljs-string">        Returns:</span>
 <span class="hljs-string">        - acc: 测试数据正确率</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
-
+        
         <span class="hljs-comment"># 对数据进行采样</span>
         N = X.shape[<span class="hljs-number">0</span>]
         <span class="hljs-keyword">if</span> num_samples <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> N &gt; num_samples:
@@ -984,10 +989,10 @@
         num_train = self.X_train.shape[<span class="hljs-number">0</span>]
         iterations_per_epoch = max(num_train / self.batch_size, <span class="hljs-number">1</span>)
         num_iterations = int(self.num_epochs * iterations_per_epoch)
-
+    
         <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(num_iterations):
             self._step()
-
+    
             <span class="hljs-comment"># 打印损失值</span>
             <span class="hljs-keyword">if</span> self.verbose <span class="hljs-keyword">and</span> t % self.print_every == <span class="hljs-number">0</span>:
                 print(<span class="hljs-string">&#x27;(迭代 %d / %d) 损失值: %f&#x27;</span> % (
@@ -1021,13 +1026,13 @@
                     self.best_params = &#123;&#125;
                     <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> self.model.params.items():
                         self.best_params[k] = v.copy()
-
+    
             <span class="hljs-comment"># 训练结束后返回最佳模型</span>
             self.model.params = self.best_params
 
 </code></pre>
-
-<h3 id="updater-py"><a href="#updater-py" class="headerlink" title="updater.py"></a>updater.py</h3><p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重w ww、当前权重的梯度d w dwdw及相应的更新配置。</p>
+<h3 id="updaterpy"><a class="markdownIt-Anchor" href="#updaterpy"></a> <a target="_blank" rel="noopener" href="http://updater.py">updater.py</a></h3>
+<p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重w ww、当前权重的梯度d w dwdw及相应的更新配置。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -1075,7 +1080,7 @@
     config.setdefault(<span class="hljs-string">&#x27;learning_rate&#x27;</span>, <span class="hljs-number">1e-2</span>)
     config.setdefault(<span class="hljs-string">&#x27;momentum&#x27;</span>, <span class="hljs-number">0.9</span>)
     v = config.setdefault(<span class="hljs-string">&#x27;velocity&#x27;</span>, np.zeros_like(w))
-
+    
     next_w = <span class="hljs-literal">None</span>
     v =config[<span class="hljs-string">&#x27;momentum&#x27;</span>]*config[<span class="hljs-string">&#x27;velocity&#x27;</span>] - config[<span class="hljs-string">&#x27;learning_rate&#x27;</span>] * dw
     next_w = w + v
@@ -1129,7 +1134,7 @@
     config.setdefault(<span class="hljs-string">&#x27;m&#x27;</span>, np.zeros_like(w))
     config.setdefault(<span class="hljs-string">&#x27;v&#x27;</span>, np.zeros_like(w))
     config.setdefault(<span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-number">0</span>)
-
+    
     next_w = <span class="hljs-literal">None</span>
     <span class="hljs-comment"># 将更新后的权重存放在next_w中，记得将m,v,t存放在相应的config中 </span>
     config[<span class="hljs-string">&#x27;t&#x27;</span>] += <span class="hljs-number">1</span>
@@ -1145,8 +1150,8 @@
     <span class="hljs-keyword">return</span> next_w, config
 
 </code></pre>
-
-<h3 id="bn-layers-py"><a href="#bn-layers-py" class="headerlink" title="bn_layers.py"></a>bn_layers.py</h3><p>实现BN算法的前向传播、反向传播。</p>
+<h3 id="bn_layerspy"><a class="markdownIt-Anchor" href="#bn_layerspy"></a> bn_layers.py</h3>
+<p>实现BN算法的前向传播、反向传播。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
@@ -1237,7 +1242,7 @@
 <span class="hljs-string">    - dbeta: beta梯度 (D,)</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
     dx, dgamma, dbeta = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
-
+    
     mu, xmu, carre, var, sqrtvar, invvar, va2, va3, gamma, beta, x, bn_param = cache
     eps = bn_param.get(<span class="hljs-string">&#x27;eps&#x27;</span>, <span class="hljs-number">1e-5</span>)
     N, D = dout.shape
@@ -1263,7 +1268,7 @@
     dmu = - np.sum(dxmu, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># Basckprop step 1</span>
     dx += <span class="hljs-number">1</span> / float(N) * np.ones((dxmu.shape)) * dmu
-
+    
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
 
 
@@ -1279,7 +1284,7 @@
     dgamma = np.sum((x - mu) * (var + eps)**(<span class="hljs-number">-1.</span> / <span class="hljs-number">2.</span>) * dout, axis=<span class="hljs-number">0</span>)
     dx = (<span class="hljs-number">1.</span>/N) * gamma * (var + eps)**(<span class="hljs-number">-1.</span>/<span class="hljs-number">2.</span>)*(N*dout-np.sum(
                         dout, axis=<span class="hljs-number">0</span>)-(x-mu)*(var+eps)**(<span class="hljs-number">-1.0</span>)*np.sum(dout*(x-mu),axis=<span class="hljs-number">0</span>))
-
+ 
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
 
 
@@ -1299,8 +1304,8 @@
     <span class="hljs-keyword">return</span> dx,dw,db,dgamma,dbeta
 
 </code></pre>
-
-<h3 id="dropout-layers-py"><a href="#dropout-layers-py" class="headerlink" title="dropout_layers.py"></a>dropout_layers.py</h3><p>包含了Dropout前向传播以及反向传播，组合Dropout传播层。</p>
+<h3 id="dropout_layerspy"><a class="markdownIt-Anchor" href="#dropout_layerspy"></a> dropout_layers.py</h3>
+<p>包含了Dropout前向传播以及反向传播，组合Dropout传播层。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
@@ -1350,7 +1355,7 @@
 <span class="hljs-string">    &quot;&quot;&quot;</span>
     dropout_param, mask = cache
     mode = dropout_param[<span class="hljs-string">&#x27;mode&#x27;</span>]
-
+    
     dx = <span class="hljs-literal">None</span>
     <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&#x27;train&#x27;</span>:
         dx =dout*mask
@@ -1402,8 +1407,8 @@
     dx,dw,db = affine_backward(drelu,cache_affine)
     <span class="hljs-keyword">return</span> dx,dw,db
 </code></pre>
-
-<h3 id="cnn-py"><a href="#cnn-py" class="headerlink" title="cnn.py"></a>cnn.py</h3><p>接下来我们实现简单的浅层卷积网络，该网络由一层卷积层，两层全连接层组成：输入 - conv - relu - 2x2 max pool - affine - relu - affine - softmax。</p>
+<h3 id="cnnpy"><a class="markdownIt-Anchor" href="#cnnpy"></a> <a target="_blank" rel="noopener" href="http://cnn.py">cnn.py</a></h3>
+<p>接下来我们实现简单的浅层卷积网络，该网络由一层卷积层，两层全连接层组成：输入 - conv - relu - 2x2 max pool - affine - relu - affine - softmax。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> sys, os
 sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
@@ -1415,7 +1420,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
     <span class="hljs-string">&quot;&quot;&quot; </span>
 <span class="hljs-string">    conv - relu - 2x2 max pool - affine - relu - affine - softmax</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
-
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, input_dim=(<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span></span>), num_filters=<span class="hljs-number">32</span>, filter_size=<span class="hljs-number">7</span>,</span></span>
 <span class="hljs-function"><span class="hljs-params">                             hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>, weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span>,</span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
@@ -1450,10 +1455,10 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                             结束编码                                      #</span>
         <span class="hljs-comment">############################################################################</span>
-
-
+         
+ 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
-
+        
         <span class="hljs-comment"># 初始化参数</span>
         W1, b1 = self.params[<span class="hljs-string">&#x27;W1&#x27;</span>], self.params[<span class="hljs-string">&#x27;b1&#x27;</span>]
         W2, b2 = self.params[<span class="hljs-string">&#x27;W2&#x27;</span>], self.params[<span class="hljs-string">&#x27;b2&#x27;</span>]
@@ -1485,7 +1490,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-keyword">if</span> y <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
             <span class="hljs-keyword">return</span> scores
-
+            
         loss, grads = <span class="hljs-number">0</span>, &#123;&#125;
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                        任务：实现反向转播                                   #</span>
@@ -1506,9 +1511,8 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">#                          结束编码                                        #</span>
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-keyword">return</span> loss, grads
-
+    
 </code></pre>
-
 
             </div>
             <hr>
@@ -1533,6 +1537,12 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/11/22/Article202111221/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深度学习实战 第7章循环神经网络笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

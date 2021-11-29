@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -217,7 +221,7 @@
               <blockquote>
 <p>原文链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/new-life/p/9345849.html">https://www.cnblogs.com/new-life/p/9345849.html</a></p>
 </blockquote>
-<p>没想到挺多人需要这个的，很高兴这篇文章能对大家有帮助，主要的工具类博文里已经有了，当然，要小工具源码的留言邮箱即可。  </p>
+<p>没想到挺多人需要这个的，很高兴这篇文章能对大家有帮助，主要的工具类博文里已经有了，当然，要小工具源码的留言邮箱即可。</p>
 <p>最近接触到了串口及其读写，在此记录java进行串口读写的过程。</p>
 <p><strong>1.导入支持java串口通信的jar包：</strong></p>
 <p>在maven项目的pom.xml中添加RXTXcomm的依赖 或者 下载RXTXcomm.jar并导入到项目中。</p>
@@ -225,7 +229,7 @@
 <p>下载地址：</p>
 <p><a target="_blank" rel="noopener" href="http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x86.zip">http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x86.zip</a> （32位）</p>
 <p><a target="_blank" rel="noopener" href="http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x64.zip">http://files.cnblogs.com/files/Dreamer-1/mfz-rxtx-2.2-20081207-win-x64.zip</a> （64位）</p>
-<p><strong>注意：运行过程中抛出 java.lang.UnsatisfiedLinkError 错误或 gnu.io 下的类找不到时，将rxtx解压包中的 rxtxParallel.dll，rxtxSerial.dll 这两个文件复制到 C:\Windows\System32 目录下可解决该错误。（这个需要注意自己电脑的位数）</strong></p>
+<p><strong>注意：运行过程中抛出 java.lang.UnsatisfiedLinkError 错误或 <a target="_blank" rel="noopener" href="http://gnu.io">gnu.io</a> 下的类找不到时，将rxtx解压包中的 rxtxParallel.dll，rxtxSerial.dll 这两个文件复制到 C:\Windows\System32 目录下可解决该错误。（这个需要注意自己电脑的位数）</strong></p>
 <p><strong>2.编写代码操作串口：</strong></p>
 <p>串口必要参数类：包含连接串口所必须的参数，方便在调用串口时设置和传递串口参数。</p>
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
@@ -240,9 +244,9 @@
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> checkoutBit;    <span class="hljs-comment">// 校验位</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> dataBit;        <span class="hljs-comment">// 数据位</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> stopBit;        <span class="hljs-comment">// 停止位</span>
-
+    
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParamConfig</span><span class="hljs-params">()</span> </span>&#123;&#125;
-
+        
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 构造方法</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> serialNumber    串口号</span>
@@ -261,7 +265,6 @@
     getter()...
     setter()...
 &#125;</code></pre>
-
 <p>串口操作类：（其中包含的CustomException是自定义异常类，仅用于抛出异常原因。）</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> gnu.io.CommPortIdentifier;
 <span class="hljs-keyword">import</span> gnu.io.PortInUseException;
@@ -526,7 +529,6 @@
         <span class="hljs-keyword">return</span> sb.toString();
     &#125;
 &#125;</code></pre>
-
 <p>调用串口操作类的代码：</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
          <span class="hljs-comment">// 实例化串口操作类对象</span>
@@ -540,10 +542,9 @@
          <span class="hljs-comment">// 关闭串口</span>
          serialPort.closeSerialPort();
      &#125;</code></pre>
-
 <p>当执行main方法中的代码且未执行关闭串口时，程序将一直处于开启状态，自动监听，接收读取来自串口的数据。</p>
 <p>注意：一个串口只能打开一次，并只支持一个程序调用。</p>
-<p> 以上所记录的是简单测试java是否能成功操作串口数据，至于本人所写的Web端的读卡器调试功能则是在串口操作类的基础上编写网页界面，通过请求来控制串口的开启关闭及相应的设置，功能比较简单，放个界面记录一下：</p>
+<p>以上所记录的是简单测试java是否能成功操作串口数据，至于本人所写的Web端的读卡器调试功能则是在串口操作类的基础上编写网页界面，通过请求来控制串口的开启关闭及相应的设置，功能比较简单，放个界面记录一下：</p>
 <p><img src="/2020/08/30/Article202008303/1.png" srcset="/img/loading.gif" alt="1"><img src="/2020/08/30/Article202008303/2.png" srcset="/img/loading.gif" alt="2"></p>
 
             </div>

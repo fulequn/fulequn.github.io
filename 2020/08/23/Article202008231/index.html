@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      294 字
+      291 字
     </span>
   
 
@@ -214,24 +218,23 @@
             <h1 style="display: none">Hexo一篇文章多个categories</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入<code>-</code>其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。</p>
-<p>  按照官方的解释，<code>categories</code> 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。</p>
-<h2 id="子分类"><a href="#子分类" class="headerlink" title="子分类"></a>子分类</h2><p>下面的分类会将该分章放到 <code>Java/Servlet</code>这个分类下。</p>
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入<code>-</code>其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。</p>
+<p>按照官方的解释，<code>categories</code> 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。</p>
+<h2 id="子分类"><a class="markdownIt-Anchor" href="#子分类"></a> 子分类</h2>
+<p>下面的分类会将该分章放到 <code>Java/Servlet</code>这个分类下。</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">categories:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-string">Java</span>
   <span class="hljs-bullet">-</span> <span class="hljs-string">Servlet</span></code></pre>
-
 <p>同样的作用我们也可以这样写，这个是按照[]的先后顺序。</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">categories:</span> [<span class="hljs-string">Java</span>, <span class="hljs-string">Servlet</span>]</code></pre>
-
 <p>上面两种方法最终效果一样，都是将文章放在了一个子分类的目录下，效果如图。</p>
-<p>[^分类图]: </p>
 <p><img src="/2020/08/23/Article202008231/12972816-cc5be43b9b70f040.png" srcset="/img/loading.gif" alt="12972816-cc5be43b9b70f040"></p>
-<h2 id="多个分类"><a href="#多个分类" class="headerlink" title="多个分类"></a>多个分类</h2><p>如果我们的要求是将文章同时分到多个不同的分类中呢，我们应该这样：</p>
+<h2 id="多个分类"><a class="markdownIt-Anchor" href="#多个分类"></a> 多个分类</h2>
+<p>如果我们的要求是将文章同时分到多个不同的分类中呢，我们应该这样：</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">categories:</span>
   <span class="hljs-string">-[Java]</span>
   <span class="hljs-string">-[Servlet]</span></code></pre>
-
 <p>这样，就可以将上面的文章分类到 <code>Java</code> 和 <code>Servlet</code> 这两个不同的目录中了。</p>
 <p>扩展一下，如果我们将其分类到 <code>Java/Servlet</code> 和 <code>Programming</code> 两个不同的目录下，我们应该如下写：</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">categories:</span>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -222,16 +226,15 @@
 <p><strong>glm函数介绍：</strong></p>
 <p>glm(formula, family=<em>family.generator</em>, data,control = list(…))</p>
 <pre><code class="hljs pgsql"><span class="hljs-keyword">family</span>：每一种响应分布（指数分布族）允许各种关联函数将均值和线性预测器关联起来。</code></pre>
-
 <p>常用的family：</p>
 <ul>
-<li>binomal(link=’logit’)     —-响应变量服从二项分布，连接函数为logit，即logistic回归</li>
-<li>binomal(link=’probit’)    —-响应变量服从二项分布，连接函数为probit</li>
-<li>poisson(link=’identity’)   —-响应变量服从泊松分布，即泊松回归</li>
+<li>binomal(link=‘logit’)     ----响应变量服从二项分布，连接函数为logit，即logistic回归</li>
+<li>binomal(link=‘probit’)    ----响应变量服从二项分布，连接函数为probit</li>
+<li>poisson(link=‘identity’)   ----响应变量服从泊松分布，即泊松回归</li>
 </ul>
 <p>control:控制算法误差和最大迭代次数</p>
-<p>glm.control(epsilon = 1e-8, maxit = 25, trace = FALSE)  </p>
-<p>   —–maxit:算法最大迭代次数，改变最大迭代次数：control=list(maxit=100)</p>
+<p>glm.control(epsilon = 1e-8, maxit = 25, trace = FALSE)</p>
+<p>-----maxit:算法最大迭代次数，改变最大迭代次数：control=list(maxit=100)</p>
 <p><strong>glm函数使用：</strong></p>
 <pre><code class="hljs R">&gt; data&lt;-iris[<span class="hljs-number">1</span>:<span class="hljs-number">100</span>,]
 &gt; samp&lt;-sample(<span class="hljs-number">100</span>,<span class="hljs-number">80</span>)
@@ -244,28 +247,27 @@ Warning messages:
 <span class="hljs-number">1</span>: glm.fit:算法没有聚合
 <span class="hljs-number">2</span>: glm.fit:拟合機率算出来是数值零或一
 &gt; summary(lgst)
-
+ 
 Call:
 glm(formula = testdata$species ~ pl, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
     data = testdata)
-
+ 
 Deviance Residuals:
        Min          1Q      Median          3Q         Max 
 -<span class="hljs-number">1.836e-05</span>  -<span class="hljs-number">2.110e-08</span>  -<span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.915e-05</span> 
-
+ 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)
 (Intercept)   -<span class="hljs-number">83.47</span>   <span class="hljs-number">88795.25</span>  -<span class="hljs-number">0.001</span>    <span class="hljs-number">0.999</span>
 pl             <span class="hljs-number">32.09</span>   <span class="hljs-number">32635.99</span>   <span class="hljs-number">0.001</span>    <span class="hljs-number">0.999</span>
-
+ 
 (Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
-
+ 
     Null deviance: <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
 Residual deviance: <span class="hljs-number">1.4102e-09</span>  on <span class="hljs-number">78</span>  degrees of freedom
 AIC: <span class="hljs-number">4</span>
-
+ 
 Number of Fisher Scoring iterations: <span class="hljs-number">25</span></code></pre>
-
 <p>注意在使用glm函数就行logistic回归时，出现警告：</p>
 <p>Warning messages:</p>
 <p>1: glm.fit:算法没有聚合</p>
@@ -277,28 +279,27 @@ Number of Fisher Scoring iterations: <span class="hljs-number">25</span></code><
 Warning message:
 glm.fit:拟合機率算出来是数值零或一
 &gt; summary(lgst)
-
+ 
 Call:
 glm(formula = testdata$species ~ pl, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
     data = testdata, control = list(maxit = <span class="hljs-number">100</span>))
-
+ 
 Deviance Residuals:
        Min          1Q      Median          3Q         Max 
 -<span class="hljs-number">1.114e-05</span>  -<span class="hljs-number">2.110e-08</span>  -<span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.162e-05</span> 
-
+ 
 Coefficients:
              Estimate Std. Error z value Pr(&gt;|z|)
 (Intercept)    -<span class="hljs-number">87.18</span>  <span class="hljs-number">146399.32</span>  -<span class="hljs-number">0.001</span>        <span class="hljs-number">1</span>
 pl              <span class="hljs-number">33.52</span>   <span class="hljs-number">53808.49</span>   <span class="hljs-number">0.001</span>        <span class="hljs-number">1</span>
-
+ 
 (Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
-
+ 
     Null deviance: <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
 Residual deviance: <span class="hljs-number">5.1817e-10</span>  on <span class="hljs-number">78</span>  degrees of freedom
 AIC: <span class="hljs-number">4</span>
-
+ 
 Number of Fisher Scoring iterations: <span class="hljs-number">26</span></code></pre>
-
 <p>如上，通过增加迭代次数，解决了第一个警告，此时算法收敛。</p>
 <p>但是第二个警告仍然存在，且回归系数P=1，仍然不显著。</p>
 <p><strong>第二个警告：拟合概率算出来的概率为0或1</strong></p>
@@ -308,10 +309,9 @@ Number of Fisher Scoring iterations: <span class="hljs-number">26</span></code><
 &gt;p&lt;-predict(lgst,type=<span class="hljs-string">&#x27;response&#x27;</span>)
 &gt;plot(seq(-<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,length=<span class="hljs-number">80</span>),sort(p),col=<span class="hljs-string">&#x27;blue&#x27;</span>)
 &gt;</code></pre>
-
 <p><img src="/2020/10/02/Article202010023/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>可以看出训练样本为’setosa’类的概率不是几乎为0，就是几乎为1，并不是我们预想中的logistic模型的S型曲线，这就是第二个警告的意思。</p>
-<p> 那么问题来了，为什么会出现这种情况？ （以下内容只是本人参考一些解释的个人理解）</p>
+<p>那么问题来了，为什么会出现这种情况？ （以下内容只是本人参考一些解释的个人理解）</p>
 <p>这种情况的出现可以理解为一种过拟合，由于数据的原因，在回归系数的优化搜索过程中，使得分类的种类属于某一种类（y=1)的线性拟合值趋于大，分类种类为另一类(y=0)的线性拟合值趋于小。</p>
 <p>由于在求解回归系数时，使用的是极大似然估计的原理，即回归系数在搜索过程中使得似然函数极大化：</p>
 <p><img src="/2020/10/02/Article202010023/2.png" srcset="/img/loading.gif" alt="2"></p>
@@ -334,15 +334,15 @@ Number of Fisher Scoring iterations: <span class="hljs-number">26</span></code><
 &gt;
 &gt; lgst&lt;-glm(testdata$species~sw+pw,binomial(link=<span class="hljs-string">&#x27;logit&#x27;</span>),data=testdata)
 &gt; summary(lgst)
-
+ 
 Call:
 glm(formula = testdata$species ~ sw + pw, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
     data = testdata)
-
+ 
 Deviance Residuals:
      Min        1Q    Median        3Q       Max 
 -<span class="hljs-number">1.82733</span>  -<span class="hljs-number">0.16423</span>   <span class="hljs-number">0.00429</span>   <span class="hljs-number">0.11512</span>   <span class="hljs-number">2.12846</span> 
-
+ 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)   
 (Intercept)  -<span class="hljs-number">12.915</span>      <span class="hljs-number">5.021</span>  -<span class="hljs-number">2.572</span>   <span class="hljs-number">0.0101</span> * 
@@ -350,15 +350,15 @@ sw            -<span class="hljs-number">3.796</span>      <span class="hljs-num
 pw            <span class="hljs-number">14.735</span>      <span class="hljs-number">3.642</span>   <span class="hljs-number">4.046</span> <span class="hljs-number">5.21e-05</span> ***
 ---
 Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
-
+ 
 (Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
-
+ 
     Null deviance: <span class="hljs-number">110.85</span>  on <span class="hljs-number">79</span>  degrees of freedom
 Residual deviance:  <span class="hljs-number">24.40</span>  on <span class="hljs-number">77</span>  degrees of freedom
 AIC: <span class="hljs-number">30.4</span>
-
+ 
 Number of Fisher Scoring iterations: <span class="hljs-number">7</span>
-
+ 
 &gt;<span class="hljs-comment">#画拟合概率曲线图</span>
 &gt; p&lt;-predict(lgst,type=<span class="hljs-string">&#x27;response&#x27;</span>)
 &gt; plot(seq(-<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,length=<span class="hljs-number">80</span>),sort(p),col=<span class="hljs-string">&#x27;blue&#x27;</span>)
@@ -383,7 +383,6 @@ Number of Fisher Scoring iterations: <span class="hljs-number">7</span>
 &gt; x3&lt;-seq(<span class="hljs-number">1.5</span>,<span class="hljs-number">4</span>,length=<span class="hljs-number">100</span>)
 &gt; y3&lt;-(<span class="hljs-number">3.796</span>/<span class="hljs-number">14.735</span>)*x3+<span class="hljs-number">13.415</span>/<span class="hljs-number">14.735</span>
 &gt; lines(x3,y3)</code></pre>
-
 <p><img src="/2020/10/02/Article202010023/5.png" srcset="/img/loading.gif" alt="5"></p>
 <p>训练样本散点图及分类边界：</p>
 <p>（画logistic回归的分类边界即画曲线h(x)=0.5）</p>

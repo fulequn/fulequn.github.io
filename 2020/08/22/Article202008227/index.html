@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -241,100 +245,97 @@
 <span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * </span>
 <span class="hljs-comment"> * <span class="hljs-doctag">@author</span> cust</span>
-<span class="hljs-comment"> *    拷贝云文件到mycopy.txt中</span>
+<span class="hljs-comment"> *	拷贝云文件到mycopy.txt中</span>
 <span class="hljs-comment"> */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Copy</span> </span>&#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        File fl1 = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;E:\\课程\\Java\\下学期实验课\\实验三\\javatest3\\src\\javatest3\\Copy.java&quot;</span>);
-        <span class="hljs-comment">//要拷贝的文件</span>
-        File fl2 = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;D:\\shiyan3\\mycopy.txt&quot;</span>);
-        <span class="hljs-comment">//拷贝文件</span>
-        File path;        <span class="hljs-comment">//记录文件路径</span>
-        <span class="hljs-comment">//判断文件的路径是否存在，不存在就创建路径</span>
-        <span class="hljs-keyword">if</span>(!(path = <span class="hljs-keyword">new</span> File(fl2.getParent())).exists())&#123;        
-            path.mkdirs();
-        &#125;<span class="hljs-keyword">else</span>&#123;
-            <span class="hljs-keyword">if</span>(!fl2.exists())&#123;        <span class="hljs-comment">//文件不存在就创建文件</span>
-                <span class="hljs-keyword">try</span> &#123;
-                    fl2.createNewFile();
-                &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
-                    e.printStackTrace();
-                &#125;
-            &#125;
-            <span class="hljs-comment">//System.out.println(path);</span>
-            copy(fl1, fl2);        <span class="hljs-comment">//执行拷贝函数</span>
-        &#125;
-        FileInputStream input;
-        <span class="hljs-keyword">try</span> &#123;
-            input = <span class="hljs-keyword">new</span> FileInputStream(fl2);
-            <span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];        <span class="hljs-comment">//用于接受读入的二进制数据 </span>
-            <span class="hljs-keyword">int</span> bytesRead;             <span class="hljs-comment">//读入长度</span>
-            <span class="hljs-keyword">while</span> ((bytesRead = input.read(buf)) &gt; <span class="hljs-number">0</span>) &#123;         <span class="hljs-comment">//仍有数据读入</span>
-                <span class="hljs-comment">//如果read返回-1，则文件中无数据了</span>
-                String str = <span class="hljs-keyword">new</span> String(buf, <span class="hljs-number">0</span>, bytesRead);
-                <span class="hljs-comment">//如果未读入完，那么就不能构建出str，也就不能输出，所以我们需要指定长度</span>
-                System.out.println(str);
-            &#125; 
-        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-            <span class="hljs-comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-        &#125;         <span class="hljs-comment">//读入流</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+		File fl1 = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;E:\\课程\\Java\\下学期实验课\\实验三\\javatest3\\src\\javatest3\\Copy.java&quot;</span>);
+		<span class="hljs-comment">//要拷贝的文件</span>
+		File fl2 = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;D:\\shiyan3\\mycopy.txt&quot;</span>);
+		<span class="hljs-comment">//拷贝文件</span>
+		File path;		<span class="hljs-comment">//记录文件路径</span>
+		<span class="hljs-comment">//判断文件的路径是否存在，不存在就创建路径</span>
+		<span class="hljs-keyword">if</span>(!(path = <span class="hljs-keyword">new</span> File(fl2.getParent())).exists())&#123;		
+			path.mkdirs();
+		&#125;<span class="hljs-keyword">else</span>&#123;
+			<span class="hljs-keyword">if</span>(!fl2.exists())&#123;		<span class="hljs-comment">//文件不存在就创建文件</span>
+				<span class="hljs-keyword">try</span> &#123;
+					fl2.createNewFile();
+				&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+					e.printStackTrace();
+				&#125;
+			&#125;
+			<span class="hljs-comment">//System.out.println(path);</span>
+			copy(fl1, fl2);		<span class="hljs-comment">//执行拷贝函数</span>
+		&#125;
+		FileInputStream input;
+		<span class="hljs-keyword">try</span> &#123;
+			input = <span class="hljs-keyword">new</span> FileInputStream(fl2);
+			<span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];    	<span class="hljs-comment">//用于接受读入的二进制数据 </span>
+		    <span class="hljs-keyword">int</span> bytesRead;     		<span class="hljs-comment">//读入长度</span>
+		    <span class="hljs-keyword">while</span> ((bytesRead = input.read(buf)) &gt; <span class="hljs-number">0</span>) &#123; 		<span class="hljs-comment">//仍有数据读入</span>
+		    	<span class="hljs-comment">//如果read返回-1，则文件中无数据了</span>
+		    	String str = <span class="hljs-keyword">new</span> String(buf, <span class="hljs-number">0</span>, bytesRead);
+		    	<span class="hljs-comment">//如果未读入完，那么就不能构建出str，也就不能输出，所以我们需要指定长度</span>
+		    	System.out.println(str);
+		    &#125; 
+		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+			<span class="hljs-comment">// TODO Auto-generated catch block</span>
+			e.printStackTrace();
+		&#125; 		<span class="hljs-comment">//读入流</span>
 
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * </span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> oldfile    要拷贝的文件</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> newfile    拷贝到的文件</span>
-<span class="hljs-comment">     * 通过InputStream，OutputStream等字节流或者FileReader、FileWriter等字符流来实现拷贝。</span>
-<span class="hljs-comment">     * 循环遍历oldfile文件的内容，拷贝到newfile文件中。</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">copy</span><span class="hljs-params">(File oldfile, File newfile)</span></span>&#123;
-        InputStream input = <span class="hljs-keyword">null</span>;   
-        OutputStream output = <span class="hljs-keyword">null</span>;   
-        <span class="hljs-keyword">try</span>&#123; 
-            input = <span class="hljs-keyword">new</span> FileInputStream(oldfile);         <span class="hljs-comment">//读入流</span>
-            output = <span class="hljs-keyword">new</span> FileOutputStream(newfile);     <span class="hljs-comment">//写入流</span>
-            <span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];        <span class="hljs-comment">//用于接受读入的二进制数据 </span>
-            <span class="hljs-keyword">int</span> bytesRead;             <span class="hljs-comment">//读入长度</span>
-            <span class="hljs-keyword">while</span> ((bytesRead = input.read(buf)) &gt; <span class="hljs-number">0</span>) &#123;         <span class="hljs-comment">//仍有数据读入</span>
-                <span class="hljs-comment">//如果read返回-1，则文件中无数据了</span>
-                output.write(buf, <span class="hljs-number">0</span>, bytesRead);         <span class="hljs-comment">//写入文件</span>
-            &#125; 
-            System.out.println(<span class="hljs-string">&quot;拷贝成功&quot;</span>);        <span class="hljs-comment">//输出提示信息</span>
-            input.close(); 
-            output.close(); 
-        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-            <span class="hljs-comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-        &#125; 
-<span class="hljs-comment">//        try &#123;</span>
-<span class="hljs-comment">//            FileReader fr = new FileReader(oldfile);</span>
-<span class="hljs-comment">//            FileWriter fw = new FileWriter(newfile);</span>
-<span class="hljs-comment">//            char[] chs = new char[512];</span>
-<span class="hljs-comment">//            int charsRead;             //读入长度</span>
-<span class="hljs-comment">//            while ((charsRead = fr.read(chs)) &gt; 0) &#123;         //仍有数据读入</span>
-<span class="hljs-comment">//                fw.write(chs, 0, charsRead);         //写入文件</span>
-<span class="hljs-comment">//            &#125; </span>
-<span class="hljs-comment">//            fr.close();</span>
-<span class="hljs-comment">//            fw.close();</span>
-<span class="hljs-comment">//            </span>
-<span class="hljs-comment">//        &#125; catch (Exception e) &#123;</span>
-<span class="hljs-comment">//            e.printStackTrace();</span>
-<span class="hljs-comment">//        &#125; </span>
-
-    &#125;
-
+	&#125;
+	
+	<span class="hljs-comment">/**</span>
+<span class="hljs-comment">	 * </span>
+<span class="hljs-comment">	 * <span class="hljs-doctag">@param</span> oldfile	要拷贝的文件</span>
+<span class="hljs-comment">	 * <span class="hljs-doctag">@param</span> newfile	拷贝到的文件</span>
+<span class="hljs-comment">	 * 通过InputStream，OutputStream等字节流或者FileReader、FileWriter等字符流来实现拷贝。</span>
+<span class="hljs-comment">	 * 循环遍历oldfile文件的内容，拷贝到newfile文件中。</span>
+<span class="hljs-comment">	 */</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">copy</span><span class="hljs-params">(File oldfile, File newfile)</span></span>&#123;
+		InputStream input = <span class="hljs-keyword">null</span>;   
+		OutputStream output = <span class="hljs-keyword">null</span>;   
+		<span class="hljs-keyword">try</span>&#123; 
+		    input = <span class="hljs-keyword">new</span> FileInputStream(oldfile); 		<span class="hljs-comment">//读入流</span>
+		    output = <span class="hljs-keyword">new</span> FileOutputStream(newfile);     <span class="hljs-comment">//写入流</span>
+		    <span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];    	<span class="hljs-comment">//用于接受读入的二进制数据 </span>
+		    <span class="hljs-keyword">int</span> bytesRead;     		<span class="hljs-comment">//读入长度</span>
+		    <span class="hljs-keyword">while</span> ((bytesRead = input.read(buf)) &gt; <span class="hljs-number">0</span>) &#123; 		<span class="hljs-comment">//仍有数据读入</span>
+		    	<span class="hljs-comment">//如果read返回-1，则文件中无数据了</span>
+		    	output.write(buf, <span class="hljs-number">0</span>, bytesRead); 		<span class="hljs-comment">//写入文件</span>
+		    &#125; 
+		    System.out.println(<span class="hljs-string">&quot;拷贝成功&quot;</span>);		<span class="hljs-comment">//输出提示信息</span>
+		    input.close(); 
+		    output.close(); 
+		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+			<span class="hljs-comment">// TODO Auto-generated catch block</span>
+			e.printStackTrace();
+		&#125; 
+<span class="hljs-comment">//		try &#123;</span>
+<span class="hljs-comment">//			FileReader fr = new FileReader(oldfile);</span>
+<span class="hljs-comment">//			FileWriter fw = new FileWriter(newfile);</span>
+<span class="hljs-comment">//			char[] chs = new char[512];</span>
+<span class="hljs-comment">//		    int charsRead;     		//读入长度</span>
+<span class="hljs-comment">//		    while ((charsRead = fr.read(chs)) &gt; 0) &#123; 		//仍有数据读入</span>
+<span class="hljs-comment">//		    	fw.write(chs, 0, charsRead); 		//写入文件</span>
+<span class="hljs-comment">//		    &#125; </span>
+<span class="hljs-comment">//		    fr.close();</span>
+<span class="hljs-comment">//		    fw.close();</span>
+<span class="hljs-comment">//			</span>
+<span class="hljs-comment">//		&#125; catch (Exception e) &#123;</span>
+<span class="hljs-comment">//			e.printStackTrace();</span>
+<span class="hljs-comment">//		&#125; </span>
+		
+	&#125;
+	
 &#125;
 <span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 1.mkdirs()和 mkdir()的对象都是路径，不是文件，时刻牢记。</span>
 <span class="hljs-comment"> * 2.通过exists()函数判断是否存在</span>
 <span class="hljs-comment"> * </span>
 <span class="hljs-comment"> */</span></code></pre>
-
-
-
 <p>\3. 现有一个文件english.txt，请使用缓冲流（BufferedReader、BufferedWriter）完成本程序，具体要求如下：读取文件中的内容，统计其中每一行单词的个数，并同时将每一行的单词个数及每个单词写到另一个文件中。</p>
 <p>例如：“第1行共5个单词，分别为：The，arrow，missed，the，target；”</p>
 <p>提示：字符串分割可使用split方法（正则表达式中，空格类字符、英文输入法下符号的元字符为：”\s”、”\p{Punct}”）、StringTokenizer或者Scanner类型实现。</p>
@@ -350,74 +351,74 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CountWord</span> </span>&#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        File english = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;C:\\Users\\cust\\workspace\\javatest3\\src\\english.txt&quot;</span>);
-        File count = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;D:\\shiyan3\\count.txt&quot;</span>);
-        File path;        <span class="hljs-comment">//记录文件路径</span>
-        <span class="hljs-keyword">if</span>(!(path = <span class="hljs-keyword">new</span> File(count.getParent())).exists())&#123;        
-            path.mkdirs();
-        &#125;<span class="hljs-keyword">else</span>&#123;
-            <span class="hljs-keyword">if</span>(!count.exists())&#123;        <span class="hljs-comment">//文件不存在就创建文件</span>
-                <span class="hljs-keyword">try</span> &#123;
-                    count.createNewFile();
-                &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
-                    e.printStackTrace();
-                &#125;
-            &#125;
-            <span class="hljs-comment">//System.out.println(path);</span>
-            countWords(english, count);
-        &#125;        
-    &#125;
-
-    <span class="hljs-comment">/**</span>
-<span class="hljs-comment">     * </span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> file        原英文文档</span>
-<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> newfile        记录英文文档个数的文件</span>
-<span class="hljs-comment">     * 将原英文文档每行的单词个数以及这些单词，写入另一个文件中。</span>
-<span class="hljs-comment">     * 通过BufferedReader、BufferedWriter实现</span>
-<span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">countWords</span><span class="hljs-params">(File file, File newfile)</span></span>&#123;
-        <span class="hljs-keyword">try</span> &#123;
-            <span class="hljs-comment">//文件读入</span>
-            FileReader fr = <span class="hljs-keyword">new</span> FileReader(file);
-            BufferedReader br = <span class="hljs-keyword">new</span> BufferedReader(fr);
-            FileWriter fw = <span class="hljs-keyword">new</span> FileWriter(newfile);
-            BufferedWriter bw = <span class="hljs-keyword">new</span> BufferedWriter(fw);
-            <span class="hljs-comment">//这里如果写上第二个参数就是追加模式，不会清空原文档</span>
-            String str;
-            <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">int</span> row = <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">while</span> ((str = br.readLine()) != <span class="hljs-keyword">null</span>) &#123;         <span class="hljs-comment">//仍有数据读入</span>
-                String[] s = str.split(<span class="hljs-string">&quot;[^a-zA-Z]&quot;</span>);
-                String info = <span class="hljs-keyword">null</span> ;
-                <span class="hljs-comment">//如果未读入完，那么就不能构建出str，也就不能输出，所以我们需要指定长度</span>
-                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; s.length; i++)&#123;
-                    <span class="hljs-keyword">if</span>(s[i] != <span class="hljs-string">&quot;&quot;</span>)&#123;
-                        count++;        
-                    &#125;
-                &#125;
-                info=<span class="hljs-string">&quot;第&quot;</span>+row+<span class="hljs-string">&quot;行有&quot;</span>+count+<span class="hljs-string">&quot;个单词,分别是:&quot;</span>;
-                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; s.length; i++)&#123;
-                    <span class="hljs-keyword">if</span>(s[i] != <span class="hljs-string">&quot;&quot;</span>)&#123;
-                        info += s[i]+<span class="hljs-string">&quot; &quot;</span>;        
-                    &#125;
-                &#125;
-                System.out.println(info);
-                <span class="hljs-comment">//info += &quot;\r\n&quot;;        //换行</span>
-                bw.write(info);
-                bw.newLine();        <span class="hljs-comment">//BufferedWriter对象中可以通过newLine()进行换行</span>
-                row++;
-                count = <span class="hljs-number">0</span>;
-            &#125; 
-            br.close();
-            fr.close();
-            bw.close();
-            fw.close();
-        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-            e.printStackTrace();
-        &#125;
-    &#125;
-
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+		File english = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;C:\\Users\\cust\\workspace\\javatest3\\src\\english.txt&quot;</span>);
+		File count = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;D:\\shiyan3\\count.txt&quot;</span>);
+		File path;		<span class="hljs-comment">//记录文件路径</span>
+		<span class="hljs-keyword">if</span>(!(path = <span class="hljs-keyword">new</span> File(count.getParent())).exists())&#123;		
+			path.mkdirs();
+		&#125;<span class="hljs-keyword">else</span>&#123;
+			<span class="hljs-keyword">if</span>(!count.exists())&#123;		<span class="hljs-comment">//文件不存在就创建文件</span>
+				<span class="hljs-keyword">try</span> &#123;
+					count.createNewFile();
+				&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+					e.printStackTrace();
+				&#125;
+			&#125;
+			<span class="hljs-comment">//System.out.println(path);</span>
+			countWords(english, count);
+		&#125;		
+	&#125;
+	
+	<span class="hljs-comment">/**</span>
+<span class="hljs-comment">	 * </span>
+<span class="hljs-comment">	 * <span class="hljs-doctag">@param</span> file		原英文文档</span>
+<span class="hljs-comment">	 * <span class="hljs-doctag">@param</span> newfile		记录英文文档个数的文件</span>
+<span class="hljs-comment">	 * 将原英文文档每行的单词个数以及这些单词，写入另一个文件中。</span>
+<span class="hljs-comment">	 * 通过BufferedReader、BufferedWriter实现</span>
+<span class="hljs-comment">	 */</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">countWords</span><span class="hljs-params">(File file, File newfile)</span></span>&#123;
+		<span class="hljs-keyword">try</span> &#123;
+			<span class="hljs-comment">//文件读入</span>
+			FileReader fr = <span class="hljs-keyword">new</span> FileReader(file);
+			BufferedReader br = <span class="hljs-keyword">new</span> BufferedReader(fr);
+			FileWriter fw = <span class="hljs-keyword">new</span> FileWriter(newfile);
+			BufferedWriter bw = <span class="hljs-keyword">new</span> BufferedWriter(fw);
+			<span class="hljs-comment">//这里如果写上第二个参数就是追加模式，不会清空原文档</span>
+			String str;
+			<span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+			<span class="hljs-keyword">int</span> row = <span class="hljs-number">1</span>;
+		    <span class="hljs-keyword">while</span> ((str = br.readLine()) != <span class="hljs-keyword">null</span>) &#123; 		<span class="hljs-comment">//仍有数据读入</span>
+		    	String[] s = str.split(<span class="hljs-string">&quot;[^a-zA-Z]&quot;</span>);
+		    	String info = <span class="hljs-keyword">null</span> ;
+		    	<span class="hljs-comment">//如果未读入完，那么就不能构建出str，也就不能输出，所以我们需要指定长度</span>
+		    	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; s.length; i++)&#123;
+		    		<span class="hljs-keyword">if</span>(s[i] != <span class="hljs-string">&quot;&quot;</span>)&#123;
+		    			count++;		
+		    		&#125;
+		    	&#125;
+		    	info=<span class="hljs-string">&quot;第&quot;</span>+row+<span class="hljs-string">&quot;行有&quot;</span>+count+<span class="hljs-string">&quot;个单词,分别是:&quot;</span>;
+		    	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; s.length; i++)&#123;
+		    		<span class="hljs-keyword">if</span>(s[i] != <span class="hljs-string">&quot;&quot;</span>)&#123;
+		    			info += s[i]+<span class="hljs-string">&quot; &quot;</span>;		
+		    		&#125;
+		    	&#125;
+		    	System.out.println(info);
+		    	<span class="hljs-comment">//info += &quot;\r\n&quot;;		//换行</span>
+		    	bw.write(info);
+		    	bw.newLine();		<span class="hljs-comment">//BufferedWriter对象中可以通过newLine()进行换行</span>
+		    	row++;
+		    	count = <span class="hljs-number">0</span>;
+		    &#125; 
+		    br.close();
+			fr.close();
+			bw.close();
+			fw.close();
+		&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+			e.printStackTrace();
+		&#125;
+	&#125;
+	
 &#125;</code></pre>
             </div>
             <hr>

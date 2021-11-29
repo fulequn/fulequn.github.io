@@ -39,7 +39,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -176,22 +180,31 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/30/Article202010303/">Unable to load native-hadoop library的解决办法</a>
+        <a href="/2020/11/21/Article202011212/">罗技K380连接windwos10电脑</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/30/Article202010303/">
+        <a href="/2020/11/21/Article202011212/">
           
           
             
           
-          
+          需要准备打的东西：
+
+Logitech k380
+笔记本电脑
+
+我们需要进行的操作：
+
+保证无线键盘是充满电的。
+打开电脑的蓝牙开关
+无线键盘打开开关，k380支持三台设备，我们可以选择自己想要的数字键，然后长按，该键开始闪烁。
+在windwos10的设置中添加蓝牙设备
+最后输入对应的PIN码即可完成连接
+
+
 参考链接：
-Unable to load native-hadoop library的解决方法_Machine Learning with Turing’s Cat-CSDN博客
-
-今天跑Hadoop的文件命令，报了一个这样的错误（其实是warning）：
-
-虽说不影响任务进程，不过看起来确实不好看（强迫症受不了）。自己捣鼓了一下发现是编译版本不对齐导致的问题，重新编译过于浪费时间，所以直接把警
+https://jingyan.baidu.com/article/4d58
         </a>
       </p>
 
@@ -199,8 +212,220 @@ Unable to load native-hadoop library的解决方法_Machine Learning with Turing
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-30 10:35" pubdate>
-              2020-10-30
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/life/">life</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/21/Article202011211/">Article202011211</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/21/Article202011211/">
+          
+          
+            
+          
+          1.Spark与Hadoop的对比
+总体而言，Hadoop中的MapReduce计算框架主要存在以下缺点：
+表达能力有限。计算都必须转化为Map和Reduce两个操作，但这并不适合所有的情况，难以描述复杂的数据处理过程；
+磁盘I/O开销大。每次执行时都需要从硬盘读取数据，并且在计算完成后需要将中间过程写入到磁盘中，I/O开销大；
+延迟高。一次计算可能需要分解成一系列按顺序执行的MapReduce任
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011184/">Article202011184</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011184/">
+          
+          
+            
+          
+          一、大数据技术概述
+1.请阐述大数据处理的基本流程？
+大数据的基本处理流程，主要包括数据采集、存储管理、处理分析、结果呈现等环节。因此，从数据分析全流程来看，大数据技术主要包括数据采集与预处理、数据存储和管理、数据处理与分析、数据可视化、数据安全与隐私保护等几个层面的内容。
+2.请阐述大数据的计算模式以及代表产品。
+批处理计算。批处理计算主要解决针对大规模数据的批量处理。MapReduce、Spa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:21" pubdate>
+              2020-11-18
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011183/">使用yolov5时出现ModuleNotFoundError:No module named ‘torch’</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011183/">
+          
+          
+            
+          
+          
+参考链接：
+Start Locally | PyTorch
+https://github.com/ultralytics/yolov5
+从零开始手把手教你利用yolov5训练自己的数据集(含coco128数据集/yolov5权重文件国内下载）更新于20200728_ai_faker的博客-CSDN博客_yolov5
+
+今天在使用git克隆下yolo v5的代码之后，由于之前安装了其他很多的库，所
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:17" pubdate>
+              2020-11-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Error/">Error</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011182/">Python编程遇到OSError:[E050] Can&#39;t find model &#39;en&#39;.</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011182/">
+          
+          
+            
+          
+          
+参考链接：
+[OSError: E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a_Learning-CSDN博客
+(1条消息) 解决Error: Couldn t link model to en_core_web_sm_椰楠liu的博客-CSDN博客
+
+ Pytho
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:10" pubdate>
+              2020-11-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Error/">Error</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011181/">Couldn&#39;t find field google.protobuf.DescriptorProto.ExtensionRange.options</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011181/">
+          
+          
+            
+          
+          
+参考链接：
+https://github.com/tensorflow/tensorflow/issues/12326
+(1条消息) TensorFlow KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”_u010187278的博客-CSDN博客
+
+ 问题描述
+
+pytho
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:09" pubdate>
+              2020-11-18
             </time>
           </div>
         
@@ -208,177 +433,64 @@ Unable to load native-hadoop library的解决方法_Machine Learning with Turing
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
+              <a href="/categories/Tensorflow/">Tensorflow</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Tensorflow/">Tensorflow</a>
+            
+              <a href="/tags/Error/">Error</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/09/Article202011094/">HBase的hbase-site.xml文件配置详解</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/09/Article202011094/">
+          
+          
+            
+          
+          
+参考文献：
+hbase-site.xml 配置详解_ningxuezhu的专栏-CSDN博客
+
+该文档是用hbase默认配置文件生成的，文件源是 hbase-default.xml
+ hbase.rootdir
+这个目录是region server的共享目录，用来持久化HBase。URL需要是完全正确的，还要包含文件系统的scheme。例如，要表示hdfs中的’/hbase’目录，namenod
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
             
               <a href="/categories/Hadoop/">Hadoop</a>
             
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/Hadooop/">Hadooop</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/30/Article202010302/">服务不支持chkconfig的解决方法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/30/Article202010302/">
-          
-          
-            
-          
-          
-参考链接：
-服务不支持 chkconfig 的解决方法_情报通-CSDN博客
-
-服务不支持 chkconfig　的解决方法
-这两天一直在研究系统服务，在chkconfig –add servername的时候老是提示服务不支持 chkconfig　经过查找，解决办法如下。
-
-示例，auto_run的前三行如下：#!/bin/sh#chkconfig: 2345 80 90#description
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-30 10:32" pubdate>
-              2020-10-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-              <a href="/categories/Linux/chkconfig/">chkconfig</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/chkconfig/">chkconfig</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/30/Article202010301/">Linux:readonly option is set(add ! to override)错误</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/30/Article202010301/">
-          
-          
-            
-          
-          
-参考链接：
-(1条消息) Linux：readonly option is set (add ! to override)错误_zw_ss-CSDN博客
-
-在使用vim修改完一些配置文件时，当你退出时经常会出现’readonly’ option is set (add ! to override)的问题，通常有三种情况：1、 该错误为当前用户没有权限对文件作修改，这种情况可以强制退出:q!,先取
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-30 10:26" pubdate>
-              2020-10-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-              <a href="/categories/Linux/vim/">vim</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-              <a href="/tags/vim/">vim</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/27/Article202010272/">Hadoop中MR程序的集中提交运行模式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/27/Article202010272/">
-          
-          
-            
-          
-          
-参考链接：
-Hadoop中MR程序的几种提交运行模式 - 大宅洋 - 博客园 (cnblogs.com)
-
-本地模型运行1：在windows的eclipse里面直接运行main方法，就会将job提交给本地执行器localjobrunner执行
-   —-输入输出数据可以放在本地路径下（c:/wc/srcdata/）
-   —-输入输出数据也可以放在hdfs中(hdfs://centosReall
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-27 20:58" pubdate>
-              2020-10-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Hadoop/">Hadoop</a>
+              <a href="/categories/Hadoop/HBase/">HBase</a>
             
           </div>
         
@@ -388,9 +500,7 @@ Hadoop中MR程序的几种提交运行模式 - 大宅洋 - 博客园 (cnblogs.co
             
               <a href="/tags/Hadoop/">Hadoop</a>
             
-              <a href="/tags/MapReduce/">MapReduce</a>
-            
-              <a href="/tags/Yarn/">Yarn</a>
+              <a href="/tags/HBase/">HBase</a>
             
           </div>
         
@@ -403,26 +513,24 @@ Hadoop中MR程序的几种提交运行模式 - 大宅洋 - 博客园 (cnblogs.co
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/27/Article202010271/">MongoDB如何查询耗时记录的方法</a>
+        <a href="/2020/11/09/Article202011093/">HBase Java API基本概念与使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/27/Article202010271/">
+        <a href="/2020/11/09/Article202011093/">
           
           
             
           
           
 参考链接：
-MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
+Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)
 
-准备
-在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的：
-&#123;
-&quot;name&quot;:&quot;your name&quot;, 
-&quot;age&quot;:22, 
-&quot;gender&quot;:&quot;male&quot;, 
-&
+ 一、几个主要 Hbase API 类和数据模型之间的对应关系
+
+1、 HBaseAdmin
+关系： org.apache.hadoop.hbase.client.HBaseAdmin
+作用：提供了一个接口来管理 HBase 数据库的表信息。它提供的方法包括：创建表，删除表，列出表项
         </a>
       </p>
 
@@ -430,8 +538,8 @@ MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-27 20:57" pubdate>
-              2020-10-27
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
             </time>
           </div>
         
@@ -439,9 +547,9 @@ MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+              <a href="/categories/Hadoop/">Hadoop</a>
             
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+              <a href="/categories/Hadoop/HBase/">HBase</a>
             
           </div>
         
@@ -449,9 +557,11 @@ MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+              <a href="/tags/Java/">Java</a>
             
-              <a href="/tags/MongoDB/">MongoDB</a>
+              <a href="/tags/Hadoop/">Hadoop</a>
+            
+              <a href="/tags/HBase/">HBase</a>
             
           </div>
         
@@ -464,22 +574,26 @@ MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/26/Article202010264/">使用MongoDB中的MapReduce</a>
+        <a href="/2020/11/09/Article202011092/">Hbase开机自启动实现</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/26/Article202010264/">
+        <a href="/2020/11/09/Article202011092/">
           
           
             
           
-          
-参考链接：
-MongoDB Map Reduce | 菜鸟教程 (runoob.com)
+          1.在/etc/init.d路径下面创建一个名为hbase的文件
+添加如下内容，保存退出。
+这里的HBASE_HOME写自己的HBASE的安装路径
+#!/bin/bash
 
-MongoDB Map ReduceMap-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。
-MongoDB提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。
-MapReduce 命令以下是MapReduce的基
+# chkconfig: 345 63 37
+
+HBASE_HOME=/opt/bigdata/hbase-2.0.5
+case &quot;$1&quot; in
+    start)
+        $HBASE_HOME
         </a>
       </p>
 
@@ -487,8 +601,8 @@ MapReduce 命令以下是MapReduce的基
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-26 09:09" pubdate>
-              2020-10-26
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
             </time>
           </div>
         
@@ -496,9 +610,9 @@ MapReduce 命令以下是MapReduce的基
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+              <a href="/categories/Hadoop/">Hadoop</a>
             
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+              <a href="/categories/Hadoop/Hbase/">Hbase</a>
             
           </div>
         
@@ -506,9 +620,9 @@ MapReduce 命令以下是MapReduce的基
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+              <a href="/tags/Hadoop/">Hadoop</a>
             
-              <a href="/tags/MongoDB/">MongoDB</a>
+              <a href="/tags/Hbase/">Hbase</a>
             
           </div>
         
@@ -521,80 +635,26 @@ MapReduce 命令以下是MapReduce的基
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/26/Article202010263/">MongoDB中导入数据的使用（mongoimport）</a>
+        <a href="/2020/11/09/Article202011091/">Linux出现Permission denied的解决办法</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/26/Article202010263/">
+        <a href="/2020/11/09/Article202011091/">
           
           
             
           
           
 参考链接：
-MongoDB中导入数据命令的使用（mongoimport） - 全心全意_运维 - 博客园 (cnblogs.com)
-Mongo导出mongoexport和导入mongoimport介绍 - 梦雨情殇 - 博客园 (cnblogs.com)
+出现Permission denied的解决办法_z止于至善的博客-CSDN博客
 
-语法：    mongoimport  
-介绍：    该命令可以将CSV，TSV或JSON文件数据导入MongoDB， 如果没有提供文件
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-26 09:09" pubdate>
-              2020-10-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
-            
-              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
-            
-              <a href="/tags/MongoDB/">MongoDB</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/26/Article202010262/">Python数据分析使用matplotlib</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/26/Article202010262/">
-          
-          
-            
-          
-          
-参考链接：
-https://blog.csdn.net/lm_is_dc/article/details/81191207
-
-matplotlib绘图关注公众号“轻松学编程”了解更多。
-Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图
-%matplotlib inline 是IPython 中的一个魔法函数。
-以下命令都是在浏览器中输入。
+提示
+Permission denied
+解决的办法：
+$ sudo chmod -R 777 某一目录
+其中
+-R 是指级联应用到目录里的所有子目录和文件
+777 是所有用户都拥有最高权限
 
         </a>
       </p>
@@ -603,71 +663,8 @@ Series和DataFrame都有一个用于生成各类图表的plot方法。默认情�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-26 09:09" pubdate>
-              2020-10-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-              <a href="/categories/Python/Matplotlib/">Matplotlib</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/Matplotlib/">Matplotlib</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/26/Article202010261/">Linux不能上网ping:unknown host问题怎么解决</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/26/Article202010261/">
-          
-          
-            
-          
-          
-参考链接：
-https://blog.csdn.net/lm_is_dc/article/details/81191207
-
-
-1、检查网卡配置
-输入命令:ifconfig -a
-查看当前网卡配置的IP地址
-
-使用命令 vi /etc/sysconfig/network-scripts/ifcfg-eth0（这里根据自己的网卡改）
-
-2、检查网卡网关设置
-ping 192.168.204.2 看
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-26 09:05" pubdate>
-              2020-10-26
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
             </time>
           </div>
         
@@ -684,55 +681,6 @@ ping 192.168.204.2 看
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/20/Article202010202/">Python错误：ImportError:DLL load failed:找不到指定的模块问题终极解决方法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/20/Article202010202/">
-          
-          
-            
-          
-          
-参考链接：
-https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-20 20:50" pubdate>
-              2020-10-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
             
           </div>
         
@@ -744,7 +692,7 @@ https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distri
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

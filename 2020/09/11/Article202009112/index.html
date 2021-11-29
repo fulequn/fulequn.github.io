@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      716 字
+      720 字
     </span>
   
 
@@ -220,11 +224,10 @@
 <p><strong>【注意】</strong></p>
 <p>可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:）</p>
 <pre><code class="hljs elm"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</code></pre>
-
 <pre><code class="hljs elm"><span class="hljs-keyword">import</span> pylab <span class="hljs-keyword">as</span> plt</code></pre>
-
 <p><strong>【效果图】</strong><img src="/2020/09/11/Article202009112/1.png" srcset="/img/loading.gif" alt="1"></p>
-<h3 id="【方式一】FontProperties"><a href="#【方式一】FontProperties" class="headerlink" title="【方式一】FontProperties"></a>【方式一】FontProperties</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<h3 id="方式一fontproperties"><a class="markdownIt-Anchor" href="#方式一fontproperties"></a> 【方式一】FontProperties</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties  <span class="hljs-comment"># 步骤一</span>
 
 <span class="hljs-comment"># ...</span>
@@ -234,9 +237,9 @@ plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>, fontproperties=fon
 plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>, fontproperties=font)
 plt.title(<span class="hljs-string">&quot;标题&quot;</span>, fontproperties=font)
 plt.show()</code></pre>
-
 <p>总的来说，很丑陋。</p>
-<h3 id="【方式二】-fontproperties"><a href="#【方式二】-fontproperties" class="headerlink" title="【方式二】 fontproperties"></a>【方式二】 fontproperties</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<h3 id="方式二-fontproperties"><a class="markdownIt-Anchor" href="#方式二-fontproperties"></a> 【方式二】 fontproperties</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 <span class="hljs-comment"># ...</span>
 
@@ -244,9 +247,9 @@ plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)
 plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>, fontproperties=<span class="hljs-string">&quot;SimSun&quot;</span>) <span class="hljs-comment"># 步骤一    （宋体）</span>
 plt.title(<span class="hljs-string">&quot;标题&quot;</span>, fontproperties=<span class="hljs-string">&quot;SimHei&quot;</span>) <span class="hljs-comment">#          （黑体）</span>
 plt.show()</code></pre>
-
 <p>灵活，另一个优点：不污染全局字体设置。</p>
-<h3 id="【方式三】rcParams"><a href="#【方式三】rcParams" class="headerlink" title="【方式三】rcParams"></a>【方式三】rcParams</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<h3 id="方式三rcparams"><a class="markdownIt-Anchor" href="#方式三rcparams"></a> 【方式三】rcParams</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>] <span class="hljs-comment"># 步骤一（替换sans-serif字体）</span>
 plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>   <span class="hljs-comment"># 步骤二（解决坐标轴负数的负号显示问题）</span>
@@ -256,9 +259,9 @@ plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)
 plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>)
 plt.title(<span class="hljs-string">&quot;标题&quot;</span>)
 plt.show()</code></pre>
-
 <p>简洁的用法。缺点：污染全局字体设置。（所以需要第二步骤）</p>
-<h3 id="【方式四】rc"><a href="#【方式四】rc" class="headerlink" title="【方式四】rc"></a>【方式四】rc</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<h3 id="方式四rc"><a class="markdownIt-Anchor" href="#方式四rc"></a> 【方式四】rc</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 font = &#123;<span class="hljs-string">&#x27;family&#x27;</span> : <span class="hljs-string">&#x27;SimHei&#x27;</span>,
         <span class="hljs-string">&#x27;weight&#x27;</span> : <span class="hljs-string">&#x27;bold&#x27;</span>,
@@ -272,11 +275,12 @@ plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)
 plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>)
 plt.title(<span class="hljs-string">&quot;标题&quot;</span>)
 plt.show()</code></pre>
-
 <p>灵活的用法。缺点：影响全局字体（所以需要第二步骤）</p>
-<h3 id="【总结】"><a href="#【总结】" class="headerlink" title="【总结】"></a>【总结】</h3><p>方式二用时才设置，且不会污染全局字体设置，<strong>更灵活</strong></p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 【总结】</h3>
+<p>方式二用时才设置，且不会污染全局字体设置，<strong>更灵活</strong></p>
 <p>方式三、方式四不需要对字体路径硬编码，而且一次设置，多次使用，<strong>更方便。</strong></p>
-<h3 id="【测试代码】"><a href="#【测试代码】" class="headerlink" title="【测试代码】"></a>【测试代码】</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<h3 id="测试代码"><a class="markdownIt-Anchor" href="#测试代码"></a> 【测试代码】</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 font = &#123;<span class="hljs-string">&#x27;family&#x27;</span> : <span class="hljs-string">&#x27;DFKai-SB&#x27;</span>,
@@ -299,9 +303,32 @@ plt.title(<span class="hljs-string">&quot;标题&quot;</span>)
 plt.ylim(<span class="hljs-number">-1.2</span>,<span class="hljs-number">1.2</span>)
 plt.legend()
 plt.show()</code></pre>
-
-<h3 id="【附录】"><a href="#【附录】" class="headerlink" title="【附录】"></a>【附录】</h3><p>一些中文字体的英文名</p>
-<p>宋体    SimSun<br>黑体    SimHei<br>微软雅黑    Microsoft YaHei<br>微软正黑体    Microsoft JhengHei<br>新宋体    NSimSun<br>新细明体    PMingLiU<br>细明体    MingLiU<br>标楷体    DFKai-SB<br>仿宋    FangSong<br>楷体    KaiTi<br>隶书：LiSu<br>幼圆：YouYuan<br>华文细黑：STXihei<br>华文楷体：STKaiti<br>华文宋体：STSong<br>华文中宋：STZhongsong<br>华文仿宋：STFangsong<br>方正舒体：FZShuTi<br>方正姚体：FZYaoti<br>华文彩云：STCaiyun<br>华文琥珀：STHupo<br>华文隶书：STLiti<br>华文行楷：STXingkai<br>华文新魏：STXinwei</p>
+<h3 id="附录"><a class="markdownIt-Anchor" href="#附录"></a> 【附录】</h3>
+<p>一些中文字体的英文名</p>
+<p>宋体    SimSun<br>
+黑体    SimHei<br>
+微软雅黑    Microsoft YaHei<br>
+微软正黑体    Microsoft JhengHei<br>
+新宋体    NSimSun<br>
+新细明体    PMingLiU<br>
+细明体    MingLiU<br>
+标楷体    DFKai-SB<br>
+仿宋    FangSong<br>
+楷体    KaiTi<br>
+隶书：LiSu<br>
+幼圆：YouYuan<br>
+华文细黑：STXihei<br>
+华文楷体：STKaiti<br>
+华文宋体：STSong<br>
+华文中宋：STZhongsong<br>
+华文仿宋：STFangsong<br>
+方正舒体：FZShuTi<br>
+方正姚体：FZYaoti<br>
+华文彩云：STCaiyun<br>
+华文琥珀：STHupo<br>
+华文隶书：STLiti<br>
+华文行楷：STXingkai<br>
+华文新魏：STXinwei</p>
 
             </div>
             <hr>

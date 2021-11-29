@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      261 字
+      262 字
     </span>
   
 
@@ -225,28 +229,30 @@
 <li>用 find 找麻烦, 而且总会找漏</li>
 <li>所以最后, 基本只在 同事确认过 的目录内活动</li>
 </ol>
-<h3 id="查找-yum-rpm-安装软件相关目录的位置"><a href="#查找-yum-rpm-安装软件相关目录的位置" class="headerlink" title="查找 yum/rpm 安装软件相关目录的位置"></a>查找 yum/rpm 安装软件相关目录的位置</h3><p>查找使用yum/rpm安装软件的文件路径</p>
+<h3 id="查找-yumrpm-安装软件相关目录的位置"><a class="markdownIt-Anchor" href="#查找-yumrpm-安装软件相关目录的位置"></a> 查找 yum/rpm 安装软件相关目录的位置</h3>
+<p>查找使用yum/rpm安装软件的文件路径</p>
 <p>使用rpm -qa | grep <postgres> 查找出带postgres的rpm包</postgres></p>
 <p>rpm -ql postgres-8.4.8-1.i386.openscg 列出dupostgres-8.4.8-1.i386.openscg这款软件安装的所有文件所在路径。</p>
 <pre><code class="hljs apache"><span class="hljs-comment">#查找所有名字中带有mysql的已经安装过的rpm包</span>
 <span class="hljs-attribute">rpm</span> -qa|grep mysql
 <span class="hljs-comment">#查找mysql-community-client-5.7.30-1.el7.x86_64的文件路径</span>
 <span class="hljs-attribute">mysql</span>-community-client-<span class="hljs-number">5</span>.<span class="hljs-number">7</span>.<span class="hljs-number">30</span>-<span class="hljs-number">1</span>.el<span class="hljs-number">7</span>.x<span class="hljs-number">86</span>_<span class="hljs-number">64</span></code></pre>
-
 <p><img src="/2020/10/17/Article202010174/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p><img src="/2020/10/17/Article202010174/2.png" srcset="/img/loading.gif" alt="2"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><pre><code class="hljs applescript">rpm -ql &lt;<span class="hljs-built_in">name</span>&gt;</code></pre>
-
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<pre><code class="hljs applescript">rpm -ql &lt;<span class="hljs-built_in">name</span>&gt;</code></pre>
 <p>使用rpm命令进行查找有这些好处：</p>
 <ol>
 <li>可以给出对应软件的文件列表</li>
-<li>配合 grep 可以更有效的查找特定文件<ol>
+<li>配合 grep 可以更有效的查找特定文件
+<ol>
 <li>比如 www</li>
 <li>比如 con</li>
 </ol>
 </li>
 </ol>
-<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>centos 包管理有以下这两种方式：</p>
+<h3 id="ps"><a class="markdownIt-Anchor" href="#ps"></a> ps</h3>
+<p>centos 包管理有以下这两种方式：</p>
 <ol>
 <li>yum</li>
 <li>rpm</li>

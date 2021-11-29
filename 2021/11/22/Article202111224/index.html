@@ -1,0 +1,1235 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>《深度学习实战》第7章 循环神经网络 - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-11-22 13:26" pubdate>
+      2021年11月22日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      172
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">《深度学习实战》第7章 循环神经网络</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>本小节我们将使用 RNN 完成图像说明( Image Captioning)任务。该任务需要联合 CNN 与 RNN 一同学习，CNN 用于提取图像特征，RNN 用于生成图像特征所对应的说明文字。</p>
+<p>在训练阶段，首先我们将图片放入卷积网络中进行特征提取，将其作为隐藏层h0的输入；然后将图片对应的文字描述一个单词接一个单词的输入到 RNN 中，而 RNN 输出则是当前单词的下一个预测单词。</p>
+<p>在测试阶段，我们将 RNN 预测的当前单词，作为下一时间片段的输入数据输入到 RNN 中。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> time, os, json
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> classifiers.chapter7 <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> utils <span class="hljs-keyword">import</span> *
+
+%matplotlib inline
+plt.rcParams[<span class="hljs-string">&#x27;figure.figsize&#x27;</span>] =(<span class="hljs-number">10.0</span>, <span class="hljs-number">8.0</span>) 
+plt.rcParams[<span class="hljs-string">&#x27;image.interpolation&#x27;</span>] = <span class="hljs-string">&#x27;nearest&#x27;</span>
+plt.rcParams[<span class="hljs-string">&#x27;image.cmap&#x27;</span>] = <span class="hljs-string">&#x27;gray&#x27;</span>
+%load_ext autoreload
+%autoreload <span class="hljs-number">2</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rel_error</span>(<span class="hljs-params">x, y</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;相对误差&quot;&quot;&quot;</span>
+    <span class="hljs-keyword">return</span> np.max(np.abs(x - y) /(np.maximum(<span class="hljs-number">1e-8</span>, np.abs(x) + np.abs(y))))</code></pre>
+<h3 id="microsoft-coco"><a class="markdownIt-Anchor" href="#microsoft-coco"></a> Microsoft COCO</h3>
+<p>本练习将使用2014年发布的 <a target="_blank" rel="noopener" href="http://mscoco.org/">Microsoft COCO dataset</a>，其作为标准的图像说明测试数据，包含有80000个训练数据以及40000验证数据，使用该网址&quot;<a target="_blank" rel="noopener" href="http://cs231n.stanford.edu/coco_captioning.zip">http://cs231n.stanford.edu/coco_captioning.zip</a>&quot; 下载数据集，下载完毕后解压到datasets文件目录。</p>
+<p>该套数据集已经对数据使用VGG-16卷积网络进行了特征提取，分别存放在<code>train2014_vgg16_fc7.h5</code>和<code>val2014_vgg16_fc7.h5</code></p>
+<p>如果想要缩短运行时间，其也将特征从4096降到了512维，分别存放在<code>train2014_vgg16_fc7_pca.h5</code>以及<code>val2014_vgg16_fc7_pca.h5</code>中</p>
+<p>原始图像大约有20GB，你可以使用<code>train2014_urls.txt</code>和<code>val2014_urls.txt</code>访问(需要翻墙)。</p>
+<p>直接处理字符串非常不高效，因此我们给每个词分配了字典ID方便我们查阅使用。因此，输入的序列数据其实是一条字典ID串，该文件存放在 <code>coco2014_vocab.json</code>。你需要使用<code>coco_utils.py</code>文件中的 <code>decode_captions</code>函数将ID转换为词向量。</p>
+<p>在训练RNN前，你需要使用记号 <code>&lt;START&gt;</code> 和 <code>&lt;END&gt;</code>标记句子的开头与结束。对于一些不常用的词我们使用<code>&lt;UNK&gt;</code> 进行替换。为了使句子长度相同，对于短句子，我们在 <code>&lt;END&gt;</code>标记后，填充<code>&lt;NULL&gt;</code> ，在训练时，不计算<code>&lt;NULL&gt;</code> 的损失与梯度。</p>
+<p>以上内容可能过于繁杂，我们已经默默处理好了，你知道即可。</p>
+<pre><code class="hljs python">data = load_coco_data(pca_features=<span class="hljs-literal">True</span>)
+<span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> data.items():
+    <span class="hljs-keyword">if</span> type(v) == np.ndarray:
+        print(k, type(v), v.shape, v.dtype)
+    <span class="hljs-keyword">else</span>:
+        print(k, type(v), len(v))</code></pre>
+<pre><code>train_captions &lt;class 'numpy.ndarray'&gt; (400135, 17) int32
+train_image_idxs &lt;class 'numpy.ndarray'&gt; (400135,) int32
+val_captions &lt;class 'numpy.ndarray'&gt; (195954, 17) int32
+val_image_idxs &lt;class 'numpy.ndarray'&gt; (195954,) int32
+train_features &lt;class 'numpy.ndarray'&gt; (82783, 512) float32
+val_features &lt;class 'numpy.ndarray'&gt; (40504, 512) float32
+idx_to_word &lt;class 'list'&gt; 1004
+word_to_idx &lt;class 'dict'&gt; 1004
+train_urls &lt;class 'numpy.ndarray'&gt; (82783,) &lt;U63
+val_urls &lt;class 'numpy.ndarray'&gt; (40504,) &lt;U63
+</code></pre>
+<h3 id="rnn单步前向传播"><a class="markdownIt-Anchor" href="#rnn单步前向传播"></a> RNN单步前向传播</h3>
+<p>打开 <code>classifiers\chapter7\rnn_layers.py</code>文件。完成<code>rnn_step_forward</code>函数，实现RNN的单步前向传播。</p>
+<p>完成后运行下列代码，检验你的实现。</p>
+<pre><code class="hljs python">N, D, H = <span class="hljs-number">3</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>
+
+x = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">0.7</span>, num=N*D).reshape(N, D)
+prev_h = np.linspace(<span class="hljs-number">-0.2</span>, <span class="hljs-number">0.5</span>, num=N*H).reshape(N, H)
+Wx = np.linspace(<span class="hljs-number">-0.1</span>, <span class="hljs-number">0.9</span>, num=D*H).reshape(D, H)
+Wh = np.linspace(<span class="hljs-number">-0.3</span>, <span class="hljs-number">0.7</span>, num=H*H).reshape(H, H)
+b = np.linspace(<span class="hljs-number">-0.2</span>, <span class="hljs-number">0.4</span>, num=H)
+
+next_h, _ = rnn_step_forward(x, prev_h, Wx, Wh, b)
+expected_next_h = np.asarray([
+    [<span class="hljs-number">-0.58172089</span>, <span class="hljs-number">-0.50182032</span>, <span class="hljs-number">-0.41232771</span>, <span class="hljs-number">-0.31410098</span>],
+    [ <span class="hljs-number">0.66854692</span>,    <span class="hljs-number">0.79562378</span>,    <span class="hljs-number">0.87755553</span>,    <span class="hljs-number">0.92795967</span>],
+    [ <span class="hljs-number">0.97934501</span>,    <span class="hljs-number">0.99144213</span>,    <span class="hljs-number">0.99646691</span>,    <span class="hljs-number">0.99854353</span>]])
+
+print(<span class="hljs-string">&#x27;next_h 误差: &#x27;</span>, rel_error(expected_next_h, next_h))</code></pre>
+<pre><code>next_h 误差:  6.292421426471037e-09
+</code></pre>
+<h3 id="rnn单步反向传播"><a class="markdownIt-Anchor" href="#rnn单步反向传播"></a> RNN单步反向传播</h3>
+<p>打开 classifiers\chapter7\rnn_layers.py文件。完成<code>rnn_step_backward</code>函数，实现RNN的单步反向传播。</p>
+<p>完成后运行下列代码，检验你的实现。你的相对误差应该小于<code>1e-8</code></p>
+<pre><code class="hljs python">N, D, H = <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>
+x = np.random.randn(N, D)
+h = np.random.randn(N, H)
+Wx = np.random.randn(D, H)
+Wh = np.random.randn(H, H)
+b = np.random.randn(H)
+
+out, cache = rnn_step_forward(x, h, Wx, Wh, b)
+
+dnext_h = np.random.randn(*out.shape)
+
+<span class="hljs-comment"># 计算前向传播后的各个值</span>
+fx = <span class="hljs-keyword">lambda</span> x: rnn_step_forward(x, h, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fh = <span class="hljs-keyword">lambda</span> prev_h: rnn_step_forward(x, h, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWx = <span class="hljs-keyword">lambda</span> Wx: rnn_step_forward(x, h, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWh = <span class="hljs-keyword">lambda</span> Wh: rnn_step_forward(x, h, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fb = <span class="hljs-keyword">lambda</span> b: rnn_step_forward(x, h, Wx, Wh, b)[<span class="hljs-number">0</span>]
+
+dx_num = eval_numerical_gradient_array(fx, x, dnext_h)
+dprev_h_num = eval_numerical_gradient_array(fh, h, dnext_h)
+dWx_num = eval_numerical_gradient_array(fWx, Wx, dnext_h)
+dWh_num = eval_numerical_gradient_array(fWh, Wh, dnext_h)
+db_num = eval_numerical_gradient_array(fb, b, dnext_h)
+
+dx, dprev_h, dWx, dWh, db = rnn_step_backward(dnext_h, cache)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dprev_h 误差: &#x27;</span>, rel_error(dprev_h_num, dprev_h))
+print(<span class="hljs-string">&#x27;dWx 误差: &#x27;</span>, rel_error(dWx_num, dWx))
+print(<span class="hljs-string">&#x27;dWh 误差: &#x27;</span>, rel_error(dWh_num, dWh))
+print(<span class="hljs-string">&#x27;db 误差: &#x27;</span>, rel_error(db_num, db))</code></pre>
+<pre><code>dx 误差:  1.310256557537144e-09
+dprev_h 误差:  2.1172970274127977e-10
+dWx 误差:  1.6514816613293213e-08
+dWh 误差:  1.770717277127576e-09
+db 误差:  3.152117259170483e-10
+</code></pre>
+<h3 id="rnn时序前向传播"><a class="markdownIt-Anchor" href="#rnn时序前向传播"></a> RNN时序前向传播</h3>
+<p>现在你需要将单步RNN组合起来，实现完整的时序RNN前向传播过程</p>
+<p>打开    <code>classifiers\chapter7\rnn_layers.py</code> ,完成 <code>rnn_forward</code>函数编码。你的相对误差应该要小于<code>1e-7</code></p>
+<pre><code class="hljs python">N, T, D, H = <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>
+
+x = np.linspace(<span class="hljs-number">-0.1</span>, <span class="hljs-number">0.3</span>, num=N*T*D).reshape(N, T, D)
+h0 = np.linspace(<span class="hljs-number">-0.3</span>, <span class="hljs-number">0.1</span>, num=N*H).reshape(N, H)
+Wx = np.linspace(<span class="hljs-number">-0.2</span>, <span class="hljs-number">0.4</span>, num=D*H).reshape(D, H)
+Wh = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">0.1</span>, num=H*H).reshape(H, H)
+b = np.linspace(<span class="hljs-number">-0.7</span>, <span class="hljs-number">0.1</span>, num=H)
+
+h, _ = rnn_forward(x, h0, Wx, Wh, b)
+expected_h = np.asarray([
+    [
+        [<span class="hljs-number">-0.42070749</span>, <span class="hljs-number">-0.27279261</span>, <span class="hljs-number">-0.11074945</span>,    <span class="hljs-number">0.05740409</span>,    <span class="hljs-number">0.22236251</span>],
+        [<span class="hljs-number">-0.39525808</span>, <span class="hljs-number">-0.22554661</span>, <span class="hljs-number">-0.0409454</span>,     <span class="hljs-number">0.14649412</span>,    <span class="hljs-number">0.32397316</span>],
+        [<span class="hljs-number">-0.42305111</span>, <span class="hljs-number">-0.24223728</span>, <span class="hljs-number">-0.04287027</span>,    <span class="hljs-number">0.15997045</span>,    <span class="hljs-number">0.35014525</span>],
+    ],
+    [
+        [<span class="hljs-number">-0.55857474</span>, <span class="hljs-number">-0.39065825</span>, <span class="hljs-number">-0.19198182</span>,    <span class="hljs-number">0.02378408</span>,    <span class="hljs-number">0.23735671</span>],
+        [<span class="hljs-number">-0.27150199</span>, <span class="hljs-number">-0.07088804</span>,    <span class="hljs-number">0.13562939</span>,    <span class="hljs-number">0.33099728</span>,    <span class="hljs-number">0.50158768</span>],
+        [<span class="hljs-number">-0.51014825</span>, <span class="hljs-number">-0.30524429</span>, <span class="hljs-number">-0.06755202</span>,    <span class="hljs-number">0.17806392</span>,    <span class="hljs-number">0.40333043</span>]]])
+print(<span class="hljs-string">&#x27;h 误差: &#x27;</span>, rel_error(expected_h, h))</code></pre>
+<pre><code>h 误差:  7.728466180186066e-08
+</code></pre>
+<h3 id="rnn时序反向传播"><a class="markdownIt-Anchor" href="#rnn时序反向传播"></a> RNN时序反向传播</h3>
+<p>现在你需要将单步RNN反向传播组合起来，实现完整的时序RNN反向传播过程</p>
+<p>打开 <code>classifiers\chapter7\rnn_layers.py</code>    ,完成 <code>rnn_backward</code> 函数编码。</p>
+<pre><code class="hljs python">N, D, T, H = <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5</span>
+
+x = np.random.randn(N, T, D)
+h0 = np.random.randn(N, H)
+Wx = np.random.randn(D, H)
+Wh = np.random.randn(H, H)
+b = np.random.randn(H)
+
+out, cache = rnn_forward(x, h0, Wx, Wh, b)
+
+dout = np.random.randn(*out.shape)
+
+dx, dh0, dWx, dWh, db = rnn_backward(dout, cache)
+
+fx = <span class="hljs-keyword">lambda</span> x: rnn_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fh0 = <span class="hljs-keyword">lambda</span> h0: rnn_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWx = <span class="hljs-keyword">lambda</span> Wx: rnn_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWh = <span class="hljs-keyword">lambda</span> Wh: rnn_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fb = <span class="hljs-keyword">lambda</span> b: rnn_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+
+dx_num = eval_numerical_gradient_array(fx, x, dout)
+dh0_num = eval_numerical_gradient_array(fh0, h0, dout)
+dWx_num = eval_numerical_gradient_array(fWx, Wx, dout)
+dWh_num = eval_numerical_gradient_array(fWh, Wh, dout)
+db_num = eval_numerical_gradient_array(fb, b, dout)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dh0 误差: &#x27;</span>, rel_error(dh0_num, dh0))
+print(<span class="hljs-string">&#x27;dWx 误差: &#x27;</span>, rel_error(dWx_num, dWx))
+print(<span class="hljs-string">&#x27;dWh 误差: &#x27;</span>, rel_error(dWh_num, dWh))
+print(<span class="hljs-string">&#x27;db 误差: &#x27;</span>, rel_error(db_num, db))</code></pre>
+<pre><code>dx 误差:  3.019690437635004e-09
+dh0 误差:  2.1293713568630968e-10
+dWx 误差:  1.227642349941746e-09
+dWh 误差:  1.8455612502078363e-09
+db 误差:  1.347211901044371e-10
+</code></pre>
+<h3 id="词嵌入前向传播"><a class="markdownIt-Anchor" href="#词嵌入前向传播"></a> 词嵌入前向传播</h3>
+<p>现在，需要将时序数据（索引串）转换为词向量。</p>
+<p>打开 <code>classifiers\chapter7\rnn_layers.py</code>文件，实现 <code>word_embedding_forward</code>函数，将单词索引，转化为词向量。</p>
+<p>运行下列代码，你的实现误差大约在范围<code>1e-8</code></p>
+<pre><code class="hljs python">N, T, V, D = <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>
+
+x = np.asarray([[<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>]])
+W = np.linspace(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, num=V*D).reshape(V, D)
+
+out, _ = word_embedding_forward(x, W)
+expected_out = np.asarray([
+ [[ <span class="hljs-number">0.</span>,                    <span class="hljs-number">0.07142857</span>,    <span class="hljs-number">0.14285714</span>],
+    [ <span class="hljs-number">0.64285714</span>,    <span class="hljs-number">0.71428571</span>,    <span class="hljs-number">0.78571429</span>],
+    [ <span class="hljs-number">0.21428571</span>,    <span class="hljs-number">0.28571429</span>,    <span class="hljs-number">0.35714286</span>],
+    [ <span class="hljs-number">0.42857143</span>,    <span class="hljs-number">0.5</span>,                 <span class="hljs-number">0.57142857</span>]],
+ [[ <span class="hljs-number">0.42857143</span>,    <span class="hljs-number">0.5</span>,                 <span class="hljs-number">0.57142857</span>],
+    [ <span class="hljs-number">0.21428571</span>,    <span class="hljs-number">0.28571429</span>,    <span class="hljs-number">0.35714286</span>],
+    [ <span class="hljs-number">0.</span>,                    <span class="hljs-number">0.07142857</span>,    <span class="hljs-number">0.14285714</span>],
+    [ <span class="hljs-number">0.64285714</span>,    <span class="hljs-number">0.71428571</span>,    <span class="hljs-number">0.78571429</span>]]])
+
+print(<span class="hljs-string">&#x27;out 误差: &#x27;</span>, rel_error(expected_out, out))</code></pre>
+<pre><code>out 误差:  1.0000000094736443e-08
+</code></pre>
+<h3 id="词嵌入反向传播"><a class="markdownIt-Anchor" href="#词嵌入反向传播"></a> 词嵌入反向传播</h3>
+<p>实现 <code>word_embedding_backward</code>函数，完成词嵌入的反向传播。</p>
+<p>运行下列梯度检验代码，你的误差应该小于<code>1e-11</code></p>
+<pre><code class="hljs python">N, T, V, D = <span class="hljs-number">50</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>
+
+x = np.random.randint(V, size=(N, T))
+W = np.random.randn(V, D)
+
+out, cache = word_embedding_forward(x, W)
+dout = np.random.randn(*out.shape)
+dW = word_embedding_backward(dout, cache)
+
+f = <span class="hljs-keyword">lambda</span> W: word_embedding_forward(x, W)[<span class="hljs-number">0</span>]
+dW_num = eval_numerical_gradient_array(f, W, dout)
+
+print(<span class="hljs-string">&#x27;dW 误差: &#x27;</span>, rel_error(dW, dW_num))</code></pre>
+<pre><code>dW 误差:  3.2759708946363888e-12
+</code></pre>
+<h3 id="时序输出仿射层"><a class="markdownIt-Anchor" href="#时序输出仿射层"></a> 时序输出仿射层</h3>
+<p>RNN隐藏层到输出层传播和前馈网络类似，只是其数据为(N,T,D)的三维数据。</p>
+<p>我们已经将其前向传播，反向传播分别实现在了<code>temporal_affine_forward</code>和 <code>temporal_affine_backward</code>函数中。</p>
+<p>打开<code>rnn_layers.py</code>文件，阅读相关代码，并运行下列代码进行检验</p>
+<pre><code class="hljs python">N, T, D, M = <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>
+x = np.random.randn(N, T, D)
+w = np.random.randn(D, M)
+b = np.random.randn(M)
+
+out, cache = temporal_affine_forward(x, w, b)
+
+dout = np.random.randn(*out.shape)
+
+fx = <span class="hljs-keyword">lambda</span> x: temporal_affine_forward(x, w, b)[<span class="hljs-number">0</span>]
+fw = <span class="hljs-keyword">lambda</span> w: temporal_affine_forward(x, w, b)[<span class="hljs-number">0</span>]
+fb = <span class="hljs-keyword">lambda</span> b: temporal_affine_forward(x, w, b)[<span class="hljs-number">0</span>]
+
+dx_num = eval_numerical_gradient_array(fx, x, dout)
+dw_num = eval_numerical_gradient_array(fw, w, dout)
+db_num = eval_numerical_gradient_array(fb, b, dout)
+
+dx, dw, db = temporal_affine_backward(dout, cache)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dw 误差: &#x27;</span>, rel_error(dw_num, dw))
+print(<span class="hljs-string">&#x27;db 误差: &#x27;</span>, rel_error(db_num, db))</code></pre>
+<pre><code>dx 误差:  1.1680190237299396e-09
+dw 误差:  1.195903277097059e-11
+db 误差:  1.0561424698310812e-11
+</code></pre>
+<h3 id="时序softmax损失函数"><a class="markdownIt-Anchor" href="#时序softmax损失函数"></a> 时序Softmax损失函数</h3>
+<p>在使用RNN进行语言建模时，每一时间步我们都会预测下一个单词对应单词字典中的单词得分索引。每一时间片段我们使用softmax作为损失函数，而整个序列的损失值，我们是将每一时间片段的损失值加起来取平均值。但句子的长度是不相同的，为了使输入对齐，我们填充<code>&lt;NULL&gt;</code>补全短句子。但这些填充的 <code>&lt;NULL&gt;</code>标记不应该计算在损失值或梯度值内，我们需要使用 <code>mask</code>进行过滤。我们已经将其写进<code>rnn_layers.py</code>文件中的 <code>temporal_softmax_loss</code> 函数，阅读即可。</p>
+<pre><code class="hljs python">N, T, V = <span class="hljs-number">100</span>, <span class="hljs-number">1</span>, <span class="hljs-number">10</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">check_loss</span>(<span class="hljs-params">N, T, V, p</span>):</span>
+    x = <span class="hljs-number">0.001</span> * np.random.randn(N, T, V)
+    y = np.random.randint(V, size=(N, T))
+    mask = np.random.rand(N, T) &lt;= p
+    print(temporal_softmax_loss(x, y, mask)[<span class="hljs-number">0</span>])
+    
+check_loss(<span class="hljs-number">100</span>, <span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">1.0</span>)     <span class="hljs-comment"># 损失值大约为 2.3</span>
+check_loss(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">1.0</span>)    <span class="hljs-comment"># 损失值大约为 23</span>
+check_loss(<span class="hljs-number">5000</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0.1</span>) <span class="hljs-comment"># 损失值大约为 2.3</span>
+
+N, T, V = <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>
+
+x = np.random.randn(N, T, V)
+y = np.random.randint(V, size=(N, T))
+mask =(np.random.rand(N, T) &gt; <span class="hljs-number">0.5</span>)
+
+loss, dx = temporal_softmax_loss(x, y, mask, verbose=<span class="hljs-literal">False</span>)
+
+dx_num = eval_numerical_gradient(
+        <span class="hljs-keyword">lambda</span> x: temporal_softmax_loss(x, y, mask)[<span class="hljs-number">0</span>], x, verbose=<span class="hljs-literal">False</span>)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx, dx_num))</code></pre>
+<pre><code>2.302582382261073
+23.02576008490865
+2.34310410100737
+dx 误差:  5.811536038658937e-08
+</code></pre>
+<h2 id="rnn图像说明任务"><a class="markdownIt-Anchor" href="#rnn图像说明任务"></a> RNN图像说明任务</h2>
+<p>我们已经实现了我所需的各项零件，接下来我们就用RNN完成图片说明任务。打开<code>rnn.py</code>文件，阅读<code>CaptioningRNN</code>类。你需要实现RNN的<code>loss</code>函数，以及测试阶段使用的<code>sample</code>函数。目前你只需实现<code>cell_type = 'rnn'</code>即可，之后再实现LSTM部分内容。</p>
+<p>完成后运行下列代码，你的损失误差应该小于 <code>1e-10</code></p>
+<pre><code class="hljs python">N, D, W, H = <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>
+word_to_idx = &#123;<span class="hljs-string">&#x27;&lt;NULL&gt;&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;cat&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;dog&#x27;</span>: <span class="hljs-number">3</span>&#125;
+V = len(word_to_idx)
+T = <span class="hljs-number">13</span>
+
+model = CaptioningRNN(word_to_idx,
+                    input_dim=D,
+                    wordvec_dim=W,
+                    hidden_dim=H,
+                    cell_type=<span class="hljs-string">&#x27;rnn&#x27;</span>)
+
+<span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> model.params.items():
+    model.params[k] = np.linspace(<span class="hljs-number">-1.4</span>, <span class="hljs-number">1.3</span>, num=v.size).reshape(*v.shape)
+
+features = np.linspace(<span class="hljs-number">-1.5</span>, <span class="hljs-number">0.3</span>, num=(N * D)).reshape(N, D)
+captions =(np.arange(N * T) % V).reshape(N, T)
+
+loss, grads = model.loss(features, captions)
+expected_loss = <span class="hljs-number">9.83235591003</span>
+
+print(<span class="hljs-string">&#x27;损失: &#x27;</span>, loss)
+print(<span class="hljs-string">&#x27;期望损失: &#x27;</span>, expected_loss)
+print(<span class="hljs-string">&#x27;误差: &#x27;</span>, abs(loss - expected_loss))</code></pre>
+<pre><code>损失:  9.832355910027388
+期望损失:  9.83235591003
+误差:  2.611244553918368e-12
+</code></pre>
+<p><code>CaptioningRNN</code> 梯度检验，期望误差在 <code>1e-7</code></p>
+<pre><code class="hljs python">batch_size = <span class="hljs-number">2</span>
+timesteps = <span class="hljs-number">3</span>
+input_dim = <span class="hljs-number">4</span>
+wordvec_dim = <span class="hljs-number">5</span>
+hidden_dim = <span class="hljs-number">6</span>
+word_to_idx = &#123;<span class="hljs-string">&#x27;&lt;NULL&gt;&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;cat&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;dog&#x27;</span>: <span class="hljs-number">3</span>&#125;
+vocab_size = len(word_to_idx)
+
+captions = np.random.randint(vocab_size, size=(batch_size,
+                                                                                             timesteps))
+features = np.random.randn(batch_size, input_dim)
+
+model = CaptioningRNN(word_to_idx,
+                    input_dim=input_dim,
+                    wordvec_dim=wordvec_dim,
+                    hidden_dim=hidden_dim,
+                    cell_type=<span class="hljs-string">&#x27;rnn&#x27;</span>
+                )
+
+loss, grads = model.loss(features, captions)
+
+<span class="hljs-keyword">for</span> param_name <span class="hljs-keyword">in</span> sorted(grads):
+    f = <span class="hljs-keyword">lambda</span> _: model.loss(features, captions)[<span class="hljs-number">0</span>]
+    param_grad_num = eval_numerical_gradient(f, model.params[param_name], 
+                         verbose=<span class="hljs-literal">False</span>, h=<span class="hljs-number">1e-6</span>)
+    e = rel_error(param_grad_num, grads[param_name])
+    print(<span class="hljs-string">&#x27;%s 相对误差: %e&#x27;</span> %(param_name, e))</code></pre>
+<pre><code>W_embed 相对误差: 4.599221e-09
+W_proj 相对误差: 5.548484e-09
+W_vocab 相对误差: 3.479308e-08
+Wh 相对误差: 1.954925e-08
+Wx 相对误差: 8.715990e-06
+b 相对误差: 2.182615e-09
+b_proj 相对误差: 4.525645e-09
+b_vocab 相对误差: 1.879290e-09
+</code></pre>
+<h3 id="过拟合小量数据"><a class="markdownIt-Anchor" href="#过拟合小量数据"></a> 过拟合小量数据</h3>
+<pre><code class="hljs python">small_data = load_coco_data(max_train=<span class="hljs-number">50</span>)
+
+small_rnn_model = CaptioningRNN(
+                    cell_type=<span class="hljs-string">&#x27;rnn&#x27;</span>,
+                    word_to_idx=data[<span class="hljs-string">&#x27;word_to_idx&#x27;</span>],
+                    input_dim=data[<span class="hljs-string">&#x27;train_features&#x27;</span>].shape[<span class="hljs-number">1</span>],
+                    hidden_dim=<span class="hljs-number">512</span>,
+                    wordvec_dim=<span class="hljs-number">256</span>,
+                )
+
+small_rnn_solver = CaptioningTrainer(small_rnn_model, small_data,
+                     update_rule=<span class="hljs-string">&#x27;adam&#x27;</span>,
+                     num_epochs=<span class="hljs-number">50</span>,
+                     batch_size=<span class="hljs-number">25</span>,
+                     updater_config=&#123;
+                         <span class="hljs-string">&#x27;learning_rate&#x27;</span>: <span class="hljs-number">5e-3</span>,
+                     &#125;,
+                     lr_decay=<span class="hljs-number">0.95</span>,
+                     verbose=<span class="hljs-literal">True</span>, print_every=<span class="hljs-number">10</span>,
+                 )
+
+small_rnn_solver.train()
+
+<span class="hljs-comment"># Plot the training losses</span>
+plt.plot(small_rnn_solver.loss_history)
+plt.xlabel(<span class="hljs-string">&#x27;Iteration&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Loss&#x27;</span>)
+plt.title(<span class="hljs-string">&#x27;Training loss history&#x27;</span>)
+plt.show()</code></pre>
+<pre><code>(Iteration 1 / 100) loss: 87.278615
+(Iteration 11 / 100) loss: 24.241030
+(Iteration 21 / 100) loss: 6.001595
+(Iteration 31 / 100) loss: 1.049757
+(Iteration 41 / 100) loss: 0.638685
+(Iteration 51 / 100) loss: 0.245997
+(Iteration 61 / 100) loss: 0.199264
+(Iteration 71 / 100) loss: 0.145133
+(Iteration 81 / 100) loss: 0.130924
+(Iteration 91 / 100) loss: 0.118513
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957175.png" srcset="/img/loading.gif" alt="png"></p>
+<h2 id="lstm"><a class="markdownIt-Anchor" href="#lstm"></a> LSTM</h2>
+<h3 id="lstm单步前向传播"><a class="markdownIt-Anchor" href="#lstm单步前向传播"></a> LSTM单步前向传播</h3>
+<p>打开 <code>rnn_layers.py</code>文件，完成lstm_step_forward代码，实现LSTM的单步前向传播。</p>
+<p>运行下列代码，你的实现误差应该在<code>1e-8</code>以内。</p>
+<pre><code class="hljs python">N, D, H = <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>
+x = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">1.2</span>, num=N*D).reshape(N, D)
+prev_h = np.linspace(<span class="hljs-number">-0.3</span>, <span class="hljs-number">0.7</span>, num=N*H).reshape(N, H)
+prev_c = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">0.9</span>, num=N*H).reshape(N, H)
+Wx = np.linspace(<span class="hljs-number">-2.1</span>, <span class="hljs-number">1.3</span>, num=<span class="hljs-number">4</span>*D*H).reshape(D, <span class="hljs-number">4</span> * H)
+Wh = np.linspace(<span class="hljs-number">-0.7</span>, <span class="hljs-number">2.2</span>, num=<span class="hljs-number">4</span>*H*H).reshape(H, <span class="hljs-number">4</span> * H)
+b = np.linspace(<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>, num=<span class="hljs-number">4</span>*H)
+
+next_h, next_c, cache = lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)
+
+expected_next_h = np.asarray([
+        [ <span class="hljs-number">0.24635157</span>,    <span class="hljs-number">0.28610883</span>,    <span class="hljs-number">0.32240467</span>,    <span class="hljs-number">0.35525807</span>,    <span class="hljs-number">0.38474904</span>],
+        [ <span class="hljs-number">0.49223563</span>,    <span class="hljs-number">0.55611431</span>,    <span class="hljs-number">0.61507696</span>,    <span class="hljs-number">0.66844003</span>,    <span class="hljs-number">0.7159181</span> ],
+        [ <span class="hljs-number">0.56735664</span>,    <span class="hljs-number">0.66310127</span>,    <span class="hljs-number">0.74419266</span>,    <span class="hljs-number">0.80889665</span>,    <span class="hljs-number">0.858299</span>    ]])
+expected_next_c = np.asarray([
+        [ <span class="hljs-number">0.32986176</span>,    <span class="hljs-number">0.39145139</span>,    <span class="hljs-number">0.451556</span>,        <span class="hljs-number">0.51014116</span>,    <span class="hljs-number">0.56717407</span>],
+        [ <span class="hljs-number">0.66382255</span>,    <span class="hljs-number">0.76674007</span>,    <span class="hljs-number">0.87195994</span>,    <span class="hljs-number">0.97902709</span>,    <span class="hljs-number">1.08751345</span>],
+        [ <span class="hljs-number">0.74192008</span>,    <span class="hljs-number">0.90592151</span>,    <span class="hljs-number">1.07717006</span>,    <span class="hljs-number">1.25120233</span>,    <span class="hljs-number">1.42395676</span>]])
+
+print(<span class="hljs-string">&#x27;next_h 误差: &#x27;</span>, rel_error(expected_next_h, next_h))
+print(<span class="hljs-string">&#x27;next_c 误差: &#x27;</span>, rel_error(expected_next_c, next_c))</code></pre>
+<pre><code>next_h 误差:  5.7054131185818695e-09
+next_c 误差:  5.8143123088804145e-09
+</code></pre>
+<h3 id="lstm单步反向传播"><a class="markdownIt-Anchor" href="#lstm单步反向传播"></a> LSTM:单步反向传播</h3>
+<p>打开 rnn_layers.py文件，完成lstm_step_backward函数代码，实现LSTM的单步反向传播。</p>
+<p>运行下列代码，你的期望误差应该在1e-8以内</p>
+<pre><code class="hljs python">N, D, H = <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>
+x = np.random.randn(N, D)
+prev_h = np.random.randn(N, H)
+prev_c = np.random.randn(N, H)
+Wx = np.random.randn(D, <span class="hljs-number">4</span> * H)
+Wh = np.random.randn(H, <span class="hljs-number">4</span> * H)
+b = np.random.randn(<span class="hljs-number">4</span> * H)
+
+next_h, next_c, cache = lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)
+
+dnext_h = np.random.randn(*next_h.shape)
+dnext_c = np.random.randn(*next_c.shape)
+
+fx_h = <span class="hljs-keyword">lambda</span> x: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fh_h = <span class="hljs-keyword">lambda</span> h: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fc_h = <span class="hljs-keyword">lambda</span> c: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWx_h = <span class="hljs-keyword">lambda</span> Wx: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWh_h = <span class="hljs-keyword">lambda</span> Wh: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fb_h = <span class="hljs-keyword">lambda</span> b: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">0</span>]
+
+fx_c = <span class="hljs-keyword">lambda</span> x: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+fh_c = <span class="hljs-keyword">lambda</span> h: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+fc_c = <span class="hljs-keyword">lambda</span> c: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+fWx_c = <span class="hljs-keyword">lambda</span> Wx: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+fWh_c = <span class="hljs-keyword">lambda</span> Wh: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+fb_c = <span class="hljs-keyword">lambda</span> b: lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b)[<span class="hljs-number">1</span>]
+
+num_grad = eval_numerical_gradient_array
+
+dx_num = num_grad(fx_h, x, dnext_h) + num_grad(fx_c, x, dnext_c)
+dh_num = num_grad(fh_h, prev_h, dnext_h) + num_grad(fh_c, prev_h, dnext_c)
+dc_num = num_grad(fc_h, prev_c, dnext_h) + num_grad(fc_c, prev_c, dnext_c)
+dWx_num = num_grad(fWx_h, Wx, dnext_h) + num_grad(fWx_c, Wx, dnext_c)
+dWh_num = num_grad(fWh_h, Wh, dnext_h) + num_grad(fWh_c, Wh, dnext_c)
+db_num = num_grad(fb_h, b, dnext_h) + num_grad(fb_c, b, dnext_c)
+
+dx, dh, dc, dWx, dWh, db = lstm_step_backward(dnext_h, dnext_c, cache)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dh 误差: &#x27;</span>, rel_error(dh_num, dh))
+print(<span class="hljs-string">&#x27;dc 误差: &#x27;</span>, rel_error(dc_num, dc))
+print(<span class="hljs-string">&#x27;dWx 误差: &#x27;</span>, rel_error(dWx_num, dWx))
+print(<span class="hljs-string">&#x27;dWh 误差: &#x27;</span>, rel_error(dWh_num, dWh))
+print(<span class="hljs-string">&#x27;db 误差: &#x27;</span>, rel_error(db_num, db))</code></pre>
+<pre><code>dx 误差:  2.36114504649104e-10
+dh 误差:  5.784107694134561e-10
+dc 误差:  6.99069012739093e-10
+dWx 误差:  6.291017711941009e-08
+dWh 误差:  4.4809579254128135e-09
+db 误差:  2.551473660645273e-10
+</code></pre>
+<h3 id="lstm前向传播"><a class="markdownIt-Anchor" href="#lstm前向传播"></a> LSTM前向传播</h3>
+<p>现在将单步传播组合起来，完成完整的时序传播。打开<code>rnn_layers.py</code> 文件，完成<code>lstm_forward</code>函数代码，实现LSTM的前向传播。</p>
+<p>运行下列代码，你的实现误差应该在1e-7以内</p>
+<pre><code class="hljs python">N, D, H, T = <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>
+x = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">0.6</span>, num=N*T*D).reshape(N, T, D)
+h0 = np.linspace(<span class="hljs-number">-0.4</span>, <span class="hljs-number">0.8</span>, num=N*H).reshape(N, H)
+Wx = np.linspace(<span class="hljs-number">-0.2</span>, <span class="hljs-number">0.9</span>, num=<span class="hljs-number">4</span>*D*H).reshape(D, <span class="hljs-number">4</span> * H)
+Wh = np.linspace(<span class="hljs-number">-0.3</span>, <span class="hljs-number">0.6</span>, num=<span class="hljs-number">4</span>*H*H).reshape(H, <span class="hljs-number">4</span> * H)
+b = np.linspace(<span class="hljs-number">0.2</span>, <span class="hljs-number">0.7</span>, num=<span class="hljs-number">4</span>*H)
+
+h, cache = lstm_forward(x, h0, Wx, Wh, b)
+
+expected_h = np.asarray([
+ [[ <span class="hljs-number">0.01764008</span>,    <span class="hljs-number">0.01823233</span>,    <span class="hljs-number">0.01882671</span>,    <span class="hljs-number">0.0194232</span> ],
+    [ <span class="hljs-number">0.11287491</span>,    <span class="hljs-number">0.12146228</span>,    <span class="hljs-number">0.13018446</span>,    <span class="hljs-number">0.13902939</span>],
+    [ <span class="hljs-number">0.31358768</span>,    <span class="hljs-number">0.33338627</span>,    <span class="hljs-number">0.35304453</span>,    <span class="hljs-number">0.37250975</span>]],
+ [[ <span class="hljs-number">0.45767879</span>,    <span class="hljs-number">0.4761092</span>,     <span class="hljs-number">0.4936887</span>,     <span class="hljs-number">0.51041945</span>],
+    [ <span class="hljs-number">0.6704845</span>,     <span class="hljs-number">0.69350089</span>,    <span class="hljs-number">0.71486014</span>,    <span class="hljs-number">0.7346449</span> ],
+    [ <span class="hljs-number">0.81733511</span>,    <span class="hljs-number">0.83677871</span>,    <span class="hljs-number">0.85403753</span>,    <span class="hljs-number">0.86935314</span>]]])
+
+print(<span class="hljs-string">&#x27;h 误差: &#x27;</span>, rel_error(expected_h, h))</code></pre>
+<pre><code>h 误差:  8.610537452106624e-08
+</code></pre>
+<h3 id="lstm反向传播"><a class="markdownIt-Anchor" href="#lstm反向传播"></a> LSTM反向传播</h3>
+<p>现在将单步反向传播组合起来，完成完整的时序反向传播。打开<code>rnn_layers.py</code> 文件，完成<code>lstm_backward</code> 函数代码，实现LSTM的反向传播。</p>
+<p>运行下列代码。你的误差大约在<code>1e-8</code></p>
+<pre><code class="hljs python">N, D, T, H = <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">10</span>, <span class="hljs-number">6</span>
+
+x = np.random.randn(N, T, D)
+h0 = np.random.randn(N, H)
+Wx = np.random.randn(D, <span class="hljs-number">4</span> * H)
+Wh = np.random.randn(H, <span class="hljs-number">4</span> * H)
+b = np.random.randn(<span class="hljs-number">4</span> * H)
+
+out, cache = lstm_forward(x, h0, Wx, Wh, b)
+
+dout = np.random.randn(*out.shape)
+
+dx, dh0, dWx, dWh, db = lstm_backward(dout, cache)
+
+fx = <span class="hljs-keyword">lambda</span> x: lstm_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fh0 = <span class="hljs-keyword">lambda</span> h0: lstm_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWx = <span class="hljs-keyword">lambda</span> Wx: lstm_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fWh = <span class="hljs-keyword">lambda</span> Wh: lstm_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+fb = <span class="hljs-keyword">lambda</span> b: lstm_forward(x, h0, Wx, Wh, b)[<span class="hljs-number">0</span>]
+
+dx_num = eval_numerical_gradient_array(fx, x, dout)
+dh0_num = eval_numerical_gradient_array(fh0, h0, dout)
+dWx_num = eval_numerical_gradient_array(fWx, Wx, dout)
+dWh_num = eval_numerical_gradient_array(fWh, Wh, dout)
+db_num = eval_numerical_gradient_array(fb, b, dout)
+
+print(<span class="hljs-string">&#x27;dx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dh0 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dWx 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;dWh 误差: &#x27;</span>, rel_error(dx_num, dx))
+print(<span class="hljs-string">&#x27;db 误差: &#x27;</span>, rel_error(dx_num, dx))</code></pre>
+<pre><code>dx 误差:  7.278901660157261e-10
+dh0 误差:  7.278901660157261e-10
+dWx 误差:  7.278901660157261e-10
+dWh 误差:  7.278901660157261e-10
+db 误差:  7.278901660157261e-10
+</code></pre>
+<h3 id="lstm图片说明任务"><a class="markdownIt-Anchor" href="#lstm图片说明任务"></a> LSTM图片说明任务</h3>
+<p>打开<code>rnn.py</code>文件，完成LSTM模式下的损失计算。</p>
+<pre><code class="hljs python">N, D, W, H = <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>
+word_to_idx = &#123;<span class="hljs-string">&#x27;&lt;NULL&gt;&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;cat&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;dog&#x27;</span>: <span class="hljs-number">3</span>&#125;
+V = len(word_to_idx)
+T = <span class="hljs-number">13</span>
+
+model = CaptioningRNN(word_to_idx,
+                    input_dim=D,
+                    wordvec_dim=W,
+                    hidden_dim=H,
+                    cell_type=<span class="hljs-string">&#x27;lstm&#x27;</span>)
+
+<span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> model.params.items():
+    model.params[k] = np.linspace(<span class="hljs-number">-1.4</span>, <span class="hljs-number">1.3</span>, num=v.size).reshape(*v.shape)
+
+features = np.linspace(<span class="hljs-number">-0.5</span>, <span class="hljs-number">1.7</span>, num=N*D).reshape(N, D)
+captions =(np.arange(N * T) % V).reshape(N, T)
+
+loss, grads = model.loss(features, captions)
+expected_loss = <span class="hljs-number">9.82445935443</span>
+
+print(<span class="hljs-string">&#x27;损失值: &#x27;</span>, loss)
+print(<span class="hljs-string">&#x27;期望损失值: &#x27;</span>, expected_loss)
+print(<span class="hljs-string">&#x27;误差: &#x27;</span>, abs(loss - expected_loss))</code></pre>
+<pre><code>损失值:  9.82445935443226
+期望损失值:  9.82445935443
+误差:  2.261302256556519e-12
+</code></pre>
+<h3 id="lstm-过拟合测试"><a class="markdownIt-Anchor" href="#lstm-过拟合测试"></a> LSTM 过拟合测试</h3>
+<p>和RNN类似，我们测试LSTM能否在小数据集上过拟合</p>
+<pre><code class="hljs python">small_data = load_coco_data(max_train=<span class="hljs-number">50</span>)
+
+small_lstm_model = CaptioningRNN(
+                    cell_type=<span class="hljs-string">&#x27;lstm&#x27;</span>,
+                    word_to_idx=data[<span class="hljs-string">&#x27;word_to_idx&#x27;</span>],
+                    input_dim=data[<span class="hljs-string">&#x27;train_features&#x27;</span>].shape[<span class="hljs-number">1</span>],
+                    hidden_dim=<span class="hljs-number">512</span>,
+                    wordvec_dim=<span class="hljs-number">256</span>)
+
+small_lstm_solver = CaptioningTrainer(small_lstm_model, small_data,
+                     update_rule=<span class="hljs-string">&#x27;adam&#x27;</span>,
+                     num_epochs=<span class="hljs-number">50</span>,
+                     batch_size=<span class="hljs-number">25</span>,
+                     updater_config=&#123;
+                         <span class="hljs-string">&#x27;learning_rate&#x27;</span>: <span class="hljs-number">5e-3</span>,
+                     &#125;,
+                     lr_decay=<span class="hljs-number">0.995</span>,
+                     verbose=<span class="hljs-literal">True</span>, print_every=<span class="hljs-number">10</span>,
+                 )
+
+small_lstm_solver.train()
+
+plt.plot(small_lstm_solver.loss_history)
+plt.xlabel(<span class="hljs-string">&#x27;Iteration&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Loss&#x27;</span>)
+plt.title(<span class="hljs-string">&#x27;Training loss history&#x27;</span>)
+plt.show()</code></pre>
+<pre><code>(Iteration 1 / 100) loss: 77.184947
+(Iteration 11 / 100) loss: 39.224173
+(Iteration 21 / 100) loss: 26.396812
+(Iteration 31 / 100) loss: 14.473610
+(Iteration 41 / 100) loss: 4.766169
+(Iteration 51 / 100) loss: 1.583464
+(Iteration 61 / 100) loss: 1.577735
+(Iteration 71 / 100) loss: 0.271194
+(Iteration 81 / 100) loss: 0.206668
+(Iteration 91 / 100) loss: 0.110635
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957176.png" srcset="/img/loading.gif" alt="png"></p>
+<h3 id="lstm-test-time-sampling"><a class="markdownIt-Anchor" href="#lstm-test-time-sampling"></a> LSTM test-time sampling</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">for</span> split <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;train&#x27;</span>, <span class="hljs-string">&#x27;val&#x27;</span>]:
+    minibatch = sample_coco_minibatch(small_data, split=split, batch_size=<span class="hljs-number">2</span>)
+    gt_captions, features, urls = minibatch
+    gt_captions = decode_captions(gt_captions, data[<span class="hljs-string">&#x27;idx_to_word&#x27;</span>])
+
+    sample_captions = small_lstm_model.sample(features)
+    sample_captions = decode_captions(sample_captions, data[<span class="hljs-string">&#x27;idx_to_word&#x27;</span>])
+
+    <span class="hljs-keyword">for</span> gt_caption, sample_caption, url <span class="hljs-keyword">in</span> zip(gt_captions, sample_captions, urls):
+        <span class="hljs-comment"># plt.imshow(image_from_url(url))</span>
+        print(url)
+        plt.title(<span class="hljs-string">&#x27;%s\n%s\nGT:%s&#x27;</span> %(split, sample_caption, gt_caption))
+        plt.axis(<span class="hljs-string">&#x27;off&#x27;</span>)
+        plt.show()</code></pre>
+<pre><code>http://farm7.staticflickr.com/6178/6167892245_3ef7bfd6c2_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957177.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm5.staticflickr.com/4121/4769212854_0bcba64aa7_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957178.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm2.staticflickr.com/1112/596804848_afb6e350a8_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957179.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm1.staticflickr.com/164/439147986_2486920a79_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271952187.png" srcset="/img/loading.gif" alt="png"></p>
+<h3 id="训练一个好的图片说明任务"><a class="markdownIt-Anchor" href="#训练一个好的图片说明任务"></a> 训练一个好的图片说明任务</h3>
+<pre><code class="hljs python"><span class="hljs-comment">#pass</span>
+small_data2 = load_coco_data(max_train=<span class="hljs-number">5000</span>)
+good_lstm_model = CaptioningRNN(
+                    cell_type=<span class="hljs-string">&#x27;lstm&#x27;</span>,
+                    word_to_idx=data[<span class="hljs-string">&#x27;word_to_idx&#x27;</span>],
+                    input_dim=data[<span class="hljs-string">&#x27;train_features&#x27;</span>].shape[<span class="hljs-number">1</span>],
+                    hidden_dim=<span class="hljs-number">200</span>,
+                    wordvec_dim=<span class="hljs-number">256</span> )
+
+good_lstm_solver = CaptioningTrainer(good_lstm_model, small_data2,
+                     update_rule=<span class="hljs-string">&#x27;adam&#x27;</span>,
+                     num_epochs=<span class="hljs-number">50</span>,
+                     batch_size=<span class="hljs-number">100</span>,
+                     updater_config=&#123;
+                         <span class="hljs-string">&#x27;learning_rate&#x27;</span>: <span class="hljs-number">5e-3</span>,
+                     &#125;,
+                     lr_decay=<span class="hljs-number">0.995</span>,
+                     verbose=<span class="hljs-literal">True</span>, print_every=<span class="hljs-number">50</span>,
+                 )
+
+good_lstm_solver.train()
+
+plt.plot(good_lstm_solver.loss_history)
+plt.xlabel(<span class="hljs-string">&#x27;Iteration&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;Loss&#x27;</span>)
+plt.title(<span class="hljs-string">&#x27;Training loss history&#x27;</span>)
+plt.show()</code></pre>
+<pre><code>(Iteration 1 / 2500) loss: 77.557809
+(Iteration 51 / 2500) loss: 41.835524
+(Iteration 101 / 2500) loss: 35.659107
+(Iteration 151 / 2500) loss: 33.714988
+(Iteration 201 / 2500) loss: 30.808365
+(Iteration 251 / 2500) loss: 28.904012
+(Iteration 301 / 2500) loss: 26.059836
+(Iteration 351 / 2500) loss: 26.031326
+(Iteration 401 / 2500) loss: 22.815424
+(Iteration 451 / 2500) loss: 22.772759
+(Iteration 501 / 2500) loss: 20.736977
+(Iteration 551 / 2500) loss: 21.022939
+(Iteration 601 / 2500) loss: 19.118450
+(Iteration 651 / 2500) loss: 18.663928
+(Iteration 701 / 2500) loss: 16.895750
+(Iteration 751 / 2500) loss: 16.610176
+(Iteration 801 / 2500) loss: 16.800854
+(Iteration 851 / 2500) loss: 15.282215
+(Iteration 901 / 2500) loss: 13.853283
+(Iteration 951 / 2500) loss: 12.862395
+(Iteration 1001 / 2500) loss: 12.577979
+(Iteration 1051 / 2500) loss: 11.035210
+(Iteration 1101 / 2500) loss: 11.835750
+(Iteration 1151 / 2500) loss: 11.085219
+(Iteration 1201 / 2500) loss: 10.444645
+(Iteration 1251 / 2500) loss: 9.716379
+(Iteration 1301 / 2500) loss: 10.622007
+(Iteration 1351 / 2500) loss: 9.389702
+(Iteration 1401 / 2500) loss: 8.864774
+(Iteration 1451 / 2500) loss: 8.837836
+(Iteration 1501 / 2500) loss: 8.383492
+(Iteration 1551 / 2500) loss: 7.997636
+(Iteration 1601 / 2500) loss: 8.565062
+(Iteration 1651 / 2500) loss: 8.156050
+(Iteration 1701 / 2500) loss: 7.169216
+(Iteration 1751 / 2500) loss: 6.436919
+(Iteration 1801 / 2500) loss: 7.325675
+(Iteration 1851 / 2500) loss: 6.806780
+(Iteration 1901 / 2500) loss: 6.385995
+(Iteration 1951 / 2500) loss: 6.291843
+(Iteration 2001 / 2500) loss: 4.958617
+(Iteration 2051 / 2500) loss: 5.567452
+(Iteration 2101 / 2500) loss: 5.913960
+(Iteration 2151 / 2500) loss: 5.399012
+(Iteration 2201 / 2500) loss: 4.924958
+(Iteration 2251 / 2500) loss: 4.796707
+(Iteration 2301 / 2500) loss: 5.224964
+(Iteration 2351 / 2500) loss: 4.845715
+(Iteration 2401 / 2500) loss: 4.922645
+(Iteration 2451 / 2500) loss: 4.887911
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957180.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code class="hljs python"><span class="hljs-comment">#pass</span>
+<span class="hljs-keyword">for</span> split <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;train&#x27;</span>, <span class="hljs-string">&#x27;val&#x27;</span>]:
+    minibatch = sample_coco_minibatch(small_data2, split=split, batch_size=<span class="hljs-number">2</span>)
+    gt_captions, features, urls = minibatch
+    gt_captions = decode_captions(gt_captions, data[<span class="hljs-string">&#x27;idx_to_word&#x27;</span>])
+
+    sample_captions = good_lstm_model.sample(features)
+    sample_captions = decode_captions(sample_captions, data[<span class="hljs-string">&#x27;idx_to_word&#x27;</span>])
+
+    <span class="hljs-keyword">for</span> gt_caption, sample_caption, url <span class="hljs-keyword">in</span> zip(gt_captions, sample_captions, urls):
+        <span class="hljs-comment">#plt.imshow(image_from_url(url))</span>
+        print(url)
+        plt.title(<span class="hljs-string">&#x27;%s\n%s\nGT:%s&#x27;</span> %(split, sample_caption, gt_caption))
+        plt.axis(<span class="hljs-string">&#x27;off&#x27;</span>)
+        plt.show()</code></pre>
+<pre><code>http://farm9.staticflickr.com/8102/8510027814_acffff06cd_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957181.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm8.staticflickr.com/7035/6510880243_4086cbb06e_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271957182.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm6.staticflickr.com/5328/9362192917_5324bd3d74_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271951942.png" srcset="/img/loading.gif" alt="png"></p>
+<pre><code>http://farm4.staticflickr.com/3316/5816070088_dfdce60093_z.jpg
+</code></pre>
+<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111271951359.png" srcset="/img/loading.gif" alt="png"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DeepLearning/">DeepLearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/22/Article202111225/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">编码实现RNN以及LSTM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/22/Article202111223/">
+                        <span class="hidden-mobile">录制动态帧视频在PR中音画不同步问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "《深度学习实战》第7章 循环神经网络&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

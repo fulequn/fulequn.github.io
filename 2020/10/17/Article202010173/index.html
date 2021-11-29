@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -217,7 +221,8 @@
               <blockquote>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq236237606/article/details/105347236/">https://blog.csdn.net/qq236237606/article/details/105347236/</a></p>
 </blockquote>
-<h2 id="python3报错AttributeError-module-‘sys’-has-no-attribute-‘setdefaultencoding’"><a href="#python3报错AttributeError-module-‘sys’-has-no-attribute-‘setdefaultencoding’" class="headerlink" title="python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultencoding’"></a>python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultencoding’</h2><p>Python 3 系统默认使用的就是utf-8编码，</p>
+<h2 id="python3报错attributeerror-module-sys-has-no-attribute-setdefaultencoding"><a class="markdownIt-Anchor" href="#python3报错attributeerror-module-sys-has-no-attribute-setdefaultencoding"></a> python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultencoding’</h2>
+<p>Python 3 系统默认使用的就是utf-8编码，</p>
 <p>就不需要sys.setdefaultencoding(“utf-8”)这段代码，</p>
 <p>而且Python 3 的 sys 库里面已经没有 setdefaultencoding() 函数了</p>
 

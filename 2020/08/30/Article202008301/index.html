@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      793 字
+      796 字
     </span>
   
 
@@ -217,20 +221,25 @@
               <p>1.项目文件名与eclipse已存在项目名字相同导致无法打开。</p>
 <p>2.项目在打开之前更改名称，导致无法打开。</p>
 <p>PS：若项目想重命名，应该在导入后再eclipse中重命名。但是不建议重命名，可能会导致出现错误。</p>
-<h1 id="打开项目方法"><a href="#打开项目方法" class="headerlink" title="打开项目方法"></a>打开项目方法</h1><p>很多时候我们在网络上找到一些源代码，要把其导入Eclipse中不是一件太容易的事。以下是本人的一些经验：</p>
-<h3 id="关于导入Eclipse原生项目"><a href="#关于导入Eclipse原生项目" class="headerlink" title="关于导入Eclipse原生项目"></a>关于导入Eclipse原生项目</h3><p>如果在项目源码看到里面有.calsspath .project文件，那么说明这个项目本来就是eclipse开发的，那么在eclipse中-&gt;File-&gt;Import-&gt;General-&gt;Existing Projects into Workspace，然后选择你想要导入的项目路径就OK了。</p>
-<h3 id="关于导入ant项目"><a href="#关于导入ant项目" class="headerlink" title="关于导入ant项目"></a>关于导入ant项目</h3><p>如果看到里面有build.xml, 那么说明这个项目是ant构建的，参考下面的“关于导入ant项目”。</p>
+<h1 id="打开项目方法"><a class="markdownIt-Anchor" href="#打开项目方法"></a> 打开项目方法</h1>
+<p>很多时候我们在网络上找到一些源代码，要把其导入Eclipse中不是一件太容易的事。以下是本人的一些经验：</p>
+<h3 id="关于导入eclipse原生项目"><a class="markdownIt-Anchor" href="#关于导入eclipse原生项目"></a> 关于导入Eclipse原生项目</h3>
+<p>如果在项目源码看到里面有.calsspath .project文件，那么说明这个项目本来就是eclipse开发的，那么在eclipse中-&gt;File-&gt;Import-&gt;General-&gt;Existing Projects into Workspace，然后选择你想要导入的项目路径就OK了。</p>
+<h3 id="关于导入ant项目"><a class="markdownIt-Anchor" href="#关于导入ant项目"></a> 关于导入ant项目</h3>
+<p>如果看到里面有build.xml, 那么说明这个项目是ant构建的，参考下面的“关于导入ant项目”。</p>
 <p>这个还是比较简单的，打开eclipse, File-&gt;New-&gt;Project （对，你没有看错，是新建不是导入），再选择“Java Project from Existing Ant Buildfile ”， 然后下一步，取一个项目名称，并指定上面所说的build.xml所在的位置就可以了。</p>
-<h3 id="关于导入Maven项目"><a href="#关于导入Maven项目" class="headerlink" title="关于导入Maven项目"></a>关于导入Maven项目</h3><p>如果看到里面有pom.xml文件，那么说明这个项目是由Maven构建的。</p>
+<h3 id="关于导入maven项目"><a class="markdownIt-Anchor" href="#关于导入maven项目"></a> 关于导入Maven项目</h3>
+<p>如果看到里面有pom.xml文件，那么说明这个项目是由Maven构建的。</p>
 <p>Maven是一种构建工具，可以想象成像make, clearmake, ant一样。</p>
 <p>首先你要安装Java，然后：</p>
-<p>1，到这里<a target="_blank" rel="noopener" href="http://maven.apache.org/%E4%B8%8B%E8%BD%BD%E5%8E%8B%E7%BC%A9%E5%8C%85%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%8E%8B%E5%88%B0%E6%9F%90%E4%B8%AA%E7%9B%AE%E5%BD%95%E3%80%82">http://maven.apache.org/下载压缩包，并解压到某个目录。</a></p>
+<p>1，到这里http://maven.apache.org/下载压缩包，并解压到某个目录。</p>
 <p>2，打开环境变量设置将Maven的安装位置添加到path中，比如我的path为：D:/Program Files (x86)/jdk1.8.0/bin/;D:/Program Files (x86)/apache-maven/bin</p>
 <p>然后打开一个新的cmd, 输入mvn -v 能看到版本信息就OK了。</p>
 <p>3，Maven安装好以后，到源代码目录，打开cmd，输入mvn eclipse:eclipse，回车，这个时候，maven会将该目录下的mvn项目转换为eclipse项目（转换完成后，你会发现项目目录下多了.calsspath .project文件），这个时候你就可以回到上面所说的第一种情况，直接导入了。另外，maven还有一个eclipse插件，可以在eclipse的帮助菜单下点击Eclipse Marketplace, 在市场中搜索安装。</p>
 <p>然后导入mvn项目时就可以用图形界面导入了。</p>
 <p><strong>至于其他的，就新建项目，将src中的源码导入再看需要导入lib吧</strong></p>
-<h3 id="这里顺便说一下直接在package中导入-java的方法"><a href="#这里顺便说一下直接在package中导入-java的方法" class="headerlink" title="这里顺便说一下直接在package中导入.java的方法"></a>这里顺便说一下直接在package中导入.java的方法</h3><p>在工程下面的package点击右键，选择Import，然后选择File System，在点击下一步,在Browse选择你存放.java文件的路径。（这里不能先把那些.java文件提前复制到想要导入的包的文件夹里面，否则，你会发现那个完成按钮是灰色的，点不了）。最后把下面的设置的所有打勾的都去掉，点击完成就OK了。</p>
+<h3 id="这里顺便说一下直接在package中导入java的方法"><a class="markdownIt-Anchor" href="#这里顺便说一下直接在package中导入java的方法"></a> 这里顺便说一下直接在package中导入.java的方法</h3>
+<p>在工程下面的package点击右键，选择Import，然后选择File System，在点击下一步,在Browse选择你存放.java文件的路径。（这里不能先把那些.java文件提前复制到想要导入的包的文件夹里面，否则，你会发现那个完成按钮是灰色的，点不了）。最后把下面的设置的所有打勾的都去掉，点击完成就OK了。</p>
 <p>这里有一点需要注意一下：你选择的那个文件夹最好不要有另外的文件夹，否则，Eclipse会把你那些文件夹也给copy到你package文件夹里。</p>
 
             </div>

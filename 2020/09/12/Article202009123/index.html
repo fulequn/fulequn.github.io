@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -220,7 +224,9 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/toshibahuai/article/details/79034829">https://blog.csdn.net/toshibahuai/article/details/79034829</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuzuwei/article/details/80890007">https://blog.csdn.net/zhuzuwei/article/details/80890007</a></p>
 </blockquote>
-<h1 id="read-csv和to-csv两大方法的参数详解"><a href="#read-csv和to-csv两大方法的参数详解" class="headerlink" title="read_csv和to_csv两大方法的参数详解"></a>read_csv和to_csv两大方法的参数详解</h1><h2 id="1-read-csv"><a href="#1-read-csv" class="headerlink" title="1. read_csv"></a>1. read_csv</h2><p>read_csv方法定义：</p>
+<h1 id="read_csv和to_csv两大方法的参数详解"><a class="markdownIt-Anchor" href="#read_csv和to_csv两大方法的参数详解"></a> read_csv和to_csv两大方法的参数详解</h1>
+<h2 id="1-read_csv"><a class="markdownIt-Anchor" href="#1-read_csv"></a> 1. read_csv</h2>
+<p>read_csv方法定义：</p>
 <pre><code class="hljs python">pandas.read_csv(filepath_or_buffer, sep=<span class="hljs-string">&#x27;, &#x27;</span>, delimiter=<span class="hljs-literal">None</span>, header=<span class="hljs-string">&#x27;infer&#x27;</span>, names=<span class="hljs-literal">None</span>, 
 index_col=<span class="hljs-literal">None</span>, usecols=<span class="hljs-literal">None</span>, squeeze=<span class="hljs-literal">False</span>, prefix=<span class="hljs-literal">None</span>, mangle_dupe_cols=<span class="hljs-literal">True</span>, dtype=<span class="hljs-literal">None</span>, 
 engine=<span class="hljs-literal">None</span>, converters=<span class="hljs-literal">None</span>, true_values=<span class="hljs-literal">None</span>, false_values=<span class="hljs-literal">None</span>, skipinitialspace=<span class="hljs-literal">False</span>, 
@@ -233,12 +239,11 @@ warn_bad_lines=<span class="hljs-literal">True</span>, skipfooter=<span class="h
 as_recarray=<span class="hljs-literal">None</span>, compact_ints=<span class="hljs-literal">None</span>, use_unsigned=<span class="hljs-literal">None</span>, low_memory=<span class="hljs-literal">True</span>, buffer_lines=<span class="hljs-literal">None</span>, 
 memory_map=<span class="hljs-literal">False</span>, float_precision=<span class="hljs-literal">None</span>
 </code></pre>
-
 <p><strong>常用参数：</strong></p>
 <p><strong>filepath_or_buffer :</strong> str，pathlib。str, pathlib.Path, py._path.local.LocalPath or any object with a read() method (such as a file handle or StringIO)</p>
 <p>可以是URL，可用URL类型包括：http, ftp, s3和文件。也就是说可以使用不同的文件系统。</p>
 <p>对于多文件正在准备中，目前尚不支持多csv文件同时读取。</p>
-<p>本地文件读取实例：://localhost/path/to/table.csv</p>
+<p>本地文件读取实例：😕/localhost/path/to/table.csv</p>
 <p><strong>sep :</strong> str, default ‘,’</p>
 <p>指定分隔符。如果不指定参数，则会尝试使用逗号分隔（csv文件（Comma-Separated Values）一般都是用逗号进行分割的）。分隔符长于一个字符并且不是‘\s+’,将使用python的语法分析器。并且忽略数据中的逗号。正则表达式例子：’\r\t’</p>
 <p><strong>delimiter :</strong> str, default None</p>
@@ -302,7 +307,6 @@ list of <span class="hljs-built_in">int</span>s <span class="hljs-keyword">or</s
 list of lists. e.g. If [[<span class="hljs-number">1</span>, <span class="hljs-number">3</span>]] -&gt; 合并<span class="hljs-number">1</span>,<span class="hljs-number">3</span>列作为一个日期列使用
 dict, e.g. &#123;‘foo’ : [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>]&#125; -&gt; 将<span class="hljs-number">1</span>,<span class="hljs-number">3</span>列合并，并给合并后的列起名为<span class="hljs-string">&quot;foo&quot;</span>
 </code></pre>
-
 <p><strong>infer_datetime_format :</strong> boolean, default False</p>
 <p>如果设定为True并且parse_dates 可用，那么pandas将尝试转换为日期类型，如果可以转换，转换方法并解析。在某些情况下会快5~10倍。</p>
 <p><strong>keep_date_col :</strong> boolean, default False</p>
@@ -356,18 +360,20 @@ dict, e.g. &#123;‘foo’ : [<span class="hljs-number">1</span>, <span class="h
 <p><strong>buffer_lines :</strong> int, default None</p>
 <p>不推荐使用，这个参数将会在未来版本移除，因为他的值在解析器中不推荐使用</p>
 <p><strong>compact_ints :</strong> boolean, default False</p>
-<p>不推荐使用，这个参数将会在未来版本移除<br>如果设置compact_ints=True ，那么任何有整数类型构成的列将被按照最小的整数类型存储，是否有符号将取决于use_unsigned 参数</p>
+<p>不推荐使用，这个参数将会在未来版本移除<br>
+如果设置compact_ints=True ，那么任何有整数类型构成的列将被按照最小的整数类型存储，是否有符号将取决于use_unsigned 参数</p>
 <p><strong>use_unsigned :</strong> boolean, default False</p>
-<p>不推荐使用：这个参数将会在未来版本移除<br>如果整数列被压缩(i.e. compact_ints=True)，指定被压缩的列是有符号还是无符号的。</p>
+<p>不推荐使用：这个参数将会在未来版本移除<br>
+如果整数列被压缩(i.e. compact_ints=True)，指定被压缩的列是有符号还是无符号的。</p>
 <p><strong>memory_map :</strong> boolean, default False</p>
 <p>如果使用的文件在内存内，那么直接map文件使用。使用这种方式可以避免文件再次进行IO操作。</p>
-<h2 id="2-to-csv"><a href="#2-to-csv" class="headerlink" title="2. to_csv"></a>2. to_csv</h2><p>to_csv方法定义：</p>
+<h2 id="2-to_csv"><a class="markdownIt-Anchor" href="#2-to_csv"></a> 2. to_csv</h2>
+<p>to_csv方法定义：</p>
 <pre><code class="hljs python">DataFrame.to_csv(path_or_buf=<span class="hljs-literal">None</span>, sep=<span class="hljs-string">&#x27;, &#x27;</span>, na_rep=<span class="hljs-string">&#x27;&#x27;</span>, float_format=<span class="hljs-literal">None</span>, columns=<span class="hljs-literal">None</span>, 
 header=<span class="hljs-literal">True</span>, index=<span class="hljs-literal">True</span>, index_label=<span class="hljs-literal">None</span>, mode=<span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-literal">None</span>, compression=<span class="hljs-literal">None</span>, 
 quoting=<span class="hljs-literal">None</span>, quotechar=<span class="hljs-string">&#x27;&quot;&#x27;</span>, line_terminator=<span class="hljs-string">&#x27;\n&#x27;</span>, chunksize=<span class="hljs-literal">None</span>, tupleize_cols=<span class="hljs-literal">None</span>, 
 date_format=<span class="hljs-literal">None</span>, doublequote=<span class="hljs-literal">True</span>, escapechar=<span class="hljs-literal">None</span>, decimal=<span class="hljs-string">&#x27;.&#x27;</span>)
 </code></pre>
-
 <p><strong>path_or_buf=None：</strong> string or file handle, default None</p>
 <p>File path or object, if None is provided the result is returned as a string.</p>
 <p>字符串或文件句柄，默认无文件</p>
@@ -435,67 +441,59 @@ date_format=<span class="hljs-literal">None</span>, doublequote=<span class="hlj
 <p><strong>decimal:</strong> string, default ‘.’</p>
 <p>字符串，默认’。’</p>
 <p>字符识别为小数点分隔符。例如。欧洲数据使用 ​​’，’</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="to-csv"><a href="#to-csv" class="headerlink" title="to_csv"></a>to_csv</h2><p><strong>1.首先查询当前的工作路径：</strong></p>
+<h1 id="使用方法"><a class="markdownIt-Anchor" href="#使用方法"></a> 使用方法</h1>
+<h2 id="to_csv"><a class="markdownIt-Anchor" href="#to_csv"></a> to_csv</h2>
+<p><strong>1.首先查询当前的工作路径：</strong></p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> os
 os.getcwd() <span class="hljs-comment">#获取当前工作路径</span></code></pre>
-
 <p><strong>2.to_csv()是DataFrame类的方法，read_csv()是pandas的方法</strong></p>
 <pre><code class="hljs python">dt.to_csv() <span class="hljs-comment">#默认dt是DataFrame的一个实例，参数解释如下</span></code></pre>
-
 <ul>
 <li><strong>路径（控制输出位置）</strong> path_or_buf: A string path to the file to write or a StringIO</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;Result.csv&#x27;</span>) <span class="hljs-comment">#相对位置，保存在getwcd()获得的路径下</span>
 dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result.csv&#x27;</span>) <span class="hljs-comment">#绝对位置</span></code></pre>
-
 <ul>
 <li><strong>分隔符（可以使用指定分割符）</strong> sep : Field delimiter for the output file (default ”,”)</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result.csv&#x27;</span>,sep=<span class="hljs-string">&#x27;?&#x27;</span>)<span class="hljs-comment">#使用?分隔需要保存的数据，如果不写，默认是,</span></code></pre>
-
 <ul>
 <li><strong>替换空值（对空值进行处理）</strong> na_rep: A string representation of a missing value (default ‘’)</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result1.csv&#x27;</span>,na_rep=<span class="hljs-string">&#x27;NA&#x27;</span>) <span class="hljs-comment">#确实值保存为NA，如果不写，默认是空</span></code></pre>
-
 <ul>
 <li><strong>格式（控制输出）</strong> float_format: Format string for floating point numbers（主要是控制字符串还有浮点小数输出）</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result1.csv&#x27;</span>,float_format=<span class="hljs-string">&#x27;%.2f&#x27;</span>) <span class="hljs-comment">#保留两位小数</span></code></pre>
-
 <ul>
 <li><strong>是否保留某列数据</strong> cols: Columns to write (default None)</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result.csv&#x27;</span>,columns=[<span class="hljs-string">&#x27;name&#x27;</span>]) <span class="hljs-comment">#保存索引列和name列</span></code></pre>
-
 <ul>
 <li><strong>是否保留列名（和read_csv类似）</strong> header: Whether to write out the column names (default True)</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result.csv&#x27;</span>,header=<span class="hljs-number">0</span>) <span class="hljs-comment">#不保存列名</span></code></pre>
-
 <ul>
 <li><strong>是否保留行索引</strong> index: whether to write row (index) names (default True)</li>
 </ul>
 <pre><code class="hljs python">dt.to_csv(<span class="hljs-string">&#x27;C:/Users/think/Desktop/Result1.csv&#x27;</span>,index=<span class="hljs-number">0</span>) <span class="hljs-comment">#不保存行索引</span></code></pre>
-
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="to-csv-1"><a href="#to-csv-1" class="headerlink" title="to_csv"></a>to_csv</h2><p><strong>pandas 之 to_csv 保存数据出现中文乱码问题及解决办法</strong></p>
+<h1 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题</h1>
+<h2 id="to_csv-2"><a class="markdownIt-Anchor" href="#to_csv-2"></a> to_csv</h2>
+<p><strong>pandas 之 to_csv 保存数据出现中文乱码问题及解决办法</strong></p>
 <p>1.使用pandas读取再使用to_csv()方法重新保存</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-
+ 
 file_name = <span class="hljs-string">&#x27;G:/myLearning/pythonML201804/spiderLearning/scrapy_learning/car_comment_crawler/\</span>
 <span class="hljs-string">            car_comment_crawler/spiders/haval_all_page3.csv&#x27;</span>
-
+ 
 df = pd.read_csv(file_name, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)
 df</code></pre>
-
 <p><img src="/2020/09/12/Article202009123/1.png" srcset="/img/loading.gif" alt="1"></p>
-<p>（1）使用 df.to_csv(file_name2, encoding=’utf-8’) 后还是编码有问题</p>
+<p>（1）使用 df.to_csv(file_name2, encoding=‘utf-8’) 后还是编码有问题</p>
 <pre><code class="hljs python">df.to_csv(file_name2,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>)</code></pre>
-
 <p><img src="/2020/09/12/Article202009123/2.png" srcset="/img/loading.gif" alt="2"></p>
-<p>（2）使用 df.to_csv(file_name2, encoding=’utf_8_sig’) 后中文乱码问题解决了</p>
+<p>（2）使用 df.to_csv(file_name2, encoding=‘utf_8_sig’) 后中文乱码问题解决了</p>
 <pre><code class="hljs reasonml">df.<span class="hljs-keyword">to</span><span class="hljs-constructor">_csv(<span class="hljs-params">file_name3</span>,<span class="hljs-params">encoding</span>=<span class="hljs-string">&quot;utf_8_sig&quot;</span>)</span></code></pre>
-
 <p><img src="/2020/09/12/Article202009123/3.png" srcset="/img/loading.gif" alt="3"></p>
 
             </div>

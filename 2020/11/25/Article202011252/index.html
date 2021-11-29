@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -220,15 +224,12 @@
 </blockquote>
 <p>导入模块</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> cPickle <span class="hljs-keyword">as</span> pickle</code></pre>
-
 <p>运行程序时发现出现错误：</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">ImportError:</span> <span class="hljs-literal">No</span> <span class="hljs-string">module</span> <span class="hljs-string">named</span> <span class="hljs-string">&#x27;cPickle&#x27;</span></code></pre>
-
 <p>其实是版本的问题，python3并不兼容python2</p>
 <p>因为在python3下，是没有cPickle。而python 2 中有cPickle，</p>
 <p>解决方法是在python3中将cPickle改为pickle，如下：</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> pickle <span class="hljs-keyword">as</span> pk</code></pre>
-
 <p>注意 p 是小写。</p>
 
             </div>

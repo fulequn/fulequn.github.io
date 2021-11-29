@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -230,7 +234,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>boolean nextBoolean()</td>
 <td>生成一个随机的 boolean 值，生成 true 和 false 的值概率相等</td>
 </tr>
@@ -266,8 +271,10 @@
 <td>double nextDouble()</td>
 <td>返回一个随机双精度值</td>
 </tr>
-</tbody></table>
-<h4 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h4><p>下面编写一个 Java 程序，演示如何使用 Random 类提供的方法来生成随机数。具体代码如下:</p>
+</tbody>
+</table>
+<h4 id="例-1"><a class="markdownIt-Anchor" href="#例-1"></a> 例 1</h4>
+<p>下面编写一个 Java 程序，演示如何使用 Random 类提供的方法来生成随机数。具体代码如下:</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
 
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test06</span> </span>&#123;
@@ -294,7 +301,6 @@
         &#125;
     &#125;
 &#125;</code></pre>
-
 <p>本实例每次运行时结果都不相同，这就实现了随机产生数据的功能。该程序的运行结果如下：</p>
 <pre><code class="hljs angelscript">生成的[<span class="hljs-number">0</span>,<span class="hljs-number">1.0</span>]区间的小数是：<span class="hljs-number">0.8773165855918825</span>
 生成的[<span class="hljs-number">0</span>,<span class="hljs-number">7.0</span>]区间的小数是：<span class="hljs-number">6.407083074782282</span>
@@ -304,8 +310,8 @@
 生成一个随机布尔型值：<span class="hljs-literal">false</span>
 生成一个随机浮点型值：<span class="hljs-number">0.6397003</span>
 下期七星彩开奖号码预测：<span class="hljs-number">0227168</span></code></pre>
-
-<h4 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h4><p>Math 类的 random() 方法没有参数，它默认会返回大于等于 0.0、小于 1.0 的 double 类型随机数，即 0&lt;=随机数&lt;1.0。对 random() 方法返回的数字稍加处理，即可实现产生任意范围随机数的功能。</p>
+<h4 id="例-2"><a class="markdownIt-Anchor" href="#例-2"></a> 例 2</h4>
+<p>Math 类的 random() 方法没有参数，它默认会返回大于等于 0.0、小于 1.0 的 double 类型随机数，即 0&lt;=随机数&lt;1.0。对 random() 方法返回的数字稍加处理，即可实现产生任意范围随机数的功能。</p>
 <p>下面使用 random() 方法实现随机生成一个 2~100 偶数的功能。具体代码如下：</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test07</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
@@ -322,11 +328,9 @@
         &#125;
     &#125;
 &#125;</code></pre>
-
 <p>由于 m+(int)(Math.random()<em>n) 语句可以获取 m~m+n 的随机数，所以 2+(int)(Math. random()</em>(102-2)) 表达式可以求出 2~100 的随机数。在产生这个区间的随机数后还需要判断是否为偶数，这里使用了对 2 取余数，如果余数不是零，说明随机数是奇数，此时将随机数加 1 后再输出。</p>
 <p>该程序的运行结果如下：</p>
 <pre><code class="hljs angelscript">随机数是：<span class="hljs-number">20</span></code></pre>
-
 
             </div>
             <hr>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,9 +222,11 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/mongodb/mongodb-map-reduce.html">MongoDB Map Reduce | 菜鸟教程 (runoob.com)</a></p>
 </blockquote>
-<h1 id="MongoDB-Map-Reduce"><a href="#MongoDB-Map-Reduce" class="headerlink" title="MongoDB Map Reduce"></a>MongoDB Map Reduce</h1><p>Map-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。</p>
+<h1 id="mongodb-map-reduce"><a class="markdownIt-Anchor" href="#mongodb-map-reduce"></a> MongoDB Map Reduce</h1>
+<p>Map-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。</p>
 <p>MongoDB提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。</p>
-<h3 id="MapReduce-命令"><a href="#MapReduce-命令" class="headerlink" title="MapReduce 命令"></a>MapReduce 命令</h3><p>以下是MapReduce的基本语法：</p>
+<h3 id="mapreduce-命令"><a class="markdownIt-Anchor" href="#mapreduce-命令"></a> MapReduce 命令</h3>
+<p>以下是MapReduce的基本语法：</p>
 <pre><code class="hljs xquery">&gt;db<span class="hljs-built_in">.collection</span>.mapReduce(
    <span class="hljs-keyword">function</span>() &#123;emit<span class="hljs-built_in">(key</span>,<span class="hljs-keyword">value</span>);&#125;,  //<span class="hljs-keyword">map</span> 函数
    <span class="hljs-keyword">function</span><span class="hljs-built_in">(key</span>,values) &#123;<span class="hljs-keyword">return</span> reduceFunction&#125;,   //reduce 函数
@@ -231,7 +237,6 @@
       limit:<span class="hljs-built_in"> number</span>
    &#125;
 )</code></pre>
-
 <p>使用 MapReduce 要实现两个函数 Map 函数和 Reduce 函数,Map 函数调用 emit(key, value), 遍历 collection 中所有的记录, 将 key 与 value 传递给 Reduce 函数进行处理。</p>
 <p>Map 函数必须调用 emit(key, value) 返回键值对。</p>
 <p>参数说明:</p>
@@ -243,10 +248,11 @@
 <li><strong>sort</strong> 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以<strong>优化分组机制</strong></li>
 <li><strong>limit</strong> 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</li>
 </ul>
-<p>以下实例在集合 orders 中查找 status:”A” 的数据，并根据 cust_id 来分组，并计算 amount 的总和。</p>
+<p>以下实例在集合 orders 中查找 status:“A” 的数据，并根据 cust_id 来分组，并计算 amount 的总和。</p>
 <p><img src="/2020/10/26/Article202010264/1.svg" srcset="/img/loading.gif" alt="1"></p>
 <hr>
-<h2 id="使用-MapReduce"><a href="#使用-MapReduce" class="headerlink" title="使用 MapReduce"></a>使用 MapReduce</h2><p>考虑以下文档结构存储用户的文章，文档存储了用户的 user_name 和文章的 status 字段：</p>
+<h2 id="使用-mapreduce"><a class="markdownIt-Anchor" href="#使用-mapreduce"></a> 使用 MapReduce</h2>
+<p>考虑以下文档结构存储用户的文章，文档存储了用户的 user_name 和文章的 status 字段：</p>
 <pre><code class="hljs stylus">&gt;db<span class="hljs-selector-class">.posts</span>.insert(&#123;
    <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,
    <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,
@@ -295,8 +301,7 @@
    <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span>
 &#125;)
 <span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span></code></pre>
-
-<p>现在，我们将在 posts 集合中使用 mapReduce 函数来选取已发布的文章(status:”active”)，并通过user_name分组，计算每个用户的文章数：</p>
+<p>现在，我们将在 posts 集合中使用 mapReduce 函数来选取已发布的文章(status:“active”)，并通过user_name分组，计算每个用户的文章数：</p>
 <pre><code class="hljs javascript">&gt;db.posts.mapReduce( 
    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123; emit(<span class="hljs-built_in">this</span>.user_name,<span class="hljs-number">1</span>); &#125;, 
    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">key, values</span>) </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.sum(values)&#125;, 
@@ -305,7 +310,6 @@
          out:<span class="hljs-string">&quot;post_total&quot;</span> 
       &#125;
 )</code></pre>
-
 <p>以上 mapReduce 输出结果为：</p>
 <pre><code class="hljs json">&#123;
         <span class="hljs-attr">&quot;result&quot;</span> : <span class="hljs-string">&quot;post_total&quot;</span>,
@@ -318,15 +322,14 @@
         &#125;,
         <span class="hljs-attr">&quot;ok&quot;</span> : <span class="hljs-number">1</span>
 &#125;</code></pre>
-
-<p>结果表明，共有 5 个符合查询条件（status:”active”）的文档， 在map函数中生成了 5 个键值对文档，最后使用reduce函数将相同的键值分为 2 组。</p>
+<p>结果表明，共有 5 个符合查询条件（status:“active”）的文档， 在map函数中生成了 5 个键值对文档，最后使用reduce函数将相同的键值分为 2 组。</p>
 <p>具体参数说明：</p>
 <ul>
 <li>result：储存结果的collection的名字,这是个临时集合，MapReduce的连接关闭后自动就被删除了。</li>
 <li>timeMillis：执行花费的时间，毫秒ms为单位</li>
 <li>input：<strong>满足条件</strong>被发送到map函数的文档个数</li>
 <li>emit：在map函数中<strong>emit被调用的次数</strong>，也就是所有集合中的数据总量</li>
-<li>ouput：结果集合中的文档个数<strong>（count对调试非常有帮助）</strong></li>
+<li>ouput：结果集合中的文档个数**（count对调试非常有帮助）**</li>
 <li>ok：是否成功，成功为1</li>
 <li>err：如果失败，这里可以有失败原因，不过从经验上来看，原因比较模糊，作用不大</li>
 </ul>
@@ -339,17 +342,14 @@
          <span class="hljs-keyword">ou</span><span class="hljs-variable">t:</span><span class="hljs-string">&quot;post_total&quot;</span> 
       &#125;
 ).<span class="hljs-keyword">find</span>()</code></pre>
-
 <p>以上查询显示如下结果:</p>
 <pre><code class="hljs json">&#123; <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;mark&quot;</span>, <span class="hljs-attr">&quot;value&quot;</span> : <span class="hljs-number">4</span> &#125;
 &#123; <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;runoob&quot;</span>, <span class="hljs-attr">&quot;value&quot;</span> : <span class="hljs-number">1</span> &#125;</code></pre>
-
 <p>用类似的方式，MapReduce可以被用来构建大型复杂的聚合查询。</p>
 <p>Map函数和Reduce函数可以使用 JavaScript 来实现，使得MapReduce的使用非常灵活和强大。</p>
 <p>注：</p>
 <p>临时集合参数是这样写的</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">out</span>: &#123; <span class="hljs-attribute">inline</span>: <span class="hljs-number">1</span> &#125;</code></pre>
-
 <p>设置了 <strong>{inline:1}</strong> 将不会创建集合，整个 <strong>Map/Reduce</strong> 的操作将会在内存中进行。</p>
 <p>注意，这个选项只有在结果集单个文档大小在16MB限制范围内时才有效。</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.users</span><span class="hljs-selector-class">.mapReduce</span>(<span class="hljs-selector-tag">map</span>,<span class="hljs-selector-tag">reduce</span>,&#123;<span class="hljs-attribute">out</span>:&#123;inline:<span class="hljs-number">1</span>&#125;&#125;);</code></pre>

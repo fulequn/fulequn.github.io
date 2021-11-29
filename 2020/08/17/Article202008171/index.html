@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -215,8 +219,11 @@
             
             <div class="markdown-body" id="post-body">
               <p>windows 10系统，所有以下在windows10 64位下进行演示。</p>
-<h1 id="1-起步"><a href="#1-起步" class="headerlink" title="1.起步"></a>1.起步</h1><h2 id="1-1-安装Hexo"><a href="#1-1-安装Hexo" class="headerlink" title="1.1 安装Hexo"></a>1.1 安装Hexo</h2><p>Hexo 依赖了 Node.js 和 Git，所以在安装 Hexo 之前必须确保安装了这两个工具。</p>
-<h3 id="1-1-1-安装-Node-js"><a href="#1-1-1-安装-Node-js" class="headerlink" title="1.1.1 安装 Node.js"></a>1.1.1 安装 Node.js</h3><p>步骤：</p>
+<h1 id="1起步"><a class="markdownIt-Anchor" href="#1起步"></a> 1.起步</h1>
+<h2 id="11-安装hexo"><a class="markdownIt-Anchor" href="#11-安装hexo"></a> 1.1 安装Hexo</h2>
+<p>Hexo 依赖了 Node.js 和 Git，所以在安装 Hexo 之前必须确保安装了这两个工具。</p>
+<h3 id="111-安装-nodejs"><a class="markdownIt-Anchor" href="#111-安装-nodejs"></a> 1.1.1 安装 Node.js</h3>
+<p>步骤：</p>
 <ol>
 <li>下载</li>
 <li>安装</li>
@@ -231,8 +238,8 @@
 <pre><code class="hljs crmsh">$ <span class="hljs-keyword">node</span> <span class="hljs-title">--version</span>
 
 v12.<span class="hljs-number">14.0</span></code></pre>
-
-<h3 id="1-1-2-安装-Git"><a href="#1-1-2-安装-Git" class="headerlink" title="1.1.2 安装 Git"></a>1.1.2 安装 Git</h3><p>步骤：</p>
+<h3 id="112-安装-git"><a class="markdownIt-Anchor" href="#112-安装-git"></a> 1.1.2 安装 Git</h3>
+<p>步骤：</p>
 <ol>
 <li>下载</li>
 <li>安装</li>
@@ -247,13 +254,11 @@ v12.<span class="hljs-number">14.0</span></code></pre>
 <pre><code class="hljs angelscript">$ git --version
 
 git version <span class="hljs-number">2.24</span><span class="hljs-number">.1</span>.windows<span class="hljs-number">.2</span></code></pre>
-
-<h3 id="1-1-3-安装Hexo"><a href="#1-1-3-安装Hexo" class="headerlink" title="1.1.3 安装Hexo"></a>1.1.3 安装Hexo</h3><p>1、在命令中执行下面的安装命令</p>
+<h3 id="113-安装hexo"><a class="markdownIt-Anchor" href="#113-安装hexo"></a> 1.1.3 安装Hexo</h3>
+<p>1、在命令中执行下面的安装命令</p>
 <pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre>
-
 <p>2、确认是否安装成功</p>
 <pre><code class="hljs ada">hexo <span class="hljs-comment">--version</span></code></pre>
-
 <p>如何能看到类似于下面的输出则证明安装成功。</p>
 <pre><code class="hljs yaml"><span class="hljs-string">$</span> <span class="hljs-string">hexo</span> <span class="hljs-string">--version</span>
 
@@ -294,13 +299,12 @@ git version <span class="hljs-number">2.24</span><span class="hljs-number">.1</s
 <span class="hljs-attr">tz:</span> <span class="hljs-string">2019a</span>
 
 <span class="hljs-attr">unicode:</span> <span class="hljs-number">12.1</span></code></pre>
-
-<h2 id="1-2-使用Hexo生成本地网站"><a href="#1-2-使用Hexo生成本地网站" class="headerlink" title="1.2 使用Hexo生成本地网站"></a>1.2 使用Hexo生成本地网站</h2><p>在命令行中执行下面的命令用来创建本地网站。</p>
+<h2 id="12-使用hexo生成本地网站"><a class="markdownIt-Anchor" href="#12-使用hexo生成本地网站"></a> 1.2 使用Hexo生成本地网站</h2>
+<p>在命令行中执行下面的命令用来创建本地网站。</p>
 <pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init 网站目录名称</span>
 
 <span class="hljs-comment">#例如</span>
 <span class="hljs-attr">hexo</span> <span class="hljs-string">init my-blog</span></code></pre>
-
 <p>创建成功的话会生成一个具有下面目录结构的网站项目。</p>
 <pre><code class="hljs sqf">. 
 
@@ -312,13 +316,13 @@ git version <span class="hljs-number">2.24</span><span class="hljs-number">.1</s
 
 ├── source
 
-|     ├── <span class="hljs-variable">_drafts</span> 
+| 	├── <span class="hljs-variable">_drafts</span> 
 
-|     └── <span class="hljs-variable">_posts</span> 
+| 	└── <span class="hljs-variable">_posts</span> 
 
 └── themes</code></pre>
-
-<h2 id="1-3-预览本地网站"><a href="#1-3-预览本地网站" class="headerlink" title="1.3  预览本地网站"></a>1.3  预览本地网站</h2><p>在你的网站根目录下执行 <code>npm run server</code> ，它会启动一个 http 服务，用于本地预览。</p>
+<h2 id="13-预览本地网站"><a class="markdownIt-Anchor" href="#13-预览本地网站"></a> 1.3  预览本地网站</h2>
+<p>在你的网站根目录下执行 <code>npm run server</code> ，它会启动一个 http 服务，用于本地预览。</p>
 <pre><code class="hljs pgsql">$ npm run <span class="hljs-keyword">server</span> 
 
 my-blog@<span class="hljs-number">0.0</span><span class="hljs-number">.0</span> <span class="hljs-keyword">server</span> C:\Users\LPZ\Documents\Projects\my-blog 
@@ -328,10 +332,10 @@ hexo <span class="hljs-keyword">server</span>
 <span class="hljs-keyword">INFO</span> <span class="hljs-keyword">Start</span> processing 
 
 <span class="hljs-keyword">INFO</span> Hexo <span class="hljs-keyword">is</span> running at http://localhost:<span class="hljs-number">4000</span> . Press Ctrl+C <span class="hljs-keyword">to</span> stop.</code></pre>
-
 <p>访问控制台中提示的地址，如果能看到下面的网页则证明服务启动成功了。</p>
 <p><img src="/2020/08/17/Article202008171/landspace.png" srcset="/img/loading.gif" alt="landspace"></p>
-<h2 id="1-4-目录结构"><a href="#1-4-目录结构" class="headerlink" title="1.4 目录结构"></a>1.4 目录结构</h2><pre><code class="hljs sqf">. 
+<h2 id="14-目录结构"><a class="markdownIt-Anchor" href="#14-目录结构"></a> 1.4 目录结构</h2>
+<pre><code class="hljs sqf">. 
 
 ├── <span class="hljs-variable">_config</span>.yml
 
@@ -341,15 +345,16 @@ hexo <span class="hljs-keyword">server</span>
 
 ├── source
 
-|     ├── <span class="hljs-variable">_drafts</span> 
+| 	├── <span class="hljs-variable">_drafts</span> 
 
-|     └── <span class="hljs-variable">_posts</span> 
+| 	└── <span class="hljs-variable">_posts</span> 
 
 └── themes</code></pre>
-
-<h2 id="1-5-写文章"><a href="#1-5-写文章" class="headerlink" title="1.5 写文章"></a>1.5 写文章</h2><h3 id="1、创建文章"><a href="#1、创建文章" class="headerlink" title="1、创建文章"></a>1、创建文章</h3><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type"></span>文章文件名称</code></pre>
-
-<h3 id="2、写文章"><a href="#2、写文章" class="headerlink" title="2、写文章"></a>2、写文章</h3><p>文章配置</p>
+<h2 id="15-写文章"><a class="markdownIt-Anchor" href="#15-写文章"></a> 1.5 写文章</h2>
+<h3 id="1-创建文章"><a class="markdownIt-Anchor" href="#1-创建文章"></a> 1、创建文章</h3>
+<pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type"></span>文章文件名称</code></pre>
+<h3 id="2-写文章"><a class="markdownIt-Anchor" href="#2-写文章"></a> 2、写文章</h3>
+<p>文章配置</p>
 <ul>
 <li>语法：YAML</li>
 <li>可配置项：<a target="_blank" rel="noopener" href="https://hexo.io/docs/front-matter">https://hexo.io/docs/front-matter</a></li>
@@ -358,74 +363,100 @@ hexo <span class="hljs-keyword">server</span>
 <pre><code class="hljs yaml"><span class="hljs-string">---</span> 
 <span class="hljs-attr">title:</span> <span class="hljs-string">Sublime</span> <span class="hljs-string">Text</span> <span class="hljs-string">打开方式</span>
 <span class="hljs-attr">categories:</span> 
-    <span class="hljs-bullet">-</span> <span class="hljs-string">开发笔记</span>
+	<span class="hljs-bullet">-</span> <span class="hljs-string">开发笔记</span>
 <span class="hljs-attr">tags:</span> 
-    <span class="hljs-bullet">-</span> <span class="hljs-string">Sublime</span> <span class="hljs-string">Text</span> 
+	<span class="hljs-bullet">-</span> <span class="hljs-string">Sublime</span> <span class="hljs-string">Text</span> 
 <span class="hljs-attr">date:</span> <span class="hljs-number">2019-12-09 00:00:00</span>
 <span class="hljs-meta">---</span></code></pre>
-
 <p>文章正文</p>
 <ul>
-<li>语法：Markdown </li>
+<li>语法：Markdown</li>
 <li>编辑工具：推荐 Typora</li>
 </ul>
-<h3 id="3、-预览文章"><a href="#3、-预览文章" class="headerlink" title="3、 预览文章"></a>3、 预览文章</h3><h2 id="1-6-发布"><a href="#1-6-发布" class="headerlink" title="1.6 发布"></a>1.6 发布</h2><ul>
+<h3 id="3-预览文章"><a class="markdownIt-Anchor" href="#3-预览文章"></a> 3、 预览文章</h3>
+<h2 id="16-发布"><a class="markdownIt-Anchor" href="#16-发布"></a> 1.6 发布</h2>
+<ul>
 <li>自己搭建服务器</li>
 <li>使用第三方云服务</li>
 <li>使用第三方网站托管服务</li>
 </ul>
-<h2 id="1-7-运行测试"><a href="#1-7-运行测试" class="headerlink" title="1.7 运行测试"></a>1.7 运行测试</h2><p>这里我们经常用到的有四个命令</p>
+<h2 id="17-运行测试"><a class="markdownIt-Anchor" href="#17-运行测试"></a> 1.7 运行测试</h2>
+<p>这里我们经常用到的有四个命令</p>
 <pre><code class="hljs nginx"><span class="hljs-attribute">hexo</span> clean <span class="hljs-comment">#用来清理缓存文件</span>
 hexo g      <span class="hljs-comment">#生成文件</span>
 hexo  s     <span class="hljs-comment">#运行本地服务器</span>
 hexo  d   <span class="hljs-comment">#上传到服务器</span></code></pre>
-
-<h1 id="2-Coding发布网页"><a href="#2-Coding发布网页" class="headerlink" title="2.  Coding发布网页"></a>2.  Coding发布网页</h1><p>参考：<a target="_blank" rel="noopener" href="https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/">https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/</a></p>
+<h1 id="2-coding发布网页"><a class="markdownIt-Anchor" href="#2-coding发布网页"></a> 2.  Coding发布网页</h1>
+<p>参考：<a target="_blank" rel="noopener" href="https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/">https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/</a></p>
 <p><strong>把我们的网页部署到云端，让别人也可以访问我们的网站，我们部署到我们国内的Coding。</strong></p>
-<h2 id="2-1-配置Coding"><a href="#2-1-配置Coding" class="headerlink" title="2.1 配置Coding"></a>2.1 配置Coding</h2><h3 id="1-进入开发平台先。"><a href="#1-进入开发平台先。" class="headerlink" title="1.进入开发平台先。"></a>1.进入开发平台先。</h3><p><img src="/2020/08/17/Article202008171/1.png" srcset="/img/loading.gif" alt="1"><br><strong>这里的用户名，以后就是我们的域名的一部分</strong><br><img src="/2020/08/17/Article202008171/2.png" srcset="/img/loading.gif" alt="2"></p>
-<h3 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h3><p>首先在coding net 上创建一个仓库，仓库名为: &lt;你的用户名&gt;.coding.me<br>开启 coding pages 服务请参考<a target="_blank" rel="noopener" href="https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/getting-started.html">coding pages帮助文档</a><br><img src="/2020/08/17/Article202008171/3.png" srcset="/img/loading.gif" alt="3"></p>
-<h3 id="3-新建项目，用于托管代码"><a href="#3-新建项目，用于托管代码" class="headerlink" title="3.新建项目，用于托管代码"></a>3.新建项目，用于托管代码</h3><p><img src="/2020/08/17/Article202008171/4.png" srcset="/img/loading.gif" alt="4"><br>这里需要注意，<strong>gexia</strong> 是我的用户名，你要改成自己的用户名，其他的选项默认，++公开源代码++可以随自己的选<br>择，注意的是在github上面是必须选公开的，不然要钱，😂。</p>
-<h3 id="4-添加公钥"><a href="#4-添加公钥" class="headerlink" title="4.添加公钥"></a>4.添加公钥</h3><p>这个过程的目的是在你的电脑和coding之间建立联系的通道，不然谁都能往上面增加内容，那你的博客岂不乱套了？<br>首先查看目录C:Users\用户名<br>有没有.ssh目录,如果没有，在本地blog文件内打开git bash hexo,输入命令:</p>
+<h2 id="21-配置coding"><a class="markdownIt-Anchor" href="#21-配置coding"></a> 2.1 配置Coding</h2>
+<h3 id="1进入开发平台先"><a class="markdownIt-Anchor" href="#1进入开发平台先"></a> 1.进入开发平台先。</h3>
+<p><img src="/2020/08/17/Article202008171/1.png" srcset="/img/loading.gif" alt="1"><br>
+<strong>这里的用户名，以后就是我们的域名的一部分</strong><br>
+<img src="/2020/08/17/Article202008171/2.png" srcset="/img/loading.gif" alt="2"></p>
+<h3 id="2创建项目"><a class="markdownIt-Anchor" href="#2创建项目"></a> 2.创建项目</h3>
+<p>首先在coding net 上创建一个仓库，仓库名为: &lt;你的用户名&gt;.coding.me<br>
+开启 coding pages 服务请参考<a target="_blank" rel="noopener" href="https://caiyantao.gitee.io/2019/04/13/Hexo%EF%BC%88%E4%BA%8C%EF%BC%89/getting-started.html">coding pages帮助文档</a><br>
+<img src="/2020/08/17/Article202008171/3.png" srcset="/img/loading.gif" alt="3"></p>
+<h3 id="3新建项目用于托管代码"><a class="markdownIt-Anchor" href="#3新建项目用于托管代码"></a> 3.新建项目，用于托管代码</h3>
+<p><img src="/2020/08/17/Article202008171/4.png" srcset="/img/loading.gif" alt="4"><br>
+这里需要注意，<strong>gexia</strong> 是我的用户名，你要改成自己的用户名，其他的选项默认，<ins>公开源代码</ins>可以随自己的选<br>
+择，注意的是在github上面是必须选公开的，不然要钱，😂。</p>
+<h3 id="4添加公钥"><a class="markdownIt-Anchor" href="#4添加公钥"></a> 4.添加公钥</h3>
+<p>这个过程的目的是在你的电脑和coding之间建立联系的通道，不然谁都能往上面增加内容，那你的博客岂不乱套了？<br>
+首先查看目录C:Users\用户名<br>
+有没有.ssh目录,如果没有，在本地blog文件内打开git bash hexo,输入命令:</p>
 <pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">&quot;这里填上你的邮箱地址&quot;</span></code></pre>
-
-<p>然后按3个回车。<br>再检查有没有.ssh目录，打开目录，你会看到出现3个文件：</p>
+<p>然后按3个回车。<br>
+再检查有没有.ssh目录，打开目录，你会看到出现3个文件：</p>
 <p><img src="/2020/08/17/Article202008171/5.png" srcset="/img/loading.gif" alt="5"></p>
-<p><img src="/2020/08/17/Article202008171/6.png" srcset="/img/loading.gif" alt="6"><br>打开<code>ssh-rsa</code>这个文件，将里面的东西复制到如上图图所示对话框中。<br><img src="/2020/08/17/Article202008171/7.png" srcset="/img/loading.gif" alt="7"><br>结果如图。</p>
-<p>主要就是用notepad++打开id——rsa.pub(这个是公钥，不带pub的是私钥，这个不要泄露出去），你会开到一堆字母，全选复制下来。<br>下面打来浏览器，进入你刚才创建的仓库，设置-部署公钥-新建部署公钥，公钥名称可以不填，将刚才复制的公钥粘贴在公钥内容里面。把授予权限打上勾！，然后添加就可以了。</p>
-<h3 id="5-修改站点配置文件-deploy-参数内容"><a href="#5-修改站点配置文件-deploy-参数内容" class="headerlink" title="5.修改站点配置文件 deploy 参数内容"></a>5.修改站点配置文件 deploy 参数内容</h3><p>打开，blog文件夹下面的站点配置文件，_config.yml<br>打开的话可以用submit text打开，或者Notepad++<br><img src="/2020/08/17/Article202008171/8.png" srcset="/img/loading.gif" alt="8"><br><strong>找到deploy：</strong><br><strong>代码，gexia换成自己的哦</strong></p>
+<p><img src="/2020/08/17/Article202008171/6.png" srcset="/img/loading.gif" alt="6"><br>
+打开<code>ssh-rsa</code>这个文件，将里面的东西复制到如上图图所示对话框中。<br>
+<img src="/2020/08/17/Article202008171/7.png" srcset="/img/loading.gif" alt="7"><br>
+结果如图。</p>
+<p>主要就是用notepad++打开id——rsa.pub(这个是公钥，不带pub的是私钥，这个不要泄露出去），你会开到一堆字母，全选复制下来。<br>
+下面打来浏览器，进入你刚才创建的仓库，设置-部署公钥-新建部署公钥，公钥名称可以不填，将刚才复制的公钥粘贴在公钥内容里面。把授予权限打上勾！，然后添加就可以了。</p>
+<h3 id="5修改站点配置文件-deploy-参数内容"><a class="markdownIt-Anchor" href="#5修改站点配置文件-deploy-参数内容"></a> 5.修改站点配置文件 deploy 参数内容</h3>
+<p>打开，blog文件夹下面的站点配置文件，_config.yml<br>
+打开的话可以用submit text打开，或者Notepad++<br>
+<img src="/2020/08/17/Article202008171/8.png" srcset="/img/loading.gif" alt="8"><br>
+<strong>找到deploy：</strong><br>
+<strong>代码，gexia换成自己的哦</strong></p>
 <pre><code class="hljs less"><span class="hljs-attribute">deploy</span>:
   <span class="hljs-attribute">type</span>: git
   <span class="hljs-attribute">repository</span>: git<span class="hljs-variable">@git</span>.coding.<span class="hljs-attribute">net</span>:gexia/gexia.coding.me.git       
   #<span class="hljs-attribute">repo</span>: <span class="hljs-attribute">https</span>:<span class="hljs-comment">//github.com/kajskj753/kajskj753.github.io.git</span>
   <span class="hljs-attribute">branch</span>: master</code></pre>
-
-
-
 <p>我前面就是托管在Github上面的，据网上的大神说还可以同时托管在github和coding上面，我就懒得折腾了，反正也没什么歪果仁看我们的网站，😂。推荐各位就在coding搞就行了。</p>
 <p>至此，就完成了基本的搭建，先用命令在本地服务器查看内容是否正确。记住，当你出现错误啥的情况下先执行下面三步曲，看看先！！😭</p>
 <pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">clean</span>
 <span class="hljs-attr">hexo</span> <span class="hljs-string">g</span>
 <span class="hljs-attr">hexo</span> <span class="hljs-string">s</span></code></pre>
-
 <blockquote>
-<p>注意，一定要先在本地试试<br>然后，把文件传送到我们的Coding那边。</p>
+<p>注意，一定要先在本地试试<br>
+然后，把文件传送到我们的Coding那边。</p>
 <pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d</span></code></pre>
 </blockquote>
-<h3 id="找到Coding那边，可以看到自己的域名。"><a href="#找到Coding那边，可以看到自己的域名。" class="headerlink" title="找到Coding那边，可以看到自己的域名。"></a>找到Coding那边，可以看到自己的域名。</h3><p><img src="/2020/08/17/Article202008171/9.png" srcset="/img/loading.gif" alt="9"></p>
+<h3 id="找到coding那边可以看到自己的域名"><a class="markdownIt-Anchor" href="#找到coding那边可以看到自己的域名"></a> 找到Coding那边，可以看到自己的域名。</h3>
+<p><img src="/2020/08/17/Article202008171/9.png" srcset="/img/loading.gif" alt="9"></p>
 <p>点击域名，就可以看到成功了。😁</p>
-<h1 id="3-主题选择"><a href="#3-主题选择" class="headerlink" title="3. 主题选择"></a>3. 主题选择</h1><p>我选用的是Fluid，该主题链接</p>
+<h1 id="3-主题选择"><a class="markdownIt-Anchor" href="#3-主题选择"></a> 3. 主题选择</h1>
+<p>我选用的是Fluid，该主题链接</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">https://github.com/fluid-dev/hexo-theme-fluid</a></p>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h4 id="1-搭建-Hexo-博客"><a href="#1-搭建-Hexo-博客" class="headerlink" title="1. 搭建 Hexo 博客"></a>1. 搭建 Hexo 博客</h4><p>如果你还没有 Hexo 博客，请按照 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p>
-<h4 id="2-获取主题最新版本"><a href="#2-获取主题最新版本" class="headerlink" title="2. 获取主题最新版本"></a>2. 获取主题最新版本</h4><p>请优先下载 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新 release 版本</a>，master 分支无法保证稳定。</p>
+<h2 id="快速开始"><a class="markdownIt-Anchor" href="#快速开始"></a> 快速开始</h2>
+<h4 id="1-搭建-hexo-博客"><a class="markdownIt-Anchor" href="#1-搭建-hexo-博客"></a> 1. 搭建 Hexo 博客</h4>
+<p>如果你还没有 Hexo 博客，请按照 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a> 进行安装、建站。</p>
+<h4 id="2-获取主题最新版本"><a class="markdownIt-Anchor" href="#2-获取主题最新版本"></a> 2. 获取主题最新版本</h4>
+<p>请优先下载 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新 release 版本</a>，master 分支无法保证稳定。</p>
 <p>下载后解压到 themes 目录下并重命名为 <code>fluid</code>。</p>
-<h4 id="3-指定主题"><a href="#3-指定主题" class="headerlink" title="3. 指定主题"></a>3. 指定主题</h4><p>如下修改 Hexo 博客目录中的 <code>_config.yml</code>：</p>
+<h4 id="3-指定主题"><a class="markdownIt-Anchor" href="#3-指定主题"></a> 3. 指定主题</h4>
+<p>如下修改 Hexo 博客目录中的 <code>_config.yml</code>：</p>
 <pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid  <span class="hljs-meta"># 指定主题</span>
 
 <span class="hljs-symbol">language:</span> <span class="hljs-built_in">zh</span>-CN  <span class="hljs-meta"># 指定语言，可不改</span></code></pre>
-
-<h4 id="4-创建「关于页」"><a href="#4-创建「关于页」" class="headerlink" title="4. 创建「关于页」"></a>4. 创建「关于页」</h4><p>首次使用主题的「关于页」需要手动创建：</p>
+<h4 id="4-创建关于页"><a class="markdownIt-Anchor" href="#4-创建关于页"></a> 4. 创建「关于页」</h4>
+<p>首次使用主题的「关于页」需要手动创建：</p>
 <pre><code class="hljs routeros">$ hexo new<span class="hljs-built_in"> page </span>about</code></pre>
-
 <p>创建成功后，编辑博客目录下 <code>/source/about/index.md</code>，添加 <code>layout</code> 属性。</p>
 <p>修改后的文件示例如下：</p>
 <pre><code class="hljs yaml"><span class="hljs-meta">---</span>

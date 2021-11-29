@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -220,25 +224,26 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geeksongs/p/15034108.html">https://www.cnblogs.com/geeksongs/p/15034108.html</a></p>
 </blockquote>
 <p>结论：Pytorch里的view方法用于改变数据维度，与numpy的reshape方法类似。</p>
-<h3 id="一-按照传入数字使数据维度进行转换"><a href="#一-按照传入数字使数据维度进行转换" class="headerlink" title="一.按照传入数字使数据维度进行转换"></a>一.按照传入数字使数据维度进行转换</h3><p><strong>示例</strong></p>
+<h3 id="一按照传入数字使数据维度进行转换"><a class="markdownIt-Anchor" href="#一按照传入数字使数据维度进行转换"></a> 一.按照传入数字使数据维度进行转换</h3>
+<p><strong>示例</strong></p>
 <pre><code class="hljs python">a = torch.arange(<span class="hljs-number">1</span>, <span class="hljs-number">17</span>)  <span class="hljs-comment"># a&#x27;s shape is (16,)</span>
-
+ 
 a.view(<span class="hljs-number">4</span>, <span class="hljs-number">4</span>) <span class="hljs-comment"># output below</span>
 tensor([[ <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>],
         [ <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>],
         [ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
         [<span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>]])
 [torch.FloatTensor of size <span class="hljs-number">4</span>x4]
-
+ 
 a.view(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>) <span class="hljs-comment"># output below</span>
 tensor([[[ <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>,  <span class="hljs-number">4</span>],
          [ <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>,  <span class="hljs-number">8</span>]],
-
+ 
         [[ <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
          [<span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>]]])
 [torch.FloatTensor of size <span class="hljs-number">2</span>x2x4]</code></pre>
-
-<h3 id="二-传入数字-1，自动对维度进行变换"><a href="#二-传入数字-1，自动对维度进行变换" class="headerlink" title="二.传入数字-1，自动对维度进行变换"></a>二.传入数字-1，自动对维度进行变换</h3><p>在某一个维度，我们可以传入数字-1，自动对维度进行计算并变化：</p>
+<h3 id="二传入数字-1自动对维度进行变换"><a class="markdownIt-Anchor" href="#二传入数字-1自动对维度进行变换"></a> 二.传入数字-1，自动对维度进行变换</h3>
+<p>在某一个维度，我们可以传入数字-1，自动对维度进行计算并变化：</p>
 <p>假设我们有一个数据维度为【3，5，2】的tensor，我们想要将其转化为其中两个维度分别为【3，1】，【5，2】，而剩下的第三个维度自动进行计算，那么我们可以使用-1来代替【3，1，10】当中的10，以及用-1来代替转化后【5，2，3】维度当中的数字3.我们可以发现3<em>1</em>10=3<em>5</em>2=5<em>2</em>3，因此变化后的维度乘积是相等的。</p>
 <p><strong>示例</strong></p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> torch
@@ -247,7 +252,6 @@ print(a)
 print(a.view(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>).size())
 print(a.view([<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>]).size()) <span class="hljs-comment">#不管加不加上列表符号，最后reshape的结果是一样的</span>
 print(a.view([<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">-1</span>]).size())</code></pre>
-
 <p><strong>结果</strong></p>
 <pre><code class="hljs python">tensor([[[ <span class="hljs-number">1.6498</span>, <span class="hljs-number">-0.4354</span>],
          [<span class="hljs-number">-1.0042</span>, <span class="hljs-number">-0.1582</span>],
@@ -269,18 +273,16 @@ print(a.view([<span class="hljs-number">5</span>,<span class="hljs-number">2</sp
 torch.Size([<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">10</span>])
 torch.Size([<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">10</span>])
 torch.Size([<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])</code></pre>
-
-<h3 id="三、使用view可以进行数据降维"><a href="#三、使用view可以进行数据降维" class="headerlink" title="三、使用view可以进行数据降维"></a>三、使用view可以进行数据降维</h3><p>只要元素数量能够对应，我们即可使用view来进行数据降维。</p>
+<h3 id="三-使用view可以进行数据降维"><a class="markdownIt-Anchor" href="#三-使用view可以进行数据降维"></a> 三、使用view可以进行数据降维</h3>
+<p>只要元素数量能够对应，我们即可使用view来进行数据降维。</p>
 <p><strong>示例</strong></p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> torch
 a = torch.randn(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>)
 print(a.size())
 print(a.view([<span class="hljs-number">3</span>,<span class="hljs-number">-1</span>]).size())</code></pre>
-
 <p><strong>结果</strong></p>
 <pre><code class="hljs python">torch.Size([<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">2</span>])
 torch.Size([<span class="hljs-number">3</span>, <span class="hljs-number">10</span>])</code></pre>
-
 
             </div>
             <hr>

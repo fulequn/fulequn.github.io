@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -219,17 +223,21 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/issues/12326">https://github.com/tensorflow/tensorflow/issues/12326</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010187278/article/details/77882822">(1条消息) TensorFlow KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”_u010187278的博客-CSDN博客</a></p>
 </blockquote>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
+<h2 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述</h2>
+<ul>
 <li>python 版本3.5</li>
 <li>macbook在用pip安装tensorflow后由于某些原因用pip又卸载了，然后再次pip install tensorflow，tensorflow安装成功</li>
 </ul>
-<p>此时import tensorflow时报错：<br>KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”</p>
+<p>此时import tensorflow时报错：<br>
+KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”</p>
 <p>注：我是在使用百度的飞桨Paddle时，导入paddle库时出现的这个错误。</p>
-<p>如下图：<br><img src="/2020/11/18/Article202011181/1.png" srcset="/img/loading.gif" alt="1"></p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><pre><code class="hljs apache"><span class="hljs-attribute">pip</span> uninstall protobuf
+<p>如下图：<br>
+<img src="/2020/11/18/Article202011181/1.png" srcset="/img/loading.gif" alt="1"></p>
+<h2 id="解决办法"><a class="markdownIt-Anchor" href="#解决办法"></a> 解决办法</h2>
+<pre><code class="hljs apache"><span class="hljs-attribute">pip</span> uninstall protobuf
 <span class="hljs-attribute">pip</span> install protobuf==<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span></code></pre>
-
-<p>两行代码重装protobuf，问题解决<br>推测是在卸载tensorflow时使得protobuf组件缺失，导致报错</p>
+<p>两行代码重装protobuf，问题解决<br>
+推测是在卸载tensorflow时使得protobuf组件缺失，导致报错</p>
 
             </div>
             <hr>

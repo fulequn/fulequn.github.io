@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      478 字
+      481 字
     </span>
   
 
@@ -218,8 +222,24 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase">https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase</a></p>
 </blockquote>
-<p>昨天import matploylib 库时遇到了ImportError: DLL load failed: 找不到指定的模块问题，记得之前sklearn也遇得到了这个问题，就是明明已经pip安装了某个库，但是在pycharm中却import不了，真是奇怪。<br>记得上次解决方式是将python3.7卸载，然后安装python3.6，再重新安装sklearn库才解决了这个问题，这次按照这个方法再次实验时又不行了，然后按照网上说的用whl方法安装还是不行，这就很无语了。最后呢，在第三方库的官网上找到了问题的所在。<br><img src="/2020/10/15/Article202010151/1.png" srcset="/img/loading.gif" alt="1"><br>自己在计算机内搜索，我果然没有vs,就果断点击下载，然后安装，再次导入库就成功了。</p>
-<p>这里再总结一下这个问题的解决方式<br>1、当发现安装了某个库，但是导入出现DLL load failed问题时，先卸载这个库（pip uninstall），然后再重新下载这个库（pip install ）<br>在下载后查看是否符合自己python的版本<br><img src="/2020/10/15/Article202010151/2.png" srcset="/img/loading.gif" alt="2"><br><img src="/2020/10/15/Article202010151/3.png" srcset="/img/loading.gif" alt="3"><br>2、如果在符合版本的情况还无法导入，就在计算机内查看是否有numpy,是否有vs<br><img src="/2020/10/15/Article202010151/4.png" srcset="/img/loading.gif" alt="4"><br>如果没有的话，就先pip numpy 再下载vs<br>vs下载网站是：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%B9%9F%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%93%E7%9A%84%E7%BD%91%E7%AB%99">https://www.lfd.uci.edu/~gohlke/pythonlibs/，这个也是所有库的网站</a><br><img src="/2020/10/15/Article202010151/5.png" srcset="/img/loading.gif" alt="5"><br><img src="/2020/10/15/Article202010151/6.png" srcset="/img/loading.gif" alt="6"><br>3、如果还是不能导入库，就将python降级，如从3.7降级到3.6，再次安装库，导入库<br>4、如果依然无法解决，就在<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/%E5%86%85%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84whl%E6%96%87%E4%BB%B6%EF%BC%8C%E5%86%8D%E7%94%A8pip%E5%AE%89%E8%A3%85%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%96%87%E7%AB%A0%E4%B8%AD%E6%9C%89%E4%BB%8B%E7%BB%8D%EF%BC%8C%E5%A6%82%E4%BD%95%E7%94%A8whl%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85%E5%BA%93">https://www.lfd.uci.edu/~gohlke/pythonlibs/内下载对应版本的whl文件，再用pip安装，这个在之前的文章中有介绍，如何用whl文件安装库</a><br>5、如果还不行的话，那我只能说，咱也不知道为什么，咱也不敢问了</p>
+<p>昨天import matploylib 库时遇到了ImportError: DLL load failed: 找不到指定的模块问题，记得之前sklearn也遇得到了这个问题，就是明明已经pip安装了某个库，但是在pycharm中却import不了，真是奇怪。<br>
+记得上次解决方式是将python3.7卸载，然后安装python3.6，再重新安装sklearn库才解决了这个问题，这次按照这个方法再次实验时又不行了，然后按照网上说的用whl方法安装还是不行，这就很无语了。最后呢，在第三方库的官网上找到了问题的所在。<br>
+<img src="/2020/10/15/Article202010151/1.png" srcset="/img/loading.gif" alt="1"><br>
+自己在计算机内搜索，我果然没有vs,就果断点击下载，然后安装，再次导入库就成功了。</p>
+<p>这里再总结一下这个问题的解决方式<br>
+1、当发现安装了某个库，但是导入出现DLL load failed问题时，先卸载这个库（pip uninstall），然后再重新下载这个库（pip install ）<br>
+在下载后查看是否符合自己python的版本<br>
+<img src="/2020/10/15/Article202010151/2.png" srcset="/img/loading.gif" alt="2"><br>
+<img src="/2020/10/15/Article202010151/3.png" srcset="/img/loading.gif" alt="3"><br>
+2、如果在符合版本的情况还无法导入，就在计算机内查看是否有numpy,是否有vs<br>
+<img src="/2020/10/15/Article202010151/4.png" srcset="/img/loading.gif" alt="4"><br>
+如果没有的话，就先pip numpy 再下载vs<br>
+vs下载网站是：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%B9%9F%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%93%E7%9A%84%E7%BD%91%E7%AB%99">https://www.lfd.uci.edu/~gohlke/pythonlibs/，这个也是所有库的网站</a><br>
+<img src="/2020/10/15/Article202010151/5.png" srcset="/img/loading.gif" alt="5"><br>
+<img src="/2020/10/15/Article202010151/6.png" srcset="/img/loading.gif" alt="6"><br>
+3、如果还是不能导入库，就将python降级，如从3.7降级到3.6，再次安装库，导入库<br>
+4、如果依然无法解决，就在https://www.lfd.uci.edu/~gohlke/pythonlibs/内下载对应版本的whl文件，再用pip安装，这个在之前的文章中有介绍，如何用whl文件安装库<br>
+5、如果还不行的话，那我只能说，咱也不知道为什么，咱也不敢问了</p>
 
             </div>
             <hr>

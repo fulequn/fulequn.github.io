@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -181,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      47
+      48
        分钟
     </span>
   
@@ -223,16 +227,17 @@
 <p><img src="/2020/09/12/Article202009121/1.jpg" srcset="/img/loading.gif" alt="1"></p>
 <p>注意这幅图片中就包含了关于刻度线的一些信息。比方，不仅有主刻度线(Major tick)，还有次刻度线(Minor tick)。并且我们看到刻度线都是朝着图的外侧。图中，上边的和右边的坐标轴(Spine)并没有刻度线。</p>
 <p>那么所有我们看到的关于刻度线的属性，都是可以修改的，至于刻度值 (Tick label)，在关于字符的问题中统一解决。在pylab中，有若干个函数用来修改刻度线的属性。</p>
-<h3 id="是否显示次刻度线"><a href="#是否显示次刻度线" class="headerlink" title="是否显示次刻度线"></a>是否显示次刻度线</h3><p>在pylab中内置了两个函数minorticks_on()和minorticks_off() 用来确定是否显示次刻度线。如下代码实现在左侧图中<strong>显示</strong>次刻度线，在右侧<strong>不显示</strong>次刻度线。在默认的情况下，不显示次刻度线。</p>
+<h3 id="是否显示次刻度线"><a class="markdownIt-Anchor" href="#是否显示次刻度线"></a> 是否显示次刻度线</h3>
+<p>在pylab中内置了两个函数minorticks_on()和minorticks_off() 用来确定是否显示次刻度线。如下代码实现在左侧图中<strong>显示</strong>次刻度线，在右侧<strong>不显示</strong>次刻度线。在默认的情况下，不显示次刻度线。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
 minorticks_on()
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
 minorticks_off()
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/2.png" srcset="/img/loading.gif" alt="2"></p>
-<h3 id="刻度线的朝向"><a href="#刻度线的朝向" class="headerlink" title="刻度线的朝向"></a>刻度线的朝向</h3><p>一般而言，我们希望刻度线朝外分布，这样避免影响图中的曲线和说明。但是有时候刻度线朝内分布，可以让图之间更加紧凑。在pylab中，利用<strong>tick_params</strong>控制刻度线的朝向，是朝图里，图外，还是都有。下面代码产生的图从左往右，分别显示朝里，朝外，两边都有的情况。</p>
+<h3 id="刻度线的朝向"><a class="markdownIt-Anchor" href="#刻度线的朝向"></a> 刻度线的朝向</h3>
+<p>一般而言，我们希望刻度线朝外分布，这样避免影响图中的曲线和说明。但是有时候刻度线朝内分布，可以让图之间更加紧凑。在pylab中，利用<strong>tick_params</strong>控制刻度线的朝向，是朝图里，图外，还是都有。下面代码产生的图从左往右，分别显示朝里，朝外，两边都有的情况。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)
@@ -244,9 +249,9 @@ tick_params(direction=<span class="hljs-string">&#x27;out&#x27;</span>)
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
 tick_params(direction=<span class="hljs-string">&#x27;inout&#x27;</span>)
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/3.png" srcset="/img/loading.gif" alt="3"></p>
-<h3 id="选择修改主刻度线还是次刻度线"><a href="#选择修改主刻度线还是次刻度线" class="headerlink" title="选择修改主刻度线还是次刻度线"></a>选择修改主刻度线还是次刻度线</h3><p>通过上面的例子可以看出，修改刻度线的主要函数就是tick_params。那么每次调用这个函数，是修改主刻度线、次刻度线，还是都改呢？这个由参数<strong>which</strong>控制。比方下面这段代码，分别让主刻度线朝里、次刻度线朝里、主次均朝里。最后一个图说明默认情况下，主次刻度线均朝外。</p>
+<h3 id="选择修改主刻度线还是次刻度线"><a class="markdownIt-Anchor" href="#选择修改主刻度线还是次刻度线"></a> 选择修改主刻度线还是次刻度线</h3>
+<p>通过上面的例子可以看出，修改刻度线的主要函数就是tick_params。那么每次调用这个函数，是修改主刻度线、次刻度线，还是都改呢？这个由参数<strong>which</strong>控制。比方下面这段代码，分别让主刻度线朝里、次刻度线朝里、主次均朝里。最后一个图说明默认情况下，主次刻度线均朝外。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>)
 minorticks_on()
@@ -264,9 +269,9 @@ subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<s
 minorticks_on()
 text(<span class="hljs-number">0.5</span>,<span class="hljs-number">0.5</span>,<span class="hljs-string">&#x27;default&#x27;</span>)
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/4.png" srcset="/img/loading.gif" alt="4"></p>
-<h3 id="修改刻度线的长度和宽度"><a href="#修改刻度线的长度和宽度" class="headerlink" title="修改刻度线的长度和宽度"></a>修改刻度线的长度和宽度</h3><p>如上图，如果觉得刻度线太短，太细，不太显眼，我们可以修改其长短、粗细。依然使用函数tick_params，通过参数<strong>width</strong>和<strong>length</strong>控制。下面代码让左图的主刻度线<strong>粗</strong>一些，右图的次刻度线<strong>长</strong>一些。</p>
+<h3 id="修改刻度线的长度和宽度"><a class="markdownIt-Anchor" href="#修改刻度线的长度和宽度"></a> 修改刻度线的长度和宽度</h3>
+<p>如上图，如果觉得刻度线太短，太细，不太显眼，我们可以修改其长短、粗细。依然使用函数tick_params，通过参数<strong>width</strong>和<strong>length</strong>控制。下面代码让左图的主刻度线<strong>粗</strong>一些，右图的次刻度线<strong>长</strong>一些。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
 minorticks_on()
@@ -277,9 +282,9 @@ minorticks_on()
 tick_params(which=<span class="hljs-string">&#x27;minor&#x27;</span>,length=<span class="hljs-number">10</span>)
 
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/5.png" srcset="/img/loading.gif" alt="5"></p>
-<h3 id="在哪些轴上显示刻度线"><a href="#在哪些轴上显示刻度线" class="headerlink" title="在哪些轴上显示刻度线"></a>在哪些轴上显示刻度线</h3><p>我们来看怎么控制刻度线出现在哪些轴上。这里用参数<strong>left，right,bottom,top</strong>来控制，下面代码画出的图片，依次显示上下左右轴上的刻度线。</p>
+<h3 id="在哪些轴上显示刻度线"><a class="markdownIt-Anchor" href="#在哪些轴上显示刻度线"></a> 在哪些轴上显示刻度线</h3>
+<p>我们来看怎么控制刻度线出现在哪些轴上。这里用参数<strong>left，right,bottom,top</strong>来控制，下面代码画出的图片，依次显示上下左右轴上的刻度线。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>)
 tick_params(top=<span class="hljs-string">&#x27;on&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
@@ -294,18 +299,18 @@ subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<s
 tick_params(top=<span class="hljs-string">&#x27;off&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;on&#x27;</span>)
 
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/6.png" srcset="/img/loading.gif" alt="6"></p>
-<h3 id="在哪些轴上显示刻度值"><a href="#在哪些轴上显示刻度值" class="headerlink" title="在哪些轴上显示刻度值"></a>在哪些轴上显示刻度值</h3><p>注意上面的图，<strong>刻度线</strong>分别出现在我们控制的坐标轴上，但是<strong>刻度值</strong>在默认情况下还是出现在左下两个轴上。这里仅说明如何让刻度值出现在相应刻度线的位置。比方，我们仅让上面的轴显示刻度线，也仅在该轴上显示刻度值，利用<strong>labelbottom, labeltop, labelleft, labelright</strong>四个参数控制，代码和图如下所示。</p>
+<h3 id="在哪些轴上显示刻度值"><a class="markdownIt-Anchor" href="#在哪些轴上显示刻度值"></a> 在哪些轴上显示刻度值</h3>
+<p>注意上面的图，<strong>刻度线</strong>分别出现在我们控制的坐标轴上，但是<strong>刻度值</strong>在默认情况下还是出现在左下两个轴上。这里仅说明如何让刻度值出现在相应刻度线的位置。比方，我们仅让上面的轴显示刻度线，也仅在该轴上显示刻度值，利用<strong>labelbottom, labeltop, labelleft, labelright</strong>四个参数控制，代码和图如下所示。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
 
 tick_params(top=<span class="hljs-string">&#x27;on&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
 tick_params(labeltop=<span class="hljs-string">&#x27;on&#x27;</span>,labelbottom=<span class="hljs-string">&#x27;off&#x27;</span>,labelleft=<span class="hljs-string">&#x27;off&#x27;</span>,labelright=<span class="hljs-string">&#x27;off&#x27;</span>)
 
 show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/7.png" srcset="/img/loading.gif" alt="7"></p>
-<h3 id="设置x轴的刻度和显示"><a href="#设置x轴的刻度和显示" class="headerlink" title="设置x轴的刻度和显示"></a>设置x轴的刻度和显示</h3><p>使用Matplotlib进行绘图时，当x轴的数据太多的时候，就需要设置x轴的刻度和显示文本。</p>
+<h3 id="设置x轴的刻度和显示"><a class="markdownIt-Anchor" href="#设置x轴的刻度和显示"></a> 设置x轴的刻度和显示</h3>
+<p>使用Matplotlib进行绘图时，当x轴的数据太多的时候，就需要设置x轴的刻度和显示文本。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
@@ -330,21 +335,23 @@ ax.set_xticklabels(xlabels, rotation=<span class="hljs-number">40</span>)<span c
 plt.plot(y)
 plt.grid()
 plt.show()</code></pre>
-
 <p>其中，涉及到坐标轴的刻度以及显示文本的函数为</p>
-<p><code>ax.set_xticks(xticks)#xticks中的数据作为坐标轴系数</code><br><code>ax.set_xticklabels(xlabels, rotation=40)#将x轴的刻度值</code></p>
-<h3 id="在-Matplotlib-中如何隐藏坐标轴文本刻度或刻度标签"><a href="#在-Matplotlib-中如何隐藏坐标轴文本刻度或刻度标签" class="headerlink" title="在 Matplotlib 中如何隐藏坐标轴文本刻度或刻度标签"></a>在 Matplotlib 中如何隐藏坐标轴文本刻度或刻度标签</h3><blockquote>
+<p><code>ax.set_xticks(xticks)#xticks中的数据作为坐标轴系数</code><br>
+<code>ax.set_xticklabels(xlabels, rotation=40)#将x轴的刻度值</code></p>
+<h3 id="在-matplotlib-中如何隐藏坐标轴文本刻度或刻度标签"><a class="markdownIt-Anchor" href="#在-matplotlib-中如何隐藏坐标轴文本刻度或刻度标签"></a> 在 Matplotlib 中如何隐藏坐标轴文本刻度或刻度标签</h3>
+<blockquote>
 <ol>
 <li>xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴</li>
 <li>xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴</li>
 <li>xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本</li>
-<li>xticks(color=’w’)/yticks(color=’w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</li>
+<li>xticks(color=‘w’)/yticks(color=‘w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</li>
 </ol>
 </blockquote>
 <p>默认情况下，Matplotlib 中的图显示了两个轴的 <code>ticks</code> 和 <code>ticklabels</code>，如示例图所示。</p>
 <p>它有不同的隐藏坐标轴文本的方法，例如 <code>xaxis.set_visible(False)</code>，<code>xaxis.set_ticks([])</code> 和 <code>xaxis.set_ticklabels([])</code>。如果将刻度线的颜色设置为白色，则仅当 Matplotlib 图形的前景色为白色时，它也可能使轴文本不可见。</p>
 <p><img src="/2020/09/12/Article202009121/8.png" srcset="/img/loading.gif" alt="8"></p>
-<h4 id="xaxis-set-visible-False-yaxis-set-visible-False-隐藏包括轴标签的坐标轴"><a href="#xaxis-set-visible-False-yaxis-set-visible-False-隐藏包括轴标签的坐标轴" class="headerlink" title="xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴"></a>xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴</h4><p>顾名思义，它使整个坐标轴不可见，包括轴刻度，轴刻度标签和轴标签。</p>
+<h4 id="xaxisset_visiblefalseyaxisset_visiblefalse-隐藏包括轴标签的坐标轴"><a class="markdownIt-Anchor" href="#xaxisset_visiblefalseyaxisset_visiblefalse-隐藏包括轴标签的坐标轴"></a> xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴</h4>
+<p>顾名思义，它使整个坐标轴不可见，包括轴刻度，轴刻度标签和轴标签。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
@@ -357,9 +364,9 @@ ax.axes.yaxis.set_visible(<span class="hljs-literal">False</span>)
 
 plt.grid(<span class="hljs-literal">True</span>)
 plt.show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/9.png" srcset="/img/loading.gif" alt="9"></p>
-<h4 id="xaxis-set-ticks-yaxis-set-ticks-在-Matplotlib-中隐藏坐标轴"><a href="#xaxis-set-ticks-yaxis-set-ticks-在-Matplotlib-中隐藏坐标轴" class="headerlink" title="xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴"></a>xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴</h4><p><code>x/yaxis.set_ticks([])</code> 设置刻度为空，并使坐标轴刻度及其标签不可见。但是坐标轴标签不受影响。</p>
+<h4 id="xaxisset_ticksyaxisset_ticks-在-matplotlib-中隐藏坐标轴"><a class="markdownIt-Anchor" href="#xaxisset_ticksyaxisset_ticks-在-matplotlib-中隐藏坐标轴"></a> xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴</h4>
+<p><code>x/yaxis.set_ticks([])</code> 设置刻度为空，并使坐标轴刻度及其标签不可见。但是坐标轴标签不受影响。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
@@ -372,9 +379,9 @@ ax.axes.yaxis.set_ticks([])
 
 plt.grid(<span class="hljs-literal">True</span>)
 plt.show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/10.png" srcset="/img/loading.gif" alt="10"></p>
-<h4 id="xaxis-set-ticklabels-yaxis-set-ticklabels-在-Matplotlib-中隐藏轴标签-文本"><a href="#xaxis-set-ticklabels-yaxis-set-ticklabels-在-Matplotlib-中隐藏轴标签-文本" class="headerlink" title="xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本"></a>xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本</h4><p><code>x/yaxis.set_ticklabels([])</code> 将刻度标签设置为空，从而使坐标轴文本（刻度标签）不可见，但刻度保持可见。</p>
+<h4 id="xaxisset_ticklabelsyaxisset_ticklabels-在-matplotlib-中隐藏轴标签文本"><a class="markdownIt-Anchor" href="#xaxisset_ticklabelsyaxisset_ticklabels-在-matplotlib-中隐藏轴标签文本"></a> xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本</h4>
+<p><code>x/yaxis.set_ticklabels([])</code> 将刻度标签设置为空，从而使坐标轴文本（刻度标签）不可见，但刻度保持可见。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
@@ -388,9 +395,9 @@ ax.axes.yaxis.set_ticklabels([])
 
 plt.grid(<span class="hljs-literal">True</span>)
 plt.show()</code></pre>
-
 <p><img src="/2020/09/12/Article202009121/11.png" srcset="/img/loading.gif" alt="11"></p>
-<h4 id="xticks-color-’w’-yticks-color-’w’-来隐藏-Matplotlib-中的坐标轴标签-文本"><a href="#xticks-color-’w’-yticks-color-’w’-来隐藏-Matplotlib-中的坐标轴标签-文本" class="headerlink" title="xticks(color=’w’)/yticks(color=’w’) 来隐藏 Matplotlib 中的坐标轴标签/文本"></a>xticks(color=’w’)/yticks(color=’w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</h4><p>这种方法不会使刻度线标签或刻度线不可见，而是将刻度线的颜色设置为白色，以便在绘图的背景为白色（也是默认颜色）的情况下，轴文本的确是不可见的。</p>
+<h4 id="xtickscolorwytickscolorw-来隐藏-matplotlib-中的坐标轴标签文本"><a class="markdownIt-Anchor" href="#xtickscolorwytickscolorw-来隐藏-matplotlib-中的坐标轴标签文本"></a> xticks(color=‘w’)/yticks(color=‘w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</h4>
+<p>这种方法不会使刻度线标签或刻度线不可见，而是将刻度线的颜色设置为白色，以便在绘图的背景为白色（也是默认颜色）的情况下，轴文本的确是不可见的。</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
 plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,9 +218,11 @@
             <h1 style="display: none">数据挖掘原理-概论（1）</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="1-数据挖掘的概念"><a href="#1-数据挖掘的概念" class="headerlink" title="1.数据挖掘的概念"></a>1.数据挖掘的概念</h2><p>数据挖掘（Data Mining，DM）又称数据库中的知识发现（Knowledge Discover in Database，KDD），是涉及机器学习、人工智能、数据库理论以及统计学等学科的交叉研究领域。</p>
+              <h2 id="1数据挖掘的概念"><a class="markdownIt-Anchor" href="#1数据挖掘的概念"></a> 1.数据挖掘的概念</h2>
+<p>数据挖掘（Data Mining，DM）又称数据库中的知识发现（Knowledge Discover in Database，KDD），是涉及机器学习、人工智能、数据库理论以及统计学等学科的交叉研究领域。</p>
 <p>数据挖掘就是从数据库的大量数据中挖掘出有用的信息，即从大量的、不完全的、有噪声的、模糊的、随机的实际应用数据中，发现隐含的、规律性的、人们事先未知的，但又是潜在有用的并且最终可理解的信息和知识的非平凡过程。</p>
-<h2 id="2-数据挖掘的历史及发展数据挖掘"><a href="#2-数据挖掘的历史及发展数据挖掘" class="headerlink" title="2.数据挖掘的历史及发展数据挖掘"></a>2.数据挖掘的历史及发展数据挖掘</h2><p>数据挖掘（Data Mining，DM）是知识发现（KDD）最核心的部分。（<strong>数据挖掘与知识发现的关系</strong>）</p>
+<h2 id="2数据挖掘的历史及发展数据挖掘"><a class="markdownIt-Anchor" href="#2数据挖掘的历史及发展数据挖掘"></a> 2.数据挖掘的历史及发展数据挖掘</h2>
+<p>数据挖掘（Data Mining，DM）是知识发现（KDD）最核心的部分。（<strong>数据挖掘与知识发现的关系</strong>）</p>
 <p>数据挖掘数学理论基础的发展，与统计学的发展密不可分。</p>
 <p><img src="/2020/09/01/Article202009011/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>数据挖掘中还存在许多问题有待进一步研究，包括下列几个研究方向：</p>
@@ -227,7 +233,9 @@
 <p>⑤探索新的应用领域</p>
 <p>⑥数据挖掘结果的可用性、确定性及可表达性</p>
 <p>⑦可视化数据挖掘</p>
-<h2 id="3-数据挖掘的研究内容及功能"><a href="#3-数据挖掘的研究内容及功能" class="headerlink" title="3.数据挖掘的研究内容及功能"></a>3.数据挖掘的研究内容及功能</h2><h3 id="3-1数据挖掘的研究内容"><a href="#3-1数据挖掘的研究内容" class="headerlink" title="3.1数据挖掘的研究内容"></a>3.1数据挖掘的研究内容</h3><p>数据挖掘所发现的知识最常见的有以下五类：</p>
+<h2 id="3数据挖掘的研究内容及功能"><a class="markdownIt-Anchor" href="#3数据挖掘的研究内容及功能"></a> 3.数据挖掘的研究内容及功能</h2>
+<h3 id="31数据挖掘的研究内容"><a class="markdownIt-Anchor" href="#31数据挖掘的研究内容"></a> 3.1数据挖掘的研究内容</h3>
+<p>数据挖掘所发现的知识最常见的有以下五类：</p>
 <p>①广义知识（Generalizat ion）</p>
 <p>广义知识指类别特征的概括性描述知识，反映同类事物共同性质，它是对数据的概括、精炼和抽象。</p>
 <p>②关联知识（Association）</p>
@@ -238,9 +246,10 @@
 <p>预测型知识根据时间序列型数据，由历史的和当前的数据去推测未来的数据，也可以认为是以时间为关键属性的关联知识</p>
 <p>⑤偏差型知识（Deviat ion）</p>
 <p>偏差型知识是对差异和极端特例的描述，揭示事物偏离常规的异常现象，如标准类外的特例，数据聚类外的离群值等<img src="/2020/09/01/Article202009011/3.png" srcset="/img/loading.gif" alt="3"></p>
-<h3 id="数据挖掘分类"><a href="#数据挖掘分类" class="headerlink" title="数据挖掘分类"></a>数据挖掘分类</h3><p>不同的角度，不同的分类</p>
+<h3 id="数据挖掘分类"><a class="markdownIt-Anchor" href="#数据挖掘分类"></a> 数据挖掘分类</h3>
+<p>不同的角度，不同的分类</p>
 <ul>
-<li>待挖掘的数据库类型 </li>
+<li>待挖掘的数据库类型</li>
 <li>待发现的知识类型</li>
 <li>所用的技术类型</li>
 <li>所适合的应用类型</li>
@@ -249,14 +258,16 @@
 <p><img src="/2020/09/01/Article202009011/4.png" srcset="/img/loading.gif" alt="4"></p>
 <p>所用技术</p>
 <p>机器学习，统计学，神经网络，数据库，可视化。</p>
-<h3 id="数据挖掘的功能主要体现在以下六个方面。"><a href="#数据挖掘的功能主要体现在以下六个方面。" class="headerlink" title="数据挖掘的功能主要体现在以下六个方面。"></a>数据挖掘的功能主要体现在以下六个方面。</h3><h4 id="1-类-概念描述：特征化和区分"><a href="#1-类-概念描述：特征化和区分" class="headerlink" title="1.类/概念描述：特征化和区分"></a>1.类/概念描述：特征化和区分</h4><p>对含有大量数据的数据集合进行描述性的总结并获得简明、准确的描述，这种描述就称为<strong>类/概念描述</strong>（Class/Concept Description）。这种描述可以通过下述方法得到：</p>
+<h3 id="数据挖掘的功能主要体现在以下六个方面"><a class="markdownIt-Anchor" href="#数据挖掘的功能主要体现在以下六个方面"></a> 数据挖掘的功能主要体现在以下六个方面。</h3>
+<h4 id="1类概念描述特征化和区分"><a class="markdownIt-Anchor" href="#1类概念描述特征化和区分"></a> 1.类/概念描述：特征化和区分</h4>
+<p>对含有大量数据的数据集合进行描述性的总结并获得简明、准确的描述，这种描述就称为<strong>类/概念描述</strong>（Class/Concept Description）。这种描述可以通过下述方法得到：</p>
 <p>（1）数据特征化</p>
 <p>（2）数据区分</p>
 <p>（3）数据特征化和比较</p>
 <p>2.关联分析</p>
 <p>关联分析（Association Analysis）就是从给定的数据集中发现频繁出现的项集模式知识，又称为关联规则</p>
 <p>3.分类和预测</p>
-<p> <strong>分类</strong>（Classification）就是找出一组能够描述数据集合典型特征的模型（或函数），以便能够分类识别未知数据的归属或类别（Class）。</p>
+<p><strong>分类</strong>（Classification）就是找出一组能够描述数据集合典型特征的模型（或函数），以便能够分类识别未知数据的归属或类别（Class）。</p>
 <p>分类挖掘所获得的分类模型可以采用多种形式加以描述输出。其中主要的表示方法有：分类规则（IF-THEN）、决策树（Decision Trees）、数学公式（Mathematical Formulae）和神经网络。</p>
 <p>分类可以用来预测数据对象的<strong>类标记</strong>。<strong>预测</strong>通常是指值预测，同时也包含基于可用数据的分布趋势识别。</p>
 <p><img src="/2020/09/01/Article202009011/5.png" srcset="/img/loading.gif" alt="5"></p>
@@ -266,7 +277,9 @@
 <p>大部分数据挖掘方法将<strong>孤立点</strong>视为噪声或异常而丢弃，但是孤立点可以使用统计试验检测。</p>
 <p>6.演变分析</p>
 <p><strong>数据演变分析</strong>（Evolution Analysis）就是对随时间变化的数据对象的变化规律和趋势进行建模描述。</p>
-<h2 id="4-数据挖掘的常用技术及工具"><a href="#4-数据挖掘的常用技术及工具" class="headerlink" title="4.数据挖掘的常用技术及工具"></a>4.数据挖掘的常用技术及工具</h2><h3 id="4-1-数据挖掘的常用技术"><a href="#4-1-数据挖掘的常用技术" class="headerlink" title="4.1 数据挖掘的常用技术"></a>4.1 数据挖掘的常用技术</h3><p><img src="/2020/09/01/Article202009011/6.png" srcset="/img/loading.gif" alt="6"></p>
+<h2 id="4数据挖掘的常用技术及工具"><a class="markdownIt-Anchor" href="#4数据挖掘的常用技术及工具"></a> 4.数据挖掘的常用技术及工具</h2>
+<h3 id="41-数据挖掘的常用技术"><a class="markdownIt-Anchor" href="#41-数据挖掘的常用技术"></a> 4.1 数据挖掘的常用技术</h3>
+<p><img src="/2020/09/01/Article202009011/6.png" srcset="/img/loading.gif" alt="6"></p>
 <p>4.2 数据挖掘的工具</p>
 <p>1、基于<strong>神经网络</strong>的工具</p>
 <p>神经网络用于分类、特征挖掘、预测和模式识别。</p>
@@ -276,7 +289,9 @@
 <p>该方法应用模糊逻辑进行数据查询、排序等。</p>
 <p>4、综合多方法的工具</p>
 <p>这类工具一般规模较大，适用于大型数据库（包括并行数据库）</p>
-<h2 id="5-数据挖掘的主要问题"><a href="#5-数据挖掘的主要问题" class="headerlink" title="5.数据挖掘的主要问题"></a>5.数据挖掘的主要问题</h2><h3 id="挖掘方法和用户交互"><a href="#挖掘方法和用户交互" class="headerlink" title="挖掘方法和用户交互"></a>挖掘方法和用户交互</h3><ul>
+<h2 id="5数据挖掘的主要问题"><a class="markdownIt-Anchor" href="#5数据挖掘的主要问题"></a> 5.数据挖掘的主要问题</h2>
+<h3 id="挖掘方法和用户交互"><a class="markdownIt-Anchor" href="#挖掘方法和用户交互"></a> 挖掘方法和用户交互</h3>
+<ul>
 <li>在数据库中挖掘不同类型的知识</li>
 <li>结合背景知识</li>
 <li>数据挖掘语言和启发式数据挖掘</li>
@@ -285,14 +300,18 @@
 <li>处理噪音和不完全数据</li>
 <li>模式评估:兴趣度问题</li>
 </ul>
-<h3 id="性能和可伸缩性"><a href="#性能和可伸缩性" class="headerlink" title="性能和可伸缩性"></a>性能和可伸缩性</h3><ul>
+<h3 id="性能和可伸缩性"><a class="markdownIt-Anchor" href="#性能和可伸缩性"></a> 性能和可伸缩性</h3>
+<ul>
 <li>数据挖掘算法的性能和可伸缩性</li>
 <li>并行、分布和增量的挖掘方法</li>
 </ul>
-<h3 id="数据类型的多样性问题"><a href="#数据类型的多样性问题" class="headerlink" title="数据类型的多样性问题"></a>数据类型的多样性问题</h3><p><img src="/2020/09/01/Article202009011/7.png" srcset="/img/loading.gif" alt="7"></p>
-<h3 id="应用和社会效果问题"><a href="#应用和社会效果问题" class="headerlink" title="应用和社会效果问题"></a>应用和社会效果问题</h3><ul>
+<h3 id="数据类型的多样性问题"><a class="markdownIt-Anchor" href="#数据类型的多样性问题"></a> 数据类型的多样性问题</h3>
+<p><img src="/2020/09/01/Article202009011/7.png" srcset="/img/loading.gif" alt="7"></p>
+<h3 id="应用和社会效果问题"><a class="markdownIt-Anchor" href="#应用和社会效果问题"></a> 应用和社会效果问题</h3>
+<ul>
 <li>发现知识的应用</li>
-<li><ul>
+<li>
+<ul>
 <li>特定领域的数据挖掘工具</li>
 <li>智能查询回答</li>
 <li>过程控制和决策制定</li>

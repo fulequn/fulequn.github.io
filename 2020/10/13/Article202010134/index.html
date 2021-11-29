@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      190 字
+      198 字
     </span>
   
 
@@ -221,8 +225,8 @@
 <p><strong>前言</strong>：在写入csv文件中，出现了乱码的问题。</p>
 <p><strong>解决</strong>：utf-8 改为utf-8-sig</p>
 <p><strong>区别如下</strong>：</p>
-<p>1、”utf-8“ 是以字节为编码单元,它的字节顺序在所有系统中都是一样的,没有字节序问题,因此它不需要BOM,所以当用”utf-8”编码方式读取带有BOM的文件时,它会把BOM当做是文件内容来处理, 也就会发生类似上边的错误.</p>
-<p>2、“uft-8-sig”中sig全拼为 signature 也就是”带有签名的utf-8”, 因此”utf-8-sig”读取带有BOM的”utf-8文件时”会把BOM单独处理,与文本内容隔离开,也是我们期望的结果.</p>
+<p>1、”utf-8“ 是以字节为编码单元,它的字节顺序在所有系统中都是一样的,没有字节序问题,因此它不需要BOM,所以当用&quot;utf-8&quot;编码方式读取带有BOM的文件时,它会把BOM当做是文件内容来处理, 也就会发生类似上边的错误.</p>
+<p>2、“uft-8-sig&quot;中sig全拼为 signature 也就是&quot;带有签名的utf-8”, 因此&quot;utf-8-sig&quot;读取带有BOM的&quot;utf-8文件时&quot;会把BOM单独处理,与文本内容隔离开,也是我们期望的结果.</p>
 
             </div>
             <hr>

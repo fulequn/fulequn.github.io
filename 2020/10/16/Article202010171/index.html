@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -225,7 +229,9 @@
 <li>NAT模式</li>
 <li>桥接模式</li>
 </ul>
-<h2 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h2><h3 id="1-VMware-Station设置"><a href="#1-VMware-Station设置" class="headerlink" title="1.VMware Station设置"></a>1.VMware Station设置</h3><p>首先，在VMware Satation中先设置虚拟机的网络适配器为NAT模式。</p>
+<h2 id="nat模式"><a class="markdownIt-Anchor" href="#nat模式"></a> NAT模式</h2>
+<h3 id="1vmware-station设置"><a class="markdownIt-Anchor" href="#1vmware-station设置"></a> 1.VMware Station设置</h3>
+<p>首先，在VMware Satation中先设置虚拟机的网络适配器为NAT模式。</p>
 <p><img src="/2020/10/16/Article202010171/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>然后进行网络适配器的设置，这个必须需要是VMware Station，如果只是VMware Player就不能更改，同时必须具有系统管理员权限。</p>
 <p><img src="/2020/10/16/Article202010171/2.png" srcset="/img/loading.gif" alt="2"></p>
@@ -234,7 +240,8 @@
 <p><img src="/2020/10/16/Article202010171/3.png" srcset="/img/loading.gif" alt="3"></p>
 <p>寻找到自己的网关IP，然后记录下来，我的网关IP是192.168.40.2，通常是子网IP前3位，最后一位为2。</p>
 <p><img src="/2020/10/16/Article202010171/4.png" srcset="/img/loading.gif" alt="4"></p>
-<h3 id="2-虚拟机设置"><a href="#2-虚拟机设置" class="headerlink" title="2.虚拟机设置"></a>2.虚拟机设置</h3><p>然后进入我们的虚拟机</p>
+<h3 id="2虚拟机设置"><a class="markdownIt-Anchor" href="#2虚拟机设置"></a> 2.虚拟机设置</h3>
+<p>然后进入我们的虚拟机</p>
 <p>我的系统是CentOS 7的虚拟机，所以我进入本机的network-scripts的ifcfg文件(本机为ifcfg-ens33)，如果是其他系统需要自己来找到对应的网卡配置文件。</p>
 <p><img src="/2020/10/16/Article202010171/6.png" srcset="/img/loading.gif" alt="6"></p>
 <p>这里我们需要设置的参数如下：</p>
@@ -245,7 +252,8 @@
 <p>DNS(域名解析服务)：8.8.8.8,114.114.114.114。就用这两个域名解析服务，其中8.8.8.8为谷歌提供的，114.114.114.114是国内移bai动、电信和联通通用的DNS。</p>
 <p>ONBOOT：yes，保证重启服务时，网卡会重启。</p>
 <p>使用<code>service network restart</code>重启网卡服务，看到确定即可。如果出错，则使用对应命令来检查日志，然后针对问题来查找解决办法，这里就不详细列出了。</p>
-<h3 id="3-本机进行网络适配器设置"><a href="#3-本机进行网络适配器设置" class="headerlink" title="3.本机进行网络适配器设置"></a>3.本机进行网络适配器设置</h3><p>进入更改适配器选项中，看到我们所有的网络适配器，然后选择我们VMware Station中NAT网卡对应的网络适配器，一般来说，该适配器的名称为VMware Network Adapter VMnet8。</p>
+<h3 id="3本机进行网络适配器设置"><a class="markdownIt-Anchor" href="#3本机进行网络适配器设置"></a> 3.本机进行网络适配器设置</h3>
+<p>进入更改适配器选项中，看到我们所有的网络适配器，然后选择我们VMware Station中NAT网卡对应的网络适配器，一般来说，该适配器的名称为VMware Network Adapter VMnet8。</p>
 <p><img src="/2020/10/16/Article202010171/7.png" srcset="/img/loading.gif" alt="7"></p>
 <p>然后更改该适配器的属性，找到IPv4选项进行更改。</p>
 <p><img src="/2020/10/16/Article202010171/8.png" srcset="/img/loading.gif" alt="8"></p>
@@ -254,16 +262,20 @@
 <p>IP地址由自己决定，与VMware Station中网络编辑器中的NAT模式的一致，IP地址不要写太小，与上述虚拟机中IP地址的要求一致。其中，子网掩码和默认网关也需要与VMware Station中网络编辑器一致。</p>
 <p>DNS则使用我们在虚拟机中设置的8.8.8.8,114.114.114.114。</p>
 <p><strong>这样我们使用NAT模式来让虚拟机连接网络就已经实现了。</strong></p>
-<h2 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h2><h3 id="1-VMware-Station设置-1"><a href="#1-VMware-Station设置-1" class="headerlink" title="1.VMware Station设置"></a>1.VMware Station设置</h3><p>更改对应虚拟机的网络适配器为自定义的网络适配器，我们这里采用的VMent0就是我们人工设置的桥接模式网络，通常来说VMent0是默认的桥接模式。</p>
+<h2 id="桥接模式"><a class="markdownIt-Anchor" href="#桥接模式"></a> 桥接模式</h2>
+<h3 id="1vmware-station设置-2"><a class="markdownIt-Anchor" href="#1vmware-station设置-2"></a> 1.VMware Station设置</h3>
+<p>更改对应虚拟机的网络适配器为自定义的网络适配器，我们这里采用的VMent0就是我们人工设置的桥接模式网络，通常来说VMent0是默认的桥接模式。</p>
 <p><img src="/2020/10/16/Article202010171/10.png" srcset="/img/loading.gif" alt="10"></p>
 <p>接下来，我们进入网络编辑器，然后使用管理员权限，然后查看我们的VMent0，然后我们选择使用桥接模式，桥接至我们的上网网卡（上网网卡可以在本机进行查看）。</p>
 <p><img src="/2020/10/16/Article202010171/11.png" srcset="/img/loading.gif" alt="11"></p>
-<h3 id="2-查看本机的网络适配器配置"><a href="#2-查看本机的网络适配器配置" class="headerlink" title="2.查看本机的网络适配器配置"></a>2.查看本机的网络适配器配置</h3><p>进入更改适配器选项，这次找到我们的上网网卡，以我的网络连接为例</p>
+<h3 id="2查看本机的网络适配器配置"><a class="markdownIt-Anchor" href="#2查看本机的网络适配器配置"></a> 2.查看本机的网络适配器配置</h3>
+<p>进入更改适配器选项，这次找到我们的上网网卡，以我的网络连接为例</p>
 <p><img src="/2020/10/16/Article202010171/12.png" srcset="/img/loading.gif" alt="12"></p>
 <p>查看对应的详细信息。</p>
 <p>然后记录下自己的IP地址，以及对应的网关和DNS服务器。</p>
 <p><img src="/2020/10/16/Article202010171/14.png" srcset="/img/loading.gif" alt="14"></p>
-<h3 id="3-虚拟机设置"><a href="#3-虚拟机设置" class="headerlink" title="3.虚拟机设置"></a>3.虚拟机设置</h3><p>进入虚拟机对应的网卡设置文件，与NAT模式一致。</p>
+<h3 id="3虚拟机设置"><a class="markdownIt-Anchor" href="#3虚拟机设置"></a> 3.虚拟机设置</h3>
+<p>进入虚拟机对应的网卡设置文件，与NAT模式一致。</p>
 <p>然后与NAT不同的就是我们的IPADDR以及GATEWAY还有DNS，这个需要与我们真实上网的网卡对应上。</p>
 <p><strong>请注意，IP地址不要写已经被使用的IP地址。</strong></p>
 <p>然后，使用<code>service network restart</code>重启网卡服务。</p>

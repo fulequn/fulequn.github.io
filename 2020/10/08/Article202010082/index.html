@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      686 字
+      713 字
     </span>
   
 
@@ -181,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      20
        分钟
     </span>
   
@@ -221,7 +225,10 @@
 <p>很多朋友在使用centos7系统时，有时候需要分配多个IP地址，这就涉及到修改网卡配置，但是在修改完网卡配置时，重启网络服务时会出现“Failed to start LSB: Bring up/down”网络报错，这个应该应该怎么解决呢？</p>
 <p>其实使用提示命令<strong>systemctl status network.service</strong>进行查看可以发现错误行：</p>
 <blockquote>
-<p>[[email protected] ~]# systemctl status network.service<br>● network.service – LSB: Bring up/down networking<br>Loaded: loaded (/etc/rc.d/init.d/network; bad; vendor preset: disabled)<br>Active: failed (Result: exit-code) since Mon 2019-03-14 23:24:37 CST; 16s ago</p>
+<p>[[email protected] ~]# systemctl status network.service<br>
+● network.service – LSB: Bring up/down networking<br>
+Loaded: loaded (/etc/rc.d/init.d/network; bad; vendor preset: disabled)<br>
+Active: failed (Result: exit-code) since Mon 2019-03-14 23:24:37 CST; 16s ago</p>
 </blockquote>
 <p>解决方法如下：</p>
 <p><strong>第一种方法：修改MAC地址</strong></p>
@@ -241,12 +248,40 @@
 <p>1、修改网卡名和配置文件</p>
 <p># mv /etc/sysconfig/network-scripts/ifcfg-enoeno9 /etc/sysconfig/network-scripts/ifcfg-eth0</p>
 <p>修改配置文件里面name和device</p>
-<p># vi /etc/sysconfig/network-scripts/ifcfg-eth0<br>TYPE=Ethernet<br>BOOTPROTO=static<br>DEFROUTE=yes<br>PEERDNS=yes<br>PEERROUTES=yes<br>IPV4_FAILURE_FATAL=no<br>NAME=eth0<br>UUID=d890d6e6-01f6-4063-bf70-cd4e1787d0a8<br>HWADDR=00:50:56:8b:57:82 #这里原文件没有，手动添加上去<br>DEVICE=eth0<br>ONBOOT=yes<br>IPADDR=IP</p>
-<p>NETMASK=掩码<br>GATEWAY=网关</p>
+<p># vi /etc/sysconfig/network-scripts/ifcfg-eth0<br>
+TYPE=Ethernet<br>
+BOOTPROTO=static<br>
+DEFROUTE=yes<br>
+PEERDNS=yes<br>
+PEERROUTES=yes<br>
+IPV4_FAILURE_FATAL=no<br>
+NAME=eth0<br>
+UUID=d890d6e6-01f6-4063-bf70-cd4e1787d0a8<br>
+HWADDR=00:50:56:8b:57:82 #这里原文件没有，手动添加上去<br>
+DEVICE=eth0<br>
+ONBOOT=yes<br>
+IPADDR=IP</p>
+<p>NETMASK=掩码<br>
+GATEWAY=网关</p>
 <p>2、修改/etc/sysconfig/grub，添加net.ifnames=0 biosdevname=0</p>
-<p># vi /etc/sysconfig/grub<br>GRUB_TIMEOUT=5<br>GRUB_DISTRIBUTOR=”$(sed ‘s, release .*$,,g’ /etc/system-release)”<br>GRUB_DEFAULT=saved<br>GRUB_DISABLE_SUBMENU=true<br>GRUB_TERMINAL_OUTPUT=”console”<br>GRUB_CMDLINE_LINUX=”crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap net.ifnames=0 biosdevname=0 rhgb quiet”<br>GRUB_DISABLE_RECOVERY=”true”</p>
+<p># vi /etc/sysconfig/grub<br>
+GRUB_TIMEOUT=5<br>
+GRUB_DISTRIBUTOR=”<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">‘</mi><mi>s</mi><mo separator="true">,</mo><mi>r</mi><mi>e</mi><mi>l</mi><mi>e</mi><mi>a</mi><mi>s</mi><mi>e</mi><mi mathvariant="normal">.</mi><mo>∗</mo></mrow><annotation encoding="application/x-tex">(sed ‘s, release .*</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord">‘</span><span class="mord mathdefault">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord">.</span><span class="mord">∗</span></span></span></span>,g’ /etc/system-release)”<br>
+GRUB_DEFAULT=saved<br>
+GRUB_DISABLE_SUBMENU=true<br>
+GRUB_TERMINAL_OUTPUT=”console”<br>
+GRUB_CMDLINE_LINUX=”crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap net.ifnames=0 biosdevname=0 rhgb quiet”<br>
+GRUB_DISABLE_RECOVERY=”true”</p>
 <p>3、手动生成70-persistent-net.rules以及其他方法</p>
-<p>查看接口的MAC地址<br># ip link show<br>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT<br>link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>2: eno16777728: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP mode DEFAULT qlen 1000<br>link/ether 00:0c:29:28:ac:54 brd ff:ff:ff:ff:ff:ff<br>生成文件<br># vi /etc/udev/rules.d/70-persistent-net.rules<br>SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>”, ATTR{address}==”00:0c:29:28:ac:54″, ATTR{type}==”1″, KERNEL==”eth</em>”, NAME=”eth0″</p>
+<p>查看接口的MAC地址<br>
+# ip link show<br>
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT<br>
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>
+2: eno16777728: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP mode DEFAULT qlen 1000<br>
+link/ether 00:0c:29:28:ac:54 brd ff:ff:ff:ff:ff:ff<br>
+生成文件<br>
+# vi /etc/udev/rules.d/70-persistent-net.rules<br>
+SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>”, ATTR{address}<mark>”00:0c:29:28:ac:54″, ATTR{type}</mark>”1″, KERNEL==”eth</em>”, NAME=”eth0″</p>
 <p>最后重启机器:# reboot 就可以了，这样基本上就能够解决了。如果大家在使用<a target="_blank" rel="noopener" href="https://go.idcspy.com/www.raksmart.com/">RAKsmart</a>美国服务器的过程中，遇到Failed to start LSB: Bring up/down等问题都可以按照上述方法解决。</p>
 
             </div>

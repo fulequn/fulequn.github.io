@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -219,12 +223,15 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f94b3fc04f5b">https://www.jianshu.com/p/f94b3fc04f5b</a></p>
 </blockquote>
 <ul>
-<li><p>摘自网站</p>
+<li>
+<p>摘自网站</p>
 </li>
-<li><p>摘要：问题描述:json.loads(text,encoding=’utf8’)报UnexpectedUTF-8BOM(decodeusingutf-8-sig)错误,<strong>将encoding改为’utf-8-sig’（首先使用这种编码来解决这个问题）</strong>仍然报错。原因分析:text包含BOM字符解决方案:将BOM头去掉</p>
+<li>
+<p>摘要：问题描述:json.loads(text,encoding=‘utf8’)报UnexpectedUTF-8BOM(decodeusingutf-8-sig)错误,**将encoding改为’utf-8-sig’（首先使用这种编码来解决这个问题）**仍然报错。原因分析:text包含BOM字符解决方案:将BOM头去掉</p>
 </li>
-<li><p>问题描述:</p>
-<p>json.loads(text,encoding=’utf8’) 报Unexpected UTF-8 BOM (decode using utf-8-sig)错误,将encoding改为’utf-8-sig’仍然报错。</p>
+<li>
+<p>问题描述:</p>
+<p>json.loads(text,encoding=‘utf8’) 报Unexpected UTF-8 BOM (decode using utf-8-sig)错误,将encoding改为’utf-8-sig’仍然报错。</p>
 <p>原因分析:</p>
 <p>text包含BOM字符</p>
 <p>解决方案:</p>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      931 字
+      932 字
     </span>
   
 
@@ -214,45 +218,50 @@
             <h1 style="display: none">解决BindingException问题</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="解决org-apache-ibatis-binding-BindingException-Type-interface-xxx-is-not-known-to-the-MapperRegistry"><a href="#解决org-apache-ibatis-binding-BindingException-Type-interface-xxx-is-not-known-to-the-MapperRegistry" class="headerlink" title="解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry"></a>解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry</h1><p>运行SpringMVC时控制台报错</p>
+              <h1 id="解决orgapacheibatisbindingbindingexception-type-interface-xxx-is-not-known-to-the-mapperregistry"><a class="markdownIt-Anchor" href="#解决orgapacheibatisbindingbindingexception-type-interface-xxx-is-not-known-to-the-mapperregistry"></a> 解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry</h1>
+<p>运行SpringMVC时控制台报错</p>
 <pre><code class="hljs java">D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\bin\java.exe -ea -Didea.test.cyclic.buffer.size=<span class="hljs-number">1048576</span> -javaagent:D:\IntelliJ_IDEA\lib\idea_rt.jar=<span class="hljs-number">55364</span>:D:\IntelliJ_IDEA\bin -Dfile.encoding=UTF-<span class="hljs-number">8</span> -classpath D:\IntelliJ_IDEA\lib\idea_rt.jar;D:\IntelliJ_IDEA\plugins\junit\lib\junit-rt.jar;D:\IntelliJ_IDEA\plugins\junit\lib\junit5-rt.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\charsets.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\deploy.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\access-bridge-<span class="hljs-number">64.</span>jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\cldrdata.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\dnsns.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\jaccess.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\jfxrt.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\localedata.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\nashorn.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\sunec.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\sunjce_provider.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\sunmscapi.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\sunpkcs11.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\ext\zipfs.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\javaws.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\jce.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\jfr.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\jfxswt.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\jsse.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\management-agent.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\plugin.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\resources.jar;D:\Java\jdk1.<span class="hljs-number">8.0_131</span>\jre\lib\rt.jar;D:\idea_workspace\SpringMVC\SpringMVC_02\target\test-classes;D:\idea_workspace\SpringMVC\SpringMVC_02\target\classes;D:\oxy\MyRepository\junit\junit\<span class="hljs-number">4.12</span>\junit-<span class="hljs-number">4.12</span>.jar;D:\oxy\MyRepository\org\hamcrest\hamcrest-core\<span class="hljs-number">1.3</span>\hamcrest-core-<span class="hljs-number">1.3</span>.jar;D:\oxy\MyRepository\org\springframework\spring-webmvc\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-webmvc-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\springframework\spring-aop\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-aop-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\springframework\spring-beans\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-beans-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\springframework\spring-context\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-context-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\springframework\spring-core\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-core-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\commons-logging\commons-logging\<span class="hljs-number">1.2</span>\commons-logging-<span class="hljs-number">1.2</span>.jar;D:\oxy\MyRepository\org\springframework\spring-expression\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-expression-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\springframework\spring-web\<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE\spring-web-<span class="hljs-number">4.3</span>.<span class="hljs-number">10.</span>RELEASE.jar;D:\oxy\MyRepository\org\mybatis\mybatis\<span class="hljs-number">3.4</span>.<span class="hljs-number">1</span>\mybatis-<span class="hljs-number">3.4</span>.<span class="hljs-number">1.</span>jar;D:\oxy\MyRepository\mysql\mysql-connector-java\<span class="hljs-number">5.1</span>.<span class="hljs-number">43</span>\mysql-connector-java-<span class="hljs-number">5.1</span>.<span class="hljs-number">43.</span>jar com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit4 com.zs.test.StudentTest
 
 org.apache.ibatis.binding.BindingException: Type <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">com</span>.<span class="hljs-title">zs</span>.<span class="hljs-title">dao</span>.<span class="hljs-title">StudentDao</span> <span class="hljs-title">is</span> <span class="hljs-title">not</span> <span class="hljs-title">known</span> <span class="hljs-title">to</span> <span class="hljs-title">the</span> <span class="hljs-title">MapperRegistry</span>.</span>
 <span class="hljs-class"></span>
-    at org.apache.ibatis.binding.MapperRegistry.getMapper(MapperRegistry.java:47)
-    at org.apache.ibatis.session.Configuration.getMapper(Configuration.java:<span class="hljs-number">717</span>)
-    at org.apache.ibatis.session.defaults.DefaultSqlSession.getMapper(DefaultSqlSession.java:<span class="hljs-number">292</span>)
-    at com.zs.test.StudentTest.test(StudentTest.java:<span class="hljs-number">34</span>)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="hljs-number">62</span>)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="hljs-number">43</span>)
-    at java.lang.reflect.Method.invoke(Method.java:<span class="hljs-number">498</span>)
-    at org.junit.runners.model.FrameworkMethod$<span class="hljs-number">1.</span>runReflectiveCall(FrameworkMethod.java:<span class="hljs-number">50</span>)
-    at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:<span class="hljs-number">12</span>)
-    at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:<span class="hljs-number">47</span>)
-    at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:<span class="hljs-number">17</span>)
-    at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:<span class="hljs-number">26</span>)
-    at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:<span class="hljs-number">27</span>)
-    at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:<span class="hljs-number">325</span>)
-    at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="hljs-number">78</span>)
-    at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="hljs-number">57</span>)
-    at org.junit.runners.ParentRunner$<span class="hljs-number">3.</span>run(ParentRunner.java:<span class="hljs-number">290</span>)
-    at org.junit.runners.ParentRunner$<span class="hljs-number">1.</span>schedule(ParentRunner.java:<span class="hljs-number">71</span>)
-    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:<span class="hljs-number">288</span>)
-    at org.junit.runners.ParentRunner.access$<span class="hljs-number">000</span>(ParentRunner.java:<span class="hljs-number">58</span>)
-    at org.junit.runners.ParentRunner$<span class="hljs-number">2.</span>evaluate(ParentRunner.java:<span class="hljs-number">268</span>)
-    at org.junit.runners.ParentRunner.run(ParentRunner.java:<span class="hljs-number">363</span>)
-    at org.junit.runner.JUnitCore.run(JUnitCore.java:<span class="hljs-number">137</span>)
-    at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:<span class="hljs-number">68</span>)
-    at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:<span class="hljs-number">47</span>)
-    at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:<span class="hljs-number">242</span>)
-    at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:<span class="hljs-number">70</span>)
+	at org.apache.ibatis.binding.MapperRegistry.getMapper(MapperRegistry.java:47)
+	at org.apache.ibatis.session.Configuration.getMapper(Configuration.java:<span class="hljs-number">717</span>)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.getMapper(DefaultSqlSession.java:<span class="hljs-number">292</span>)
+	at com.zs.test.StudentTest.test(StudentTest.java:<span class="hljs-number">34</span>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="hljs-number">62</span>)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="hljs-number">43</span>)
+	at java.lang.reflect.Method.invoke(Method.java:<span class="hljs-number">498</span>)
+	at org.junit.runners.model.FrameworkMethod$<span class="hljs-number">1.</span>runReflectiveCall(FrameworkMethod.java:<span class="hljs-number">50</span>)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:<span class="hljs-number">12</span>)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:<span class="hljs-number">47</span>)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:<span class="hljs-number">17</span>)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:<span class="hljs-number">26</span>)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:<span class="hljs-number">27</span>)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:<span class="hljs-number">325</span>)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="hljs-number">78</span>)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="hljs-number">57</span>)
+	at org.junit.runners.ParentRunner$<span class="hljs-number">3.</span>run(ParentRunner.java:<span class="hljs-number">290</span>)
+	at org.junit.runners.ParentRunner$<span class="hljs-number">1.</span>schedule(ParentRunner.java:<span class="hljs-number">71</span>)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:<span class="hljs-number">288</span>)
+	at org.junit.runners.ParentRunner.access$<span class="hljs-number">000</span>(ParentRunner.java:<span class="hljs-number">58</span>)
+	at org.junit.runners.ParentRunner$<span class="hljs-number">2.</span>evaluate(ParentRunner.java:<span class="hljs-number">268</span>)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:<span class="hljs-number">363</span>)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:<span class="hljs-number">137</span>)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:<span class="hljs-number">68</span>)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:<span class="hljs-number">47</span>)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:<span class="hljs-number">242</span>)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:<span class="hljs-number">70</span>)
 
 
 Process finished with exit code -<span class="hljs-number">1</span></code></pre>
-
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h3 id="1-检查定义的接口和实体类映射的接口名是否一致"><a href="#1-检查定义的接口和实体类映射的接口名是否一致" class="headerlink" title="1.检查定义的接口和实体类映射的接口名是否一致"></a>1.检查定义的接口和实体类映射的接口名是否一致</h3><p><img src="/2020/08/24/Article202008243/1.png" srcset="/img/loading.gif" alt="1"><br><img src="/2020/08/24/Article202008243/2.png" srcset="/img/loading.gif" alt="2"><br>特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.zs.dao.StudentDao。</p>
-<h3 id="2-配置文件里xml扫描器扫描"><a href="#2-配置文件里xml扫描器扫描" class="headerlink" title="2.配置文件里xml扫描器扫描"></a>2.配置文件里xml扫描器扫描</h3><p>在配置文件中我发现使用.xml出现了这个错误，把改成具体我要实现的那个接口，解决了问题。</p>
+<h1 id="解决办法"><a class="markdownIt-Anchor" href="#解决办法"></a> 解决办法</h1>
+<h3 id="1检查定义的接口和实体类映射的接口名是否一致"><a class="markdownIt-Anchor" href="#1检查定义的接口和实体类映射的接口名是否一致"></a> 1.检查定义的接口和实体类映射的接口名是否一致</h3>
+<p><img src="/2020/08/24/Article202008243/1.png" srcset="/img/loading.gif" alt="1"><br>
+<img src="/2020/08/24/Article202008243/2.png" srcset="/img/loading.gif" alt="2"><br>
+特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.zs.dao.StudentDao。</p>
+<h3 id="2配置文件里xml扫描器扫描"><a class="markdownIt-Anchor" href="#2配置文件里xml扫描器扫描"></a> 2.配置文件里xml扫描器扫描</h3>
+<p>在配置文件中我发现使用.xml出现了这个错误，把改成具体我要实现的那个接口，解决了问题。</p>
 
             </div>
             <hr>

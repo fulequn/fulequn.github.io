@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      340 字
+      342 字
     </span>
   
 
@@ -218,13 +222,15 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41429220/article/details/104973805">https://blog.csdn.net/qq_41429220/article/details/104973805</a></p>
 </blockquote>
-<h2 id="Pytorch-Error-ValueError-Expected-input-batch-size-324-to-match-target-batch-size-4-Log-In"><a href="#Pytorch-Error-ValueError-Expected-input-batch-size-324-to-match-target-batch-size-4-Log-In" class="headerlink" title="Pytorch Error: ValueError: Expected input batch_size (324) to match target batch_size (4) Log In"></a>Pytorch Error: ValueError: Expected input batch_size (324) to match target batch_size (4) Log In</h2><h3 id="1-ERROR原因"><a href="#1-ERROR原因" class="headerlink" title="1.ERROR原因"></a>1.ERROR原因</h3><p>使用pytorch训练一个自定义的模型，参照网上的博客直接照搬网络，但是在修改自定义数据集时，出现这个错误。很明显是一个图像参数不匹配问题，自定义数据集的图片大小规格不统一且与网络接受的大小不匹配。</p>
+<h2 id="pytorch-error-valueerror-expected-input-batch_size-324-to-match-target-batch_size-4-log-in"><a class="markdownIt-Anchor" href="#pytorch-error-valueerror-expected-input-batch_size-324-to-match-target-batch_size-4-log-in"></a> Pytorch Error: ValueError: Expected input batch_size (324) to match target batch_size (4) Log In</h2>
+<h3 id="1error原因"><a class="markdownIt-Anchor" href="#1error原因"></a> 1.ERROR原因</h3>
+<p>使用pytorch训练一个自定义的模型，参照网上的博客直接照搬网络，但是在修改自定义数据集时，出现这个错误。很明显是一个图像参数不匹配问题，自定义数据集的图片大小规格不统一且与网络接受的大小不匹配。</p>
 <pre><code class="hljs python">ValueError: Expected input batch_size (<span class="hljs-number">324</span>) to match target batch_size (<span class="hljs-number">4</span>) Log In</code></pre>
-
-<h3 id="2-解决思路"><a href="#2-解决思路" class="headerlink" title="2.解决思路"></a>2.解决思路</h3><p>首先，在错误的网络结构处前后加入print来查看网络结构。</p>
+<h3 id="2解决思路"><a class="markdownIt-Anchor" href="#2解决思路"></a> 2.解决思路</h3>
+<p>首先，在错误的网络结构处前后加入print来查看网络结构。</p>
 <pre><code class="hljs python"><span class="hljs-comment"># 构建CNN模型</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CNNNet</span>(<span class="hljs-params">nn.Module</span>):</span>
-
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span>
         super(CNNNet, self).__init__()
         self.conv1 = nn.Conv2d(<span class="hljs-number">3</span>, <span class="hljs-number">64</span>, <span class="hljs-number">5</span>)
@@ -233,7 +239,7 @@
         self.fc1 = nn.Linear(<span class="hljs-number">128</span>*<span class="hljs-number">53</span>*<span class="hljs-number">53</span>, <span class="hljs-number">1024</span>)
         self.fc2 = nn.Linear(<span class="hljs-number">1024</span>, <span class="hljs-number">84</span>)
         self.fc3 = nn.Linear(<span class="hljs-number">84</span>, <span class="hljs-number">10</span>)
-
+        
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span>
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
@@ -244,16 +250,12 @@
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         <span class="hljs-keyword">return</span> x</code></pre>
-
 <p>即我注释的这个地方，可以得到输入前的数据格式。</p>
 <pre><code class="hljs python">torch.Size([<span class="hljs-number">4</span>, <span class="hljs-number">128</span>, <span class="hljs-number">53</span>, <span class="hljs-number">53</span>])</code></pre>
-
 <p>根据输出的形状来更改view里的参数。</p>
 <pre><code class="hljs python">x = x.view(<span class="hljs-number">-1</span>, <span class="hljs-number">128</span> * <span class="hljs-number">53</span> * <span class="hljs-number">53</span>)</code></pre>
-
 <p>后面的Linear层也需要对应修改，使其与数据输入匹配：</p>
 <pre><code class="hljs python">self.fc1 = nn.Linear(<span class="hljs-number">128</span> * <span class="hljs-number">53</span> * <span class="hljs-number">53</span>, <span class="hljs-number">1024</span>)</code></pre>
-
 
             </div>
             <hr>

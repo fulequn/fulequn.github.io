@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,22 +222,33 @@
 <p>原文链接</p>
 <p><a target="_blank" rel="noopener" href="https://www.freesion.com/article/3927842113/#1_xy_4">https://www.freesion.com/article/3927842113/#1_xy_4</a></p>
 </blockquote>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="1-画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？"><a href="#1-画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？" class="headerlink" title="1. 画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？"></a>1. 画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？</h3><p>失败案例：<code>plot(runif(10,0,10),type=&quot;l&quot;,xlim=c(0,10),ylim=c(0,10))</code></p>
+<h2 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题</h2>
+<h3 id="1-画图的时候明明设置了x轴y轴的范围为什么坐标轴的长度还是会多出一块呢"><a class="markdownIt-Anchor" href="#1-画图的时候明明设置了x轴y轴的范围为什么坐标轴的长度还是会多出一块呢"></a> 1. 画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？</h3>
+<p>失败案例：<code>plot(runif(10,0,10),type=&quot;l&quot;,xlim=c(0,10),ylim=c(0,10))</code></p>
 <p><img src="/2020/09/28/Article202009284/1.png" srcset="/img/loading.gif" alt="1"></p>
-<h3 id="2-想使原点在图中间或使坐标在图中间交汇，应该咋整捏？"><a href="#2-想使原点在图中间或使坐标在图中间交汇，应该咋整捏？" class="headerlink" title="2. 想使原点在图中间或使坐标在图中间交汇，应该咋整捏？"></a>2. 想使原点在图中间或使坐标在图中间交汇，应该咋整捏？</h3><p>错误示例：<code>plot(-10:9,runif(20,-10,10),type=&quot;l&quot;,xlim=c(-10,10),ylim=c(-10,10))</code></p>
+<h3 id="2-想使原点在图中间或使坐标在图中间交汇应该咋整捏"><a class="markdownIt-Anchor" href="#2-想使原点在图中间或使坐标在图中间交汇应该咋整捏"></a> 2. 想使原点在图中间或使坐标在图中间交汇，应该咋整捏？</h3>
+<p>错误示例：<code>plot(-10:9,runif(20,-10,10),type=&quot;l&quot;,xlim=c(-10,10),ylim=c(-10,10))</code></p>
 <p><img src="/2020/09/28/Article202009284/2.png" srcset="/img/loading.gif" alt="2"></p>
 <p>期望的效果：</p>
 <p><img src="/2020/09/28/Article202009284/3.png" srcset="/img/loading.gif" alt="3"></p>
-<h3 id="3-坐标轴上的LABEL朝向应该怎么旋转呢？或者说-参数LAS应该怎么设置呢？"><a href="#3-坐标轴上的LABEL朝向应该怎么旋转呢？或者说-参数LAS应该怎么设置呢？" class="headerlink" title="3. 坐标轴上的LABEL朝向应该怎么旋转呢？或者说 参数LAS应该怎么设置呢？"></a>3. 坐标轴上的LABEL朝向应该怎么旋转呢？或者说 参数LAS应该怎么设置呢？</h3><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="1-使用-XAXIS-YAXIS-“I”"><a href="#1-使用-XAXIS-YAXIS-“I”" class="headerlink" title="1. 使用 XAXIS/YAXIS=“I”"></a>1. 使用 XAXIS/YAXIS=“I”</h3><p>在R中默认会画出增加4%的坐标轴，如果想画出正好是xlim或ylim的长度，可以使用 <strong>xaxis/yaxis=”i”</strong><br>示例代码： <code>plot(runif(10,0,10),type=&quot;l&quot;,xlim=c(0,10),ylim=c(0,10),yaxs=&quot;i&quot;,xaxs=&quot;i&quot;)</code></p>
+<h3 id="3-坐标轴上的label朝向应该怎么旋转呢或者说-参数las应该怎么设置呢"><a class="markdownIt-Anchor" href="#3-坐标轴上的label朝向应该怎么旋转呢或者说-参数las应该怎么设置呢"></a> 3. 坐标轴上的LABEL朝向应该怎么旋转呢？或者说 参数LAS应该怎么设置呢？</h3>
+<h2 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h2>
+<h3 id="1-使用-xaxisyaxisi"><a class="markdownIt-Anchor" href="#1-使用-xaxisyaxisi"></a> 1. 使用 XAXIS/YAXIS=“I”</h3>
+<p>在R中默认会画出增加4%的坐标轴，如果想画出正好是xlim或ylim的长度，可以使用 <strong>xaxis/yaxis=&quot;i&quot;</strong><br>
+示例代码： <code>plot(runif(10,0,10),type=&quot;l&quot;,xlim=c(0,10),ylim=c(0,10),yaxs=&quot;i&quot;,xaxs=&quot;i&quot;)</code></p>
 <p><img src="/2020/09/28/Article202009284/4.png" srcset="/img/loading.gif" alt="4"></p>
-<h3 id="2-用AXIS-重制坐标轴"><a href="#2-用AXIS-重制坐标轴" class="headerlink" title="2. 用AXIS()重制坐标轴"></a>2. 用AXIS()重制坐标轴</h3><p>为了完成问题2的任务，我们需要在原图的基础上重新画坐标。<br>简单的介绍以下几个函数及概念。</p>
+<h3 id="2-用axis重制坐标轴"><a class="markdownIt-Anchor" href="#2-用axis重制坐标轴"></a> 2. 用AXIS()重制坐标轴</h3>
+<p>为了完成问题2的任务，我们需要在原图的基础上重新画坐标。<br>
+简单的介绍以下几个函数及概念。</p>
 <ul>
-<li><strong>低级画图函数</strong>： 需要在已有图/画布上才能发挥作用的函数，例如：rect(), text(), lines()…<br>区分低级画图函数与画图函数：函数中带plot四个字母的就肯定不是低级的！例如xyplot(), boxplot(),barplot()…</li>
-<li>**axis()**： 画坐标轴的低级函数，可以最大程度的实现坐标轴自定义效果。</li>
+<li><strong>低级画图函数</strong>： 需要在已有图/画布上才能发挥作用的函数，例如：rect(), text(), lines()…<br>
+区分低级画图函数与画图函数：函数中带plot四个字母的就肯定不是低级的！例如xyplot(), boxplot(),barplot()…</li>
+<li><strong>axis()</strong>： 画坐标轴的低级函数，可以最大程度的实现坐标轴自定义效果。</li>
 <li><strong>plot.new()</strong>: 用于创建新画布。在创建新画布后，低级函数就可以发挥作用了。（故低级函数只能搭配plot.new()使用，或者是与已有的plot搭配进行图的再加工）</li>
 <li><strong>plot.window()</strong>: 定义画布的坐标系统，参数必须包括 xlim/ylim。该函数一般和plot.new()搭配使用。</li>
 </ul>
-<p><strong>Ps:</strong> 若<strong>只使用plot.new()而不用plot.window()，则会创建 坐标系统则为xlim=ylim=c(0,1)的单位画布</strong><br><strong>Ps2:</strong> 为了便于理解，我才引入“画布”这个词，这并不是一个官方的叫法，事实上我并不清楚这个东西到底是怎么称呼。。</p>
+<p><strong>Ps:</strong> 若<strong>只使用plot.new()而不用plot.window()，则会创建 坐标系统则为xlim=ylim=c(0,1)的单位画布</strong><br>
+<strong>Ps2:</strong> 为了便于理解，我才引入“画布”这个词，这并不是一个官方的叫法，事实上我并不清楚这个东西到底是怎么称呼。。</p>
 <p>了解了以上内容之后，可以想到将坐标原点放在画布中间这个任务可以使用</p>
 <ul>
 <li>新建画布</li>
@@ -248,9 +263,9 @@ plot.window(xlim=c(<span class="hljs-number">-10</span>,<span class="hljs-number
 lines(<span class="hljs-number">-9</span>:<span class="hljs-number">9</span>,runif(<span class="hljs-number">19</span>,<span class="hljs-number">-10</span>,<span class="hljs-number">10</span>),col=<span class="hljs-string">&quot;red&quot;</span>)
 axis(<span class="hljs-number">1</span>,pos=<span class="hljs-number">0</span>)
 axis(<span class="hljs-number">2</span>,pos=<span class="hljs-number">0</span>)</code></pre>
-
 <p><img src="/2020/09/28/Article202009284/5.png" srcset="/img/loading.gif" alt="5"></p>
-<h3 id="3-使用参数LAS"><a href="#3-使用参数LAS" class="headerlink" title="3. 使用参数LAS"></a>3. 使用参数LAS</h3><p>在上图中，坐标轴的label是不是相当难受了，应该如何旋转它呢？</p>
+<h3 id="3-使用参数las"><a class="markdownIt-Anchor" href="#3-使用参数las"></a> 3. 使用参数LAS</h3>
+<p>在上图中，坐标轴的label是不是相当难受了，应该如何旋转它呢？</p>
 <p>这里我们用到的是参数las， 他有四个值可选：0，1，2，3。</p>
 <p>更具体的讲，我把它分成了两个部分。</p>
 <p>las=1及las=3：表现的是标签的绝对状态：las=1 为竖直，las=3为水平。</p>
@@ -276,7 +291,6 @@ title(main=<span class="hljs-string">&quot;las=0&quot;</span>)
 par(mai=c(<span class="hljs-number">0.5</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.4</span>,<span class="hljs-number">0.2</span>))
 plot(<span class="hljs-number">0</span>:<span class="hljs-number">5</span>,las=<span class="hljs-number">2</span>,ann=F)
 title(main=<span class="hljs-string">&quot;las=2&quot;</span>)</code></pre>
-
 <p>回到上面问题二的图，怎么能让原点在中间的坐标轴更加美观呢？</p>
 <ul>
 <li>使用axis()中的<strong>at参数</strong>, 将坐标轴的标签位置固定</li>
@@ -286,7 +300,6 @@ plot.window(xlim=c(<span class="hljs-number">-10</span>,<span class="hljs-number
 lines(<span class="hljs-number">-9</span>:<span class="hljs-number">9</span>,runif(<span class="hljs-number">19</span>,<span class="hljs-number">-10</span>,<span class="hljs-number">10</span>),col=<span class="hljs-string">&quot;red&quot;</span>)
 axis(<span class="hljs-number">1</span>,pos=<span class="hljs-number">0</span>,at=c(<span class="hljs-number">-10</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>))
 axis(<span class="hljs-number">2</span>,pos=<span class="hljs-number">0</span>,at=c(<span class="hljs-number">-10</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>),las=<span class="hljs-number">1</span>)</code></pre>
-
 <p><img src="/2020/09/28/Article202009284/8.png" srcset="/img/loading.gif" alt="8"></p>
 <ul>
 <li>当然，标签内容可用<strong>labels参数</strong>进行自定义</li>
@@ -296,7 +309,6 @@ plot.window(xlim=c(<span class="hljs-number">-10</span>,<span class="hljs-number
 lines(<span class="hljs-number">-9</span>:<span class="hljs-number">9</span>,runif(<span class="hljs-number">19</span>,<span class="hljs-number">-10</span>,<span class="hljs-number">10</span>),col=<span class="hljs-string">&quot;red&quot;</span>)
 axis(<span class="hljs-number">1</span>,pos=<span class="hljs-number">0</span>,at=c(<span class="hljs-number">-10</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>),labels=c(<span class="hljs-string">&quot;Day 1&quot;</span>,<span class="hljs-string">&quot;Day 2&quot;</span>,<span class="hljs-string">&quot;Day 3&quot;</span>,<span class="hljs-string">&quot;Day 4&quot;</span>))
 axis(<span class="hljs-number">2</span>,pos=<span class="hljs-number">0</span>,at=c(<span class="hljs-number">-10</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>),las=<span class="hljs-number">1</span>)</code></pre>
-
 <p><img src="/2020/09/28/Article202009284/9.png" srcset="/img/loading.gif" alt="9"></p>
 
             </div>

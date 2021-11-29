@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      307 字
+      309 字
     </span>
   
 
@@ -215,9 +219,12 @@
             
             <div class="markdown-body" id="post-body">
               <p>简单可重复的工作，坚决不做第二次，通通写个脚本自动化</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>直接使用 pip 安装就可以了<br>pip install PyPDF2</p>
+<h3 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h3>
+<p>直接使用 pip 安装就可以了<br>
+pip install PyPDF2</p>
 <p>PyPDF2 包含了 PdfFileReader PdfFileMerger PageObject PdfFileWriter 四个常用的主要 Class。</p>
-<h3 id="简单读写-PDF"><a href="#简单读写-PDF" class="headerlink" title="简单读写 PDF"></a>简单读写 PDF</h3><pre><code class="hljs python"><span class="hljs-keyword">from</span> PyPDF2 <span class="hljs-keyword">import</span> PdfFileReader, PdfFileWriter
+<h3 id="简单读写-pdf"><a class="markdownIt-Anchor" href="#简单读写-pdf"></a> 简单读写 PDF</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> PyPDF2 <span class="hljs-keyword">import</span> PdfFileReader, PdfFileWriter
 infn = <span class="hljs-string">&#x27;infn.pdf&#x27;</span>
 outfn = <span class="hljs-string">&#x27;outfn.pdf&#x27;</span>
 <span class="hljs-comment"># 获取一个 PdfFileReader 对象</span>
@@ -234,8 +241,8 @@ pdf_output = PdfFileWriter()
 pdf_output.addPage(page)
 <span class="hljs-comment"># 输出到文件中</span>
 pdf_output.write(open(outfn, <span class="hljs-string">&#x27;wb&#x27;</span>))</code></pre>
-
-<h3 id="应用实例-合并分割-PDF"><a href="#应用实例-合并分割-PDF" class="headerlink" title="应用实例 合并分割 PDF"></a>应用实例 合并分割 PDF</h3><pre><code class="hljs python"><span class="hljs-keyword">from</span> PyPDF2 <span class="hljs-keyword">import</span> PdfFileReader, PdfFileWriter
+<h3 id="应用实例-合并分割-pdf"><a class="markdownIt-Anchor" href="#应用实例-合并分割-pdf"></a> 应用实例 合并分割 PDF</h3>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> PyPDF2 <span class="hljs-keyword">import</span> PdfFileReader, PdfFileWriter
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">split_pdf</span>(<span class="hljs-params">infn, outfn</span>):</span>
     pdf_output = PdfFileWriter()
@@ -263,9 +270,8 @@ pdf_output.write(open(outfn, <span class="hljs-string">&#x27;wb&#x27;</span>))</
     infn = <span class="hljs-string">&#x27;infn.pdf&#x27;</span>
     outfn = <span class="hljs-string">&#x27;outfn.pdf&#x27;</span>
     split_pdf(infn, outfn)</code></pre>
-
-<p>应用实例源代码可以在 <a href="https://link.zhihu.com/?target=https://github.com/xchaoinfo/Py-example-by-xchaoinfo">https://github.com/xchaoinfo/Py-example-by-xchaoinfo</a> 找到。</p>
-<p>Refer: <a href="https://link.zhihu.com/?target=http://pythonhosted.org/PyPDF2/">PyPDF2 Documentation</a></p>
+<p>应用实例源代码可以在 <a href="https://link.zhihu.com/?target=https%3A//github.com/xchaoinfo/Py-example-by-xchaoinfo">https://github.com/xchaoinfo/Py-example-by-xchaoinfo</a> 找到。</p>
+<p>Refer: <a href="https://link.zhihu.com/?target=http%3A//pythonhosted.org/PyPDF2/">PyPDF2 Documentation</a></p>
 
             </div>
             <hr>

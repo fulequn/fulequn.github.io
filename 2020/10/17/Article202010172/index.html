@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -245,10 +249,10 @@
         <span class="hljs-keyword">else</span>:
             labels[i] = <span class="hljs-number">2</span>
     labels = labels.astype(np.int)<span class="hljs-comment">#降低内存空间</span>
-
+    
     <span class="hljs-comment">#模型建立</span>
     clf.fit(datas, labels)<span class="hljs-comment">#使用已有的数据和标签进行模型拟合</span>
-
+    
     <span class="hljs-comment">#数据准备阶段</span>
     N, M = <span class="hljs-number">500</span>, <span class="hljs-number">500</span>  <span class="hljs-comment"># 横纵各采样多少个值</span>
     x1_min, x2_min = datas.min(axis=<span class="hljs-number">0</span>)
@@ -258,22 +262,22 @@
     x1, x2 = np.meshgrid(t1, t2)  <span class="hljs-comment"># 生成网格采样点</span>
     x_show = np.stack((x1.flat, x2.flat), axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># 测试点</span>
     y_predict = clf.predict(x_show)<span class="hljs-comment">#预测值</span>
-
+    
     cm_light = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;#A0FFA0&#x27;</span>, <span class="hljs-string">&#x27;#FFA0A0&#x27;</span>, <span class="hljs-string">&#x27;#A0A0FF&#x27;</span>])
     cm_dark = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>])
     plt.pcolormesh(x1, x2, y_predict.reshape(x1.shape), shading=<span class="hljs-string">&#x27;auto&#x27;</span>, cmap=cm_light)
     plt.scatter(datas[:,<span class="hljs-number">0</span>], datas[:,<span class="hljs-number">1</span>], c=labels.transpose(), cmap=cm_dark, marker=<span class="hljs-string">&#x27;o&#x27;</span>, edgecolors=<span class="hljs-string">&#x27;k&#x27;</span>)
-
+   
     plt.xlim(x1_min, x1_max)
     plt.ylim(x2_min, x2_max)
     <span class="hljs-comment">#设置x轴和y轴的标签以及主题</span>
     plt.title(titleOfChart, fontsize=<span class="hljs-number">15</span>)
     plt.xlabel(x_label, fontsize=<span class="hljs-number">11</span>)
     plt.ylabel(y_label, fontsize=<span class="hljs-number">11</span>)
-
+    
     plt.show()
-
-
+    
+    
 <span class="hljs-comment"># 设置中文字体</span>
 mpl.rcParams[<span class="hljs-string">&quot;font.sans-serif&quot;</span>]=[<span class="hljs-string">&quot;SimHei&quot;</span>]
 mpl.rcParams[<span class="hljs-string">&quot;axes.unicode_minus&quot;</span>]=<span class="hljs-literal">False</span>
@@ -298,7 +302,7 @@ data_file=open(<span class="hljs-string">&#x27;iris.txt&#x27;</span>,<span class
         datas2.append(linedata[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>]) <span class="hljs-comment"># [2:4]花瓣长宽</span>
         datas3.append(linedata[:][<span class="hljs-number">0</span>:<span class="hljs-number">4</span>:<span class="hljs-number">3</span>]) <span class="hljs-comment"># [0,3]花萼长，花瓣宽</span>
         datas4.append(linedata[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>]) <span class="hljs-comment"># [1:3]花萼宽，花瓣长</span>
-
+        
 data_file.close()
 
 logistic(datas1,labels1, <span class="hljs-string">&quot;花萼长，花萼宽&quot;</span>, <span class="hljs-string">&quot;花萼长/(cm)&quot;</span>, <span class="hljs-string">&quot;花萼宽/(cm)&quot;</span>)
@@ -306,7 +310,6 @@ logistic(datas2,labels1, <span class="hljs-string">&quot;花瓣长，花瓣宽&q
 logistic(datas3,labels1, <span class="hljs-string">&quot;花萼长，花瓣宽&quot;</span>, <span class="hljs-string">&quot;花萼长/(cm)&quot;</span>, <span class="hljs-string">&quot;花瓣宽/(cm)&quot;</span>)
 logistic(datas4,labels1, <span class="hljs-string">&quot;花萼宽，花瓣长&quot;</span>, <span class="hljs-string">&quot;花萼宽/(cm)&quot;</span>, <span class="hljs-string">&quot;花瓣长/(cm)&quot;</span>)
 </code></pre>
-
 <p>其中iris.txt的文件内容如下图所示。</p>
 <p><img src="/2020/10/17/Article202010172/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>没有列名，我们使用open打开文件，文件中使用了“，”进行分割，首先明确每行有5条数据，分别是花萼长、花萼宽、花瓣长、花瓣宽、鸢尾花的类别。</p>
@@ -316,7 +319,8 @@ logistic(datas4,labels1, <span class="hljs-string">&quot;花萼宽，花瓣长&q
 <p>3.花萼长、花瓣宽</p>
 <p>4.花瓣长、花萼宽</p>
 <p>所以我们分别统计这些数据，然后放入Logistic线性回归模型中去训练，然后使用pcolormesh来实现最终的分类效果展示。</p>
-<h3 id="分类图的绘画"><a href="#分类图的绘画" class="headerlink" title="分类图的绘画"></a>分类图的绘画</h3><p>训练完模型后，现在需要画出分类边界，首先需要在横纵坐标各取500点，一共组成250000个点，然后把这250000个点送进我们训练好的Logistic模型，来算出所属的种类，代码如下：</p>
+<h3 id="分类图的绘画"><a class="markdownIt-Anchor" href="#分类图的绘画"></a> 分类图的绘画</h3>
+<p>训练完模型后，现在需要画出分类边界，首先需要在横纵坐标各取500点，一共组成250000个点，然后把这250000个点送进我们训练好的Logistic模型，来算出所属的种类，代码如下：</p>
 <pre><code class="hljs python"><span class="hljs-comment">#数据准备阶段</span>
 N, M = <span class="hljs-number">500</span>, <span class="hljs-number">500</span>  <span class="hljs-comment"># 横纵各采样多少个值</span>
 x1_min, x2_min = datas.min(axis=<span class="hljs-number">0</span>)
@@ -326,15 +330,12 @@ t2 = np.linspace(x2_min, x2_max, M)
 x1, x2 = np.meshgrid(t1, t2)  <span class="hljs-comment"># 生成网格采样点</span>
 x_show = np.stack((x1.flat, x2.flat), axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># 测试点</span>
 y_predict = clf.predict(x_show)<span class="hljs-comment">#预测值</span></code></pre>
-
 <p>接着就可以绘制出分类图了。由于该数据集中一共有三种鸢尾花，所以绘制图片的时候需要三种颜色</p>
 <pre><code class="hljs python">cm_light = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;#A0FFA0&#x27;</span>, <span class="hljs-string">&#x27;#FFA0A0&#x27;</span>, <span class="hljs-string">&#x27;#A0A0FF&#x27;</span>])
 cm_dark = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>])</code></pre>
-
-<p>接着使用plt.pcolormesh来绘制分类图，这里请注意，如果不写入<code>shading=&#39;auto&#39;</code>，代码会发出警告，不会影响运行。</p>
+<p>接着使用plt.pcolormesh来绘制分类图，这里请注意，如果不写入<code>shading='auto'</code>，代码会发出警告，不会影响运行。</p>
 <pre><code class="hljs python">plt.pcolormesh(x1, x2, y_predict.reshape(x1.shape), shading=<span class="hljs-string">&#x27;auto&#x27;</span>, cmap=cm_light)
 plt.scatter(datas[:,<span class="hljs-number">0</span>], datas[:,<span class="hljs-number">1</span>], c=labels.transpose(), cmap=cm_dark, marker=<span class="hljs-string">&#x27;o&#x27;</span>, edgecolors=<span class="hljs-string">&#x27;k&#x27;</span>)</code></pre>
-
 <p>plt.pcolormesh()会根据y_predict的结果自动在cmap里选择颜色。</p>
 <p><img src="/2020/10/17/Article202010172/2.png" srcset="/img/loading.gif" alt="2"></p>
 

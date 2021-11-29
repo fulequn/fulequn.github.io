@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -219,8 +223,10 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangquan-yw/p/10244889.html">MongoDB中导入数据命令的使用（mongoimport） - 全心全意_运维 - 博客园 (cnblogs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mengyu/p/7718311.html">Mongo导出mongoexport和导入mongoimport介绍 - 梦雨情殇 - 博客园 (cnblogs.com)</a></p>
 </blockquote>
-<p>语法：<br>    mongoimport <options> <file></file></options></p>
-<p>介绍：<br>    该命令可以将<strong>CSV，TSV或JSON</strong>文件数据导入MongoDB， 如果没有提供文件，则mongoimport从<strong>stdin</strong>（标准输入）读取。</p>
+<p>语法：<br>
+mongoimport <options> <file></file></options></p>
+<p>介绍：<br>
+该命令可以将<strong>CSV，TSV或JSON</strong>文件数据导入MongoDB， 如果没有提供文件，则mongoimport从<strong>stdin</strong>（标准输入）读取。</p>
 <p><strong>常规选项</strong>：</p>
 <p>/help                               获取命令用法</p>
 <p>/version                            获取工具版本</p>
@@ -247,8 +253,10 @@
 <p>/jsonArray                          当导入数据文件中的数据为json数组时，使用此选项</p>
 <p>/type:<type>                      指定要导入的数据文件的类型json，csv或tsv（默认为json）</type></p>
 <p><strong>省略部分</strong></p>
-<p>ingest options:<br>    鄙人暂时不懂有什么用，省略</p>
-<p>使用示例：<br>mongoimport –db ML_OER –collection lecture –file /home/tmp/course_temp.json</p>
+<p>ingest options:<br>
+鄙人暂时不懂有什么用，省略</p>
+<p>使用示例：<br>
+mongoimport --db ML_OER --collection lecture --file /home/tmp/course_temp.json</p>
 <p>附录：</p>
 <p>关键参数说明：</p>
 <ul>
@@ -258,7 +266,7 @@
 <li>-p,–password：代表连接数据库的账号对应的密码；</li>
 <li>-d,–db：代表连接的数据库；</li>
 <li>-c,–collection：代表连接数据库中的集合；</li>
-<li>-f, –fields：代表导入集合中的字段；</li>
+<li>-f, --fields：代表导入集合中的字段；</li>
 <li>–type：代表导入的文件类型，包括csv和json,tsv文件，默认json格式；</li>
 <li>–file：导入的文件名称</li>
 <li>–headerline：导入csv文件时，指明第一行是列名，不需要导入；</li>

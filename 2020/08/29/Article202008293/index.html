@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -215,16 +219,25 @@
             
             <div class="markdown-body" id="post-body">
               <p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/HTL2018/article/details/106876940">https://blog.csdn.net/HTL2018/article/details/106876940</a></p>
-<h1 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h1><ul>
-<li>先是出现错误：<br><code>error：spawn failed...</code></li>
-<li>然后经过一些博客的操作会出现以下问题：<br><code>fatal: cannot lock ref &#39;HEAD&#39;: unable to resolve reference HEAD: Invalid argument error: src refspec</code></li>
-<li>或者：<br><code>error: src refspec HEAD does not match any.</code>等等</li>
+<h1 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述：</h1>
+<ul>
+<li>先是出现错误：<br>
+<code>error：spawn failed...</code></li>
+<li>然后经过一些博客的操作会出现以下问题：<br>
+<code>fatal: cannot lock ref 'HEAD': unable to resolve reference HEAD: Invalid argument error: src refspec</code></li>
+<li>或者：<br>
+<code>error: src refspec HEAD does not match any.</code>等等</li>
 </ul>
-<p><strong>总结一下</strong>：<br>问题大多是因为<code>git</code>进行<code>push</code>或者<code>hexo d</code>的时候改变了一些<code>.deploy_git</code>文件下的内容。</p>
-<h1 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h1><ol>
+<p><strong>总结一下</strong>：<br>
+问题大多是因为<code>git</code>进行<code>push</code>或者<code>hexo d</code>的时候改变了一些<code>.deploy_git</code>文件下的内容。</p>
+<h1 id="解决办法"><a class="markdownIt-Anchor" href="#解决办法"></a> 解决办法：</h1>
+<ol>
 <li>删除<code>.deploy_git</code>文件夹;</li>
 <li>输入<code>git config --global core.autocrlf false</code></li>
-<li>然后，依次执行：<br><code>hexo clean</code><br><code>hexo g</code><br><code>hexo d</code></li>
+<li>然后，依次执行：<br>
+<code>hexo clean</code><br>
+<code>hexo g</code><br>
+<code>hexo d</code></li>
 </ol>
 <p>问题解决。暴力直接，有效。</p>
 

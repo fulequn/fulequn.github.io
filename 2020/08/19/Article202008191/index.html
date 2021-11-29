@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -216,7 +220,8 @@
             <div class="markdown-body" id="post-body">
               <p>链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GA411n7yx">https://www.bilibili.com/video/BV1GA411n7yx</a></p>
 <p>一、二讲，三讲部分</p>
-<h1 id="测验"><a href="#测验" class="headerlink" title="测验"></a>测验</h1><ol>
+<h1 id="测验"><a class="markdownIt-Anchor" href="#测验"></a> 测验</h1>
+<ol>
 <li>Python的用途？</li>
 <li>Python是什么样的语言？有什么样的优缺点？</li>
 <li>import this出现的是什么？</li>
@@ -252,8 +257,12 @@
 <li>面向对象三大特性？</li>
 <li>异常处理格式？</li>
 </ol>
-<h1 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h1><p>1.网络应用开发，自动化脚本，数据科学，人工智能，数据分析，科学计算……</p>
-<p>2.Python是一种解释性的、交互性的、面向对象的高级编程语言。<br>高级：抽象层次高，更接近人类语言。<br>优点：优雅、明确、简单。<br>缺点：慢。</p>
+<h1 id="参考答案"><a class="markdownIt-Anchor" href="#参考答案"></a> 参考答案</h1>
+<p>1.网络应用开发，自动化脚本，数据科学，人工智能，数据分析，科学计算……</p>
+<p>2.Python是一种解释性的、交互性的、面向对象的高级编程语言。<br>
+高级：抽象层次高，更接近人类语言。<br>
+优点：优雅、明确、简单。<br>
+缺点：慢。</p>
 <p>虽然运行速度不如C类语言，但是开发效率远高于C类语言。</p>
 <p>11.append 末尾添加； insert指定位置添加；del指定位置删除；remove 指定元素值进行删除；index 指定值第一次出现索引；更改就是元素重新赋值。</p>
 <p>13.x.sort(reverse=True)</p>
@@ -266,7 +275,7 @@
 <p>查：in</p>
 <p>17.只能通过key访问value，不能通过value访问key；不能通过编号访问；不要访问不存在的键。键不可以改，值可以改。</p>
 <p>18.用途：可用于关系运算（交并补），例如列表去重。</p>
-<p>19.没有“字符”与“字符串”的差别；单引号与双引号基本无区别字符串（str）与列表一样，可以索引、切片….但是字符串不可变，不支持元素赋值、切片赋值等直接修改。</p>
+<p>19.没有“字符”与“字符串”的差别；单引号与双引号基本无区别字符串（str）与列表一样，可以索引、切片…但是字符串不可变，不支持元素赋值、切片赋值等直接修改。</p>
 <p>21.字符串格式化：本质上并不是字符串常量，而是一一个在运行时求值的表达式。</p>
 <pre><code class="hljs python">GPA = <span class="hljs-number">4.0</span>
 name = <span class="hljs-string">&quot;Jack&quot;</span>
@@ -278,7 +287,6 @@ info1 =<span class="hljs-string">&quot;%s&#x27;s GPA is %0.1f，but he still isn
 info2 =<span class="hljs-string">&quot;&#123;&#125;&#x27;s GPA is&#123;&#125;，but he still isn&#x27;t happy&quot;</span>.format（name，GPA）<span class="hljs-comment">#format格式化</span>
 
 info3 = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;name&#125;</span>&#x27;s GPA is<span class="hljs-subst">&#123;GPA&#125;</span>，but he still isn&#x27;t happy&quot;</span><span class="hljs-comment">#f-string 格式化</span></code></pre>
-
 <p><img src="/2020/08/19/Article202008191/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%9E%E9%A1%BE.png" srcset="/img/loading.gif" alt="数据结构-回顾"></p>
 <p>26.new_scores =[x + 5 for x in scores]#列表生成式，一句搞定</p>
 <p>27.函数是具有特定功能的可重用代码片段，是最基本的代码抽象的方式。</p>
@@ -291,9 +299,10 @@ info3 = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;name&#12
     response = response = requests.get(url)
     home_page = response.content.decode()
     <span class="hljs-keyword">return</span> home_page</code></pre>
-
 <p>32.多态：允许对不同的对象进行相同的操作。</p>
-<p>33.封装：隐藏不必要的内部实现细节，对外公开接口。<br>继承：从已有的类派生出新的类（子类），子类继承父类的数据属性和行为，并能根据自己的需求扩展出新的方法或者覆盖父类的方法。<br>多态：允许对不同的对象进行相同的操作。</p>
+<p>33.封装：隐藏不必要的内部实现细节，对外公开接口。<br>
+继承：从已有的类派生出新的类（子类），子类继承父类的数据属性和行为，并能根据自己的需求扩展出新的方法或者覆盖父类的方法。<br>
+多态：允许对不同的对象进行相同的操作。</p>
 <p>34.try……except……else</p>
 
             </div>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      358 字
+      334 字
     </span>
   
 
@@ -218,35 +222,43 @@
 <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/The_Time_Runner/article/details/89928057">https://blog.csdn.net/The_Time_Runner/article/details/89928057</a></p>
 </blockquote>
 <ul>
-<li><h2 id="matplotlib-pyplot-xlim-官方文档"><a href="#matplotlib-pyplot-xlim-官方文档" class="headerlink" title="matplotlib.pyplot.xlim() 官方文档"></a>matplotlib.pyplot.xlim() <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlim.html">官方文档</a></h2></li>
+<li>
+<h2 id="matplotlibpyplotxlim-官方文档"><a class="markdownIt-Anchor" href="#matplotlibpyplotxlim-官方文档"></a> matplotlib.pyplot.xlim() <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlim.html">官方文档</a></h2>
+</li>
 </ul>
 <pre><code class="hljs python">matplotlib.pyplot.xlim(*args, **kwargs)</code></pre>
-
 <p>获取或者是设定x座标轴的范围，当前axes上的座标轴。</p>
 <p>有两种参数输入方式</p>
 <ol>
-<li><pre><code class="python">plt.xlim(num1, num2)
-&lt;!--hexoPostRenderEscape:&lt;pre&gt;&lt;code class=&quot;hljs markdown&quot;&gt;
-![&lt;span class=&quot;hljs-string&quot;&gt;1&lt;/span&gt;](&lt;span class=&quot;hljs-link&quot;&gt;Article202009267/1.png&lt;/span&gt;)
-</code></pre>
+<li>
+<pre class="highlight"><code class="python">plt.xlim(num1, num2)
+&lt;!--hexoPostRenderEscape:&lt;pre&gt;&lt;code <span class="hljs-class"><span class="hljs-keyword">class</span>="<span class="hljs-title">hljs</span> <span class="hljs-title">markdown</span>"&gt;
+</span></code></pre>
 </li>
 </ol>
-<p><span class="hljs-bullet">1.</span> <span class="hljs-code">```python</span><br><span class="hljs-code">   plt.xlim(xmin=num1,xmax=num2)</span>:hexoPostRenderEscape–&gt;</p>
+<p>![<span class="hljs-string">1</span>](<span class="hljs-link">Article202009267/1.png</span>)</p>
+<p><span class="hljs-bullet">1.</span> <span class="hljs-code">```python</span><br>
+<span class="hljs-code">   plt.xlim(xmin=num1,xmax=num2)</span>:hexoPostRenderEscape–&gt;</p>
 <p><img src="https://img-blog.csdnimg.cn/20190507194847203.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoZV9UaW1lX1J1bm5lcg==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
 <ul>
-<li><h2 id="matplotlib-pyplot-ylim-官方文档"><a href="#matplotlib-pyplot-ylim-官方文档" class="headerlink" title="matplotlib.pyplot.ylim 官方文档"></a>matplotlib.pyplot.ylim <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylim.html#matplotlib.pyplot.ylim">官方文档</a></h2></li>
+<li>
+<h2 id="matplotlibpyplotylim-官方文档"><a class="markdownIt-Anchor" href="#matplotlibpyplotylim-官方文档"></a> matplotlib.pyplot.ylim <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylim.html#matplotlib.pyplot.ylim">官方文档</a></h2>
+</li>
 </ul>
 <p>内容与x一样</p>
 <ul>
-<li><h2 id="matplotlib-pyplot-axis-官方文档"><a href="#matplotlib-pyplot-axis-官方文档" class="headerlink" title="matplotlib.pyplot.axis 官方文档"></a>matplotlib.pyplot.axis <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis">官方文档</a></h2></li>
+<li>
+<h2 id="matplotlibpyplotaxis-官方文档"><a class="markdownIt-Anchor" href="#matplotlibpyplotaxis-官方文档"></a> matplotlib.pyplot.axis <a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html#matplotlib.pyplot.axis">官方文档</a></h2>
+</li>
 </ul>
 <pre><code class="hljs python">matplotlib.pyplot.axis(*v, **kwargs)</code></pre>
-
 <p><strong>参数详解：</strong></p>
 <ol>
-<li><p><strong>xmin, xmax, ymin, ymax</strong> : float, optional（浮点数，可选）</p>
+<li>
+<p><strong>xmin, xmax, ymin, ymax</strong> : float, optional（浮点数，可选）</p>
 </li>
-<li><p><strong>option</strong> : str</p>
+<li>
+<p><strong>option</strong> : str</p>
 <table>
 <thead>
 <tr>
@@ -254,7 +266,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>‘on’</td>
 <td>Turn on axis lines and labels.（启用轴线和标签。）</td>
 </tr>
@@ -290,9 +303,11 @@
 <td>‘square’</td>
 <td>Square plot; similar to ‘scaled’, but initially forcing <code>xmax-xmin = ymax-ymin</code>.（正方形图；类似于“scaled”，但最初强制使用“xmax xmin=ymax ymin”。）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
-<li><p><strong>emit</strong> : bool, optional, default <em>True</em></p>
+<li>
+<p><strong>emit</strong> : bool, optional, default <em>True</em></p>
 </li>
 </ol>
 <p><img src="/2020/09/26/Article202009267/3.png" srcset="/img/loading.gif" alt="3"></p>

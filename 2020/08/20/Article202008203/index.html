@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,51 +218,54 @@
             <h1 style="display: none">使用java实现Huffman树</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="我们为什么需要Huffman树"><a href="#我们为什么需要Huffman树" class="headerlink" title="我们为什么需要Huffman树"></a>我们为什么需要Huffman树</h2><p>目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。</p>
-<h2 id="什么是Huffman编码"><a href="#什么是Huffman编码" class="headerlink" title="什么是Huffman编码"></a>什么是Huffman编码</h2><p>Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。</p>
-<h2 id="如何实现Huffman编码"><a href="#如何实现Huffman编码" class="headerlink" title="如何实现Huffman编码"></a>如何实现Huffman编码</h2><p>考虑实现Huffman编码的结构，我们决定使用二叉树来实现。</p>
+              <h2 id="我们为什么需要huffman树"><a class="markdownIt-Anchor" href="#我们为什么需要huffman树"></a> 我们为什么需要Huffman树</h2>
+<p>目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。</p>
+<h2 id="什么是huffman编码"><a class="markdownIt-Anchor" href="#什么是huffman编码"></a> 什么是Huffman编码</h2>
+<p>Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。</p>
+<h2 id="如何实现huffman编码"><a class="markdownIt-Anchor" href="#如何实现huffman编码"></a> 如何实现Huffman编码</h2>
+<p>考虑实现Huffman编码的结构，我们决定使用二叉树来实现。</p>
 <p>这里涉及到一个概念，二叉树的带权外路径长度：树中所有叶子的带权路径长度之和。而Huffman树则是二叉树的带权外路径长度最小的二叉树，也称最优二叉树。</p>
-<h2 id="构造Huffman树并得到Huffman编码"><a href="#构造Huffman树并得到Huffman编码" class="headerlink" title="构造Huffman树并得到Huffman编码"></a>构造Huffman树并得到Huffman编码</h2><p>这里，我们使用静态三叉链表存储Huffman树。</p>
+<h2 id="构造huffman树并得到huffman编码"><a class="markdownIt-Anchor" href="#构造huffman树并得到huffman编码"></a> 构造Huffman树并得到Huffman编码</h2>
+<p>这里，我们使用静态三叉链表存储Huffman树。</p>
 <p>这是静态三叉链表结点类TriElement</p>
 <pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * <span class="hljs-doctag">@author</span> cust</span>
 <span class="hljs-comment"> * 二叉树的静态三叉链表结点类</span>
 <span class="hljs-comment"> */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TriElement</span></span>&#123;
-
+	
     int <span class="hljs-keyword">data</span>;                                    <span class="hljs-comment">//数据域</span>
     int parent,left,right;                       <span class="hljs-comment">//父母结点和左、右孩子结点下标</span>
 
     <span class="hljs-comment">//不设置setter方法和getter方法,确保静态三叉链表结点只在具有权值时构造，且不可再被修改</span>
-
+    
     <span class="hljs-comment">//构造结点，各参数依次指定元素、父母结点下标、左/右孩子结点下标</span>
-    <span class="hljs-keyword">public</span> TriElement(int <span class="hljs-keyword">data</span>, int parent, int left, int right)
-    &#123;                    
-        <span class="hljs-keyword">this</span>.<span class="hljs-keyword">data</span> = <span class="hljs-keyword">data</span>;
-        <span class="hljs-keyword">this</span>.parent = parent;
-        <span class="hljs-keyword">this</span>.left = left;
-        <span class="hljs-keyword">this</span>.right = right;
-    &#125;
-
-    <span class="hljs-keyword">public</span> TriElement(int <span class="hljs-keyword">data</span>) &#123;                  <span class="hljs-comment">//构造元素值为data、无父母的叶子结点</span>
-        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">data</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>);
-    &#125;
-
+	<span class="hljs-keyword">public</span> TriElement(int <span class="hljs-keyword">data</span>, int parent, int left, int right)
+	&#123;					
+	    <span class="hljs-keyword">this</span>.<span class="hljs-keyword">data</span> = <span class="hljs-keyword">data</span>;
+	    <span class="hljs-keyword">this</span>.parent = parent;
+	    <span class="hljs-keyword">this</span>.left = left;
+	    <span class="hljs-keyword">this</span>.right = right;
+	&#125;
+	
+	<span class="hljs-keyword">public</span> TriElement(int <span class="hljs-keyword">data</span>) &#123;                  <span class="hljs-comment">//构造元素值为data、无父母的叶子结点</span>
+	    <span class="hljs-keyword">this</span>(<span class="hljs-keyword">data</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>);
+	&#125;
+	
     <span class="hljs-keyword">public</span> String toString() &#123;                     <span class="hljs-comment">//返回结点的描述字符串</span>
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;(&quot;</span>+<span class="hljs-keyword">this</span>.<span class="hljs-keyword">data</span>+<span class="hljs-string">&quot;,&quot;</span>+<span class="hljs-keyword">this</span>.parent+<span class="hljs-string">&quot;,&quot;</span>+<span class="hljs-keyword">this</span>.left+<span class="hljs-string">&quot;,&quot;</span>+<span class="hljs-keyword">this</span>.right+<span class="hljs-string">&quot;)&quot;</span>;
     &#125;
-
+    
     <span class="hljs-keyword">public</span> boolean isLeaf() &#123;                                <span class="hljs-comment">//判断是否叶子结点</span>
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.left==-<span class="hljs-number">1</span> &amp;&amp; <span class="hljs-keyword">this</span>.right==-<span class="hljs-number">1</span>;
     &#125;
-
+    
     <span class="hljs-keyword">public</span> boolean equals(Object obj) &#123;                      <span class="hljs-comment">//比较是否相等 ，覆盖Object类的equals(obj)方法</span>
         <span class="hljs-comment">//仅比较元素值</span>
         <span class="hljs-keyword">return</span> obj==<span class="hljs-keyword">this</span> || obj instanceof TriElement &amp;&amp; <span class="hljs-keyword">this</span>.<span class="hljs-keyword">data</span>==((TriElement)obj).<span class="hljs-keyword">data</span>;
     &#125;
-
+    
 &#125;</code></pre>
-
 <p>这是Huffman树类HuffmanTree</p>
 <pre><code class="hljs java"><span class="hljs-comment">//哈夫曼树类</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HuffmanTree</span></span>&#123;                                   <span class="hljs-comment">//Huffman树类</span>
@@ -266,9 +273,9 @@
     <span class="hljs-keyword">private</span> String charset;                                <span class="hljs-comment">//字符集合</span>
     <span class="hljs-keyword">private</span> TriElement[] huftree;                          <span class="hljs-comment">//静态三叉链表结点数组</span>
     <span class="hljs-comment">//用来存储数据</span>
-
+ 
     <span class="hljs-comment">//不设置setter方法和getter方法,确保每一颗huffman树只在具有权值时构造，且不可再被修改</span>
-
+    
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> weights  权重数组</span>
 <span class="hljs-comment">          * 通过Huffman算法构建Huffman树</span>
@@ -283,26 +290,26 @@
     <span class="hljs-comment">//构造Huffman树，weights指定权值集合，数组长度为叶子结点数；默认字符集合从A开始</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HuffmanTree</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] weights)</span></span>
 <span class="hljs-function">    </span>&#123;
-        <span class="hljs-comment">//准备部分</span>
-        <span class="hljs-keyword">this</span>.charset = <span class="hljs-string">&quot;&quot;</span>;        
+    	<span class="hljs-comment">//准备部分</span>
+        <span class="hljs-keyword">this</span>.charset = <span class="hljs-string">&quot;&quot;</span>;		
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; weights.length; i++) &#123; 
-            <span class="hljs-comment">//将权值数组中的每一个数字转化为对应的字符</span>
-            <span class="hljs-comment">//默认字符集合是从&#x27;A&#x27;开始的weights.length个字符</span>
-<span class="hljs-comment">//            this.charset += (char)(&#x27;A&#x27;+i);</span>
-            <span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">25</span>)&#123;
-                <span class="hljs-keyword">this</span>.charset += (<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;A&#x27;</span>+i);
-            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">51</span>)&#123;
-                <span class="hljs-keyword">this</span>.charset += (<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;a&#x27;</span>+(i - <span class="hljs-number">26</span>));
-            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i == <span class="hljs-number">52</span>)&#123;
-                <span class="hljs-keyword">this</span>.charset += <span class="hljs-string">&quot; &quot;</span>;
-            &#125;
+        	<span class="hljs-comment">//将权值数组中的每一个数字转化为对应的字符</span>
+        	<span class="hljs-comment">//默认字符集合是从&#x27;A&#x27;开始的weights.length个字符</span>
+<span class="hljs-comment">//        	this.charset += (char)(&#x27;A&#x27;+i);</span>
+        	<span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">25</span>)&#123;
+        		<span class="hljs-keyword">this</span>.charset += (<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;A&#x27;</span>+i);
+        	&#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i &lt;= <span class="hljs-number">51</span>)&#123;
+        		<span class="hljs-keyword">this</span>.charset += (<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;a&#x27;</span>+(i - <span class="hljs-number">26</span>));
+        	&#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i == <span class="hljs-number">52</span>)&#123;
+        		<span class="hljs-keyword">this</span>.charset += <span class="hljs-string">&quot; &quot;</span>;
+        	&#125;
 
         &#125;
 <span class="hljs-comment">//        System.out.println(charset);</span>
 <span class="hljs-comment">//        System.out.println(charset);</span>
         <span class="hljs-keyword">int</span> n = weights.length;                            <span class="hljs-comment">//叶子结点数</span>
         <span class="hljs-comment">//叶子结点数与权值数组一一对应，每一个叶子都对应了一个字符的编码</span>
-
+        
         <span class="hljs-comment">//初始化</span>
         <span class="hljs-keyword">this</span>.huftree = <span class="hljs-keyword">new</span> TriElement[<span class="hljs-number">2</span>*n-<span class="hljs-number">1</span>];              <span class="hljs-comment">//n个叶子的Huffman树共有2n-1个结点</span>
         <span class="hljs-comment">//前n个存放叶子结点，后n-1个存放2度结点</span>
@@ -311,35 +318,35 @@
 
         <span class="hljs-comment">//合并二叉树</span>
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = n; i &lt; <span class="hljs-number">2</span>*n-<span class="hljs-number">1</span>; i++) &#123;                         <span class="hljs-comment">//构造n-1个2度结点</span>
-            <span class="hljs-comment">//当n-1个2度顶点构造完成时结束循环</span>
-
+        	<span class="hljs-comment">//当n-1个2度顶点构造完成时结束循环</span>
+        	
             <span class="hljs-keyword">int</span> min1 = Integer.MAX_VALUE, min2 = min1;         <span class="hljs-comment">//最小和次小权值，初值为整数最大值</span>
             <span class="hljs-keyword">int</span> x1=-<span class="hljs-number">1</span>, x2=-<span class="hljs-number">1</span>;                              <span class="hljs-comment">//最小和次小权值结点下标</span>
             <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123;                        <span class="hljs-comment">//寻找两个无父母的最小权值结点下标</span>
-                <span class="hljs-comment">//若该结点具有父母，说明该结点已经合并</span>
+            	<span class="hljs-comment">//若该结点具有父母，说明该结点已经合并</span>
                 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.huftree[j].parent == -<span class="hljs-number">1</span>)            <span class="hljs-comment">//第j个结点无父母</span>
-                    <span class="hljs-comment">//若能选出最小的，则用原本最小的记录，然后将原本记录最小的存储到次小的</span>
+                	<span class="hljs-comment">//若能选出最小的，则用原本最小的记录，然后将原本记录最小的存储到次小的</span>
                     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.huftree[j].data &lt; min1) &#123;         <span class="hljs-comment">//第j个结点权值最小</span>
                         min2 = min1;                       <span class="hljs-comment">//min2记得次小权值</span>
                         x2 = x1;                           <span class="hljs-comment">//x2记得次小权值结点下标</span>
                         min1 = <span class="hljs-keyword">this</span>.huftree[j].data;       <span class="hljs-comment">//min1记得最小权值</span>
                         x1 = j;                            <span class="hljs-comment">//x1记得最小权值结点下标</span>
-                    &#125;<span class="hljs-keyword">else</span> &#123;            <span class="hljs-comment">//若能得到比次小小的，但比最小的大，则只需要更新次小的即可</span>
+                    &#125;<span class="hljs-keyword">else</span> &#123;			<span class="hljs-comment">//若能得到比次小小的，但比最小的大，则只需要更新次小的即可</span>
                         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.huftree[j].data &lt; min2) &#123;     <span class="hljs-comment">//第j个结点权值次小</span>
-                            min2 = huftree[j].data;         <span class="hljs-comment">//记录次小权值</span>
-                            x2 = j;                <span class="hljs-comment">//记录次小的位置</span>
+                            min2 = huftree[j].data; 		<span class="hljs-comment">//记录次小权值</span>
+                            x2 = j;				<span class="hljs-comment">//记录次小的位置</span>
                         &#125;
                     &#125;
             &#125;
-
+            
             <span class="hljs-keyword">this</span>.huftree[x1].parent = i;                   <span class="hljs-comment">//合并两棵权值最小的子树，左孩子最小</span>
             <span class="hljs-keyword">this</span>.huftree[x2].parent = i;
             <span class="hljs-keyword">this</span>.huftree[i] = <span class="hljs-keyword">new</span> TriElement(min1+min2, -<span class="hljs-number">1</span>, x1, x2); <span class="hljs-comment">//构造结点，指定值、父母、左右孩子</span>
         &#125;
-
+        
         <span class="hljs-comment">//Huffman树构造完毕</span>
     &#125;
-
+    
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> i 字符在charset中的位置</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 对应的描述字符串</span>
@@ -347,15 +354,15 @@
 <span class="hljs-comment">     */</span>
     <span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">getCode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span>                 <span class="hljs-comment">//返回charset第i个字符的Huffman编码字符串</span></span>
 <span class="hljs-function">    </span>&#123;
-        <span class="hljs-keyword">int</span> n = <span class="hljs-number">59</span>;        
-<span class="hljs-comment">//        int n = 8;        //最多可以表示8个字符的huffman编码，这里可以修改为26</span>
+        <span class="hljs-keyword">int</span> n = <span class="hljs-number">59</span>;		
+<span class="hljs-comment">//        int n = 8;		//最多可以表示8个字符的huffman编码，这里可以修改为26</span>
         <span class="hljs-keyword">char</span> hufcode[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[n];                      <span class="hljs-comment">//声明字符数组暂存Huffman编码</span>
-        <span class="hljs-keyword">int</span> child = i, parent = <span class="hljs-keyword">this</span>.huftree[child].parent;        <span class="hljs-comment">//获取这个元素的父节点</span>
+        <span class="hljs-keyword">int</span> child = i, parent = <span class="hljs-keyword">this</span>.huftree[child].parent;		<span class="hljs-comment">//获取这个元素的父节点</span>
         <span class="hljs-keyword">for</span> (i = n-<span class="hljs-number">1</span>; parent != -<span class="hljs-number">1</span>; i--)                       <span class="hljs-comment">//由叶结点向上直到根结点，反序存储编码</span>
         &#123;
             hufcode[i] = (huftree[parent].left==child) ? <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-string">&#x27;1&#x27;</span>;  <span class="hljs-comment">//左、右孩子编码为0、1</span>
-            child = parent;        <span class="hljs-comment">//向上转移到根结点</span>
-            parent = huftree[child].parent;      <span class="hljs-comment">//得到根结点      </span>
+            child = parent;		<span class="hljs-comment">//向上转移到根结点</span>
+            parent = huftree[child].parent;  	<span class="hljs-comment">//得到根结点      </span>
         &#125;                       
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> String(hufcode,i+<span class="hljs-number">1</span>,n-<span class="hljs-number">1</span>-i);    <span class="hljs-comment">//由hufcode数组从i+1开始的n-1-i个字符构造串</span>
     &#125;
@@ -377,26 +384,26 @@
 <span class="hljs-function">    </span>&#123;
         String compressed = <span class="hljs-string">&quot;&quot;</span>;                              <span class="hljs-comment">//被压缩的数据，以字符串显示</span>
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; text.length(); i++) &#123;
-<span class="hljs-comment">//             compressed += getCode(text.charAt(i)-&#x27;A&#x27;);     //默认字符集是从A开始的n个字符</span>
-             <span class="hljs-keyword">if</span>(text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span> &lt;= <span class="hljs-number">25</span>)&#123;
-                 compressed += getCode(text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符</span>
-             &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span> &lt;= <span class="hljs-number">25</span>)&#123;
-                 compressed += getCode(text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span>+<span class="hljs-number">26</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符</span>
-             &#125;<span class="hljs-keyword">else</span>&#123;
-                 compressed += getCode(<span class="hljs-number">52</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符 </span>
-             &#125;
+<span class="hljs-comment">//        	 compressed += getCode(text.charAt(i)-&#x27;A&#x27;);     //默认字符集是从A开始的n个字符</span>
+        	 <span class="hljs-keyword">if</span>(text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span> &lt;= <span class="hljs-number">25</span>)&#123;
+        		 compressed += getCode(text.charAt(i)-<span class="hljs-string">&#x27;A&#x27;</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符</span>
+        	 &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span> &lt;= <span class="hljs-number">25</span>)&#123;
+        		 compressed += getCode(text.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span>+<span class="hljs-number">26</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符</span>
+        	 &#125;<span class="hljs-keyword">else</span>&#123;
+        		 compressed += getCode(<span class="hljs-number">52</span>);     <span class="hljs-comment">//默认字符集是从A开始的n个字符 </span>
+        	 &#125;
         &#125;
-
-        <span class="hljs-keyword">return</span> compressed;        <span class="hljs-comment">//返回对应字符串</span>
+           
+        <span class="hljs-keyword">return</span> compressed;		<span class="hljs-comment">//返回对应字符串</span>
     &#125;
 
     <span class="hljs-comment">//数据解压缩，将压缩compressed中的0/1序列进行Huffman译码，返回译码字符串</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">decode</span><span class="hljs-params">(String compressed)</span></span>
 <span class="hljs-function">    </span>&#123;
-        String text = <span class="hljs-string">&quot;&quot;</span>;        <span class="hljs-comment">//结果字符串</span>
+        String text = <span class="hljs-string">&quot;&quot;</span>;		<span class="hljs-comment">//结果字符串</span>
         <span class="hljs-keyword">int</span> node = <span class="hljs-keyword">this</span>.huftree.length-<span class="hljs-number">1</span>;               <span class="hljs-comment">//node搜索一条从根到达叶子的路径</span>
         <span class="hljs-comment">//huftree的最后一个元素是根结点</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; compressed.length(); i++)         <span class="hljs-comment">//将每一段数字转化成对应的英文字符</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; compressed.length(); i++) 		<span class="hljs-comment">//将每一段数字转化成对应的英文字符</span>
         &#123;
             <span class="hljs-keyword">if</span> (compressed.charAt(i) == <span class="hljs-string">&#x27;0&#x27;</span>)            <span class="hljs-comment">//根据0、1分别向左或右孩子走</span>
                 node = huftree[node].left;
@@ -410,9 +417,8 @@
         &#125;
         <span class="hljs-keyword">return</span> text;
     &#125;
-
+    
 &#125;</code></pre>
-
 <p>这是与Huffman树对应的字符映射类AsciiCodeMap，在Huffman树中指定的默认字符集则是来自于这里，此处我只设置了大小写英文字母和空格，实际上也可以继续添加，最好设置为ASCII的所有字符。</p>
 <pre><code class="hljs arduino"><span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -420,52 +426,51 @@
 <span class="hljs-comment">//英文符号对应的映射</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsciiCodeMap</span> &#123;</span>
 
-    <span class="hljs-keyword">public</span> Map&lt;Character, Integer&gt; asciiCodeMap = <span class="hljs-keyword">new</span> HashMap&lt;Character, Integer&gt;();
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AsciiCodeMap</span><span class="hljs-params">()</span></span>&#123;
-
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">25</span>; i++)&#123;
-            asciiCodeMap.<span class="hljs-built_in">put</span>((<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;A&#x27;</span>+(i<span class="hljs-number">-26</span>)), i);
-        &#125;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">26</span>; i &lt;= <span class="hljs-number">51</span>; i++)&#123;
-            asciiCodeMap.<span class="hljs-built_in">put</span>((<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;a&#x27;</span>+(i<span class="hljs-number">-26</span>)), i);
-        &#125;
-        asciiCodeMap.<span class="hljs-built_in">put</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">52</span>);
-
-    &#125;
-
+	<span class="hljs-keyword">public</span> Map&lt;Character, Integer&gt; asciiCodeMap = <span class="hljs-keyword">new</span> HashMap&lt;Character, Integer&gt;();
+	
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AsciiCodeMap</span><span class="hljs-params">()</span></span>&#123;
+		
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">25</span>; i++)&#123;
+			asciiCodeMap.<span class="hljs-built_in">put</span>((<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;A&#x27;</span>+(i<span class="hljs-number">-26</span>)), i);
+		&#125;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">26</span>; i &lt;= <span class="hljs-number">51</span>; i++)&#123;
+			asciiCodeMap.<span class="hljs-built_in">put</span>((<span class="hljs-keyword">char</span>)(<span class="hljs-string">&#x27;a&#x27;</span>+(i<span class="hljs-number">-26</span>)), i);
+		&#125;
+		asciiCodeMap.<span class="hljs-built_in">put</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">52</span>);
+		
+	&#125;
+	
 &#125;</code></pre>
-
 <p>这里是测试类</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;
 
 <span class="hljs-comment">//采用Huffman算法对字符串进行数据压缩和解压缩。</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HuffmanTree_ex</span> </span>&#123;
-
+	
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
 <span class="hljs-function">    </span>&#123;        
 <span class="hljs-comment">//        String text=&quot;AAAACFHHHFFFCEEEHEHCGBGAFFEHHHHHHHECCAEECDCEEEADC&quot;</span>
-<span class="hljs-comment">//                + &quot;CDAACCCCABHHAAGADDAAAFAHHHHAA&quot;;                     //【例6.4】 数据</span>
+<span class="hljs-comment">//        		+ &quot;CDAACCCCABHHAAGADDAAAFAHHHHAA&quot;;                     //【例6.4】 数据</span>
 <span class="hljs-comment">//        int[] weight6_34=&#123;19, 2, 13, 5, 11, 7, 3, 17&#125;;                        //6-34</span>
 <span class="hljs-comment">//        HuffmanTree huffman = new HuffmanTree(weight6_34); //构造Huffman树</span>
 <span class="hljs-comment">//        System.out.println(huffman.toString());            //输出Huffman树的结点数组和所有字符编码</span>
 <span class="hljs-comment">//        String compressed = huffman.encode(text);</span>
 <span class="hljs-comment">//        System.out.println(&quot;将&quot;+text+&quot;压缩为&quot;+compressed+&quot;，&quot;+compressed.length()+&quot;位&quot;);</span>
 <span class="hljs-comment">//        System.out.println(&quot;将&quot;+compressed+&quot;解码为&quot;+huffman.decode(compressed));</span>
-
+        
         <span class="hljs-comment">//手动编码，测试</span>
-        Scanner input = <span class="hljs-keyword">new</span> Scanner(System.in);
-        String text2 = input.nextLine();
+    	Scanner input = <span class="hljs-keyword">new</span> Scanner(System.in);
+    	String text2 = input.nextLine();
         AsciiCodeMap a = <span class="hljs-keyword">new</span> AsciiCodeMap();
 <span class="hljs-comment">//        String text2=&quot;Hello world&quot;; </span>
         <span class="hljs-keyword">int</span>[] weight = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">59</span>];                        <span class="hljs-comment">//6-34</span>
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;weight.length; i++)&#123;
-            weight[i] = <span class="hljs-number">0</span>;
+        	weight[i] = <span class="hljs-number">0</span>;
         &#125;
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;text2.length(); i++)&#123;
-            <span class="hljs-keyword">int</span> m = a.asciiCodeMap.get(text2.charAt(i));            <span class="hljs-comment">//找到对应的索引位置</span>
-            weight[m]++;
-<span class="hljs-comment">//            System.out.println(text2.charAt(i)+&quot;   &quot;+ m);</span>
+        	<span class="hljs-keyword">int</span> m = a.asciiCodeMap.get(text2.charAt(i));			<span class="hljs-comment">//找到对应的索引位置</span>
+        	weight[m]++;
+<span class="hljs-comment">//        	System.out.println(text2.charAt(i)+&quot;   &quot;+ m);</span>
         &#125;
         HuffmanTree huffman2 = <span class="hljs-keyword">new</span> HuffmanTree(weight); <span class="hljs-comment">//构造Huffman树</span>
         System.out.println(huffman2.toString());            <span class="hljs-comment">//输出Huffman树的结点数组和所有字符编码</span>
@@ -474,10 +479,10 @@
         System.out.println(<span class="hljs-string">&quot;将&quot;</span>+compressed2+<span class="hljs-string">&quot;解码为&quot;</span>+huffman2.decode(compressed2));
         input.close();
     &#125;  
-
+    
 &#125;</code></pre>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>构建Huffman树，需要了解Huffman编码的基本原理：也就是出现次数多的字符的编码尽可能地短，这样就可以实现了我们所说的数据压缩。</p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>构建Huffman树，需要了解Huffman编码的基本原理：也就是出现次数多的字符的编码尽可能地短，这样就可以实现了我们所说的数据压缩。</p>
 
             </div>
             <hr>

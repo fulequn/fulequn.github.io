@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -215,24 +219,27 @@
             
             <div class="markdown-body" id="post-body">
               <p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/haw2106/p/8036523.html">https://www.cnblogs.com/haw2106/p/8036523.html</a></p>
-<p><strong>方法1</strong><br>(数据类型)(最小值+Math.random()</p>
+<p><strong>方法1</strong><br>
+(数据类型)(最小值+Math.random()</p>
 <pre><code class="hljs angelscript">*(最大值-最小值+<span class="hljs-number">1</span>))
 例:
 (<span class="hljs-built_in">int</span>)(<span class="hljs-number">1</span>+Math.random()*(<span class="hljs-number">10</span><span class="hljs-number">-1</span>+<span class="hljs-number">1</span>))</code></pre>
-
 <p>从1到10的int型随数</p>
-<p><strong>方法2</strong><br>获得随机数</p>
+<p><strong>方法2</strong><br>
+获得随机数</p>
 <pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
 &#123;System.out.println((<span class="hljs-keyword">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>));&#125;
 (<span class="hljs-keyword">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>)</code></pre>
-
-<p>通过java.Math包的random方法得到1-10的int随机数<br>公式是:最小值—最大值（整数）的随机数<br>（类型）最小值+Math.random()*最大值</p>
-<p>通过java.Math包的random方法得到1-10的int随机数<br>公式是:最小值—最大值（整数）的随机数<br>（类型）最小值+Math.random()*最大值</p>
+<p>通过java.Math包的random方法得到1-10的int随机数<br>
+公式是:最小值—最大值（整数）的随机数<br>
+（类型）最小值+Math.random()*最大值</p>
+<p>通过java.Math包的random方法得到1-10的int随机数<br>
+公式是:最小值—最大值（整数）的随机数<br>
+（类型）最小值+Math.random()*最大值</p>
 <p><strong>方法3</strong></p>
 <pre><code class="hljs java">Random ra =<span class="hljs-keyword">new</span> Random();
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
 &#123;System.out.println(ra.nextInt(<span class="hljs-number">10</span>)+<span class="hljs-number">1</span>);&#125;</code></pre>
-
 <p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p>
 <p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p>
 <p>生成0到1之间的任意随机小数：</p>
@@ -246,7 +253,8 @@
 <p>其实在Random的默认构造方法里也是使用上面第三种方法进行随机数的产生的</p>
 <p>对于方法二中的Random类有以下说明：</p>
 <p>java.util.Random类有两种方式构建方式：带种子和不带种子</p>
-<p>不带种子：<br>此种方式将会返回随机的数字，每次运行结果不一样</p>
+<p>不带种子：<br>
+此种方式将会返回随机的数字，每次运行结果不一样</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
         java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random();
@@ -256,7 +264,6 @@
     &#125;
 
 &#125;</code></pre>
-
 <p>带种子：</p>
 <p>此种方式，无论程序运行多少次，返回结果都是一样的</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
@@ -265,7 +272,6 @@
       System.out.println(r.nextInt());
     &#125;
 &#125;</code></pre>
-
 <p>两种方式的差别在于</p>
 <p>(1) 首先请打开Java Doc，我们会看到Random类的说明：</p>
 <p>此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。</p>
@@ -274,10 +280,9 @@
 <p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Random</span><span class="hljs-params">()</span> </span>&#123; 
 
-    <span class="hljs-keyword">this</span>(System.currentTimeMillis()); 
+	<span class="hljs-keyword">this</span>(System.currentTimeMillis()); 
 
 &#125;</code></pre>
-
 <p>另外：</p>
 <p>random对象的nextInt(),nextInt(int n)方法的说明：</p>
 <pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> next<span class="hljs-constructor">Int()</span>
@@ -287,58 +292,56 @@
 <span class="hljs-built_in">int</span> next<span class="hljs-constructor">Int(<span class="hljs-params">int</span> <span class="hljs-params">n</span>)</span>
 
 返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 <span class="hljs-number">0</span>（包括）和指定值（不包括）之间均匀分布的 <span class="hljs-built_in">int</span>值。</code></pre>
-
-
-
-<h1 id="Java随机数总结"><a href="#Java随机数总结" class="headerlink" title="Java随机数总结"></a>Java随机数总结</h1><p>随机数在实际中使用很广泛，比如要随即生成一个固定长度的字符串、数字。或者随即生成一个不定长度的数字、或者进行一个模拟的随机选择等等。Java提供了最基本的工具，可以帮助开发者来实现这一切。</p>
-<h2 id="一、Java随机数的产生方式"><a href="#一、Java随机数的产生方式" class="headerlink" title="一、Java随机数的产生方式"></a>一、Java随机数的产生方式</h2><p>　　在Java中，随机数的概念从广义上将，有三种。</p>
-<p>　　1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p>
-<p>　　2、通过Math.random()返回一个0到1之间的double值。</p>
-<p>　　3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p>
-<h2 id="二、Random类API说明"><a href="#二、Random类API说明" class="headerlink" title="二、Random类API说明"></a>二、Random类API说明</h2><p>　　1、Java API说明</p>
-<p>　　Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p>
-<p>　　如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p>
-<p>　　很多应用程序会发现 Math 类中的 random 方法更易于使用。</p>
-<p>　　2、方法摘要</p>
-<p>　　Random()</p>
-<p>　　创建一个新的随机数生成器。</p>
-<p>　　Random(long seed)</p>
-<p>　　使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p>
-<p>　　protected int next(int bits)</p>
-<p>　　生成下一个伪随机数。</p>
-<p>　　boolean nextBoolean()</p>
-<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p>
-<p>　　void nextBytes(byte[] bytes)</p>
-<p>　　生成随机字节并将其置于用户提供的字节数组中。</p>
-<p>　　double nextDouble()</p>
-<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p>
-<p>　　float nextFloat()</p>
-<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p>
-<p>　　double nextGaussian()</p>
-<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p>
-<p>　　int nextInt()</p>
-<p>　　返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p>
-<p>　　int nextInt(int n)</p>
-<p>　　返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p>
-<p>　　long nextLong()</p>
-<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p>
-<p>　　void setSeed(long seed)</p>
-<p>　　使用单个 long 种子设置此随机数生成器的种子。</p>
-<p>　　三、Random类使用说明</p>
-<p>　　1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p>
-<p>　　通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p>
-<p>　　不带种子的，每次运行生成的都是随机的，没有规律可言。</p>
-<p>　　2、创建不带种子的Random对象</p>
+<h1 id="java随机数总结"><a class="markdownIt-Anchor" href="#java随机数总结"></a> Java随机数总结</h1>
+<p>随机数在实际中使用很广泛，比如要随即生成一个固定长度的字符串、数字。或者随即生成一个不定长度的数字、或者进行一个模拟的随机选择等等。Java提供了最基本的工具，可以帮助开发者来实现这一切。</p>
+<h2 id="一-java随机数的产生方式"><a class="markdownIt-Anchor" href="#一-java随机数的产生方式"></a> 一、Java随机数的产生方式</h2>
+<p>在Java中，随机数的概念从广义上将，有三种。</p>
+<p>1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p>
+<p>2、通过Math.random()返回一个0到1之间的double值。</p>
+<p>3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p>
+<h2 id="二-random类api说明"><a class="markdownIt-Anchor" href="#二-random类api说明"></a> 二、Random类API说明</h2>
+<p>1、Java API说明</p>
+<p>Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p>
+<p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p>
+<p>很多应用程序会发现 Math 类中的 random 方法更易于使用。</p>
+<p>2、方法摘要</p>
+<p>Random()</p>
+<p>创建一个新的随机数生成器。</p>
+<p>Random(long seed)</p>
+<p>使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p>
+<p>protected int next(int bits)</p>
+<p>生成下一个伪随机数。</p>
+<p>boolean nextBoolean()</p>
+<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p>
+<p>void nextBytes(byte[] bytes)</p>
+<p>生成随机字节并将其置于用户提供的字节数组中。</p>
+<p>double nextDouble()</p>
+<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p>
+<p>float nextFloat()</p>
+<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p>
+<p>double nextGaussian()</p>
+<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p>
+<p>int nextInt()</p>
+<p>返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p>
+<p>int nextInt(int n)</p>
+<p>返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p>
+<p>long nextLong()</p>
+<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p>
+<p>void setSeed(long seed)</p>
+<p>使用单个 long 种子设置此随机数生成器的种子。</p>
+<p>三、Random类使用说明</p>
+<p>1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p>
+<p>通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p>
+<p>不带种子的，每次运行生成的都是随机的，没有规律可言。</p>
+<p>2、创建不带种子的Random对象</p>
 <pre><code class="hljs java">　　Random random = <span class="hljs-keyword">new</span> Random();</code></pre>
-
-<p>　　3、创建不带种子的Random对象有两种方法：</p>
+<p>3、创建不带种子的Random对象有两种方法：</p>
 <pre><code class="hljs java">　　<span class="hljs-number">1</span>) Random random = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">555L</span>);
 
 　　<span class="hljs-number">2</span>) Random random = <span class="hljs-keyword">new</span> Random();random.setSeed(<span class="hljs-number">555L</span>);</code></pre>
-
-<p>　　四、测试</p>
-<p>　　通过一个例子说明上面的用法</p>
-<p>　　</p>
+<p>四、测试</p>
+<p>通过一个例子说明上面的用法</p>
+<p></p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
 
 　　
@@ -391,7 +394,7 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
-          System.out.println(random.nextInt());
+      	System.out.println(random.nextInt());
 
       &#125;
 
@@ -407,7 +410,7 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
-          System.out.println(random.nextInt());
+      	System.out.println(random.nextInt());
 
       &#125;
 
@@ -425,16 +428,15 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
-          System.out.println(random.nextInt());
+     	 System.out.println(random.nextInt());
 
       &#125;
 
 　　&#125;
 
 &#125;</code></pre>
-
-<p>　　运行结果：</p>
-<p>　　</p>
+<p>运行结果：</p>
+<p></p>
 <pre><code class="hljs java">--------------test()--------------
 
 　　r1 = <span class="hljs-number">1227108626582</span>
@@ -468,11 +470,10 @@
 　　-<span class="hljs-number">1462441651</span>
 
 　　Process finished with exit code <span class="hljs-number">0</span></code></pre>
-
-<p>　　通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p>
-<p>　　而不带种子的，每次运行结果都是随机的。</p>
-<p>　　五、综合应用</p>
-<p>　　下面通过最近写的一个随机数工具类来展示用法：</p>
+<p>通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p>
+<p>而不带种子的，每次运行结果都是随机的。</p>
+<p>五、综合应用</p>
+<p>下面通过最近写的一个随机数工具类来展示用法：</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
 
 　　
@@ -495,11 +496,11 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
-          sb.append(allChar.charAt(random.nextInt(allChar.length())));
+      	sb.append(allChar.charAt(random.nextInt(allChar.length())));
 
-　　    &#125;
+　　	&#125;
 
-　　    <span class="hljs-keyword">return</span> sb.toString();
+　　	<span class="hljs-keyword">return</span> sb.toString();
 
 　　&#125;
 
@@ -513,7 +514,7 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
-          sb.append(allChar.charAt(random.nextInt(letterChar.length())));
+     	 sb.append(allChar.charAt(random.nextInt(letterChar.length())));
 
       &#125;
 
@@ -525,7 +526,7 @@
 
 　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateLowerString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
 
-　    　<span class="hljs-keyword">return</span> generateMixString(length).toLowerCase();
+　	　<span class="hljs-keyword">return</span> generateMixString(length).toLowerCase();
 
 　　&#125;
 
@@ -533,7 +534,7 @@
 
 　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateUpperString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
 
-　　    <span class="hljs-keyword">return</span> generateMixString(length).toUpperCase();
+　　	<span class="hljs-keyword">return</span> generateMixString(length).toUpperCase();
 
 　　&#125;
 
@@ -545,7 +546,7 @@
 
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
-          sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);
+     	 sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);
 
       &#125;
 
@@ -563,11 +564,11 @@
 
       <span class="hljs-keyword">if</span> (fixdlenth - strNum.length() &gt;= <span class="hljs-number">0</span>) &#123;
 
-          sb.append(generateZeroString(fixdlenth - strNum.length()));
+      	sb.append(generateZeroString(fixdlenth - strNum.length()));
 
       &#125; <span class="hljs-keyword">else</span> &#123;
 
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
+      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
 
       &#125;
 
@@ -587,11 +588,11 @@
 
       <span class="hljs-keyword">if</span> (fixdlenth - strNum.length() &gt;= <span class="hljs-number">0</span>) &#123;
 
-          sb.append(generateZeroString(fixdlenth - strNum.length()));
+      	sb.append(generateZeroString(fixdlenth - strNum.length()));
 
       &#125; <span class="hljs-keyword">else</span> &#123;
 
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
+      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
 
       &#125;
 
@@ -620,8 +621,7 @@
 　　&#125;
 
 &#125;</code></pre>
-
-<p>　　运行结果：</p>
+<p>运行结果：</p>
 <pre><code class="hljs awk">　　vWMBPiNbzfGCpHG
 
 　　<span class="hljs-number">23</span>hyraHdJkKPwMv
@@ -637,22 +637,22 @@
 　　<span class="hljs-number">000000000000123</span>
 
 　　Process finished with <span class="hljs-keyword">exit</span> code <span class="hljs-number">0</span></code></pre>
-
-<p>　　六、总结</p>
-<p>　　1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p>
-<p>　　2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p>
-<p>　　3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p>
-<p>　　4、Random的功能涵盖了Math.random()的功能。</p>
-<p>　　5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p>
-<p>　　6、不要研究不重复的随机数，意义不大。因为结果不可再现</p>
+<p>六、总结</p>
+<p>1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p>
+<p>2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p>
+<p>3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p>
+<p>4、Random的功能涵盖了Math.random()的功能。</p>
+<p>5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p>
+<p>6、不要研究不重复的随机数，意义不大。因为结果不可再现</p>
 <p>在Java 中我们可以使用java.util.Random类来产生一个随机数发生器。它有两种形式的构造函数，分别是Random()和Random(long seed)。Random()使用当前时间即System.currentTimeMillis()作为发生器的种子，Random(long seed)使用指定的seed作为发生器的种子。</p>
 <p>​    随机数发生器(Random)对象产生以后，通过调用不同的method：nextInt()、nextLong()、nextFloat()、nextDouble()等获得不同类型随机数。</p>
 <p>​    1&gt;生成随机数</p>
 <pre><code class="hljs arcade"><span class="hljs-built_in">Random</span> random = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>();
 <span class="hljs-built_in">Random</span> random = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>(<span class="hljs-number">100</span>);<span class="hljs-comment">//指定种子数100</span></code></pre>
-
-<p>​      random调用不同的方法，获得随机数。<br>​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
-<p>​      random调用不同的方法，获得随机数。<br>​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
+<p>​      random调用不同的方法，获得随机数。<br>
+​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
+<p>​      random调用不同的方法，获得随机数。<br>
+​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
 <pre><code class="hljs reasonml">import java.util.*;
 <span class="hljs-keyword">class</span> TestRandom &#123;
    public static void main(String<span class="hljs-literal">[]</span> args) &#123;
@@ -666,18 +666,17 @@
       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random2.next<span class="hljs-constructor">Boolean()</span>);
    &#125;
  &#125;</code></pre>
-
-<p>​    2&gt;指定范围内的随机数<br>​       随机数控制在某个范围内,使用模数运算符%</p>
+<p>​    2&gt;指定范围内的随机数<br>
+​       随机数控制在某个范围内,使用模数运算符%</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestRandom</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
         Random random = <span class="hljs-keyword">new</span> Random();
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>;i++) &#123;
-                System.out.println(Math.abs(random.nextInt()));
+       		 System.out.println(Math.abs(random.nextInt()));
         &#125;
     &#125;
 &#125;</code></pre>
-
 <p>​       获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p>
 <p>​       获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p>
 <p>​    3&gt;获取指定范围内的不重复随机数</p>
@@ -709,9 +708,10 @@
         &#125;
     &#125;
 &#125;</code></pre>
-
-<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>1.测试一： 使用不带参数的Random()构造函数</p>
-<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>1.测试一： 使用不带参数的Random()构造函数</p>
+<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>
+1.测试一： 使用不带参数的Random()构造函数</p>
+<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>
+1.测试一： 使用不带参数的Random()构造函数</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest</span> </span>&#123;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
@@ -721,7 +721,6 @@
        &#125;
     &#125;
 &#125;</code></pre>
-
 <p>程序运行结果：</p>
 <pre><code class="hljs angelscript"><span class="hljs-number">-1761145445</span>
 <span class="hljs-number">-1070533012</span>
@@ -733,7 +732,6 @@
 <span class="hljs-number">-1099867456</span>
 <span class="hljs-number">347034376</span>
 <span class="hljs-number">-1277853157</span></code></pre>
-
 <p>再次运行该程序：</p>
 <pre><code class="hljs angelscript"><span class="hljs-number">-169416241</span>
 <span class="hljs-number">220377062</span>
@@ -745,11 +743,10 @@
 <span class="hljs-number">1132916742</span>
 <span class="hljs-number">-1522319721</span>
 <span class="hljs-number">1787867608</span></code></pre>
-
-<p>  从上面的测试我们可以看出，使用不带参数的Random()构造函数产生的随机数不会重复。那么，什么情况下Java会产生重复的随机数呢？且看下面的测试。</p>
+<p>从上面的测试我们可以看出，使用不带参数的Random()构造函数产生的随机数不会重复。那么，什么情况下Java会产生重复的随机数呢？且看下面的测试。</p>
 <p>2.测试二：为Random设置种子数</p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest_Repeat</span> </span>&#123;
-
+ 
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
     java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random(<span class="hljs-number">10</span>);
     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
@@ -757,7 +754,6 @@
     &#125;
   &#125;
 &#125;</code></pre>
-
 <p>无论程序运行多少次，其结果总是：</p>
 <pre><code class="hljs angelscript"><span class="hljs-number">-1157793070</span>
 <span class="hljs-number">1913984760</span>
@@ -769,12 +765,16 @@
 <span class="hljs-number">1581279777</span>
 <span class="hljs-number">-778209333</span>
 <span class="hljs-number">1532292428</span></code></pre>
-
 <p>甚至在不同的机器上测试，测试结果也不会改变！</p>
-<p>3.原因分析：<br>(1) 首先请打开Java Doc，我们会看到Random类的说明：<br>此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。<br>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。<br>Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p>
+<p>3.原因分析：<br>
+(1) 首先请打开Java Doc，我们会看到Random类的说明：<br>
+此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。<br>
+如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。<br>
+Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p>
 <p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p>
-<p>   public Random() { this(System.currentTimeMillis()); }</p>
-<p>4.结论：<br>  通过上面的测试和分析，我们会对Random类有较为深刻的理解。同时，我觉得，通过阅读Java Doc的API文档，可以很好地提高我们的Java编程能力，做到“知其然”；一旦遇到费解的问题，不妨打开Java的源代码，这样我们就能做到“知其所以然”。</p>
+<p>public Random() { this(System.currentTimeMillis()); }</p>
+<p>4.结论：<br>
+通过上面的测试和分析，我们会对Random类有较为深刻的理解。同时，我觉得，通过阅读Java Doc的API文档，可以很好地提高我们的Java编程能力，做到“知其然”；一旦遇到费解的问题，不妨打开Java的源代码，这样我们就能做到“知其所以然”。</p>
 
             </div>
             <hr>

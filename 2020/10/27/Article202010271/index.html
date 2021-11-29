@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -226,19 +230,15 @@
 <span class="hljs-attr">&quot;gender&quot;</span>:<span class="hljs-string">&quot;male&quot;</span>, 
 <span class="hljs-attr">&quot;grade&quot;</span>:<span class="hljs-number">2</span>
 &#125;</code></pre>
-
 <p><strong>explain</strong></p>
 <p>explain方法是用来查看<code>db.collecion.find()</code>的一些查询信息的。例如：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.collectionName</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.explain</span>()</code></pre>
-
 <p>explain方法有个可选的参数verbose，是个字符串，他表示的是verbose的模式。一共分为3种模式：</p>
 <p>queryPlanner：默认参数，详细说明查询优化器选择的计划并列出被拒绝的计划。例如：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.students</span><span class="hljs-selector-class">.find</span>(&#123;<span class="hljs-attribute">grade</span>:<span class="hljs-number">1</span>&#125;)<span class="hljs-selector-class">.explain</span>()</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>executionStats：MongoDB运行查询优化器选择获胜的计划，执行计划，完成并返回成功，统计描述的胜利计划的执行。例如：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.students</span><span class="hljs-selector-class">.find</span>(&#123;<span class="hljs-attribute">grade</span>:<span class="hljs-number">1</span>&#125;)<span class="hljs-selector-class">.explain</span>(&quot;<span class="hljs-selector-tag">executionStats</span>&quot;)</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/2.png" srcset="/img/loading.gif" alt="2"></p>
 <p>allPlansExecution：MongoDB返回描述获奖计划的执行以及对其他候选人统计计划选择方案时捕获的统计。</p>
 <p>我们的目的是要记录执行find方法的耗时时间，所以用executionStats模式就可以了。</p>
@@ -261,7 +261,6 @@
 <p>例如：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.setProfilingLevel</span>(2)
 <span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.getProfilingLevel</span>()</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/4.png" srcset="/img/loading.gif" alt="4"></p>
 <p>Profiling一共分为3个级别：</p>
 <ul>
@@ -272,23 +271,18 @@
 <p>Profile 记录在级别1时会记录慢命令，那么这个慢的定义是什么?上面我们说到其默认为100ms，当然有默认就有设置，其设置方法和级别一样有两种，一种是通过添 加–slowms启动参数配置。第二种是调用<code>db.setProfilingLevel</code>时加上第二个参数：</p>
 <pre><code class="hljs reasonml">db.set<span class="hljs-constructor">ProfilingLevel(<span class="hljs-params">level</span>,<span class="hljs-params">slowms</span>)</span>
 db.set<span class="hljs-constructor">ProfilingLevel( 1 , 10 )</span>;</code></pre>
-
 <p><strong>查询 Profiling 记录</strong></p>
 <p>开启profiling功能后，系统会把相关命令详细信息记录到当前数据库的<code>system.profile</code>集合里。查询方法也是跟普通的集合查询一样。</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>()</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/5.png" srcset="/img/loading.gif" alt="5"></p>
 <p>其中，mills就是命令耗时记录。</p>
 <p>由于我们设置的级别是2，所以所有命令都有记录，现在我们把他改为级别1，且只记录耗时20毫秒以上的记录：</p>
 <pre><code class="hljs angelscript">db.setProfilingLevel( <span class="hljs-number">1</span> , <span class="hljs-number">20</span>)</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/6.png" srcset="/img/loading.gif" alt="6"></p>
 <p>然后我们再执行一下聚合查询，查看下耗时时间：</p>
 <pre><code class="hljs bash">db.students.aggregate( &#123;<span class="hljs-variable">$group</span>:&#123;_id:<span class="hljs-string">&quot;<span class="hljs-variable">$grade</span>&quot;</span>,avgAge:&#123;<span class="hljs-variable">$avg</span>:<span class="hljs-string">&quot;<span class="hljs-variable">$age</span>&quot;</span>&#125;&#125;&#125; )</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/7.png" srcset="/img/loading.gif" alt="7"></p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.pretty</span>()</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/8.png" srcset="/img/loading.gif" alt="8"></p>
 <p>可以看出，我们的这聚合查询耗时70毫秒。</p>
 <p><strong>profile 部分字段解释</strong></p>
@@ -305,21 +299,18 @@ db.set<span class="hljs-constructor">ProfilingLevel( 1 , 10 )</span>;</code></pr
 <p><strong>下面介绍几个常用的查询命令：</strong></p>
 <p>列出执行时间长于某一限度(例如：20ms)的 Profile 记录.</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>(&#123;<span class="hljs-attribute">millis</span>:&#123;$gt:<span class="hljs-number">50</span>&#125;&#125;)</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/9.png" srcset="/img/loading.gif" alt="9"></p>
 <p>查看最新的 3条Profile 记录：</p>
 <pre><code class="hljs vim">db.<span class="hljs-built_in">system</span>.<span class="hljs-keyword">profile</span>.<span class="hljs-keyword">find</span>().<span class="hljs-keyword">sort</span>(&#123;$natura<span class="hljs-variable">l:</span>-<span class="hljs-number">1</span>&#125;).limit(<span class="hljs-number">3</span>)</code></pre>
-
 <p><img src="/2020/10/27/Article202010271/10.png" srcset="/img/loading.gif" alt="10"></p>
 <p>查看关于某个collection的相关慢查询操作：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>(&#123;<span class="hljs-attribute">ns</span>:<span class="hljs-string">&#x27;mydb.students&#x27;</span>&#125;)</code></pre>
-
 <p><strong>MongoDB 查询优化</strong></p>
-<p>　　docsExamined(扫描的记录数)远大于nreturned(返回结果的记录数)的话，那么我们就要考虑通过加索引来优化记录定位了。</p>
-<p>　　responseLength 如果过大，那么说明我们返回的结果集太大了，这时请查看find函数的第二个参数是否只写上了你需要的属性名。(类似 于MySQL中不要总是select)</p>
-<p>　　对于创建索引的建议是：如果很少读，那么尽量不要添加索引，因为索引越多，写操作会越慢。如果读量很大，那么创建索引还是比较划算的。</p>
+<p>docsExamined(扫描的记录数)远大于nreturned(返回结果的记录数)的话，那么我们就要考虑通过加索引来优化记录定位了。</p>
+<p>responseLength 如果过大，那么说明我们返回的结果集太大了，这时请查看find函数的第二个参数是否只写上了你需要的属性名。(类似 于MySQL中不要总是select)</p>
+<p>对于创建索引的建议是：如果很少读，那么尽量不要添加索引，因为索引越多，写操作会越慢。如果读量很大，那么创建索引还是比较划算的。</p>
 <p><strong>Profiler 的效率</strong></p>
-<p>　　Profiling 功能肯定是会影响效率的，但是不太严重，原因是他使用的是system.profile 来记录，而<code>system.profile </code>是一个capped collection 这种collection 在操作上有一些限制和特点，但是效率更高。</p>
+<p>Profiling 功能肯定是会影响效率的，但是不太严重，原因是他使用的是system.profile 来记录，而<code>system.profile</code>是一个capped collection 这种collection 在操作上有一些限制和特点，但是效率更高。</p>
 
             </div>
             <hr>

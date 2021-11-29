@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      671 字
+      672 字
     </span>
   
 
@@ -214,32 +218,38 @@
             <h1 style="display: none">R语言读写xls，xlsx文件</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConnect，openxlsx等）</p>
+              <h2 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h2>
+<p>R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConnect，openxlsx等）</p>
 <p>其中，ROOBC包只能应用于32位的windows系统，xlsReadWrite只能从GitHub中获取，CRAN中不能直接获取，XLConnect需要依赖于java，且对大数据情况读取非常慢，所以我们使用xlsx，readxl，XLConnect来进行Excel类文件的读取。</p>
-<h2 id="xlsx包"><a href="#xlsx包" class="headerlink" title="xlsx包"></a>xlsx包</h2><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="1）-装Java"><a href="#1）-装Java" class="headerlink" title="1） 装Java"></a>1） 装Java</h4><p>安装链接：<a target="_blank" rel="noopener" href="https://www.java.com/zh_CN/download/">https://www.java.com/zh_CN/download/</a></p>
+<h2 id="xlsx包"><a class="markdownIt-Anchor" href="#xlsx包"></a> xlsx包</h2>
+<h3 id="使用步骤"><a class="markdownIt-Anchor" href="#使用步骤"></a> 使用步骤</h3>
+<h4 id="1-装java"><a class="markdownIt-Anchor" href="#1-装java"></a> 1） 装Java</h4>
+<p>安装链接：<a target="_blank" rel="noopener" href="https://www.java.com/zh_CN/download/">https://www.java.com/zh_CN/download/</a></p>
 <p>我们按照指引选择默认路径安装，安装完成后，在<code>C:\Program Files</code>下出现了Java文件，说明安装成功。（注：有些地方说需要将Java文件添加到全局变量中，后面的<code>xlsx</code>包才能调取成功，但其实在这两天的实际安装中发现，自己的电脑并不需要，可能得看脸。）</p>
-<h4 id="2）-装xlsx"><a href="#2）-装xlsx" class="headerlink" title="2） 装xlsx"></a>2） 装xlsx</h4><p>使用install.package()或者在RStudio中直接安装。</p>
-<h4 id="3）-读取文件"><a href="#3）-读取文件" class="headerlink" title="3） 读取文件"></a>3） 读取文件</h4><p>最后我们就能直接使用啦，下面来讲一下其代码格式：</p>
+<h4 id="2-装xlsx"><a class="markdownIt-Anchor" href="#2-装xlsx"></a> 2） 装xlsx</h4>
+<p>使用install.package()或者在RStudio中直接安装。</p>
+<h4 id="3-读取文件"><a class="markdownIt-Anchor" href="#3-读取文件"></a> 3） 读取文件</h4>
+<p>最后我们就能直接使用啦，下面来讲一下其代码格式：</p>
 <pre><code class="hljs r"><span class="hljs-keyword">library</span>(xlsx)
 dat &lt;- read.xlsx(<span class="hljs-string">&quot;data.xlsx&quot;</span>, sheetName = <span class="hljs-string">&quot;Sheet1&quot;</span>, encoding = <span class="hljs-string">&#x27;UTF-8&#x27;</span>)</code></pre>
-
 <p>一个标准的数据读取如上所示，下面将几个常用的参数：</p>
 <ul>
 <li><code>&quot;data.xlsx&quot;</code>：表示读取数据的名称。</li>
 <li><code>sheetName</code>：表示读取表中表的名称，通常第一个就是<code>Sheet1</code>。</li>
 <li><code>encoding</code>：这个在读取中文数据的时候是一定要加上的，不然读取数据会出现乱码。</li>
-<li><code>sheetIndex</code>：表示读取文件中第几个表，<code>sheetIndex = 1</code>表示读取文件中第一个表。需要特别注意：当文件中我们的表明为中文字时，不能使用类似<code>sheetName = &quot;表1&quot;</code>进行读取，即使加上<code>encoding = &#39;UTF-8&#39;</code>也会出现读取错误，这时就需要使用<code>sheetIndex</code>来进行读取。</li>
+<li><code>sheetIndex</code>：表示读取文件中第几个表，<code>sheetIndex = 1</code>表示读取文件中第一个表。需要特别注意：当文件中我们的表明为中文字时，不能使用类似<code>sheetName = &quot;表1&quot;</code>进行读取，即使加上<code>encoding = 'UTF-8'</code>也会出现读取错误，这时就需要使用<code>sheetIndex</code>来进行读取。</li>
 </ul>
-<h4 id="4）-写入文件"><a href="#4）-写入文件" class="headerlink" title="4） 写入文件"></a>4） 写入文件</h4><pre><code class="hljs javascript">write.xlsx(iris, file = <span class="hljs-string">&quot;iris.xlsx&quot;</span>, row.names = FALSE, sheetName = <span class="hljs-string">&quot;Sheet1&quot;</span>)</code></pre>
-
+<h4 id="4-写入文件"><a class="markdownIt-Anchor" href="#4-写入文件"></a> 4） 写入文件</h4>
+<pre><code class="hljs javascript">write.xlsx(iris, file = <span class="hljs-string">&quot;iris.xlsx&quot;</span>, row.names = FALSE, sheetName = <span class="hljs-string">&quot;Sheet1&quot;</span>)</code></pre>
 <p>想必会有人在这里踩坑，大家应该注意到有一个<code>append</code>的参数，是否认为将其值设置为<code>TRUE</code>的话，就可以多次向表中写入数据？那就真踩坑了。查看xlsx包中的注释也很模糊：</p>
 <pre><code class="hljs javascript">&gt; # a logical value indicating if x should be appended to an existing file. 
 &gt; # 翻译：一个逻辑值，指示是否应该将x附加到现有文件中。</code></pre>
-
 <p><strong>附加到现有文件中</strong>，实际上是增加新的sheet，而非在原有sheet工作表中继续增加数据。如需在同一个sheet工作表中多次增加数据。</p>
-<h2 id="readxl包"><a href="#readxl包" class="headerlink" title="readxl包"></a>readxl包</h2><h3 id="1）-安装readlx包"><a href="#1）-安装readlx包" class="headerlink" title="1） 安装readlx包"></a>1） 安装readlx包</h3><pre><code class="hljs cmake">&gt; <span class="hljs-keyword">install</span>.packages(<span class="hljs-string">&quot;readxl&quot;</span>)</code></pre>
-
-<h3 id="2）-读取文件"><a href="#2）-读取文件" class="headerlink" title="2） 读取文件"></a>2） 读取文件</h3><pre><code class="hljs routeros">&gt; library(readxl)
+<h2 id="readxl包"><a class="markdownIt-Anchor" href="#readxl包"></a> readxl包</h2>
+<h3 id="1-安装readlx包"><a class="markdownIt-Anchor" href="#1-安装readlx包"></a> 1） 安装readlx包</h3>
+<pre><code class="hljs cmake">&gt; <span class="hljs-keyword">install</span>.packages(<span class="hljs-string">&quot;readxl&quot;</span>)</code></pre>
+<h3 id="2-读取文件"><a class="markdownIt-Anchor" href="#2-读取文件"></a> 2） 读取文件</h3>
+<pre><code class="hljs routeros">&gt; library(readxl)
 
 <span class="hljs-builtin-name">Warning</span> message:
 

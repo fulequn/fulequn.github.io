@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,28 +222,29 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/intsmaze/p/5614417.html">Hadoop中MR程序的几种提交运行模式 - 大宅洋 - 博客园 (cnblogs.com)</a></p>
 </blockquote>
-<h3 id="本地模型运行"><a href="#本地模型运行" class="headerlink" title="本地模型运行"></a>本地模型运行</h3><p>1：在windows的eclipse里面直接运行main方法，就会将job提交给本地执行器localjobrunner执行</p>
-<p>   —-输入输出数据可以放在本地路径下（c:/wc/srcdata/）</p>
-<p>   —-输入输出数据也可以放在hdfs中(hdfs://centosReall-131:9000/wc/srcdata)</p>
+<h3 id="本地模型运行"><a class="markdownIt-Anchor" href="#本地模型运行"></a> 本地模型运行</h3>
+<p>1：在windows的eclipse里面直接运行main方法，就会将job提交给本地执行器localjobrunner执行</p>
+<p>----输入输出数据可以放在本地路径下（c:/wc/srcdata/）</p>
+<p>----输入输出数据也可以放在hdfs中(hdfs://centosReall-131:9000/wc/srcdata)</p>
 <p>2：在linux的eclipse里面直接运行main方法，但是不要添加yarn相关的配置文件，也会提交给localjobrunner执行</p>
-<p>   —-输入输出数据可以放在本地路径下（/home/hadoop/wc/srcdata/）</p>
-<p>   —-输入输出数据也可以放在hdfs中(hdfs:/centosReall-131:9000/wc/srcdata)  </p>
-<h3 id="集群模式运行"><a href="#集群模式运行" class="headerlink" title="集群模式运行"></a>集群模式运行</h3><p>1：将工程打成jar包，上传到服务器，然后用hadoop命令提交  hadoop jar wc.jar cn.intsmaze.hadoop.mr.wordcount.WCRunner</p>
+<p>----输入输出数据可以放在本地路径下（/home/hadoop/wc/srcdata/）</p>
+<p>----输入输出数据也可以放在hdfs中(hdfs:/centosReall-131:9000/wc/srcdata)</p>
+<h3 id="集群模式运行"><a class="markdownIt-Anchor" href="#集群模式运行"></a> 集群模式运行</h3>
+<p>1：将工程打成jar包，上传到服务器，然后用hadoop命令提交  hadoop jar wc.jar cn.intsmaze.hadoop.mr.wordcount.WCRunner</p>
 <p>程序编写好以后要打包成jar包放到hadoop集群上进行运行。这里打包的jar包名为wc.jar。</p>
 <p>先把文件上传到linux目录，然后在该目录下使用指令将该jar分发到hadoop集群中并指定运行哪一个程序。</p>
 <p><strong>hadoop jar wc.jar cn.intsmaze.hadoop.mr.WCRunner(指定运行java类的完整路径)这个时候程序就执行了。</strong></p>
 <p>2:在linux的eclipse中直接运行main方法，也可以提交到集群中去运行，但是，必须采取以下措施：</p>
-<p>   —-在工程src目录下加入 mapred-site.xml  和  yarn-site.xml （这两个文件在搭建hdfs时修改了的见hdfs文件夹下的搭建日志）</p>
-<p>   —-将工程打成jar包(wc.jar)，同时在main方法中添加一个conf的配置参数　</p>
+<p>----在工程src目录下加入 mapred-site.xml  和  yarn-site.xml （这两个文件在搭建hdfs时修改了的见hdfs文件夹下的搭建日志）</p>
+<p>----将工程打成jar包(wc.jar)，同时在main方法中添加一个conf的配置参数</p>
 <pre><code class="hljs pgsql"><span class="hljs-keyword">Configuration</span> conf = <span class="hljs-built_in">new</span> <span class="hljs-keyword">Configuration</span>();
 conf.<span class="hljs-keyword">set</span>(&quot;mapreduce.job.jar&quot;,&quot;wc.jar&quot;);</code></pre>
-
 <p>JAR包的位置要在运行程序的工程里面。</p>
 <p>3:在windows的eclipse中直接运行main方法，也可以提交给集群中运行，但是因为平台不兼容，需要做很多的设置修改（很麻烦忽略）</p>
-<p>—-要在windows中存放一份hadoop的安装包（解压好的）</p>
-<p>—-要将其中的lib和bin目录替换成根据你的windows版本重新编译出的文件</p>
-<p>—-再要配置系统环境变量 HADOOP_HOME  和 PATH</p>
-<p>—-修改YarnRunner这个类的源码</p>
+<p>----要在windows中存放一份hadoop的安装包（解压好的）</p>
+<p>----要将其中的lib和bin目录替换成根据你的windows版本重新编译出的文件</p>
+<p>----再要配置系统环境变量 HADOOP_HOME  和 PATH</p>
+<p>----修改YarnRunner这个类的源码</p>
 
             </div>
             <hr>

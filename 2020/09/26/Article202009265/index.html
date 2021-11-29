@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -231,7 +235,6 @@ plt.show()
 x.plot(logy=<span class="hljs-literal">True</span>,label=<span class="hljs-string">u&#x27;对数数据图&#x27;</span>,legend=<span class="hljs-literal">True</span>) <span class="hljs-comment">#这个函数里的参数logy=True时，是以10为底的</span>
 plt.grid(<span class="hljs-literal">True</span>)
 plt.show()</code></pre>
-
 <p>效果图如下：</p>
 <p><img src="/2020/09/26/Article202009265/1.jpg" srcset="/img/loading.gif" alt="1"></p>
 <p><img src="/2020/09/26/Article202009265/2.jpg" srcset="/img/loading.gif" alt="2"></p>
@@ -257,7 +260,6 @@ red_line= mlines.Line2D([],[],linestyle=<span class="hljs-string">&#x27;--&#x27;
 plt.legend(handles=[blue_line,red_line],loc=<span class="hljs-string">&#x27;upper left&#x27;</span>)
 plt.grid(<span class="hljs-literal">True</span>)
 plt.show()</code></pre>
-
 <p>效果如下：</p>
 <p><img src="/2020/09/26/Article202009265/3.jpg" srcset="/img/loading.gif" alt="3"></p>
 

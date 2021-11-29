@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -181,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      74
+      75
        分钟
     </span>
   
@@ -220,11 +224,12 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34941023/article/details/51448770">https://blog.csdn.net/qq_34941023/article/details/51448770</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c3eba7553ae5">https://www.jianshu.com/p/c3eba7553ae5</a></p>
 </blockquote>
-<h2 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h2><p>Data Frame一般被翻译为数据框，感觉就像是R中的表，由行和列组成，与Matrix不同的是，每个列可以是不同的数据类型，而Matrix是必须相同的。</p>
+<h2 id="含义"><a class="markdownIt-Anchor" href="#含义"></a> 含义</h2>
+<p>Data Frame一般被翻译为数据框，感觉就像是R中的表，由行和列组成，与Matrix不同的是，每个列可以是不同的数据类型，而Matrix是必须相同的。</p>
 <p>Data Frame每一列有列名，每一行也可以指定行名。如果不指定行名，那么就是从1开始自增的Sequence来标识每一行。</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a><strong>初始化</strong></h2><p>使用data.frame函数就可以初始化一个Data Frame。比如我们要初始化一个student的Data Frame其中包含ID和Name还有Gender以及Birthdate，那么代码为：</p>
+<h2 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> <strong>初始化</strong></h2>
+<p>使用data.frame函数就可以初始化一个Data Frame。比如我们要初始化一个student的Data Frame其中包含ID和Name还有Gender以及Birthdate，那么代码为：</p>
 <pre><code class="hljs R">student&lt;-data.frame(ID=c(<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>),Name=c(<span class="hljs-string">&quot;Devin&quot;</span>,<span class="hljs-string">&quot;Edward&quot;</span>,<span class="hljs-string">&quot;Wenli&quot;</span>),Gender=c(<span class="hljs-string">&quot;M&quot;</span>,<span class="hljs-string">&quot;M&quot;</span>,<span class="hljs-string">&quot;F&quot;</span>),Birthdate=c(<span class="hljs-string">&quot;1984-12-29&quot;</span>,<span class="hljs-string">&quot;1983-5-6&quot;</span>,<span class="hljs-string">&quot;1986-8-8”))</span></code></pre>
-
 <p>另外也可以使用read.table() read.csv()读取一个文本文件，返回的也是一个Data Frame对象。读取数据库也是返回Data Frame对象。</p>
 <p>查看student的内容为：</p>
 <pre><code class="hljs R"> ID  Name Gender  Birthdate
@@ -234,10 +239,8 @@
 <span class="hljs-number">2</span>  <span class="hljs-number">12</span> Edward    M  <span class="hljs-number">1983</span>-<span class="hljs-number">5</span>-<span class="hljs-number">6</span>
 
 <span class="hljs-number">3</span>  <span class="hljs-number">13</span>  Wenli    <span class="hljs-literal">F</span>  <span class="hljs-number">1986</span>-<span class="hljs-number">8</span>-<span class="hljs-number">8</span></code></pre>
-
 <p>这里只指定了列名为ID，Name，Gender和Birthdate，使用names函数可以查看列名，如果要查看行名，需要用到row.names函数。这里我们希望将ID作为行名，那么可以这样写：</p>
 <pre><code class="hljs R">row.names(student)&lt;-student$ID</code></pre>
-
 <p>更简单的办法是在初始化date.frame的时候，有参数row.names可以设置行名的向量。</p>
 <p>或者是使用向量来构成数据框。</p>
 <pre><code class="hljs R">&gt; mydataframe=data.frame(
@@ -254,7 +257,6 @@
 <span class="hljs-string">3 王五   M  18  177.3   63.0</span>
 <span class="hljs-string">4 赵六   M  16  167.5   53.0</span>
 <span class="hljs-string">5 丁一   M  19  170.0   69.5</span></code></pre>
-
 <p>将List转化为DataFrame</p>
 <pre><code class="hljs R">&gt; mylist&lt;-list(
 + name=c(\<span class="hljs-string">&quot;张三\&quot;, \&quot;李四\&quot;, \&quot;王五\&quot;, \&quot;赵六\&quot;, \&quot;丁一\&quot;),</span>
@@ -282,7 +284,6 @@
 <span class="hljs-string">3 王五   M  18  177.3   63.0</span>
 <span class="hljs-string">4 赵六   M  16  167.5   53.0</span>
 <span class="hljs-string">5 丁一   M  19  170.0   69.5</span></code></pre>
-
 <p>将矩阵转化为DataFrame</p>
 <pre><code class="hljs R">&gt; x=array(<span class="hljs-number">1</span>:<span class="hljs-number">12</span>,c(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))
 &gt; x
@@ -296,14 +297,12 @@ V1 V2 V3 V4
 <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <span class="hljs-number">10</span>
 <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">5</span> <span class="hljs-number">8</span> <span class="hljs-number">11</span>
 <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">6</span> <span class="hljs-number">9</span> <span class="hljs-number">12</span></code></pre>
-
-<h2 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a><strong>访问元素</strong></h2><p>与Matrix一样，使用<code>[行Index, 列Index]</code>的格式可以访问具体的元素。</p>
+<h2 id="访问元素"><a class="markdownIt-Anchor" href="#访问元素"></a> <strong>访问元素</strong></h2>
+<p>与Matrix一样，使用<code>[行Index, 列Index]</code>的格式可以访问具体的元素。</p>
 <p>比如访问第一行:</p>
 <pre><code class="hljs R">student[<span class="hljs-number">1</span>,]</code></pre>
-
 <p>访问第二列：</p>
 <pre><code class="hljs R">student[,<span class="hljs-number">2</span>]</code></pre>
-
 <p>使用列的Index或者列名可以选取要访问的哪些列。比如要ID和Name，那么代码为：</p>
 <p><code>idname&lt;-student[1:2]</code>或者是<code>idname&lt;-student[c(&quot;ID&quot;,&quot;Name”)]</code></p>
 <p>如果是<strong>只访问某一列</strong>，返回的是Vector类型的，那么可以使用[[或者$来访问。比如我们要所有student的Name，代码为：</p>
@@ -313,49 +312,46 @@ V1 V2 V3 V4
 <pre><code class="hljs R"><span class="hljs-keyword">attach</span>(student)
 print(Name)
 <span class="hljs-keyword">detach</span>(student)</code></pre>
-
 <p>还可以换一种简洁一点的写法就是用with函数：</p>
 <pre><code class="hljs R">with(student,&#123;
  n&lt;-Name
  print(n)
 &#125;)</code></pre>
-
 <p>这里的n作用域只在大括号内，如果想在with函数中对全局的变量进行赋值，那么需要使用&lt;&lt;-这样一个运算符。</p>
-<h2 id="修改列数据类型"><a href="#修改列数据类型" class="headerlink" title="修改列数据类型"></a><strong>修改列数据类型</strong></h2><p>接下来我们查看该对象每列的类型，使用str(student)可以得到如下结果：</p>
+<h2 id="修改列数据类型"><a class="markdownIt-Anchor" href="#修改列数据类型"></a> <strong>修改列数据类型</strong></h2>
+<p>接下来我们查看该对象每列的类型，使用str(student)可以得到如下结果：</p>
 <p>‘data.frame’:3 obs. of  4 variables:</p>
-<p> $ ID    : num  1 2 3</p>
-<p> $ Name   : Factor w/ 3 levels “Devin”,”Edward”,..: 1 2 3</p>
-<p> $ Gender  : Factor w/ 2 levels “F”,”M”: 2 2 1</p>
-<p> $ Birthdate: Factor w/ 3 levels “1983-5-6”,”1984-12-29”,..: 2 1 3</p>
+<p>$ ID    : num  1 2 3</p>
+<p>$ Name   : Factor w/ 3 levels “Devin”,“Edward”,…: 1 2 3</p>
+<p>$ Gender  : Factor w/ 2 levels “F”,“M”: 2 2 1</p>
+<p>$ Birthdate: Factor w/ 3 levels “1983-5-6”,“1984-12-29”,…: 2 1 3</p>
 <p>默认情况下，字符串向量都会被自动识别成Factor（这个可以关闭），也就是说，ID是数字类型，其他的3个列都被定义为Factor类型了。显然这里Name应该是字符串类型，Birthdate应该是Date类型，我们需要对列的数据类型进行更改：</p>
 <pre><code class="hljs stata">student<span class="hljs-variable">$Name</span>&lt;-<span class="hljs-keyword">as</span>.character(student<span class="hljs-variable">$Name</span>)
 student<span class="hljs-variable">$Birthdate</span>&lt;-<span class="hljs-keyword">as</span>.<span class="hljs-built_in">Date</span>(student<span class="hljs-variable">$Birthdate</span>)</code></pre>
-
 <p>下面我们再运行str(student)看看修改后的结果：</p>
 <p>‘data.frame’:3 obs. of  4 variables:</p>
-<p> $ ID    : num  11 12 13</p>
-<p> $ Name   : chr  “Devin” “Edward” “Wenli”</p>
-<p> $ Gender  : Factor w/ 2 levels “F”,”M”: 2 2 1</p>
-<p> $ Birthdate: Date, format: “1984-12-29” “1983-05-06” “1986-08-08”</p>
-<h2 id="添加新列"><a href="#添加新列" class="headerlink" title="添加新列"></a><strong>添加新列</strong></h2><p>对于以及存在的student对象，我们希望增加Age列，该列是根据Birthdate算出来的。首先需要知道怎么算年龄。我们可以使用日期函数Sys.Date()获得当前的日期，然后使用format函数获得年份，然后用两个年份相减就是年龄。好像R并没有提供几个能用的日期函数，我们只能使用format函数取出年份部分，然后转换为int类型相减。</p>
+<p>$ ID    : num  11 12 13</p>
+<p>$ Name   : chr  “Devin” “Edward” “Wenli”</p>
+<p>$ Gender  : Factor w/ 2 levels “F”,“M”: 2 2 1</p>
+<p>$ Birthdate: Date, format: “1984-12-29” “1983-05-06” &quot;1986-08-08”</p>
+<h2 id="添加新列"><a class="markdownIt-Anchor" href="#添加新列"></a> <strong>添加新列</strong></h2>
+<p>对于以及存在的student对象，我们希望增加Age列，该列是根据Birthdate算出来的。首先需要知道怎么算年龄。我们可以使用日期函数Sys.Date()获得当前的日期，然后使用format函数获得年份，然后用两个年份相减就是年龄。好像R并没有提供几个能用的日期函数，我们只能使用format函数取出年份部分，然后转换为int类型相减。</p>
 <pre><code class="hljs pgsql">student$Age&lt;-<span class="hljs-keyword">as</span>.integer(format(Sys.Date(),&quot;%Y&quot;))-<span class="hljs-keyword">as</span>.integer(format(student$Birthdate,&quot;%Y”))</code></pre>
-
 <p>这样写似乎太长了，我们可以用within函数，这个函数和之前提到过的with函数类似，可以省略变量名，不同的地方是within函数可以在其中修改变量，也就是我们这里增加Age列：</p>
 <pre><code class="hljs R">student&lt;-within(student,&#123;
  Age&lt;-as.integer(format(Sys.Date(),<span class="hljs-string">&quot;%Y&quot;</span>))-as.integer(format(Birthdate,<span class="hljs-string">&quot;%Y&quot;</span>))
 &#125;)</code></pre>
-
 <p>使用cbind函数可以实现两个DataFrame的拼接，从而实现添加列。</p>
 <pre><code class="hljs swift">y&lt;-<span class="hljs-number">1</span>:<span class="hljs-number">4</span>
 data1 &lt;- data.frame(x1=<span class="hljs-built_in">c</span>(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>), x2=<span class="hljs-built_in">c</span>(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>),x3=<span class="hljs-built_in">c</span>(<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span>),x4=<span class="hljs-built_in">c</span>(<span class="hljs-number">15</span>,<span class="hljs-number">16</span>,<span class="hljs-number">17</span>,<span class="hljs-number">18</span>))
 data2 &lt;- cbind(data1[,<span class="hljs-number">1</span>:<span class="hljs-number">2</span>],y,data1[,<span class="hljs-number">3</span>:ncol(data1)])</code></pre>
-
-<h2 id="添加行"><a href="#添加行" class="headerlink" title="添加行"></a>添加行</h2><p>使用rbind函数实现行的拼接。</p>
+<h2 id="添加行"><a class="markdownIt-Anchor" href="#添加行"></a> 添加行</h2>
+<p>使用rbind函数实现行的拼接。</p>
 <pre><code class="hljs kotlin">data1&lt;- <span class="hljs-keyword">data</span>.frame(x1=runif(<span class="hljs-number">10</span>),x2= runif(<span class="hljs-number">10</span>),x3= runif(<span class="hljs-number">10</span>))
 row&lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
 data2 &lt;- rbind(data1[<span class="hljs-number">1</span>:<span class="hljs-number">5</span>,], row, data1[<span class="hljs-number">6</span>:nrow(data1), ])</code></pre>
-
-<h2 id="查询-子集"><a href="#查询-子集" class="headerlink" title="查询/子集"></a><strong>查询/子集</strong></h2><p>查询一个Date Frame，返回一个满足条件的子集，这相当于数据库中的表查询，是非常常见的操作。使用行和列的Index来获取子集是最简单的方法，前面已经提到过。如果我们使用布尔向量，配合which函数，可以实现对行的过滤。比如我们要查询所有Gender为F的数据，那么我们首先对student$Gender==“F”，得到一个布尔向量:FALSE FALSE  TRUE,然后使用which函数可以将布尔向量中TRUE的Index返回，所以我们的完整查询语句就是：</p>
+<h2 id="查询子集"><a class="markdownIt-Anchor" href="#查询子集"></a> <strong>查询/子集</strong></h2>
+<p>查询一个Date Frame，返回一个满足条件的子集，这相当于数据库中的表查询，是非常常见的操作。使用行和列的Index来获取子集是最简单的方法，前面已经提到过。如果我们使用布尔向量，配合which函数，可以实现对行的过滤。比如我们要查询所有Gender为F的数据，那么我们首先对student$Gender==“F”，得到一个布尔向量:FALSE FALSE  TRUE,然后使用which函数可以将布尔向量中TRUE的Index返回，所以我们的完整查询语句就是：</p>
 <p><code>student[which(student$Gender==&quot;F&quot;),]</code></p>
 <p>注意这里列Index并没有输入，如果我们只想知道所有女生的年龄，那么可以改为：</p>
 <p><code>student[which(student$Gender==&quot;F&quot;),&quot;Age”]</code></p>
@@ -366,9 +362,9 @@ data2 &lt;- rbind(data1[<span class="hljs-number">1</span>:<span class="hljs-num
 <p>同样是前面的需求，对应的语句就是：</p>
 <pre><code class="hljs R"><span class="hljs-keyword">library</span>(sqldf)
 result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student where Gender=&#x27;F&#x27; and Age&lt;30&quot;</span>)</code></pre>
-
 <p><strong>使用subset函数进行查询</strong></p>
-<p>subset函数，从某一个数据框中选择出符合某条件的数据或是相关的列<br>（1）单条件查询</p>
+<p>subset函数，从某一个数据框中选择出符合某条件的数据或是相关的列<br>
+（1）单条件查询</p>
 <pre><code class="hljs R">&gt; selectresult=subset(df1,name==<span class="hljs-string">&quot;aa&quot;</span>)
 &gt; selectresult
   name age sex
@@ -378,7 +374,6 @@ result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student wh
 <span class="hljs-number">1</span>   aa  <span class="hljs-number">20</span>   f
 <span class="hljs-number">2</span>   bb  <span class="hljs-number">29</span>   m
 <span class="hljs-number">3</span>   cc  <span class="hljs-number">30</span>   f</code></pre>
-
 <p>（2）指定显示列</p>
 <pre><code class="hljs R">\&gt;selectresult=subset(df1,name==<span class="hljs-string">&quot;aa&quot;</span>,select=c(age,sex))
 
@@ -387,7 +382,6 @@ result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student wh
  age sex
 
 <span class="hljs-number">1</span> <span class="hljs-number">20</span>  f</code></pre>
-
 <p>（3）多条件查询</p>
 <pre><code class="hljs R">&gt; selectresult=subset(df1,name==<span class="hljs-string">&quot;aa&quot;</span> &amp; sex==<span class="hljs-string">&quot;f&quot;</span>,select=c(age,sex))
 &gt; selectresult
@@ -398,13 +392,12 @@ result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student wh
 <span class="hljs-number">1</span>   aa  <span class="hljs-number">20</span>   f
 <span class="hljs-number">2</span>   bb  <span class="hljs-number">29</span>   m
 <span class="hljs-number">3</span>   cc  <span class="hljs-number">30</span>   f</code></pre>
-
-<h2 id="连接-合并"><a href="#连接-合并" class="headerlink" title="连接/合并"></a><strong>连接/合并</strong></h2><p>对于数据库来说，对多表进行join查询是一个很正常的事情，那么在R中也可以对多个Data Frame进行连接，这就需要使用merge函数。</p>
+<h2 id="连接合并"><a class="markdownIt-Anchor" href="#连接合并"></a> <strong>连接/合并</strong></h2>
+<p>对于数据库来说，对多表进行join查询是一个很正常的事情，那么在R中也可以对多个Data Frame进行连接，这就需要使用merge函数。</p>
 <p>比如除了前面申明的student对象外，我们再申明一个score变量，记录了每个学生的科目和成绩：</p>
 <pre><code class="hljs R">score&lt;-data.frame(SID=c(<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>),Course=c(<span class="hljs-string">&quot;Math&quot;</span>,<span class="hljs-string">&quot;English&quot;</span>,<span class="hljs-string">&quot;Math&quot;</span>,<span class="hljs-string">&quot;Chinese&quot;</span>,<span class="hljs-string">&quot;Math&quot;</span>),Score=c(<span class="hljs-number">90</span>,<span class="hljs-number">80</span>,<span class="hljs-number">80</span>,<span class="hljs-number">95</span>,<span class="hljs-number">96</span>))</code></pre>
-
 <p>我们看看该表的内容：</p>
-<p> SID  Course Score</p>
+<p>SID  Course Score</p>
 <p>1  11   Math   90</p>
 <p>2  11 English   80</p>
 <p>3  12   Math   80</p>
@@ -412,9 +405,8 @@ result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student wh
 <p>5  13   Math   96</p>
 <p>这里的SID就是Student里面的ID，相当于一个外键，现在要用这个ID进行inner join操作，那么对应的R语句就是：</p>
 <pre><code class="hljs r">result&lt;-merge(student,score,by.x=<span class="hljs-string">&quot;ID&quot;</span>,by.y=<span class="hljs-string">&quot;SID&quot;</span>)</code></pre>
-
 <p>我们看看merge以后的结果：</p>
-<p> ID  Name Gender  Birthdate Age  Course Score</p>
+<p>ID  Name Gender  Birthdate Age  Course Score</p>
 <p>1 11  Devin    M 1984-12-29  31   Math   90</p>
 <p>2 11  Devin    M 1984-12-29  31 English   80</p>
 <p>3 12 Edward    M 1983-05-06  32   Math   80</p>
@@ -425,7 +417,6 @@ result&lt;-sqldf(<span class="hljs-string">&quot;select Name,Age from student wh
 <p>rbind的两个Data Frame必须有相同的列，比如我们再申明一个student2，将两个变量rbind起来：</p>
 <pre><code class="hljs R">student2&lt;-data.frame(ID=c(<span class="hljs-number">21</span>,<span class="hljs-number">22</span>),Name=c(<span class="hljs-string">&quot;Yan&quot;</span>,<span class="hljs-string">&quot;Peng&quot;</span>),Gender=c(<span class="hljs-string">&quot;F&quot;</span>,<span class="hljs-string">&quot;M&quot;</span>),Birthdate=c(<span class="hljs-string">&quot;1982-2-9&quot;</span>,<span class="hljs-string">&quot;1983-1-16&quot;</span>),Age=c(<span class="hljs-number">32</span>,<span class="hljs-number">31</span>))
 rbind(student,student2)</code></pre>
-
 
             </div>
             <hr>

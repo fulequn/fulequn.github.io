@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -222,7 +226,6 @@
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211024180802.png" srcset="/img/loading.gif" alt="1"></p>
 <p>在plt.show()之前加入以下代码即可。</p>
 <pre><code class="hljs python">plt.tight_layout()</code></pre>
-
 <p>最终结果：</p>
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202110241809248.png" srcset="/img/loading.gif" alt="2"></p>
 <p>tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作。它仅仅检查坐标轴标签、刻度标签以及标题的部分。</p>

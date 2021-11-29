@@ -39,7 +39,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -176,78 +180,22 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/20/Article202010201/">更改word中所有英文字体</a>
+        <a href="/2020/10/30/Article202010303/">Unable to load native-hadoop library的解决办法</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/20/Article202010201/">
-          
-          
-            
-          
-          参考链接：
-1.进入word 2016软件。
-
-2.拖动光标将要更改的文字全部选中。
-
-3.点击鼠标右键，点击字体，进入字体设置选项框。或者是从工具栏中点击拓展的。
-
-
-4.在想西文字体一栏中选择想更改的字体类型，点击确定，此时可以看到所有英文字体都已经改变，但中文字体不变。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-20 20:43" pubdate>
-              2020-10-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Word/">Word</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Word/">Word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/19/Article202010192/">Your password does not satisfy the current policy requirements</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/19/Article202010192/">
+        <a href="/2020/10/30/Article202010303/">
           
           
             
           
           
 参考链接：
-https://blog.csdn.net/hello_world_qwp/article/details/79551789
+Unable to load native-hadoop library的解决方法_Machine Learning with Turing’s Cat-CSDN博客
 
-关于这个问题是在 《 基于MySQL Yum存储库在Linux-7.2上安装MySQL-5.7.21数据库服务（实战篇） 》 时遇到的问题，这是 mysql 初始化时，使用临时密码，修改自定义密码时，由于自定义密码比较简单，就出现了不符合密码策略的问题。
-密
+今天跑Hadoop的文件命令，报了一个这样的错误（其实是warning）：
+
+虽说不影响任务进程，不过看起来确实不好看（强迫症受不了）。自己捣鼓了一下发现是编译版本不对齐导致的问题，重新编译过于浪费时间，所以直接把警
         </a>
       </p>
 
@@ -255,60 +203,8 @@ https://blog.csdn.net/hello_world_qwp/article/details/79551789
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-19 21:35" pubdate>
-              2020-10-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Mysql/">Mysql</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Mysql/">Mysql</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/19/Article202010191/">ambari-hdp平台安装过程中常见错误汇总和注意事项</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/19/Article202010191/">
-          
-          
-            
-          
-          
-参考链接：
-https://blog.csdn.net/qq_41712271/article/details/108700385
-
-1 HDP搭建好以后，安装目录在以下位置/usr/hdp/3.1.4.0-315
-2 网速不稳定，导致某些jar包不完整，个人推荐用FlashFXP解决办法：解压本地下载好的tar.gz，将相应的jar包重新上传，某些服务安装不成功，先重试下，还不行重新安装服务即
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-19 21:35" pubdate>
-              2020-10-19
+            <time datetime="2020-10-30 10:35" pubdate>
+              2020-10-30
             </time>
           </div>
         
@@ -328,9 +224,7 @@ https://blog.csdn.net/qq_41712271/article/details/108700385
             
               <a href="/tags/Linux/">Linux</a>
             
-              <a href="/tags/Ambari/">Ambari</a>
-            
-              <a href="/tags/HDP/">HDP</a>
+              <a href="/tags/Hadooop/">Hadooop</a>
             
           </div>
         
@@ -343,27 +237,26 @@ https://blog.csdn.net/qq_41712271/article/details/108700385
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/17/Article202010174/">使用Linux的yum或者rpm来查找软件的位置</a>
+        <a href="/2020/10/30/Article202010302/">服务不支持chkconfig的解决方法</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010174/">
+        <a href="/2020/10/30/Article202010302/">
           
           
             
           
           
-参考文章：
-https://zhidao.baidu.com/question/877081751423004492.html
-https://www.cnblogs.com/xy14/p/12410604.html
+参考链接：
+服务不支持 chkconfig 的解决方法_情报通-CSDN博客
 
-之前一直疑惑, linux 上的软件, 都装在哪？
+服务不支持 chkconfig　的解决方法
+这两天一直在研究系统服务，在chkconfig --add servername的时候老是提示服务不支持 chkconfig　经过查找，解决办法如下。
 
-自己不太会找
-用 find 找麻烦, 而且总会找漏
-所以最后, 基本只在 同事确认过 的目录内活动
-
-查找 yum/rpm 
+示例，auto_run的前三行如下：
+#!/bin/sh
+#chkconfig: 2345 80 90
+#descrip
         </a>
       </p>
 
@@ -371,8 +264,8 @@ https://www.cnblogs.com/xy14/p/12410604.html
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
+            <time datetime="2020-10-30 10:32" pubdate>
+              2020-10-30
             </time>
           </div>
         
@@ -382,6 +275,8 @@ https://www.cnblogs.com/xy14/p/12410604.html
             
               <a href="/categories/Linux/">Linux</a>
             
+              <a href="/categories/Linux/chkconfig/">chkconfig</a>
+            
           </div>
         
         
@@ -390,6 +285,8 @@ https://www.cnblogs.com/xy14/p/12410604.html
             
               <a href="/tags/Linux/">Linux</a>
             
+              <a href="/tags/chkconfig/">chkconfig</a>
+            
           </div>
         
       </div>
@@ -401,20 +298,21 @@ https://www.cnblogs.com/xy14/p/12410604.html
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/17/Article202010173/">Python3出现AttributeError的错误</a>
+        <a href="/2020/10/30/Article202010301/">Linux:readonly option is set(add ! to override)错误</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010173/">
+        <a href="/2020/10/30/Article202010301/">
           
           
             
           
           
-参考链接：https://blog.csdn.net/qq236237606/article/details/105347236/
+参考链接：
+(1条消息) Linux：readonly option is set (add ! to override)错误_zw_ss-CSDN博客
 
-python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultencoding’Python 3 系统默认使用的就是utf-8编码，
-就不需要sys.setdefaultencoding(“ut
+在使用vim修改完一些配置文件时，当你退出时经常会出现’readonly’ option is set (add ! to override)的问题，通常有三种情况：
+1、 该错误为当前用户没有权限对文件作修改，这种情况可以强制退出:q!,先
         </a>
       </p>
 
@@ -422,8 +320,8 @@ python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultenco
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
+            <time datetime="2020-10-30 10:26" pubdate>
+              2020-10-30
             </time>
           </div>
         
@@ -431,7 +329,9 @@ python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultenco
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Python/">Python</a>
+              <a href="/categories/Linux/">Linux</a>
+            
+              <a href="/categories/Linux/vim/">vim</a>
             
           </div>
         
@@ -439,7 +339,9 @@ python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultenco
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Python/">Python</a>
+              <a href="/tags/Linux/">Linux</a>
+            
+              <a href="/tags/vim/">vim</a>
             
           </div>
         
@@ -452,19 +354,23 @@ python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultenco
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/17/Article202010172/">使用pcolormesh绘制鸢尾花的分类图</a>
+        <a href="/2020/10/27/Article202010272/">Hadoop中MR程序的集中提交运行模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010172/">
+        <a href="/2020/10/27/Article202010272/">
           
           
             
           
-          代码
-# 参考 https://www.cnblogs.com/shenxiaolin/p/8857158.html , https://blog.csdn.net/liulina603/article/details/78676723
-from sklearn.linear_model import LogisticRegression  #导入逻辑回归模型
-import numpy as np
+          
+参考链接：
+Hadoop中MR程序的几种提交运行模式 - 大宅洋 - 博客园 (cnblogs.com)
+
+ 本地模型运行
+1：在windows的eclipse里面直接运行main方法，就会将job提交给本地执行器localjobrunner执行
+----输入输出数据可以放在本地路径下（c:/wc/srcdata/）
+----输入输出数据也可以放在hdfs中(hdfs://centosReall
         </a>
       </p>
 
@@ -472,8 +378,246 @@ import numpy as np
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
+            <time datetime="2020-10-27 20:58" pubdate>
+              2020-10-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Hadoop/">Hadoop</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Hadoop/">Hadoop</a>
+            
+              <a href="/tags/MapReduce/">MapReduce</a>
+            
+              <a href="/tags/Yarn/">Yarn</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/10/27/Article202010271/">MongoDB如何查询耗时记录的方法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/27/Article202010271/">
+          
+          
+            
+          
+          
+参考链接：
+MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)
+
+准备
+在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的：
+&#123;
+&quot;name&quot;:&quot;your name&quot;, 
+&quot;age&quot;:22, 
+&quot;gender&quot;:&quot;male&quot;, 
+&
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-27 20:57" pubdate>
+              2020-10-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/tags/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/10/26/Article202010264/">使用MongoDB中的MapReduce</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/26/Article202010264/">
+          
+          
+            
+          
+          
+参考链接：
+MongoDB Map Reduce | 菜鸟教程 (runoob.com)
+
+ MongoDB Map Reduce
+Map-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。
+MongoDB提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。
+ MapReduce 命令
+以下是MapRedu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-26 09:09" pubdate>
+              2020-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/tags/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/10/26/Article202010263/">MongoDB中导入数据的使用（mongoimport）</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/26/Article202010263/">
+          
+          
+            
+          
+          
+参考链接：
+MongoDB中导入数据命令的使用（mongoimport） - 全心全意_运维 - 博客园 (cnblogs.com)
+Mongo导出mongoexport和导入mongoimport介绍 - 梦雨情殇 - 博客园 (cnblogs.com)
+
+语法：
+mongoimport  
+介绍：
+该命令可以将CSV，TSV或JSON文件数据导入MongoDB， 如果没有提供文件，则mong
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-26 09:09" pubdate>
+              2020-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/">非关系型数据库</a>
+            
+              <a href="/tags/MongoDB/">MongoDB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/10/26/Article202010262/">Python数据分析使用matplotlib</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/26/Article202010262/">
+          
+          
+            
+          
+          
+参考链接：
+https://blog.csdn.net/lm_is_dc/article/details/81191207
+
+ matplotlib绘图
+关注公众号“轻松学编程”了解更多。
+Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图
+%matplotlib inline 是IPython 中的一个魔法函数。
+以下命令都是在浏览器中输入
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-26 09:09" pubdate>
+              2020-10-26
             </time>
           </div>
         
@@ -506,20 +650,28 @@ import numpy as np
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/16/Article202010161/">安装了sklearn(scikit-learn)但是报错ImportError:No module named &#39;sklearn.cross_validation&#39;</a>
+        <a href="/2020/10/26/Article202010261/">Linux不能上网ping:unknown host问题怎么解决</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/16/Article202010161/">
+        <a href="/2020/10/26/Article202010261/">
           
           
             
           
           
 参考链接：
-https://blog.csdn.net/zhangpeterx/article/details/83189192
+https://blog.csdn.net/lm_is_dc/article/details/81191207
 
-sklearn.cross_validation是sklearn老版本的模块，新版本都迁移到了sklearn.model_selection修改代码为from sklearn. model_selection import train_test_split 即可正常
+
+1、检查网卡配置
+输入命令:ifconfig -a
+查看当前网卡配置的IP地址
+
+使用命令 vi /etc/sysconfig/network-scripts/ifcfg-eth0（这里根据自己的网卡改）
+
+2、检查网卡网关设置
+ping 192.168.204.2 看
         </a>
       </p>
 
@@ -527,72 +679,8 @@ sklearn.cross_validation是sklearn老版本的模块，新版本都迁移到了s
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-16 20:03" pubdate>
-              2020-10-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-              <a href="/categories/Python/sklearn/">sklearn</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/16/Article202010171/">Vmware Station中实现CentOS 7 上网的两种方式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/16/Article202010171/">
-          
-          
-            
-          
-          环境需要：
-
-VMware Workstation Pro 15
-CentOS 7系统虚拟机
-本机是Windows 10系统
-
-我们可以使用以下两种方式来进行网络连接，但是无论哪种都必须需要本机能联网：
-
-NAT模式
-桥接模式
-
-NAT模式1.VMware Station设置首先，在VMware Satation中先设置虚拟机的网络适配器为NAT模式。
-
-然后进行网络适配器的设置，这个必须需要是V
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-16 20:03" pubdate>
-              2020-10-16
+            <time datetime="2020-10-26 09:05" pubdate>
+              2020-10-26
             </time>
           </div>
         
@@ -601,8 +689,6 @@ NAT模式1.VMware Station设置首先，在VMware Satation中先设置虚拟机�
             <i class="iconfont icon-category"></i>
             
               <a href="/categories/Linux/">Linux</a>
-            
-              <a href="/categories/Linux/CentOS/">CentOS</a>
             
           </div>
         
@@ -623,11 +709,11 @@ NAT模式1.VMware Station设置首先，在VMware Satation中先设置虚拟机�
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/15/Article202010151/">ImportError：DLL load failed：找不到指定模块</a>
+        <a href="/2020/10/20/Article202010202/">Python错误：ImportError:DLL load failed:找不到指定的模块问题终极解决方法</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/15/Article202010151/">
+        <a href="/2020/10/20/Article202010202/">
           
           
             
@@ -642,8 +728,8 @@ https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distri
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-15 21:05" pubdate>
-              2020-10-15
+            <time datetime="2020-10-20 20:50" pubdate>
+              2020-10-20
             </time>
           </div>
         
@@ -667,63 +753,11 @@ https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distri
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/13/Article202010136/">（线性回归）R语言的模型诊断图（Residuals vs Fitted， Normal QQ， Scale-Location， Residuals Leverage）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/13/Article202010136/">
-          
-          
-            
-          
-          
-参考链接：
-https://www.pianshen.com/article/9572273081/
-
-线性回归，是概率统计学里最重要的统计方法，也是机器学习中一类非常重要的算法。线性模型简单理解非常容易，但是内涵是非常深奥的。尤其是线性回归模型中的Diagnostics plot的阅读与理解一直被认为是线性回归中的一个难点。
-在任何线性模型中，能够直接“lm”（模型有意义），既要考虑各个参数的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-13 20:52" pubdate>
-              2020-10-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/R/">R</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/R/">R</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

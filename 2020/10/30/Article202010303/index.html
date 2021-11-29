@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -225,10 +229,8 @@
 <pre><code class="hljs java">cd /usr/local/hadoop-<span class="hljs-number">2.9</span>.<span class="hljs-number">1</span>/etc/hadoop/
 
 vim log4j.properties</code></pre>
-
 <p>在文件最后一行加入：</p>
 <pre><code class="hljs java">log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR</code></pre>
-
 <p>再运行命令，显示一切正常。这个属性就是让记录等级ERROR才显示，问题并没有直接解决。</p>
 
             </div>

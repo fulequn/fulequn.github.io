@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      239 字
+      241 字
     </span>
   
 
@@ -218,7 +222,14 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40853073/article/details/81707177">(1条消息) Linux：readonly option is set (add ! to override)错误_zw_ss-CSDN博客</a></p>
 </blockquote>
-<p>在使用vim修改完一些配置文件时，当你退出时经常会出现’readonly’ option is set (add ! to override)的问题，通常有三种情况：<br>1、 该错误为当前用户没有权限对文件作修改，这种情况可以强制退出:q!,先取得root权限后进行修改（root的权限取得命令是:su root然后输入你的登录密码即可）<br>2、该文件没有正确保存退出，正在打开状态，请别人关闭后再保存<br>3 、 若该文件所有人都关闭了，提示有的人没有关闭，则删除该文件的临时文件则可以正常打开、修改、保存；有文件未关闭的显示：<br>步骤：<br>1、按Esc<br>2、输入：set noreadonly<br>3、即可按正常途径保存:wq</p>
+<p>在使用vim修改完一些配置文件时，当你退出时经常会出现’readonly’ option is set (add ! to override)的问题，通常有三种情况：<br>
+1、 该错误为当前用户没有权限对文件作修改，这种情况可以强制退出:q!,先取得root权限后进行修改（root的权限取得命令是:su root然后输入你的登录密码即可）<br>
+2、该文件没有正确保存退出，正在打开状态，请别人关闭后再保存<br>
+3 、 若该文件所有人都关闭了，提示有的人没有关闭，则删除该文件的临时文件则可以正常打开、修改、保存；有文件未关闭的显示：<br>
+步骤：<br>
+1、按Esc<br>
+2、输入：set noreadonly<br>
+3、即可按正常途径保存:wq</p>
 <p>还有个就是强制退出使用<code>wq!</code>即可。</p>
 
             </div>

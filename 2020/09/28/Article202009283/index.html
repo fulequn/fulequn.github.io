@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,9 +222,11 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dengfaheng/p/12720431.html">https://www.cnblogs.com/dengfaheng/p/12720431.html</a></p>
 </blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大家好，最近在研究在搞Python的大作业，有个需求就是利用Matplotlib画几个像模像样的统计图然后合并在一张图中，因为此前很少用这方面的东西，所以折腾了不少时间，今天介绍一下。</p>
+<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>大家好，最近在研究在搞Python的大作业，有个需求就是利用Matplotlib画几个像模像样的统计图然后合并在一张图中，因为此前很少用这方面的东西，所以折腾了不少时间，今天介绍一下。</p>
 <p><img src="/2020/09/28/Article202009283/1.png" srcset="/img/loading.gif" alt="1"></p>
-<h1 id="subplot多合一"><a href="#subplot多合一" class="headerlink" title="subplot多合一"></a>subplot多合一</h1><p>其实，利用python 的matplotlib包下的subplot函数可以将多个子图放在同一个画板上。在此之前，我们先来看一个案例：</p>
+<h1 id="subplot多合一"><a class="markdownIt-Anchor" href="#subplot多合一"></a> subplot多合一</h1>
+<p>其实，利用python 的matplotlib包下的subplot函数可以将多个子图放在同一个画板上。在此之前，我们先来看一个案例：</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span>  matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np 
 
@@ -241,7 +247,6 @@ ax3 = plt.subplot(<span class="hljs-number">223</span>)
 ax3.plot(t,s,color=<span class="hljs-string">&quot;g&quot;</span>,linestyle = <span class="hljs-string">&quot;-.&quot;</span>)
 ax4 = plt.subplot(<span class="hljs-number">224</span>)
 ax4.plot(t,s,color=<span class="hljs-string">&quot;b&quot;</span>,linestyle = <span class="hljs-string">&quot;:&quot;</span>)</code></pre>
-
 <p>效果如下：</p>
 <p><img src="/2020/09/28/Article202009283/2.png" srcset="/img/loading.gif" alt="2"></p>
 <p>可以看到，一个画板上放了4个子图。达到了我们想要的效果。好了我们现在来解析一下刚刚的部分代码：</p>
@@ -257,7 +262,6 @@ ax3 = plt.subplot(223)
 ax3.plot(t,s,<span class="hljs-attribute">color</span>=<span class="hljs-string">&quot;g&quot;</span>,linestyle = <span class="hljs-string">&quot;-.&quot;</span>)
 ax4 = plt.subplot(224)
 ax4.plot(t,s,<span class="hljs-attribute">color</span>=<span class="hljs-string">&quot;b&quot;</span>,linestyle = <span class="hljs-string">&quot;:&quot;</span>)</code></pre>
-
 <p>一共划分了2X2=4个区域，然后1234分别开始绘图。so easy！比如我们想达到下面的效果：</p>
 <p><img src="/2020/09/28/Article202009283/4.png" srcset="/img/loading.gif" alt="4"></p>
 <p>那么只需要：</p>
@@ -279,15 +283,15 @@ ax2 = plt.subplot(<span class="hljs-number">222</span>)
 plt.plot([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>],color=<span class="hljs-string">&quot;y&quot;</span>,linestyle = <span class="hljs-string">&quot;-&quot;</span>)
 ax3 = plt.subplot(<span class="hljs-number">212</span>)
 plt.plot([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],[<span class="hljs-number">11</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>,<span class="hljs-number">44</span>],color=<span class="hljs-string">&quot;g&quot;</span>,linestyle = <span class="hljs-string">&quot;-.&quot;</span>)</code></pre>
-
 <p>子图1和子图2与上面的一样，主要是子图3，plt.subplot(212)表示将整个画板分成两部分后取第2块，即下面的部分。</p>
-<h1 id="2subplot2grid分格显示"><a href="#2subplot2grid分格显示" class="headerlink" title="2subplot2grid分格显示"></a>2subplot2grid分格显示</h1><p>这种方式和上一种实现的效果一样，只不过更加容易理解罢了，先来看一个案例代码：</p>
+<h1 id="2subplot2grid分格显示"><a class="markdownIt-Anchor" href="#2subplot2grid分格显示"></a> 2subplot2grid分格显示</h1>
+<p>这种方式和上一种实现的效果一样，只不过更加容易理解罢了，先来看一个案例代码：</p>
 <pre><code class="hljs python"><span class="hljs-keyword">import</span>  matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;SimHei&#x27;</span>] <span class="hljs-comment"># 用来正常显示中文标签</span>
 plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>]=<span class="hljs-literal">False</span> <span class="hljs-comment"># 用来正常显示负号</span>
-
+ 
 <span class="hljs-comment">#method1: subplot2grid</span>
 <span class="hljs-comment">###########################</span>
 plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">10</span>), dpi=<span class="hljs-number">80</span>)
@@ -302,12 +306,10 @@ y = np.array([<span class="hljs-number">15</span>,<span class="hljs-number">20</
 ax3.bar(x,y)
 ax4=plt.subplot2grid((<span class="hljs-number">3</span>,<span class="hljs-number">3</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">0</span>),colspan=<span class="hljs-number">1</span>,rowspan=<span class="hljs-number">1</span>)
 ax5=plt.subplot2grid((<span class="hljs-number">3</span>,<span class="hljs-number">3</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>),colspan=<span class="hljs-number">2</span>,rowspan=<span class="hljs-number">1</span>)</code></pre>
-
 <p>效果如下：</p>
 <p><img src="/2020/09/28/Article202009283/5.png" srcset="/img/loading.gif" alt="5"></p>
 <p>结合图可能更好理解一点，其中代码：</p>
 <pre><code class="hljs apache"><span class="hljs-attribute">plt</span>.subplot<span class="hljs-number">2</span>grid((<span class="hljs-number">3</span>,<span class="hljs-number">3</span>),(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),colspan=<span class="hljs-number">3</span>,rowspan=<span class="hljs-number">1</span>)</code></pre>
-
 <p>第一个参数(3,3)相当于格子分成3行3列,第二个参数(0,0)表示该子图的开始位置，colspan=3表示子图的列跨度为3，rowspan=1表示子图的行跨度为1。</p>
 
             </div>

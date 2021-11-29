@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">Hexo的Fluid主题设置文章隐藏</h1>
             
             <div class="markdown-body" id="post-body">
-              <h3 id="隐藏文章"><a href="#隐藏文章" class="headerlink" title="隐藏文章"></a>隐藏文章</h3><p>如果想把某些文章隐藏起来，不在首页和其他分类里展示，可以在文章开头 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a> 中配置 <code>hide: true</code> 属性。</p>
+              <h3 id="隐藏文章"><a class="markdownIt-Anchor" href="#隐藏文章"></a> 隐藏文章</h3>
+<p>如果想把某些文章隐藏起来，不在首页和其他分类里展示，可以在文章开头 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a> 中配置 <code>hide: true</code> 属性。</p>
 <pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">文章标题</span>
 <span class="hljs-attr">index_img:</span> <span class="hljs-string">/img/example.jpg</span>
@@ -222,7 +227,6 @@
 <span class="hljs-attr">hide:</span> <span class="hljs-literal">true</span>
 <span class="hljs-meta">---</span>
 <span class="hljs-string">以下是文章内容</span></code></pre>
-
 <p>TIP</p>
 <blockquote>
 <p>隐藏会使文章在分类和标签类里都不显示</p>

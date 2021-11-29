@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">Python操作DataFrame遇到TypeError异常</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="TypeError-‘-slice-None-None-None-1-’-is-an-invalid-key"><a href="#TypeError-‘-slice-None-None-None-1-’-is-an-invalid-key" class="headerlink" title="TypeError: ‘(slice(None, None, None), 1)’ is an invalid key"></a>TypeError: ‘(slice(None, None, None), 1)’ is an invalid key</h2><p>可能是你操作的（df）是一个dataframe，应该先把它转化为ndarray，运用下面的语句</p>
+              <h2 id="typeerror-slicenone-none-none-1-is-an-invalid-key"><a class="markdownIt-Anchor" href="#typeerror-slicenone-none-none-1-is-an-invalid-key"></a> TypeError: ‘(slice(None, None, None), 1)’ is an invalid key</h2>
+<p>可能是你操作的（df）是一个dataframe，应该先把它转化为ndarray，运用下面的语句</p>
 <p><code>df.values</code></p>
 
             </div>

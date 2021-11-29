@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -219,22 +223,41 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hello_world_qwp/article/details/79551789">https://blog.csdn.net/hello_world_qwp/article/details/79551789</a></p>
 </blockquote>
 <p>关于这个问题是在 《 基于MySQL Yum存储库在Linux-7.2上安装MySQL-5.7.21数据库服务（实战篇） 》 时遇到的问题，这是 mysql 初始化时，使用临时密码，修改自定义密码时，由于自定义密码比较简单，就出现了不符合密码策略的问题。</p>
-<p>密码策略问题异常信息：<br>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</p>
+<p>密码策略问题异常信息：<br>
+ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</p>
 <p>如下图：</p>
-<p> <img src="/2020/10/19/Article202010192/1.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="/2020/10/19/Article202010192/1.png" srcset="/img/loading.gif" alt="1"></p>
 <p>解决办法：</p>
-<p>1、查看 mysql 初始的密码策略，<br>输入语句 “ SHOW VARIABLES LIKE ‘validate_password%’; ” 进行查看，<br>如下图：</p>
-<p> <img src="/2020/10/19/Article202010192/2.png" srcset="/img/loading.gif" alt="2"></p>
-<p>2、首先需要设置密码的验证强度等级，设置 validate_password_policy 的全局参数为 LOW 即可，<br>输入设值语句 “ set global validate_password_policy=LOW; ” 进行设值，<br>如下图：</p>
+<p>1、查看 mysql 初始的密码策略，<br>
+输入语句 “ SHOW VARIABLES LIKE ‘validate_password%’; ” 进行查看，<br>
+如下图：</p>
+<p><img src="/2020/10/19/Article202010192/2.png" srcset="/img/loading.gif" alt="2"></p>
+<p>2、首先需要设置密码的验证强度等级，设置 validate_password_policy 的全局参数为 LOW 即可，<br>
+输入设值语句 “ set global validate_password_policy=LOW; ” 进行设值，<br>
+如下图：</p>
 <p><img src="/2020/10/19/Article202010192/3.png" srcset="/img/loading.gif" alt="3"></p>
-<p>3、当前密码长度为 8 ，如果不介意的话就不用修改了，按照通用的来讲，设置为 6 位的密码，设置 validate_password_length 的全局参数为 6 即可，<br>输入设值语句 “ set global validate_password_length=6; ” 进行设值，<br>如下图：</p>
-<p> <img src="/2020/10/19/Article202010192/4.png" srcset="/img/loading.gif" alt="4"></p>
-<p>4、现在可以为 mysql 设置简单密码了，只要满足六位的长度即可，<br>输入修改语句 “ ALTER USER ‘root’@’localhost’ IDENTIFIED BY ‘123456’; ” 可以看到修改成功，表示密码策略修改成功了！！！</p>
+<p>3、当前密码长度为 8 ，如果不介意的话就不用修改了，按照通用的来讲，设置为 6 位的密码，设置 validate_password_length 的全局参数为 6 即可，<br>
+输入设值语句 “ set global validate_password_length=6; ” 进行设值，<br>
+如下图：</p>
+<p><img src="/2020/10/19/Article202010192/4.png" srcset="/img/loading.gif" alt="4"></p>
+<p>4、现在可以为 mysql 设置简单密码了，只要满足六位的长度即可，<br>
+输入修改语句 “ ALTER USER ‘root’@‘localhost’ IDENTIFIED BY ‘123456’; ” 可以看到修改成功，表示密码策略修改成功了！！！</p>
 <p>如下图：</p>
 <p><img src="/2020/10/19/Article202010192/5.png" srcset="/img/loading.gif" alt="5"></p>
-<p>注：在默认密码的长度最小值为 4 ，由 大/小写字母各一个 + 阿拉伯数字一个 + 特殊字符一个，<br>只要设置密码的长度小于 3 ，都将自动设值为 4 ，如下图：</p>
+<p>注：在默认密码的长度最小值为 4 ，由 大/小写字母各一个 + 阿拉伯数字一个 + 特殊字符一个，<br>
+只要设置密码的长度小于 3 ，都将自动设值为 4 ，如下图：</p>
 <p><img src="/2020/10/19/Article202010192/6.png" srcset="/img/loading.gif" alt="6"></p>
-<p>关于 mysql 密码策略相关参数；<br>1）、validate_password_length 固定密码的总长度；<br>2）、validate_password_dictionary_file 指定密码验证的文件路径；<br>3）、validate_password_mixed_case_count 整个密码中至少要包含大/小写字母的总个数；<br>4）、validate_password_number_count 整个密码中至少要包含阿拉伯数字的个数；<br>5）、validate_password_policy 指定密码的强度验证等级，默认为 MEDIUM；<br>关于 validate_password_policy 的取值：<br>0/LOW：只验证长度；<br>1/MEDIUM：验证长度、数字、大小写、特殊字符；<br>2/STRONG：验证长度、数字、大小写、特殊字符、字典文件；<br>6）、validate_password_special_char_count 整个密码中至少要包含特殊字符的个数；</p>
+<p>关于 mysql 密码策略相关参数；<br>
+1）、validate_password_length 固定密码的总长度；<br>
+2）、validate_password_dictionary_file 指定密码验证的文件路径；<br>
+3）、validate_password_mixed_case_count 整个密码中至少要包含大/小写字母的总个数；<br>
+4）、validate_password_number_count 整个密码中至少要包含阿拉伯数字的个数；<br>
+5）、validate_password_policy 指定密码的强度验证等级，默认为 MEDIUM；<br>
+关于 validate_password_policy 的取值：<br>
+0/LOW：只验证长度；<br>
+1/MEDIUM：验证长度、数字、大小写、特殊字符；<br>
+2/STRONG：验证长度、数字、大小写、特殊字符、字典文件；<br>
+6）、validate_password_special_char_count 整个密码中至少要包含特殊字符的个数；</p>
 
             </div>
             <hr>

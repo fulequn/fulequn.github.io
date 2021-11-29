@@ -1,0 +1,1582 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>编码实现RNN以及LSTM - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-11-22 13:26" pubdate>
+      2021年11月22日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      188
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">编码实现RNN以及LSTM</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>本次涉及代码较多，部分重复代码不再重复发布。重复的代码详见以下链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37402392/article/details/121468321?spm=1001.2014.3001.5501">https://blog.csdn.net/qq_37402392/article/details/121468321?spm=1001.2014.3001.5501</a></p>
+<p><strong>bn_layers.py</strong></p>
+<p><strong>cnn_layers.py</strong></p>
+<p><strong>dropout_layers.py</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="http://updater.py">updater.py</a></strong></p>
+<p>以下是本次添加的内容。</p>
+<p><strong>captioning_trainer.py</strong></p>
+<p>训练器，与之前的训练器Trainer类似。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-keyword">from</span> coco_utils <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> updater
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptioningTrainer</span>(<span class="hljs-params">object</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot; </span>
+<span class="hljs-string">    CaptioningTrainer大部分内容和前面的Trainer相同</span>
+<span class="hljs-string">    使用方法：</span>
+<span class="hljs-string">    data = load_coco_data()</span>
+<span class="hljs-string">    model = MyAwesomeModel(hidden_dim=100)</span>
+<span class="hljs-string">    trainer = CaptioningTrainer(model, data,</span>
+<span class="hljs-string">                                    update_rule=&#x27;sgd&#x27;,</span>
+<span class="hljs-string">                                    updater_config=&#123;</span>
+<span class="hljs-string">                                        &#x27;learning_rate&#x27;: 1e-3,</span>
+<span class="hljs-string">                                    &#125;,</span>
+<span class="hljs-string">                                    lr_decay=0.95,</span>
+<span class="hljs-string">                                    num_epochs=10, batch_size=100,</span>
+<span class="hljs-string">                                    print_every=100)</span>
+<span class="hljs-string">    trainer.train()</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, model, data, **kwargs</span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        初始化CaptioningTrainer</span>
+<span class="hljs-string">        所需参数:</span>
+<span class="hljs-string">        - model: RNN模型</span>
+<span class="hljs-string">        - data: coco数据集</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">        可选参数:</span>
+<span class="hljs-string">        - update_rule:更新规则，查看 updater.py.</span>
+<span class="hljs-string">            默认为 &#x27;sgd&#x27;.</span>
+<span class="hljs-string">        - updater_config: 更新器配置</span>
+<span class="hljs-string">        - lr_decay:学习率衰减因子</span>
+<span class="hljs-string">        - batch_size: 批量大小</span>
+<span class="hljs-string">        - num_epochs: 迭代次数</span>
+<span class="hljs-string">        - print_every:每训练多少次，打印训练结果</span>
+<span class="hljs-string">        - verbose:是否打印训练中间结果</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        self.model = model
+        self.data = data
+        
+        self.update_rule = kwargs.pop(<span class="hljs-string">&#x27;update_rule&#x27;</span>, <span class="hljs-string">&#x27;sgd&#x27;</span>)
+        self.updater_config = kwargs.pop(<span class="hljs-string">&#x27;updater_config&#x27;</span>, &#123;&#125;)
+        self.lr_decay = kwargs.pop(<span class="hljs-string">&#x27;lr_decay&#x27;</span>, <span class="hljs-number">1.0</span>)
+        self.batch_size = kwargs.pop(<span class="hljs-string">&#x27;batch_size&#x27;</span>, <span class="hljs-number">100</span>)
+        self.num_epochs = kwargs.pop(<span class="hljs-string">&#x27;num_epochs&#x27;</span>, <span class="hljs-number">10</span>)
+
+        self.print_every = kwargs.pop(<span class="hljs-string">&#x27;print_every&#x27;</span>, <span class="hljs-number">10</span>)
+        self.verbose = kwargs.pop(<span class="hljs-string">&#x27;verbose&#x27;</span>, <span class="hljs-literal">True</span>)
+
+        <span class="hljs-keyword">if</span> len(kwargs) &gt; <span class="hljs-number">0</span>:
+            extra = <span class="hljs-string">&#x27;, &#x27;</span>.join(<span class="hljs-string">&#x27;&quot;%s&quot;&#x27;</span> % k <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> kwargs.keys())
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Unrecognized arguments %s&#x27;</span> % extra)
+
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(updater, self.update_rule):
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid update_rule &quot;%s&quot;&#x27;</span> % self.update_rule)
+        self.update_rule = getattr(updater, self.update_rule)
+
+        self._reset()
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_reset</span>(<span class="hljs-params">self</span>):</span>
+        self.epoch = <span class="hljs-number">0</span>
+        self.best_val_acc = <span class="hljs-number">0</span>
+        self.best_params = &#123;&#125;
+        self.loss_history = []
+        self.train_acc_history = []
+        self.val_acc_history = []
+
+        self.updater_configs = &#123;&#125;
+        <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> self.model.params:
+            d = &#123;k: v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> self.updater_config.items()&#125;
+            self.updater_configs[p] = d
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_step</span>(<span class="hljs-params">self</span>):</span>
+        minibatch = sample_coco_minibatch(self.data,
+                                    batch_size=self.batch_size,
+                                    split=<span class="hljs-string">&#x27;train&#x27;</span>)
+        captions, features, urls = minibatch
+
+        loss, grads = self.model.loss(features, captions)
+        self.loss_history.append(loss)
+
+        <span class="hljs-keyword">for</span> p, w <span class="hljs-keyword">in</span> self.model.params.items():
+            dw = grads[p]
+            config = self.updater_configs[p]
+            next_w, next_config = self.update_rule(w, dw, config)
+            self.model.params[p] = next_w
+            self.updater_configs[p] = next_config
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">self</span>):</span>
+        num_train = self.data[<span class="hljs-string">&#x27;train_captions&#x27;</span>].shape[<span class="hljs-number">0</span>]
+        iterations_per_epoch = max(num_train / self.batch_size, <span class="hljs-number">1</span>)
+        num_iterations = int(self.num_epochs * iterations_per_epoch)
+        
+        <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(num_iterations):
+            self._step()
+
+
+            <span class="hljs-keyword">if</span> self.verbose <span class="hljs-keyword">and</span> t % self.print_every == <span class="hljs-number">0</span>:
+                print(<span class="hljs-string">&#x27;(Iteration %d / %d) loss: %f&#x27;</span> % (
+                             t + <span class="hljs-number">1</span>, num_iterations, self.loss_history[<span class="hljs-number">-1</span>]))
+
+            epoch_end = (t + <span class="hljs-number">1</span>) % iterations_per_epoch == <span class="hljs-number">0</span>
+            <span class="hljs-keyword">if</span> epoch_end:
+                self.epoch += <span class="hljs-number">1</span>
+                <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> self.updater_configs:
+                    self.updater_configs[k][<span class="hljs-string">&#x27;learning_rate&#x27;</span>] *= self.lr_decay
+
+</code></pre>
+<p><strong>coco_utils.py</strong></p>
+<p>对coco数据集进行处理，包括了读取数据文件、解码数据以及小批量读取数据</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> os, json
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> h5py
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_coco_data</span>(<span class="hljs-params">base_dir=<span class="hljs-string">&#x27;datasets/coco_captioning&#x27;</span>, max_train=None,</span></span>
+<span class="hljs-function"><span class="hljs-params">                         pca_features=True</span>):</span>
+    <span class="hljs-string">&#x27;&#x27;&#x27;</span>
+<span class="hljs-string">    读取CoCo训练文件</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Parameters</span>
+<span class="hljs-string">    ----------</span>
+<span class="hljs-string">    base_dir : TYPE, optional</span>
+<span class="hljs-string">        数据文件位置. The default is &#x27;datasets/coco_captioning&#x27;.</span>
+<span class="hljs-string">    max_train : TYPE, optional</span>
+<span class="hljs-string">        是否对训练数据进行再抽样. The default is None.</span>
+<span class="hljs-string">    pca_features : TYPE, optional</span>
+<span class="hljs-string">        是否使用降维特征. The default is True.</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Returns</span>
+<span class="hljs-string">    -------</span>
+<span class="hljs-string">    data : TYPE</span>
+<span class="hljs-string">        读取的数据文件.</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    &#x27;&#x27;&#x27;</span>
+    <span class="hljs-comment"># 保存数据</span>
+    data = &#123;&#125;
+    <span class="hljs-comment"># 获得文件</span>
+    caption_file = os.path.join(base_dir, <span class="hljs-string">&#x27;coco2014_captions.h5&#x27;</span>)
+    <span class="hljs-comment"># 添加文件汇总的内容</span>
+    <span class="hljs-keyword">with</span> h5py.File(caption_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> f.items():
+            data[k] = np.asarray(v)
+    
+    <span class="hljs-comment"># 是否使用降维特征</span>
+    <span class="hljs-keyword">if</span> pca_features:
+        train_feat_file = os.path.join(base_dir, <span class="hljs-string">&#x27;train2014_vgg16_fc7_pca.h5&#x27;</span>)
+    <span class="hljs-keyword">else</span>:
+        train_feat_file = os.path.join(base_dir, <span class="hljs-string">&#x27;train2014_vgg16_fc7.h5&#x27;</span>)
+    <span class="hljs-keyword">with</span> h5py.File(train_feat_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        data[<span class="hljs-string">&#x27;train_features&#x27;</span>] = np.asarray(f[<span class="hljs-string">&#x27;features&#x27;</span>])
+
+    <span class="hljs-keyword">if</span> pca_features:
+        val_feat_file = os.path.join(base_dir, <span class="hljs-string">&#x27;val2014_vgg16_fc7_pca.h5&#x27;</span>)
+    <span class="hljs-keyword">else</span>:
+        val_feat_file = os.path.join(base_dir, <span class="hljs-string">&#x27;val2014_vgg16_fc7.h5&#x27;</span>)
+    <span class="hljs-keyword">with</span> h5py.File(val_feat_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        data[<span class="hljs-string">&#x27;val_features&#x27;</span>] = np.asarray(f[<span class="hljs-string">&#x27;features&#x27;</span>])
+
+    dict_file = os.path.join(base_dir, <span class="hljs-string">&#x27;coco2014_vocab.json&#x27;</span>)
+    <span class="hljs-keyword">with</span> open(dict_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        dict_data = json.load(f)
+        <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> dict_data.items():
+            data[k] = v
+
+    train_url_file = os.path.join(base_dir, <span class="hljs-string">&#x27;train2014_urls.txt&#x27;</span>)
+    <span class="hljs-keyword">with</span> open(train_url_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        train_urls = np.asarray([line.strip() <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f])
+    data[<span class="hljs-string">&#x27;train_urls&#x27;</span>] = train_urls
+
+    val_url_file = os.path.join(base_dir, <span class="hljs-string">&#x27;val2014_urls.txt&#x27;</span>)
+    <span class="hljs-keyword">with</span> open(val_url_file, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        val_urls = np.asarray([line.strip() <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f])
+    data[<span class="hljs-string">&#x27;val_urls&#x27;</span>] = val_urls
+
+    <span class="hljs-comment"># 也许对训练数据进行再抽样</span>
+    <span class="hljs-keyword">if</span> max_train <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
+        num_train = data[<span class="hljs-string">&#x27;train_captions&#x27;</span>].shape[<span class="hljs-number">0</span>]
+        mask = np.random.randint(num_train, size=max_train)
+        data[<span class="hljs-string">&#x27;train_captions&#x27;</span>] = data[<span class="hljs-string">&#x27;train_captions&#x27;</span>][mask]
+        data[<span class="hljs-string">&#x27;train_image_idxs&#x27;</span>] = data[<span class="hljs-string">&#x27;train_image_idxs&#x27;</span>][mask]
+
+    <span class="hljs-keyword">return</span> data
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode_captions</span>(<span class="hljs-params">captions, idx_to_word</span>):</span>
+    singleton = <span class="hljs-literal">False</span>
+    <span class="hljs-keyword">if</span> captions.ndim == <span class="hljs-number">1</span>:
+        singleton = <span class="hljs-literal">True</span>
+        captions = captions[<span class="hljs-literal">None</span>]
+    decoded = []
+    N, T = captions.shape
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(N):
+        words = []
+        <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(T):
+            word = idx_to_word[captions[i, t]]
+            <span class="hljs-keyword">if</span> word != <span class="hljs-string">&#x27;&lt;NULL&gt;&#x27;</span>:
+                words.append(word)
+            <span class="hljs-keyword">if</span> word == <span class="hljs-string">&#x27;&lt;END&gt;&#x27;</span>:
+                <span class="hljs-keyword">break</span>
+        decoded.append(<span class="hljs-string">&#x27; &#x27;</span>.join(words))
+    <span class="hljs-keyword">if</span> singleton:
+        decoded = decoded[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> decoded
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sample_coco_minibatch</span>(<span class="hljs-params">data, batch_size=<span class="hljs-number">100</span>, split=<span class="hljs-string">&#x27;train&#x27;</span></span>):</span>
+    split_size = data[<span class="hljs-string">&#x27;%s_captions&#x27;</span> % split].shape[<span class="hljs-number">0</span>]
+    mask = np.random.choice(split_size, batch_size)
+    captions = data[<span class="hljs-string">&#x27;%s_captions&#x27;</span> % split][mask]
+    image_idxs = data[<span class="hljs-string">&#x27;%s_image_idxs&#x27;</span> % split][mask]
+    image_features = data[<span class="hljs-string">&#x27;%s_features&#x27;</span> % split][image_idxs]
+    urls = data[<span class="hljs-string">&#x27;%s_urls&#x27;</span> % split][image_idxs]
+    <span class="hljs-keyword">return</span> captions, image_features, urls</code></pre>
+<p><strong>image_utils.py</strong></p>
+<p>通用的方法用于展示过程中的图片。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request, os, tempfile
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> scipy.misc <span class="hljs-keyword">import</span> imread
+
+<span class="hljs-keyword">from</span> cnn_layers <span class="hljs-keyword">import</span> conv_forward_fast
+
+
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">Utility functions used for viewing and processing images.</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">blur_image</span>(<span class="hljs-params">X</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    A very gentle image blurring operation, to be used as a regularizer for image</span>
+<span class="hljs-string">    generation.</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - X: Image data of shape (N, 3, H, W)</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns:</span>
+<span class="hljs-string">    - X_blur: Blurred version of X, of shape (N, 3, H, W)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    w_blur = np.zeros((<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>))
+    b_blur = np.zeros(<span class="hljs-number">3</span>)
+    blur_param = &#123;<span class="hljs-string">&#x27;stride&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;pad&#x27;</span>: <span class="hljs-number">1</span>&#125;
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>):
+        w_blur[i, i] = np.asarray([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">188</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]], dtype=np.float32)
+    w_blur /= <span class="hljs-number">200.0</span>
+    <span class="hljs-keyword">return</span> conv_forward_fast(X, w_blur, b_blur, blur_param)[<span class="hljs-number">0</span>]
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">preprocess_image</span>(<span class="hljs-params">img, mean_img, mean=<span class="hljs-string">&#x27;image&#x27;</span></span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Convert to float, transepose, and subtract mean pixel</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Input:</span>
+<span class="hljs-string">    - img: (H, W, 3)</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns:</span>
+<span class="hljs-string">    - (1, 3, H, 3)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">if</span> mean == <span class="hljs-string">&#x27;image&#x27;</span>:
+        mean = mean_img
+    <span class="hljs-keyword">elif</span> mean == <span class="hljs-string">&#x27;pixel&#x27;</span>:
+        mean = mean_img.mean(axis=(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), keepdims=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> mean == <span class="hljs-string">&#x27;none&#x27;</span>:
+        mean = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;mean must be image or pixel or none&#x27;</span>)
+    <span class="hljs-keyword">return</span> img.astype(np.float32).transpose(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)[<span class="hljs-literal">None</span>] - mean
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deprocess_image</span>(<span class="hljs-params">img, mean_img, mean=<span class="hljs-string">&#x27;image&#x27;</span>, renorm=False</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Add mean pixel, transpose, and convert to uint8</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Input:</span>
+<span class="hljs-string">    - (1, 3, H, W) or (3, H, W)</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns:</span>
+<span class="hljs-string">    - (H, W, 3)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">if</span> mean == <span class="hljs-string">&#x27;image&#x27;</span>:
+        mean = mean_img
+    <span class="hljs-keyword">elif</span> mean == <span class="hljs-string">&#x27;pixel&#x27;</span>:
+        mean = mean_img.mean(axis=(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), keepdims=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> mean == <span class="hljs-string">&#x27;none&#x27;</span>:
+        mean = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;mean must be image or pixel or none&#x27;</span>)
+    <span class="hljs-keyword">if</span> img.ndim == <span class="hljs-number">3</span>:
+        img = img[<span class="hljs-literal">None</span>]
+    img = (img + mean)[<span class="hljs-number">0</span>].transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+    <span class="hljs-keyword">if</span> renorm:
+        low, high = img.min(), img.max()
+        img = <span class="hljs-number">255.0</span> * (img - low) / (high - low)
+    <span class="hljs-keyword">return</span> img.astype(np.uint8)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">image_from_url</span>(<span class="hljs-params">url</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Read an image from a URL. Returns a numpy array with the pixel data.</span>
+<span class="hljs-string">    We write the image to a temporary file then read it back. Kinda gross.</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">try</span>:
+        f = urllib.request.urlopen(url)
+        _, fname = tempfile.mkstemp()
+        <span class="hljs-keyword">with</span> open(fname, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> ff:
+            ff.write(f.read())
+        img = imread(fname)
+        os.remove(fname)
+        <span class="hljs-keyword">return</span> img
+    <span class="hljs-keyword">except</span> urllib.request.URLError <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">&#x27;URL Error: &#x27;</span>, e.reason, url)
+    <span class="hljs-keyword">except</span> urllib.request.HTTPError <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">&#x27;HTTP Error: &#x27;</span>, e.code, url)
+</code></pre>
+<p><strong><a target="_blank" rel="noopener" href="http://rnn.py">rnn.py</a></strong></p>
+<p>图片说明任务RNN网络类</p>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> rnn_layers <span class="hljs-keyword">import</span> *
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptioningRNN</span>(<span class="hljs-params">object</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    处理图片说明任务RNN网络</span>
+<span class="hljs-string">    注意：不使用正则化</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, word_to_idx, input_dim=<span class="hljs-number">512</span>, wordvec_dim=<span class="hljs-number">128</span>,</span></span>
+<span class="hljs-function"><span class="hljs-params">                             hidden_dim=<span class="hljs-number">128</span>, cell_type=<span class="hljs-string">&#x27;rnn&#x27;</span></span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        初始化CaptioningRNN </span>
+<span class="hljs-string">        Inputs:</span>
+<span class="hljs-string">        - word_to_idx: 单词字典，用于查询单词索引对应的词向量</span>
+<span class="hljs-string">        - input_dim: 输入图片数据维度</span>
+<span class="hljs-string">        - wordvec_dim: 词向量维度.</span>
+<span class="hljs-string">        - hidden_dim: RNN隐藏层维度.</span>
+<span class="hljs-string">        - cell_type: 细胞类型; &#x27;rnn&#x27; 或 &#x27;lstm&#x27;.</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        <span class="hljs-comment"># 参数检验</span>
+        <span class="hljs-keyword">if</span> cell_type <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> &#123;<span class="hljs-string">&#x27;rnn&#x27;</span>, <span class="hljs-string">&#x27;lstm&#x27;</span>&#125;:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid cell_type &quot;%s&quot;&#x27;</span> % cell_type)
+        
+        <span class="hljs-comment"># 初始化数据</span>
+        self.cell_type = cell_type
+        self.word_to_idx = word_to_idx
+        self.idx_to_word = &#123;i: w <span class="hljs-keyword">for</span> w, i <span class="hljs-keyword">in</span> word_to_idx.items()&#125;
+        self.params = &#123;&#125;
+        
+        vocab_size = len(word_to_idx)
+
+        self._null = word_to_idx[<span class="hljs-string">&#x27;&lt;NULL&gt;&#x27;</span>]
+        self._start = word_to_idx.get(<span class="hljs-string">&#x27;&lt;START&gt;&#x27;</span>, <span class="hljs-literal">None</span>)
+        self._end = word_to_idx.get(<span class="hljs-string">&#x27;&lt;END&gt;&#x27;</span>, <span class="hljs-literal">None</span>)
+        
+        <span class="hljs-comment"># 初始化词向量</span>
+        self.params[<span class="hljs-string">&#x27;W_embed&#x27;</span>] = np.random.randn(vocab_size, wordvec_dim)
+        self.params[<span class="hljs-string">&#x27;W_embed&#x27;</span>] /= <span class="hljs-number">100</span>
+        
+        <span class="hljs-comment"># 初始化 CNN -&gt; 隐藏层参数，用于将图片特征提取到RNN中</span>
+        self.params[<span class="hljs-string">&#x27;W_proj&#x27;</span>] = np.random.randn(input_dim, hidden_dim)
+        self.params[<span class="hljs-string">&#x27;W_proj&#x27;</span>] /= np.sqrt(input_dim)
+        self.params[<span class="hljs-string">&#x27;b_proj&#x27;</span>] = np.zeros(hidden_dim)
+
+        <span class="hljs-comment"># 初始化RNN参数</span>
+        dim_mul = &#123;<span class="hljs-string">&#x27;lstm&#x27;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;rnn&#x27;</span>: <span class="hljs-number">1</span>&#125;[cell_type]
+        self.params[<span class="hljs-string">&#x27;Wx&#x27;</span>] = np.random.randn(wordvec_dim, dim_mul * hidden_dim)
+        self.params[<span class="hljs-string">&#x27;Wx&#x27;</span>] /= np.sqrt(wordvec_dim)
+        self.params[<span class="hljs-string">&#x27;Wh&#x27;</span>] = np.random.randn(hidden_dim, dim_mul * hidden_dim)
+        self.params[<span class="hljs-string">&#x27;Wh&#x27;</span>] /= np.sqrt(hidden_dim)
+        self.params[<span class="hljs-string">&#x27;b&#x27;</span>] = np.zeros(dim_mul * hidden_dim)
+        
+        <span class="hljs-comment"># 初始化输出层参数 </span>
+        self.params[<span class="hljs-string">&#x27;W_vocab&#x27;</span>] = np.random.randn(hidden_dim, vocab_size)
+        self.params[<span class="hljs-string">&#x27;W_vocab&#x27;</span>] /= np.sqrt(hidden_dim)
+        self.params[<span class="hljs-string">&#x27;b_vocab&#x27;</span>] = np.zeros(vocab_size)
+            
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, features, captions</span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        计算RNN或LSTM的损失值。</span>
+<span class="hljs-string">        Inputs:</span>
+<span class="hljs-string">        - features: 输入图片特征(N, D)。</span>
+<span class="hljs-string">        - captions: 图像文字说明(N, T)。 </span>
+<span class="hljs-string">            </span>
+<span class="hljs-string">        Returns 元组:</span>
+<span class="hljs-string">        - loss: 损失值。</span>
+<span class="hljs-string">        - grads:梯度。</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        <span class="hljs-comment">#将文字切分为两段：captions_in除去最后一词用于RNN输入</span>
+        <span class="hljs-comment">#captions_out除去第一个单词，用于RNN输出配对</span>
+        captions_in = captions[:, :<span class="hljs-number">-1</span>]
+        captions_out = captions[:, <span class="hljs-number">1</span>:]
+        
+        <span class="hljs-comment"># 掩码 </span>
+        mask = (captions_out != self._null)
+
+        <span class="hljs-comment"># 图像仿射转换矩阵</span>
+        W_proj, b_proj = self.params[<span class="hljs-string">&#x27;W_proj&#x27;</span>], self.params[<span class="hljs-string">&#x27;b_proj&#x27;</span>]
+        
+        <span class="hljs-comment"># 词嵌入矩阵</span>
+        W_embed = self.params[<span class="hljs-string">&#x27;W_embed&#x27;</span>]
+
+        <span class="hljs-comment"># RNN参数</span>
+        Wx, Wh, b = self.params[<span class="hljs-string">&#x27;Wx&#x27;</span>], self.params[<span class="hljs-string">&#x27;Wh&#x27;</span>], self.params[<span class="hljs-string">&#x27;b&#x27;</span>]
+
+        <span class="hljs-comment"># 隐藏层输出转化矩阵</span>
+        W_vocab, b_vocab = self.params[<span class="hljs-string">&#x27;W_vocab&#x27;</span>], self.params[<span class="hljs-string">&#x27;b_vocab&#x27;</span>]
+        
+        loss, grads = <span class="hljs-number">0.0</span>, &#123;&#125;
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-comment">#                        任务：实现CaptioningRNN传播                          #</span>
+        <span class="hljs-comment">#         (1)使用仿射变换(features,W_proj,b_proj)，                           #</span>
+        <span class="hljs-comment">#                     将图片特征输入进隐藏层初始状态h0(N,H)                      #</span>
+        <span class="hljs-comment">#         (2)使用词嵌入层将captions_in中的单词索引转换为词向量(N,T,W)              #</span>
+        <span class="hljs-comment">#         (3)使用RNN或LSTM处理词向量(N,T,H)                                    #</span>
+        <span class="hljs-comment">#         (4)使用时序仿射传播temporal_affine_forward计算各单词得分(N,T,V)        #</span>
+        <span class="hljs-comment">#         (5)使用temporal_softmax_loss计算损失值                              #</span>
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-comment"># 1 使用仿射变换(features,W_proj,b_proj)，将图片特征输入进隐藏层初始状态h0(N,H)</span>
+        h0, cache_h0 = affine_forward(features, W_proj, b_proj)
+        <span class="hljs-comment"># 2 使用词嵌入层将captions_in中的单词索引转换为词向量(N,T,W)</span>
+        x, cache_embedding = word_embedding_forward(captions_in, W_embed)
+        <span class="hljs-comment"># 3 使用RNN或LSTM处理词向量(N,T,H)</span>
+        <span class="hljs-keyword">if</span> self.cell_type == <span class="hljs-string">&#x27;rnn&#x27;</span>:
+            out_h, cache_rnn = rnn_forward(x, h0, Wx, Wh, b)
+        <span class="hljs-keyword">elif</span> self.cell_type == <span class="hljs-string">&#x27;lstm&#x27;</span>:
+            out_h, cache_rnn = lstm_forward(x, h0, Wx, Wh, b)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid cell_type &quot;%s&quot;&#x27;</span> % self.cell_type)
+        <span class="hljs-comment"># 4 使用时序仿射传播temporal_affine_forward计算各单词得分(N,T,V)</span>
+        yHat, cache_out = temporal_affine_forward(out_h, W_vocab, b_vocab)
+        <span class="hljs-comment"># 5 使用temporal_softmax_loss计算损失值</span>
+        loss, dy = temporal_softmax_loss(yHat, captions_out, mask, verbose=<span class="hljs-literal">False</span>)
+        <span class="hljs-comment"># 计算梯度</span>
+        dout_h, dW_vocab, db_vocab = temporal_affine_backward(dy, cache_out)
+        <span class="hljs-comment"># 输出层到隐藏层的反向传播</span>
+        <span class="hljs-keyword">if</span> self.cell_type == <span class="hljs-string">&#x27;rnn&#x27;</span>:
+            dx, dh0, dWx, dWh, db = rnn_backward(dout_h, cache_rnn)
+        <span class="hljs-keyword">elif</span> self.cell_type == <span class="hljs-string">&#x27;lstm&#x27;</span>:
+            dx, dh0, dWx, dWh, db = lstm_backward(dout_h, cache_rnn)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid cell_type &quot;%s&quot;&#x27;</span> % self.cell_type)
+        <span class="hljs-comment"># 隐藏层到隐藏层自身的反向传播 </span>
+        dW_embed = word_embedding_backward(dx, cache_embedding)
+        <span class="hljs-comment"># 隐藏层到输入层的反向传播</span>
+        dfeatures, dW_proj, db_proj = affine_backward(dh0, cache_h0)
+        <span class="hljs-comment"># 记录梯度</span>
+        grads[<span class="hljs-string">&#x27;W_proj&#x27;</span>] = dW_proj
+        grads[<span class="hljs-string">&#x27;b_proj&#x27;</span>] = db_proj
+        grads[<span class="hljs-string">&#x27;W_embed&#x27;</span>] = dW_embed
+        grads[<span class="hljs-string">&#x27;Wx&#x27;</span>] = dWx
+        grads[<span class="hljs-string">&#x27;Wh&#x27;</span>] = dWh
+        grads[<span class="hljs-string">&#x27;b&#x27;</span>] = db
+        grads[<span class="hljs-string">&#x27;W_vocab&#x27;</span>] = dW_vocab
+        grads[<span class="hljs-string">&#x27;b_vocab&#x27;</span>] = db_vocab
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-comment">#                          结束编码                                          #</span>
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-keyword">return</span> loss, grads
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sample</span>(<span class="hljs-params">self, features, max_length=<span class="hljs-number">30</span></span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        测试阶段的前向传播过程，采样一批图片说明作为输入</span>
+<span class="hljs-string">        Inputs:</span>
+<span class="hljs-string">        - features: 图片特征(N, D).</span>
+<span class="hljs-string">        - max_length:生成说明文字的最大长度</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">        Returns:</span>
+<span class="hljs-string">        - captions: 说明文字的字典索引串(N, max_length)</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        N = features.shape[<span class="hljs-number">0</span>]
+        captions = self._null * np.ones((N, max_length), dtype=np.int32)
+
+        W_proj, b_proj = self.params[<span class="hljs-string">&#x27;W_proj&#x27;</span>], self.params[<span class="hljs-string">&#x27;b_proj&#x27;</span>]
+        W_embed = self.params[<span class="hljs-string">&#x27;W_embed&#x27;</span>]
+        Wx, Wh, b = self.params[<span class="hljs-string">&#x27;Wx&#x27;</span>], self.params[<span class="hljs-string">&#x27;Wh&#x27;</span>], self.params[<span class="hljs-string">&#x27;b&#x27;</span>]
+        W_vocab, b_vocab = self.params[<span class="hljs-string">&#x27;W_vocab&#x27;</span>], self.params[<span class="hljs-string">&#x27;b_vocab&#x27;</span>]
+        
+        <span class="hljs-comment">###########################################################################</span>
+        <span class="hljs-comment">#                             任务：测试阶段前向传播                                                                        #</span>
+        <span class="hljs-comment">#    提示:(1)第一个单词应该是&lt;START&gt;标记，captions[:,0]=self._start                 #</span>
+        <span class="hljs-comment">#             (2)当前单词输入为之前RNN的输出                                                                        #</span>
+        <span class="hljs-comment">#        (3)前向传播过程为预测当前单词的下一个单词，                                                    #</span>
+        <span class="hljs-comment">#         你需要计算所有单词得分，然后选取最大得分作为预测单词                                #</span>
+        <span class="hljs-comment">#        (4)你无法使用rnn_forward 或 lstm_forward函数，                                                 #</span>
+        <span class="hljs-comment">#        你需要循环调用rnn_step_forward或lstm_step_forward函数                                #</span>
+        <span class="hljs-comment">###########################################################################</span>
+        <span class="hljs-comment"># 获取数据</span>
+        N, D = features.shape
+        affine_out, affine_cache = affine_forward(features, W_proj, b_proj)
+        prev_word_idx = [self._start]*N
+        prev_h = affine_out
+        prev_c = np.zeros(prev_h.shape)
+        <span class="hljs-comment"># 1第一个单词应该是&lt;START&gt;标记</span>
+        captions[:, <span class="hljs-number">0</span>] = self._start
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, max_length):
+            <span class="hljs-comment"># 2当前单词输入为之前RNN的输出 </span>
+            prev_word_embed = W_embed[prev_word_idx]
+            <span class="hljs-comment"># 4循环调用rnn_step_forward或lstm_step_forward函数</span>
+            <span class="hljs-keyword">if</span> self.cell_type == <span class="hljs-string">&#x27;rnn&#x27;</span>:
+                next_h, rnn_step_cache = rnn_step_forward(prev_word_embed, prev_h,
+                                                          Wx, Wh, b)
+            <span class="hljs-keyword">elif</span> self.cell_type == <span class="hljs-string">&#x27;lstm&#x27;</span>:
+                next_h, next_c, lstm_step_cache = lstm_step_forward(prev_word_embed, prev_h,
+                                                          prev_c, Wx, Wh, b)
+                prev_c = next_c
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid cell_type &quot;%s&quot;&#x27;</span> % self.cell_type)
+            vocab_affine_out, vocab_affine_out_cache = affine_forward(next_h, 
+                            W_vocab, b_vocab)
+            <span class="hljs-comment"># 3计算所有单词得分，然后选取最大得分作为预测单词 </span>
+            captions[:, i] = list(np.argmax(vocab_affine_out, axis=<span class="hljs-number">1</span>))
+            prev_word_idx = captions[:, i]
+            prev_h = next_h
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-comment">#                                                         结束编码                                                                         #</span>
+        <span class="hljs-comment">############################################################################</span>
+        <span class="hljs-keyword">return</span> captions
+</code></pre>
+<p><strong>rnn_layers.py</strong></p>
+<p>RNN隐藏层需要使用到的方法，包括了RNN、LSTM以及词嵌入的前向传播和反向传播。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rnn_step_forward</span>(<span class="hljs-params">x, prev_h, Wx, Wh, b</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    RNN单步前向传播，使用tanh激活单元</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 当前时间步数据输入(N, D).</span>
+<span class="hljs-string">    - prev_h: 前一时间步隐藏层状态 (N, H)</span>
+<span class="hljs-string">    - Wx: 输入层到隐藏层连接权重(D, H)</span>
+<span class="hljs-string">    - Wh:隐藏层到隐藏层连接权重(H, H)</span>
+<span class="hljs-string">    - b: 隐藏层偏置项(H,)</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - next_h: 下一隐藏层状态(N, H)</span>
+<span class="hljs-string">    - cache: 缓存</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    next_h, cache = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                        任务：实现RNN单步前向传播                              #</span>
+    <span class="hljs-comment">#                         将输出值储存在next_h中，                              #</span>
+    <span class="hljs-comment">#                 将反向传播时所需的各项缓存存放在cache中                         #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment"># 计算神经元输入</span>
+    a = prev_h.dot(Wh)+x.dot(Wx)+b
+    <span class="hljs-comment"># 神经元激活</span>
+    next_h = np.tanh(a)
+    <span class="hljs-comment"># 保留过程中的数据</span>
+    cache = (x, prev_h, Wh, Wx, b, next_h)    
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                      结束编码                                               #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> next_h, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rnn_step_backward</span>(<span class="hljs-params">dnext_h, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    RNN单步反向传播。</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - dnext_h: 后一时间片段的梯度。</span>
+<span class="hljs-string">    - cache: 前向传播时的缓存。</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - dx: 数据梯度(N, D)。</span>
+<span class="hljs-string">    - dprev_h: 前一时间片段梯度(N, H)。</span>
+<span class="hljs-string">    - dWx: 输入层到隐藏层权重梯度(D,H)。</span>
+<span class="hljs-string">    - dWh:    隐藏层到隐藏层权重梯度(H, H)。</span>
+<span class="hljs-string">    - db: 偏置项梯度(H,)。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    dx, dprev_h, dWx, dWh, db = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                            任务：实现RNN单步反向传播                           #</span>
+    <span class="hljs-comment">#            提示：tanh(x)梯度:    1 - tanh(x)*tanh(x)                         # </span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment"># 获取缓存数据</span>
+    x, prev_h, Wh, Wx, b, next_h = cache
+    <span class="hljs-comment"># 根据链式求导法则依次计算各个变量的梯度</span>
+    dscores = dnext_h*(<span class="hljs-number">1</span>-next_h*next_h)
+    dWx = np.dot(x.T, dscores)
+    db = np.sum(dscores, axis=<span class="hljs-number">0</span>)
+    dWh = np.dot(prev_h.T, dscores)
+    dx = np.dot(dscores, Wx.T)
+    dprev_h = np.dot(dscores, Wh.T)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                                                             结束编码                                                                         #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> dx, dprev_h, dWx, dWh, db
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rnn_forward</span>(<span class="hljs-params">x, h0, Wx, Wh, b</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    RNN前向传播。</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 完整的时序数据 (N, T, D)。</span>
+<span class="hljs-string">    - h0: 隐藏层初始化状态 (N, H)。</span>
+<span class="hljs-string">    - Wx: 输入层到隐藏层权重 (D, H)。</span>
+<span class="hljs-string">    - Wh:    隐藏层到隐藏层权重(H, H)。</span>
+<span class="hljs-string">    - b: 偏置项(H,)。</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - h: 所有时间步隐藏层状态(N, T, H)。</span>
+<span class="hljs-string">    - cache: 反向传播所需的缓存。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    h, cache = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                              任务：实现RNN前向传播。                           #</span>
+    <span class="hljs-comment">#                提示： 使用前面实现的rnn_step_forward 函数。                     #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment"># 获取数据维度</span>
+    N, T, D = x.shape
+    (H, ) = b.shape
+    <span class="hljs-comment"># 初始化h</span>
+    h = np.zeros((N, T, H))
+    <span class="hljs-comment"># 获取默认隐藏层状态</span>
+    prev_h = h0
+    <span class="hljs-comment"># 遍历所有时间</span>
+    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(T):
+        <span class="hljs-comment"># 获取当前时间片段</span>
+        xt = x[:, t, :]
+        <span class="hljs-comment"># 计算每一个片段</span>
+        next_h, _ = rnn_step_forward(xt, prev_h, Wx, Wh, b)
+        <span class="hljs-comment"># 更新状态</span>
+        prev_h = next_h
+        <span class="hljs-comment"># 保留结果</span>
+        h[:, t, :] = prev_h
+    <span class="hljs-comment"># 数据缓存，</span>
+    cache = (x, h0, Wh, Wx, b, h)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                              结束编码                                                                                 #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> h, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rnn_backward</span>(<span class="hljs-params">dh, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    RNN反向传播。</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - dh: 隐藏层所有时间步梯度(N, T, H)。</span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - dx: 输入数据时序梯度(N, T, D)。</span>
+<span class="hljs-string">    - dh0: 初始隐藏层梯度(N, H)。</span>
+<span class="hljs-string">    - dWx: 输入层到隐藏层权重梯度(D, H)。</span>
+<span class="hljs-string">    - dWh: 隐藏层到隐藏层权重梯度(H, H)。</span>
+<span class="hljs-string">    - db: 偏置项梯度(H,)。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    dx, dh0, dWx, dWh, db = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                              任务：实现RNN反向传播。                           #</span>
+    <span class="hljs-comment">#                        提示：使用 rnn_step_backward函数。                     #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment"># 获取缓存数据</span>
+    x, h0, Wh, Wx, b, h = cache 
+    <span class="hljs-comment"># 获取数据维度</span>
+    N, T, H = dh.shape
+    _, _, D = x.shape
+    <span class="hljs-comment"># 得到最后的细胞状态</span>
+    next_h = h[:, T<span class="hljs-number">-1</span>, :]
+    <span class="hljs-comment"># 初始化</span>
+    dprev_h = np.zeros((N, H))
+    dx = np.zeros((N, T, D))
+    dh0 = np.zeros((N, H))
+    dWx = np.zeros((D, H))
+    dWh = np.zeros((H, H))
+    db = np.zeros((H,))
+    <span class="hljs-comment"># 遍历所有时间片段</span>
+    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(T):
+        <span class="hljs-comment"># 当前处理的时间片段（从后往前）</span>
+        t = T<span class="hljs-number">-1</span>-t
+        <span class="hljs-comment"># 获取对应的数据</span>
+        xt = x[:, t, :]
+        <span class="hljs-comment"># 最初时间片段的之前细胞状态默认为h0</span>
+        <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>:
+            prev_h = h0
+        <span class="hljs-keyword">else</span>:
+            prev_h = h[:, t<span class="hljs-number">-1</span>, :]
+        <span class="hljs-comment"># 获取缓存数据 </span>
+        step_cache = (xt, prev_h, Wh, Wx, b, next_h)
+        <span class="hljs-comment"># 更新状态</span>
+        next_h = prev_h
+        dnext_h = dh[:, t, :]+dprev_h
+        <span class="hljs-comment"># 进行反向传播</span>
+        dx[:, t, :], dprev_h, dWxt, dWht, dbt = rnn_step_backward(dnext_h, step_cache)
+        <span class="hljs-comment"># 状态累加</span>
+        dWx, dWh, db = dWx+dWxt, dWh+dWht, db+dbt
+    <span class="hljs-comment"># 记录h0的梯度</span>
+    dh0 = dprev_h
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                                    结束编码                                  #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> dx, dh0, dWx, dWh, db
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">word_embedding_forward</span>(<span class="hljs-params">x, W</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    词嵌入前向传播，将数据矩阵中的N条长度为T的词索引转化为词向量。</span>
+<span class="hljs-string">    如：W[x[i,j]]表示第i条，第j时间步单词索引所对应的词向量。</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 整数型数组(N,T),N表示数据条数，T表示单条数据长度，</span>
+<span class="hljs-string">        数组的每一元素存放着单词索引，取值范围[0,V)。</span>
+<span class="hljs-string">    - W: 词向量矩阵(V,D)存放各单词对应的向量。</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - out:输出词向量(N, T, D)。 </span>
+<span class="hljs-string">    - cache:反向传播时所需的缓存。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    out, cache = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                           任务：实现词嵌入前向传播。                            #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment"># 获取数据维度</span>
+    N, T = x.shape
+    V, D = W.shape
+    <span class="hljs-comment"># 初始化</span>
+    out = np.zeros((N, T, D))
+    <span class="hljs-comment"># 遍历所有数据</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(N):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(T):
+            <span class="hljs-comment"># 将其转化为词向量</span>
+            out[i, j] = W[x[i, j]]
+    cache = (x, W.shape)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                                        结束编码                              #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> out, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">word_embedding_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    词嵌入反向传播</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - dout: 上层梯度 (N, T, D)</span>
+<span class="hljs-string">    - cache:前向传播缓存</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns:</span>
+<span class="hljs-string">    - dW: 词嵌入矩阵梯度(V, D).</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    dW = <span class="hljs-literal">None</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                          任务：实现词嵌入反向传播                               #</span>
+    <span class="hljs-comment">#                     提示：你可以使用np.add.at函数                              #</span>
+    <span class="hljs-comment">#            例如 np.add.at(a,[1,2],1)相当于a[1],a[2]分别加1                    #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    x, W_shape = cache
+    dW = np.zeros(W_shape)
+    <span class="hljs-comment"># np.add.at()是将传入的数组中制定下标位置的元素加上指定的值.</span>
+    np.add.at(dW, x, dout)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                                                             结束编码                                                                         #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> dW
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sigmoid</span>(<span class="hljs-params">x</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    数值稳定版本的sigmoid函数。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    pos_mask = (x &gt;= <span class="hljs-number">0</span>)
+    neg_mask = (x &lt; <span class="hljs-number">0</span>)
+    z = np.zeros_like(x)
+    z[pos_mask] = np.exp(-x[pos_mask])
+    z[neg_mask] = np.exp(x[neg_mask])
+    top = np.ones_like(x)
+    top[neg_mask] = z[neg_mask]
+    <span class="hljs-keyword">return</span> top / (<span class="hljs-number">1</span> + z)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lstm_step_forward</span>(<span class="hljs-params">x, prev_h, prev_c, Wx, Wh, b</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    LSTM单步前向传播</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 输入数据 (N, D)</span>
+<span class="hljs-string">    - prev_h: 前一隐藏层状态 (N, H)</span>
+<span class="hljs-string">    - prev_c: 前一细胞状态(N, H)</span>
+<span class="hljs-string">    - Wx: 输入层到隐藏层权重(D, 4H)</span>
+<span class="hljs-string">    - Wh: 隐藏层到隐藏层权重 (H, 4H)</span>
+<span class="hljs-string">    - b: 偏置项(4H,)</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - next_h:    下一隐藏层状态(N, H)</span>
+<span class="hljs-string">    - next_c:    下一细胞状态(N, H)</span>
+<span class="hljs-string">    - cache: 反向传播所需的缓存</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    next_h, next_c, cache = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment">#                            任务：实现LSTM单步前向传播。                        #</span>
+    <span class="hljs-comment">#                 提示：稳定版本的sigmoid函数已经帮你实现，直接调用即可。            #</span>
+    <span class="hljs-comment">#                             tanh函数使用np.tanh。                           #</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment"># 获取数据</span>
+    N, D = x.shape
+    N, H = prev_h.shape
+    <span class="hljs-comment"># 计算输入门、遗忘门、输出门</span>
+    input_gate = sigmoid(np.dot(x, Wx[:, <span class="hljs-number">0</span>:H])+np.dot(prev_h, Wh[:, <span class="hljs-number">0</span>:H])+b[<span class="hljs-number">0</span>:H])
+    forget_gate = sigmoid(np.dot(x, Wx[:, H:<span class="hljs-number">2</span>*H])+np.dot(prev_h, Wh[:, H:<span class="hljs-number">2</span>*H])
+                          +b[H:<span class="hljs-number">2</span>*H])
+    output_gate = sigmoid(np.dot(x, Wx[:, <span class="hljs-number">2</span>*H:<span class="hljs-number">3</span>*H])+np.dot(prev_h, Wh[:, <span class="hljs-number">2</span>*H:<span class="hljs-number">3</span>*H])
+                          +b[<span class="hljs-number">2</span>*H:<span class="hljs-number">3</span>*H])
+    <span class="hljs-comment"># 计算输出单元</span>
+    input_data = np.tanh(np.dot(x, Wx[:, <span class="hljs-number">3</span>*H:<span class="hljs-number">4</span>*H])+np.dot(prev_h, Wh[:, <span class="hljs-number">3</span>*H:<span class="hljs-number">4</span>*H])
+                         +b[<span class="hljs-number">3</span>*H:<span class="hljs-number">4</span>*H])
+    <span class="hljs-comment"># 更新细胞记忆</span>
+    next_c = forget_gate*prev_c+input_data*input_gate
+    <span class="hljs-comment"># 计算细胞输出</span>
+    next_scores_c = np.tanh(next_c)
+    next_h = output_gate*next_scores_c
+    cache = (x, Wx, Wh, b, input_data, input_gate, output_gate, forget_gate,
+             prev_h, prev_c, next_scores_c)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                             结束编码                                         #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-keyword">return</span> next_h, next_c, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lstm_step_backward</span>(<span class="hljs-params">dnext_h, dnext_c, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">     LSTM单步反向传播</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - dnext_h: 下一隐藏层梯度 (N, H)</span>
+<span class="hljs-string">    - dnext_c: 下一细胞梯度 (N, H)</span>
+<span class="hljs-string">    - cache: 前向传播缓存</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - dx: 输入数据梯度 (N, D)</span>
+<span class="hljs-string">    - dprev_h: 前一隐藏层梯度 (N, H)</span>
+<span class="hljs-string">    - dprev_c: 前一细胞梯度(N, H)</span>
+<span class="hljs-string">    - dWx: 输入层到隐藏层梯度(D, 4H)</span>
+<span class="hljs-string">    - dWh:    隐藏层到隐藏层梯度(H, 4H)</span>
+<span class="hljs-string">    - db:    偏置梯度(4H,)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    dx, dprev_h, dc, dWx, dWh, db = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment">#                      任务：实现LSTM单步反向传播                               #</span>
+    <span class="hljs-comment">#       提示：sigmoid(x)函数梯度：sigmoid(x)*(1-sigmoid(x))                    #</span>
+    <span class="hljs-comment">#             tanh(x)函数梯度：     1-tanh(x)*tanh(x)                         #</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment"># 获取数据</span>
+    x, Wx, Wh, b, input_data, input_gate, output_gate, forget_gate, prev_h,\
+        prev_c, next_scores_c = cache
+    N, D = x.shape
+    N, H = prev_h.shape
+    <span class="hljs-comment"># 初始化变量</span>
+    dWx = np.zeros((D, <span class="hljs-number">4</span>*H))
+    dxx = np.zeros((D, <span class="hljs-number">4</span>*H))
+    dWh = np.zeros((H, <span class="hljs-number">4</span>*H))
+    dhh = np.zeros((H, <span class="hljs-number">4</span>*H))
+    db = np.zeros(<span class="hljs-number">4</span>*H)
+    dx = np.zeros((N, D))
+    dprev_h = np.zeros((N, H))
+    <span class="hljs-comment"># 计算当前细胞的梯度</span>
+    dc_tem = dnext_c+dnext_h*(<span class="hljs-number">1</span>-next_scores_c**<span class="hljs-number">2</span>)*output_gate
+    <span class="hljs-comment"># 求解tanh层</span>
+    dprev_c = forget_gate*dc_tem
+    dforget_gate = prev_c*dc_tem
+    dinput_gate = input_data*dc_tem
+    dinput = input_gate*dc_tem
+    doutput_gate = next_scores_c*dnext_h
+    <span class="hljs-comment"># 求解sigmoid层</span>
+    dscores_in_gate = input_gate*(<span class="hljs-number">1</span>-input_gate)*dinput_gate
+    dscores_forget_gate = forget_gate*(<span class="hljs-number">1</span>-forget_gate)*dforget_gate
+    dscores_out_gate = output_gate*(<span class="hljs-number">1</span>-output_gate)*doutput_gate
+    dscores_in = (<span class="hljs-number">1</span>-input_data**<span class="hljs-number">2</span>)*dinput
+    da = np.hstack((dscores_in_gate, dscores_forget_gate, dscores_out_gate, dscores_in))
+    dWx = np.dot(x.T, da)
+    dWh = np.dot(prev_h.T, da)
+    db = np.sum(da, axis=<span class="hljs-number">0</span>)
+    dx = np.dot(da, Wx.T)
+    dprev_h = np.dot(da, Wh.T)
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                           结束编码                                           #</span>
+    <span class="hljs-comment">##############################################################################</span>
+
+    <span class="hljs-keyword">return</span> dx, dprev_h, dprev_c, dWx, dWh, db
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lstm_forward</span>(<span class="hljs-params">x, h0, Wx, Wh, b</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    LSTM前向传播</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 输入数据 (N, T, D)</span>
+<span class="hljs-string">    - h0:初始化隐藏层状态(N, H)</span>
+<span class="hljs-string">    - Wx: 输入层到隐藏层权重 (D, 4H)</span>
+<span class="hljs-string">    - Wh: 隐藏层到隐藏层权重(H, 4H)</span>
+<span class="hljs-string">    - b: 偏置项(4H,)</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - h: 隐藏层所有状态 (N, T, H)</span>
+<span class="hljs-string">    - cache: 用于反向传播的缓存</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    h, cache = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment">#                    任务： 实现完整的LSTM前向传播                              #</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment"># 获取数据</span>
+    N, T, D = x.shape
+    H = int(b.shape[<span class="hljs-number">0</span>]/<span class="hljs-number">4</span>)
+    <span class="hljs-comment"># 初始化信息</span>
+    h = np.zeros((N, T, H))
+    cache = &#123;&#125;
+    prev_h = h0
+    prev_c = np.zeros((N, H))
+    <span class="hljs-comment"># 遍历所有时序数据</span>
+    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(T):
+        <span class="hljs-comment"># 当前数据</span>
+        xt = x[:, t, :]
+        <span class="hljs-comment"># 进行单步LSTM前向传播</span>
+        next_h, next_c, cache[t] = lstm_step_forward(xt, prev_h, prev_c, Wx, Wh, b)
+        <span class="hljs-comment"># 更新状态</span>
+        prev_h = next_h
+        prev_c = next_c
+        h[:, t, :] = prev_h
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                          结束编码                                            #</span>
+    <span class="hljs-comment">##############################################################################</span>
+
+    <span class="hljs-keyword">return</span> h, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lstm_backward</span>(<span class="hljs-params">dh, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    LSTM反向传播</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - dh: 各隐藏层梯度(N, T, H)</span>
+<span class="hljs-string">    - cache: V前向传播缓存</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - dx: 输入数据梯度 (N, T, D)</span>
+<span class="hljs-string">    - dh0:初始隐藏层梯度(N, H)</span>
+<span class="hljs-string">    - dWx: 输入层到隐藏层权重梯度 (D, 4H)</span>
+<span class="hljs-string">    - dWh: 隐藏层到隐藏层权重梯度 (H, 4H)</span>
+<span class="hljs-string">    - db: 偏置项梯度 (4H,)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    dx, dh0, dWx, dWh, db = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment">#               任务：实现完整的LSTM反向传播                                     #</span>
+    <span class="hljs-comment">#############################################################################</span>
+    <span class="hljs-comment"># 获取数据</span>
+    N, T, H = dh.shape
+    <span class="hljs-comment"># 从最后一条开始更新</span>
+    x, Wx, Wh, b, input_data, input_gate, output_gate, forget_gate, prev_h, prev_c,\
+        next_scores_c = cache[T<span class="hljs-number">-1</span>]
+    D = x.shape[<span class="hljs-number">1</span>]
+    <span class="hljs-comment"># 初始化</span>
+    dprev_h = np.zeros((N, H))
+    dprev_c = np.zeros((N, H))
+    dx = np.zeros((N, T, D))
+    dh0 = np.zeros((N, H))
+    dWx = np.zeros((D, <span class="hljs-number">4</span>*H))
+    dWh = np.zeros((H, <span class="hljs-number">4</span>*H))
+    db = np.zeros((<span class="hljs-number">4</span>*H,))
+    <span class="hljs-comment"># 遍历所有数据</span>
+    <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(T):
+        <span class="hljs-comment"># 选择当前时间（从后向前）</span>
+        t = T<span class="hljs-number">-1</span>-t
+        <span class="hljs-comment"># 获取数据</span>
+        step_cache = cache[t]
+        dnext_h = dh[:, t, :]+dprev_h
+        dnext_c = dprev_c
+        <span class="hljs-comment"># 进行单步反向传播计算</span>
+        dx[:, t, :], dprev_h, dprev_c, dWxt, dWht, dbt = lstm_step_backward(dnext_h,
+                        dnext_c, step_cache)
+        <span class="hljs-comment"># 更新参数</span>
+        dWx, dWh, db = dWx+dWxt, dWh+dWht, db+dbt
+    <span class="hljs-comment"># 更新h0梯度</span>
+    dh0 = dprev_h
+    <span class="hljs-comment">##############################################################################</span>
+    <span class="hljs-comment">#                            结束编码                                          #</span>
+    <span class="hljs-comment">##############################################################################</span>
+    
+    <span class="hljs-keyword">return</span> dx, dh0, dWx, dWh, db
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">temporal_affine_forward</span>(<span class="hljs-params">x, w, b</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    时序隐藏层仿射传播：将隐藏层时序数据(N,T,D)重塑为(N*T,D)，</span>
+<span class="hljs-string">    完成前向传播后，再重塑回原型输出。</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 时序数据(N, T, D)。</span>
+<span class="hljs-string">    - w: 权重(D, M)。</span>
+<span class="hljs-string">    - b: 偏置(M,)。</span>
+<span class="hljs-string">    </span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - out: 输出(N, T, M)。</span>
+<span class="hljs-string">    - cache: 反向传播缓存。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    N, T, D = x.shape
+    M = b.shape[<span class="hljs-number">0</span>]
+    <span class="hljs-comment"># Affine层</span>
+    out = x.reshape(N * T, D).dot(w).reshape(N, T, M) + b
+    cache = x, w, b, out
+    <span class="hljs-keyword">return</span> out, cache
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">temporal_affine_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    时序隐藏层仿射反向传播。</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Input:</span>
+<span class="hljs-string">    - dout:上层梯度 (N, T, M)。</span>
+<span class="hljs-string">    - cache: 前向传播缓存。</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - dx: 输入梯度(N, T, D)。</span>
+<span class="hljs-string">    - dw: 权重梯度 (D, M)。</span>
+<span class="hljs-string">    - db: 偏置项梯度 (M,)。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    x, w, b, out = cache
+    N, T, D = x.shape
+    M = b.shape[<span class="hljs-number">0</span>]
+    <span class="hljs-comment"># Affine层反向传播</span>
+    dx = dout.reshape(N * T, M).dot(w.T).reshape(N, T, D)
+    dw = dout.reshape(N * T, M).T.dot(x.reshape(N * T, D)).T
+    db = dout.sum(axis=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>))
+
+    <span class="hljs-keyword">return</span> dx, dw, db
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">temporal_softmax_loss</span>(<span class="hljs-params">x, y, mask, verbose=False</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    时序版本的Softmax损失和原版本类似，只需将数据(N, T, V)重塑为(N*T,V)即可。</span>
+<span class="hljs-string">    需要注意的是，对于NULL标记不计入损失值，因此，你需要加入掩码进行过滤。</span>
+<span class="hljs-string">    Inputs:</span>
+<span class="hljs-string">    - x: 输入数据得分(N, T, V)。</span>
+<span class="hljs-string">    - y: 目标索引(N, T)，其中0&lt;= y[i, t] &lt; V。</span>
+<span class="hljs-string">    - mask: 过滤NULL标记的掩码。</span>
+<span class="hljs-string">    Returns 元组:</span>
+<span class="hljs-string">    - loss: 损失值。</span>
+<span class="hljs-string">    - dx: x梯度。</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 获取必备信息</span>
+    N, T, V = x.shape
+    
+    x_flat = x.reshape(N * T, V)
+    y_flat = y.reshape(N * T)
+    mask_flat = mask.reshape(N * T)
+    
+    <span class="hljs-comment"># 和原有softmax类似，不足的部分使用NULL补充，计算的时候过滤</span>
+    probs = np.exp(x_flat - np.max(x_flat, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>))
+    probs /= np.sum(probs, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>)
+    loss = -np.sum(mask_flat * np.log(probs[np.arange(N * T), y_flat])) / N
+    dx_flat = probs.copy()
+    dx_flat[np.arange(N * T), y_flat] -= <span class="hljs-number">1</span>
+    dx_flat /= N
+    dx_flat *= mask_flat[:, <span class="hljs-literal">None</span>]
+    
+    <span class="hljs-comment"># 是否打印</span>
+    <span class="hljs-keyword">if</span> verbose: 
+        print(<span class="hljs-string">&#x27;dx_flat: &#x27;</span>, dx_flat.shape)
+    
+    dx = dx_flat.reshape(N, T, V)
+    
+    <span class="hljs-keyword">return</span> loss, dx
+
+</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DeepLearning/">DeepLearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/22/Article202111226/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《深度学习实战》汇总</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/22/Article202111224/">
+                        <span class="hidden-mobile">《深度学习实战》第7章 循环神经网络</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "编码实现RNN以及LSTM&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,24 +222,22 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43677260/article/details/86615923">https://blog.csdn.net/weixin_43677260/article/details/86615923</a></p>
 </blockquote>
-<p>R语言中，定义全局变量的方法为：<code>a&lt;&lt;-1</code>。<br>在函数内部定义的变量是不会在Global Environment出现的，例如：</p>
+<p>R语言中，定义全局变量的方法为：<code>a&lt;&lt;-1</code>。<br>
+在函数内部定义的变量是不会在Global Environment出现的，例如：</p>
 <pre><code class="hljs python">sigmoid&lt;-function(x)
 &#123;
     a = <span class="hljs-number">1</span>
     <span class="hljs-keyword">return</span>(<span class="hljs-number">1</span>/(<span class="hljs-number">1</span>+exp(-x)))
 &#125;</code></pre>
-
 <p>中变量<code>a</code>是不会出现在全局环境中的，</p>
 <pre><code class="hljs python">&gt; print(a)
 Error <span class="hljs-keyword">in</span> print(a) : object <span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-keyword">not</span> found</code></pre>
-
 <p>但是，如果将代码改为：</p>
 <pre><code class="hljs python">sigmoid&lt;-function(x)
 &#123;
     a &lt;&lt;<span class="hljs-number">-1</span>
     <span class="hljs-keyword">return</span>(<span class="hljs-number">1</span>/(<span class="hljs-number">1</span>+exp(-x)))
 &#125;</code></pre>
-
 <p>变量a就会出现在全局环境中，</p>
 <pre><code class="hljs python">&gt; print(a)
 [<span class="hljs-number">1</span>] <span class="hljs-number">1</span></code></pre>

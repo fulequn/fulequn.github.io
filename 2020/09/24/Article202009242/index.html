@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -217,8 +221,12 @@
               <blockquote>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jackchiang/p/4605327.html">https://www.cnblogs.com/jackchiang/p/4605327.html</a></p>
 </blockquote>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>1、读取指定目录下的所有文件<br>2、读取指定文件，输出文件内容<br>3、创建一个文件并保存到指定目录</p>
-<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: UTF-8 -*- </span>
+<h3 id="需求分析"><a class="markdownIt-Anchor" href="#需求分析"></a> 需求分析</h3>
+<p>1、读取指定目录下的所有文件<br>
+2、读取指定文件，输出文件内容<br>
+3、创建一个文件并保存到指定目录</p>
+<h3 id="实现过程"><a class="markdownIt-Anchor" href="#实现过程"></a> 实现过程</h3>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: UTF-8 -*- </span>
 
 <span class="hljs-string">&#x27;&#x27;&#x27;</span>
 <span class="hljs-string">1、读取指定目录下的所有文件</span>
@@ -240,7 +248,7 @@
     <span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> fopen:
         <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;读取到得内容如下：&quot;</span>,eachLine
     fopen.close()
-
+    
 <span class="hljs-comment"># 输入多行文字，写入指定文件并保存到指定文件夹</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">writeFile</span>(<span class="hljs-params">filename</span>):</span>
     fopen = open(filename, <span class="hljs-string">&#x27;w&#x27;</span>)
@@ -261,7 +269,6 @@
     eachFile(filePathC)
     readFile(filePath)
     writeFile(filePathI)</code></pre>
-
 
             </div>
             <hr>

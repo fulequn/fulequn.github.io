@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -219,10 +223,22 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_34439107/article/details/70214258">服务不支持 chkconfig 的解决方法_情报通-CSDN博客</a></p>
 </blockquote>
 <p>服务不支持 chkconfig　的解决方法</p>
-<p>这两天一直在研究系统服务，在chkconfig –add servername的时候老是提示服务不支持 chkconfig　经过查找，解决办法如下。</p>
+<p>这两天一直在研究系统服务，在chkconfig --add servername的时候老是提示服务不支持 chkconfig　经过查找，解决办法如下。</p>
 <ol>
-<li>示例，auto_run的前三行如下：<br>#!/bin/sh<br>#chkconfig: 2345 80 90<br>#description:auto_run<br>第一行，告诉系统使用的shell,所以的shell脚本都是这样。<br>第二行，chkconfig后面有三个参数2345,80和90告诉chkconfig程序，需要在rc2.d~rc5.d目录下，创建名字为 S80auto_run的文件连接，连接到/etc/rc.d/init.d目录下的的auto_run脚本。第一个字符是S，系统在启动的时候，运行脚 本auto_run，就会添加一个start参数，告诉脚本，现在是启动模式。同时在rc0.d和rc6.d目录下，创建名字为K90auto_run的 文件连接，第一个字符为K，个系统在关闭系统的时候，会运行auto_run，添加一个stop，告诉脚本，现在是关闭模式。<br>注意上面的三行是中，第二，第三行是必须的，否则在运行chkconfig –add auto_run时，会报错。</li>
-<li>常见的错误<br>“<strong>服务不支持 chkconfig</strong>”：<br>  请注意检查脚本的前面，是否有完整的两行：<br>#chkconfig: 2345 80 90<br>#description:auto_run<br>在脚本前面这两行是不能少的，否则不能chkconfig命令会报错误。<br>如果运行chkconfig老是报错，如果脚本没有问题，我建议，直接在rc0.d~rc6.d下面创建到脚本的文件连接来解决，原理都是一样的。</li>
+<li>示例，auto_run的前三行如下：<br>
+#!/bin/sh<br>
+#chkconfig: 2345 80 90<br>
+#description:auto_run<br>
+第一行，告诉系统使用的shell,所以的shell脚本都是这样。<br>
+第二行，chkconfig后面有三个参数2345,80和90告诉chkconfig程序，需要在rc2.d~rc5.d目录下，创建名字为 S80auto_run的文件连接，连接到/etc/rc.d/init.d目录下的的auto_run脚本。第一个字符是S，系统在启动的时候，运行脚 本auto_run，就会添加一个start参数，告诉脚本，现在是启动模式。同时在rc0.d和rc6.d目录下，创建名字为K90auto_run的 文件连接，第一个字符为K，个系统在关闭系统的时候，会运行auto_run，添加一个stop，告诉脚本，现在是关闭模式。<br>
+注意上面的三行是中，第二，第三行是必须的，否则在运行chkconfig --add auto_run时，会报错。</li>
+<li>常见的错误<br>
+“<strong>服务不支持 chkconfig</strong>”：<br>
+请注意检查脚本的前面，是否有完整的两行：<br>
+#chkconfig: 2345 80 90<br>
+#description:auto_run<br>
+在脚本前面这两行是不能少的，否则不能chkconfig命令会报错误。<br>
+如果运行chkconfig老是报错，如果脚本没有问题，我建议，直接在rc0.d~rc6.d下面创建到脚本的文件连接来解决，原理都是一样的。</li>
 </ol>
 
             </div>

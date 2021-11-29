@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">编码实现Dropout正则化编码</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="dropout-layers-py"><a href="#dropout-layers-py" class="headerlink" title="dropout_layers.py"></a>dropout_layers.py</h2><p>包含了Dropout前向传播以及反向传播，组合Dropout传播层</p>
+              <h2 id="dropout_layerspy"><a class="markdownIt-Anchor" href="#dropout_layerspy"></a> dropout_layers.py</h2>
+<p>包含了Dropout前向传播以及反向传播，组合Dropout传播层</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> .layers <span class="hljs-keyword">import</span> *
@@ -278,7 +283,7 @@
 <span class="hljs-string">    &quot;&quot;&quot;</span>
     dropout_param, mask = cache
     mode = dropout_param[<span class="hljs-string">&#x27;mode&#x27;</span>]
-
+    
     dx = <span class="hljs-literal">None</span>
     <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&#x27;train&#x27;</span>:
         <span class="hljs-comment">###########################################################################</span>
@@ -356,8 +361,8 @@
     <span class="hljs-comment">#                                                    结束编码                                                                            #</span>
     <span class="hljs-comment">###########################################################################</span>
     <span class="hljs-keyword">return</span> dx,dw,db</code></pre>
-
-<h2 id="layers-py"><a href="#layers-py" class="headerlink" title="layers.py"></a>layers.py</h2><p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p>
+<h2 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h2>
+<p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -535,8 +540,8 @@
 
     <span class="hljs-keyword">return</span> loss, dx
 </code></pre>
-
-<h2 id="fc-net-py"><a href="#fc-net-py" class="headerlink" title="fc_net.py"></a>fc_net.py</h2><p>实现了深层全连接神经网络。</p>
+<h2 id="fc_netpy"><a class="markdownIt-Anchor" href="#fc_netpy"></a> fc_net.py</h2>
+<p>实现了深层全连接神经网络。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> sys, os
 sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
@@ -578,14 +583,14 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
                         layers_dims[i],layers_dims[i+<span class="hljs-number">1</span>])
                 self.params[<span class="hljs-string">&#x27;b&#x27;</span> + str(i + <span class="hljs-number">1</span>)] = np.zeros(
                         (<span class="hljs-number">1</span>, layers_dims[i + <span class="hljs-number">1</span>]))
-
+        
         <span class="hljs-comment"># 初始化与dropout有关的参数</span>
         self.dropout_param = &#123;&#125;
         <span class="hljs-keyword">if</span> self.use_dropout:
             self.dropout_param = &#123;<span class="hljs-string">&#x27;mode&#x27;</span>: <span class="hljs-string">&#x27;train&#x27;</span>, <span class="hljs-string">&#x27;p&#x27;</span>: dropout&#125;
             <span class="hljs-keyword">if</span> seed <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
                 self.dropout_param[<span class="hljs-string">&#x27;seed&#x27;</span>] = seed
-
+        
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
         <span class="hljs-string">&#x27;&#x27;&#x27;</span>
@@ -596,7 +601,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment"># 设置执行模式</span>
         <span class="hljs-keyword">if</span> self.dropout_param <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:
             self.dropout_param[<span class="hljs-string">&#x27;mode&#x27;</span>] = mode     
-
+        
         scores = <span class="hljs-literal">None</span>
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                                    任务：执行全连接网络的前馈过程。                                                #</span>
@@ -640,7 +645,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
                     * self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)]))
         dout[h], grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+str(h+<span class="hljs-number">1</span>)] = affine_backward(dy, 
                     cache[h+<span class="hljs-number">1</span>])
-        grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)]    += self.reg * self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)]
+        grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)]	+= self.reg * self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)]
         <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(h):
             <span class="hljs-keyword">if</span> self.use_dropout:
                 dout[h<span class="hljs-number">-1</span>-i], grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h-i)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+str(h-i)] =  affine_relu_dropout_backward(dout[h-i], cache[h-i])
@@ -652,8 +657,8 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-keyword">return</span> loss, grads
 </code></pre>
-
-<h2 id="trainer-py"><a href="#trainer-py" class="headerlink" title="trainer.py"></a>trainer.py</h2><p>解耦训练器的实现</p>
+<h2 id="trainerpy"><a class="markdownIt-Anchor" href="#trainerpy"></a> <a target="_blank" rel="noopener" href="http://trainer.py">trainer.py</a></h2>
+<p>解耦训练器的实现</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> sys, os
 sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
@@ -709,7 +714,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         self.y_train = data[ <span class="hljs-string">&#x27;y_train&#x27;</span>]
         self.X_val = data[ <span class="hljs-string">&#x27;X_val&#x27;</span>]
         self.y_val = data[ <span class="hljs-string">&#x27;y_val&#x27;</span>]
-
+        
         <span class="hljs-comment"># 弹出可选参数，进行相关配置。</span>
         self.update_rule = kwargs.pop(<span class="hljs-string">&#x27;update_rule&#x27;</span>, <span class="hljs-string">&#x27;sgd&#x27;</span>)
         self.updater_config = kwargs.pop(<span class="hljs-string">&#x27;updater_config&#x27;</span>, &#123;&#125;)
@@ -777,7 +782,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
             self.model.params[p] = next_w
             self.updater_configs[p] = next_config
 
-
+    
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">check_accuracy</span>(<span class="hljs-params">self, X, y, num_samples=None, batch_size=<span class="hljs-number">100</span></span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
@@ -792,7 +797,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
 <span class="hljs-string">        Returns:</span>
 <span class="hljs-string">        - acc: 测试数据正确率</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
-
+        
         <span class="hljs-comment"># 对数据进行采样</span>
         N = X.shape[<span class="hljs-number">0</span>]
         <span class="hljs-comment"># 采样次数为空或者训练数据大于采样数据</span>
@@ -872,8 +877,8 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         self.model.params = self.best_params
 
 </code></pre>
-
-<h2 id="updater-py"><a href="#updater-py" class="headerlink" title="updater.py"></a>updater.py</h2><p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重$w$、当前权重的梯度$dw$及相应的更新配置。</p>
+<h2 id="updaterpy"><a class="markdownIt-Anchor" href="#updaterpy"></a> <a target="_blank" rel="noopener" href="http://updater.py">updater.py</a></h2>
+<p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>、当前权重的梯度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>w</mi></mrow><annotation encoding="application/x-tex">dw</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>及相应的更新配置。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -908,7 +913,6 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
   <span class="hljs-keyword">return</span> w, config
 
 </code></pre>
-
 
             </div>
             <hr>

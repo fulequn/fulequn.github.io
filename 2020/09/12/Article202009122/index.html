@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      339 字
+      341 字
     </span>
   
 
@@ -214,30 +218,27 @@
             <h1 style="display: none">R统计笔记（三） 分组统计的几种方法</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>原文链接:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduend~default-6-89202950.nonecase&utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1">https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2<del>all</del>sobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1</a></p>
-<h2 id="1-使用tapply函数"><a href="#1-使用tapply函数" class="headerlink" title="1. 使用tapply函数"></a>1. 使用tapply函数</h2><pre><code class="hljs R"><span class="hljs-comment">#INDEX相当于groupBy</span>
+              <p>原文链接:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1">https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2<sub>all</sub>sobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1</a></p>
+<h2 id="1-使用tapply函数"><a class="markdownIt-Anchor" href="#1-使用tapply函数"></a> 1. 使用tapply函数</h2>
+<pre><code class="hljs R"><span class="hljs-comment">#INDEX相当于groupBy</span>
 tapply(salarys$SALARY, INDEX=salarys$SEX, FUN=sum)</code></pre>
-
 <p>如果出现参数的长度不一致的错误，如下:</p>
 <pre><code class="hljs R">Error <span class="hljs-keyword">in</span> tapply(salarys$SALARY, INDEX = salarys$SEX, FUN = max) :   参数的长度必需相同</code></pre>
-
 <p>请仔细检查salarysSEX的长度是否相等，尤其是检查INDEX的类型，如果是list类型，请务必转换为向量：</p>
 <pre><code class="hljs R"><span class="hljs-comment"># 对数据进行处理,返回</span>
 LISTsalarys$SEX &lt;- lapply(salarys$SEX, <span class="hljs-keyword">function</span>(x) <span class="hljs-keyword">switch</span>(x, FEMALE=<span class="hljs-string">&#x27;女&#x27;</span>, MALE=<span class="hljs-string">&#x27;男&#x27;</span>))<span class="hljs-comment"># 返回向量</span>
 salarys$SEX &lt;- c(salarys$SEX, recursive = <span class="hljs-literal">TRUE</span>)<span class="hljs-number">1234</span></code></pre>
-
-<h2 id="2-使用by函数"><a href="#2-使用by函数" class="headerlink" title="2. 使用by函数"></a>2. 使用by函数</h2><p>使用by函数可以达到同样的效果，唯一需要注意的是，引用的数据必须全是数据列，例如在本例中，数据最多也只能是salarys[c(‘SALARY’, ‘ID’)]。</p>
+<h2 id="2-使用by函数"><a class="markdownIt-Anchor" href="#2-使用by函数"></a> 2. 使用by函数</h2>
+<p>使用by函数可以达到同样的效果，唯一需要注意的是，引用的数据必须全是数据列，例如在本例中，数据最多也只能是salarys[c(‘SALARY’, ‘ID’)]。</p>
 <pre><code class="hljs bash">by(salarys[c(<span class="hljs-string">&#x27;SALARY&#x27;</span>)], INDICES = list(salarys<span class="hljs-variable">$SEX</span>), FUN=max)</code></pre>
-
-<h2 id="3-使用aggregate函数"><a href="#3-使用aggregate函数" class="headerlink" title="3. 使用aggregate函数"></a>3. 使用aggregate函数</h2><pre><code class="hljs R">aggregate(x=salarys[c(<span class="hljs-string">&#x27;SALARY&#x27;</span>)], by = list(salarys$SEX, salarys$ID), FUN=max)</code></pre>
-
+<h2 id="3-使用aggregate函数"><a class="markdownIt-Anchor" href="#3-使用aggregate函数"></a> 3. 使用aggregate函数</h2>
+<pre><code class="hljs R">aggregate(x=salarys[c(<span class="hljs-string">&#x27;SALARY&#x27;</span>)], by = list(salarys$SEX, salarys$ID), FUN=max)</code></pre>
 <p>聚合函数与group by更相似，例如以上语句就表示按SEX、ID进行分组，结果如下：</p>
 <pre><code class="hljs text">  Group.1 Group.2  SALARY1      
 男       1  300002      
 男       2    2003      
 女       3   12004      
 女       4   3500123451</code></pre>
-
 <p>从以上的数据可以看出，分组的唯一性由（SEX，ID）决定，所以跟SQL一模一样。</p>
 
             </div>

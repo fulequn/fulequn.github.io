@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,30 +218,33 @@
             <h1 style="display: none">流数据分析处理-流计算技术概述</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="1-1-大数据技术回顾"><a href="#1-1-大数据技术回顾" class="headerlink" title="1.1 大数据技术回顾"></a>1.1 大数据技术回顾</h2><table>
+              <h2 id="11-大数据技术回顾"><a class="markdownIt-Anchor" href="#11-大数据技术回顾"></a> 1.1 大数据技术回顾</h2>
+<table>
 <thead>
 <tr>
 <th><strong>技术层面</strong></th>
-<th align="center"><strong>功能</strong></th>
+<th style="text-align:center"><strong>功能</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>数据采集</td>
-<td align="center">利用ETL工具将分布的、异构数据源中的数据如关系数据、平面数据文件等，抽取到临时中间层后进行清洗、转换、集成，最后加载到数据仓库或数据集市中，成为联机分析处理、数据挖掘的基础；或者也可以把实时采集的数据作为流计算系统的输入，进行实时处理分析</td>
+<td style="text-align:center">利用ETL工具将分布的、异构数据源中的数据如关系数据、平面数据文件等，抽取到临时中间层后进行清洗、转换、集成，最后加载到数据仓库或数据集市中，成为联机分析处理、数据挖掘的基础；或者也可以把实时采集的数据作为流计算系统的输入，进行实时处理分析</td>
 </tr>
 <tr>
 <td>数据存储和管理</td>
-<td align="center">利用分布式文件系统、数据仓库、关系数据库、NoSQL数据库、云数据库等，实现对结构化、半结构化和非结构化海量数据的存储和管理</td>
+<td style="text-align:center">利用分布式文件系统、数据仓库、关系数据库、NoSQL数据库、云数据库等，实现对结构化、半结构化和非结构化海量数据的存储和管理</td>
 </tr>
 <tr>
 <td>数据处理与分析</td>
-<td align="center">利用分布式并行编程模型和计算框架，结合机器学习和数据挖掘算法，实现对海量数据的处理和分析；对分析结果进行可视化呈现，帮助人们更好地理解数据、分析数据</td>
+<td style="text-align:center">利用分布式并行编程模型和计算框架，结合机器学习和数据挖掘算法，实现对海量数据的处理和分析；对分析结果进行可视化呈现，帮助人们更好地理解数据、分析数据</td>
 </tr>
 <tr>
 <td>数据隐私和安全</td>
-<td align="center">在从大数据中挖掘潜在的巨大商业价值和学术价值的同时，构建隐私数据保护体系和数据安全体系，有效保护个人隐私和数据安全</td>
+<td style="text-align:center">在从大数据中挖掘潜在的巨大商业价值和学术价值的同时，构建隐私数据保护体系和数据安全体系，有效保护个人隐私和数据安全</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>表1-1 大数据技术的不同层面及其功能</p>
 <p><strong>1.1大数据关键技术</strong></p>
 <p><img src="/2020/08/31/Article202008312/1.png" srcset="/img/loading.gif" alt="1"></p>

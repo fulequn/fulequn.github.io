@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -230,23 +234,27 @@
 <p>Python其实也有一个性能不错的统计学包，StatsModel：</p>
 <p><a target="_blank" rel="noopener" href="http://www.statsmodels.org/stable/index.html">http://www.statsmodels.org/stable/index.html</a></p>
 <p>欢迎各位读者朋友尝试使用这一工具完成我们这篇文章中所讲的内容。在这里我们使用RStudio以及最新版本（当前时间是2019年3月8日）来进行项目分析。其实这也是我个人认为非常罕见的R的功能竟然比Python还要强大的地方。</p>
-<p>我们首先使用lm()方法，也就是R语言中求线性回归的命令对任意一个线性模型进行线性回归。但是为了方便起见，我们可以把这个“线性回归”命名为fit。</p>
+<p>我们首先使用lm()方法，也就是R语言中求线性回归的命令对任意一个线性模型进行线性回归。但是为了方便起见，我们可以把这个“线性回归&quot;命名为fit。</p>
 <blockquote>
 <p>fit=lm(因变量~自变量)</p>
 </blockquote>
 <p>之后我们就可以用R语言绘制Diagnostics plot了。同样的，在R语言里，这里也只有一行代码。</p>
 <blockquote>
-<p> plot(fit)</p>
+<p>plot(fit)</p>
 </blockquote>
 <p>如果您的代码确实可以执行，在RStudio中应该显示出四张图片。 分别是：</p>
 <ol>
-<li><p>Residuals vs Fitted</p>
+<li>
+<p>Residuals vs Fitted</p>
 </li>
-<li><p>Normal QQ</p>
+<li>
+<p>Normal QQ</p>
 </li>
-<li><p>Scale-Location</p>
+<li>
+<p>Scale-Location</p>
 </li>
-<li><p>Residuals vs Leverage</p>
+<li>
+<p>Residuals vs Leverage</p>
 </li>
 </ol>
 <p>如图所示。就是一个这样的图：</p>

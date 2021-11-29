@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -236,7 +240,6 @@
 <span class="hljs-string">       谢逊 梅超风 殷天正 段誉 袁冠南 张三丰 王语嫣 阿紫 谢逊 杨过 郭靖 黄蓉 </span>
 <span class="hljs-string">       双儿 灭绝师太 段誉 张无忌 陈家洛 黄蓉 鳌拜 黄药师 逍遥子 忽必烈 赵敏 </span>
 <span class="hljs-string">       逍遥子 完颜洪烈 金轮法王 双儿 鳌拜 洪七公 郭芙 郭襄 赵敏&#x27;&#x27;&#x27;</span></code></pre>
-
 <p><strong>执行代码</strong>：</p>
 <pre><code class="hljs python">s = <span class="hljs-string">&#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 金轮法王 乔峰 杨过 洪七公 郭靖 </span>
 <span class="hljs-string">       杨逍 鳌拜 殷天正 段誉 杨逍 慕容复 阿紫 慕容复 郭芙 乔峰 令狐冲 郭芙 </span>
@@ -274,8 +277,9 @@ max_name, max_sum = <span class="hljs-string">&quot;&quot;</span>, <span class="
     <span class="hljs-keyword">if</span> counts[j] &gt; max_sum:
         max_sum, max_name = counts[j], j
 print(max_name)</code></pre>
-
-<p>总结：输出最多的方式有两种，一种是根据value的大小来直接利用函数排序，再输出最开头或者最<br>后的key，另一种是直接把每个value对比，再用变量记录每次比较后的最大所对应的key，<br>在输出key。</p>
+<p>总结：输出最多的方式有两种，一种是根据value的大小来直接利用函数排序，再输出最开头或者最<br>
+后的key，另一种是直接把每个value对比，再用变量记录每次比较后的最大所对应的key，<br>
+在输出key。</p>
 
             </div>
             <hr>

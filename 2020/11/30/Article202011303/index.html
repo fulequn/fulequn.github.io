@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">编码实现全连接神经网络</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="layers-py"><a href="#layers-py" class="headerlink" title="layers.py"></a>layers.py</h2><p>首先实现神经网络中仿射层、ReLU层以及组合单层神经元。</p>
+              <h2 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h2>
+<p>首先实现神经网络中仿射层、ReLU层以及组合单层神经元。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -419,8 +424,8 @@
     dx /= N
 
     <span class="hljs-keyword">return</span> loss, dx</code></pre>
-
-<h2 id="shallow-layer-net-py"><a href="#shallow-layer-net-py" class="headerlink" title="shallow_layer_net.py"></a>shallow_layer_net.py</h2><p>实现浅层神经网络</p>
+<h2 id="shallow_layer_netpy"><a class="markdownIt-Anchor" href="#shallow_layer_netpy"></a> shallow_layer_net.py</h2>
+<p>实现浅层神经网络</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> .layers <span class="hljs-keyword">import</span> *
@@ -430,7 +435,7 @@
 <span class="hljs-string">    浅层全连接神经网络，其中隐藏层使用ReLU作为激活函数，输出层使用softmax作为分类器</span>
 <span class="hljs-string">    该网络结构应该为     affine - relu -affine - softmax</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
-
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, input_dim=<span class="hljs-number">3</span>*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>, hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>,</span></span>
 <span class="hljs-function"><span class="hljs-params">               weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span></span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
@@ -458,9 +463,9 @@
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                           结束编码                                       #</span>
         <span class="hljs-comment">############################################################################</span>
-
-
-
+    
+    
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        计算数据X的损失值以及梯度.</span>
@@ -484,7 +489,7 @@
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment"># 第1层是affine和relu的组合层</span>
         out1, cache1 = affine_relu_forward(X, self.params[<span class="hljs-string">&#x27;W1&#x27;</span>], self.params[<span class="hljs-string">&#x27;b1&#x27;</span>])
-        <span class="hljs-comment"># 第2层是affine层</span>
+		<span class="hljs-comment"># 第2层是affine层</span>
         scores, cache2 = affine_forward(out1, self.params[<span class="hljs-string">&#x27;W2&#x27;</span>], self.params[<span class="hljs-string">&#x27;b2&#x27;</span>])
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                            结束编码                                     #</span>
@@ -541,7 +546,7 @@
         train_acc_history = []  <span class="hljs-comment">#训练精度</span>
         val_acc_history = []  <span class="hljs-comment">#记录精度</span>
         best_val=<span class="hljs-number">-1</span>  <span class="hljs-comment">#记录最佳精度</span>
-
+        
         <span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> range(num_iters):
           X_batch = <span class="hljs-literal">None</span>
           y_batch = <span class="hljs-literal">None</span>
@@ -581,8 +586,8 @@
           <span class="hljs-string">&#x27;val_acc_history&#x27;</span>: val_acc_history,
           <span class="hljs-string">&#x27;best_val_acc&#x27;</span>:best_val
         &#125;
-
-
+    
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict</span>(<span class="hljs-params">self, X</span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        Inputs:</span>
@@ -597,8 +602,8 @@
         <span class="hljs-comment"># 选择可能性最大的类别作为该样本的分类</span>
         y_pred = np.argmax(scores, axis=<span class="hljs-number">1</span>)
         <span class="hljs-keyword">return</span> y_pred</code></pre>
-
-<h2 id="fc-net-py"><a href="#fc-net-py" class="headerlink" title="fc_net.py"></a>fc_net.py</h2><p>实现深层全连接网络。</p>
+<h2 id="fc_netpy"><a class="markdownIt-Anchor" href="#fc_netpy"></a> fc_net.py</h2>
+<p>实现深层全连接网络。</p>
 <pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> .layers <span class="hljs-keyword">import</span> *
@@ -641,7 +646,7 @@
         <span class="hljs-comment">############################################################################</span>
 
 
-
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        计算数据X的损失值以及梯度.</span>
@@ -728,7 +733,7 @@
 
             X_batch = <span class="hljs-literal">None</span>
             y_batch = <span class="hljs-literal">None</span>
-
+            
             sample_index = np.random.choice(num_train, batch_size, replace=<span class="hljs-literal">True</span>)
             X_batch = X[sample_index, :]  <span class="hljs-comment"># (batch_size,D)</span>
             y_batch = y[sample_index]  <span class="hljs-comment"># (1,batch_size)</span>
@@ -736,7 +741,7 @@
             <span class="hljs-comment">#计算损失以及梯度</span>
             loss, grads = self.loss(X_batch, y=y_batch)
             loss_history.append(loss)
-
+            
             <span class="hljs-comment">#修改权重</span>
             <span class="hljs-comment">############################################################################</span>
             <span class="hljs-comment">#                    任务：修改深层网络的权重                              #</span>
@@ -767,7 +772,7 @@
           <span class="hljs-string">&#x27;val_acc_history&#x27;</span>: val_acc_history,
           <span class="hljs-string">&#x27;best_val_acc&#x27;</span>:best_val
         &#125;
-
+    
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict</span>(<span class="hljs-params">self, X</span>):</span>
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        Inputs:</span>
@@ -794,7 +799,6 @@
         <span class="hljs-comment">###########################################################################</span>
         <span class="hljs-keyword">return</span> y_pred
 </code></pre>
-
 
             </div>
             <hr>

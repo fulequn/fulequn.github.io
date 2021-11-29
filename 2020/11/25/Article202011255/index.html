@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -218,7 +222,8 @@
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjf3151731373/article/details/103293471">(1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客</a></p>
 </blockquote>
-<h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):</span>
+<h2 id="第一种"><a class="markdownIt-Anchor" href="#第一种"></a> 第一种</h2>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):</span>
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    使用显式循环版本计算Softmax损失函数</span>
 <span class="hljs-string">    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。</span>
@@ -263,11 +268,11 @@
     <span class="hljs-comment"># 使用平均梯度，再引入正则化</span>
     dW = dW/num_train+reg*W
     <span class="hljs-keyword">return</span> loss, dW</code></pre>
-
 <p>结果如下：</p>
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211023202454.png" srcset="/img/loading.gif" alt="1"></p>
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211023203046.png" srcset="/img/loading.gif" alt="2"></p>
-<h2 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h2><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):</span>
+<h2 id="第二种"><a class="markdownIt-Anchor" href="#第二种"></a> 第二种</h2>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):</span>
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    使用显式循环版本计算Softmax损失函数</span>
 <span class="hljs-string">    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。</span>
@@ -312,7 +317,6 @@
     <span class="hljs-comment">#                           结束编码                                        #</span>
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-keyword">return</span> loss, dW</code></pre>
-
 <p>结果如下：</p>
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211023202031.png" srcset="/img/loading.gif" alt="3"></p>
 <p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211023203700.png" srcset="/img/loading.gif" alt="4"></p>

@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -171,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      434 字
+      435 字
     </span>
   
 
@@ -219,7 +223,8 @@
 <p>[OSError: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29695701/article/details/88582095">E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a_Learning-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34621022/article/details/106572517">(1条消息) 解决Error: Couldn t link model to en_core_web_sm_椰楠liu的博客-CSDN博客</a></p>
 </blockquote>
-<h3 id="Python-package-or-a-valid-path-to-a-data-directory"><a href="#Python-package-or-a-valid-path-to-a-data-directory" class="headerlink" title="Python package or a valid path to a data directory."></a>Python package or a valid path to a data directory.</h3><p><strong>问题描述</strong>：</p>
+<h3 id="python-package-or-a-valid-path-to-a-data-directory"><a class="markdownIt-Anchor" href="#python-package-or-a-valid-path-to-a-data-directory"></a> Python package or a valid path to a data directory.</h3>
+<p><strong>问题描述</strong>：</p>
 <pre><code class="hljs bash">Namespace(afn=<span class="hljs-string">&#x27;gelu&#x27;</span>, analysis=True, attn_pdrop=0.1, b1=0.9, b2=0.999, bpe_path=<span class="hljs-string">&#x27;model/vocab_40000.bpe&#x27;</span>, clf_pdrop=0.1, data_dir=<span class="hljs-string">&#x27;/ROCStoriesCloseTest&#x27;</span>, dataset=<span class="hljs-string">&#x27;rocstories&#x27;</span>, desc=<span class="hljs-string">&#x27;rocstories&#x27;</span>, e=1e-08, embd_pdrop=0.1, encoder_path=<span class="hljs-string">&#x27;model/encoder_bpe_40000.json&#x27;</span>, l2=0.01, lm_coef=0.5, log_dir=<span class="hljs-string">&#x27;log/&#x27;</span>, lr=6.25e-05, lr_schedule=<span class="hljs-string">&#x27;warmup_linear&#x27;</span>, lr_warmup=0.002, max_grad_norm=1, n_batch=8, n_ctx=512, n_embd=768, n_gpu=4, n_head=12, n_iter=3, n_layer=12, n_transfer=12, opt=<span class="hljs-string">&#x27;adam&#x27;</span>, resid_pdrop=0.1, save_dir=<span class="hljs-string">&#x27;save/&#x27;</span>, seed=42, submission_dir=<span class="hljs-string">&#x27;submission/&#x27;</span>, submit=True, vector_l2=False)
 Traceback (most recent call last):
   File <span class="hljs-string">&quot;train.py&quot;</span>, line 366, <span class="hljs-keyword">in</span> &lt;module&gt;
@@ -231,14 +236,18 @@ Traceback (most recent call last):
   File <span class="hljs-string">&quot;/anaconda3/lib/python3.5/site-packages/spacy/util.py&quot;</span>, line 119, <span class="hljs-keyword">in</span> load_model
     raise IOError(Errors.E050.format(name=name))
 OSError: [E050] Can<span class="hljs-string">&#x27;t find model &#x27;</span>en<span class="hljs-string">&#x27;. It doesn&#x27;</span>t seem to be a shortcut link, a Python package or a valid path to a data directory.</code></pre>
-
 <ul>
 <li><strong>解决办法</strong>：</li>
 </ul>
 <pre><code class="hljs bash">$ python3 -m spacy download en</code></pre>
-
 <p>这个时候，如果我们不是管理员用户还会出现另一个问题。</p>
-<h3 id="Error-Couldn’t-link-model-to-‘en-core-web-sm’"><a href="#Error-Couldn’t-link-model-to-‘en-core-web-sm’" class="headerlink" title="Error: Couldn’t link model to ‘en_core_web_sm’"></a>Error: Couldn’t link model to ‘en_core_web_sm’</h3><p>使用Anaconda提供的conda prompt下载python -m spacy download en以及python -m spacy download de时出现错误<br><strong>Error: Couldn’t link model to ‘en_core_web_sm’</strong><br><img src="/2020/11/18/Article202011182/1.png" srcset="/img/loading.gif" alt="1"><br>一开始也没有仔细阅读错误提示，直接百度发现没什么可以用的解决方案，仔细一读后发现解决十分简单。<br><strong>解决方案：在打开prompt的时候以管理员的身份运行。</strong><br><img src="/2020/11/18/Article202011182/2.png" srcset="/img/loading.gif" alt="2"></p>
+<h3 id="error-couldnt-link-model-to-en_core_web_sm"><a class="markdownIt-Anchor" href="#error-couldnt-link-model-to-en_core_web_sm"></a> Error: Couldn’t link model to ‘en_core_web_sm’</h3>
+<p>使用Anaconda提供的conda prompt下载python -m spacy download en以及python -m spacy download de时出现错误<br>
+<strong>Error: Couldn’t link model to 'en_core_web_sm’</strong><br>
+<img src="/2020/11/18/Article202011182/1.png" srcset="/img/loading.gif" alt="1"><br>
+一开始也没有仔细阅读错误提示，直接百度发现没什么可以用的解决方案，仔细一读后发现解决十分简单。<br>
+<strong>解决方案：在打开prompt的时候以管理员的身份运行。</strong><br>
+<img src="/2020/11/18/Article202011182/2.png" srcset="/img/loading.gif" alt="2"></p>
 
             </div>
             <hr>

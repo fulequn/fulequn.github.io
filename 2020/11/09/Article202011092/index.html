@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">Hbase开机自启动实现</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>1.在/etc/init.d路径下面创建一个名为hbase的文件<br>添加如下内容，保存退出。</p>
+              <p>1.在/etc/init.d路径下面创建一个名为hbase的文件<br>
+添加如下内容，保存退出。</p>
 <p>这里的HBASE_HOME写自己的HBASE的安装路径</p>
 <pre><code class="hljs awk"><span class="hljs-comment">#!/bin/bash</span>
 
@@ -239,22 +244,21 @@ case <span class="hljs-string">&quot;$1&quot;</span> <span class="hljs-keyword">
 
 esac
 <span class="hljs-keyword">exit</span> <span class="hljs-number">0</span></code></pre>
-
 <ol start="3">
-<li><p>对hbase文件进行授权</p>
-<pre><code class="hljs angelscript">chmod <span class="hljs-number">777</span> hbase</code></pre>
-</li>
-<li><p>启动、关闭、重启hbase服务</p>
-<pre><code class="hljs awk">service hbase start   <span class="hljs-regexp">//</span> 启动hbase服务
+<li>对hbase文件进行授权</li>
+</ol>
+  <pre><code class="hljs angelscript">chmod <span class="hljs-number">777</span> hbase</code></pre>
+<ol start="4">
+<li>启动、关闭、重启hbase服务</li>
+</ol>
+  <pre><code class="hljs awk">service hbase start   <span class="hljs-regexp">//</span> 启动hbase服务
 service hbase stop    <span class="hljs-regexp">//</span> 关闭hbase服务
 service hbase restart <span class="hljs-regexp">//</span> 重启hbase服务</code></pre>
-</li>
-<li><p>设置开启启动或不启动hbase服务</p>
-<pre><code class="hljs awk">chkconfig hbase on    <span class="hljs-regexp">//</span> 设置开机启动
-chkconfig hbase off   <span class="hljs-regexp">//</span> 关闭开机启动</code></pre>
-
-</li>
+<ol start="5">
+<li>设置开启启动或不启动hbase服务</li>
 </ol>
+  <pre><code class="hljs awk">chkconfig hbase on    <span class="hljs-regexp">//</span> 设置开机启动
+chkconfig hbase off   <span class="hljs-regexp">//</span> 关闭开机启动</code></pre>
 
             </div>
             <hr>

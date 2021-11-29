@@ -49,7 +49,11 @@
 
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
 
 
 <body>
@@ -214,7 +218,8 @@
             <h1 style="display: none">Java中Hex（十六进制）和byte[]之间相互转化</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="Hex转成byte"><a href="#Hex转成byte" class="headerlink" title="Hex转成byte[]"></a>Hex转成byte[]</h1><p>方法一</p>
+              <h1 id="hex转成byte"><a class="markdownIt-Anchor" href="#hex转成byte"></a> Hex转成byte[]</h1>
+<p>方法一</p>
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * hex转byte数组</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> hex</span>
@@ -232,8 +237,8 @@
         &#125;
         <span class="hljs-keyword">return</span> ret;
     &#125;</code></pre>
-
-<h1 id="byte-转Hex"><a href="#byte-转Hex" class="headerlink" title="byte[]转Hex"></a>byte[]转Hex</h1><p>方法一</p>
+<h1 id="byte转hex"><a class="markdownIt-Anchor" href="#byte转hex"></a> byte[]转Hex</h1>
+<p>方法一</p>
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * byte数组转hex</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bytes</span>
@@ -248,10 +253,8 @@
         &#125;
         <span class="hljs-keyword">return</span> sb.toString().trim();
     &#125;</code></pre>
-
 <p>方法二</p>
 <pre><code class="hljs java">String.format(<span class="hljs-string">&quot;%02x&quot;</span>, oneByte);</code></pre>
-
 
             </div>
             <hr>
