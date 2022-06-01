@@ -180,26 +180,25 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/20/Article202010201/">更改word中所有英文字体</a>
+        <a href="/2020/11/21/Article202011214/">更改Spyder的Python指定版本</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/20/Article202010201/">
+        <a href="/2020/11/21/Article202011214/">
           
           
             
           
           参考链接：
-1.进入word 2016软件。
+spyder指定python环境_我自横刀向天笑，笑完我就去睡觉-CSDN博客
+打开Spyder，Tools-&gt;Preferences-&gt;Python interpreter，将解释器换成用户需要的解释器即可。
 
-2.拖动光标将要更改的文字全部选中。
+但是console可能出现错误，如下图所示。
 
-3.点击鼠标右键，点击字体，进入字体设置选项框。或者是从工具栏中点击拓展的。
-
-
-4.在想西文字体一栏中选择想更改的字体类型，点击确定，此时可以看到所有英文字体都已经改变，但中文字体不变。
-
-
+按照提示的语句直接复制，可能会出现错误。
+因为那个‑和咱们的-其实是不一样的
+所以要把那个‑改成负号就行：
+pip
         </a>
       </p>
 
@@ -207,24 +206,102 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-20 20:43" pubdate>
-              2020-10-20
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
             </time>
           </div>
         
         
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/21/Article202011213/">Kubernetes调度器插件</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/21/Article202011213/">
+          
+          
+            
+          
+          参考链接：
+https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler/framework/plugins
+ Scheduler Framework Plugins（调度程序框架插件）
+ Creating a new in-tree plugin（创建一个新的树内插件）
+Read the docs to understand
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
           <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Word/">Word</a>
-            
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
+            </time>
           </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/21/Article202011212/">罗技K380连接windwos10电脑</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/21/Article202011212/">
+          
+          
+            
+          
+          需要准备打的东西：
+
+Logitech k380
+笔记本电脑
+
+我们需要进行的操作：
+
+保证无线键盘是充满电的。
+打开电脑的蓝牙开关
+无线键盘打开开关，k380支持三台设备，我们可以选择自己想要的数字键，然后长按，该键开始闪烁。
+在windwos10的设置中添加蓝牙设备
+最后输入对应的PIN码即可完成连接
+
+
+参考链接：
+https://jingyan.baidu.com/article/4d58
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
+            </time>
+          </div>
+        
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Word/">Word</a>
+              <a href="/tags/life/">life</a>
             
           </div>
         
@@ -237,21 +314,20 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/19/Article202010192/">Your password does not satisfy the current policy requirements</a>
+        <a href="/2020/11/21/Article202011211/">Article202011211</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/19/Article202010192/">
+        <a href="/2020/11/21/Article202011211/">
           
           
             
           
-          
-参考链接：
-https://blog.csdn.net/hello_world_qwp/article/details/79551789
-
-关于这个问题是在 《 基于MySQL Yum存储库在Linux-7.2上安装MySQL-5.7.21数据库服务（实战篇） 》 时遇到的问题，这是 mysql 初始化时，使用临时密码，修改自定义密码时，由于自定义密码比较简单，就出现了不符合密码策略的问题。
-密
+          1.Spark与Hadoop的对比
+总体而言，Hadoop中的MapReduce计算框架主要存在以下缺点：
+表达能力有限。计算都必须转化为Map和Reduce两个操作，但这并不适合所有的情况，难以描述复杂的数据处理过程；
+磁盘I/O开销大。每次执行时都需要从硬盘读取数据，并且在计算完成后需要将中间过程写入到磁盘中，I/O开销大；
+延迟高。一次计算可能需要分解成一系列按顺序执行的MapReduce任
         </a>
       </p>
 
@@ -259,24 +335,93 @@ https://blog.csdn.net/hello_world_qwp/article/details/79551789
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-19 21:35" pubdate>
-              2020-10-19
+            <time datetime="2020-11-21 18:20" pubdate>
+              2020-11-21
             </time>
           </div>
         
         
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011184/">Article202011184</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011184/">
+          
+          
+            
+          
+          一、大数据技术概述
+1.请阐述大数据处理的基本流程？
+大数据的基本处理流程，主要包括数据采集、存储管理、处理分析、结果呈现等环节。因此，从数据分析全流程来看，大数据技术主要包括数据采集与预处理、数据存储和管理、数据处理与分析、数据可视化、数据安全与隐私保护等几个层面的内容。
+2.请阐述大数据的计算模式以及代表产品。
+批处理计算。批处理计算主要解决针对大规模数据的批量处理。MapReduce、Spa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
           <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Mysql/">Mysql</a>
-            
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:21" pubdate>
+              2020-11-18
+            </time>
           </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011183/">使用yolov5时出现ModuleNotFoundError:No module named ‘torch’</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011183/">
+          
+          
+            
+          
+          
+参考链接：
+Start Locally | PyTorch
+https://github.com/ultralytics/yolov5
+从零开始手把手教你利用yolov5训练自己的数据集(含coco128数据集/yolov5权重文件国内下载）更新于20200728_ai_faker的博客-CSDN博客_yolov5
+
+今天在使用git克隆下yolo v5的代码之后，由于之前安装了其他很多的库，所
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:17" pubdate>
+              2020-11-18
+            </time>
+          </div>
+        
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Mysql/">Mysql</a>
+              <a href="/tags/Error/">Error</a>
             
           </div>
         
@@ -289,23 +434,21 @@ https://blog.csdn.net/hello_world_qwp/article/details/79551789
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/19/Article202010191/">ambari-hdp平台安装过程中常见错误汇总和注意事项</a>
+        <a href="/2020/11/18/Article202011182/">Python编程遇到OSError:[E050] Can&#39;t find model &#39;en&#39;.</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/19/Article202010191/">
+        <a href="/2020/11/18/Article202011182/">
           
           
             
           
           
 参考链接：
-https://blog.csdn.net/qq_41712271/article/details/108700385
+[OSError: E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a_Learning-CSDN博客
+(1条消息) 解决Error: Couldn t link model to en_core_web_sm_椰楠liu的博客-CSDN博客
 
-1 HDP搭建好以后，安装目录在以下位置
-/usr/hdp/3.1.4.0-315
-2 网速不稳定，导致某些jar包不完整，个人推荐用FlashFXP
-解决办法：解压本地下载好的tar.gz，将相应的jar包重新上传，某些服务安装不成功，先重试下，还不行重新安装服
+ Pytho
         </a>
       </p>
 
@@ -313,8 +456,55 @@ https://blog.csdn.net/qq_41712271/article/details/108700385
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-19 21:35" pubdate>
-              2020-10-19
+            <time datetime="2020-11-18 00:10" pubdate>
+              2020-11-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Error/">Error</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/18/Article202011181/">Couldn&#39;t find field google.protobuf.DescriptorProto.ExtensionRange.options</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/18/Article202011181/">
+          
+          
+            
+          
+          
+参考链接：
+https://github.com/tensorflow/tensorflow/issues/12326
+(1条消息) TensorFlow KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”_u010187278的博客-CSDN博客
+
+ 问题描述
+
+pytho
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-18 00:09" pubdate>
+              2020-11-18
             </time>
           </div>
         
@@ -322,21 +512,74 @@ https://blog.csdn.net/qq_41712271/article/details/108700385
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
+              <a href="/categories/Tensorflow/">Tensorflow</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Tensorflow/">Tensorflow</a>
+            
+              <a href="/tags/Error/">Error</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/09/Article202011094/">HBase的hbase-site.xml文件配置详解</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/09/Article202011094/">
+          
+          
+            
+          
+          
+参考文献：
+hbase-site.xml 配置详解_ningxuezhu的专栏-CSDN博客
+
+该文档是用hbase默认配置文件生成的，文件源是 hbase-default.xml
+ hbase.rootdir
+这个目录是region server的共享目录，用来持久化HBase。URL需要是完全正确的，还要包含文件系统的scheme。例如，要表示hdfs中的’/hbase’目录，namenod
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
             
               <a href="/categories/Hadoop/">Hadoop</a>
             
+              <a href="/categories/Hadoop/HBase/">HBase</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Linux/">Linux</a>
+              <a href="/tags/Hadoop/">Hadoop</a>
             
-              <a href="/tags/Ambari/">Ambari</a>
-            
-              <a href="/tags/HDP/">HDP</a>
+              <a href="/tags/HBase/">HBase</a>
             
           </div>
         
@@ -349,186 +592,24 @@ https://blog.csdn.net/qq_41712271/article/details/108700385
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/10/17/Article202010174/">使用Linux的yum或者rpm来查找软件的位置</a>
+        <a href="/2020/11/09/Article202011093/">HBase Java API基本概念与使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010174/">
-          
-          
-            
-          
-          
-参考文章：
-https://zhidao.baidu.com/question/877081751423004492.html
-https://www.cnblogs.com/xy14/p/12410604.html
-
-之前一直疑惑, linux 上的软件, 都装在哪？
-
-自己不太会找
-用 find 找麻烦, 而且总会找漏
-所以最后, 基本只在 同事确认过 的目录内活动
-
- 查找 yum/rpm
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/17/Article202010173/">Python3出现AttributeError的错误</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010173/">
-          
-          
-            
-          
-          
-参考链接：https://blog.csdn.net/qq236237606/article/details/105347236/
-
- python3报错AttributeError: module ‘sys’ has no attribute ‘setdefaultencoding’
-Python 3 系统默认使用的就是utf-8编码，
-就不需要sys.setdefaultencoding(“
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/17/Article202010172/">使用pcolormesh绘制鸢尾花的分类图</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/17/Article202010172/">
-          
-          
-            
-          
-          代码
-# 参考 https://www.cnblogs.com/shenxiaolin/p/8857158.html , https://blog.csdn.net/liulina603/article/details/78676723
-from sklearn.linear_model import LogisticRegression  #导入逻辑回归模型
-import numpy as np
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-17 21:12" pubdate>
-              2020-10-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-              <a href="/categories/Python/Matplotlib/">Matplotlib</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/Matplotlib/">Matplotlib</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/16/Article202010161/">安装了sklearn(scikit-learn)但是报错ImportError:No module named &#39;sklearn.cross_validation&#39;</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/16/Article202010161/">
+        <a href="/2020/11/09/Article202011093/">
           
           
             
           
           
 参考链接：
-https://blog.csdn.net/zhangpeterx/article/details/83189192
+Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)
 
-sklearn.cross_validation是sklearn老版本的模块，新版本都迁移到了
-sklearn.model_selection
-修改代码为from sklearn. model_selection import train_test_split 即可
+ 一、几个主要 Hbase API 类和数据模型之间的对应关系
+
+1、 HBaseAdmin
+关系： org.apache.hadoop.hbase.client.HBaseAdmin
+作用：提供了一个接口来管理 HBase 数据库的表信息。它提供的方法包括：创建表，删除表，列出表项
         </a>
       </p>
 
@@ -536,8 +617,8 @@ sklearn.model_selection
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-16 20:03" pubdate>
-              2020-10-16
+            <time datetime="2020-11-09 23:35" pubdate>
+              2020-11-09
             </time>
           </div>
         
@@ -545,75 +626,9 @@ sklearn.model_selection
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Python/">Python</a>
+              <a href="/categories/Hadoop/">Hadoop</a>
             
-              <a href="/categories/Python/sklearn/">sklearn</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/16/Article202010171/">Vmware Station中实现CentOS 7 上网的两种方式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/16/Article202010171/">
-          
-          
-            
-          
-          环境需要：
-
-VMware Workstation Pro 15
-CentOS 7系统虚拟机
-本机是Windows 10系统
-
-我们可以使用以下两种方式来进行网络连接，但是无论哪种都必须需要本机能联网：
-
-NAT模式
-桥接模式
-
- NAT模式
- 1.VMware Station设置
-首先，在VMware Satation中先设置虚拟机的网络适配器为NAT模式。
-
-然后进行网络适配器的设置，这个必须
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-16 20:03" pubdate>
-              2020-10-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-              <a href="/categories/Linux/CentOS/">CentOS</a>
+              <a href="/categories/Hadoop/HBase/">HBase</a>
             
           </div>
         
@@ -621,108 +636,11 @@ NAT模式
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Linux/">Linux</a>
+              <a href="/tags/Java/">Java</a>
             
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/15/Article202010151/">ImportError：DLL load failed：找不到指定模块</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/15/Article202010151/">
-          
-          
+              <a href="/tags/Hadoop/">Hadoop</a>
             
-          
-          
-参考链接：
-https://blog.csdn.net/weixin_44663675/article/details/91957566?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-12.nonecase&amp;depth_1-utm_source=distribute.pc_
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-15 21:05" pubdate>
-              2020-10-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/10/13/Article202010136/">（线性回归）R语言的模型诊断图（Residuals vs Fitted， Normal QQ， Scale-Location， Residuals Leverage）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/10/13/Article202010136/">
-          
-          
-            
-          
-          
-参考链接：
-https://www.pianshen.com/article/9572273081/
-
-线性回归，是概率统计学里最重要的统计方法，也是机器学习中一类非常重要的算法。线性模型简单理解非常容易，但是内涵是非常深奥的。尤其是线性回归模型中的Diagnostics plot的阅读与理解一直被认为是线性回归中的一个难点。
-在任何线性模型中，能够直接“lm”（模型有意义），既要考虑各个参数的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-13 20:52" pubdate>
-              2020-10-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/R/">R</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/R/">R</a>
+              <a href="/tags/HBase/">HBase</a>
             
           </div>
         
@@ -734,7 +652,7 @@ https://www.pianshen.com/article/9572273081/
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

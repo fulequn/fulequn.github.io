@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Fulequn">
   <meta name="keywords" content="">
-  <title>Article202111294 - FuLeQun&#39;s Blog</title>
+  <title>Ubuntu16桌面版卸载不必要的自带软件 - FuLeQun&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      258 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -215,15 +215,67 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Article202111294</h1>
+            <h1 style="display: none">Ubuntu16桌面版卸载不必要的自带软件</h1>
             
             <div class="markdown-body" id="post-body">
-              
+              <blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/67a86505279f">Ubuntu 16.04桌面版卸载不必要的自带软件 - 简书 (jianshu.com)</a></p>
+</blockquote>
+<h4 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h4>
+<p>由于Ubuntu自带了一些例如Firefox、LibreOffice软件，占用系统大量空间，所以需要将其删除。</p>
+<h4 id="卸载方法"><a class="markdownIt-Anchor" href="#卸载方法"></a> 卸载方法</h4>
+<p>1.卸载LibreOffice</p>
+<pre><code class="hljs csharp">sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">remove</span> libreoffice-common</code></pre>
+<p>2.删除Amazon广告图标</p>
+<pre><code class="hljs undefined">sudo rm -f &#x2F;usr&#x2F;share&#x2F;applications&#x2F;com.canonical.launcher.amazon.desktop</code></pre>
+<pre><code class="hljs cpp">sudo rm -f /usr/share/applications/ubuntu-amazon-<span class="hljs-keyword">default</span>.desktop</code></pre>
+<p>3.其他软件</p>
+<pre><code class="hljs csharp">sudo apt-<span class="hljs-keyword">get</span> -y purge thunderbird*
+<span class="hljs-meta">#邮件</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge firefox
+<span class="hljs-meta">#火狐浏览器</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge deja-dup
+<span class="hljs-meta">#备份</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge simple-scan
+<span class="hljs-meta">#扫描</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge hplip* 
+<span class="hljs-meta">#打印</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge printer-driver* 
+<span class="hljs-meta">#打印驱动</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge rhythmbox* 
+<span class="hljs-meta">#音乐播放</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge gedit* 
+<span class="hljs-meta">#文本编辑</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge libreoffice* 
+<span class="hljs-meta">#办公套件</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge gnome-orca 
+<span class="hljs-meta">#屏幕阅读</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge onboard 
+<span class="hljs-meta">#屏幕键盘</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge mahjongg 
+<span class="hljs-meta">#对对碰</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge aisleriot 
+<span class="hljs-meta">#纸牌王</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge gnome-sudoku 
+<span class="hljs-meta">#数独</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge gnomine 
+<span class="hljs-meta">#扫雷</span>
+sudo apt-<span class="hljs-keyword">get</span> -y purge wodim 
+<span class="hljs-meta">#命令刻</span></code></pre>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
                 
               </div>
               
@@ -234,12 +286,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/01/08/Article202201081/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Anaconda安装只有部分文件夹</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
                       <a href="/2021/11/29/Article202111293/">
-                        <span class="hidden-mobile">Article202111293</span>
+                        <span class="hidden-mobile">ubuntu的kylin16版本安装OpenAI gym</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -411,7 +469,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Article202111294&nbsp;",
+        "Ubuntu16桌面版卸载不必要的自带软件&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
