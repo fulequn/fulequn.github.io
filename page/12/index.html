@@ -180,20 +180,25 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/26/Article202009261/">“带BOM的UTF-8”和“无BOM的UTF-8”的区别</a>
+        <a href="/2020/09/28/Article202009285/">R在函数中定义全局变量</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/26/Article202009261/">
+        <a href="/2020/09/28/Article202009285/">
           
           
             
           
           
-参考链接：https://www.zhihu.com/question/20167122/answer/14194448
+参考链接：
+https://blog.csdn.net/weixin_43677260/article/details/86615923
 
-UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。
-所以不含 BOM 的 UTF-8 才是标准形式，在 UTF-8 文件中放置 BOM 主要是微软的习惯（顺便提一下：把带有 BOM 的小端序 UTF-16 称作「Unicode」而又不
+R语言中，定义全局变量的方法为：a&lt;&lt;-1。
+在函数内部定义的变量是不会在Global Environment出现的，例如：
+sigmoid&lt;-function(x)
+&#123;
+    a = 1
+    return(1/(1+exp
         </a>
       </p>
 
@@ -201,8 +206,8 @@ UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-26 11:43" pubdate>
-              2020-09-26
+            <time datetime="2020-09-28 07:54" pubdate>
+              2020-09-28
             </time>
           </div>
         
@@ -210,7 +215,7 @@ UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/CharSet/">CharSet</a>
+              <a href="/categories/R/">R</a>
             
           </div>
         
@@ -220,7 +225,7 @@ UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。
             
               <a href="/tags/Knowledge/">Knowledge</a>
             
-              <a href="/tags/CharSet/">CharSet</a>
+              <a href="/tags/R/">R</a>
             
           </div>
         
@@ -233,22 +238,24 @@ UTF-8 不需要 BOM，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/24/Article202009244/">Python人名出现次数最多统计</a>
+        <a href="/2020/09/28/Article202009284/">R语言-与坐标轴相关（标签，范围，原点位置）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/24/Article202009244/">
+        <a href="/2020/09/28/Article202009284/">
           
           
             
           
           
-原文链接：https://blog.csdn.net/weixin_44591177/article/details/99698117
+原文链接
+https://www.freesion.com/article/3927842113/#1_xy_4
 
-问题：输出字符串中出现最多的名字
-s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 金轮法王 乔峰 杨过 洪七公 郭靖 
-       杨逍 鳌拜 殷天正 段誉 杨逍 慕容复 阿紫 慕容复 郭芙 乔峰 令狐冲 郭芙 
+ 问题
+ 1. 画图的时候，明明设置了X轴Y轴的范围，为什么坐标轴的长度还是会多出一块呢？
+失败案例：plot(runif(10,0,10),type=&quot;l&quot;,xlim=c(0,10),ylim=c(0,10))
 
+ 2. 想使原点在图中间或使坐标在图中间交汇，
         </a>
       </p>
 
@@ -256,8 +263,8 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-24 21:08" pubdate>
-              2020-09-24
+            <time datetime="2020-09-28 07:54" pubdate>
+              2020-09-28
             </time>
           </div>
         
@@ -265,7 +272,7 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Python/">Python</a>
+              <a href="/categories/R/">R</a>
             
           </div>
         
@@ -275,7 +282,7 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
             
               <a href="/tags/Knowledge/">Knowledge</a>
             
-              <a href="/tags/Python/">Python</a>
+              <a href="/tags/R/">R</a>
             
           </div>
         
@@ -288,22 +295,24 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/24/Article202009014/">使用plot以及scatter来绘制散点图，同时改变点的大小</a>
+        <a href="/2020/09/28/Article202009283/">Python中的Matplotlib绘制多图并合并展示</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/24/Article202009014/">
+        <a href="/2020/09/28/Article202009283/">
           
           
             
           
           
-参考链接：https://blog.csdn.net/Poul_henry/article/details/88602806
+参考链接：
+https://www.cnblogs.com/dengfaheng/p/12720431.html
 
- plot()
-根据关于matplotlip.pyplot的官方文档：pyplot，其plot部分的解释plot()的作用是画出线条和线条上的标记：
-大致意思就是：
-将线条和/或标记绘制到轴上。args 是一个可变长度参数，允许使用可选格式字符串进行多个 x、y 对。例
+ 前言
+大家好，最近在研究在搞Python的大作业，有个需求就是利用Matplotlib画几个像模像样的统计图然后合并在一张图中，因为此前很少用这方面的东西，所以折腾了不少时间，今天介绍一下。
+
+ subplot多合一
+其实，利用python 的matplotlib包下的subpl
         </a>
       </p>
 
@@ -311,47 +320,8 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-24 21:07" pubdate>
-              2020-09-24
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/09/24/Article202009243/">使用plot以及scatter来绘制散点图，同时改变点的大小</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/09/24/Article202009243/">
-          
-          
-            
-          
-          
-参考链接：https://blog.csdn.net/Poul_henry/article/details/88602806
-
- plot()
-根据关于matplotlip.pyplot的官方文档：pyplot，其plot部分的解释plot()的作用是画出线条和线条上的标记：
-大致意思就是：
-将线条和/或标记绘制到轴上。args 是一个可变长度参数，允许使用可选格式字符串进行多个 x、y 对。例
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-24 21:07" pubdate>
-              2020-09-24
+            <time datetime="2020-09-28 07:54" pubdate>
+              2020-09-28
             </time>
           </div>
         
@@ -369,9 +339,9 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Knowledge/">Knowledge</a>
-            
               <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
             
               <a href="/tags/Matplotlib/">Matplotlib</a>
             
@@ -386,29 +356,23 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/24/Article202009242/">Python遍历文件夹和读写文件的方法</a>
+        <a href="/2020/09/28/Article202009282/">R语言DataFrame数据框类型的使用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/24/Article202009242/">
+        <a href="/2020/09/28/Article202009282/">
           
           
             
           
           
-参考链接：https://www.cnblogs.com/jackchiang/p/4605327.html
+参考链接
+https://www.cnblogs.com/studyzy/p/4316118.html
+https://blog.csdn.net/qq_34941023/article/details/51448770
+https://www.jianshu.com/p/c3eba7553ae5
 
- 需求分析
-1、读取指定目录下的所有文件
-2、读取指定文件，输出文件内容
-3、创建一个文件并保存到指定目录
- 实现过程
-#-*- coding: UTF-8 -*- 
-
-&#x27;&#x27;&#x27;
-1、读取指定目录下的所有文件
-2、读取指定文件，输出文件内容
-3、创建一个文件
+ 含义
+Data Frame一般被翻译为数据框，感觉就像是R中的表，由行和列组成，与Matrix
         </a>
       </p>
 
@@ -416,125 +380,8 @@ s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-24 20:55" pubdate>
-              2020-09-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Knowledge/">Knowledge</a>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/09/24/Article202009241/">NumPy库入门</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/09/24/Article202009241/">
-          
-          
-            
-          
-           数据的维度
-从一个数据到一组数据
-
-一个数据表达一个含义
-一组数据表达一个或多个含义
-
-维度：一组数据的组织形式
-
-一维数据由对等关系的有序或无序数据构成，采用线性方式组织，对应列表、数组和集合等概念。
-列表：数据类型可以不同；数组：数据类型相同
-二维数据由多个一维数据构成，是一维数据的组合形式。
-表格是典型的二维数据。其中，表头是二维数据的一部分。
-
-高维数据仅利用最基本的二元关系展示数据间的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-24 20:54" pubdate>
-              2020-09-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-              <a href="/categories/Python/NumPy/">NumPy</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Knowledge/">Knowledge</a>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/NumPy/">NumPy</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/09/17/Article202009171/">R语言读写xls，xlsx文件</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/09/17/Article202009171/">
-          
-          
-            
-          
-           引言
-R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConnect，openxlsx等）
-其中，ROOBC包只能应用于32位的windows系统，xlsReadWrite只能从GitHub中获取，CRAN中不能直接获取，XLConnect需要依赖于java，且对大数据情况读取非常慢，所以我们使用xlsx，readxl，XLConnect来进行Excel类文件
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-17 20:56" pubdate>
-              2020-09-17
+            <time datetime="2020-09-28 07:52" pubdate>
+              2020-09-28
             </time>
           </div>
         
@@ -565,19 +412,22 @@ R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConn
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/16/Article202009161/">20200916Exam</a>
+        <a href="/2020/09/28/Article202009281/">Matplotlib中图层叠加问题</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/16/Article202009161/">
+        <a href="/2020/09/28/Article202009281/">
           
           
             
           
-           测验
-1.YAMLException: incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulate？
-2.执行命令hexo server，提示：Usage: hexo …. 提示找不到该指令？
-3.执行：hexo server，启动了服务，在浏览器输入本地地址访问，看到白板和Canno
+          
+参考链接：https://blog.csdn.net/sunsoda/article/details/82431770
+
+ matplotlib中的多图层叠加的问题
+ 问题的引出
+
+老板提出希望在之前绘制的降水分布图基础上，叠加上一下线路、变电站的分布。简单一想这个任务很简单，只需要知道线路，变电站经纬度，再叠加到图层即可。但是在实际操作却遇到一个小问题，即如何保证叠加的顺序，通过查阅matpl
         </a>
       </p>
 
@@ -585,17 +435,30 @@ R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConn
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-16 21:56" pubdate>
-              2020-09-16
+            <time datetime="2020-09-28 07:49" pubdate>
+              2020-09-28
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/Matplotlib/">Matplotlib</a>
+            
+          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/exam/">exam</a>
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
+            
+              <a href="/tags/Matplotlib/">Matplotlib</a>
             
           </div>
         
@@ -608,22 +471,23 @@ R语言读写excel文件时，可以使用多个package（readxl，xlsx，XLConn
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/12/Article202009123/">pandas系列 read_csv和to_csv的使用</a>
+        <a href="/2020/09/26/Article202009268/">Python设置默认字典</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/12/Article202009123/">
+        <a href="/2020/09/26/Article202009268/">
           
           
             
           
           
-参考链接：
-https://blog.csdn.net/u010801439/article/details/80033341
-https://blog.csdn.net/toshibahuai/article/details/79034829
-https://blog.csdn.net/zhuzuwei/article/details/80890007
+参考链接：https://www.cnblogs.com/wangyueyouyi/p/9561057.html
 
- read_csv和to_csv两大方
+访问字典中某个‘键’时，若键不存在则会报错，比如
+&gt;&gt;&gt; dic = &#123;&#x27;a&#x27; : 1&#125;
+&gt;&gt;&gt; dic[&#x27;b&#x27;]
+Traceback (most recent call last):
+
         </a>
       </p>
 
@@ -631,8 +495,131 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-12 22:41" pubdate>
-              2020-09-12
+            <time datetime="2020-09-26 11:48" pubdate>
+              2020-09-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/09/26/Article202009267/">Matplotlib中xlim，ylim，axis结构与用法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/09/26/Article202009267/">
+          
+          
+            
+          
+          
+参考链接：https://blog.csdn.net/The_Time_Runner/article/details/89928057
+
+
+
+ matplotlib.pyplot.xlim() 官方文档
+
+
+matplotlib.pyplot.xlim(*args, **kwargs)
+获取或者是设定x座标轴的范围，当前axes上的座标轴。
+有两种参数输入方式
+
+
+plt.xlim(num1, 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-26 11:48" pubdate>
+              2020-09-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/Matplotlib/">Matplotlib</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
+            
+              <a href="/tags/Matplotlib/">Matplotlib</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/09/26/Article202009266/">pandas按行按列遍历DataFrame</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/09/26/Article202009266/">
+          
+          
+            
+          
+          
+参考链接：https://blog.csdn.net/sinat_29675423/article/details/87972498
+
+遍历数据有以下三种方法：
+
+简单对上面三种方法进行说明：
+
+iterrows(): 按行遍历，将DataFrame的每一行迭代为(index, Series)对，可以通过row[name]对元素进行访问。
+itertuples(): 按行遍历，将DataFram
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-26 11:48" pubdate>
+              2020-09-26
             </time>
           </div>
         
@@ -650,9 +637,9 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Knowledge/">Knowledge</a>
-            
               <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
             
               <a href="/tags/Pandas/">Pandas</a>
             
@@ -667,16 +654,24 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/09/12/Article202009122/">R统计笔记（三） 分组统计的几种方法</a>
+        <a href="/2020/09/26/Article202009265/">pandas+matplotlib画图，两张图叠加</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/09/12/Article202009122/">
+        <a href="/2020/09/26/Article202009265/">
           
           
             
           
-          原文链接:https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2allsobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%8
+          
+参考链接：https://blog.csdn.net/o1101574955/article/details/51623018
+
+《python数据分析与挖掘实战》原书上的例子：
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+plt.rcParams[&#x27;font.sans-serif&#x
         </a>
       </p>
 
@@ -684,8 +679,8 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-12 22:41" pubdate>
-              2020-09-12
+            <time datetime="2020-09-26 11:48" pubdate>
+              2020-09-26
             </time>
           </div>
         
@@ -693,9 +688,11 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/R/">R</a>
+              <a href="/categories/Python/">Python</a>
             
-              <a href="/categories/R/%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/">分组统计</a>
+              <a href="/categories/Python/Pandas/">Pandas</a>
+            
+              <a href="/categories/Python/Matplotlib/">Matplotlib</a>
             
           </div>
         
@@ -703,9 +700,69 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/Python/">Python</a>
+            
               <a href="/tags/Knowledge/">Knowledge</a>
             
-              <a href="/tags/R/">R</a>
+              <a href="/tags/Pandas/">Pandas</a>
+            
+              <a href="/tags/Matplotlib/">Matplotlib</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/09/26/Article202009264/">Python操作DataFrame遇到TypeError异常</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/09/26/Article202009264/">
+          
+          
+            
+          
+           TypeError: ‘(slice(None, None, None), 1)’ is an invalid key
+可能是你操作的（df）是一个dataframe，应该先把它转化为ndarray，运用下面的语句
+df.values
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-26 11:48" pubdate>
+              2020-09-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/Pandas/">Pandas</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Knowledge/">Knowledge</a>
+            
+              <a href="/tags/Pandas/">Pandas</a>
             
           </div>
         
@@ -717,7 +774,7 @@ https://blog.csdn.net/zhuzuwei/article/details/80890007
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/11/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/13/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/11/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/13/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

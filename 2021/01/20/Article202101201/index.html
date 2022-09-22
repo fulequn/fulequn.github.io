@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fulequn">
+  <meta name="keywords" content="">
+  <title>Centos安装docker以及ServiceAccount - FuLeQun&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-01-20 16:21" pubdate>
+      2021年1月20日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      50
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Centos安装docker以及ServiceAccount</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="一-centos安装docker"><a class="markdownIt-Anchor" href="#一-centos安装docker"></a> 一、Centos安装docker</h1>
+<h2 id="1-使用官方安装脚本自动安装"><a class="markdownIt-Anchor" href="#1-使用官方安装脚本自动安装"></a> 1、使用官方安装脚本自动安装</h2>
+<p>安装命令如下：</p>
+<pre><code class="hljs livecodeserver">curl -fsSL <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.docker.com | bash -s docker <span class="hljs-comment">--mirror Aliyun</span></code></pre>
+<p>也可以使用国内 daocloud 一键安装命令：</p>
+<pre><code class="hljs vim">curl -sSL http<span class="hljs-variable">s:</span>//<span class="hljs-built_in">get</span>.daocloud.io/docker | <span class="hljs-keyword">sh</span></code></pre>
+<h2 id="2-docker-镜像加速"><a class="markdownIt-Anchor" href="#2-docker-镜像加速"></a> 2、Docker 镜像加速</h2>
+<p>国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：</p>
+<ul>
+<li>网易：<strong><a target="_blank" rel="noopener" href="https://hub-mirror.c.163.com/">https://hub-mirror.c.163.com/</a></strong></li>
+<li>阿里云：<strong>https://&lt;你的ID&gt;.mirror.aliyuncs.com</strong></li>
+<li>七牛云加速器：<strong><a target="_blank" rel="noopener" href="https://reg-mirror.qiniu.com">https://reg-mirror.qiniu.com</a></strong></li>
+</ul>
+<h3 id="21-ubuntu1604-debian8-centos7"><a class="markdownIt-Anchor" href="#21-ubuntu1604-debian8-centos7"></a> 2.1、Ubuntu16.04+、Debian8+、CentOS7</h3>
+<p>对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：</p>
+<pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;registry-mirrors&quot;</span>:[<span class="hljs-string">&quot;https://reg-mirror.qiniu.com/&quot;</span>]&#125;</code></pre>
+<p>之后重新启动服务：</p>
+<p>$ <strong>sudo</strong> systemctl daemon-reload<br>
+$ <strong>sudo</strong> systemctl restart docker</p>
+<h2 id="3-docker开机自启动"><a class="markdownIt-Anchor" href="#3-docker开机自启动"></a> 3、Docker开机自启动</h2>
+<p>如果不设置成开机自启动，那么每一次开启机器都需要手动start，因此我们设置成开机自启动</p>
+<pre><code class="hljs shell">systemctl enable docker
+systemctl is-enabled docker #检查是否为自启动，enbale则为已经设置成自启动</code></pre>
+<p>然后我们可以检查docker的各种信息。使用命令：</p>
+<pre><code class="hljs shell">docker system info</code></pre>
+<h2 id="4-出现的异常"><a class="markdownIt-Anchor" href="#4-出现的异常"></a> 4、出现的异常</h2>
+<h3 id="41-docker-cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-runningsee-docker-run-help"><a class="markdownIt-Anchor" href="#41-docker-cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-runningsee-docker-run-help"></a> 4.1、docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.See ‘docker run --help’.</h3>
+<p>一、</p>
+<p>因为，我忘记启动docker这个服务了。</p>
+<pre><code class="hljs crmsh">service docker <span class="hljs-literal">start</span></code></pre>
+<p>二、</p>
+<p>You need to add user into docker group. by ’ sudo gpasswd-a xxxx docker’(xxx is your user name)</p>
+<p>Then restart your computer.</p>
+<p>This problem should be solved.</p>
+<p>docker默认只允许root用户连接，想用其他用户需要添加。</p>
+<p>三</p>
+<p>docker-machine restart&amp;&amp;eva&quot;$(docker-machine env default)&quot;&amp;&amp;docker-machine env</p>
+<p>运行这么一串就好了。</p>
+<h3 id="42-docker-创建镜像时显示-forbidden-path-outside-the-build-context"><a class="markdownIt-Anchor" href="#42-docker-创建镜像时显示-forbidden-path-outside-the-build-context"></a> 4.2、docker 创建镜像时显示 Forbidden path outside the build context</h3>
+<p>因为<strong>目录不允许超过当前目录</strong>，那两个 … 超出了docker的根目录，所以报这个错了</p>
+<p>解决办法是把dockerfile向上一个级目录，在上一级目录中进行操作。</p>
+<h1 id="二-相关知识"><a class="markdownIt-Anchor" href="#二-相关知识"></a> 二、相关知识</h1>
+<h2 id="1-serviceaccount-是什么"><a class="markdownIt-Anchor" href="#1-serviceaccount-是什么"></a> 1、ServiceAccount 是什么</h2>
+<p>Service Account为Pod中的进程和外部用户提供身份信息。所有的kubernetes集群中账户分为两类，Kubernetes管理的serviceaccount(服务账户)和useraccount（用户账户）。</p>
+<p>大家都知道api server的集群的入口，对于kunbernetes的api server 是肯定不能随便访问。所以我们必须需要一些认证信息。</p>
+<p>例如：</p>
+<p>当用户访问集群（例如使用<code>kubectl</code>命令）时，apiserver 会将您认证为一个特定的 User Account（目前通常是<code>admin</code>，除非您的系统管理员自定义了集群配置）。Pod 容器中的进程也可以与 apiserver 联系。 当它们在联系 apiserver 的时候，它们会被认证为一个特定的 Service Account。</p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202209211812333.png" srcset="/img/loading.gif" alt="1"></p>
+<p>因为kubernetes是高度模块化，所有认证方式和授权方式都可以通过插件的方式让客户自定义的，可以支持很多种。客户端请求的时候首先需要进行认证，认证通过后再进行授权检查，因有些操作需要级联到其他资源或者环境，但是级联环境是否有授权权限，这时候需要准入控制。</p>
+<h3 id="认证插件"><a class="markdownIt-Anchor" href="#认证插件"></a> 认证插件</h3>
+<ul>
+<li><strong>bearer token</strong> 当使用来自 http 客户端的 bearer token 时，API server 期望 <code>Authorization</code> header 中包含 <code>Bearer token</code> 的值。Bearer token 必须是一个字符串序列，只需使用 HTTP 的编码和引用功能就可以将其放入到 HTTP header 中。</li>
+<li><strong>客户端证书</strong> 客户端请求前需要，需要发送api server的办法的证书，由api server来确认是否他来签署的，引用的文件必须包含一个或多个证书颁发机构，用于验证提交给 API server 的客户端证书。如果客户端证书已提交并验证，则使用 subject 的 Common Name（CN）作为请求的用户名。反过来，api server也要验证客户端的证书，所有对于客户端也应该有一个证书，提供api server 验证，此过程是双向验证。</li>
+<li><strong>HTTP BASE 认证</strong>： 通过用户名+密码方式认证。</li>
+</ul>
+<p>当启用了多个认证模块时，第一个认证模块成功认证后将短路请求，不会进行第二个模块的认证。API server 不会保证认证的顺序。</p>
+<h3 id="用户账户需要哪些信息"><a class="markdownIt-Anchor" href="#用户账户需要哪些信息"></a> 用户账户需要哪些信息：</h3>
+<ul>
+<li>user 保护UserName和UID，UserName是标识最终用户的字符串，UID是标识最终用户的字符串，比用户名更加一致切唯一。</li>
+<li>group 一组将用户和常规用户组相关联的字符串</li>
+<li>extra 包含其他有用认证信息的字符串列表</li>
+</ul>
+<p>上述是来自集群外部的访问，我们可以理解成是User Account，是给kubernetes集群外部用户，例如（系统管理员、用户/租户等）。Service Account而是给运行在Pod的容器、或者Pod使用的身份认证。</p>
+<p>正常情况下，为了确保kubernetes集群的安全性，Api Server 都会给客户端进行身份认证，但是Pod访问Kubernetes Api Server服务时，也是需要身份认证的。如下图：</p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202209211812448.png" srcset="/img/loading.gif" alt="2"></p>
+<p>我们在每一个namespace下看到都有一个secret,而我们看svc的时候，api server通过svc的访问访问的，他们的Endpoints是api server。</p>
+<pre><code class="hljs routeros">$ kubectl  <span class="hljs-builtin-name">get</span> svc 
+NAME        <span class="hljs-built_in"> TYPE </span>       CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP   52d
+$ kubectl describe svc kubernetes 
+Name:              kubernetes
+Namespace:         default
+Labels:            <span class="hljs-attribute">component</span>=apiserver
+                   <span class="hljs-attribute">provider</span>=kubernetes
+Annotations:       &lt;none&gt;
+Selector:          &lt;none&gt;
+Type:              ClusterIP
+IP:                10.96.0.1
+Port:              https  443/TCP
+TargetPort:        6443/TCP
+Endpoints:         172.16.138.40:6443,172.16.138.41:6443
+Session Affinity:  None
+Events:            &lt;none&gt;
+$ kubectl <span class="hljs-builtin-name">get</span><span class="hljs-built_in"> secret </span> -n default
+NAME                 <span class="hljs-built_in"> TYPE </span>                                 DATA      AGE
+default-token-lplp6   kubernetes.io/service-account-token   3         52d
+$ kubectl <span class="hljs-builtin-name">get</span><span class="hljs-built_in"> secret </span> -n ingress-nginx
+NAME                                      <span class="hljs-built_in"> TYPE </span>                                 DATA      AGE
+default-token-v58zx                        kubernetes.io/service-account-token   3         52d</code></pre>
+<p>每个Namespace下都有一个名为default的默认的 Service Account对象，这个Service Account里面有一个名为Tokens的可以当作Volume一样被Mount到Pod里的secret，当Pod启动时候，这个Secret会自动Mount到Pod的指定目录下，用来完成Pod中的进程访问API server时的身份认证过程。下面可以看到</p>
+<pre><code class="hljs routeros">$  kubectl describe pod my-demo
+<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>.
+Volumes:
+  appindex:
+    Type:          HostPath (bare host directory volume)
+    Path:          /data/pod/myapp
+    HostPathType:  DirectoryOrCreate
+  default-token-lplp6:
+    Type:       <span class="hljs-built_in"> Secret </span>(a volume populated by a Secret)
+    SecretName:  default-token-lplp6
+    Optional:    <span class="hljs-literal">false</span>
+<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>.</code></pre>
+<h3 id="创建一个serviceaccount"><a class="markdownIt-Anchor" href="#创建一个serviceaccount"></a> 创建一个serviceaccount</h3>
+<pre><code class="hljs routeros">$ kubectl create serviceaccount jaxzhai
+$ kubectl <span class="hljs-builtin-name">get</span> sa 
+NAME      SECRETS   AGE
+default   1         52d
+jaxzhai   1         8s
+$ kubectl describe sa jaxzhai
+Name:                jaxzhai
+Namespace:           default
+Labels:              &lt;none&gt;
+Annotations:         &lt;none&gt;
+Image pull secrets:  &lt;none&gt;
+Mountable secrets:   jaxzhai-token-9n5th
+Tokens:              jaxzhai-token-9n5th
+Events:              &lt;none&gt;$ kubectl <span class="hljs-builtin-name">get</span><span class="hljs-built_in"> secret </span>NAME                 <span class="hljs-built_in"> TYPE </span>                                 DATA      AGEdefault-token-lplp6   kubernetes.io/service-account-token   3         52djaxzhai-token-9n5th   kubernetes.io/service-account-token   3         4m</code></pre>
+<p>这里我们看到Kubernetes集群会自动创建一个token的secert，并被jaxzhai这个serviceaccount引用。</p>
+<p>设置非默认的 service account，只需要在 pod 的<code>spec.serviceAccountName</code> 字段中将name设置为您想要用的 service account 名字即可。</p>
+<p>在 pod 创建之初 service account 就必须已经存在，否则创建将被拒绝。</p>
+<p>您不能更新已创建的 pod 的 service account。</p>
+<h3 id="在pod中使用service-account"><a class="markdownIt-Anchor" href="#在pod中使用service-account"></a> 在pod中使用service account</h3>
+<pre><code class="hljs routeros">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-sa-demo
+  namespace: default
+  labels:
+    name: myapp
+    tier: appfront
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+  serviceAccountName: jaxzhai
+
+$ kubectl apply -f myapp-serviceaccount.yaml 
+pod/my-sa-demo created
+$ kubectl describe pod my-sa-demo 
+<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>
+Volumes:
+  jaxzhai-token-9n5th:
+    Type:       <span class="hljs-built_in"> Secret </span>(a volume populated by a Secret)
+    SecretName:  jaxzhai-token-9n5th
+    Optional:    <span class="hljs-literal">false</span>
+QoS Class:       BestEffort
+<span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span></code></pre>
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/centos-docker-install.html">https://www.runoob.com/docker/centos-docker-install.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-mirror-acceleration.html">https://www.runoob.com/docker/docker-mirror-acceleration.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000005040763">https://segmentfault.com/q/1010000005040763</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/pub/reader/119632192/chapter/1150819665524715520">https://www.zhihu.com/pub/reader/119632192/chapter/1150819665524715520</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30633405/article/details/99215173">https://blog.csdn.net/weixin_30633405/article/details/99215173</a></p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/">https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xzkzzz/p/9889173.html">https://www.cnblogs.com/xzkzzz/p/9889173.html</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Docker/">Docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Kubernetes/">Kubernetes</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/Article202102161/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">K8S内容1</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/10/Article202101103/">
+                        <span class="hidden-mobile">编码实现卷积神经网络</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/lazyload.js" ></script>
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Centos安装docker以及ServiceAccount&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

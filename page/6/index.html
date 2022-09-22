@@ -180,25 +180,23 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/21/Article202011214/">更改Spyder的Python指定版本</a>
+        <a href="/2020/12/03/Article202012032/">编码实现深度学习优化</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/21/Article202011214/">
+        <a href="/2020/12/03/Article202012032/">
           
           
             
           
-          参考链接：
-spyder指定python环境_我自横刀向天笑，笑完我就去睡觉-CSDN博客
-打开Spyder，Tools-&gt;Preferences-&gt;Python interpreter，将解释器换成用户需要的解释器即可。
+           dropout_layers.py
+包含了Dropout前向传播以及反向传播，组合Dropout传播层
+#-*- coding: utf-8 -*-
+import sys, os
+sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
 
-但是console可能出现错误，如下图所示。
-
-按照提示的语句直接复制，可能会出现错误。
-因为那个‑和咱们的-其实是不一样的
-所以要把那个‑改成负号就行：
-pip
+import numpy as np
+from layer
         </a>
       </p>
 
@@ -206,93 +204,8 @@ pip
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-21 18:20" pubdate>
-              2020-11-21
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/21/Article202011213/">Kubernetes调度器插件</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/21/Article202011213/">
-          
-          
-            
-          
-          参考链接：
-https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler/framework/plugins
- Scheduler Framework Plugins（调度程序框架插件）
- Creating a new in-tree plugin（创建一个新的树内插件）
-Read the docs to understand
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-21 18:20" pubdate>
-              2020-11-21
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/21/Article202011212/">罗技K380连接windwos10电脑</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/21/Article202011212/">
-          
-          
-            
-          
-          需要准备打的东西：
-
-Logitech k380
-笔记本电脑
-
-我们需要进行的操作：
-
-保证无线键盘是充满电的。
-打开电脑的蓝牙开关
-无线键盘打开开关，k380支持三台设备，我们可以选择自己想要的数字键，然后长按，该键开始闪烁。
-在windwos10的设置中添加蓝牙设备
-最后输入对应的PIN码即可完成连接
-
-
-参考链接：
-https://jingyan.baidu.com/article/4d58
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-21 18:20" pubdate>
-              2020-11-21
+            <time datetime="2020-12-03 20:24" pubdate>
+              2020-12-03
             </time>
           </div>
         
@@ -301,7 +214,7 @@ https://jingyan.baidu.com/article/4d58
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/life/">life</a>
+              <a href="/tags/DeepLearning/">DeepLearning</a>
             
           </div>
         
@@ -314,20 +227,21 @@ https://jingyan.baidu.com/article/4d58
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/21/Article202011211/">Article202011211</a>
+        <a href="/2020/12/03/Article202012031/">深度学习实战 第5章深度学习优化笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/21/Article202011211/">
+        <a href="/2020/12/03/Article202012031/">
           
           
             
           
-          1.Spark与Hadoop的对比
-总体而言，Hadoop中的MapReduce计算框架主要存在以下缺点：
-表达能力有限。计算都必须转化为Map和Reduce两个操作，但这并不适合所有的情况，难以描述复杂的数据处理过程；
-磁盘I/O开销大。每次执行时都需要从硬盘读取数据，并且在计算完成后需要将中间过程写入到磁盘中，I/O开销大；
-延迟高。一次计算可能需要分解成一系列按顺序执行的MapReduce任
+           第5章 深度学习优化
+ 5.1 神经网络优化困难
+1.深度学习所面临的优化挑战，包括了局部最优、鞍点、梯度悬崖及梯度消失问题。
+ 5.1.1 局部最优
+1.凸函数最显著的特征是能够找到一个局部最优解，并且此解是全局的最优解。但有时我们也并不执着于寻找最优的某一点，在某些凸函数的底部可能是一个貌如盆地的平坦区域，在该平坦区域取得的任何值也是可以接受的。
+2.在实践中我们发现，最优解附近的解其泛化性
         </a>
       </p>
 
@@ -335,84 +249,8 @@ https://jingyan.baidu.com/article/4d58
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-21 18:20" pubdate>
-              2020-11-21
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/18/Article202011184/">Article202011184</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/18/Article202011184/">
-          
-          
-            
-          
-          一、大数据技术概述
-1.请阐述大数据处理的基本流程？
-大数据的基本处理流程，主要包括数据采集、存储管理、处理分析、结果呈现等环节。因此，从数据分析全流程来看，大数据技术主要包括数据采集与预处理、数据存储和管理、数据处理与分析、数据可视化、数据安全与隐私保护等几个层面的内容。
-2.请阐述大数据的计算模式以及代表产品。
-批处理计算。批处理计算主要解决针对大规模数据的批量处理。MapReduce、Spa
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-18 00:21" pubdate>
-              2020-11-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/18/Article202011183/">使用yolov5时出现ModuleNotFoundError:No module named ‘torch’</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/18/Article202011183/">
-          
-          
-            
-          
-          
-参考链接：
-Start Locally | PyTorch
-https://github.com/ultralytics/yolov5
-从零开始手把手教你利用yolov5训练自己的数据集(含coco128数据集/yolov5权重文件国内下载）更新于20200728_ai_faker的博客-CSDN博客_yolov5
-
-今天在使用git克隆下yolo v5的代码之后，由于之前安装了其他很多的库，所
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-18 00:17" pubdate>
-              2020-11-18
+            <time datetime="2020-12-03 20:23" pubdate>
+              2020-12-03
             </time>
           </div>
         
@@ -421,7 +259,9 @@ https://github.com/ultralytics/yolov5
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Error/">Error</a>
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
             
           </div>
         
@@ -434,21 +274,176 @@ https://github.com/ultralytics/yolov5
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/18/Article202011182/">Python编程遇到OSError:[E050] Can&#39;t find model &#39;en&#39;.</a>
+        <a href="/2020/11/30/Article202011305/">编码实现Dropout正则化编码</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/18/Article202011182/">
+        <a href="/2020/11/30/Article202011305/">
+          
+          
+            
+          
+           dropout_layers.py
+包含了Dropout前向传播以及反向传播，组合Dropout传播层
+#-*- coding: utf-8 -*-
+import numpy as np
+from .layers import *
+
+def dropout_forward(x, dropout_param):
+    &quot;&quot;&quot;
+    执行dropout前向传播过程。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-30 12:49" pubdate>
+              2020-11-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/30/Article202011304/">深度学习实战 第4章深度学习正则化笔记</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/30/Article202011304/">
+          
+          
+            
+          
+           第4章 深度学习正则化
+1.机器学习的两个核心任务：
+
+尽可能地降低训练错误率
+提高模型的泛化能力（避免过拟合）
+
+2.可以使用正则化来尽可能地使训练错误率与测试错误率之间的差距变小。
+3.正则化就是降低验证错误率（有时需要牺牲训练错误率）的一系列方法。
+4.从降低泛化错误率的角度出发，伟大的前人们已经提出了大量的正则化策略，这其中最重要的方法就是限制学习能力。参数范数惩罚便是最具有代表性的通用
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-30 12:49" pubdate>
+              2020-11-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/30/Article202011303/">编码实现全连接神经网络</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/30/Article202011303/">
+          
+          
+            
+          
+           layers.py
+首先实现神经网络中仿射层、ReLU层以及组合单层神经元。
+#-*- coding: utf-8 -*-
+import numpy as np
+
+def affine_forward(x, w, b):
+    &quot;&quot;&quot;
+    计算神经网络当前层的前馈传播，该方法计算在全连接情况下的得分函数。
+    注：如果不理解affine仿射变换，简单的理解
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-30 12:48" pubdate>
+              2020-11-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Deepearning/">Deepearning</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/30/Article202011302/">Matplotlib使用subplot时标题与刻度重叠</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/30/Article202011302/">
           
           
             
           
           
 参考链接：
-[OSError: E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a_Learning-CSDN博客
-(1条消息) 解决Error: Couldn t link model to en_core_web_sm_椰楠liu的博客-CSDN博客
+(1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客
 
- Pytho
+使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。
+
+在plt.show()之前加入以下代码即可。
+plt.tight_layout()
+最终结果：
+
+tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作
         </a>
       </p>
 
@@ -456,8 +451,8 @@ https://github.com/ultralytics/yolov5
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-18 00:10" pubdate>
-              2020-11-18
+            <time datetime="2020-11-30 12:48" pubdate>
+              2020-11-30
             </time>
           </div>
         
@@ -466,7 +461,7 @@ https://github.com/ultralytics/yolov5
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Error/">Error</a>
+              <a href="/tags/Python/">Python</a>
             
           </div>
         
@@ -479,23 +474,22 @@ https://github.com/ultralytics/yolov5
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/18/Article202011181/">Couldn&#39;t find field google.protobuf.DescriptorProto.ExtensionRange.options</a>
+        <a href="/2020/11/30/Article202011301/">python的ModuleNotFoundError解决</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/18/Article202011181/">
+        <a href="/2020/11/30/Article202011301/">
           
           
             
           
           
 参考链接：
-https://github.com/tensorflow/tensorflow/issues/12326
-(1条消息) TensorFlow KeyError: “Couldn’t find field google.protobuf.DescriptorProto.ExtensionRange.options”_u010187278的博客-CSDN博客
+修复python的ModuleNotFoundError - xiao.chun - 博客园 (cnblogs.com)
+【经验】python运行报错ModuleNotFoundError: No module named XXX_进阶中的程序员吃吃的博客-CSDN博客
 
- 问题描述
-
-pytho
+运行代码时出现ModuleNotFoundError，本地存在相应的Python文件，解决办法如下：
+在文件开头
         </a>
       </p>
 
@@ -503,26 +497,17 @@ pytho
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-18 00:09" pubdate>
-              2020-11-18
+            <time datetime="2020-11-30 12:46" pubdate>
+              2020-11-30
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Tensorflow/">Tensorflow</a>
-            
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Tensorflow/">Tensorflow</a>
-            
-              <a href="/tags/Error/">Error</a>
+              <a href="/tags/Python/">Python</a>
             
           </div>
         
@@ -535,81 +520,26 @@ pytho
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/09/Article202011094/">HBase的hbase-site.xml文件配置详解</a>
+        <a href="/2020/11/25/Article202011255/">使用显式循环版本计算Softmax损失函数</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/09/Article202011094/">
-          
-          
-            
-          
-          
-参考文献：
-hbase-site.xml 配置详解_ningxuezhu的专栏-CSDN博客
-
-该文档是用hbase默认配置文件生成的，文件源是 hbase-default.xml
- hbase.rootdir
-这个目录是region server的共享目录，用来持久化HBase。URL需要是完全正确的，还要包含文件系统的scheme。例如，要表示hdfs中的’/hbase’目录，namenod
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-09 23:35" pubdate>
-              2020-11-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Hadoop/">Hadoop</a>
-            
-              <a href="/categories/Hadoop/HBase/">HBase</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Hadoop/">Hadoop</a>
-            
-              <a href="/tags/HBase/">HBase</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/09/Article202011093/">HBase Java API基本概念与使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/09/Article202011093/">
+        <a href="/2020/11/25/Article202011255/">
           
           
             
           
           
 参考链接：
-Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)
+(1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客
 
- 一、几个主要 Hbase API 类和数据模型之间的对应关系
-
-1、 HBaseAdmin
-关系： org.apache.hadoop.hbase.client.HBaseAdmin
-作用：提供了一个接口来管理 HBase 数据库的表信息。它提供的方法包括：创建表，删除表，列出表项
+ 第一种
+def softmax_loss_naive(W, X, y, reg):
+    &quot;&quot;&quot;
+    使用显式循环版本计算Softmax损失函数
+    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。
+    Inputs:
+  
         </a>
       </p>
 
@@ -617,30 +547,113 @@ Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-09 23:35" pubdate>
-              2020-11-09
+            <time datetime="2020-11-25 18:16" pubdate>
+              2020-11-25
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Hadoop/">Hadoop</a>
-            
-              <a href="/categories/Hadoop/HBase/">HBase</a>
-            
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java/">Java</a>
+              <a href="/tags/Python/">Python</a>
             
-              <a href="/tags/Hadoop/">Hadoop</a>
+              <a href="/tags/DeepLearning/">DeepLearning</a>
             
-              <a href="/tags/HBase/">HBase</a>
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/25/Article202011254/">Python出现ImportError:cannot import name &#39;imread&#39; from &#39;scipy.misc&#39;问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/25/Article202011254/">
+          
+          
+            
+          
+          
+参考链接：
+(30条消息) ImportError: cannot import name ‘imread’ from 'scipy.misc’问题的解决办法_二狗子的博客-CSDN博客
+
+ImportError: cannot import name ‘imread’ from 'scipy.misc’问题的解决办法
+wordcloud库做词云时常见的错误
+如果您在使用python绘制词云时使
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-25 18:14" pubdate>
+              2020-11-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/11/25/Article202011253/">Python字符串前面加u,r,b,f的含义</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/25/Article202011253/">
+          
+          
+            
+          
+          
+参考链接：
+Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客
+
+字符串前加u
+后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。
+exp = u&quot;我是含有中文字符组成的字符串。&quot;
+字符串前加r
+去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-25 18:13" pubdate>
+              2020-11-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
             
           </div>
         
@@ -652,7 +665,7 @@ Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

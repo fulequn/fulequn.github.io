@@ -228,23 +228,23 @@
 <p>安装过程很容易，按着顺序依次确定即可，安装完成之后需要进行网络配置，让我们的虚拟机链接上网络。</p>
 <h1 id="一-配置网络"><a class="markdownIt-Anchor" href="#一-配置网络"></a> 一、配置网络</h1>
 <p>1.打开VMware workstation ，菜单栏选项–&gt;编辑–&gt;虚拟网络编辑器，将<strong>VMnet8</strong>设置为NAT模式，启动DHCP(DHCP就是用来动态分配虚拟机IP的，不启用也没有关系), 如图：</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081139191.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081139191.png" srcset="/img/loading.gif" alt="1"></p>
 <p>2.在<strong>主机上开启NAT服务和DHCP服务</strong>：</p>
 <p>win+r –&gt; services.msc</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081142308.png" srcset="/img/loading.gif" alt="2"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081142308.png" srcset="/img/loading.gif" alt="2"></p>
 <p>3.然后，打开VMware workstation ，菜单栏选项–&gt;虚拟机–&gt;设置为NAT模式</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081143179.png" srcset="/img/loading.gif" alt="3"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081143179.png" srcset="/img/loading.gif" alt="3"></p>
 <p>4.更改适配器设置，将可以上网的网络设置为共享，共享给虚拟机的<strong>VMnet8</strong>（不需要勾下面的勾）:</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081148824.png" srcset="/img/loading.gif" alt="4"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081148824.png" srcset="/img/loading.gif" alt="4"></p>
 <h1 id="二-配置python3环境"><a class="markdownIt-Anchor" href="#二-配置python3环境"></a> 二、配置Python3环境</h1>
 <p>ubuntu的kylin16系统自己带了Python2.7和Python3.5环境，我需要使用Python3.8+。</p>
 <p>1.配置依赖环境，如果不进行这步可能会出现一些问题。</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081158019.png" srcset="/img/loading.gif" alt="5"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081158019.png" srcset="/img/loading.gif" alt="5"></p>
 <p>2.去官网下载<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.8.1">Python-3.8.1.tar.xz</a></p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081159782.png" srcset="/img/loading.gif" alt="6"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081159782.png" srcset="/img/loading.gif" alt="6"></p>
 <p>3.解压下载的包</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvJf</span>  <span class="hljs-selector-tag">Python-3</span><span class="hljs-selector-class">.8</span><span class="hljs-selector-class">.1</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.xz</span></code></pre>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081201823.png" srcset="/img/loading.gif" alt="7"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081201823.png" srcset="/img/loading.gif" alt="7"></p>
 <p>4.进入解压后的目录</p>
 <pre><code class="hljs apache"><span class="hljs-attribute">cd</span> Python-<span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>/</code></pre>
 <p>5.安装依赖(非必要，可跳过此步骤，如在6步出错在执行本步骤)</p>
@@ -263,7 +263,7 @@ sudo make &amp;&amp; sudo make install</code></pre>
 <pre><code class="hljs awk">sudo ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python</code></pre>
 <p>测试是否安装成功了。</p>
 <pre><code class="hljs ebnf"><span class="hljs-attribute">python -V</span></code></pre>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112081634112.png" srcset="/img/loading.gif" alt="8"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081634112.png" srcset="/img/loading.gif" alt="8"></p>
 <p>8.安装/升级pip</p>
 <p>这句是给(python2.7安装pip)</p>
 <pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python-pip</code></pre>

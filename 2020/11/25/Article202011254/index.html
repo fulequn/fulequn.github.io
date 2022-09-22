@@ -237,7 +237,7 @@ mask=imread(<span class="hljs-string">&#x27;map1.png&#x27;</span>)</code></pre>
 <p>针对scipy库的版本问题：</p>
 <pre><code class="hljs python">python -c <span class="hljs-string">&quot;import scipy; print(scipy.__version__)&quot;</span></code></pre>
 <p>可以在cmd命令行查看scipy库的版本信息，笔者通过查询发现，scipy版本为1.3.1</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211022190053.png" srcset="/img/loading.gif" alt="QQ截图20211022185959"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/20211022190053.png" srcset="/img/loading.gif" alt="QQ截图20211022185959"></p>
 <p>使用pip install scipy==1.2.0更换了版本之后就不会报出**ImportError: cannot import name ‘imread’ from ‘scipy.misc’**错误了。</p>
 <p>图中可以看到，scipy.imread(‘图片.格式’)的imread方法被更换成了1.2.0的版本，但最终系统还是使用了imageio.inread实现了词云的生成。因此，使用<strong>imageio库同样能够实现此功能</strong>。</p>
 

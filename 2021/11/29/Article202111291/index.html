@@ -226,20 +226,20 @@
 <p>强化学习中有名的算法，Q-learning。由第一章可知，Q-learning的分类是model-free，基于价值，单步更新，离线学习。</p>
 <h2 id="21-什么是q-learning"><a class="markdownIt-Anchor" href="#21-什么是q-learning"></a> 2.1 什么是Q-Learning</h2>
 <h3 id="211-行为准则"><a class="markdownIt-Anchor" href="#211-行为准则"></a> 2.1.1 行为准则</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111300843576.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202111300843576.png" srcset="/img/loading.gif" alt="1"></p>
 <p>我们做事情都会有一个自己的行为准则, 比如小时候爸妈常说”不写完作业就不准看电视”。所以我们在 写作业的<strong>这种状态</strong>下, <strong>好的行为</strong>就是继续写作业, 直到写完它, 我们还可以得到奖励, <strong>不好的行为</strong>就是没写完就跑去看电视了, 被爸妈发现, 后果很严重。小时候这种事情做多了, 也就变成我们不可磨灭的记忆。这和我们要提到的 Q learning 有什么关系呢? 原来 <strong>Q learning 也是一个决策过程</strong>, 和小时候的这种情况差不多。我们举例说明.</p>
 <p>假设现在我们处于写作业的状态而且我们以前并没有尝试过写作业时看电视, 所以现在我们有两种选择 , 1, 继续写作业, 2, 跑去看电视. 因为以前没有被罚过, 所以我选看电视, 然后现在的状态变成了看电视, 我又选了继续看电视, 接着我还是看电视, 最后爸妈回家, 发现我没写完作业就去看电视了, 狠狠地惩罚了我一次, 我也深刻地记下了这一次经历, 并在我的脑海中将 “没写完作业就看电视” 这种行为更改为负面行为, 我们在看看 Q learning 根据很多这样的经历是如何来决策的吧。</p>
 <h3 id="212-qlearning-决策"><a class="markdownIt-Anchor" href="#212-qlearning-决策"></a> 2.1.2 QLearning 决策</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111300916525.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202111300916525.png" srcset="/img/loading.gif" alt="1"></p>
 <p>假设我们的行为准则已经学习好了, 现在我们处于状态s1, 我在写作业, 我有两个行为 a1, a2, 分别是看电视和写作业, 根据我的经验, 在这种 s1 状态下, a2 写作业带来的潜在奖励要比 a1 看电视高（比较不同决策的价值）, 这里的潜在奖励我们可以用一个有关于 s 和 a 的 Q 表格代替, 在我的记忆Q表格中, Q(s1, a1)=-2 要小于 Q(s1, a2)=1, 所以我们判断要选择 a2 作为下一个行为。现在我们的状态更新成 s2 , 我们还是有两个同样的选择, 重复上面的过程, 在行为准则Q 表中寻找 Q(s2, a1)和Q(s2, a2) 的值, 并比较他们的大小, 选取较大的一个。接着根据 a2 我们到达 s3 并在此重复上面的决策过程. Q learning 的方法也就是这样决策的。看完决策, 我看在来研究一下这张行为准则 Q 表是通过什么样的方式更改, 提升的。</p>
 <h3 id="213-qlearning-更新"><a class="markdownIt-Anchor" href="#213-qlearning-更新"></a> 2.1.3 QLearning 更新</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111300920463.png" srcset="/img/loading.gif" alt="3"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202111300920463.png" srcset="/img/loading.gif" alt="3"></p>
 <p>所以我们回到之前的流程, 根据 Q 表的估计, 因为在 s1 中, a2 的值比较大, 通过之前的决策方法, 我们在 s1 采取了 a2, 并到达 s2, 这时我们开始更新用于决策的 Q 表, 接着我们并没有在实际中采取任何行为, 而是<strong>再想象自己在 s2 上采取了每种行为</strong>, 分别看看两种行为哪一个的 Q 值大, 比如说 Q(s2, a2) 的值比 Q(s2, a1) 的大, 所以<strong>我们把大的 Q(s2, a2) 乘上一个衰减值 gamma (比如是0.9) 并加上到达s2时所获取的奖励 R (这里还没有获取到我们的棒棒糖, 所以奖励为 0)</strong>, 因为会获取实实在在的奖励 R , 我们将这个作为我现实中 Q(s1, a2) 的值, 但是我们之前是根据 Q 表估计 Q(s1, a2) 的值。<strong>所以有了现实和估计值, 我们就能更新Q(s1, a2) , 根据估计与现实的差距, 将这个差距乘以一个学习效率 alpha 累加上老的 Q(s1, a2) 的值变成新的值</strong>。但时刻记住, 我们虽然用 maxQ(s2) 估算了一下 s2 状态, 但还没有在 s2 做出任何的行为, s2 的行为决策要等到更新完了以后再重新另外做。这就是 off-policy 的 Q learning 是如何决策和学习优化决策的过程。</p>
 <h3 id="214-qlearning-整体算法"><a class="markdownIt-Anchor" href="#214-qlearning-整体算法"></a> 2.1.4 QLearning 整体算法</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111300930021.png" srcset="/img/loading.gif" alt="4"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202111300930021.png" srcset="/img/loading.gif" alt="4"></p>
 <p>这一张图概括了我们之前所有的内容。这也是 <strong>Q learning 的算法, 每次更新我们都用到了 Q 现实和 Q 估计, 而且 Q learning 的迷人之处就是 在 Q(s1, a2) 现实中, 也包含了一个 Q(s2) 的最大估计值, 将对下一步的衰减的最大估计和当前所得到的奖励当成这一步的现实</strong>, 很奇妙吧。最后我们来说说这套算法中一些参数的意义。<strong>Epsilon greedy 是用在决策上的一种策略, 比如 epsilon = 0.9 时, 就说明有90% 的情况我会按照 Q 表的最优值选择行为, 10% 的时间使用随机选行为。alpha是学习率, 来决定这次的误差有多少是要被学习的, alpha是一个小于1 的数。gamma 是对未来 reward 的衰减值。</strong></p>
 <h3 id="215-qlearning-中的-gamma"><a class="markdownIt-Anchor" href="#215-qlearning-中的-gamma"></a> 2.1.5 QLearning 中的 Gamma</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202111300934738.png" srcset="/img/loading.gif" alt="5"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202111300934738.png" srcset="/img/loading.gif" alt="5"></p>
 <p>我们重写一下 Q(s1) 的公式, 将 Q(s2) 拆开, 因为Q(s2)可以像 Q(s1)一样,是关于Q(s3) 的, 所以可以写成这样, 然后以此类推, 不停地这样写下去, 最后就能写成这样。**可以看出Q(s1) 是有关于之后所有的奖励, 但这些奖励正在衰减, 离 s1 越远的状态衰减越严重。**不好理解? 行, 我们想象 Qlearning 的机器人天生近视眼, gamma = 1 时, 机器人有了一副合适的眼镜, 在 s1 看到的 Q 是未来没有任何衰变的奖励, 也就是机器人能清清楚楚地看到之后所有步的全部价值, 但是当 gamma =0, 近视机器人没了眼镜, 只能摸到眼前的 reward, 同样也就只在乎最近的大奖励, 如果 gamma 从 0 变到 1, 眼镜的度数由浅变深, 对远处的价值看得越清楚, 所以机器人渐渐变得有远见, 不仅仅只看眼前的利益, 也为自己的未来着想。</p>
 <h3 id="216-补充"><a class="markdownIt-Anchor" href="#216-补充"></a> 2.1.6 补充</h3>
 <p>1.为什么不直接用现实值更新老的Q值呢？</p>
@@ -335,7 +335,7 @@ FRESH_TIME = <span class="hljs-number">0.3</span>    <span class="hljs-comment">
         time.sleep(FRESH_TIME)</code></pre>
 <h3 id="227-强化学习主循环"><a class="markdownIt-Anchor" href="#227-强化学习主循环"></a> 2.2.7 强化学习主循环</h3>
 <p>最重要的地方就在这里。 你定义的 RL 方法都在这里体现。 在之后的教程中, 我们会更加详细得讲解 RL 中的各种方法, 下面的内容, 大家大概看看就行, 这节内容不用仔细研究。</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112021050182.png" srcset="/img/loading.gif" alt="6"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112021050182.png" srcset="/img/loading.gif" alt="6"></p>
 <pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rl</span>():</span>
     q_table = build_q_table(N_STATES, ACTIONS)  <span class="hljs-comment"># 初始 q table</span>
     <span class="hljs-keyword">for</span> episode <span class="hljs-keyword">in</span> range(MAX_EPISODES):     <span class="hljs-comment"># 回合</span>
@@ -372,9 +372,9 @@ FRESH_TIME = <span class="hljs-number">0.3</span>    <span class="hljs-comment">
 <h2 id="23-q-learning-算法更新"><a class="markdownIt-Anchor" href="#23-q-learning-算法更新"></a> 2.3 Q-learning 算法更新</h2>
 <h3 id="231-要点"><a class="markdownIt-Anchor" href="#231-要点"></a> 2.3.1 要点</h3>
 <p>上次我们知道了 RL 之中的 Q-learning 方法是在做什么事, 今天我们就来说说一个更具体的例子。让探索者学会走迷宫。黄色的是天堂 (reward 1), 黑色的地狱 (reward -1)。大多数 RL 是由 reward 导向的, 所以定义 reward 是 RL 中比较重要的一点。</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112031036521.png" srcset="/img/loading.gif" alt="7"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112031036521.png" srcset="/img/loading.gif" alt="7"></p>
 <h3 id="232-算法"><a class="markdownIt-Anchor" href="#232-算法"></a> 2.3.2 算法</h3>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202112031037484.png" srcset="/img/loading.gif" alt="8"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112031037484.png" srcset="/img/loading.gif" alt="8"></p>
 <p>**整个算法就是一直不断更新 Q table 里的值, 然后再根据新的值来判断要在某个 state 采取怎样的 action。**Qlearning 是一个 <strong>off-policy</strong> 的算法, 因为里面的 <code>max</code> action 让 Q table 的更新可以不基于正在经历的经验(可以是现在学习着很久以前的经验,甚至是学习他人的经验)。不过这一次的例子, 我们没有运用到 off-policy, 而是把 Qlearning 用在了 on-policy 上, 也就是现学现卖, 将现在经历的直接当场学习并运用。</p>
 <h3 id="233-算法的代码形式"><a class="markdownIt-Anchor" href="#233-算法的代码形式"></a> 2.3.3 算法的代码形式</h3>
 <p>首先我们先 import 两个模块, <code>maze_env</code> 是我们的环境模块, 已经编写好了, 大家可以直接在<a target="_blank" rel="noopener" href="https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/2_Q_Learning_maze/maze_env.py">这里下载</a>, <code>maze_env</code> 模块我们可以不深入研究, 如果你对编辑环境感兴趣, 可以去看看如何使用 python 自带的简单 GUI 模块 <code>tkinter</code> 来编写虚拟环境. 我也有<a target="_blank" rel="noopener" href="https://mofanpy.com/tutorials/python-basic/tkinter/">对应的教程</a>。<code>maze_env</code> 就是用 <code>tkinter</code> 编写的. 而 <code>RL_brain</code> 这个模块是 RL 的大脑部分, 我们下节会讲。</p>

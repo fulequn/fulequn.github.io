@@ -223,11 +223,11 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Du_Shuang/article/details/84139716">(1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客</a></p>
 </blockquote>
 <p>使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/20211024180802.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/20211024180802.png" srcset="/img/loading.gif" alt="1"></p>
 <p>在plt.show()之前加入以下代码即可。</p>
 <pre><code class="hljs python">plt.tight_layout()</code></pre>
 <p>最终结果：</p>
-<p><img src="https://gitee.com/zuiyixin/blog-graph/raw/master/img/202110241809248.png" srcset="/img/loading.gif" alt="2"></p>
+<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202110241809248.png" srcset="/img/loading.gif" alt="2"></p>
 <p>tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作。它仅仅检查坐标轴标签、刻度标签以及标题的部分。</p>
 
             </div>

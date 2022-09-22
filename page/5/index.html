@@ -180,24 +180,22 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011305/">编码实现Dropout正则化编码</a>
+        <a href="/2021/11/22/Article202111222/">莫烦强化学习-简介</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/30/Article202011305/">
+        <a href="/2021/11/22/Article202111222/">
           
           
             
           
-           dropout_layers.py
-包含了Dropout前向传播以及反向传播，组合Dropout传播层
-#-*- coding: utf-8 -*-
-import numpy as np
-from .layers import *
+          
+参考链接：
+https://mofanpy.com/tutorials/machine-learning/reinforcement-learning/intro-RL/
+https://www.cnblogs.com/maybe2030/p/9862353.html
 
-def dropout_forward(x, dropout_param):
-    &quot;&quot;&quot;
-    执行dropout前向传播过程。
+ 第1章 简介
+强化学习是机器学习大家族中的一大类, 使用强化学习能够让机器学着如何在环境中拿到高分, 表现出优秀的成绩. 而
         </a>
       </p>
 
@@ -205,8 +203,8 @@ def dropout_forward(x, dropout_param):
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 12:49" pubdate>
-              2020-11-30
+            <time datetime="2021-11-22 13:25" pubdate>
+              2021-11-22
             </time>
           </div>
         
@@ -215,9 +213,9 @@ def dropout_forward(x, dropout_param):
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Python/">Python</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
             
-              <a href="/tags/DeepLearning/">DeepLearning</a>
+              <a href="/tags/ReinforcementLearning/">ReinforcementLearning</a>
             
           </div>
         
@@ -230,24 +228,18 @@ def dropout_forward(x, dropout_param):
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011304/">深度学习实战 第4章深度学习正则化笔记</a>
+        <a href="/2021/11/22/Article202111221/">深度学习实战 第7章循环神经网络笔记</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/30/Article202011304/">
+        <a href="/2021/11/22/Article202111221/">
           
           
             
           
-           第4章 深度学习正则化
-1.机器学习的两个核心任务：
-
-尽可能地降低训练错误率
-提高模型的泛化能力（避免过拟合）
-
-2.可以使用正则化来尽可能地使训练错误率与测试错误率之间的差距变小。
-3.正则化就是降低验证错误率（有时需要牺牲训练错误率）的一系列方法。
-4.从降低泛化错误率的角度出发，伟大的前人们已经提出了大量的正则化策略，这其中最重要的方法就是限制学习能力。参数范数惩罚便是最具有代表性的通用
+           第7章 循环神经网络
+1.前馈神经网络总是单向的，从输入层到低级隐层，再从低级隐藏层到高级隐藏层，最后再到输出层。但不管网络有多少层，都是一层一层地前向输出。但这其实是有问题的，因为这种前馈结构需要假设数据是独立同分布，但现实中有很多复杂的数据都不满足这个条件，例如音频数据、视频数据及自然语言数据等。
+2.当我们将一篇英文文本翻译成中文文本时，句子之间，段落之间是存在上下文关系的，在特定的情景中
         </a>
       </p>
 
@@ -255,8 +247,8 @@ def dropout_forward(x, dropout_param):
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 12:49" pubdate>
-              2020-11-30
+            <time datetime="2021-11-22 13:25" pubdate>
+              2021-11-22
             </time>
           </div>
         
@@ -280,24 +272,119 @@ def dropout_forward(x, dropout_param):
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/30/Article202011303/">编码实现全连接神经网络</a>
+        <a href="/2021/02/16/Article202102161/">K8S内容1</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/30/Article202011303/">
+        <a href="/2021/02/16/Article202102161/">
           
           
             
           
-           layers.py
-首先实现神经网络中仿射层、ReLU层以及组合单层神经元。
+          内容：
+kind: ClusterRole #ClusterRole是一组权限的集合，但与Role不同的是，ClusterRole可以在包括所有NameSpce和集群级别的资源或非资源类型进行鉴权。
+apiVersion: rbac.authorization.k8s.io/v1 #api版本
+metadata: # 资源的元数据/属性 
+  name: multipoint-plugin-exa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 16:21" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Kubernetes/">Kubernetes</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2021/01/20/Article202101201/">Centos安装docker以及ServiceAccount</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/20/Article202101201/">
+          
+          
+            
+          
+           一、Centos安装docker
+ 1、使用官方安装脚本自动安装
+安装命令如下：
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+也可以使用国内 daocloud 一键安装命令：
+curl -sSL https://get.daocloud.io/docker | sh
+ 2、Docker 镜像加速
+国内从 D
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-20 16:21" pubdate>
+              2021-01-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+              <a href="/tags/Kubernetes/">Kubernetes</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2021/01/10/Article202101103/">编码实现卷积神经网络</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/10/Article202101103/">
+          
+          
+            
+          
+           cnn_layers.py
+实现卷积神经网络的前向后传播的函数。
 #-*- coding: utf-8 -*-
 import numpy as np
+from layers import *
+from bn_layers import *
 
-def affine_forward(x, w, b):
+
+def conv_forward_naive(x, w, b, conv_param):
     &quot;&quot;&quot;
-    计算神经网络当前层的前馈传播，该方法计算在全连接情况下的得分函数。
-    注：如果不理解affine仿射变换，简单的理解
+    卷积前向传
         </a>
       </p>
 
@@ -305,156 +392,8 @@ def affine_forward(x, w, b):
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 12:48" pubdate>
-              2020-11-30
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-              <a href="/tags/Deepearning/">Deepearning</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/30/Article202011302/">Matplotlib使用subplot时标题与刻度重叠</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/30/Article202011302/">
-          
-          
-            
-          
-          
-参考链接：
-(1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客
-
-使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。
-
-在plt.show()之前加入以下代码即可。
-plt.tight_layout()
-最终结果：
-
-tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 12:48" pubdate>
-              2020-11-30
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/30/Article202011301/">python的ModuleNotFoundError解决</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/30/Article202011301/">
-          
-          
-            
-          
-          
-参考链接：
-修复python的ModuleNotFoundError - xiao.chun - 博客园 (cnblogs.com)
-【经验】python运行报错ModuleNotFoundError: No module named XXX_进阶中的程序员吃吃的博客-CSDN博客
-
-运行代码时出现ModuleNotFoundError，本地存在相应的Python文件，解决办法如下：
-在文件开头
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-30 12:46" pubdate>
-              2020-11-30
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/25/Article202011255/">使用显式循环版本计算Softmax损失函数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/25/Article202011255/">
-          
-          
-            
-          
-          
-参考链接：
-(1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客
-
- 第一种
-def softmax_loss_naive(W, X, y, reg):
-    &quot;&quot;&quot;
-    使用显式循环版本计算Softmax损失函数
-    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。
-    Inputs:
-  
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-25 18:16" pubdate>
-              2020-11-25
+            <time datetime="2021-01-10 19:32" pubdate>
+              2021-01-10
             </time>
           </div>
         
@@ -478,22 +417,24 @@ def softmax_loss_naive(W, X, y, reg):
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/25/Article202011254/">Python出现ImportError:cannot import name &#39;imread&#39; from &#39;scipy.misc&#39;问题</a>
+        <a href="/2021/01/10/Article202101102/">Pytorch的view方法</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/25/Article202011254/">
+        <a href="/2021/01/10/Article202101102/">
           
           
             
           
           
 参考链接：
-(30条消息) ImportError: cannot import name ‘imread’ from 'scipy.misc’问题的解决办法_二狗子的博客-CSDN博客
+https://blog.csdn.net/scut_salmon/article/details/82391320
+https://www.cnblogs.com/geeksongs/p/15034108.html
 
-ImportError: cannot import name ‘imread’ from 'scipy.misc’问题的解决办法
-wordcloud库做词云时常见的错误
-如果您在使用python绘制词云时使
+结论：Pytorch里的view方法用于改变数据维度，与numpy的reshape方法类似。
+ 一.按照传入数字使数据维度进行转换
+示例
+a = torch.aran
         </a>
       </p>
 
@@ -501,8 +442,154 @@ wordcloud库做词云时常见的错误
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-25 18:14" pubdate>
-              2020-11-25
+            <time datetime="2021-01-10 19:28" pubdate>
+              2021-01-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/Pytorch/">Pytorch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2021/01/10/Article202101101/">Pytorch错误Expected input batch_size (324) to match target batch_size (4) Log In</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/10/Article202101101/">
+          
+          
+            
+          
+          
+参考链接：
+https://blog.csdn.net/qq_41429220/article/details/104973805
+
+ Pytorch Error: ValueError: Expected input batch_size (324) to match target batch_size (4) Log In
+ 1.ERROR原因
+使用pytorch训练一个自定义的模型，参照网
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-10 19:27" pubdate>
+              2021-01-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/Pytorch/">Pytorch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/12/03/Article202012035/">深度学习实战 第6章卷积神经网络笔记</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/12/03/Article202012035/">
+          
+          
+            
+          
+           第6章 卷积神经网络
+**卷积神经网络(Convolutional Neural Network,CNN)**是在实际应用中最为成功的一种神经网络，其专门用于处理格状结构数据，比如图片数据就可以看成是由像素组成的二维格状数据。之所以称为“卷积”是因为其数据处理方式类似于数学中的卷积操作，该网络也是人工智能领域受生物启发最成功的模型之一，该模型儿乎垄断了机器视觉方面的研究。
+ 6.1 卷积操作
+1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-03 20:29" pubdate>
+              2020-12-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DeepLearning/">DeepLearning</a>
+            
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/12/03/Article202012034/">python安装cv2</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/12/03/Article202012034/">
+          
+          
+            
+          
+          
+参考链接：
+https://blog.csdn.net/weixin_39450145/article/details/104801730
+https://pypi.org/project/opencv-python/
+
+1.问题：ModuleNotFoundError: No module named 'cv2’
+
+2.解决：安装cv2
+
+pip install opencv-python  
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-03 20:28" pubdate>
+              2020-12-03
             </time>
           </div>
         
@@ -524,24 +611,21 @@ wordcloud库做词云时常见的错误
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2020/11/25/Article202011253/">Python字符串前面加u,r,b,f的含义</a>
+        <a href="/2020/12/03/Article202012033/">Typora添加数学公式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/11/25/Article202011253/">
+        <a href="/2020/12/03/Article202012033/">
           
           
             
           
           
 参考链接：
-Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客
-
-字符串前加u
-后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。
-exp = u&quot;我是含有中文字符组成的字符串。&quot;
-字符串前加r
-去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义
+https://blog.csdn.net/mingzhuo_126/article/details/82722455
+https://www.cnblogs.com/144823836yj/p/10263070.html
+https://zhuanlan.zhihu.com/p/262900046
+https://blog.csdn.net/liyuanbhu/article/de
         </a>
       </p>
 
@@ -549,8 +633,8 @@ exp = u&quot;我是含有中文字符组成的字符串。&quot;
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-25 18:13" pubdate>
-              2020-11-25
+            <time datetime="2020-12-03 20:24" pubdate>
+              2020-12-03
             </time>
           </div>
         
@@ -559,105 +643,9 @@ exp = u&quot;我是含有中文字符组成的字符串。&quot;
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Python/">Python</a>
+              <a href="/tags/Typora/">Typora</a>
             
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/25/Article202011252/">错误No module named &#39;cPickle&#39;</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/25/Article202011252/">
-          
-          
-            
-          
-          
-参考链接：
-https://blog.csdn.net/IMWTJ123/article/details/88547969
-
-导入模块
-import cPickle as pickle
-运行程序时发现出现错误：
-ImportError: No module named &#x27;cPickle&#x27;
-其实是版本的问题，python3并不兼容python2
-因为在python3下，是没有c
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-25 18:13" pubdate>
-              2020-11-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/11/25/Article202011251/">不完美的勇气【5】</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/11/25/Article202011251/">
-          
-          
-            
-          
-          第五章 所有的失败都源于缺乏共同体感觉
-——关于“共同体感觉”
-
-阿德勒曾与某位女士有过这样一段对话。
-这位女士因为丈夫的事而烦恼，怎么都睡不着觉。于是，阿德勒对她说。
-“如果今晚还是睡不着，不如想想怎么做才能让你的丈夫开心，明天一早就打电话告诉我，可以吗？”
-第二天早上，这位女士打电话过来。
-“阿德勒博士，实在是对不起，没有办法答复你要求的事，昨天晚上我睡得实在是太香了。”
-
-——引自《回忆阿德
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-25 18:13" pubdate>
-              2020-11-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%BF%83%E7%90%86/">心理</a>
+              <a href="/tags/Latex/">Latex</a>
             
           </div>
         
@@ -669,7 +657,7 @@ ImportError: No module named &#x27;cPickle&#x27;
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
