@@ -1,225 +1,4 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>使用pcolormesh绘制鸢尾花的分类图 - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-10-17 21:12" pubdate>
-      2020年10月17日 晚上
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.2k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      34
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">使用pcolormesh绘制鸢尾花的分类图</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <p>代码</p>
-<pre><code class="hljs python"><span class="hljs-comment"># 参考 https://www.cnblogs.com/shenxiaolin/p/8857158.html , https://blog.csdn.net/liulina603/article/details/78676723</span>
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>使用pcolormesh绘制鸢尾花的分类图 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-10-17 21:12" pubdate>2020年10月17日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.2k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 34 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">使用pcolormesh绘制鸢尾花的分类图</h1><div class="markdown-body" id="post-body"><p>代码</p><pre><code class="hljs python"><span class="hljs-comment"># 参考 https://www.cnblogs.com/shenxiaolin/p/8857158.html , https://blog.csdn.net/liulina603/article/details/78676723</span>
 <span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression  <span class="hljs-comment">#导入逻辑回归模型</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl
@@ -234,29 +13,29 @@
 <span class="hljs-string">datas</span>
 <span class="hljs-string">labels</span>
 <span class="hljs-string">&#x27;&#x27;&#x27;</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">logistic</span>(<span class="hljs-params">datas, labels, titleOfChart, x_label, y_label</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">logistic</span>(<span class="hljs-params">datas, labels, titleOfChart, x_label, y_label</span>):
     plt.figure()<span class="hljs-comment">#创建新画布</span>
     datas=np.array(datas)
-    datas=datas.astype(float) <span class="hljs-comment">#将二维的字符串数组转换成浮点数数组</span>
+    datas=datas.astype(<span class="hljs-built_in">float</span>) <span class="hljs-comment">#将二维的字符串数组转换成浮点数数组</span>
     labels=np.array(labels)   <span class="hljs-comment">#150个类别，50个&#x27;Iris-setosa&#x27;，50个&#x27;Iris-versicolor&#x27;，50个&#x27;Iris-virginica&#x27;</span>
     clf = LogisticRegression()  <span class="hljs-comment">#获取Logistic线性回归模型</span>
     <span class="hljs-comment">#将字符串类型的标签转化为数字类型，进行数字编码处理</span>
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(labels)):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(labels)):
         <span class="hljs-keyword">if</span> labels[i] == <span class="hljs-string">&#x27;Iris-setosa&#x27;</span>:
             labels[i] = <span class="hljs-number">0</span>
         <span class="hljs-keyword">elif</span> labels[i] == <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>:
             labels[i] = <span class="hljs-number">1</span>
         <span class="hljs-keyword">else</span>:
             labels[i] = <span class="hljs-number">2</span>
-    labels = labels.astype(np.int)<span class="hljs-comment">#降低内存空间</span>
+    labels = labels.astype(np.<span class="hljs-built_in">int</span>)<span class="hljs-comment">#降低内存空间</span>
     
     <span class="hljs-comment">#模型建立</span>
     clf.fit(datas, labels)<span class="hljs-comment">#使用已有的数据和标签进行模型拟合</span>
     
     <span class="hljs-comment">#数据准备阶段</span>
     N, M = <span class="hljs-number">500</span>, <span class="hljs-number">500</span>  <span class="hljs-comment"># 横纵各采样多少个值</span>
-    x1_min, x2_min = datas.min(axis=<span class="hljs-number">0</span>)
-    x1_max, x2_max = datas.max(axis=<span class="hljs-number">0</span>)
+    x1_min, x2_min = datas.<span class="hljs-built_in">min</span>(axis=<span class="hljs-number">0</span>)
+    x1_max, x2_max = datas.<span class="hljs-built_in">max</span>(axis=<span class="hljs-number">0</span>)
     t1 = np.linspace(x1_min, x1_max, N)
     t2 = np.linspace(x2_min, x2_max, M)
     x1, x2 = np.meshgrid(t1, t2)  <span class="hljs-comment"># 生成网格采样点</span>
@@ -290,15 +69,15 @@ datas2=[]
 datas3=[]
 datas4=[]
 labels1=[]<span class="hljs-comment">#标签列</span>
-data_file=open(<span class="hljs-string">&#x27;iris.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>)
+data_file=<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;iris.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>)
 <span class="hljs-comment">#数据初始化</span>
 <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> data_file.readlines():
     linedata = line.split(<span class="hljs-string">&#x27;,&#x27;</span>)
     <span class="hljs-comment">#剔除异常数据</span>
-    <span class="hljs-keyword">if</span> len(linedata) == <span class="hljs-number">5</span>:
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(linedata) == <span class="hljs-number">5</span>:
         linedata = np.array(linedata)  <span class="hljs-comment">#转化为多维数组</span>
         datas1.append(linedata[:<span class="hljs-number">2</span>]) <span class="hljs-comment"># [0:2]花萼长宽</span>
-        labels1.append(linedata[<span class="hljs-number">-1</span>].replace(<span class="hljs-string">&#x27;\n&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>))  <span class="hljs-comment"># 获取150朵花儿所属的类别</span>
+        labels1.append(linedata[-<span class="hljs-number">1</span>].replace(<span class="hljs-string">&#x27;\n&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>))  <span class="hljs-comment"># 获取150朵花儿所属的类别</span>
         datas2.append(linedata[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>]) <span class="hljs-comment"># [2:4]花瓣长宽</span>
         datas3.append(linedata[:][<span class="hljs-number">0</span>:<span class="hljs-number">4</span>:<span class="hljs-number">3</span>]) <span class="hljs-comment"># [0,3]花萼长，花瓣宽</span>
         datas4.append(linedata[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>]) <span class="hljs-comment"># [1:3]花萼宽，花瓣长</span>
@@ -309,328 +88,14 @@ logistic(datas1,labels1, <span class="hljs-string">&quot;花萼长，花萼宽&q
 logistic(datas2,labels1, <span class="hljs-string">&quot;花瓣长，花瓣宽&quot;</span>, <span class="hljs-string">&quot;花瓣长/(cm)&quot;</span>, <span class="hljs-string">&quot;花瓣宽/(cm)&quot;</span>)
 logistic(datas3,labels1, <span class="hljs-string">&quot;花萼长，花瓣宽&quot;</span>, <span class="hljs-string">&quot;花萼长/(cm)&quot;</span>, <span class="hljs-string">&quot;花瓣宽/(cm)&quot;</span>)
 logistic(datas4,labels1, <span class="hljs-string">&quot;花萼宽，花瓣长&quot;</span>, <span class="hljs-string">&quot;花萼宽/(cm)&quot;</span>, <span class="hljs-string">&quot;花瓣长/(cm)&quot;</span>)
-</code></pre>
-<p>其中iris.txt的文件内容如下图所示。</p>
-<p><img src="/2020/10/17/Article202010172/1.png" srcset="/img/loading.gif" alt="1"></p>
-<p>没有列名，我们使用open打开文件，文件中使用了“，”进行分割，首先明确每行有5条数据，分别是花萼长、花萼宽、花瓣长、花瓣宽、鸢尾花的类别。</p>
-<p>因为我们要对鸢尾花做分类，我们本次任务是从多个属性组合来检查分类效果。</p>
-<p>1.花萼的长、宽</p>
-<p>2.花瓣的长、宽</p>
-<p>3.花萼长、花瓣宽</p>
-<p>4.花瓣长、花萼宽</p>
-<p>所以我们分别统计这些数据，然后放入Logistic线性回归模型中去训练，然后使用pcolormesh来实现最终的分类效果展示。</p>
-<h3 id="分类图的绘画"><a class="markdownIt-Anchor" href="#分类图的绘画"></a> 分类图的绘画</h3>
-<p>训练完模型后，现在需要画出分类边界，首先需要在横纵坐标各取500点，一共组成250000个点，然后把这250000个点送进我们训练好的Logistic模型，来算出所属的种类，代码如下：</p>
-<pre><code class="hljs python"><span class="hljs-comment">#数据准备阶段</span>
+</code></pre><p>其中iris.txt的文件内容如下图所示。</p><p><img src="/2020/10/17/Article202010172/1.png" srcset="/img/loading.gif" alt="1"></p><p>没有列名，我们使用open打开文件，文件中使用了“，”进行分割，首先明确每行有5条数据，分别是花萼长、花萼宽、花瓣长、花瓣宽、鸢尾花的类别。</p><p>因为我们要对鸢尾花做分类，我们本次任务是从多个属性组合来检查分类效果。</p><p>1.花萼的长、宽</p><p>2.花瓣的长、宽</p><p>3.花萼长、花瓣宽</p><p>4.花瓣长、花萼宽</p><p>所以我们分别统计这些数据，然后放入Logistic线性回归模型中去训练，然后使用pcolormesh来实现最终的分类效果展示。</p><h3 id="分类图的绘画"><a class="markdownIt-Anchor" href="#分类图的绘画"></a> 分类图的绘画</h3><p>训练完模型后，现在需要画出分类边界，首先需要在横纵坐标各取500点，一共组成250000个点，然后把这250000个点送进我们训练好的Logistic模型，来算出所属的种类，代码如下：</p><pre><code class="hljs python"><span class="hljs-comment">#数据准备阶段</span>
 N, M = <span class="hljs-number">500</span>, <span class="hljs-number">500</span>  <span class="hljs-comment"># 横纵各采样多少个值</span>
-x1_min, x2_min = datas.min(axis=<span class="hljs-number">0</span>)
-x1_max, x2_max = datas.max(axis=<span class="hljs-number">0</span>)
+x1_min, x2_min = datas.<span class="hljs-built_in">min</span>(axis=<span class="hljs-number">0</span>)
+x1_max, x2_max = datas.<span class="hljs-built_in">max</span>(axis=<span class="hljs-number">0</span>)
 t1 = np.linspace(x1_min, x1_max, N)
 t2 = np.linspace(x2_min, x2_max, M)
 x1, x2 = np.meshgrid(t1, t2)  <span class="hljs-comment"># 生成网格采样点</span>
 x_show = np.stack((x1.flat, x2.flat), axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># 测试点</span>
-y_predict = clf.predict(x_show)<span class="hljs-comment">#预测值</span></code></pre>
-<p>接着就可以绘制出分类图了。由于该数据集中一共有三种鸢尾花，所以绘制图片的时候需要三种颜色</p>
-<pre><code class="hljs python">cm_light = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;#A0FFA0&#x27;</span>, <span class="hljs-string">&#x27;#FFA0A0&#x27;</span>, <span class="hljs-string">&#x27;#A0A0FF&#x27;</span>])
-cm_dark = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>])</code></pre>
-<p>接着使用plt.pcolormesh来绘制分类图，这里请注意，如果不写入<code>shading='auto'</code>，代码会发出警告，不会影响运行。</p>
-<pre><code class="hljs python">plt.pcolormesh(x1, x2, y_predict.reshape(x1.shape), shading=<span class="hljs-string">&#x27;auto&#x27;</span>, cmap=cm_light)
-plt.scatter(datas[:,<span class="hljs-number">0</span>], datas[:,<span class="hljs-number">1</span>], c=labels.transpose(), cmap=cm_dark, marker=<span class="hljs-string">&#x27;o&#x27;</span>, edgecolors=<span class="hljs-string">&#x27;k&#x27;</span>)</code></pre>
-<p>plt.pcolormesh()会根据y_predict的结果自动在cmap里选择颜色。</p>
-<p><img src="/2020/10/17/Article202010172/2.png" srcset="/img/loading.gif" alt="2"></p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Python/Matplotlib/">Matplotlib</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/10/17/Article202010173/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python3出现AttributeError的错误</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/10/16/Article202010161/">
-                        <span class="hidden-mobile">安装了sklearn(scikit-learn)但是报错ImportError:No module named 'sklearn.cross_validation'</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "使用pcolormesh绘制鸢尾花的分类图&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+y_predict = clf.predict(x_show)<span class="hljs-comment">#预测值</span></code></pre><p>接着就可以绘制出分类图了。由于该数据集中一共有三种鸢尾花，所以绘制图片的时候需要三种颜色</p><pre><code class="hljs python">cm_light = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;#A0FFA0&#x27;</span>, <span class="hljs-string">&#x27;#FFA0A0&#x27;</span>, <span class="hljs-string">&#x27;#A0A0FF&#x27;</span>])
+cm_dark = mpl.colors.ListedColormap([<span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>])</code></pre><p>接着使用plt.pcolormesh来绘制分类图，这里请注意，如果不写入<code>shading='auto'</code>，代码会发出警告，不会影响运行。</p><pre><code class="hljs python">plt.pcolormesh(x1, x2, y_predict.reshape(x1.shape), shading=<span class="hljs-string">&#x27;auto&#x27;</span>, cmap=cm_light)
+plt.scatter(datas[:,<span class="hljs-number">0</span>], datas[:,<span class="hljs-number">1</span>], c=labels.transpose(), cmap=cm_dark, marker=<span class="hljs-string">&#x27;o&#x27;</span>, edgecolors=<span class="hljs-string">&#x27;k&#x27;</span>)</code></pre><p>plt.pcolormesh()会根据y_predict的结果自动在cmap里选择颜色。</p><p><img src="/2020/10/17/Article202010172/2.png" srcset="/img/loading.gif" alt="2"></p></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/Python/">Python</a> <a class="hover-with-bg" href="/categories/Python/Matplotlib/">Matplotlib</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/10/17/Article202010173/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Python3出现AttributeError的错误</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/10/16/Article202010161/"><span class="hidden-mobile">安装了sklearn(scikit-learn)但是报错ImportError:No module named 'sklearn.cross_validation'</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","使用pcolormesh绘制鸢尾花的分类图&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

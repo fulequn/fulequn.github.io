@@ -1,229 +1,7 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>编码实现全连接神经网络 - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-11-30 12:48" pubdate>
-      2020年11月30日 下午
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      3.4k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      99
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">编码实现全连接神经网络</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <h2 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h2>
-<p>首先实现神经网络中仿射层、ReLU层以及组合单层神经元。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>编码实现全连接神经网络 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-11-30 12:48" pubdate>2020年11月30日 下午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 3.4k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 99 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">编码实现全连接神经网络</h1><div class="markdown-body" id="post-body"><h2 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h2><p>首先实现神经网络中仿射层、ReLU层以及组合单层神经元。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_forward</span>(<span class="hljs-params">x, w, b</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_forward</span>(<span class="hljs-params">x, w, b</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算神经网络当前层的前馈传播，该方法计算在全连接情况下的得分函数。</span>
 <span class="hljs-string">    注：如果不理解affine仿射变换，简单的理解为在全连接情况下的得分函数即可。</span>
@@ -250,7 +28,7 @@
     <span class="hljs-comment"># 获取样本数</span>
     N = x.shape[<span class="hljs-number">0</span>]
     <span class="hljs-comment"># 整合数据</span>
-    x_new = x.reshape(N, <span class="hljs-number">-1</span>)
+    x_new = x.reshape(N, -<span class="hljs-number">1</span>)
     <span class="hljs-comment"># 计算仿射的得分</span>
     out = np.dot(x_new, w)+b
     <span class="hljs-comment">#############################################################################</span>
@@ -260,7 +38,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     计算仿射层的反向传播.</span>
 <span class="hljs-string"></span>
@@ -283,9 +61,9 @@
     <span class="hljs-comment">#                 求完梯度后你需要将dx的形状与x重塑成一样                                            #</span>
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-comment"># 计算b的梯度</span>
-    db = np.sum(dout, axis=<span class="hljs-number">0</span>)
+    db = np.<span class="hljs-built_in">sum</span>(dout, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># 将x重塑成(N, D)</span>
-    xx = x.reshape(x.shape[<span class="hljs-number">0</span>], <span class="hljs-number">-1</span>)
+    xx = x.reshape(x.shape[<span class="hljs-number">0</span>], -<span class="hljs-number">1</span>)
     dw = np.dot(xx.T, dout)
     dx = np.dot(dout, w.T)
     <span class="hljs-comment"># 将dx的形状与x重塑成一样</span>
@@ -296,7 +74,7 @@
     <span class="hljs-keyword">return</span> dx, dw, db
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">relu_forward</span>(<span class="hljs-params">x</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">relu_forward</span>(<span class="hljs-params">x</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算rectified linear units (ReLUs)激活函数的前向传播，并保存相应缓存</span>
 <span class="hljs-string"></span>
@@ -320,7 +98,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">relu_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">relu_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算 rectified linear units (ReLUs)激活函数的反向传播.</span>
 <span class="hljs-string"></span>
@@ -342,7 +120,7 @@
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-keyword">return</span> dx
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_forward</span>(<span class="hljs-params">x, w, b</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_forward</span>(<span class="hljs-params">x, w, b</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     ReLU神经元前向传播</span>
 <span class="hljs-string"></span>
@@ -368,7 +146,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     ReLU神经元的反向传播</span>
 <span class="hljs-string">     </span>
@@ -395,7 +173,7 @@
 
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss</span>(<span class="hljs-params">x, y</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">softmax_loss</span>(<span class="hljs-params">x, y</span>):
     <span class="hljs-string">&#x27;&#x27;&#x27;</span>
 <span class="hljs-string">    计算Softmax损失函数</span>
 <span class="hljs-string"></span>
@@ -414,30 +192,27 @@
 <span class="hljs-string">        梯度</span>
 <span class="hljs-string"></span>
 <span class="hljs-string">    &#x27;&#x27;&#x27;</span>
-    probs = np.exp(x - np.max(x, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>))
-    probs /= np.sum(probs, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>)
+    probs = np.exp(x - np.<span class="hljs-built_in">max</span>(x, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>))
+    probs /= np.<span class="hljs-built_in">sum</span>(probs, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>)
     <span class="hljs-comment"># 数据量</span>
     N = x.shape[<span class="hljs-number">0</span>]
-    loss = -np.sum(np.log(probs[np.arange(N), y])) / N
+    loss = -np.<span class="hljs-built_in">sum</span>(np.log(probs[np.arange(N), y])) / N
     dx = probs.copy()
     dx[np.arange(N), y] -= <span class="hljs-number">1</span>
     dx /= N
 
-    <span class="hljs-keyword">return</span> loss, dx</code></pre>
-<h2 id="shallow_layer_netpy"><a class="markdownIt-Anchor" href="#shallow_layer_netpy"></a> shallow_layer_net.py</h2>
-<p>实现浅层神经网络</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+    <span class="hljs-keyword">return</span> loss, dx</code></pre><h2 id="shallow_layer_netpy"><a class="markdownIt-Anchor" href="#shallow_layer_netpy"></a> shallow_layer_net.py</h2><p>实现浅层神经网络</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> .layers <span class="hljs-keyword">import</span> *
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShallowLayerNet</span>(<span class="hljs-params">object</span>):</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ShallowLayerNet</span>(<span class="hljs-title class_ inherited__">object</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    浅层全连接神经网络，其中隐藏层使用ReLU作为激活函数，输出层使用softmax作为分类器</span>
 <span class="hljs-string">    该网络结构应该为     affine - relu -affine - softmax</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, input_dim=<span class="hljs-number">3</span>*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>, hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">               weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span></span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, input_dim=<span class="hljs-number">3</span>*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>, hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>,</span>
+<span class="hljs-params">               weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        初始化网络.</span>
 <span class="hljs-string"></span>
@@ -466,7 +241,7 @@
     
     
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">self, X, y=<span class="hljs-literal">None</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        计算数据X的损失值以及梯度.</span>
 <span class="hljs-string"></span>
@@ -507,8 +282,8 @@
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment"># 计算最后的分类</span>
         loss, dy = softmax_loss(scores, y)
-        loss += <span class="hljs-number">0.5</span>*self.reg*(np.sum(self.params[<span class="hljs-string">&#x27;W1&#x27;</span>]*self.params[<span class="hljs-string">&#x27;W1&#x27;</span>])
-                   +np.sum(self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]*self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]))
+        loss += <span class="hljs-number">0.5</span>*self.reg*(np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W1&#x27;</span>]*self.params[<span class="hljs-string">&#x27;W1&#x27;</span>])
+                   +np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]*self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]))
         dx2, dw2, grads[<span class="hljs-string">&#x27;b2&#x27;</span>] = affine_backward(dy, cache2) 
         grads[<span class="hljs-string">&#x27;W2&#x27;</span>] = dw2 + self.reg*self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]
         dx, dw1, grads[<span class="hljs-string">&#x27;b1&#x27;</span>] = affine_relu_backward(dx2, cache1) 
@@ -518,10 +293,10 @@
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-keyword">return</span> loss, grads
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">self, X, y, X_val, y_val,</span></span>
-<span class="hljs-function"><span class="hljs-params">            learning_rate=<span class="hljs-number">1e-3</span>, learning_rate_decay=<span class="hljs-number">0.95</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">            reg=<span class="hljs-number">1e-5</span>, num_iters=<span class="hljs-number">100</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">            batch_size=<span class="hljs-number">200</span>, verbose=False</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">self, X, y, X_val, y_val,</span>
+<span class="hljs-params">            learning_rate=<span class="hljs-number">1e-3</span>, learning_rate_decay=<span class="hljs-number">0.95</span>,</span>
+<span class="hljs-params">            reg=<span class="hljs-number">1e-5</span>, num_iters=<span class="hljs-number">100</span>,</span>
+<span class="hljs-params">            batch_size=<span class="hljs-number">200</span>, verbose=<span class="hljs-literal">False</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        使用随机梯度下贱训练神经网络</span>
 <span class="hljs-string">        Inputs:</span>
@@ -539,15 +314,15 @@
         num_train = X.shape[<span class="hljs-number">0</span>]
         self.reg =reg
         <span class="hljs-comment">#打印以及学习率衰减周期</span>
-        iterations_per_epoch = max(num_train / batch_size, <span class="hljs-number">1</span>)
+        iterations_per_epoch = <span class="hljs-built_in">max</span>(num_train / batch_size, <span class="hljs-number">1</span>)
 
         <span class="hljs-comment"># 存储训练中的数据</span>
         loss_history = []  <span class="hljs-comment">#loss值</span>
         train_acc_history = []  <span class="hljs-comment">#训练精度</span>
         val_acc_history = []  <span class="hljs-comment">#记录精度</span>
-        best_val=<span class="hljs-number">-1</span>  <span class="hljs-comment">#记录最佳精度</span>
+        best_val=-<span class="hljs-number">1</span>  <span class="hljs-comment">#记录最佳精度</span>
         
-        <span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> range(num_iters):
+        <span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_iters):
           X_batch = <span class="hljs-literal">None</span>
           y_batch = <span class="hljs-literal">None</span>
 
@@ -566,7 +341,7 @@
           self.params[<span class="hljs-string">&#x27;b2&#x27;</span>] += -learning_rate*grads[<span class="hljs-string">&#x27;b2&#x27;</span>]
 
           <span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">and</span> it % <span class="hljs-number">100</span> == <span class="hljs-number">0</span>:
-            print(<span class="hljs-string">&#x27;迭代次数 %d / %d: 损失值 %f&#x27;</span> % (it, num_iters, loss))
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;迭代次数 %d / %d: 损失值 %f&#x27;</span> % (it, num_iters, loss))
 
           <span class="hljs-keyword">if</span> it % iterations_per_epoch == <span class="hljs-number">0</span>:
             <span class="hljs-comment"># 测试精度</span>
@@ -588,7 +363,7 @@
         &#125;
     
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict</span>(<span class="hljs-params">self, X</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">self, X</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        Inputs:</span>
 <span class="hljs-string">        - X: 输入数据</span>
@@ -601,21 +376,18 @@
         scores, cache2 = affine_forward(out1,self.params[<span class="hljs-string">&#x27;W2&#x27;</span>],self.params[<span class="hljs-string">&#x27;b2&#x27;</span>])
         <span class="hljs-comment"># 选择可能性最大的类别作为该样本的分类</span>
         y_pred = np.argmax(scores, axis=<span class="hljs-number">1</span>)
-        <span class="hljs-keyword">return</span> y_pred</code></pre>
-<h2 id="fc_netpy"><a class="markdownIt-Anchor" href="#fc_netpy"></a> fc_net.py</h2>
-<p>实现深层全连接网络。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+        <span class="hljs-keyword">return</span> y_pred</code></pre><h2 id="fc_netpy"><a class="markdownIt-Anchor" href="#fc_netpy"></a> fc_net.py</h2><p>实现深层全连接网络。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> .layers <span class="hljs-keyword">import</span> *
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FullyConnectedNet</span>(<span class="hljs-params">object</span>):</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FullyConnectedNet</span>(<span class="hljs-title class_ inherited__">object</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    深层全连接神经网络，其中隐藏层使用ReLU作为激活函数，输出层使用softmax作为分类器</span>
 <span class="hljs-string">    该网络结构应该为     &#123;affine - relu&#125;x(L -1) -affine - softmax</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, input_dim=<span class="hljs-number">3</span>*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>, hidden_dims=[<span class="hljs-number">50</span>,<span class="hljs-number">50</span>], num_classes=<span class="hljs-number">10</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">                 reg=<span class="hljs-number">0.0</span>, weight_scale=<span class="hljs-number">1e-3</span></span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, input_dim=<span class="hljs-number">3</span>*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>, hidden_dims=[<span class="hljs-number">50</span>,<span class="hljs-number">50</span>], num_classes=<span class="hljs-number">10</span>,</span>
+<span class="hljs-params">                 reg=<span class="hljs-number">0.0</span>, weight_scale=<span class="hljs-number">1e-3</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        初始化网络.</span>
 <span class="hljs-string"></span>
@@ -627,7 +399,7 @@
 <span class="hljs-string">        - reg: L2正则化的权重衰减系数.</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
         self.reg = reg
-        self.num_layers = <span class="hljs-number">1</span> + len(hidden_dims)
+        self.num_layers = <span class="hljs-number">1</span> + <span class="hljs-built_in">len</span>(hidden_dims)
         self.params = &#123;&#125;
         <span class="hljs-comment"># 这里存储的是每层的神经元数量。 </span>
         layers_dims = [input_dim] + hidden_dims + [num_classes] 
@@ -637,17 +409,17 @@
         <span class="hljs-comment">#        所有权重矩阵和偏置向量应该存放在self.params字典中。               #</span>
         <span class="hljs-comment">#   第一层的权重和偏置使用键值 &#x27;W1&#x27;以及&#x27;b1&#x27;，第n层使用&#x27;Wn&#x27;以及&#x27;bn&#x27;         #</span>
         <span class="hljs-comment">############################################################################   </span>
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.num_layers):
-            self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)] = weight_scale*np.random.randn(
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(self.num_layers):
+            self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)] = weight_scale*np.random.randn(
                 layers_dims[i], layers_dims[i+<span class="hljs-number">1</span>])
-            self.params[<span class="hljs-string">&#x27;b&#x27;</span>+str(i+<span class="hljs-number">1</span>)] = np.zeros((<span class="hljs-number">1</span>, layers_dims[i+<span class="hljs-number">1</span>]))
+            self.params[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)] = np.zeros((<span class="hljs-number">1</span>, layers_dims[i+<span class="hljs-number">1</span>]))
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                           结束编码                                       #</span>
         <span class="hljs-comment">############################################################################</span>
 
 
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">self, X, y=<span class="hljs-literal">None</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        计算数据X的损失值以及梯度.</span>
 <span class="hljs-string"></span>
@@ -670,13 +442,13 @@
         <span class="hljs-comment">############################################################################</span>
         cache_relu, outs, cache_out = &#123;&#125;, &#123;&#125;, &#123;&#125;
         outs[<span class="hljs-number">0</span>] = X
-        num_h = self.num_layers<span class="hljs-number">-1</span>
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_h):
+        num_h = self.num_layers-<span class="hljs-number">1</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_h):
             outs[i+<span class="hljs-number">1</span>], cache_relu[i+<span class="hljs-number">1</span>] = affine_relu_forward(
-                outs[i], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)], self.params[<span class="hljs-string">&#x27;b&#x27;</span>+str(i+<span class="hljs-number">1</span>)])
+                outs[i], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)], self.params[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)])
         scores, cache_out = affine_forward(outs[num_h], 
-                                           self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(num_h+<span class="hljs-number">1</span>)],
-                                           self.params[<span class="hljs-string">&#x27;b&#x27;</span>+str(num_h+<span class="hljs-number">1</span>)])
+                                           self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(num_h+<span class="hljs-number">1</span>)],
+                                           self.params[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(num_h+<span class="hljs-number">1</span>)])
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                            结束编码                                      #</span>
         <span class="hljs-comment">############################################################################</span>
@@ -689,25 +461,25 @@
         dout, daffine = &#123;&#125;, &#123;&#125;
         loss, dy = softmax_loss(scores, y)
         <span class="hljs-comment"># 隐藏层数</span>
-        h = self.num_layers<span class="hljs-number">-1</span>
+        h = self.num_layers-<span class="hljs-number">1</span>
         <span class="hljs-comment"># 最后一层是affine层，前面的均是组合层</span>
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.num_layers):
-            loss += <span class="hljs-number">0.5</span>*self.reg*(np.sum(self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)]*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)]))
-            dout[h], grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+str(h+<span class="hljs-number">1</span>)] = affine_backward(dy, cache_out)
-            grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)] += self.reg*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(h+<span class="hljs-number">1</span>)]
-            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(h):
-                dout[h-i<span class="hljs-number">-1</span>], grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h-i)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+str(h-i)] = affine_relu_backward(
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(self.num_layers):
+            loss += <span class="hljs-number">0.5</span>*self.reg*(np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)]*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)]))
+            dout[h], grads[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h+<span class="hljs-number">1</span>)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(h+<span class="hljs-number">1</span>)] = affine_backward(dy, cache_out)
+            grads[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h+<span class="hljs-number">1</span>)] += self.reg*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h+<span class="hljs-number">1</span>)]
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(h):
+                dout[h-i-<span class="hljs-number">1</span>], grads[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h-i)], grads[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(h-i)] = affine_relu_backward(
                     dout[h-i], cache_relu[h-i])
-                grads[<span class="hljs-string">&#x27;W&#x27;</span>+str(h-i)] += self.reg*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(h-i)]
+                grads[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h-i)] += self.reg*self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(h-i)]
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-comment">#                             结束编码                                     #</span>
         <span class="hljs-comment">############################################################################</span>
 
         <span class="hljs-keyword">return</span> loss, grads
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">self, X, y, X_val, </span></span>
-<span class="hljs-function"><span class="hljs-params">              y_val,learning_rate=<span class="hljs-number">1e-3</span>, learning_rate_decay=<span class="hljs-number">0.95</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">              num_iters=<span class="hljs-number">100</span>,batch_size=<span class="hljs-number">200</span>, verbose=False</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">self, X, y, X_val, </span>
+<span class="hljs-params">              y_val,learning_rate=<span class="hljs-number">1e-3</span>, learning_rate_decay=<span class="hljs-number">0.95</span>,</span>
+<span class="hljs-params">              num_iters=<span class="hljs-number">100</span>,batch_size=<span class="hljs-number">200</span>, verbose=<span class="hljs-literal">False</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        使用随机梯度下降训练神经网络</span>
 <span class="hljs-string">        Inputs:</span>
@@ -723,13 +495,13 @@
 <span class="hljs-string">        - verbose:是否在训练过程中打印结果.</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
         num_train = X.shape[<span class="hljs-number">0</span>]
-        iterations_per_epoch = max(num_train / batch_size, <span class="hljs-number">1</span>)
+        iterations_per_epoch = <span class="hljs-built_in">max</span>(num_train / batch_size, <span class="hljs-number">1</span>)
 
         loss_history = []
         train_acc_history = []
         val_acc_history = []
-        best_val=<span class="hljs-number">-1</span>
-        <span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> range(num_iters):
+        best_val=-<span class="hljs-number">1</span>
+        <span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_iters):
 
             X_batch = <span class="hljs-literal">None</span>
             y_batch = <span class="hljs-literal">None</span>
@@ -752,7 +524,7 @@
             <span class="hljs-comment">#                              结束编码                                    #</span>
             <span class="hljs-comment">############################################################################</span>
             <span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">and</span> it % <span class="hljs-number">100</span> == <span class="hljs-number">0</span>:
-                print(<span class="hljs-string">&#x27;iteration %d / %d: loss %f&#x27;</span> % (it, num_iters, loss))
+                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;iteration %d / %d: loss %f&#x27;</span> % (it, num_iters, loss))
 
             <span class="hljs-keyword">if</span> it % iterations_per_epoch == <span class="hljs-number">0</span>:
                 <span class="hljs-comment"># 检验精度</span>
@@ -773,7 +545,7 @@
           <span class="hljs-string">&#x27;best_val_acc&#x27;</span>:best_val
         &#125;
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">predict</span>(<span class="hljs-params">self, X</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">self, X</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        Inputs:</span>
 <span class="hljs-string">        - X: 输入数据</span>
@@ -787,302 +559,15 @@
         <span class="hljs-comment">###########################################################################</span>
         outs = &#123;&#125;
         outs[<span class="hljs-number">0</span>] = X
-        num_h = self.num_layers<span class="hljs-number">-1</span>
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_h):
-            outs[i+<span class="hljs-number">1</span>], _ =affine_relu_forward(outs[i], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(i+<span class="hljs-number">1</span>)],
-                                              self.params[<span class="hljs-string">&#x27;b&#x27;</span>+str(i+<span class="hljs-number">1</span>)])
-        scores, _ = affine_forward(outs[num_h], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+str(num_h+<span class="hljs-number">1</span>)], 
-                                   self.params[<span class="hljs-string">&#x27;b&#x27;</span>+str(num_h+<span class="hljs-number">1</span>)])
+        num_h = self.num_layers-<span class="hljs-number">1</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_h):
+            outs[i+<span class="hljs-number">1</span>], _ =affine_relu_forward(outs[i], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)],
+                                              self.params[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(i+<span class="hljs-number">1</span>)])
+        scores, _ = affine_forward(outs[num_h], self.params[<span class="hljs-string">&#x27;W&#x27;</span>+<span class="hljs-built_in">str</span>(num_h+<span class="hljs-number">1</span>)], 
+                                   self.params[<span class="hljs-string">&#x27;b&#x27;</span>+<span class="hljs-built_in">str</span>(num_h+<span class="hljs-number">1</span>)])
         y_pred = np.argmax(scores, axis=<span class="hljs-number">1</span>)
         <span class="hljs-comment">###########################################################################</span>
         <span class="hljs-comment">#                             结束编码                                    #</span>
         <span class="hljs-comment">###########################################################################</span>
         <span class="hljs-keyword">return</span> y_pred
-</code></pre>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Deepearning/">Deepearning</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/11/30/Article202011304/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">深度学习实战 第4章深度学习正则化笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/11/30/Article202011302/">
-                        <span class="hidden-mobile">Matplotlib使用subplot时标题与刻度重叠</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "编码实现全连接神经网络&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+</code></pre></div><hr><div><div class="post-metas mb-3"><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/Deepearning/">Deepearning</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/11/30/Article202011304/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">深度学习实战 第4章深度学习正则化笔记</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/11/30/Article202011302/"><span class="hidden-mobile">Matplotlib使用subplot时标题与刻度重叠</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","编码实现全连接神经网络&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,232 +1,10 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>编码实现卷积神经网络 - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2021-01-10 19:32" pubdate>
-      2021年1月10日 晚上
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      7k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      225
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">编码实现卷积神经网络</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <h3 id="cnn_layerspy"><a class="markdownIt-Anchor" href="#cnn_layerspy"></a> cnn_layers.py</h3>
-<p>实现卷积神经网络的前向后传播的函数。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>编码实现卷积神经网络 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2021-01-10 19:32" pubdate>2021年1月10日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 7k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 225 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">编码实现卷积神经网络</h1><div class="markdown-body" id="post-body"><h3 id="cnn_layerspy"><a class="markdownIt-Anchor" href="#cnn_layerspy"></a> cnn_layers.py</h3><p>实现卷积神经网络的前向后传播的函数。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
 <span class="hljs-keyword">from</span> bn_layers <span class="hljs-keyword">import</span> *
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_forward_naive</span>(<span class="hljs-params">x, w, b, conv_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_forward_naive</span>(<span class="hljs-params">x, w, b, conv_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    卷积前向传播。</span>
 <span class="hljs-string">    Input:</span>
@@ -261,17 +39,17 @@
     x_pad = np.pad(x, ((<span class="hljs-number">0</span>,), (<span class="hljs-number">0</span>,), (pad,), (pad,)), <span class="hljs-string">&#x27;constant&#x27;</span>)
     
     <span class="hljs-comment"># 计算循环次数</span>
-    Hhat = int(<span class="hljs-number">1</span> + (H + <span class="hljs-number">2</span> * pad - HH) / stride)
-    What= int(<span class="hljs-number">1</span> + (W + <span class="hljs-number">2</span> * pad - WW) / stride)
+    Hhat = <span class="hljs-built_in">int</span>(<span class="hljs-number">1</span> + (H + <span class="hljs-number">2</span> * pad - HH) / stride)
+    What= <span class="hljs-built_in">int</span>(<span class="hljs-number">1</span> + (W + <span class="hljs-number">2</span> * pad - WW) / stride)
     <span class="hljs-comment"># 输出值</span>
     out = np.zeros([N,F,Hhat,What])
     <span class="hljs-comment"># 遍历所有数据的下层色道的高和宽</span>
-    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> range(N):
-        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> range(F):
-            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(Hhat):
-                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(What):
+    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):
+        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Hhat):
+                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(What):
                     xx =x_pad[n, :, i*stride:i*stride+HH, j*stride:j*stride+WW]
-                    out[n,f,i,j] =np.sum(xx*w[f])+b[f]
+                    out[n,f,i,j] =np.<span class="hljs-built_in">sum</span>(xx*w[f])+b[f]
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-comment">#                                                         结束编码                                                                            #</span>
     <span class="hljs-comment">#############################################################################</span>
@@ -279,7 +57,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_forward_fast</span>(<span class="hljs-params">x, w, b, conv_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_forward_fast</span>(<span class="hljs-params">x, w, b, conv_param</span>):
     <span class="hljs-string">&#x27;&#x27;&#x27;</span>
 <span class="hljs-string">    卷积前向传播的快速版本</span>
 <span class="hljs-string"></span>
@@ -312,8 +90,8 @@
     <span class="hljs-comment"># 计算输出维度</span>
     H += <span class="hljs-number">2</span> * pad
     W += <span class="hljs-number">2</span> * pad
-    out_h = int((H - HH) / stride + <span class="hljs-number">1</span>)
-    out_w = int((W - WW) / stride + <span class="hljs-number">1</span>)
+    out_h = <span class="hljs-built_in">int</span>((H - HH) / stride + <span class="hljs-number">1</span>)
+    out_w = <span class="hljs-built_in">int</span>((W - WW) / stride + <span class="hljs-number">1</span>)
     shape = (C, HH, WW, N, out_h, out_w)
     strides = (H * W, W, <span class="hljs-number">1</span>, C * H * W, stride * W, stride)
     strides = x.itemsize * np.array(strides)
@@ -322,7 +100,7 @@
     x_cols = np.ascontiguousarray(x_stride)
     x_cols.shape = (C * HH * WW, N * out_h * out_w)
     <span class="hljs-comment"># 将所有卷积核重塑成一行</span>
-    res = w.reshape(F, <span class="hljs-number">-1</span>).dot(x_cols) + b.reshape(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>)
+    res = w.reshape(F, -<span class="hljs-number">1</span>).dot(x_cols) + b.reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
     <span class="hljs-comment"># 重塑输出</span>
     res.shape = (F, N, out_h, out_w)
     out = res.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
@@ -332,7 +110,7 @@
 
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_backward_naive1</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_backward_naive1</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    卷积层反向传播显式循环版本</span>
 <span class="hljs-string"></span>
@@ -357,33 +135,33 @@
     N, F, Hh, Hw = dout.shape
     S = conv_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
     dw = np.zeros((F, C, HH, WW))
-    <span class="hljs-keyword">for</span> fprime <span class="hljs-keyword">in</span> range(F):
-        <span class="hljs-keyword">for</span> cprime <span class="hljs-keyword">in</span> range(C):
-            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(HH):
-                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(WW):
+    <span class="hljs-keyword">for</span> fprime <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):
+        <span class="hljs-keyword">for</span> cprime <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(C):
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(HH):
+                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(WW):
                     sub_xpad =x_pad[:,cprime,i:i+Hh*S:S,j:j+Hw*S:S]
-                    dw[fprime,cprime,i,j] = np.sum(
+                    dw[fprime,cprime,i,j] = np.<span class="hljs-built_in">sum</span>(
                             dout[:,fprime,:,:]*sub_xpad)
 
     
     db = np.zeros((F))
-    <span class="hljs-keyword">for</span> fprime <span class="hljs-keyword">in</span> range(F):
-                db[fprime] = np.sum(dout[:,fprime,:,:])
+    <span class="hljs-keyword">for</span> fprime <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):
+                db[fprime] = np.<span class="hljs-built_in">sum</span>(dout[:,fprime,:,:])
     dx = np.zeros((N, C, H, W))
     
-    <span class="hljs-keyword">for</span> nprime <span class="hljs-keyword">in</span> range(N):
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(H):
-            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(W):
-                <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> range(F):
-                    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(Hh):
-                        <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> range(Hw):
+    <span class="hljs-keyword">for</span> nprime <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(H):
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(W):
+                <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):
+                    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Hh):
+                        <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Hw):
                             mask1 = np.zeros_like(w[f,:,:,:])
                             mask2 = np.zeros_like(w[f,:,:,:])
                             <span class="hljs-keyword">if</span> (i+P-k*S)&lt;HH <span class="hljs-keyword">and</span> (i+P-k*S)&gt;= <span class="hljs-number">0</span>:
                                     mask1[:,i+P-k*S,:] = <span class="hljs-number">1.0</span>
                             <span class="hljs-keyword">if</span> (j+P-l* S) &lt; WW <span class="hljs-keyword">and</span> (j+P-l*S)&gt;= <span class="hljs-number">0</span>:
                                     mask2[:,:,j+P-l*S] = <span class="hljs-number">1.0</span>
-                            w_masked=np.sum(w[f,:,:,:]*mask1*mask2,axis=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))
+                            w_masked=np.<span class="hljs-built_in">sum</span>(w[f,:,:,:]*mask1*mask2,axis=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))
                             dx[nprime,:,i,j] +=dout[nprime,f,k,l]*w_masked
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-comment">#                            结束编码                                                                         #</span>
@@ -391,7 +169,7 @@
     <span class="hljs-keyword">return</span> dx, dw, db
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_backward_naive</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_backward_naive</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    卷积层反向传播</span>
 <span class="hljs-string"></span>
@@ -414,8 +192,8 @@
     F, _, HH, WW = w.shape
     stride, pad = conv_param[<span class="hljs-string">&#x27;stride&#x27;</span>], conv_param[<span class="hljs-string">&#x27;pad&#x27;</span>]
     <span class="hljs-comment"># 计算循环次数</span>
-    H_out = int(<span class="hljs-number">1</span>+(H+<span class="hljs-number">2</span>*pad-HH)/stride)
-    W_out = int(<span class="hljs-number">1</span>+(W+<span class="hljs-number">2</span>*pad-WW)/stride)
+    H_out = <span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>+(H+<span class="hljs-number">2</span>*pad-HH)/stride)
+    W_out = <span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>+(W+<span class="hljs-number">2</span>*pad-WW)/stride)
     <span class="hljs-comment"># 进行0填充</span>
     x_pad = np.pad(x,((<span class="hljs-number">0</span>,), (<span class="hljs-number">0</span>,), (pad,), (pad,)), 
                    mode=<span class="hljs-string">&#x27;constant&#x27;</span>, constant_values=<span class="hljs-number">0</span>)
@@ -425,22 +203,22 @@
     dw = np.zeros_like(w)
     db = np.zeros_like(b)
     <span class="hljs-comment"># 进行求解</span>
-    db = np.sum(dout, axis=(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+    db = np.<span class="hljs-built_in">sum</span>(dout, axis=(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
     x_pad = np.pad(x,((<span class="hljs-number">0</span>,), (<span class="hljs-number">0</span>,), (pad,), (pad,)), 
                    mode=<span class="hljs-string">&#x27;constant&#x27;</span>, constant_values=<span class="hljs-number">0</span>)
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(H_out):
-        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(W_out):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(H_out):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(W_out):
             x_pad_masked = x_pad[:, :, i*stride:i*stride+HH, 
                                  j*stride:j*stride+WW]
             <span class="hljs-comment"># 计算dw</span>
-            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(F):
-                dw[k, :, :, :] += np.sum(x_pad_masked*(dout[:, k, i, j])[:,
+            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):
+                dw[k, :, :, :] += np.<span class="hljs-built_in">sum</span>(x_pad_masked*(dout[:, k, i, j])[:,
                             <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>], axis=<span class="hljs-number">0</span>)
             
             <span class="hljs-comment"># 计算dx_pad</span>
-            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> range(N):
+            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):
                 dx_pad[n, :, i*stride:i*stride+HH, j*stride:j*stride+WW] += \
-                    np.sum((w[:, :, :, :]*(dout[n, :, i, j])[:, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>]),
+                    np.<span class="hljs-built_in">sum</span>((w[:, :, :, :]*(dout[n, :, i, j])[:, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>]),
                            axis=<span class="hljs-number">0</span>)
                     
     dx = dx_pad[:, :, pad:-pad, pad:-pad]
@@ -450,7 +228,7 @@
     <span class="hljs-keyword">return</span> dx, dw, db
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">max_pool_forward_naive</span>(<span class="hljs-params">x, pool_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">max_pool_forward_naive</span>(<span class="hljs-params">x, pool_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    最大池化前向传播</span>
 <span class="hljs-string"></span>
@@ -476,15 +254,15 @@
     stride = pool_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
     
     <span class="hljs-comment"># 计算循环次数</span>
-    H_out = int((H-HH)/stride+<span class="hljs-number">1</span>) 
-    W_out = int((W-WW)/stride+<span class="hljs-number">1</span>)
+    H_out = <span class="hljs-built_in">int</span>((H-HH)/stride+<span class="hljs-number">1</span>) 
+    W_out = <span class="hljs-built_in">int</span>((W-WW)/stride+<span class="hljs-number">1</span>)
     out = np.zeros((N, C, H_out, W_out))
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(H_out):
-        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(W_out):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(H_out):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(W_out):
             <span class="hljs-comment"># 先找到对应区域</span>
             x_masked = x[:, :, i*stride:i*stride+HH, j*stride:j*stride+WW]
             <span class="hljs-comment"># 选择其中最大的值</span>
-            out[:, :, i, j] = np.max(x_masked, axis=(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
+            out[:, :, i, j] = np.<span class="hljs-built_in">max</span>(x_masked, axis=(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
     <span class="hljs-comment">#############################################################################</span>
     <span class="hljs-comment">#                            结束编码                                                                            #</span>
     <span class="hljs-comment">#############################################################################</span>
@@ -492,7 +270,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">max_pool_forward_fast</span>(<span class="hljs-params">x, pool_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">max_pool_forward_fast</span>(<span class="hljs-params">x, pool_param</span>):
     <span class="hljs-string">&#x27;&#x27;&#x27;</span>
 <span class="hljs-string">    最大池化前向传播的快速版本</span>
 <span class="hljs-string"></span>
@@ -519,15 +297,15 @@
     <span class="hljs-keyword">assert</span> H % pool_height == <span class="hljs-number">0</span>
     <span class="hljs-keyword">assert</span> W % pool_height == <span class="hljs-number">0</span>
     
-    x_reshaped = x.reshape(N, C, int(H / pool_height), pool_height,
-                                                int(W / pool_width), pool_width)
-    out = x_reshaped.max(axis=<span class="hljs-number">3</span>).max(axis=<span class="hljs-number">4</span>)
+    x_reshaped = x.reshape(N, C, <span class="hljs-built_in">int</span>(H / pool_height), pool_height,
+                                                <span class="hljs-built_in">int</span>(W / pool_width), pool_width)
+    out = x_reshaped.<span class="hljs-built_in">max</span>(axis=<span class="hljs-number">3</span>).<span class="hljs-built_in">max</span>(axis=<span class="hljs-number">4</span>)
 
     cache = (x, x_reshaped, out)
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">max_pool_backward_naive</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">max_pool_backward_naive</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    最大池化反向传播.</span>
 <span class="hljs-string"></span>
@@ -546,13 +324,13 @@
     HH = pool_param[<span class="hljs-string">&#x27;pool_height&#x27;</span>]
     WW = pool_param[<span class="hljs-string">&#x27;pool_width&#x27;</span>]
     stride = pool_param[<span class="hljs-string">&#x27;stride&#x27;</span>]
-    H_out = int((H-HH)/stride+<span class="hljs-number">1</span>)
-    W_out = int((W-WW)/stride+<span class="hljs-number">1</span>)
+    H_out = <span class="hljs-built_in">int</span>((H-HH)/stride+<span class="hljs-number">1</span>)
+    W_out = <span class="hljs-built_in">int</span>((W-WW)/stride+<span class="hljs-number">1</span>)
     dx = np.zeros_like(x)
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(H_out):
-        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(W_out):
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(H_out):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(W_out):
             x_masked = x[:, :, i*stride:i*stride+HH, j*stride:j*stride+WW]
-            max_x_masked = np.max(x_masked, axis=(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
+            max_x_masked = np.<span class="hljs-built_in">max</span>(x_masked, axis=(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))
             temp_binary_mask = (x_masked == (max_x_masked)[:, :, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>])
             dx[:, :, i*stride:i*stride+HH, j*stride:j*stride+WW] += \
                 temp_binary_mask*(dout[:, :, i, j])[:, :, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>]
@@ -562,7 +340,7 @@
     <span class="hljs-keyword">return</span> dx
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">max_pool_backward_fast</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">max_pool_backward_fast</span>(<span class="hljs-params">dout, cache</span>):
     x, x_reshaped, out = cache
     dx_reshaped = np.zeros_like(x_reshaped)
     out_newaxis = out[:, :, :, np.newaxis, :, np.newaxis]
@@ -570,12 +348,12 @@
     dout_newaxis = dout[:, :, :, np.newaxis, :, np.newaxis]
     dout_broadcast, _ = np.broadcast_arrays(dout_newaxis, dx_reshaped)
     dx_reshaped[mask] = dout_broadcast[mask]
-    dx_reshaped /= np.sum(mask, axis=(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>), keepdims=<span class="hljs-literal">True</span>)
+    dx_reshaped /= np.<span class="hljs-built_in">sum</span>(mask, axis=(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>), keepdims=<span class="hljs-literal">True</span>)
     dx = dx_reshaped.reshape(x.shape)
     <span class="hljs-keyword">return</span> dx
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">spatial_batchnorm_forward</span>(<span class="hljs-params">x, gamma, beta, bn_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">spatial_batchnorm_forward</span>(<span class="hljs-params">x, gamma, beta, bn_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    空间批量归一化前向传播</span>
 <span class="hljs-string">    </span>
@@ -610,7 +388,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">spatial_batchnorm_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">spatial_batchnorm_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        空间批量归一化反向传播</span>
 <span class="hljs-string">    </span>
@@ -638,21 +416,21 @@
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
     
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_relu_forward</span>(<span class="hljs-params">x, w, b, conv_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_relu_forward</span>(<span class="hljs-params">x, w, b, conv_param</span>):
     a, conv_cache = conv_forward_fast(x, w, b, conv_param)
     out, relu_cache = relu_forward(a)
     cache = (conv_cache, relu_cache)
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_relu_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_relu_backward</span>(<span class="hljs-params">dout, cache</span>):
     conv_cache, relu_cache = cache
     da = relu_backward(dout, relu_cache)
     dx, dw, db = conv_backward_naive(da, conv_cache)
     <span class="hljs-keyword">return</span> dx, dw, db
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_relu_pool_forward</span>(<span class="hljs-params">x, w, b, conv_param, pool_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_relu_pool_forward</span>(<span class="hljs-params">x, w, b, conv_param, pool_param</span>):
     a, conv_cache = conv_forward_fast(x, w, b, conv_param)
     s, relu_cache = relu_forward(a)
     out, pool_cache = max_pool_forward_fast(s, pool_param)
@@ -660,7 +438,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">conv_relu_pool_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">conv_relu_pool_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&#x27;&#x27;&#x27;</span>
 <span class="hljs-string">    完整卷积层的反向传播</span>
 <span class="hljs-string"></span>
@@ -680,13 +458,10 @@
     da = relu_backward(ds, relu_cache)
     dx, dw, db = conv_backward_naive(da, conv_cache)
     <span class="hljs-keyword">return</span> dx, dw, db
-</code></pre>
-<h3 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h3>
-<p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="layerspy"><a class="markdownIt-Anchor" href="#layerspy"></a> <a target="_blank" rel="noopener" href="http://layers.py">layers.py</a></h3><p>之前已经写好的前向传播与后向传播代码以及softmax的损失函数。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_forward</span>(<span class="hljs-params">x, w, b</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_forward</span>(<span class="hljs-params">x, w, b</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算神经网络当前层的前馈传播。该方法计算在全连接情况下的得分函数</span>
 <span class="hljs-string">    注：如果不理解affine仿射变换，简单的理解为在全连接情况下的得分函数即可</span>
@@ -709,13 +484,13 @@
     <span class="hljs-comment"># 任务: 实现全连接前向传播</span>
     <span class="hljs-comment"># 注：首先你需要将输入数据重塑成行。  </span>
     N=x.shape[<span class="hljs-number">0</span>]
-    x_new=x.reshape(N,<span class="hljs-number">-1</span>)<span class="hljs-comment">#将x重塑成2维向量</span>
+    x_new=x.reshape(N,-<span class="hljs-number">1</span>)<span class="hljs-comment">#将x重塑成2维向量</span>
     out=np.dot(x_new,w)+b
     cache = (x, w, b)
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"> 计算仿射层的反向传播.</span>
 <span class="hljs-string"></span>
@@ -734,15 +509,15 @@
     dx, dw, db = <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>
     <span class="hljs-comment"># 注意：你需要将x重塑成(N,D)后才能计算各梯度，                                            #</span>
     <span class="hljs-comment"># 完梯度后你需要将dx的形状与x重塑成一样     </span>
-    db = np.sum(dout,axis=<span class="hljs-number">0</span>)
-    xx= x.reshape(x.shape[<span class="hljs-number">0</span>],<span class="hljs-number">-1</span>)
+    db = np.<span class="hljs-built_in">sum</span>(dout,axis=<span class="hljs-number">0</span>)
+    xx= x.reshape(x.shape[<span class="hljs-number">0</span>],-<span class="hljs-number">1</span>)
     dw = np.dot(xx.T,dout)
     dx = np.dot(dout,w.T)
     dx=np.reshape(dx,x.shape)
     <span class="hljs-keyword">return</span> dx, dw, db
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">relu_forward</span>(<span class="hljs-params">x</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">relu_forward</span>(<span class="hljs-params">x</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算tified linear units (ReLUs)激活函数的前向传播，并保存相应缓存</span>
 <span class="hljs-string"></span>
@@ -760,7 +535,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">relu_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">relu_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    计算 rectified linear units (ReLUs)激活函数的反向传播.</span>
 <span class="hljs-string"></span>
@@ -777,7 +552,7 @@
     dx[x&lt;=<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>
     <span class="hljs-keyword">return</span> dx
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_forward</span>(<span class="hljs-params">x, w, b</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_forward</span>(<span class="hljs-params">x, w, b</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     ReLU神经元前向传播</span>
 <span class="hljs-string"></span>
@@ -796,7 +571,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     ReLU神经元的反向传播</span>
 <span class="hljs-string">     </span>
@@ -817,27 +592,24 @@
 
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_loss</span>(<span class="hljs-params">x, y</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">softmax_loss</span>(<span class="hljs-params">x, y</span>):
 
-    probs = np.exp(x - np.max(x, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>))
-    probs /= np.sum(probs, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>)
+    probs = np.exp(x - np.<span class="hljs-built_in">max</span>(x, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>))
+    probs /= np.<span class="hljs-built_in">sum</span>(probs, axis=<span class="hljs-number">1</span>, keepdims=<span class="hljs-literal">True</span>)
     N = x.shape[<span class="hljs-number">0</span>]
-    loss = -np.sum(np.log(probs[np.arange(N), y])) / N
+    loss = -np.<span class="hljs-built_in">sum</span>(np.log(probs[np.arange(N), y])) / N
     dx = probs.copy()
     dx[np.arange(N), y] -= <span class="hljs-number">1</span>
     dx /= N
 
     <span class="hljs-keyword">return</span> loss, dx
-</code></pre>
-<h3 id="trainerpy"><a class="markdownIt-Anchor" href="#trainerpy"></a> <a target="_blank" rel="noopener" href="http://trainer.py">trainer.py</a></h3>
-<p>解耦训练器的实现</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="trainerpy"><a class="markdownIt-Anchor" href="#trainerpy"></a> <a target="_blank" rel="noopener" href="http://trainer.py">trainer.py</a></h3><p>解耦训练器的实现</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">import</span> updater
 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trainer</span>(<span class="hljs-params">object</span>):</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Trainer</span>(<span class="hljs-title class_ inherited__">object</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    使用形式:</span>
 <span class="hljs-string">    </span>
@@ -859,7 +631,7 @@
 <span class="hljs-string">    Trainer.train()</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, model, data, **kwargs</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, model, data, **kwargs</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        构造一个新的Trainer实例</span>
 <span class="hljs-string">        必须参数:</span>
@@ -896,15 +668,15 @@
         self.verbose = kwargs.pop(<span class="hljs-string">&#x27;verbose&#x27;</span>, <span class="hljs-literal">True</span>)
 
         <span class="hljs-comment"># 若可选参数错误，抛出异常</span>
-        <span class="hljs-keyword">if</span> len(kwargs) &gt; <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(kwargs) &gt; <span class="hljs-number">0</span>:
             extra = <span class="hljs-string">&#x27;, &#x27;</span>.join(<span class="hljs-string">&#x27;&quot;%s&quot;&#x27;</span> % k <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> kwargs.keys())
             <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Unrecognized arguments %s&#x27;</span> % extra)
 
 
         <span class="hljs-comment">#确认updater中含有更新规则</span>
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(updater, self.update_rule):
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(updater, self.update_rule):
             <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Invalid update_rule &quot;%s&quot;&#x27;</span> % self.update_rule)
-        self.update_rule = getattr(updater, self.update_rule)
+        self.update_rule = <span class="hljs-built_in">getattr</span>(updater, self.update_rule)
 
         <span class="hljs-comment"># 初始化相关变量</span>
         self.epoch = <span class="hljs-number">0</span>
@@ -921,7 +693,7 @@
             self.updater_configs[p] = d
 
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_step</span>(<span class="hljs-params">self</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_step</span>(<span class="hljs-params">self</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        执行单步梯度更新</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
@@ -944,7 +716,7 @@
             self.updater_configs[p] = next_config
 
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">check_accuracy</span>(<span class="hljs-params">self, X, y, num_samples=None, batch_size=<span class="hljs-number">100</span></span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">check_accuracy</span>(<span class="hljs-params">self, X, y, num_samples=<span class="hljs-literal">None</span>, batch_size=<span class="hljs-number">100</span></span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     根据提供的数据检验精度，若数据集过大，可进行采样测试。</span>
 <span class="hljs-string">        </span>
@@ -967,11 +739,11 @@
             y = y[mask]
 
         <span class="hljs-comment"># 计算精度</span>
-        num_batches = int(N / batch_size)
+        num_batches = <span class="hljs-built_in">int</span>(N / batch_size)
         <span class="hljs-keyword">if</span> N % batch_size != <span class="hljs-number">0</span>:
           num_batches += <span class="hljs-number">1</span>
         y_pred = []
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_batches):
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_batches):
             start = i * batch_size
             end = (i + <span class="hljs-number">1</span>) * batch_size
             scores = self.model.loss(X[start:end])
@@ -982,21 +754,21 @@
         <span class="hljs-keyword">return</span> acc
 
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">self</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">self</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        根据配置训练模型</span>
 <span class="hljs-string">        &quot;&quot;&quot;</span>
         num_train = self.X_train.shape[<span class="hljs-number">0</span>]
-        iterations_per_epoch = max(num_train / self.batch_size, <span class="hljs-number">1</span>)
-        num_iterations = int(self.num_epochs * iterations_per_epoch)
+        iterations_per_epoch = <span class="hljs-built_in">max</span>(num_train / self.batch_size, <span class="hljs-number">1</span>)
+        num_iterations = <span class="hljs-built_in">int</span>(self.num_epochs * iterations_per_epoch)
     
-        <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(num_iterations):
+        <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_iterations):
             self._step()
     
             <span class="hljs-comment"># 打印损失值</span>
             <span class="hljs-keyword">if</span> self.verbose <span class="hljs-keyword">and</span> t % self.print_every == <span class="hljs-number">0</span>:
-                print(<span class="hljs-string">&#x27;(迭代 %d / %d) 损失值: %f&#x27;</span> % (
-                             t + <span class="hljs-number">1</span>, num_iterations, self.loss_history[<span class="hljs-number">-1</span>]))
+                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;(迭代 %d / %d) 损失值: %f&#x27;</span> % (
+                             t + <span class="hljs-number">1</span>, num_iterations, self.loss_history[-<span class="hljs-number">1</span>]))
 
             <span class="hljs-comment"># 更新学习率</span>
             epoch_end = (t + <span class="hljs-number">1</span>) % iterations_per_epoch == <span class="hljs-number">0</span>
@@ -1017,7 +789,7 @@
                 self.val_acc_history.append(val_acc)
 
                 <span class="hljs-keyword">if</span> self.verbose:
-                    print(<span class="hljs-string">&#x27;(周期 %d / %d) 训练精度: %f; 验证精度: %f&#x27;</span> % (
+                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;(周期 %d / %d) 训练精度: %f; 验证精度: %f&#x27;</span> % (
                                  self.epoch, self.num_epochs, train_acc, val_acc))
 
                 <span class="hljs-comment"># 记录最佳模型</span>
@@ -1030,10 +802,7 @@
             <span class="hljs-comment"># 训练结束后返回最佳模型</span>
             self.model.params = self.best_params
 
-</code></pre>
-<h3 id="updaterpy"><a class="markdownIt-Anchor" href="#updaterpy"></a> <a target="_blank" rel="noopener" href="http://updater.py">updater.py</a></h3>
-<p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重w ww、当前权重的梯度d w dwdw及相应的更新配置。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="updaterpy"><a class="markdownIt-Anchor" href="#updaterpy"></a> <a target="_blank" rel="noopener" href="http://updater.py">updater.py</a></h3><p>解耦更新器，主要负责更新神经网络的权重，其传入参数有神经网络的权重w ww、当前权重的梯度d w dwdw及相应的更新配置。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-string">&quot;&quot;&quot;</span>
@@ -1052,7 +821,7 @@
 <span class="hljs-string">&quot;&quot;&quot;</span>
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sgd</span>(<span class="hljs-params">w, dw, config=None</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sgd</span>(<span class="hljs-params">w, dw, config=<span class="hljs-literal">None</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    随机梯度下降更新规则.</span>
 <span class="hljs-string"></span>
@@ -1067,7 +836,7 @@
 
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sgd_momentum</span>(<span class="hljs-params">w, dw, config=None</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">sgd_momentum</span>(<span class="hljs-params">w, dw, config=<span class="hljs-literal">None</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    动量随机梯度下降更新规则</span>
 <span class="hljs-string"></span>
@@ -1090,7 +859,7 @@
 
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rmsprop</span>(<span class="hljs-params">w, dw, config=None</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">rmsprop</span>(<span class="hljs-params">w, dw, config=<span class="hljs-literal">None</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    RMSProp 更新规则</span>
 <span class="hljs-string"></span>
@@ -1113,7 +882,7 @@
     <span class="hljs-keyword">return</span> next_w, config
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">adam</span>(<span class="hljs-params">w, dw, config=None</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">adam</span>(<span class="hljs-params">w, dw, config=<span class="hljs-literal">None</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    使用 Adam更新规则 ,融合了“热身”更新</span>
 <span class="hljs-string"></span>
@@ -1149,15 +918,12 @@
     next_w = w - learning_rate * mb / (np.sqrt(vb)+epsilon)
     <span class="hljs-keyword">return</span> next_w, config
 
-</code></pre>
-<h3 id="bn_layerspy"><a class="markdownIt-Anchor" href="#bn_layerspy"></a> bn_layers.py</h3>
-<p>实现BN算法的前向传播、反向传播。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="bn_layerspy"><a class="markdownIt-Anchor" href="#bn_layerspy"></a> bn_layers.py</h3><p>实现BN算法的前向传播、反向传播。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
 <span class="hljs-keyword">from</span> dropout_layers <span class="hljs-keyword">import</span> *
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">batchnorm_forward</span>(<span class="hljs-params">x, gamma, beta, bn_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">batchnorm_forward</span>(<span class="hljs-params">x, gamma, beta, bn_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"></span>
 <span class="hljs-string">    使用使用类似动量衰减的运行时平均，计算总体均值与方差 例如:</span>
@@ -1191,13 +957,13 @@
     <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&#x27;train&#x27;</span>:
         <span class="hljs-comment"># Forward pass</span>
         <span class="hljs-comment"># Step 1 - shape of mu (D,)</span>
-        mu = <span class="hljs-number">1</span> / float(N) * np.sum(x, axis=<span class="hljs-number">0</span>)
+        mu = <span class="hljs-number">1</span> / <span class="hljs-built_in">float</span>(N) * np.<span class="hljs-built_in">sum</span>(x, axis=<span class="hljs-number">0</span>)
         <span class="hljs-comment"># Step 2 - shape of var (N,D)</span>
         xmu = x - mu
         <span class="hljs-comment"># Step 3 - shape of carre (N,D)</span>
         carre = xmu**<span class="hljs-number">2</span>
         <span class="hljs-comment"># Step 4 - shape of var (D,)</span>
-        var = <span class="hljs-number">1</span> / float(N) * np.sum(carre, axis=<span class="hljs-number">0</span>)
+        var = <span class="hljs-number">1</span> / <span class="hljs-built_in">float</span>(N) * np.<span class="hljs-built_in">sum</span>(carre, axis=<span class="hljs-number">0</span>)
         <span class="hljs-comment"># Step 5 - Shape sqrtvar (D,)</span>
         sqrtvar = np.sqrt(var + eps)
         <span class="hljs-comment"># Step 6 - Shape invvar (D,)</span>
@@ -1229,7 +995,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">batchnorm_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">batchnorm_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    BN反向传播 </span>
 <span class="hljs-string">    Inputs:</span>
@@ -1248,31 +1014,31 @@
     N, D = dout.shape
     <span class="hljs-comment"># Backprop Step 9</span>
     dva3 = dout
-    dbeta = np.sum(dout, axis=<span class="hljs-number">0</span>)
+    dbeta = np.<span class="hljs-built_in">sum</span>(dout, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># Backprop step 8</span>
     dva2 = gamma * dva3
-    dgamma = np.sum(va2 * dva3, axis=<span class="hljs-number">0</span>)
+    dgamma = np.<span class="hljs-built_in">sum</span>(va2 * dva3, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># Backprop step 7</span>
     dxmu = invvar * dva2
-    dinvvar = np.sum(xmu * dva2, axis=<span class="hljs-number">0</span>)
+    dinvvar = np.<span class="hljs-built_in">sum</span>(xmu * dva2, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># Backprop step 6</span>
-    dsqrtvar = <span class="hljs-number">-1.</span> / (sqrtvar**<span class="hljs-number">2</span>) * dinvvar
+    dsqrtvar = -<span class="hljs-number">1.</span> / (sqrtvar**<span class="hljs-number">2</span>) * dinvvar
     <span class="hljs-comment"># Backprop step 5</span>
-    dvar = <span class="hljs-number">0.5</span> * (var + eps)**(<span class="hljs-number">-0.5</span>) * dsqrtvar
+    dvar = <span class="hljs-number">0.5</span> * (var + eps)**(-<span class="hljs-number">0.5</span>) * dsqrtvar
     <span class="hljs-comment"># Backprop step 4</span>
-    dcarre = <span class="hljs-number">1</span> / float(N) * np.ones((carre.shape)) * dvar
+    dcarre = <span class="hljs-number">1</span> / <span class="hljs-built_in">float</span>(N) * np.ones((carre.shape)) * dvar
     <span class="hljs-comment"># Backprop step 3</span>
     dxmu += <span class="hljs-number">2</span> * xmu * dcarre
     <span class="hljs-comment"># Backprop step 2</span>
     dx = dxmu
-    dmu = - np.sum(dxmu, axis=<span class="hljs-number">0</span>)
+    dmu = - np.<span class="hljs-built_in">sum</span>(dxmu, axis=<span class="hljs-number">0</span>)
     <span class="hljs-comment"># Basckprop step 1</span>
-    dx += <span class="hljs-number">1</span> / float(N) * np.ones((dxmu.shape)) * dmu
+    dx += <span class="hljs-number">1</span> / <span class="hljs-built_in">float</span>(N) * np.ones((dxmu.shape)) * dmu
     
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">batchnorm_backward_alt</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">batchnorm_backward_alt</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    可选的BN反向传播</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
@@ -1280,15 +1046,15 @@
     mu, xmu, carre, var, sqrtvar, invvar, va2, va3, gamma, beta, x, bn_param = cache
     eps = bn_param.get(<span class="hljs-string">&#x27;eps&#x27;</span>, <span class="hljs-number">1e-5</span>)
     N, D = dout.shape
-    dbeta = np.sum(dout, axis=<span class="hljs-number">0</span>)
-    dgamma = np.sum((x - mu) * (var + eps)**(<span class="hljs-number">-1.</span> / <span class="hljs-number">2.</span>) * dout, axis=<span class="hljs-number">0</span>)
-    dx = (<span class="hljs-number">1.</span>/N) * gamma * (var + eps)**(<span class="hljs-number">-1.</span>/<span class="hljs-number">2.</span>)*(N*dout-np.sum(
-                        dout, axis=<span class="hljs-number">0</span>)-(x-mu)*(var+eps)**(<span class="hljs-number">-1.0</span>)*np.sum(dout*(x-mu),axis=<span class="hljs-number">0</span>))
+    dbeta = np.<span class="hljs-built_in">sum</span>(dout, axis=<span class="hljs-number">0</span>)
+    dgamma = np.<span class="hljs-built_in">sum</span>((x - mu) * (var + eps)**(-<span class="hljs-number">1.</span> / <span class="hljs-number">2.</span>) * dout, axis=<span class="hljs-number">0</span>)
+    dx = (<span class="hljs-number">1.</span>/N) * gamma * (var + eps)**(-<span class="hljs-number">1.</span>/<span class="hljs-number">2.</span>)*(N*dout-np.<span class="hljs-built_in">sum</span>(
+                        dout, axis=<span class="hljs-number">0</span>)-(x-mu)*(var+eps)**(-<span class="hljs-number">1.0</span>)*np.<span class="hljs-built_in">sum</span>(dout*(x-mu),axis=<span class="hljs-number">0</span>))
  
     <span class="hljs-keyword">return</span> dx, dgamma, dbeta
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_bn_relu_forward</span>(<span class="hljs-params">x,w,b,gamma, beta,bn_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_bn_relu_forward</span>(<span class="hljs-params">x,w,b,gamma, beta,bn_param</span>):
     x_affine,cache_affine= affine_forward(x,w,b)
     x_bn,cache_bn = batchnorm_forward(x_affine,gamma, beta,bn_param)
     out,cache_relu = relu_forward(x_bn)
@@ -1296,22 +1062,19 @@
     <span class="hljs-keyword">return</span> out,cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_bn_relu_backward</span>(<span class="hljs-params">dout,cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_bn_relu_backward</span>(<span class="hljs-params">dout,cache</span>):
     cache_affine,cache_bn,cache_relu = cache
     drelu = relu_backward(dout,cache_relu)
     dbn,dgamma, dbeta= batchnorm_backward_alt(drelu,cache_bn)
     dx,dw,db = affine_backward(dbn,cache_affine)
     <span class="hljs-keyword">return</span> dx,dw,db,dgamma,dbeta
 
-</code></pre>
-<h3 id="dropout_layerspy"><a class="markdownIt-Anchor" href="#dropout_layerspy"></a> dropout_layers.py</h3>
-<p>包含了Dropout前向传播以及反向传播，组合Dropout传播层。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="dropout_layerspy"><a class="markdownIt-Anchor" href="#dropout_layerspy"></a> dropout_layers.py</h3><p>包含了Dropout前向传播以及反向传播，组合Dropout传播层。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> layers <span class="hljs-keyword">import</span> *
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dropout_forward</span>(<span class="hljs-params">x, dropout_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dropout_forward</span>(<span class="hljs-params">x, dropout_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    执行dropout前向传播</span>
 <span class="hljs-string">    Inputs:</span>
@@ -1345,7 +1108,7 @@
     <span class="hljs-keyword">return</span> out, cache
 
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dropout_backward</span>(<span class="hljs-params">dout, cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dropout_backward</span>(<span class="hljs-params">dout, cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    dropout反向传播</span>
 <span class="hljs-string"></span>
@@ -1363,7 +1126,7 @@
         dx = dout
     <span class="hljs-keyword">return</span> dx
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_dropout_forward</span>(<span class="hljs-params">x,w,b,dropout_param</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_dropout_forward</span>(<span class="hljs-params">x,w,b,dropout_param</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">    组合affine_relu_dropout前向传播</span>
 <span class="hljs-string">    Inputs:</span>
@@ -1387,7 +1150,7 @@
     cache = (cache_affine,cache_relu,cache_dropout)
     <span class="hljs-keyword">return</span> out_dropout,cache
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">affine_relu_dropout_backward</span>(<span class="hljs-params">dout,cache</span>):</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">affine_relu_dropout_backward</span>(<span class="hljs-params">dout,cache</span>):
     <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">     affine_relu_dropout神经元的反向传播</span>
 <span class="hljs-string">     </span>
@@ -1406,23 +1169,20 @@
     drelu = relu_backward(ddropout,cache_relu)
     dx,dw,db = affine_backward(drelu,cache_affine)
     <span class="hljs-keyword">return</span> dx,dw,db
-</code></pre>
-<h3 id="cnnpy"><a class="markdownIt-Anchor" href="#cnnpy"></a> <a target="_blank" rel="noopener" href="http://cnn.py">cnn.py</a></h3>
-<p>接下来我们实现简单的浅层卷积网络，该网络由一层卷积层，两层全连接层组成：输入 - conv - relu - 2x2 max pool - affine - relu - affine - softmax。</p>
-<pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
+</code></pre><h3 id="cnnpy"><a class="markdownIt-Anchor" href="#cnnpy"></a> <a target="_blank" rel="noopener" href="http://cnn.py">cnn.py</a></h3><p>接下来我们实现简单的浅层卷积网络，该网络由一层卷积层，两层全连接层组成：输入 - conv - relu - 2x2 max pool - affine - relu - affine - softmax。</p><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: utf-8 -*-</span>
 <span class="hljs-keyword">import</span> sys, os
 sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
 
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> cnn_layers <span class="hljs-keyword">import</span> *
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreeLayerConvNet</span>(<span class="hljs-params">object</span>):</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreeLayerConvNet</span>(<span class="hljs-title class_ inherited__">object</span>):
     <span class="hljs-string">&quot;&quot;&quot; </span>
 <span class="hljs-string">    conv - relu - 2x2 max pool - affine - relu - affine - softmax</span>
 <span class="hljs-string">    &quot;&quot;&quot;</span>
     
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, input_dim=(<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span></span>), num_filters=<span class="hljs-number">32</span>, filter_size=<span class="hljs-number">7</span>,</span></span>
-<span class="hljs-function"><span class="hljs-params">                             hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>, weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span>,</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, input_dim=(<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span></span>), num_filters=<span class="hljs-number">32</span>, filter_size=<span class="hljs-number">7</span>,</span>
+<span class="hljs-params">                             hidden_dim=<span class="hljs-number">100</span>, num_classes=<span class="hljs-number">10</span>, weight_scale=<span class="hljs-number">1e-3</span>, reg=<span class="hljs-number">0.0</span>,</span>):
         <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string">        初始化网络.</span>
 <span class="hljs-string">        </span>
@@ -1447,7 +1207,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         self.params[<span class="hljs-string">&#x27;W1&#x27;</span>] = weight_scale*np.random.randn(num_filters, C, 
                     filter_size, filter_size)
         self.params[<span class="hljs-string">&#x27;b1&#x27;</span>] = np.zeros(num_filters)
-        self.params[<span class="hljs-string">&#x27;W2&#x27;</span>] = weight_scale*np.random.randn(int((H/<span class="hljs-number">2</span>)*(W/<span class="hljs-number">2</span>)*num_filters), 
+        self.params[<span class="hljs-string">&#x27;W2&#x27;</span>] = weight_scale*np.random.randn(<span class="hljs-built_in">int</span>((H/<span class="hljs-number">2</span>)*(W/<span class="hljs-number">2</span>)*num_filters), 
                     hidden_dim)
         self.params[<span class="hljs-string">&#x27;b2&#x27;</span>] = np.zeros(hidden_dim)
         self.params[<span class="hljs-string">&#x27;W3&#x27;</span>] = weight_scale*np.random.randn(hidden_dim, num_classes)
@@ -1457,7 +1217,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">############################################################################</span>
          
  
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loss</span>(<span class="hljs-params">self, X, y=None</span>):</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">self, X, y=<span class="hljs-literal">None</span></span>):
         
         <span class="hljs-comment"># 初始化参数</span>
         W1, b1 = self.params[<span class="hljs-string">&#x27;W1&#x27;</span>], self.params[<span class="hljs-string">&#x27;b1&#x27;</span>]
@@ -1466,7 +1226,7 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment"># 使用卷积层</span>
         filter_size = W1.shape[<span class="hljs-number">2</span>]
         <span class="hljs-comment"># 设置卷积层和池化层所需要的参数</span>
-        conv_param = &#123;<span class="hljs-string">&#x27;stride&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;pad&#x27;</span>: int((filter_size - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>)&#125;
+        conv_param = &#123;<span class="hljs-string">&#x27;stride&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;pad&#x27;</span>: <span class="hljs-built_in">int</span>((filter_size - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>)&#125;
         pool_param = &#123;<span class="hljs-string">&#x27;pool_height&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;pool_width&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;stride&#x27;</span>: <span class="hljs-number">2</span>&#125;
 
         scores = <span class="hljs-literal">None</span>
@@ -1497,9 +1257,9 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">#                      注意：别忘了权重衰减项                                 #</span>
         <span class="hljs-comment">############################################################################</span>
         loss, dout = softmax_loss(scores, y)
-        loss += self.reg*<span class="hljs-number">0.5</span>*(np.sum(self.params[<span class="hljs-string">&#x27;W1&#x27;</span>]**<span class="hljs-number">2</span>)
-                              +np.sum(self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]**<span class="hljs-number">2</span>)
-                              +np.sum(self.params[<span class="hljs-string">&#x27;W3&#x27;</span>]**<span class="hljs-number">2</span>))
+        loss += self.reg*<span class="hljs-number">0.5</span>*(np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W1&#x27;</span>]**<span class="hljs-number">2</span>)
+                              +np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W2&#x27;</span>]**<span class="hljs-number">2</span>)
+                              +np.<span class="hljs-built_in">sum</span>(self.params[<span class="hljs-string">&#x27;W3&#x27;</span>]**<span class="hljs-number">2</span>))
         dX3, grads[<span class="hljs-string">&#x27;W3&#x27;</span>], grads[<span class="hljs-string">&#x27;b3&#x27;</span>] = affine_backward(dout, cache_forward_3)
         dX2 = relu_backward(dX3, cache_relu_2)
         dX2, grads[<span class="hljs-string">&#x27;W2&#x27;</span>], grads[<span class="hljs-string">&#x27;b2&#x27;</span>] = affine_backward(dX2, cache_forward_2)
@@ -1512,291 +1272,4 @@ sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))))
         <span class="hljs-comment">############################################################################</span>
         <span class="hljs-keyword">return</span> loss, grads
     
-</code></pre>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/DeepLearning/">DeepLearning</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/01/20/Article202101201/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Centos安装docker以及ServiceAccount</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/01/10/Article202101102/">
-                        <span class="hidden-mobile">Pytorch的view方法</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "编码实现卷积神经网络&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+</code></pre></div><hr><div><div class="post-metas mb-3"><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/DeepLearning/">DeepLearning</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2021/01/20/Article202101201/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Centos安装docker以及ServiceAccount</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2021/01/10/Article202101102/"><span class="hidden-mobile">Pytorch的view方法</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","编码实现卷积神经网络&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

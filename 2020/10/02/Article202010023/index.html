@@ -1,685 +1,115 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>R语言中的广义线性模型glm - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-10-02 18:47" pubdate>
-      2020年10月2日 晚上
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.9k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      54
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">R语言中的广义线性模型glm</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <blockquote>
-<p>参考文献：</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/runner-ljt/p/4574275.html">https://www.cnblogs.com/runner-ljt/p/4574275.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/runner-ljt/">https://www.cnblogs.com/runner-ljt/</a></p>
-</blockquote>
-<p><strong>glm函数介绍：</strong></p>
-<p>glm(formula, family=<em>family.generator</em>, data,control = list(…))</p>
-<pre><code class="hljs pgsql"><span class="hljs-keyword">family</span>：每一种响应分布（指数分布族）允许各种关联函数将均值和线性预测器关联起来。</code></pre>
-<p>常用的family：</p>
-<ul>
-<li>binomal(link=‘logit’)     ----响应变量服从二项分布，连接函数为logit，即logistic回归</li>
-<li>binomal(link=‘probit’)    ----响应变量服从二项分布，连接函数为probit</li>
-<li>poisson(link=‘identity’)   ----响应变量服从泊松分布，即泊松回归</li>
-</ul>
-<p>control:控制算法误差和最大迭代次数</p>
-<p>glm.control(epsilon = 1e-8, maxit = 25, trace = FALSE)</p>
-<p>-----maxit:算法最大迭代次数，改变最大迭代次数：control=list(maxit=100)</p>
-<p><strong>glm函数使用：</strong></p>
-<pre><code class="hljs R">&gt; data&lt;-iris[<span class="hljs-number">1</span>:<span class="hljs-number">100</span>,]
-&gt; samp&lt;-sample(<span class="hljs-number">100</span>,<span class="hljs-number">80</span>)
-&gt; names(data)&lt;-c(<span class="hljs-string">&#x27;sl&#x27;</span>,<span class="hljs-string">&#x27;sw&#x27;</span>,<span class="hljs-string">&#x27;pl&#x27;</span>,<span class="hljs-string">&#x27;pw&#x27;</span>,<span class="hljs-string">&#x27;species&#x27;</span>)
-&gt; testdata&lt;-data[samp,]
-&gt; traindata&lt;-data[-samp,]
-&gt;
-&gt; lgst&lt;-glm(testdata$species~pl,binomial(link=<span class="hljs-string">&#x27;logit&#x27;</span>),data=testdata)
-Warning messages:
-<span class="hljs-number">1</span>: glm.fit:算法没有聚合
-<span class="hljs-number">2</span>: glm.fit:拟合機率算出来是数值零或一
-&gt; summary(lgst)
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>R语言中的广义线性模型glm - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-10-02 18:47" pubdate>2020年10月2日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.9k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 54 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">R语言中的广义线性模型glm</h1><div class="markdown-body" id="post-body"><blockquote><p>参考文献：</p><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/runner-ljt/p/4574275.html">https://www.cnblogs.com/runner-ljt/p/4574275.html</a></p><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/runner-ljt/">https://www.cnblogs.com/runner-ljt/</a></p></blockquote><p><strong>glm函数介绍：</strong></p><p>glm(formula, family=<em>family.generator</em>, data,control = list(…))</p><pre><code class="hljs pgsql"><span class="hljs-keyword">family</span>：每一种响应分布（指数分布族）允许各种关联函数将均值和线性预测器关联起来。</code></pre><p>常用的family：</p><ul><li>binomal(link=‘logit’) ----响应变量服从二项分布，连接函数为logit，即logistic回归</li><li>binomal(link=‘probit’) ----响应变量服从二项分布，连接函数为probit</li><li>poisson(link=‘identity’) ----响应变量服从泊松分布，即泊松回归</li></ul><p>control:控制算法误差和最大迭代次数</p><p>glm.control(epsilon = 1e-8, maxit = 25, trace = FALSE)</p><p>-----maxit:算法最大迭代次数，改变最大迭代次数：control=list(maxit=100)</p><p><strong>glm函数使用：</strong></p><pre><code class="hljs R"><span class="hljs-operator">&gt;</span> data<span class="hljs-operator">&lt;-</span>iris<span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">100</span><span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> samp<span class="hljs-operator">&lt;-</span>sample<span class="hljs-punctuation">(</span><span class="hljs-number">100</span><span class="hljs-punctuation">,</span><span class="hljs-number">80</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> <span class="hljs-built_in">names</span><span class="hljs-punctuation">(</span>data<span class="hljs-punctuation">)</span><span class="hljs-operator">&lt;-</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&#x27;sl&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;sw&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pl&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pw&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;species&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> testdata<span class="hljs-operator">&lt;-</span>data<span class="hljs-punctuation">[</span>samp<span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> traindata<span class="hljs-operator">&lt;-</span>data<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span>samp<span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span>
+<span class="hljs-operator">&gt;</span> lgst<span class="hljs-operator">&lt;-</span>glm<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>species<span class="hljs-operator">~</span>pl<span class="hljs-punctuation">,</span>binomial<span class="hljs-punctuation">(</span>link<span class="hljs-operator">=</span><span class="hljs-string">&#x27;logit&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>data<span class="hljs-operator">=</span>testdata<span class="hljs-punctuation">)</span>
+Warning messages<span class="hljs-operator">:</span>
+<span class="hljs-number">1</span><span class="hljs-operator">:</span> glm.fit<span class="hljs-operator">:</span>算法没有聚合
+<span class="hljs-number">2</span><span class="hljs-operator">:</span> glm.fit<span class="hljs-operator">:</span>拟合機率算出来是数值零或一
+<span class="hljs-operator">&gt;</span> summary<span class="hljs-punctuation">(</span>lgst<span class="hljs-punctuation">)</span>
  
-Call:
-glm(formula = testdata$species ~ pl, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
-    data = testdata)
+Call<span class="hljs-operator">:</span>
+glm<span class="hljs-punctuation">(</span>formula <span class="hljs-operator">=</span> testdata<span class="hljs-operator">$</span>species <span class="hljs-operator">~</span> pl<span class="hljs-punctuation">,</span> family <span class="hljs-operator">=</span> binomial<span class="hljs-punctuation">(</span>link <span class="hljs-operator">=</span> <span class="hljs-string">&quot;logit&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>
+    data <span class="hljs-operator">=</span> testdata<span class="hljs-punctuation">)</span>
  
-Deviance Residuals:
-       Min          1Q      Median          3Q         Max 
--<span class="hljs-number">1.836e-05</span>  -<span class="hljs-number">2.110e-08</span>  -<span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.915e-05</span> 
+Deviance Residuals<span class="hljs-operator">:</span>
+       Min          <span class="hljs-number">1</span>Q      Median          <span class="hljs-number">3</span>Q         Max 
+<span class="hljs-operator">-</span><span class="hljs-number">1.836e-05</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.110e-08</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.915e-05</span> 
  
-Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept)   -<span class="hljs-number">83.47</span>   <span class="hljs-number">88795.25</span>  -<span class="hljs-number">0.001</span>    <span class="hljs-number">0.999</span>
+Coefficients<span class="hljs-operator">:</span>
+            Estimate Std. Error z value Pr<span class="hljs-punctuation">(</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">|</span>z<span class="hljs-operator">|</span><span class="hljs-punctuation">)</span>
+<span class="hljs-punctuation">(</span>Intercept<span class="hljs-punctuation">)</span>   <span class="hljs-operator">-</span><span class="hljs-number">83.47</span>   <span class="hljs-number">88795.25</span>  <span class="hljs-operator">-</span><span class="hljs-number">0.001</span>    <span class="hljs-number">0.999</span>
 pl             <span class="hljs-number">32.09</span>   <span class="hljs-number">32635.99</span>   <span class="hljs-number">0.001</span>    <span class="hljs-number">0.999</span>
  
-(Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
+<span class="hljs-punctuation">(</span>Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span><span class="hljs-punctuation">)</span>
  
-    Null deviance: <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
-Residual deviance: <span class="hljs-number">1.4102e-09</span>  on <span class="hljs-number">78</span>  degrees of freedom
-AIC: <span class="hljs-number">4</span>
+    Null deviance<span class="hljs-operator">:</span> <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
+Residual deviance<span class="hljs-operator">:</span> <span class="hljs-number">1.4102e-09</span>  on <span class="hljs-number">78</span>  degrees of freedom
+AIC<span class="hljs-operator">:</span> <span class="hljs-number">4</span>
  
-Number of Fisher Scoring iterations: <span class="hljs-number">25</span></code></pre>
-<p>注意在使用glm函数就行logistic回归时，出现警告：</p>
-<p>Warning messages:</p>
-<p>1: glm.fit:算法没有聚合</p>
-<p>2: glm.fit:拟合機率算出来是数值零或一</p>
-<p>同时也可以发现两个系数的P值都为0.999，说明回归系数不显著。</p>
-<p><strong>第一个警告：算法不收敛。</strong></p>
-<p>由于在进行logistic回归时，依照极大似然估计原则进行迭代求解回归系数，glm函数默认的最大迭代次数 maxit=25，当数据不太好时，经过25次迭代可能算法 还不收敛，所以可以通过增大迭代次数尝试解决算法不收敛的问题。但是当增大迭代次数后算法仍然不收敛，此时数据就是真的不好了，需要对数据进行奇异值检验等进一步的处理。</p>
-<pre><code class="hljs R">&gt; lgst&lt;-glm(testdata$species~pl,binomial(link=<span class="hljs-string">&#x27;logit&#x27;</span>),data=testdata,control=list(maxit=<span class="hljs-number">100</span>))
-Warning message:
-glm.fit:拟合機率算出来是数值零或一
-&gt; summary(lgst)
+Number of Fisher Scoring iterations<span class="hljs-operator">:</span> <span class="hljs-number">25</span></code></pre><p>注意在使用glm函数就行logistic回归时，出现警告：</p><p>Warning messages:</p><p>1: glm.fit:算法没有聚合</p><p>2: glm.fit:拟合機率算出来是数值零或一</p><p>同时也可以发现两个系数的P值都为0.999，说明回归系数不显著。</p><p><strong>第一个警告：算法不收敛。</strong></p><p>由于在进行logistic回归时，依照极大似然估计原则进行迭代求解回归系数，glm函数默认的最大迭代次数 maxit=25，当数据不太好时，经过25次迭代可能算法 还不收敛，所以可以通过增大迭代次数尝试解决算法不收敛的问题。但是当增大迭代次数后算法仍然不收敛，此时数据就是真的不好了，需要对数据进行奇异值检验等进一步的处理。</p><pre><code class="hljs R"><span class="hljs-operator">&gt;</span> lgst<span class="hljs-operator">&lt;-</span>glm<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>species<span class="hljs-operator">~</span>pl<span class="hljs-punctuation">,</span>binomial<span class="hljs-punctuation">(</span>link<span class="hljs-operator">=</span><span class="hljs-string">&#x27;logit&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>data<span class="hljs-operator">=</span>testdata<span class="hljs-punctuation">,</span>control<span class="hljs-operator">=</span><span class="hljs-built_in">list</span><span class="hljs-punctuation">(</span>maxit<span class="hljs-operator">=</span><span class="hljs-number">100</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span>
+Warning message<span class="hljs-operator">:</span>
+glm.fit<span class="hljs-operator">:</span>拟合機率算出来是数值零或一
+<span class="hljs-operator">&gt;</span> summary<span class="hljs-punctuation">(</span>lgst<span class="hljs-punctuation">)</span>
  
-Call:
-glm(formula = testdata$species ~ pl, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
-    data = testdata, control = list(maxit = <span class="hljs-number">100</span>))
+Call<span class="hljs-operator">:</span>
+glm<span class="hljs-punctuation">(</span>formula <span class="hljs-operator">=</span> testdata<span class="hljs-operator">$</span>species <span class="hljs-operator">~</span> pl<span class="hljs-punctuation">,</span> family <span class="hljs-operator">=</span> binomial<span class="hljs-punctuation">(</span>link <span class="hljs-operator">=</span> <span class="hljs-string">&quot;logit&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>
+    data <span class="hljs-operator">=</span> testdata<span class="hljs-punctuation">,</span> control <span class="hljs-operator">=</span> <span class="hljs-built_in">list</span><span class="hljs-punctuation">(</span>maxit <span class="hljs-operator">=</span> <span class="hljs-number">100</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span>
  
-Deviance Residuals:
-       Min          1Q      Median          3Q         Max 
--<span class="hljs-number">1.114e-05</span>  -<span class="hljs-number">2.110e-08</span>  -<span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.162e-05</span> 
+Deviance Residuals<span class="hljs-operator">:</span>
+       Min          <span class="hljs-number">1</span>Q      Median          <span class="hljs-number">3</span>Q         Max 
+<span class="hljs-operator">-</span><span class="hljs-number">1.114e-05</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.110e-08</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.110e-08</span>   <span class="hljs-number">2.110e-08</span>   <span class="hljs-number">1.162e-05</span> 
  
-Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept)    -<span class="hljs-number">87.18</span>  <span class="hljs-number">146399.32</span>  -<span class="hljs-number">0.001</span>        <span class="hljs-number">1</span>
+Coefficients<span class="hljs-operator">:</span>
+             Estimate Std. Error z value Pr<span class="hljs-punctuation">(</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">|</span>z<span class="hljs-operator">|</span><span class="hljs-punctuation">)</span>
+<span class="hljs-punctuation">(</span>Intercept<span class="hljs-punctuation">)</span>    <span class="hljs-operator">-</span><span class="hljs-number">87.18</span>  <span class="hljs-number">146399.32</span>  <span class="hljs-operator">-</span><span class="hljs-number">0.001</span>        <span class="hljs-number">1</span>
 pl              <span class="hljs-number">33.52</span>   <span class="hljs-number">53808.49</span>   <span class="hljs-number">0.001</span>        <span class="hljs-number">1</span>
  
-(Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
+<span class="hljs-punctuation">(</span>Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span><span class="hljs-punctuation">)</span>
  
-    Null deviance: <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
-Residual deviance: <span class="hljs-number">5.1817e-10</span>  on <span class="hljs-number">78</span>  degrees of freedom
-AIC: <span class="hljs-number">4</span>
+    Null deviance<span class="hljs-operator">:</span> <span class="hljs-number">1.1085e+02</span>  on <span class="hljs-number">79</span>  degrees of freedom
+Residual deviance<span class="hljs-operator">:</span> <span class="hljs-number">5.1817e-10</span>  on <span class="hljs-number">78</span>  degrees of freedom
+AIC<span class="hljs-operator">:</span> <span class="hljs-number">4</span>
  
-Number of Fisher Scoring iterations: <span class="hljs-number">26</span></code></pre>
-<p>如上，通过增加迭代次数，解决了第一个警告，此时算法收敛。</p>
-<p>但是第二个警告仍然存在，且回归系数P=1，仍然不显著。</p>
-<p><strong>第二个警告：拟合概率算出来的概率为0或1</strong></p>
-<p>首先，这个警告是什么意思？</p>
-<p>我们先来看看训练样本的logist回归结果，拟合出的每个样本属于’setosa’类的概率为多少？</p>
-<pre><code class="hljs R">&gt;lgst&lt;-glm(testdata$species~pl,binomial(link=<span class="hljs-string">&#x27;logit&#x27;</span>),data=testdata,control=list(maxit=<span class="hljs-number">100</span>))
-&gt;p&lt;-predict(lgst,type=<span class="hljs-string">&#x27;response&#x27;</span>)
-&gt;plot(seq(-<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,length=<span class="hljs-number">80</span>),sort(p),col=<span class="hljs-string">&#x27;blue&#x27;</span>)
-&gt;</code></pre>
-<p><img src="/2020/10/02/Article202010023/1.png" srcset="/img/loading.gif" alt="1"></p>
-<p>可以看出训练样本为’setosa’类的概率不是几乎为0，就是几乎为1，并不是我们预想中的logistic模型的S型曲线，这就是第二个警告的意思。</p>
-<p>那么问题来了，为什么会出现这种情况？ （以下内容只是本人参考一些解释的个人理解）</p>
-<p>这种情况的出现可以理解为一种过拟合，由于数据的原因，在回归系数的优化搜索过程中，使得分类的种类属于某一种类（y=1)的线性拟合值趋于大，分类种类为另一类(y=0)的线性拟合值趋于小。</p>
-<p>由于在求解回归系数时，使用的是极大似然估计的原理，即回归系数在搜索过程中使得似然函数极大化：</p>
-<p><img src="/2020/10/02/Article202010023/2.png" srcset="/img/loading.gif" alt="2"></p>
-<p>所以在搜索过程中偏向于使得y=1的h(x)趋向于大，而使得y=0的h(x)趋向于小。</p>
-<p><img src="/2020/10/02/Article202010023/3.png" srcset="/img/loading.gif" alt="3"></p>
-<p>即系数Θ使得 Y=1类的 -ΘTX 趋向于大，使得Y=0类的 -ΘTX 趋向于小。而这样的结果就会导致P(y=1|x;Θ)–&gt;1  ； P(y=0|x;Θ)–&gt;0 。</p>
-<p>那么问题又来了，什么样的数据会导致这样的过拟合产生呢？</p>
-<p>先来看看上述logistic回归中种类为setosa和versicolor的样本pl值的情况。（横轴代表pl值，为了避免样本pl数据点叠加在一起，增加了一个无关的y值使样本点展开）</p>
-<p><img src="/2020/10/02/Article202010023/4.png" srcset="/img/loading.gif" alt="4"></p>
-<p>可以看出两类数据明显的<strong>完全线性可分</strong>。</p>
-<p>故在回归系数搜索过程中只要使得一元线性函数h(x)的斜率的绝对值偏大，就可以实现y=1类的h(x)趋向大，y=0类的h(x)趋向小。</p>
-<p>所以当样本数据完全可分时，logistic回归往往会导致过拟合的问题，即出现第二个警告：拟合概率算出来的概率为0或1。</p>
-<p>出现了第二个警告后的logistic模型进行预测时往往是不适用的，对于这种线性可分的样本数据，其实直接使用<strong>规则判断</strong>的方法则简单且适用（如当pl&lt;2.5时则直接判断为setosa类，pl&gt;2.5时判断为versicolor类）。</p>
-<p><strong>以下，对于不完全可分的二维训练数据展示logistic回归过程。</strong></p>
-<pre><code class="hljs R">&gt; data&lt;-iris[<span class="hljs-number">51</span>:<span class="hljs-number">150</span>,]
-&gt; samp&lt;-sample(<span class="hljs-number">100</span>,<span class="hljs-number">80</span>)
-&gt; names(data)&lt;-c(<span class="hljs-string">&#x27;sl&#x27;</span>,<span class="hljs-string">&#x27;sw&#x27;</span>,<span class="hljs-string">&#x27;pl&#x27;</span>,<span class="hljs-string">&#x27;pw&#x27;</span>,<span class="hljs-string">&#x27;species&#x27;</span>)
-&gt; testdata&lt;-data[samp,]
-&gt; traindata&lt;-data[-samp,]
-&gt;
-&gt; lgst&lt;-glm(testdata$species~sw+pw,binomial(link=<span class="hljs-string">&#x27;logit&#x27;</span>),data=testdata)
-&gt; summary(lgst)
+Number of Fisher Scoring iterations<span class="hljs-operator">:</span> <span class="hljs-number">26</span></code></pre><p>如上，通过增加迭代次数，解决了第一个警告，此时算法收敛。</p><p>但是第二个警告仍然存在，且回归系数P=1，仍然不显著。</p><p><strong>第二个警告：拟合概率算出来的概率为0或1</strong></p><p>首先，这个警告是什么意思？</p><p>我们先来看看训练样本的logist回归结果，拟合出的每个样本属于’setosa’类的概率为多少？</p><pre><code class="hljs R"><span class="hljs-operator">&gt;</span>lgst<span class="hljs-operator">&lt;-</span>glm<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>species<span class="hljs-operator">~</span>pl<span class="hljs-punctuation">,</span>binomial<span class="hljs-punctuation">(</span>link<span class="hljs-operator">=</span><span class="hljs-string">&#x27;logit&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>data<span class="hljs-operator">=</span>testdata<span class="hljs-punctuation">,</span>control<span class="hljs-operator">=</span><span class="hljs-built_in">list</span><span class="hljs-punctuation">(</span>maxit<span class="hljs-operator">=</span><span class="hljs-number">100</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span>p<span class="hljs-operator">&lt;-</span>predict<span class="hljs-punctuation">(</span>lgst<span class="hljs-punctuation">,</span>type<span class="hljs-operator">=</span><span class="hljs-string">&#x27;response&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span>plot<span class="hljs-punctuation">(</span>seq<span class="hljs-punctuation">(</span><span class="hljs-operator">-</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><span class="hljs-built_in">length</span><span class="hljs-operator">=</span><span class="hljs-number">80</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>sort<span class="hljs-punctuation">(</span>p<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span><span class="hljs-string">&#x27;blue&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span></code></pre><p><img src="/2020/10/02/Article202010023/1.png" srcset="/img/loading.gif" alt="1"></p><p>可以看出训练样本为’setosa’类的概率不是几乎为0，就是几乎为1，并不是我们预想中的logistic模型的S型曲线，这就是第二个警告的意思。</p><p>那么问题来了，为什么会出现这种情况？ （以下内容只是本人参考一些解释的个人理解）</p><p>这种情况的出现可以理解为一种过拟合，由于数据的原因，在回归系数的优化搜索过程中，使得分类的种类属于某一种类（y=1)的线性拟合值趋于大，分类种类为另一类(y=0)的线性拟合值趋于小。</p><p>由于在求解回归系数时，使用的是极大似然估计的原理，即回归系数在搜索过程中使得似然函数极大化：</p><p><img src="/2020/10/02/Article202010023/2.png" srcset="/img/loading.gif" alt="2"></p><p>所以在搜索过程中偏向于使得y=1的h(x)趋向于大，而使得y=0的h(x)趋向于小。</p><p><img src="/2020/10/02/Article202010023/3.png" srcset="/img/loading.gif" alt="3"></p><p>即系数Θ使得 Y=1类的 -ΘTX 趋向于大，使得Y=0类的 -ΘTX 趋向于小。而这样的结果就会导致P(y=1|x;Θ)–&gt;1 ； P(y=0|x;Θ)–&gt;0 。</p><p>那么问题又来了，什么样的数据会导致这样的过拟合产生呢？</p><p>先来看看上述logistic回归中种类为setosa和versicolor的样本pl值的情况。（横轴代表pl值，为了避免样本pl数据点叠加在一起，增加了一个无关的y值使样本点展开）</p><p><img src="/2020/10/02/Article202010023/4.png" srcset="/img/loading.gif" alt="4"></p><p>可以看出两类数据明显的<strong>完全线性可分</strong>。</p><p>故在回归系数搜索过程中只要使得一元线性函数h(x)的斜率的绝对值偏大，就可以实现y=1类的h(x)趋向大，y=0类的h(x)趋向小。</p><p>所以当样本数据完全可分时，logistic回归往往会导致过拟合的问题，即出现第二个警告：拟合概率算出来的概率为0或1。</p><p>出现了第二个警告后的logistic模型进行预测时往往是不适用的，对于这种线性可分的样本数据，其实直接使用<strong>规则判断</strong>的方法则简单且适用（如当pl&lt;2.5时则直接判断为setosa类，pl&gt;2.5时判断为versicolor类）。</p><p><strong>以下，对于不完全可分的二维训练数据展示logistic回归过程。</strong></p><pre><code class="hljs R"><span class="hljs-operator">&gt;</span> data<span class="hljs-operator">&lt;-</span>iris<span class="hljs-punctuation">[</span><span class="hljs-number">51</span><span class="hljs-operator">:</span><span class="hljs-number">150</span><span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> samp<span class="hljs-operator">&lt;-</span>sample<span class="hljs-punctuation">(</span><span class="hljs-number">100</span><span class="hljs-punctuation">,</span><span class="hljs-number">80</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> <span class="hljs-built_in">names</span><span class="hljs-punctuation">(</span>data<span class="hljs-punctuation">)</span><span class="hljs-operator">&lt;-</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&#x27;sl&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;sw&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pl&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pw&#x27;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;species&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> testdata<span class="hljs-operator">&lt;-</span>data<span class="hljs-punctuation">[</span>samp<span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> traindata<span class="hljs-operator">&lt;-</span>data<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span>samp<span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span>
+<span class="hljs-operator">&gt;</span> lgst<span class="hljs-operator">&lt;-</span>glm<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>species<span class="hljs-operator">~</span>sw<span class="hljs-operator">+</span>pw<span class="hljs-punctuation">,</span>binomial<span class="hljs-punctuation">(</span>link<span class="hljs-operator">=</span><span class="hljs-string">&#x27;logit&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>data<span class="hljs-operator">=</span>testdata<span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> summary<span class="hljs-punctuation">(</span>lgst<span class="hljs-punctuation">)</span>
  
-Call:
-glm(formula = testdata$species ~ sw + pw, family = binomial(link = <span class="hljs-string">&quot;logit&quot;</span>),
-    data = testdata)
+Call<span class="hljs-operator">:</span>
+glm<span class="hljs-punctuation">(</span>formula <span class="hljs-operator">=</span> testdata<span class="hljs-operator">$</span>species <span class="hljs-operator">~</span> sw <span class="hljs-operator">+</span> pw<span class="hljs-punctuation">,</span> family <span class="hljs-operator">=</span> binomial<span class="hljs-punctuation">(</span>link <span class="hljs-operator">=</span> <span class="hljs-string">&quot;logit&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>
+    data <span class="hljs-operator">=</span> testdata<span class="hljs-punctuation">)</span>
  
-Deviance Residuals:
-     Min        1Q    Median        3Q       Max 
--<span class="hljs-number">1.82733</span>  -<span class="hljs-number">0.16423</span>   <span class="hljs-number">0.00429</span>   <span class="hljs-number">0.11512</span>   <span class="hljs-number">2.12846</span> 
+Deviance Residuals<span class="hljs-operator">:</span>
+     Min        <span class="hljs-number">1</span>Q    Median        <span class="hljs-number">3</span>Q       Max 
+<span class="hljs-operator">-</span><span class="hljs-number">1.82733</span>  <span class="hljs-operator">-</span><span class="hljs-number">0.16423</span>   <span class="hljs-number">0.00429</span>   <span class="hljs-number">0.11512</span>   <span class="hljs-number">2.12846</span> 
  
-Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept)  -<span class="hljs-number">12.915</span>      <span class="hljs-number">5.021</span>  -<span class="hljs-number">2.572</span>   <span class="hljs-number">0.0101</span> * 
-sw            -<span class="hljs-number">3.796</span>      <span class="hljs-number">1.760</span>  -<span class="hljs-number">2.156</span>   <span class="hljs-number">0.0310</span> * 
-pw            <span class="hljs-number">14.735</span>      <span class="hljs-number">3.642</span>   <span class="hljs-number">4.046</span> <span class="hljs-number">5.21e-05</span> ***
----
-Signif. codes:  <span class="hljs-number">0</span> ‘***’ <span class="hljs-number">0.001</span> ‘**’ <span class="hljs-number">0.01</span> ‘*’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
+Coefficients<span class="hljs-operator">:</span>
+            Estimate Std. Error z value Pr<span class="hljs-punctuation">(</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">|</span>z<span class="hljs-operator">|</span><span class="hljs-punctuation">)</span>   
+<span class="hljs-punctuation">(</span>Intercept<span class="hljs-punctuation">)</span>  <span class="hljs-operator">-</span><span class="hljs-number">12.915</span>      <span class="hljs-number">5.021</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.572</span>   <span class="hljs-number">0.0101</span> <span class="hljs-operator">*</span> 
+sw            <span class="hljs-operator">-</span><span class="hljs-number">3.796</span>      <span class="hljs-number">1.760</span>  <span class="hljs-operator">-</span><span class="hljs-number">2.156</span>   <span class="hljs-number">0.0310</span> <span class="hljs-operator">*</span> 
+pw            <span class="hljs-number">14.735</span>      <span class="hljs-number">3.642</span>   <span class="hljs-number">4.046</span> <span class="hljs-number">5.21e-05</span> <span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span>
+<span class="hljs-operator">-</span><span class="hljs-operator">-</span><span class="hljs-operator">-</span>
+Signif. codes<span class="hljs-operator">:</span>  <span class="hljs-number">0</span> ‘<span class="hljs-operator">*</span><span class="hljs-operator">*</span><span class="hljs-operator">*</span>’ <span class="hljs-number">0.001</span> ‘<span class="hljs-operator">*</span><span class="hljs-operator">*</span>’ <span class="hljs-number">0.01</span> ‘<span class="hljs-operator">*</span>’ <span class="hljs-number">0.05</span> ‘.’ <span class="hljs-number">0.1</span> ‘ ’ <span class="hljs-number">1</span>
  
-(Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span>)
+<span class="hljs-punctuation">(</span>Dispersion parameter <span class="hljs-keyword">for</span> binomial family taken to be <span class="hljs-number">1</span><span class="hljs-punctuation">)</span>
  
-    Null deviance: <span class="hljs-number">110.85</span>  on <span class="hljs-number">79</span>  degrees of freedom
-Residual deviance:  <span class="hljs-number">24.40</span>  on <span class="hljs-number">77</span>  degrees of freedom
-AIC: <span class="hljs-number">30.4</span>
+    Null deviance<span class="hljs-operator">:</span> <span class="hljs-number">110.85</span>  on <span class="hljs-number">79</span>  degrees of freedom
+Residual deviance<span class="hljs-operator">:</span>  <span class="hljs-number">24.40</span>  on <span class="hljs-number">77</span>  degrees of freedom
+AIC<span class="hljs-operator">:</span> <span class="hljs-number">30.4</span>
  
-Number of Fisher Scoring iterations: <span class="hljs-number">7</span>
+Number of Fisher Scoring iterations<span class="hljs-operator">:</span> <span class="hljs-number">7</span>
  
-&gt;<span class="hljs-comment">#画拟合概率曲线图</span>
-&gt; p&lt;-predict(lgst,type=<span class="hljs-string">&#x27;response&#x27;</span>)
-&gt; plot(seq(-<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,length=<span class="hljs-number">80</span>),sort(p),col=<span class="hljs-string">&#x27;blue&#x27;</span>)
-&gt;
-&gt;<span class="hljs-comment">#画训练样本数据散点图</span>
-&gt;a&lt;-testdata$species==<span class="hljs-string">&#x27;versicolor&#x27;</span>
-&gt; x1&lt;-testdata[a,<span class="hljs-string">&#x27;sw&#x27;</span>]
-&gt; y1&lt;-testdata[a,<span class="hljs-string">&#x27;pw&#x27;</span>]
-&gt; x2&lt;-testdata[!a,<span class="hljs-string">&#x27;sw&#x27;</span>]
-&gt; y2&lt;-testdata[!a,<span class="hljs-string">&#x27;pw&#x27;</span>]
-&gt; summary(testdata$sw)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+<span class="hljs-operator">&gt;</span><span class="hljs-comment">#画拟合概率曲线图</span>
+<span class="hljs-operator">&gt;</span> p<span class="hljs-operator">&lt;-</span>predict<span class="hljs-punctuation">(</span>lgst<span class="hljs-punctuation">,</span>type<span class="hljs-operator">=</span><span class="hljs-string">&#x27;response&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> plot<span class="hljs-punctuation">(</span>seq<span class="hljs-punctuation">(</span><span class="hljs-operator">-</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><span class="hljs-built_in">length</span><span class="hljs-operator">=</span><span class="hljs-number">80</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>sort<span class="hljs-punctuation">(</span>p<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span><span class="hljs-string">&#x27;blue&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span>
+<span class="hljs-operator">&gt;</span><span class="hljs-comment">#画训练样本数据散点图</span>
+<span class="hljs-operator">&gt;</span>a<span class="hljs-operator">&lt;-</span>testdata<span class="hljs-operator">$</span>species<span class="hljs-operator">==</span><span class="hljs-string">&#x27;versicolor&#x27;</span>
+<span class="hljs-operator">&gt;</span> x1<span class="hljs-operator">&lt;-</span>testdata<span class="hljs-punctuation">[</span>a<span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;sw&#x27;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> y1<span class="hljs-operator">&lt;-</span>testdata<span class="hljs-punctuation">[</span>a<span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pw&#x27;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> x2<span class="hljs-operator">&lt;-</span>testdata<span class="hljs-punctuation">[</span><span class="hljs-operator">!</span>a<span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;sw&#x27;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> y2<span class="hljs-operator">&lt;-</span>testdata<span class="hljs-punctuation">[</span><span class="hljs-operator">!</span>a<span class="hljs-punctuation">,</span><span class="hljs-string">&#x27;pw&#x27;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-operator">&gt;</span> summary<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>sw<span class="hljs-punctuation">)</span>
+   Min. <span class="hljs-number">1</span>st Qu.  Median    Mean <span class="hljs-number">3</span>rd Qu.    Max.
   <span class="hljs-number">2.000</span>   <span class="hljs-number">2.700</span>   <span class="hljs-number">2.900</span>   <span class="hljs-number">2.881</span>   <span class="hljs-number">3.100</span>   <span class="hljs-number">3.800</span>
-&gt; summary(testdata$pw)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+<span class="hljs-operator">&gt;</span> summary<span class="hljs-punctuation">(</span>testdata<span class="hljs-operator">$</span>pw<span class="hljs-punctuation">)</span>
+   Min. <span class="hljs-number">1</span>st Qu.  Median    Mean <span class="hljs-number">3</span>rd Qu.    Max.
   <span class="hljs-number">1.000</span>   <span class="hljs-number">1.300</span>   <span class="hljs-number">1.600</span>   <span class="hljs-number">1.672</span>   <span class="hljs-number">2.000</span>   <span class="hljs-number">2.500</span>
-&gt;
-&gt; plot(x1,y1,xlim=c(<span class="hljs-number">1.5</span>,<span class="hljs-number">4</span>),ylim=c(<span class="hljs-number">.05</span>,<span class="hljs-number">3</span>),xlab=<span class="hljs-string">&#x27;sw&#x27;</span>,ylab=<span class="hljs-string">&#x27;pw&#x27;</span>,col=<span class="hljs-string">&#x27;blue&#x27;</span>)
-&gt; points(x2,y2,col=<span class="hljs-string">&#x27;red&#x27;</span>)
-&gt;
-&gt; <span class="hljs-comment">#画分类边界图，即画h(x)=0.5的图像</span>
-&gt; x3&lt;-seq(<span class="hljs-number">1.5</span>,<span class="hljs-number">4</span>,length=<span class="hljs-number">100</span>)
-&gt; y3&lt;-(<span class="hljs-number">3.796</span>/<span class="hljs-number">14.735</span>)*x3+<span class="hljs-number">13.415</span>/<span class="hljs-number">14.735</span>
-&gt; lines(x3,y3)</code></pre>
-<p><img src="/2020/10/02/Article202010023/5.png" srcset="/img/loading.gif" alt="5"></p>
-<p>训练样本散点图及分类边界：</p>
-<p>（画logistic回归的分类边界即画曲线h(x)=0.5）</p>
-<p><img src="/2020/10/02/Article202010023/6.png" srcset="/img/loading.gif" alt="6"></p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/R/">R</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
-                    
-                      <a class="hover-with-bg" href="/tags/R/">R</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/">线性模型</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/10/02/Article202010024/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">R语言在已有的图形上画一条直线</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/10/02/Article202010022/">
-                        <span class="hidden-mobile">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "R语言中的广义线性模型glm&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+<span class="hljs-operator">&gt;</span>
+<span class="hljs-operator">&gt;</span> plot<span class="hljs-punctuation">(</span>x1<span class="hljs-punctuation">,</span>y1<span class="hljs-punctuation">,</span>xlim<span class="hljs-operator">=</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1.5</span><span class="hljs-punctuation">,</span><span class="hljs-number">4</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>ylim<span class="hljs-operator">=</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">.05</span><span class="hljs-punctuation">,</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>xlab<span class="hljs-operator">=</span><span class="hljs-string">&#x27;sw&#x27;</span><span class="hljs-punctuation">,</span>ylab<span class="hljs-operator">=</span><span class="hljs-string">&#x27;pw&#x27;</span><span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span><span class="hljs-string">&#x27;blue&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> points<span class="hljs-punctuation">(</span>x2<span class="hljs-punctuation">,</span>y2<span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span><span class="hljs-string">&#x27;red&#x27;</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span>
+<span class="hljs-operator">&gt;</span> <span class="hljs-comment">#画分类边界图，即画h(x)=0.5的图像</span>
+<span class="hljs-operator">&gt;</span> x3<span class="hljs-operator">&lt;-</span>seq<span class="hljs-punctuation">(</span><span class="hljs-number">1.5</span><span class="hljs-punctuation">,</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span><span class="hljs-built_in">length</span><span class="hljs-operator">=</span><span class="hljs-number">100</span><span class="hljs-punctuation">)</span>
+<span class="hljs-operator">&gt;</span> y3<span class="hljs-operator">&lt;-</span><span class="hljs-punctuation">(</span><span class="hljs-number">3.796</span><span class="hljs-operator">/</span><span class="hljs-number">14.735</span><span class="hljs-punctuation">)</span><span class="hljs-operator">*</span>x3<span class="hljs-operator">+</span><span class="hljs-number">13.415</span><span class="hljs-operator">/</span><span class="hljs-number">14.735</span>
+<span class="hljs-operator">&gt;</span> lines<span class="hljs-punctuation">(</span>x3<span class="hljs-punctuation">,</span>y3<span class="hljs-punctuation">)</span></code></pre><p><img src="/2020/10/02/Article202010023/5.png" srcset="/img/loading.gif" alt="5"></p><p>训练样本散点图及分类边界：</p><p>（画logistic回归的分类边界即画曲线h(x)=0.5）</p><p><img src="/2020/10/02/Article202010023/6.png" srcset="/img/loading.gif" alt="6"></p></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/R/">R</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a> <a class="hover-with-bg" href="/tags/R/">R</a> <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/">线性模型</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/10/02/Article202010024/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">R语言在已有的图形上画一条直线</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/10/02/Article202010022/"><span class="hidden-mobile">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","R语言中的广义线性模型glm&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

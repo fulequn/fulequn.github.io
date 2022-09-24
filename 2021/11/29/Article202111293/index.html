@@ -1,285 +1,11 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>ubuntu的kylin16版本安装OpenAI gym - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2021-11-29 10:42" pubdate>
-      2021年11月29日 上午
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.8k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      60
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">ubuntu的kylin16版本安装OpenAI gym</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <blockquote>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://y4ung.blog.csdn.net/article/details/70544957">Vmware Ubuntu kylin NAT模式上网设置_y4ung-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cnwy/p/12238229.html">ubuntu16.04纯净版-安装Python3.8.1/升级pip - 王钰 - 博客园 (cnblogs.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43843267/article/details/117355000">ubuntu python3 pip报错SyntaxError: invalid syntax_海棠花未眠的博客-CSDN博客</a></p>
-</blockquote>
-<p>虚拟机安装不赘述了，使用版本为ubuntukylin-16.04-desktop-amd64（建议使用ubuntu而不是centos）。</p>
-<p>安装过程很容易，按着顺序依次确定即可，安装完成之后需要进行网络配置，让我们的虚拟机链接上网络。</p>
-<h1 id="一-配置网络"><a class="markdownIt-Anchor" href="#一-配置网络"></a> 一、配置网络</h1>
-<p>1.打开VMware workstation ，菜单栏选项–&gt;编辑–&gt;虚拟网络编辑器，将<strong>VMnet8</strong>设置为NAT模式，启动DHCP(DHCP就是用来动态分配虚拟机IP的，不启用也没有关系), 如图：</p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081139191.png" srcset="/img/loading.gif" alt="1"></p>
-<p>2.在<strong>主机上开启NAT服务和DHCP服务</strong>：</p>
-<p>win+r –&gt; services.msc</p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081142308.png" srcset="/img/loading.gif" alt="2"></p>
-<p>3.然后，打开VMware workstation ，菜单栏选项–&gt;虚拟机–&gt;设置为NAT模式</p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081143179.png" srcset="/img/loading.gif" alt="3"></p>
-<p>4.更改适配器设置，将可以上网的网络设置为共享，共享给虚拟机的<strong>VMnet8</strong>（不需要勾下面的勾）:</p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081148824.png" srcset="/img/loading.gif" alt="4"></p>
-<h1 id="二-配置python3环境"><a class="markdownIt-Anchor" href="#二-配置python3环境"></a> 二、配置Python3环境</h1>
-<p>ubuntu的kylin16系统自己带了Python2.7和Python3.5环境，我需要使用Python3.8+。</p>
-<p>1.配置依赖环境，如果不进行这步可能会出现一些问题。</p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081158019.png" srcset="/img/loading.gif" alt="5"></p>
-<p>2.去官网下载<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.8.1">Python-3.8.1.tar.xz</a></p>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081159782.png" srcset="/img/loading.gif" alt="6"></p>
-<p>3.解压下载的包</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvJf</span>  <span class="hljs-selector-tag">Python-3</span><span class="hljs-selector-class">.8</span><span class="hljs-selector-class">.1</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.xz</span></code></pre>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081201823.png" srcset="/img/loading.gif" alt="7"></p>
-<p>4.进入解压后的目录</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">cd</span> Python-<span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>/</code></pre>
-<p>5.安装依赖(非必要，可跳过此步骤，如在6步出错在执行本步骤)</p>
-<p>执行下列命令安装依赖过程中，如有提示，一律y。</p>
-<pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install python-<span class="hljs-built_in">dev</span>
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>ubuntu的kylin16版本安装OpenAI gym - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2021-11-29 10:42" pubdate>2021年11月29日 上午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.8k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 60 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">ubuntu的kylin16版本安装OpenAI gym</h1><div class="markdown-body" id="post-body"><blockquote><p>参考链接：</p><p><a target="_blank" rel="noopener" href="https://y4ung.blog.csdn.net/article/details/70544957">Vmware Ubuntu kylin NAT模式上网设置_y4ung-CSDN博客</a></p><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cnwy/p/12238229.html">ubuntu16.04纯净版-安装Python3.8.1/升级pip - 王钰 - 博客园 (cnblogs.com)</a></p><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43843267/article/details/117355000">ubuntu python3 pip报错SyntaxError: invalid syntax_海棠花未眠的博客-CSDN博客</a></p></blockquote><p>虚拟机安装不赘述了，使用版本为ubuntukylin-16.04-desktop-amd64（建议使用ubuntu而不是centos）。</p><p>安装过程很容易，按着顺序依次确定即可，安装完成之后需要进行网络配置，让我们的虚拟机链接上网络。</p><h1 id="一-配置网络"><a class="markdownIt-Anchor" href="#一-配置网络"></a> 一、配置网络</h1><p>1.打开VMware workstation ，菜单栏选项–&gt;编辑–&gt;虚拟网络编辑器，将<strong>VMnet8</strong>设置为NAT模式，启动DHCP(DHCP就是用来动态分配虚拟机IP的，不启用也没有关系), 如图：</p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081139191.png" srcset="/img/loading.gif" alt="1"></p><p>2.在<strong>主机上开启NAT服务和DHCP服务</strong>：</p><p>win+r –&gt; services.msc</p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081142308.png" srcset="/img/loading.gif" alt="2"></p><p>3.然后，打开VMware workstation ，菜单栏选项–&gt;虚拟机–&gt;设置为NAT模式</p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081143179.png" srcset="/img/loading.gif" alt="3"></p><p>4.更改适配器设置，将可以上网的网络设置为共享，共享给虚拟机的<strong>VMnet8</strong>（不需要勾下面的勾）:</p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081148824.png" srcset="/img/loading.gif" alt="4"></p><h1 id="二-配置python3环境"><a class="markdownIt-Anchor" href="#二-配置python3环境"></a> 二、配置Python3环境</h1><p>ubuntu的kylin16系统自己带了Python2.7和Python3.5环境，我需要使用Python3.8+。</p><p>1.配置依赖环境，如果不进行这步可能会出现一些问题。</p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081158019.png" srcset="/img/loading.gif" alt="5"></p><p>2.去官网下载<a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.8.1">Python-3.8.1.tar.xz</a></p><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081159782.png" srcset="/img/loading.gif" alt="6"></p><p>3.解压下载的包</p><pre><code class="hljs apache"><span class="hljs-attribute">tar</span> -xvJf  Python-<span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>.tar.xz</code></pre><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081201823.png" srcset="/img/loading.gif" alt="7"></p><p>4.进入解压后的目录</p><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> Python-<span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>/</code></pre><p>5.安装依赖(非必要，可跳过此步骤，如在6步出错在执行本步骤)</p><p>执行下列命令安装依赖过程中，如有提示，一律y。</p><pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install python-<span class="hljs-built_in">dev</span>
 sudo apt-<span class="hljs-built_in">get</span> install libffi-<span class="hljs-built_in">dev</span>
 sudo apt-<span class="hljs-built_in">get</span> install libssl-<span class="hljs-built_in">dev</span>
-sudo apt-<span class="hljs-built_in">get</span> install -y make build-essential libssl-<span class="hljs-built_in">dev</span> zlib1g-<span class="hljs-built_in">dev</span> libbz2-<span class="hljs-built_in">dev</span> libreadline-<span class="hljs-built_in">dev</span> libsqlite3-<span class="hljs-built_in">dev</span> wget curl llvm libncurses5-<span class="hljs-built_in">dev</span> libncursesw5-<span class="hljs-built_in">dev</span> xz-utils tk-<span class="hljs-built_in">dev</span></code></pre>
-<p>6.执行安装</p>
-<pre><code class="hljs awk">.<span class="hljs-regexp">/configure prefix=/u</span>sr<span class="hljs-regexp">/local/</span>python3
-sudo make &amp;&amp; sudo make install</code></pre>
-<p>7.修改软连接（配置全局变量）</p>
-<p>将原来的链接备份。</p>
-<pre><code class="hljs awk">sudo mv <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python /u</span>sr<span class="hljs-regexp">/bin/</span>python.bak</code></pre>
-<p>添加python3的软链接。</p>
-<pre><code class="hljs awk">sudo ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python</code></pre>
-<p>测试是否安装成功了。</p>
-<pre><code class="hljs ebnf"><span class="hljs-attribute">python -V</span></code></pre>
-<p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081634112.png" srcset="/img/loading.gif" alt="8"></p>
-<p>8.安装/升级pip</p>
-<p>这句是给(python2.7安装pip)</p>
-<pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python-pip</code></pre>
-<p>给python3安装pip。</p>
-<pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python3-pip</code></pre>
-<p>执行升级。</p>
-<pre><code class="hljs sql">sudo pip <span class="hljs-keyword">install</span> <span class="hljs-comment">--upgrade pip</span>
-sudo pip3 <span class="hljs-keyword">install</span> <span class="hljs-comment">--upgrade pip</span></code></pre>
-<p>升级pip时出现了问题：</p>
-<pre><code class="hljs sql">Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):
-  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/bin/pip&quot;</span>, line <span class="hljs-number">9</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
-    <span class="hljs-keyword">from</span> pip <span class="hljs-keyword">import</span> <span class="hljs-keyword">main</span></code></pre>
-<p>修改一下pip配置</p>
-<pre><code class="hljs awk">sudo vi <span class="hljs-regexp">/usr/</span>bin/pip</code></pre>
-<p>改成</p>
-<pre><code class="hljs awk"><span class="hljs-comment">#原PIP配置文件</span>
+sudo apt-<span class="hljs-built_in">get</span> install -y make build-essential libssl-<span class="hljs-built_in">dev</span> zlib1g-<span class="hljs-built_in">dev</span> libbz2-<span class="hljs-built_in">dev</span> libreadline-<span class="hljs-built_in">dev</span> libsqlite3-<span class="hljs-built_in">dev</span> wget curl llvm libncurses5-<span class="hljs-built_in">dev</span> libncursesw5-<span class="hljs-built_in">dev</span> xz-utils tk-<span class="hljs-built_in">dev</span></code></pre><p>6.执行安装</p><pre><code class="hljs awk">.<span class="hljs-regexp">/configure prefix=/u</span>sr<span class="hljs-regexp">/local/</span>python3
+sudo make &amp;&amp; sudo make install</code></pre><p>7.修改软连接（配置全局变量）</p><p>将原来的链接备份。</p><pre><code class="hljs awk">sudo mv <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python /u</span>sr<span class="hljs-regexp">/bin/</span>python.bak</code></pre><p>添加python3的软链接。</p><pre><code class="hljs awk">sudo ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python</code></pre><p>测试是否安装成功了。</p><pre><code class="hljs ebnf"><span class="hljs-attribute">python -V</span></code></pre><p><img src="https://flqgraph-1302174199.cos.ap-nanjing.myqcloud.com/202112081634112.png" srcset="/img/loading.gif" alt="8"></p><p>8.安装/升级pip</p><p>这句是给(python2.7安装pip)</p><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install python-pip</code></pre><p>给python3安装pip。</p><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install python3-pip</code></pre><p>执行升级。</p><pre><code class="hljs ada">sudo pip install <span class="hljs-comment">--upgrade pip</span>
+sudo pip3 install <span class="hljs-comment">--upgrade pip</span></code></pre><p>升级pip时出现了问题：</p><pre><code class="hljs arduino"><span class="hljs-built_in">Traceback</span> (most recent call last):
+  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/usr/bin/pip&quot;</span>, line <span class="hljs-number">9</span>, in &lt;<span class="hljs-keyword">module</span>&gt;
+    from pip <span class="hljs-keyword">import</span> main</code></pre><p>修改一下pip配置</p><pre><code class="hljs awk">sudo vi <span class="hljs-regexp">/usr/</span>bin/pip</code></pre><p>改成</p><pre><code class="hljs awk"><span class="hljs-comment">#原PIP配置文件</span>
 from pip import main  
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:  
     sys.<span class="hljs-keyword">exit</span>(main()) 
@@ -287,392 +13,76 @@ from pip import main
 <span class="hljs-comment">#修改为</span>
 from pip import __main__  <span class="hljs-regexp">//</span>修改
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:  
-    sys.<span class="hljs-keyword">exit</span>(__main__._main())<span class="hljs-regexp">//</span>修改</code></pre>
-<p>9.pip3安装包时出现问题</p>
-<pre><code class="hljs arduino">Traceback (most recent call last):
-  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/usr/bin/pip3&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">11</span>, in &lt;<span class="hljs-keyword">module</span>&gt;
-    sys.<span class="hljs-built_in">exit</span>(main())
-  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/__init__.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">11</span>, in main
+    sys.<span class="hljs-keyword">exit</span>(__main__._main())<span class="hljs-regexp">//</span>修改</code></pre><p>9.pip3安装包时出现问题</p><pre><code class="hljs arduino"><span class="hljs-built_in">Traceback</span> (most recent call last):
+  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/usr/bin/pip3&quot;</span>, line <span class="hljs-number">11</span>, in &lt;<span class="hljs-keyword">module</span>&gt;
+    sys.<span class="hljs-built_in">exit</span>(<span class="hljs-built_in">main</span>())
+  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/__init__.py&quot;</span>, line <span class="hljs-number">11</span>, in main
     from pip._internal.utils.entrypoints <span class="hljs-keyword">import</span> _wrapper
-  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/_internal/utils/entrypoints.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">4</span>, in &lt;<span class="hljs-keyword">module</span>&gt;
+  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/_internal/utils/entrypoints.py&quot;</span>, line <span class="hljs-number">4</span>, in &lt;<span class="hljs-keyword">module</span>&gt;
     from pip._internal.cli.main <span class="hljs-keyword">import</span> main
-  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/_internal/cli/main.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">57</span>
-    sys.<span class="hljs-built_in">stderr</span>.<span class="hljs-built_in">write</span>(f<span class="hljs-string">&quot;ERROR: &#123;exc&#125;&quot;</span>)</code></pre>
-<p><strong>原因</strong></p>
-<p>查了很多，大多数老外的说法是，高版本的pip不再支持<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?from=pc_blog_highlight&amp;q=python">python</a>3.5</p>
-<p><strong>解决</strong></p>
-<p>移除pip的相关文件</p>
-<pre><code class="hljs angelscript">sudo apt <span class="hljs-built_in">auto</span>remove</code></pre>
-<p>下载pip的安装文件</p>
-<pre><code class="hljs awk">url -O https:<span class="hljs-regexp">//</span>bootstrap.pypa.io<span class="hljs-regexp">/pip/</span><span class="hljs-number">3.5</span>/get-pip.py</code></pre>
-<p>执行安装文件</p>
-<pre><code class="hljs vim">/usr/bin/<span class="hljs-keyword">python3</span> <span class="hljs-built_in">get</span>-pip.<span class="hljs-keyword">py</span></code></pre>
-<p>这句是给(python2.7安装pip)</p>
-<pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python-pip</code></pre>
-<p>给python3安装pip。</p>
-<pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python3-pip</code></pre>
-<p>pip升级</p>
-<pre><code class="hljs sql">sudo pip <span class="hljs-keyword">install</span> <span class="hljs-comment">--upgrade pip</span>
-sudo pip3 <span class="hljs-keyword">install</span> <span class="hljs-comment">--upgrade pip</span></code></pre>
-<p>这个部分我卸载之后，出现了pip不存在的错误。之后重新安装，再升级就解决了。</p>
-<h1 id="三-安装openai-gym"><a class="markdownIt-Anchor" href="#三-安装openai-gym"></a> 三、安装OpenAI gym</h1>
-<p>输入下面语句，安装gym</p>
-<pre><code class="hljs awk">pip install gym -i https:<span class="hljs-regexp">//</span>pypi.tuna.tsinghua.edu.cn/simple</code></pre>
-<p>1.出现下面错误</p>
-<pre><code class="hljs yaml"><span class="hljs-attr">ModuleNotFoundError:</span> <span class="hljs-literal">No</span> <span class="hljs-string">module</span> <span class="hljs-string">named</span> <span class="hljs-string">&#x27;_ctypes&#x27;</span></code></pre>
-<p>解决：</p>
-<pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> libffi-dev -y</code></pre>
-<p>2.出现错误</p>
-<pre><code class="hljs subunit"><span class="hljs-keyword">ERROR: </span>No matching distribution found for gym[all]</code></pre>
-<p>未解决</p>
-<p>3.出现错误</p>
-<pre><code class="hljs sql">    ERROR: Command errored out <span class="hljs-keyword">with</span> <span class="hljs-keyword">exit</span> <span class="hljs-keyword">status</span> <span class="hljs-number">1</span>:
-     command: /usr/<span class="hljs-keyword">bin</span>/python -u -c <span class="hljs-string">&#x27;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;; __file__=&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;;f = getattr(tokenize, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;open&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;from setuptools import setup; setup()&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);code = f.read().replace(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\r\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;exec&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;))&#x27;</span> <span class="hljs-keyword">install</span> <span class="hljs-comment">--record /tmp/pip-record-cqfhnl92/install-record.txt --single-version-externally-managed --user --prefix= --compile --install-headers /home/fulequn/.local/include/python3.8/mujoco-py</span>
-         cwd: /tmp/pip-<span class="hljs-keyword">install</span>-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/
-    <span class="hljs-keyword">Complete</span> <span class="hljs-keyword">output</span> (<span class="hljs-number">58</span> <span class="hljs-keyword">lines</span>):
-    running <span class="hljs-keyword">install</span>
-    /home/fulequn/.local/lib/python3<span class="hljs-number">.8</span>/site-packages/setuptools/command/install.py:<span class="hljs-number">34</span>: SetuptoolsDeprecationWarning: setup.py <span class="hljs-keyword">install</span> <span class="hljs-keyword">is</span> deprecated. <span class="hljs-keyword">Use</span> <span class="hljs-keyword">build</span> <span class="hljs-keyword">and</span> pip <span class="hljs-keyword">and</span> other standards-based tools.
+  <span class="hljs-built_in">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.5/site-packages/pip/_internal/cli/main.py&quot;</span>, line <span class="hljs-number">57</span>
+    sys.stderr.<span class="hljs-built_in">write</span>(f<span class="hljs-string">&quot;ERROR: &#123;exc&#125;&quot;</span>)</code></pre><p><strong>原因</strong></p><p>查了很多，大多数老外的说法是，高版本的pip不再支持<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?from=pc_blog_highlight&amp;q=python">python</a>3.5</p><p><strong>解决</strong></p><p>移除pip的相关文件</p><pre><code class="hljs angelscript">sudo apt <span class="hljs-built_in">auto</span>remove</code></pre><p>下载pip的安装文件</p><pre><code class="hljs awk">url -O https:<span class="hljs-regexp">//</span>bootstrap.pypa.io<span class="hljs-regexp">/pip/</span><span class="hljs-number">3.5</span>/get-pip.py</code></pre><p>执行安装文件</p><pre><code class="hljs vim">/usr/bin/<span class="hljs-keyword">python3</span> <span class="hljs-built_in">get</span>-pip.<span class="hljs-keyword">py</span></code></pre><p>这句是给(python2.7安装pip)</p><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install python-pip</code></pre><p>给python3安装pip。</p><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install python3-pip</code></pre><p>pip升级</p><pre><code class="hljs ada">sudo pip install <span class="hljs-comment">--upgrade pip</span>
+sudo pip3 install <span class="hljs-comment">--upgrade pip</span></code></pre><p>这个部分我卸载之后，出现了pip不存在的错误。之后重新安装，再升级就解决了。</p><h1 id="三-安装openai-gym"><a class="markdownIt-Anchor" href="#三-安装openai-gym"></a> 三、安装OpenAI gym</h1><p>输入下面语句，安装gym</p><pre><code class="hljs awk">pip install gym -i https:<span class="hljs-regexp">//</span>pypi.tuna.tsinghua.edu.cn/simple</code></pre><p>1.出现下面错误</p><pre><code class="hljs vbnet"><span class="hljs-symbol">ModuleNotFoundError:</span> No <span class="hljs-keyword">module</span> named <span class="hljs-comment">&#x27;_ctypes&#x27;</span></code></pre><p>解决：</p><pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> libffi-dev -y</code></pre><p>2.出现错误</p><pre><code class="hljs subunit"><span class="hljs-keyword">ERROR: </span>No matching distribution found for gym[all]</code></pre><p>未解决</p><p>3.出现错误</p><pre><code class="hljs vim">    ERROR: Command errored out with <span class="hljs-keyword">exit</span> status <span class="hljs-number">1</span>:
+     <span class="hljs-keyword">command</span>: /usr/bin/<span class="hljs-keyword">python</span> -<span class="hljs-keyword">u</span> -<span class="hljs-keyword">c</span> <span class="hljs-string">&#x27;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;; __file__=&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;;f = getattr(tokenize, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;open&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;from setuptools import setup; setup()&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);code = f.read().replace(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\r\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;exec&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;))&#x27;</span> install --record /tmp/pip-record-cqfhnl92/install-record.txt --single-<span class="hljs-keyword">version</span>-externally-managed --user --prefix= --compile --install-headers /home/fulequn/.local/include/<span class="hljs-keyword">python3</span>.<span class="hljs-number">8</span>/mujoco-<span class="hljs-keyword">py</span>
+         cwd: /tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/
+    Complete output (<span class="hljs-number">58</span> lines):
+    running install
+    /home/fulequn/.local/lib/<span class="hljs-keyword">python3</span>.<span class="hljs-number">8</span>/site-packages/setuptools/<span class="hljs-keyword">command</span>/install.<span class="hljs-keyword">py</span>:<span class="hljs-number">34</span>: SetuptoolsDeprecationWarning: setup.<span class="hljs-keyword">py</span> install <span class="hljs-keyword">is</span> deprecated. Use build <span class="hljs-built_in">and</span> pip <span class="hljs-built_in">and</span> other standards-based tools.
       warnings.warn(
-    running <span class="hljs-keyword">build</span>
+    running build
     
-    You appear <span class="hljs-keyword">to</span> be <span class="hljs-keyword">missing</span> MuJoCo.  We expected <span class="hljs-keyword">to</span> find the <span class="hljs-keyword">file</span> here: /home/fulequn/.mujoco/mjpro150
+    You appear <span class="hljs-keyword">to</span> <span class="hljs-keyword">be</span> missing MuJoCo.  We expected <span class="hljs-keyword">to</span> <span class="hljs-keyword">find</span> the <span class="hljs-keyword">file</span> here: /home/fulequn/.mujoco/mjpro150
     
-    This <span class="hljs-keyword">package</span> <span class="hljs-keyword">only</span> provides python bindings, the <span class="hljs-keyword">library</span> must be installed separately.
+    This package <span class="hljs-keyword">only</span> provides <span class="hljs-keyword">python</span> bindings, the library must <span class="hljs-keyword">be</span> installed separately.
     
-    Please follow the instructions <span class="hljs-keyword">on</span> the README <span class="hljs-keyword">to</span> <span class="hljs-keyword">install</span> MuJoCo
+    Please follow the instructions <span class="hljs-keyword">on</span> the README <span class="hljs-keyword">to</span> install MuJoCo
     
-        https://github.com/openai/mujoco-py<span class="hljs-comment">#install-mujoco</span>
+        https://github.<span class="hljs-keyword">com</span>/openai/mujoco-py#install-mujoco
     
-    Which can be downloaded <span class="hljs-keyword">from</span> the website
+    Which can <span class="hljs-keyword">be</span> downloaded from the website
     
-        https://www.roboti.us/index.html
+        https://www.roboti.us/<span class="hljs-built_in">index</span>.html
     
     Traceback (most recent <span class="hljs-keyword">call</span> <span class="hljs-keyword">last</span>):
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;&lt;string&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&quot;</span>, line <span class="hljs-number">32</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
+      File <span class="hljs-string">&quot;&lt;string&gt;&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">1</span>, in <span class="hljs-symbol">&lt;module&gt;</span>
+      File <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">32</span>, in <span class="hljs-symbol">&lt;module&gt;</span>
         setup(
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.8/site-packages/setuptools/__init__.py&quot;</span>, line <span class="hljs-number">153</span>, <span class="hljs-keyword">in</span> setup
+      File <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.8/site-packages/setuptools/__init__.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">153</span>, in setup
         <span class="hljs-keyword">return</span> distutils.core.setup(**attrs)
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/core.py&quot;</span>, line <span class="hljs-number">148</span>, <span class="hljs-keyword">in</span> setup
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/core.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">148</span>, in setup
         dist.run_commands()
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, line <span class="hljs-number">966</span>, <span class="hljs-keyword">in</span> run_commands
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">966</span>, in run_commands
         self.run_command(cmd)
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, line <span class="hljs-number">985</span>, <span class="hljs-keyword">in</span> run_command
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">985</span>, in run_command
         cmd_obj.run()
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.8/site-packages/setuptools/command/install.py&quot;</span>, line <span class="hljs-number">68</span>, <span class="hljs-keyword">in</span> run
-        <span class="hljs-keyword">return</span> orig.install.run(<span class="hljs-keyword">self</span>)
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/command/install.py&quot;</span>, line <span class="hljs-number">545</span>, <span class="hljs-keyword">in</span> run
+      File <span class="hljs-string">&quot;/home/fulequn/.local/lib/python3.8/site-packages/setuptools/command/install.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">68</span>, in run
+        <span class="hljs-keyword">return</span> orig.install.run(self)
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/command/install.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">545</span>, in run
         self.run_command(<span class="hljs-string">&#x27;build&#x27;</span>)
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/cmd.py&quot;</span>, line <span class="hljs-number">313</span>, <span class="hljs-keyword">in</span> run_command
-        self.distribution.run_command(command)
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, line <span class="hljs-number">985</span>, <span class="hljs-keyword">in</span> run_command
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/cmd.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">313</span>, in run_command
+        self.distribution.run_command(<span class="hljs-keyword">command</span>)
+      File <span class="hljs-string">&quot;/usr/local/python3/lib/python3.8/distutils/dist.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">985</span>, in run_command
         cmd_obj.run()
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&quot;</span>, line <span class="hljs-number">28</span>, <span class="hljs-keyword">in</span> run
-        <span class="hljs-keyword">import</span> mujoco_py  <span class="hljs-comment"># noqa: force build</span>
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/__init__.py&quot;</span>, line <span class="hljs-number">3</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
-        <span class="hljs-keyword">from</span> mujoco_py.builder <span class="hljs-keyword">import</span> cymj, ignore_mujoco_warnings, functions, MujocoException
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/builder.py&quot;</span>, line <span class="hljs-number">502</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;
+      File <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">28</span>, in run
+        import mujoco_py  # noqa: force build
+      File <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/__init__.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">3</span>, in <span class="hljs-symbol">&lt;module&gt;</span>
+        from mujoco_py.builder import cymj, ignore_mujoco_warnings, functions, MujocoException
+      File <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/builder.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">502</span>, in <span class="hljs-symbol">&lt;module&gt;</span>
         mjpro_path, key_path = discover_mujoco()
-      <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/utils.py&quot;</span>, line <span class="hljs-number">93</span>, <span class="hljs-keyword">in</span> discover_mujoco
-        <span class="hljs-keyword">raise</span> <span class="hljs-keyword">Exception</span>(message)
-    <span class="hljs-keyword">Exception</span>:
-    You appear <span class="hljs-keyword">to</span> be <span class="hljs-keyword">missing</span> MuJoCo.  We expected <span class="hljs-keyword">to</span> find the <span class="hljs-keyword">file</span> here: /home/fulequn/.mujoco/mjpro150
+      File <span class="hljs-string">&quot;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/mujoco_py/utils.py&quot;</span>, <span class="hljs-built_in">line</span> <span class="hljs-number">93</span>, in discover_mujoco
+        raise Exception(message)
+    Exception:
+    You appear <span class="hljs-keyword">to</span> <span class="hljs-keyword">be</span> missing MuJoCo.  We expected <span class="hljs-keyword">to</span> <span class="hljs-keyword">find</span> the <span class="hljs-keyword">file</span> here: /home/fulequn/.mujoco/mjpro150
     
-    This <span class="hljs-keyword">package</span> <span class="hljs-keyword">only</span> provides python bindings, the <span class="hljs-keyword">library</span> must be installed separately.
+    This package <span class="hljs-keyword">only</span> provides <span class="hljs-keyword">python</span> bindings, the library must <span class="hljs-keyword">be</span> installed separately.
     
-    Please follow the instructions <span class="hljs-keyword">on</span> the README <span class="hljs-keyword">to</span> <span class="hljs-keyword">install</span> MuJoCo
+    Please follow the instructions <span class="hljs-keyword">on</span> the README <span class="hljs-keyword">to</span> install MuJoCo
     
-        https://github.com/openai/mujoco-py<span class="hljs-comment">#install-mujoco</span>
+        https://github.<span class="hljs-keyword">com</span>/openai/mujoco-py#install-mujoco
     
-    Which can be downloaded <span class="hljs-keyword">from</span> the website
+    Which can <span class="hljs-keyword">be</span> downloaded from the website
     
-        https://www.roboti.us/index.html
+        https://www.roboti.us/<span class="hljs-built_in">index</span>.html
     
-    <span class="hljs-comment">----------------------------------------</span>
-<span class="hljs-keyword">ERROR</span>: Command errored <span class="hljs-keyword">out</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">exit</span> <span class="hljs-keyword">status</span> <span class="hljs-number">1</span>: /usr/<span class="hljs-keyword">bin</span>/python -u -c <span class="hljs-string">&#x27;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;; __file__=&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;;f = getattr(tokenize, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;open&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;from setuptools import setup; setup()&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);code = f.read().replace(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\r\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;exec&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;))&#x27;</span> <span class="hljs-keyword">install</span> <span class="hljs-comment">--record /tmp/pip-record-cqfhnl92/install-record.txt --single-version-externally-managed --user --prefix= --compile --install-headers /home/fulequn/.local/include/python3.8/mujoco-py Check the logs for full command output.</span></code></pre>
-<p>未解决</p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/ReinforcementLearning/">ReinforcementLearning</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/11/29/Article202111294/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu16桌面版卸载不必要的自带软件</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/11/29/Article202111292/">
-                        <span class="hidden-mobile">强化学习系列（一）：强化学习简介</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "ubuntu的kylin16版本安装OpenAI gym&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+    ----------------------------------------
+ERROR: Command errored out with <span class="hljs-keyword">exit</span> status <span class="hljs-number">1</span>: /usr/bin/<span class="hljs-keyword">python</span> -<span class="hljs-keyword">u</span> -<span class="hljs-keyword">c</span> <span class="hljs-string">&#x27;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;; __file__=&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;/tmp/pip-install-n_xs68fh/mujoco-py_a3733903fc69448b995da4444e4157b9/setup.py&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;;f = getattr(tokenize, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;open&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;from setuptools import setup; setup()&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);code = f.read().replace(&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\r\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;\n&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;exec&#x27;</span><span class="hljs-string">&quot;&#x27;&quot;</span><span class="hljs-string">&#x27;))&#x27;</span> install --record /tmp/pip-record-cqfhnl92/install-record.txt --single-<span class="hljs-keyword">version</span>-externally-managed --user --prefix= --compile --install-headers /home/fulequn/.local/include/<span class="hljs-keyword">python3</span>.<span class="hljs-number">8</span>/mujoco-<span class="hljs-keyword">py</span> Check the logs <span class="hljs-keyword">for</span> full <span class="hljs-keyword">command</span> output.</code></pre><p>未解决</p></div><hr><div><div class="post-metas mb-3"><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/ReinforcementLearning/">ReinforcementLearning</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2021/11/29/Article202111294/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Ubuntu16桌面版卸载不必要的自带软件</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2021/11/29/Article202111292/"><span class="hidden-mobile">强化学习系列（一）：强化学习简介</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","ubuntu的kylin16版本安装OpenAI gym&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

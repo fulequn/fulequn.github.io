@@ -1,354 +1,41 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  <title>Java获取随机数 - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.0.2"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-26 17:04" pubdate>
-      2020年8月26日 下午
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      4.3k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      111
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
-            <!-- SEO header -->
-            <h1 style="display: none">Java获取随机数</h1>
-            
-            <div class="markdown-body" id="post-body">
-              <p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/haw2106/p/8036523.html">https://www.cnblogs.com/haw2106/p/8036523.html</a></p>
-<p><strong>方法1</strong><br>
-(数据类型)(最小值+Math.random()</p>
-<pre><code class="hljs angelscript">*(最大值-最小值+<span class="hljs-number">1</span>))
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>Java获取随机数 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-08-26 17:04" pubdate>2020年8月26日 下午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 4.3k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 111 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">Java获取随机数</h1><div class="markdown-body" id="post-body"><p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/haw2106/p/8036523.html">https://www.cnblogs.com/haw2106/p/8036523.html</a></p><p><strong>方法1</strong><br>(数据类型)(最小值+Math.random()</p><pre><code class="hljs gcode">*<span class="hljs-comment">(最大值-最小值+1)</span>)
 例:
-(<span class="hljs-built_in">int</span>)(<span class="hljs-number">1</span>+Math.random()*(<span class="hljs-number">10</span><span class="hljs-number">-1</span>+<span class="hljs-number">1</span>))</code></pre>
-<p>从1到10的int型随数</p>
-<p><strong>方法2</strong><br>
-获得随机数</p>
-<pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
-&#123;System.out.println((<span class="hljs-keyword">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>));&#125;
-(<span class="hljs-keyword">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>)</code></pre>
-<p>通过java.Math包的random方法得到1-10的int随机数<br>
-公式是:最小值—最大值（整数）的随机数<br>
-（类型）最小值+Math.random()*最大值</p>
-<p>通过java.Math包的random方法得到1-10的int随机数<br>
-公式是:最小值—最大值（整数）的随机数<br>
-（类型）最小值+Math.random()*最大值</p>
-<p><strong>方法3</strong></p>
-<pre><code class="hljs java">Random ra =<span class="hljs-keyword">new</span> Random();
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
-&#123;System.out.println(ra.nextInt(<span class="hljs-number">10</span>)+<span class="hljs-number">1</span>);&#125;</code></pre>
-<p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p>
-<p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p>
-<p>生成0到1之间的任意随机小数：</p>
-<p>生成[0,d)区间的随机小数，d为任意正的小数，则只需要将nextDouble方法的返回值乘以d即可。</p>
-<p>[n1，n2]</p>
-<p>也就是 ra.nextDouble() * (n2-n1)+n1</p>
-<p>java产生随机数的几种方式</p>
-<p>一.在j2se里我们可以使用Math.random()方法来产生一个随机数，这个产生的随机数是0-1之间的一个double，我们可以把他乘以一定的数，比如说乘以100，他就是个100以内的随机，这个在j2me中没有。</p>
-<p>二.在java.util这个包里面提供了一个Random的类，我们可以新建一个Random的对象来产生随机数，他可以产生随机整数、随机float、随机double，随机long，这个也是我们在j2me的程序里经常用的一个取随机数的方法。</p>
-<p>三.在我们的System类中有一个currentTimeMillis()方法，这个方法返回一个从1970年1月1号0点0分0秒到目前的一个毫秒数，返回类型是long，我们可以拿他作为一个随机数，我们可以拿他对一些数取模，就可以把他限制在一个范围之内啦</p>
-<p>其实在Random的默认构造方法里也是使用上面第三种方法进行随机数的产生的</p>
-<p>对于方法二中的Random类有以下说明：</p>
-<p>java.util.Random类有两种方式构建方式：带种子和不带种子</p>
-<p>不带种子：<br>
-此种方式将会返回随机的数字，每次运行结果不一样</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
+<span class="hljs-comment">(int)</span><span class="hljs-comment">(1+Math.random()</span>*<span class="hljs-comment">(10-1+1)</span>)</code></pre><p>从1到10的int型随数</p><p><strong>方法2</strong><br>获得随机数</p><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
+&#123;System.out.println((<span class="hljs-type">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>));&#125;
+(<span class="hljs-type">int</span>)(<span class="hljs-number">1</span>+Math.random()*<span class="hljs-number">10</span>)</code></pre><p>通过java.Math包的random方法得到1-10的int随机数<br>公式是:最小值—最大值（整数）的随机数<br>（类型）最小值+Math.random()*最大值</p><p>通过java.Math包的random方法得到1-10的int随机数<br>公式是:最小值—最大值（整数）的随机数<br>（类型）最小值+Math.random()*最大值</p><p><strong>方法3</strong></p><pre><code class="hljs java"><span class="hljs-type">Random</span> <span class="hljs-variable">ra</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">30</span>;i++)
+&#123;System.out.println(ra.nextInt(<span class="hljs-number">10</span>)+<span class="hljs-number">1</span>);&#125;</code></pre><p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p><p>通过java.util包中的Random类的nextInt方法来得到1-10的int随机数</p><p>生成0到1之间的任意随机小数：</p><p>生成[0,d)区间的随机小数，d为任意正的小数，则只需要将nextDouble方法的返回值乘以d即可。</p><p>[n1，n2]</p><p>也就是 ra.nextDouble() * (n2-n1)+n1</p><p>java产生随机数的几种方式</p><p>一.在j2se里我们可以使用Math.random()方法来产生一个随机数，这个产生的随机数是0-1之间的一个double，我们可以把他乘以一定的数，比如说乘以100，他就是个100以内的随机，这个在j2me中没有。</p><p>二.在java.util这个包里面提供了一个Random的类，我们可以新建一个Random的对象来产生随机数，他可以产生随机整数、随机float、随机double，随机long，这个也是我们在j2me的程序里经常用的一个取随机数的方法。</p><p>三.在我们的System类中有一个currentTimeMillis()方法，这个方法返回一个从1970年1月1号0点0分0秒到目前的一个毫秒数，返回类型是long，我们可以拿他作为一个随机数，我们可以拿他对一些数取模，就可以把他限制在一个范围之内啦</p><p>其实在Random的默认构造方法里也是使用上面第三种方法进行随机数的产生的</p><p>对于方法二中的Random类有以下说明：</p><p>java.util.Random类有两种方式构建方式：带种子和不带种子</p><p>不带种子：<br>此种方式将会返回随机的数字，每次运行结果不一样</p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomTest</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        java.util.Random r=<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.util.Random();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
           System.out.println(r.nextInt());
         &#125;
     &#125;
 
-&#125;</code></pre>
-<p>带种子：</p>
-<p>此种方式，无论程序运行多少次，返回结果都是一样的</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-    java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random(<span class="hljs-number">10</span>);
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
+&#125;</code></pre><p>带种子：</p><p>此种方式，无论程序运行多少次，返回结果都是一样的</p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+    java.util.Random r=<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.util.Random(<span class="hljs-number">10</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
       System.out.println(r.nextInt());
     &#125;
-&#125;</code></pre>
-<p>两种方式的差别在于</p>
-<p>(1) 首先请打开Java Doc，我们会看到Random类的说明：</p>
-<p>此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。</p>
-<p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。</p>
-<p>Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p>
-<p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Random</span><span class="hljs-params">()</span> </span>&#123; 
+&#125;</code></pre><p>两种方式的差别在于</p><p>(1) 首先请打开Java Doc，我们会看到Random类的说明：</p><p>此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。</p><p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。</p><p>Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p><p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Random</span><span class="hljs-params">()</span> &#123; 
 
-	<span class="hljs-keyword">this</span>(System.currentTimeMillis()); 
+	<span class="hljs-built_in">this</span>(System.currentTimeMillis()); 
 
-&#125;</code></pre>
-<p>另外：</p>
-<p>random对象的nextInt(),nextInt(int n)方法的说明：</p>
-<pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> next<span class="hljs-constructor">Int()</span>
+&#125;</code></pre><p>另外：</p><p>random对象的nextInt(),nextInt(int n)方法的说明：</p><pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> next<span class="hljs-constructor">Int()</span>
 
 返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 <span class="hljs-built_in">int</span> 值。
 
 <span class="hljs-built_in">int</span> next<span class="hljs-constructor">Int(<span class="hljs-params">int</span> <span class="hljs-params">n</span>)</span>
 
-返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 <span class="hljs-number">0</span>（包括）和指定值（不包括）之间均匀分布的 <span class="hljs-built_in">int</span>值。</code></pre>
-<h1 id="java随机数总结"><a class="markdownIt-Anchor" href="#java随机数总结"></a> Java随机数总结</h1>
-<p>随机数在实际中使用很广泛，比如要随即生成一个固定长度的字符串、数字。或者随即生成一个不定长度的数字、或者进行一个模拟的随机选择等等。Java提供了最基本的工具，可以帮助开发者来实现这一切。</p>
-<h2 id="一-java随机数的产生方式"><a class="markdownIt-Anchor" href="#一-java随机数的产生方式"></a> 一、Java随机数的产生方式</h2>
-<p>在Java中，随机数的概念从广义上将，有三种。</p>
-<p>1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p>
-<p>2、通过Math.random()返回一个0到1之间的double值。</p>
-<p>3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p>
-<h2 id="二-random类api说明"><a class="markdownIt-Anchor" href="#二-random类api说明"></a> 二、Random类API说明</h2>
-<p>1、Java API说明</p>
-<p>Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p>
-<p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p>
-<p>很多应用程序会发现 Math 类中的 random 方法更易于使用。</p>
-<p>2、方法摘要</p>
-<p>Random()</p>
-<p>创建一个新的随机数生成器。</p>
-<p>Random(long seed)</p>
-<p>使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p>
-<p>protected int next(int bits)</p>
-<p>生成下一个伪随机数。</p>
-<p>boolean nextBoolean()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p>
-<p>void nextBytes(byte[] bytes)</p>
-<p>生成随机字节并将其置于用户提供的字节数组中。</p>
-<p>double nextDouble()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p>
-<p>float nextFloat()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p>
-<p>double nextGaussian()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p>
-<p>int nextInt()</p>
-<p>返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p>
-<p>int nextInt(int n)</p>
-<p>返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p>
-<p>long nextLong()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p>
-<p>void setSeed(long seed)</p>
-<p>使用单个 long 种子设置此随机数生成器的种子。</p>
-<p>三、Random类使用说明</p>
-<p>1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p>
-<p>通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p>
-<p>不带种子的，每次运行生成的都是随机的，没有规律可言。</p>
-<p>2、创建不带种子的Random对象</p>
-<pre><code class="hljs java">　　Random random = <span class="hljs-keyword">new</span> Random();</code></pre>
-<p>3、创建不带种子的Random对象有两种方法：</p>
-<pre><code class="hljs java">　　<span class="hljs-number">1</span>) Random random = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">555L</span>);
+返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 <span class="hljs-number">0</span>（包括）和指定值（不包括）之间均匀分布的 <span class="hljs-built_in">int</span>值。</code></pre><h1 id="java随机数总结"><a class="markdownIt-Anchor" href="#java随机数总结"></a> Java随机数总结</h1><p>随机数在实际中使用很广泛，比如要随即生成一个固定长度的字符串、数字。或者随即生成一个不定长度的数字、或者进行一个模拟的随机选择等等。Java提供了最基本的工具，可以帮助开发者来实现这一切。</p><h2 id="一-java随机数的产生方式"><a class="markdownIt-Anchor" href="#一-java随机数的产生方式"></a> 一、Java随机数的产生方式</h2><p>在Java中，随机数的概念从广义上将，有三种。</p><p>1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p><p>2、通过Math.random()返回一个0到1之间的double值。</p><p>3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p><h2 id="二-random类api说明"><a class="markdownIt-Anchor" href="#二-random类api说明"></a> 二、Random类API说明</h2><p>1、Java API说明</p><p>Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p><p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p><p>很多应用程序会发现 Math 类中的 random 方法更易于使用。</p><p>2、方法摘要</p><p>Random()</p><p>创建一个新的随机数生成器。</p><p>Random(long seed)</p><p>使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p><p>protected int next(int bits)</p><p>生成下一个伪随机数。</p><p>boolean nextBoolean()</p><p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p><p>void nextBytes(byte[] bytes)</p><p>生成随机字节并将其置于用户提供的字节数组中。</p><p>double nextDouble()</p><p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p><p>float nextFloat()</p><p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p><p>double nextGaussian()</p><p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p><p>int nextInt()</p><p>返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p><p>int nextInt(int n)</p><p>返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p><p>long nextLong()</p><p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p><p>void setSeed(long seed)</p><p>使用单个 long 种子设置此随机数生成器的种子。</p><p>三、Random类使用说明</p><p>1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p><p>通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p><p>不带种子的，每次运行生成的都是随机的，没有规律可言。</p><p>2、创建不带种子的Random对象</p><pre><code class="hljs java">　　<span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();</code></pre><p>3、创建不带种子的Random对象有两种方法：</p><pre><code class="hljs java">　　<span class="hljs-number">1</span>) <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>(<span class="hljs-number">555L</span>);
 
-　　<span class="hljs-number">2</span>) Random random = <span class="hljs-keyword">new</span> Random();random.setSeed(<span class="hljs-number">555L</span>);</code></pre>
-<p>四、测试</p>
-<p>通过一个例子说明上面的用法</p>
-<p></p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
+　　<span class="hljs-number">2</span>) <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();random.setSeed(<span class="hljs-number">555L</span>);</code></pre><p>四、测试</p><p>通过一个例子说明上面的用法</p><p></p><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
 
 　　
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestRandomNum</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestRandomNum</span> &#123;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
 
       randomTest();
 
@@ -360,21 +47,21 @@
 
 　　&#125;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">randomTest</span><span class="hljs-params">()</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">randomTest</span><span class="hljs-params">()</span> &#123;
 
       System.out.println(<span class="hljs-string">&quot;--------------test()--------------&quot;</span>);
 
       <span class="hljs-comment">//返回以毫秒为单位的当前时间。</span>
 
-      <span class="hljs-keyword">long</span> r1 = System.currentTimeMillis();
+      <span class="hljs-type">long</span> <span class="hljs-variable">r1</span> <span class="hljs-operator">=</span> System.currentTimeMillis();
 
       <span class="hljs-comment">//返回带正号的 double 值，大于或等于 0.0，小于 1.0。</span>
 
-      <span class="hljs-keyword">double</span> r2 = Math.random();
+      <span class="hljs-type">double</span> <span class="hljs-variable">r2</span> <span class="hljs-operator">=</span> Math.random();
 
       <span class="hljs-comment">//通过Random类来获取下一个随机的整数</span>
 
-      <span class="hljs-keyword">int</span> r3 = <span class="hljs-keyword">new</span> Random().nextInt();
+      <span class="hljs-type">int</span> <span class="hljs-variable">r3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>().nextInt();
 
       System.out.println(<span class="hljs-string">&quot;r1 = &quot;</span> + r1);
 
@@ -384,15 +71,15 @@
 
 　　&#125;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testNoSeed</span><span class="hljs-params">()</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testNoSeed</span><span class="hljs-params">()</span> &#123;
 
       System.out.println(<span class="hljs-string">&quot;--------------testNoSeed()--------------&quot;</span>);
 
       <span class="hljs-comment">//创建不带种子的测试Random对象</span>
 
-      Random random = <span class="hljs-keyword">new</span> Random();
+      <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
       	System.out.println(random.nextInt());
 
@@ -400,15 +87,15 @@
 
 　　&#125;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testSeed1</span><span class="hljs-params">()</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSeed1</span><span class="hljs-params">()</span> &#123;
 
       System.out.println(<span class="hljs-string">&quot;--------------testSeed1()--------------&quot;</span>);
 
       <span class="hljs-comment">//创建带种子的测试Random对象</span>
 
-      Random random = <span class="hljs-keyword">new</span> Random(<span class="hljs-number">555L</span>);
+      <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>(<span class="hljs-number">555L</span>);
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
       	System.out.println(random.nextInt());
 
@@ -416,17 +103,17 @@
 
 　　&#125;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testSeed2</span><span class="hljs-params">()</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSeed2</span><span class="hljs-params">()</span> &#123;
 
       System.out.println(<span class="hljs-string">&quot;--------------testSeed2()--------------&quot;</span>);
 
       <span class="hljs-comment">//创建带种子的测试Random对象</span>
 
-      Random random = <span class="hljs-keyword">new</span> Random();
+      <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
 
       random.setSeed(<span class="hljs-number">555L</span>);
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
 
      	 System.out.println(random.nextInt());
 
@@ -434,10 +121,7 @@
 
 　　&#125;
 
-&#125;</code></pre>
-<p>运行结果：</p>
-<p></p>
-<pre><code class="hljs java">--------------test()--------------
+&#125;</code></pre><p>运行结果：</p><p></p><pre><code class="hljs java">--------------test()--------------
 
 　　r1 = <span class="hljs-number">1227108626582</span>
 
@@ -469,32 +153,27 @@
 
 　　-<span class="hljs-number">1462441651</span>
 
-　　Process finished with exit code <span class="hljs-number">0</span></code></pre>
-<p>通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p>
-<p>而不带种子的，每次运行结果都是随机的。</p>
-<p>五、综合应用</p>
-<p>下面通过最近写的一个随机数工具类来展示用法：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
+　　Process finished with exit code <span class="hljs-number">0</span></code></pre><p>通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p><p>而不带种子的，每次运行结果都是随机的。</p><p>五、综合应用</p><p>下面通过最近写的一个随机数工具类来展示用法：</p><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Random;
 
 　　
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomUtils</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomUtils</span> &#123;
 
-　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String allChar = <span class="hljs-string">&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">allChar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;
 
-　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String letterChar = <span class="hljs-string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">letterChar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;
 
-　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String numberChar = <span class="hljs-string">&quot;0123456789&quot;</span>;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">numberChar</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;0123456789&quot;</span>;
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">generateString</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;
 
-      StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer();
+      <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
-      Random random = <span class="hljs-keyword">new</span> Random();
+      <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
       	sb.append(allChar.charAt(random.nextInt(allChar.length())));
 
@@ -506,13 +185,13 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateMixString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">generateMixString</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;
 
-      StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer();
+      <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
-      Random random = <span class="hljs-keyword">new</span> Random();
+      <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
      	 sb.append(allChar.charAt(random.nextInt(letterChar.length())));
 
@@ -524,7 +203,7 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateLowerString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">generateLowerString</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;
 
 　	　<span class="hljs-keyword">return</span> generateMixString(length).toLowerCase();
 
@@ -532,7 +211,7 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateUpperString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">generateUpperString</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;
 
 　　	<span class="hljs-keyword">return</span> generateMixString(length).toUpperCase();
 
@@ -540,11 +219,11 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">generateZeroString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">generateZeroString</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;
 
-      StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer();
+      <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
+      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;
 
      	 sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);
 
@@ -556,11 +235,11 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">toFixdLengthString</span><span class="hljs-params">(<span class="hljs-keyword">long</span> num, <span class="hljs-keyword">int</span> fixdlenth)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">toFixdLengthString</span><span class="hljs-params">(<span class="hljs-type">long</span> num, <span class="hljs-type">int</span> fixdlenth)</span> &#123;
 
-      StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer();
+      <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
-      String strNum = String.valueOf(num);
+      <span class="hljs-type">String</span> <span class="hljs-variable">strNum</span> <span class="hljs-operator">=</span> String.valueOf(num);
 
       <span class="hljs-keyword">if</span> (fixdlenth - strNum.length() &gt;= <span class="hljs-number">0</span>) &#123;
 
@@ -568,7 +247,7 @@
 
       &#125; <span class="hljs-keyword">else</span> &#123;
 
-      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
+      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
 
       &#125;
 
@@ -580,11 +259,11 @@
 
 　　
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">toFixdLengthString</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num, <span class="hljs-keyword">int</span> fixdlenth)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">toFixdLengthString</span><span class="hljs-params">(<span class="hljs-type">int</span> num, <span class="hljs-type">int</span> fixdlenth)</span> &#123;
 
-      StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer();
+      <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
-      String strNum = String.valueOf(num);
+      <span class="hljs-type">String</span> <span class="hljs-variable">strNum</span> <span class="hljs-operator">=</span> String.valueOf(num);
 
       <span class="hljs-keyword">if</span> (fixdlenth - strNum.length() &gt;= <span class="hljs-number">0</span>) &#123;
 
@@ -592,7 +271,7 @@
 
       &#125; <span class="hljs-keyword">else</span> &#123;
 
-      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
+      	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;将数字&quot;</span> + num + <span class="hljs-string">&quot;转化为长度为&quot;</span> + fixdlenth + <span class="hljs-string">&quot;的字符串发生异常!&quot;</span>);
 
       &#125;
 
@@ -602,7 +281,7 @@
 
 　　&#125;
 
-　　<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+　　<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
 
       System.out.println(generateString(<span class="hljs-number">15</span>));
 
@@ -620,9 +299,7 @@
 
 　　&#125;
 
-&#125;</code></pre>
-<p>运行结果：</p>
-<pre><code class="hljs awk">　　vWMBPiNbzfGCpHG
+&#125;</code></pre><p>运行结果：</p><pre><code class="hljs awk">　　vWMBPiNbzfGCpHG
 
 　　<span class="hljs-number">23</span>hyraHdJkKPwMv
 
@@ -636,61 +313,38 @@
 
 　　<span class="hljs-number">000000000000123</span>
 
-　　Process finished with <span class="hljs-keyword">exit</span> code <span class="hljs-number">0</span></code></pre>
-<p>六、总结</p>
-<p>1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p>
-<p>2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p>
-<p>3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p>
-<p>4、Random的功能涵盖了Math.random()的功能。</p>
-<p>5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p>
-<p>6、不要研究不重复的随机数，意义不大。因为结果不可再现</p>
-<p>在Java 中我们可以使用java.util.Random类来产生一个随机数发生器。它有两种形式的构造函数，分别是Random()和Random(long seed)。Random()使用当前时间即System.currentTimeMillis()作为发生器的种子，Random(long seed)使用指定的seed作为发生器的种子。</p>
-<p>​    随机数发生器(Random)对象产生以后，通过调用不同的method：nextInt()、nextLong()、nextFloat()、nextDouble()等获得不同类型随机数。</p>
-<p>​    1&gt;生成随机数</p>
-<pre><code class="hljs arcade"><span class="hljs-built_in">Random</span> random = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>();
-<span class="hljs-built_in">Random</span> random = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>(<span class="hljs-number">100</span>);<span class="hljs-comment">//指定种子数100</span></code></pre>
-<p>​      random调用不同的方法，获得随机数。<br>
-​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
-<p>​      random调用不同的方法，获得随机数。<br>
-​      如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p>
-<pre><code class="hljs reasonml">import java.util.*;
+　　Process finished with <span class="hljs-keyword">exit</span> code <span class="hljs-number">0</span></code></pre><p>六、总结</p><p>1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p><p>2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p><p>3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p><p>4、Random的功能涵盖了Math.random()的功能。</p><p>5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p><p>6、不要研究不重复的随机数，意义不大。因为结果不可再现</p><p>在Java 中我们可以使用java.util.Random类来产生一个随机数发生器。它有两种形式的构造函数，分别是Random()和Random(long seed)。Random()使用当前时间即System.currentTimeMillis()作为发生器的种子，Random(long seed)使用指定的seed作为发生器的种子。</p><p>​ 随机数发生器(Random)对象产生以后，通过调用不同的method：nextInt()、nextLong()、nextFloat()、nextDouble()等获得不同类型随机数。</p><p>​ 1&gt;生成随机数</p><pre><code class="hljs arcade"><span class="hljs-built_in">Random</span> <span class="hljs-built_in">random</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>();
+<span class="hljs-built_in">Random</span> <span class="hljs-built_in">random</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>(<span class="hljs-number">100</span>);<span class="hljs-comment">//指定种子数100</span></code></pre><p>​ random调用不同的方法，获得随机数。<br>​ 如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p><p>​ random调用不同的方法，获得随机数。<br>​ 如果2个Random对象使用相同的种子（比如都是100），并且以相同的顺序调用相同的函数，那它们返回值完全相同。如下面代码中两个Random对象的输出完全相同</p><pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-keyword">class</span> TestRandom &#123;
-   public static void main(String<span class="hljs-literal">[]</span> args) &#123;
-      Random random1 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Random(100)</span>;
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random1.next<span class="hljs-constructor">Int()</span>);
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random1.next<span class="hljs-constructor">Float()</span>);
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random1.next<span class="hljs-constructor">Boolean()</span>);
-      Random random2 = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Random(100)</span>;
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random2.next<span class="hljs-constructor">Int()</span>);
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random2.next<span class="hljs-constructor">Float()</span>);
-      <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(random2.next<span class="hljs-constructor">Boolean()</span>);
+   <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;
+      Random random1 = <span class="hljs-built_in">new</span> Random(<span class="hljs-number">100</span>);
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random1.nextInt());
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random1.nextFloat());
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random1.nextBoolean());
+      Random random2 = <span class="hljs-built_in">new</span> Random(<span class="hljs-number">100</span>);
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random2.nextInt());
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random2.nextFloat());
+      <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(random2.nextBoolean());
    &#125;
- &#125;</code></pre>
-<p>​    2&gt;指定范围内的随机数<br>
-​       随机数控制在某个范围内,使用模数运算符%</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestRandom</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Random random = <span class="hljs-keyword">new</span> Random();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>;i++) &#123;
+ &#125;</code></pre><p>​ 2&gt;指定范围内的随机数<br>​ 随机数控制在某个范围内,使用模数运算符%</p><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TestRandom</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>;i++) &#123;
        		 System.out.println(Math.abs(random.nextInt()));
         &#125;
     &#125;
-&#125;</code></pre>
-<p>​       获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p>
-<p>​       获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p>
-<p>​    3&gt;获取指定范围内的不重复随机数</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestRandom</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        <span class="hljs-keyword">int</span>[] intRet = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">6</span>];
-        <span class="hljs-keyword">int</span> intRd = <span class="hljs-number">0</span>; <span class="hljs-comment">//存放随机数</span>
-        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">//记录生成的随机数个数</span>
-        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>; <span class="hljs-comment">//是否已经生成过标志</span>
+&#125;</code></pre><p>​ 获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p><p>​ 获得的随机数有正有负的，用Math.abs使获取数据范围为非负数</p><p>​ 3&gt;获取指定范围内的不重复随机数</p><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TestRandom</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-type">int</span>[] intRet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">6</span>];
+        <span class="hljs-type">int</span> <span class="hljs-variable">intRd</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//存放随机数</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//记录生成的随机数个数</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//是否已经生成过标志</span>
         <span class="hljs-keyword">while</span>(count&lt;<span class="hljs-number">6</span>)&#123;
-            Random rdm = <span class="hljs-keyword">new</span> Random(System.currentTimeMillis());
+            <span class="hljs-type">Random</span> <span class="hljs-variable">rdm</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>(System.currentTimeMillis());
             intRd = Math.abs(rdm.nextInt())<span class="hljs-number">2</span>+<span class="hljs-number">1</span>;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;count;i++)&#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;count;i++)&#123;
                 <span class="hljs-keyword">if</span>(intRet[i]==intRd)&#123;
                     flag = <span class="hljs-number">1</span>;
                     <span class="hljs-keyword">break</span>;
@@ -703,371 +357,51 @@
                 count++;
             &#125;
         &#125;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> t=<span class="hljs-number">0</span>;t&lt;<span class="hljs-number">6</span>;t++)&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> t=<span class="hljs-number">0</span>;t&lt;<span class="hljs-number">6</span>;t++)&#123;
             System.out.println(t+<span class="hljs-string">&quot;-&gt;&quot;</span>+intRet[t]);
         &#125;
     &#125;
-&#125;</code></pre>
-<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>
-1.测试一： 使用不带参数的Random()构造函数</p>
-<p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>
-1.测试一： 使用不带参数的Random()构造函数</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest</span> </span>&#123;
+&#125;</code></pre><p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>1.测试一： 使用不带参数的Random()构造函数</p><p>Java中的随机数是否可以重复？Java中产生的随机数能否可以用来产生数据库主键？带着这个问题，我们做了一系列测试。<br>1.测试一： 使用不带参数的Random()构造函数</p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomTest</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-       java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random();
-       <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+       java.util.Random r=<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.util.Random();
+       <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
          System.out.println(r.nextInt());
        &#125;
     &#125;
-&#125;</code></pre>
-<p>程序运行结果：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">-1761145445</span>
-<span class="hljs-number">-1070533012</span>
+&#125;</code></pre><p>程序运行结果：</p><pre><code class="hljs dns">-<span class="hljs-number">1761145445</span>
+-<span class="hljs-number">1070533012</span>
 <span class="hljs-number">216216989</span>
-<span class="hljs-number">-910884656</span>
-<span class="hljs-number">-1408725314</span>
-<span class="hljs-number">-1091802870</span>
+-<span class="hljs-number">910884656</span>
+-<span class="hljs-number">1408725314</span>
+-<span class="hljs-number">1091802870</span>
 <span class="hljs-number">1681403823</span>
-<span class="hljs-number">-1099867456</span>
+-<span class="hljs-number">1099867456</span>
 <span class="hljs-number">347034376</span>
-<span class="hljs-number">-1277853157</span></code></pre>
-<p>再次运行该程序：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">-169416241</span>
+-<span class="hljs-number">1277853157</span></code></pre><p>再次运行该程序：</p><pre><code class="hljs dns">-<span class="hljs-number">169416241</span>
 <span class="hljs-number">220377062</span>
-<span class="hljs-number">-1140589550</span>
-<span class="hljs-number">-1364404766</span>
-<span class="hljs-number">-1088116756</span>
+-<span class="hljs-number">1140589550</span>
+-<span class="hljs-number">1364404766</span>
+-<span class="hljs-number">1088116756</span>
 <span class="hljs-number">2134626361</span>
-<span class="hljs-number">-546049728</span>
+-<span class="hljs-number">546049728</span>
 <span class="hljs-number">1132916742</span>
-<span class="hljs-number">-1522319721</span>
-<span class="hljs-number">1787867608</span></code></pre>
-<p>从上面的测试我们可以看出，使用不带参数的Random()构造函数产生的随机数不会重复。那么，什么情况下Java会产生重复的随机数呢？且看下面的测试。</p>
-<p>2.测试二：为Random设置种子数</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RandomTest_Repeat</span> </span>&#123;
+-<span class="hljs-number">1522319721</span>
+<span class="hljs-number">1787867608</span></code></pre><p>从上面的测试我们可以看出，使用不带参数的Random()构造函数产生的随机数不会重复。那么，什么情况下Java会产生重复的随机数呢？且看下面的测试。</p><p>2.测试二：为Random设置种子数</p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomTest_Repeat</span> &#123;
  
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-    java.util.Random r=<span class="hljs-keyword">new</span> java.util.Random(<span class="hljs-number">10</span>);
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+    java.util.Random r=<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.util.Random(<span class="hljs-number">10</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;
       System.out.println(r.nextInt());
     &#125;
   &#125;
-&#125;</code></pre>
-<p>无论程序运行多少次，其结果总是：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">-1157793070</span>
+&#125;</code></pre><p>无论程序运行多少次，其结果总是：</p><pre><code class="hljs dns">-<span class="hljs-number">1157793070</span>
 <span class="hljs-number">1913984760</span>
 <span class="hljs-number">1107254586</span>
 <span class="hljs-number">1773446580</span>
 <span class="hljs-number">254270492</span>
-<span class="hljs-number">-1408064384</span>
+-<span class="hljs-number">1408064384</span>
 <span class="hljs-number">1048475594</span>
 <span class="hljs-number">1581279777</span>
-<span class="hljs-number">-778209333</span>
-<span class="hljs-number">1532292428</span></code></pre>
-<p>甚至在不同的机器上测试，测试结果也不会改变！</p>
-<p>3.原因分析：<br>
-(1) 首先请打开Java Doc，我们会看到Random类的说明：<br>
-此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。<br>
-如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。<br>
-Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p>
-<p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p>
-<p>public Random() { this(System.currentTimeMillis()); }</p>
-<p>4.结论：<br>
-通过上面的测试和分析，我们会对Random类有较为深刻的理解。同时，我觉得，通过阅读Java Doc的API文档，可以很好地提高我们的Java编程能力，做到“知其然”；一旦遇到费解的问题，不妨打开Java的源代码，这样我们就能做到“知其所以然”。</p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Random/">Random</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/08/26/Article202008265/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo的Fluid主题设置文章隐藏</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/08/26/Article202008263/">
-                        <span class="hidden-mobile">Java生成随机数</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-<div>
-  <span id="timeDate">载入天数...</span>
-  <span id="times">载入时分秒...</span>
-  <script>
-  var now = new Date();
-  function createtime(){
-      var grt= new Date("08/17/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
-      now.setTime(now.getTime()+250);
-      days = (now - grt ) / 1000 / 60 / 60 / 24;
-      dnum = Math.floor(days);
-      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
-      hnum = Math.floor(hours);
-      if(String(hnum).length ==1 ){
-          hnum = "0" + hnum;
-      }
-      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-      mnum = Math.floor(minutes);
-      if(String(mnum).length ==1 ){
-                mnum = "0" + mnum;
-      }
-      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-      snum = Math.round(seconds);
-      if(String(snum).length ==1 ){
-                snum = "0" + snum;
-      }
-      document.getElementById("timeDate").innerHTML = "本站安全运行&nbsp"+dnum+"&nbsp天";
-      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
-  }
-  setInterval("createtime()",250);
-  </script>
-</div>
-    
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Java获取随机数&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+-<span class="hljs-number">778209333</span>
+<span class="hljs-number">1532292428</span></code></pre><p>甚至在不同的机器上测试，测试结果也不会改变！</p><p>3.原因分析：<br>(1) 首先请打开Java Doc，我们会看到Random类的说明：<br>此类的实例用于生成伪随机数流，此类使用 48 位的种子，该种子可以使用线性同余公式对其进行修改（请参阅 Donald Knuth 的《The Art of Computer Programming, Volume 2》，第 3.2.1 节）。<br>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证实现这种特性，我们为类Random指定了特定的算法。为了 Java 代码的完全可移植性，Java 实现必须让类 Random 使用此处所示的所有算法。但是允许 Random 类的子类使用其他算法，只要其符合所有方法的常规协定即可。<br>Java Doc对Random类已经解释得非常明白，我们的测试也验证了这一点。</p><p>(2) 如果没有提供种子数，Random实例的种子数将是当前时间的毫秒数，可以通过System.currentTimeMillis()来获得当前时间的毫秒数。打开JDK的源代码，我们可以非常明确地看到这一点。</p><p>public Random() { this(System.currentTimeMillis()); }</p><p>4.结论：<br>通过上面的测试和分析，我们会对Random类有较为深刻的理解。同时，我觉得，通过阅读Java Doc的API文档，可以很好地提高我们的Java编程能力，做到“知其然”；一旦遇到费解的问题，不妨打开Java的源代码，这样我们就能做到“知其所以然”。</p></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/Java/">Java</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Knowledge/">Knowledge</a> <a class="hover-with-bg" href="/tags/Java/">Java</a> <a class="hover-with-bg" href="/tags/Random/">Random</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/08/26/Article202008265/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Hexo的Fluid主题设置文章隐藏</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/08/26/Article202008263/"><span class="hidden-mobile">Java生成随机数</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Java获取随机数&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
