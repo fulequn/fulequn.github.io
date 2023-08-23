@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>Matplotlib设置坐标轴的刻度以及刻度值 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-09-12 22:41" pubdate>2020年9月12日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.8k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 48 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">Matplotlib设置坐标轴的刻度以及刻度值</h1><div class="markdown-body" id="post-body"><blockquote><p>参考来源：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32088843">https://zhuanlan.zhihu.com/p/32088843</a></p><p><a target="_blank" rel="noopener" href="https://www.delftstack.com/zh/howto/matplotlib/how-to-hide-axis-text-ticks-and-or-tick-labels-in-matplotlib/">https://www.delftstack.com/zh/howto/matplotlib/how-to-hide-axis-text-ticks-and-or-tick-labels-in-matplotlib/</a></p></blockquote><p>在matplotlib中，刻度线叫做tick，刻度值叫做tick_label。</p><p><strong>官方介绍图像</strong></p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031153.jpg" srcset="/img/loading.gif" alt="1"></p><p>注意这幅图片中就包含了关于刻度线的一些信息。比方，不仅有主刻度线(Major tick)，还有次刻度线(Minor tick)。并且我们看到刻度线都是朝着图的外侧。图中，上边的和右边的坐标轴(Spine)并没有刻度线。</p><p>那么所有我们看到的关于刻度线的属性，都是可以修改的，至于刻度值 (Tick label)，在关于字符的问题中统一解决。在pylab中，有若干个函数用来修改刻度线的属性。</p><h3 id="是否显示次刻度线"><a class="markdownIt-Anchor" href="#是否显示次刻度线"></a> 是否显示次刻度线</h3><p>在pylab中内置了两个函数minorticks_on()和minorticks_off() 用来确定是否显示次刻度线。如下代码实现在左侧图中<strong>显示</strong>次刻度线，在右侧<strong>不显示</strong>次刻度线。在默认的情况下，不显示次刻度线。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+minorticks_on()
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+minorticks_off()
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031154.png" srcset="/img/loading.gif" alt="2"></p><h3 id="刻度线的朝向"><a class="markdownIt-Anchor" href="#刻度线的朝向"></a> 刻度线的朝向</h3><p>一般而言，我们希望刻度线朝外分布，这样避免影响图中的曲线和说明。但是有时候刻度线朝内分布，可以让图之间更加紧凑。在pylab中，利用<strong>tick_params</strong>控制刻度线的朝向，是朝图里，图外，还是都有。下面代码产生的图从左往右，分别显示朝里，朝外，两边都有的情况。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>)
+tick_params(direction=<span class="hljs-string">&#x27;in&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>)
+tick_params(direction=<span class="hljs-string">&#x27;out&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>)
+tick_params(direction=<span class="hljs-string">&#x27;inout&#x27;</span>)
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031155.png" srcset="/img/loading.gif" alt="3"></p><h3 id="选择修改主刻度线还是次刻度线"><a class="markdownIt-Anchor" href="#选择修改主刻度线还是次刻度线"></a> 选择修改主刻度线还是次刻度线</h3><p>通过上面的例子可以看出，修改刻度线的主要函数就是tick_params。那么每次调用这个函数，是修改主刻度线、次刻度线，还是都改呢？这个由参数<strong>which</strong>控制。比方下面这段代码，分别让主刻度线朝里、次刻度线朝里、主次均朝里。最后一个图说明默认情况下，主次刻度线均朝外。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>)
+minorticks_on()
+tick_params(which=<span class="hljs-string">&#x27;major&#x27;</span>,direction=<span class="hljs-string">&#x27;in&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>)
+minorticks_on()
+tick_params(which=<span class="hljs-string">&#x27;minor&#x27;</span>,direction=<span class="hljs-string">&#x27;in&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>)
+minorticks_on()
+tick_params(which=<span class="hljs-string">&#x27;both&#x27;</span>,direction=<span class="hljs-string">&#x27;in&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
+minorticks_on()
+text(<span class="hljs-number">0.5</span>,<span class="hljs-number">0.5</span>,<span class="hljs-string">&#x27;default&#x27;</span>)
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031156.png" srcset="/img/loading.gif" alt="4"></p><h3 id="修改刻度线的长度和宽度"><a class="markdownIt-Anchor" href="#修改刻度线的长度和宽度"></a> 修改刻度线的长度和宽度</h3><p>如上图，如果觉得刻度线太短，太细，不太显眼，我们可以修改其长短、粗细。依然使用函数tick_params，通过参数<strong>width</strong>和<strong>length</strong>控制。下面代码让左图的主刻度线<strong>粗</strong>一些，右图的次刻度线<strong>长</strong>一些。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)
+minorticks_on()
+tick_params(which=<span class="hljs-string">&#x27;major&#x27;</span>,width=<span class="hljs-number">4</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)
+minorticks_on()
+tick_params(which=<span class="hljs-string">&#x27;minor&#x27;</span>,length=<span class="hljs-number">10</span>)
+
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031157.png" srcset="/img/loading.gif" alt="5"></p><h3 id="在哪些轴上显示刻度线"><a class="markdownIt-Anchor" href="#在哪些轴上显示刻度线"></a> 在哪些轴上显示刻度线</h3><p>我们来看怎么控制刻度线出现在哪些轴上。这里用参数<strong>left，right,bottom,top</strong>来控制，下面代码画出的图片，依次显示上下左右轴上的刻度线。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>)
+tick_params(top=<span class="hljs-string">&#x27;on&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>)
+tick_params(top=<span class="hljs-string">&#x27;off&#x27;</span>,bottom=<span class="hljs-string">&#x27;on&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>)
+tick_params(top=<span class="hljs-string">&#x27;off&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;on&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
+
+subplot(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>)
+tick_params(top=<span class="hljs-string">&#x27;off&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;on&#x27;</span>)
+
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031158.png" srcset="/img/loading.gif" alt="6"></p><h3 id="在哪些轴上显示刻度值"><a class="markdownIt-Anchor" href="#在哪些轴上显示刻度值"></a> 在哪些轴上显示刻度值</h3><p>注意上面的图，<strong>刻度线</strong>分别出现在我们控制的坐标轴上，但是<strong>刻度值</strong>在默认情况下还是出现在左下两个轴上。这里仅说明如何让刻度值出现在相应刻度线的位置。比方，我们仅让上面的轴显示刻度线，也仅在该轴上显示刻度值，利用<strong>labelbottom, labeltop, labelleft, labelright</strong>四个参数控制，代码和图如下所示。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> pylab <span class="hljs-keyword">import</span> *
+
+tick_params(top=<span class="hljs-string">&#x27;on&#x27;</span>,bottom=<span class="hljs-string">&#x27;off&#x27;</span>,left=<span class="hljs-string">&#x27;off&#x27;</span>,right=<span class="hljs-string">&#x27;off&#x27;</span>)
+tick_params(labeltop=<span class="hljs-string">&#x27;on&#x27;</span>,labelbottom=<span class="hljs-string">&#x27;off&#x27;</span>,labelleft=<span class="hljs-string">&#x27;off&#x27;</span>,labelright=<span class="hljs-string">&#x27;off&#x27;</span>)
+
+show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031159.png" srcset="/img/loading.gif" alt="7"></p><h3 id="设置x轴的刻度和显示"><a class="markdownIt-Anchor" href="#设置x轴的刻度和显示"></a> 设置x轴的刻度和显示</h3><p>使用Matplotlib进行绘图时，当x轴的数据太多的时候，就需要设置x轴的刻度和显示文本。</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+fig, ax = plt.subplots()
+
+<span class="hljs-comment">#分别获取x轴和y轴的数据</span>
+x = [d[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data]
+y = [d[<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data]
+
+<span class="hljs-comment">#设置x轴的刻度以及显示文本</span>
+xticks = <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(x), <span class="hljs-number">10</span>)
+xlabels = [x[index] <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> xticks]
+xticks.append(<span class="hljs-built_in">len</span>(x))
+xlabels.append(data[-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>])
+
+
+<span class="hljs-comment">#设置坐标轴</span>
+ax.set_xticks(xticks)<span class="hljs-comment">#xticks中的数据作为坐标轴系数</span>
+ax.set_xticklabels(xlabels, rotation=<span class="hljs-number">40</span>)<span class="hljs-comment">#将x轴的刻度值设置为xlabels，同时倾斜40度</span>
+
+<span class="hljs-comment">#绘图并显示网格</span>
+plt.plot(y)
+plt.grid()
+plt.show()</code></pre><p>其中，涉及到坐标轴的刻度以及显示文本的函数为</p><p><code>ax.set_xticks(xticks)#xticks中的数据作为坐标轴系数</code><br><code>ax.set_xticklabels(xlabels, rotation=40)#将x轴的刻度值</code></p><h3 id="在-matplotlib-中如何隐藏坐标轴文本刻度或刻度标签"><a class="markdownIt-Anchor" href="#在-matplotlib-中如何隐藏坐标轴文本刻度或刻度标签"></a> 在 Matplotlib 中如何隐藏坐标轴文本刻度或刻度标签</h3><blockquote><ol><li>xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴</li><li>xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴</li><li>xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本</li><li>xticks(color=‘w’)/yticks(color=‘w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</li></ol></blockquote><p>默认情况下，Matplotlib 中的图显示了两个轴的 <code>ticks</code> 和 <code>ticklabels</code>，如示例图所示。</p><p>它有不同的隐藏坐标轴文本的方法，例如 <code>xaxis.set_visible(False)</code>，<code>xaxis.set_ticks([])</code> 和 <code>xaxis.set_ticklabels([])</code>。如果将刻度线的颜色设置为白色，则仅当 Matplotlib 图形的前景色为白色时，它也可能使轴文本不可见。</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031160.png" srcset="/img/loading.gif" alt="8"></p><h4 id="xaxisset_visiblefalseyaxisset_visiblefalse-隐藏包括轴标签的坐标轴"><a class="markdownIt-Anchor" href="#xaxisset_visiblefalseyaxisset_visiblefalse-隐藏包括轴标签的坐标轴"></a> xaxis.set_visible(False)/yaxis.set_visible(False) 隐藏包括轴标签的坐标轴</h4><p>顾名思义，它使整个坐标轴不可见，包括轴刻度，轴刻度标签和轴标签。</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
+plt.xlabel(<span class="hljs-string">&quot;X Label&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;Y Label&quot;</span>)
+
+ax = plt.gca()
+ax.axes.xaxis.set_visible(<span class="hljs-literal">False</span>)
+ax.axes.yaxis.set_visible(<span class="hljs-literal">False</span>)
+
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031161.png" srcset="/img/loading.gif" alt="9"></p><h4 id="xaxisset_ticksyaxisset_ticks-在-matplotlib-中隐藏坐标轴"><a class="markdownIt-Anchor" href="#xaxisset_ticksyaxisset_ticks-在-matplotlib-中隐藏坐标轴"></a> xaxis.set_ticks([])/yaxis.set_ticks([]) 在 Matplotlib 中隐藏坐标轴</h4><p><code>x/yaxis.set_ticks([])</code> 设置刻度为空，并使坐标轴刻度及其标签不可见。但是坐标轴标签不受影响。</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
+plt.xlabel(<span class="hljs-string">&quot;X Label&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;Y Label&quot;</span>)
+
+ax = plt.gca()
+ax.axes.xaxis.set_ticks([])
+ax.axes.yaxis.set_ticks([])
+
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031162.png" srcset="/img/loading.gif" alt="10"></p><h4 id="xaxisset_ticklabelsyaxisset_ticklabels-在-matplotlib-中隐藏轴标签文本"><a class="markdownIt-Anchor" href="#xaxisset_ticklabelsyaxisset_ticklabels-在-matplotlib-中隐藏轴标签文本"></a> xaxis.set_ticklabels([])/yaxis.set_ticklabels([]) 在 Matplotlib 中隐藏轴标签/文本</h4><p><code>x/yaxis.set_ticklabels([])</code> 将刻度标签设置为空，从而使坐标轴文本（刻度标签）不可见，但刻度保持可见。</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
+plt.xlabel(<span class="hljs-string">&quot;X Label&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;Y Label&quot;</span>)
+
+ax = plt.gca()
+
+ax.axes.xaxis.set_ticklabels([])
+ax.axes.yaxis.set_ticklabels([])
+
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306212031163.png" srcset="/img/loading.gif" alt="11"></p><h4 id="xtickscolorwytickscolorw-来隐藏-matplotlib-中的坐标轴标签文本"><a class="markdownIt-Anchor" href="#xtickscolorwytickscolorw-来隐藏-matplotlib-中的坐标轴标签文本"></a> xticks(color=‘w’)/yticks(color=‘w’) 来隐藏 Matplotlib 中的坐标轴标签/文本</h4><p>这种方法不会使刻度线标签或刻度线不可见，而是将刻度线的颜色设置为白色，以便在绘图的背景为白色（也是默认颜色）的情况下，轴文本的确是不可见的。</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>])
+plt.xlabel(<span class="hljs-string">&quot;X Label&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;Y Label&quot;</span>)
+
+plt.xticks(color=<span class="hljs-string">&#x27;w&#x27;</span>)
+plt.yticks(color=<span class="hljs-string">&#x27;w&#x27;</span>)
+
+plt.grid(<span class="hljs-literal">True</span>)
+plt.show()</code></pre></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/09/12/Article202009122/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">R统计笔记（三） 分组统计的几种方法</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/09/11/Article202009112/"><span class="hidden-mobile">matplotlib设置中文显示</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Matplotlib设置坐标轴的刻度以及刻度值&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

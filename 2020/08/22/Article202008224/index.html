@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>PyPDF2的使用 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-08-22 22:00" pubdate>2020年8月22日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.4k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 38 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">PyPDF2的使用</h1><div class="markdown-body" id="post-body"><p>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e3d384e51db9">https://www.jianshu.com/p/e3d384e51db9</a></p><h2 id="在python中使用pdf"><a class="markdownIt-Anchor" href="#在python中使用pdf"></a> 在Python中使用PDF</h2><p>我相信，你们一定对pdf非常熟悉。事实上，它也是非常重要并且应用广泛的一种数字媒体。PDF全称是Portable Document Format,即可移植的文档格式。它使用.pdf作为扩展名。用于可靠的呈现和交换文档，与软件，硬件和操作系统无关。</p><p>pdf由Adobe公司开发，现在由国际标准化组织ISO进行维护。PDF合成包含链接和按钮，表单字段，音频，视频和业务逻辑</p><pre><code class="hljs undefined">在这篇文章中，我们将学习如何做一些pdf的操作:</code></pre><blockquote><p>从PDF中提取文字</p></blockquote><blockquote><p>旋转pdf页</p></blockquote><blockquote><p>合并pdf</p></blockquote><blockquote><p>分割pdf</p></blockquote><blockquote><p>向pdf页中添加水印</p></blockquote><h5 id="使用简单的python脚本"><a class="markdownIt-Anchor" href="#使用简单的python脚本"></a> 使用简单的python脚本</h5><h3 id="1-安装"><a class="markdownIt-Anchor" href="#1-安装"></a> 1、安装</h3><p>我们将使用第三方的模块 PyPDF2</p><hr><pre><code class="hljs undefined">PyPDF2是作为PDF工具包构建的python库，它能够:</code></pre><ul><li>提取文档信息（标题，作者，…）</li><li>按页拆分文档</li><li>逐页合并文档</li><li>裁剪页面</li><li>合并多个页面到一个页</li><li>对pdf文档进行加密解密</li><li>等等</li></ul><p>安装PyPDF2,在命令行下执行命令:</p><pre><code class="hljs undefined">pip install PyPDF2</code></pre><hr><p><strong>注意，这个模块的名字对大小写是敏感的，所以，确保y是小写的，其他字母都是大写的</strong></p><h3 id="2-使用模块"><a class="markdownIt-Anchor" href="#2-使用模块"></a> 2、使用模块</h3><h3 id="-从pdf中提取文字"><a class="markdownIt-Anchor" href="#-从pdf中提取文字"></a> - 从pdf中提取文字</h3><pre><code class="hljs go"><span class="hljs-keyword">import</span> PyPDF2
+
+pdfFile = open(<span class="hljs-string">&#x27;example.pdf&#x27;</span>,<span class="hljs-string">&#x27;rb&#x27;</span>)
+
+pdfReader = PyPDF2.PdfFileReader(pdfFile)
+
+<span class="hljs-built_in">print</span>(pdfReader.numPages)
+
+page = pdfReader.getPage(<span class="hljs-number">0</span>)
+
+<span class="hljs-built_in">print</span>(page.extractText())
+
+pdfFile.<span class="hljs-built_in">close</span>()</code></pre><p>在我的机子上输出如下：</p><pre><code class="hljs kotlin"><span class="hljs-number">241</span>
+
+
+Copyright © <span class="hljs-number">201</span>
+<span class="hljs-number">7</span>
+ 
+<span class="hljs-keyword">by</span> OriginLab Corporation
+ 
+ 
+All rights reserved. No part of the contents of <span class="hljs-keyword">this</span> book may be reproduced or 
+transmitted <span class="hljs-keyword">in</span> any form or <span class="hljs-keyword">by</span> any means without the written permission of OriginLab 
+Corporation.
+ 
+ 
+OriginLab, Origin, 
+and LabTalk are either registered trademarks or trademarks of 
+OriginLab Corporation. Other product and company names mentioned herein may be 
+the trademarks of their respective owners.</code></pre><h4 id="我们来逐步分析一下上面的代码"><a class="markdownIt-Anchor" href="#我们来逐步分析一下上面的代码"></a> 我们来逐步分析一下上面的代码</h4><pre><code class="hljs kotlin">pdfFile = <span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;example.pdf&#x27;</span>,<span class="hljs-string">&#x27;rb&#x27;</span>)</code></pre><blockquote><p>我们以二进制的方式打开example.pdf，并且保存为pdfFile</p></blockquote><pre><code class="hljs undefined">pdfReader = PyPDF2.PdfFileReader(pdfFile)</code></pre><blockquote><p>我们创建了一个PyPDF2模块中PdfFileReader类的对象，并将pdfFile对象传进去，获取pdfReader对象</p></blockquote><pre><code class="hljs bash"><span class="hljs-built_in">print</span>(pdfReader.numPages)</code></pre><blockquote><p>numPages 属性保存了pdf的页数，在我的例子中，numPages = 241</p></blockquote><pre><code class="hljs undefined">page = pdfReader.getPage(0)</code></pre><blockquote><p>现在，我们创建了一个page对象。pdfReader的getPage方法可以接受页码参数，并返回页面对象。</p></blockquote><pre><code class="hljs bash"><span class="hljs-built_in">print</span>(page.extractText())</code></pre><blockquote><p>page的extractText()方法，可以提取出页面中的文字</p></blockquote><pre><code class="hljs css">pdfFile<span class="hljs-selector-class">.close</span>()</code></pre><blockquote><p>最后，关闭打开的example.pdf</p></blockquote><p><strong>注意:虽然PDF文件非常适合以一种便于打印和阅读的方式显示文本，但是对于软件来说，将其解析为纯文本并不容易。因此，PyPDF2在从PDF中提取文本时可能会出错，甚至可能根本无法打开某些PDF。不幸的是，你对此无能为力。PyPDF2可能无法处理某些特定的PDF文件。</strong></p><h3 id="-旋转pdf页"><a class="markdownIt-Anchor" href="#-旋转pdf页"></a> - 旋转pdf页</h3><hr><pre><code class="hljs python"><span class="hljs-keyword">import</span> PyPDF2
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">PDFrotate</span>(<span class="hljs-params">origFileName,newFileName,rotation</span>):
+    pdfFile = <span class="hljs-built_in">open</span>(origFileName,<span class="hljs-string">&#x27;rb&#x27;</span>)
+    pdfReader = PyPDF2.PdfFileReader(pdfFile)
+    pdfWriter = PyPDF2.PdfFileWriter()
+
+    <span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(pdfReader.numPages):
+        pageObj = pdfReader.getPage(page)
+        pageObj.rotateClockwise(rotation)
+
+        pdfWriter.addPage(pageObj)
+
+    newFile = <span class="hljs-built_in">open</span>(newFileName,<span class="hljs-string">&#x27;wb&#x27;</span>)
+    pdfWrite.write(newFile)
+
+    pdfFile.close()
+    newFile.close()
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    origFileName = <span class="hljs-string">&#x27;example.pdf&#x27;</span>
+    
+    newFileName = <span class="hljs-string">&#x27;rotated_example.pdf&#x27;</span>
+
+    rotation = <span class="hljs-number">270</span>
+
+    PDFrotate(origFileName,newFileName,rotation)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    main()</code></pre><p>我们看一下关键的代码：</p><pre><code class="hljs undefined">pdfWriter = PyPDF2.PdfFileWriter()</code></pre><blockquote><p>因为我们是将旋转后的页面写入新的pdf，所以首先创建一个PdfFileWriter对象：pdfWriter。</p></blockquote><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> <span class="hljs-title">range</span>(<span class="hljs-params">pdfReader.numPages</span>):</span>
+<span class="hljs-function">        pageObj</span> = pdfReader.getPage(page)
+        pageObj.rotateClockwise(rotation)
+
+        pdfWriter.addPage(pageObj)</code></pre><blockquote><p>通过pdfReader.numPages,获取pdf的页数，然后进行循环。<br>循环体中，先创建每一页的对象，然后调用页面对象的rotateClockwise方法，传入的参数是顺时针旋转的度数。最后，旋转后的页面对象作为参数传给pdfWriter的addPage方法。</p></blockquote><pre><code class="hljs go">newFile = open(newFileName,<span class="hljs-string">&#x27;wb&#x27;</span>)
+    pdfWrite.write(newFile)
+
+    pdfFile.<span class="hljs-built_in">close</span>()
+    newFile.<span class="hljs-built_in">close</span>()</code></pre><blockquote><p>打开新的文件，以写的方式，将我们新生成的pdf写入。然后关闭两个文件</p></blockquote><h3 id="-合并pdf文件"><a class="markdownIt-Anchor" href="#-合并pdf文件"></a> - 合并pdf文件</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> PyPDF2
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">PDFmerge</span>(<span class="hljs-params">pdfs,output</span>):
+    
+    <span class="hljs-comment">#创建一个pdf文件合并对象</span>
+    pdfMerger = PyPDF2.PdfFileMerger()
+    
+    <span class="hljs-comment">#逐个添加pdf</span>
+    <span class="hljs-keyword">for</span> pdf <span class="hljs-keyword">in</span> pdfs:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(pdf,<span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:
+            pdfMerger.append(f)
+
+    <span class="hljs-comment">#将内存中合并的pdf文件写入</span>
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output,<span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        pdfMerger.write(f)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    <span class="hljs-comment">#需要合并的pdf名称</span>
+    pdfs = [<span class="hljs-string">&#x27;example.pdf&#x27;</span>,<span class="hljs-string">&#x27;testexample.pdf&#x27;</span>]
+    
+    <span class="hljs-comment">#合并完成的pdf名称</span>
+    output = <span class="hljs-string">&#x27;combined_example.pdf&#x27;</span>
+
+    <span class="hljs-comment">#调用PDFmerge函数，进行合并</span>
+    PDFmerge(pdfs,output)
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre><h3 id="-给pdf添加水印"><a class="markdownIt-Anchor" href="#-给pdf添加水印"></a> - 给pdf添加水印</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> PyPDF2
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">add_watermark</span>(<span class="hljs-params">wmFile,pageObj</span>):
+    <span class="hljs-comment">#打开水印pdf文件</span>
+    wmFileObj = <span class="hljs-built_in">open</span>(wmFile,<span class="hljs-string">&#x27;rb&#x27;</span>)
+    
+    <span class="hljs-comment">#创建pdfReader对象，把打开的水印pdf传入</span>
+    pdfReader = PyPDF2.PdfFileRdader(wmFileObj)
+    
+    <span class="hljs-comment">#将水印pdf的首页与传入的原始pdf的页进行合并</span>
+    pageObj.mergePage(pdfReader.getPage(<span class="hljs-number">0</span>))
+
+    wmFileObj.close()
+    <span class="hljs-keyword">return</span> pageObj
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    
+    <span class="hljs-comment">#水印pdf的名称</span>
+    watermark = <span class="hljs-string">&#x27;watermark.pdf&#x27;</span>
+
+    <span class="hljs-comment">#原始pdf的名称</span>
+    origFileName = <span class="hljs-string">&#x27;example.pdf&#x27;</span>
+
+    <span class="hljs-comment">#合并后新的pdf名称</span>
+    newFileName = <span class="hljs-string">&#x27;watermark_example.pdf&#x27;</span>
+
+    <span class="hljs-comment">#打开原始的pdf文件,获取文件指针</span>
+    pdfFileObj = <span class="hljs-built_in">open</span>(origFileName,<span class="hljs-string">&#x27;rb&#x27;</span>)
+
+    <span class="hljs-comment">#创建reader对象</span>
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+    <span class="hljs-comment">#创建一个指向新的pdf文件的指针</span>
+    pdfWriter = PyPDF2.PdfFileWriter()
+
+    <span class="hljs-comment">#通过迭代将水印添加到原始pdf的每一页</span>
+    <span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(pdfReader.numPages):
+        wmPageObj = add_watermark(mywatermark,pdfReader.getPage(page))
+        
+        <span class="hljs-comment">#将合并后的即添加了水印的page对象添加到pdfWriter</span>
+        pdfWriter.addpage(wPageObj)
+
+    <span class="hljs-comment">#打开新的pdf文件</span>
+    newFile = <span class="hljs-built_in">open</span>(newFileName,<span class="hljs-string">&#x27;wb&#x27;</span>)
+    <span class="hljs-comment">#将已经添加完水印的pdfWriter对象写入文件</span>
+    pdfWriter.write(newFile)
+
+    <span class="hljs-comment">#关闭原始和新的pdf</span>
+    pdfFileObj.close()
+    newFile.close()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre><blockquote><p>过程大致和旋转的例子一样</p></blockquote><pre><code class="hljs undefined">wmPageObj = add_watermark(mywatermark,pdfReader.getPage(page))</code></pre><blockquote><p>我们通过自定义的add_watermark函数将水印与原始pdf页进行合并。<br>让我们来观察一下add_watermark函数</p></blockquote><pre><code class="hljs kotlin">wmFileObj = <span class="hljs-keyword">open</span>(wmFile, <span class="hljs-string">&#x27;rb&#x27;</span>)
+pdfReader = PyPDF2.PdfFileReader(wmFileObj) 
+pageObj.mergePage(pdfReader.getPage(<span class="hljs-number">0</span>))
+wmFileObj.close()
+<span class="hljs-keyword">return</span> pageObj</code></pre><blockquote><p>首先，我们创建了一个pdf reader对象。对于传递的页面对象，我们使用mergePage()函数传递水印，这将在传递的页面对象上覆盖水印。</p></blockquote></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/08/22/Article202008227/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Java输入与输出</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/08/22/Article202008223/"><span class="hidden-mobile">Python之PyPDF2模块的使用</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","PyPDF2的使用&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

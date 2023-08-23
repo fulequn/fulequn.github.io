@@ -1,0 +1,696 @@
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>HBase Java API基本概念与使用 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-11-09 23:35" pubdate>2020年11月9日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 3.7k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 132 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">HBase Java API基本概念与使用</h1><div class="markdown-body" id="post-body"><blockquote><p>参考链接：</p><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuwei6/p/6842536.html">Hbase(六) hbase Java API - 凌-风 - 博客园 (cnblogs.com)</a></p></blockquote><h3 id="一-几个主要-hbase-api-类和数据模型之间的对应关系"><a class="markdownIt-Anchor" href="#一-几个主要-hbase-api-类和数据模型之间的对应关系"></a> 一、几个主要 Hbase API 类和数据模型之间的对应关系</h3><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925238.png" srcset="/img/loading.gif" alt="1"></p><p>1、 HBaseAdmin<br>关系： org.apache.hadoop.hbase.client.HBaseAdmin<br>作用：提供了一个接口来管理 HBase 数据库的表信息。它提供的方法包括：创建表，删除表，列出表项，使表有效或无效，以及添加或删除表列族成员等。<br><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925239.png" srcset="/img/loading.gif" alt="2"></p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925240.png" srcset="/img/loading.gif" alt="3"></p><p>2、 HBaseConfiguration<br>关系： org.apache.hadoop.hbase.HBaseConfiguration<br>作用：对 HBase 进行配置</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925242.png" srcset="/img/loading.gif" alt="4"></p><p>3、 HTableDescriptor<br>关系： org.apache.hadoop.hbase.HTableDescriptor<br>作用：包含了表的名字极其对应表的列族</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925243.png" srcset="/img/loading.gif" alt="5"></p><p>4、 HColumnDescriptor<br>关系： org.apache.hadoop.hbase.HColumnDescriptor<br>作用：维护着关于列族的信息，例如版本号，压缩设置等。它通常在创建表或者为表添 加列族的时候使用。列族被创建后不能直接修改，只能通过删除然后重新创建的方式。<br>列族被删除的时候，列族里面的数据也会同时被删除。</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925244.png" srcset="/img/loading.gif" alt="6"></p><p>5、 HTable<br>关系： org.apache.hadoop.hbase.client.HTable<br>作用：可以用来和 HBase 表直接通信。此方法对于更新操作来说是非线程安全的。</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925245.png" srcset="/img/loading.gif" alt="7"></p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925246.png" srcset="/img/loading.gif" alt="8"></p><p>6、 Put<br>关系： org.apache.hadoop.hbase.client.Put<br>作用：用来对单个行执行添加操作</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925247.png" srcset="/img/loading.gif" alt="9"></p><p>7、 Get<br>关系： org.apache.hadoop.hbase.client.Get<br>作用：用来获取单个行的相关信息</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925248.png" srcset="/img/loading.gif" alt="10"></p><p>8、 Result<br>关系： org.apache.hadoop.hbase.client.Result<br>作用：存储 Get 或者 Scan 操作后获取表的单行值。使用此类提供的方法可以直接获取值 或者各种 Map 结构（ key-value 对）<br><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241925249.png" srcset="/img/loading.gif" alt="11"></p><h3 id="二-具体增删改查"><a class="markdownIt-Anchor" href="#二-具体增删改查"></a> 二、具体增删改查</h3><p>代码具体实现：</p><pre><code class="hljs java"><span class="hljs-keyword">package</span> HbaseDome;
+ 
+ 
+ 
+<span class="hljs-keyword">import</span> java.util.List;
+ 
+<span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.Cell;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HColumnDescriptor;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.KeyValue;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.TableName;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Delete;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Get;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.HBaseAdmin;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.HTable;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Put;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Result;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.ResultScanner;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Scan;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.protobuf.generated.ZooKeeperProtos.Table;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.util.Bytes;
+ 
+ 
+ 
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Hbasedome</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HBaseDemoInterface</span>&#123;
+ 
+     
+    <span class="hljs-keyword">static</span> <span class="hljs-type">Configuration</span> <span class="hljs-variable">conf</span> <span class="hljs-operator">=</span><span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String ZKconnect=<span class="hljs-string">&quot;192.168.123.212:2181,192.168.123.213:2181,192.168.123.214:2181&quot;</span>;
+    <span class="hljs-keyword">static</span>&#123;
+        conf=HBaseConfiguration.create();
+        conf.set(<span class="hljs-string">&quot;hbase.zookeeper.quorum&quot;</span>, ZKconnect);
+    &#125;
+<span class="hljs-comment">//  static String tableName=&quot;student&quot;;</span>
+<span class="hljs-comment">//  static String[] family=&#123;&quot;lie01&quot;,&quot;lie02&quot;&#125;;</span>
+     
+     
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        <span class="hljs-type">Hbasedome</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Hbasedome</span>();
+         String tableName=<span class="hljs-string">&quot;student11&quot;</span>;
+         String[] family=&#123;<span class="hljs-string">&quot;lie01&quot;</span>,<span class="hljs-string">&quot;lie02&quot;</span>&#125;;
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">htds</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(tableName);
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> z=<span class="hljs-number">0</span>;z&lt;family.length;z++)&#123;
+                HColumnDescriptor h=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(family[z]);
+                htds.addFamily(h);
+            &#125;
+<span class="hljs-comment">//          a.descTable(&quot;table03&quot;);</span>
+<span class="hljs-comment">//          a.createTable(tableName, htds);</span>
+<span class="hljs-comment">//          a.descTable(&quot;table03&quot;);</span>
+<span class="hljs-comment">//          a.getAllTables();</span>
+<span class="hljs-comment">//          a.createTable(tableName,family);</span>
+<span class="hljs-comment">//          a.getResult(&quot;table03&quot;, &quot;usr001&quot;);</span>
+<span class="hljs-comment">//          a.dropTable(&quot;user1&quot;);</span>
+<span class="hljs-comment">//          a.getAllTables();</span>
+<span class="hljs-comment">//          a.putData(&quot;table03&quot;, &quot;usr005&quot;, &quot;liezu01&quot;, &quot;name&quot;, &quot;liu&quot;);</span>
+<span class="hljs-comment">//          a.getResult(&quot;table03&quot;, &quot;usr001&quot;);</span>
+<span class="hljs-comment">//          a.getResultScann(&quot;table03&quot;);</span>
+<span class="hljs-comment">//          a.getResultScann(&quot;table03&quot;,&quot;&quot;);</span>
+             
+            <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> a.getResult(<span class="hljs-string">&quot;table03&quot;</span>, <span class="hljs-string">&quot;usr001&quot;</span>);
+            System.out.println(result.toString());
+            List&lt;Cell&gt; cells = result.listCells();
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; cells.size(); i++) &#123;
+                <span class="hljs-type">Cell</span> <span class="hljs-variable">cell</span> <span class="hljs-operator">=</span> cells.get(i);
+                System.out.println(cell.toString());
+    <span class="hljs-comment">//          printCell(cell);</span>
+            &#125;
+         
+<span class="hljs-comment">//          List&lt;KeyValue&gt; list = result.list();</span>
+<span class="hljs-comment">//          for (int i = 0; i &lt; list.size(); i++) &#123;</span>
+<span class="hljs-comment">//              KeyValue kv = list.get(i);</span>
+<span class="hljs-comment">//              printKeyValye(kv);</span>
+<span class="hljs-comment">//          &#125;</span>
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+            <span class="hljs-comment">// TODO Auto-generated catch block</span>
+            e.printStackTrace();
+        &#125;
+ 
+         
+    &#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printKeyValye</span><span class="hljs-params">(KeyValue kv)</span> &#123;
+        System.out.println(Bytes.toString(kv.getRow()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getFamily()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getQualifier()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getValue()) + <span class="hljs-string">&quot;\t&quot;</span> + kv.getTimestamp());
+    &#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printCell</span><span class="hljs-params">(Cell cell)</span> &#123;
+        System.out.println(Bytes.toString(cell.getRow()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getFamily()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getQualifier()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getValue()) + <span class="hljs-string">&quot;\t&quot;</span> + cell.getTimestamp());
+    &#125;
+    <span class="hljs-comment">//创建表</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createTable</span><span class="hljs-params">(String tableName, String[] family)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">desc</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(tableName);
+         
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;family.length;i++)&#123;
+            desc.addFamily(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(family[i]));
+            System.out.println(<span class="hljs-string">&quot;11111111111&quot;</span>+family[i]);
+        &#125;
+        <span class="hljs-keyword">if</span>(admin.tableExists(tableName))&#123;
+            System.out.println(<span class="hljs-string">&quot;表已经存在，别瞎输行吗&quot;</span>);
+<span class="hljs-comment">//          System.exit(0);</span>
+        &#125;<span class="hljs-keyword">else</span>&#123;
+            admin.createTable(desc);
+            System.out.println(<span class="hljs-string">&quot;表创建成功&quot;</span>);
+        &#125;
+    &#125;
+ 
+    <span class="hljs-comment">//创建表</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createTable</span><span class="hljs-params">(String tableName, HTableDescriptor htds)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">tableExists1</span> <span class="hljs-operator">=</span> admin.tableExists(Bytes.toBytes(tableName));
+        System.out.println(tableExists1 ? <span class="hljs-string">&quot;表已存在&quot;</span> : <span class="hljs-string">&quot;表不存在&quot;</span>);
+        admin.createTable(htds);
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">tableExists</span> <span class="hljs-operator">=</span> admin.tableExists(Bytes.toBytes(tableName));
+        System.out.println(tableExists ? <span class="hljs-string">&quot;创建表成功&quot;</span> : <span class="hljs-string">&quot;创建失败&quot;</span>);
+    &#125;
+ 
+     
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">descTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        HTable table=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">desc</span> <span class="hljs-operator">=</span>table.getTableDescriptor();
+        HColumnDescriptor[] columnFamilies = desc.getColumnFamilies();
+     
+        <span class="hljs-keyword">for</span>(HColumnDescriptor t:columnFamilies)&#123;
+            System.out.println(Bytes.toString(t.getName()));
+        &#125;
+         
+    &#125;
+ 
+    <span class="hljs-comment">//// 这种方式是替换该表tableName的所有列簇</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">modifyTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">htd</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(TableName.valueOf(tableName));
+        htd.addFamily(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(Bytes.toBytes(<span class="hljs-string">&quot;cf3&quot;</span>)));
+        htd.addFamily(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(Bytes.toBytes(<span class="hljs-string">&quot;cf2&quot;</span>)));
+        admin.modifyTable(tableName, htd);
+ 
+        <span class="hljs-comment">// 删除该表tableName当中的特定的列簇</span>
+        <span class="hljs-comment">// admin.deleteColumn(tableName, &quot;cf3&quot;);</span>
+ 
+        System.out.println(<span class="hljs-string">&quot;修改成功&quot;</span>);
+         
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getAllTables</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">HBaseAdmin</span> <span class="hljs-variable">admin</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+         
+        String[] tableNames = admin.getTableNames();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;tableNames.length;i++)&#123;
+            System.out.println(tableNames[i]);
+        &#125;
+    &#125;
+ 
+    <span class="hljs-comment">//更新数据  插入数据</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putData</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName, String value)</span>
+            <span class="hljs-keyword">throws</span> Exception &#123;
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, Bytes.toBytes(tableName));
+        Put put=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Put</span>(Bytes.toBytes(rowKey));
+        put.add(Bytes.toBytes(familyName), Bytes.toBytes(columnName), Bytes.toBytes(value));
+        htable.put(put);
+         
+    &#125;
+ 
+    <span class="hljs-comment">//为表添加数据</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addData</span><span class="hljs-params">(String tableName, String rowKey, String[] column1, String[] value1, String[] column2,</span>
+<span class="hljs-params">            String[] value2)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+         
+        Put put=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Put</span>(Bytes.toBytes(rowKey));
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, Bytes.toBytes(tableName));
+        HColumnDescriptor[] columnFamilies = htable.getTableDescriptor().getColumnFamilies();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;columnFamilies.length;i++)&#123;
+            <span class="hljs-type">String</span> <span class="hljs-variable">nameAsString</span> <span class="hljs-operator">=</span> columnFamilies[i].getNameAsString();
+            <span class="hljs-keyword">if</span>(nameAsString.equals(<span class="hljs-string">&quot;lie01&quot;</span>))&#123;
+                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;column1.length;j++)&#123;
+                    put.add(Bytes.toBytes(nameAsString), Bytes.toBytes(column1[j]),Bytes.toBytes(value1[j]));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(nameAsString.equals(<span class="hljs-string">&quot;lie02&quot;</span>))&#123;
+                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;column2.length;j++)&#123;
+                    put.add(Bytes.toBytes(nameAsString), Bytes.toBytes(column2[j]),Bytes.toBytes(value2[j]));
+                &#125;
+            &#125;
+             
+        &#125;
+        htable.put(put);
+        System.out.println(<span class="hljs-string">&quot;addData ok!&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-comment">//根据rowkey 查询</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResult</span><span class="hljs-params">(String tableName, String rowKey)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        Get get=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, Bytes.toBytes(tableName));
+        Result result=htable.get(get);
+<span class="hljs-comment">//      for(KeyValue k:result.list())&#123;</span>
+<span class="hljs-comment">//          System.out.println(Bytes.toString(k.getFamily()));</span>
+<span class="hljs-comment">//          System.out.println(Bytes.toString(k.getQualifier()));</span>
+<span class="hljs-comment">//          System.out.println(Bytes.toString(k.getValue()));</span>
+<span class="hljs-comment">//          System.out.println(k.getTimestamp());</span>
+<span class="hljs-comment">//      &#125;</span>
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+    <span class="hljs-comment">//查询指定的某列</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResult</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        Get get=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, Bytes.toBytes(tableName));
+        get.addColumn(Bytes.toBytes(familyName),Bytes.toBytes(columnName));
+        Result result=htable.get(get);
+        <span class="hljs-keyword">for</span>(KeyValue k:result.list())&#123;
+            System.out.println(Bytes.toString(k.getFamily()));
+            System.out.println(Bytes.toString(k.getQualifier()));
+            System.out.println(Bytes.toString(k.getValue()));
+            System.out.println(k.getTimestamp());
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+     
+    <span class="hljs-comment">//遍历查询表</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> ResultScanner <span class="hljs-title function_">getResultScann</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+     
+        Scan scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scan</span>();
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span><span class="hljs-literal">null</span>;
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+        <span class="hljs-keyword">try</span>&#123;
+            rs=htable.getScanner(scan);
+            <span class="hljs-keyword">for</span>(Result r: rs)&#123;
+                <span class="hljs-keyword">for</span>(KeyValue kv:r.list())&#123;
+     
+                    System.out.println(Bytes.toString(kv.getRow()));
+                    System.out.println(Bytes.toString(kv.getFamily()));
+                    System.out.println(Bytes.toString(kv.getQualifier()));
+                    System.out.println(Bytes.toString(kv.getValue()));
+                    System.out.println(kv.getTimestamp());
+                &#125;
+            &#125;
+        &#125;<span class="hljs-keyword">finally</span>&#123;
+            rs.close();
+        &#125;
+        <span class="hljs-keyword">return</span> rs;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> ResultScanner <span class="hljs-title function_">getResultScann</span><span class="hljs-params">(String tableName, Scan scan)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+         
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span><span class="hljs-literal">null</span>;
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+        <span class="hljs-keyword">try</span>&#123;
+            rs=htable.getScanner(scan);
+            <span class="hljs-keyword">for</span>(Result r: rs)&#123;
+                <span class="hljs-keyword">for</span>(KeyValue kv:r.list())&#123;
+     
+                    System.out.println(Bytes.toString(kv.getRow()));
+                    System.out.println(Bytes.toString(kv.getFamily()));
+                    System.out.println(Bytes.toString(kv.getQualifier()));
+                    System.out.println(Bytes.toString(kv.getValue()));
+                    System.out.println(kv.getTimestamp());
+                &#125;
+            &#125;
+        &#125;<span class="hljs-keyword">finally</span>&#123;
+            rs.close();
+        &#125;      
+        <span class="hljs-keyword">return</span> rs;
+    &#125;
+ 
+    <span class="hljs-comment">//查询表中的某一列</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResultByColumn</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName)</span>
+            <span class="hljs-keyword">throws</span> Exception &#123;
+         
+         
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+        Get get=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        get.addColumn(Bytes.toBytes(familyName),Bytes.toBytes(columnName));
+        Result result=htable.get(get);
+        <span class="hljs-keyword">for</span>(KeyValue kv: result.list())&#123;
+ 
+            System.out.println(Bytes.toString(kv.getFamily()));
+            System.out.println(Bytes.toString(kv.getQualifier()));
+            System.out.println(Bytes.toString(kv.getValue()));
+            System.out.println(kv.getTimestamp());
+             
+        &#125;
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+     
+    <span class="hljs-comment">//查询某列数据的某个版本</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResultByVersion</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName,</span>
+<span class="hljs-params">            <span class="hljs-type">int</span> versions)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+     
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+        <span class="hljs-type">Get</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        get.addColumn(Bytes.toBytes(familyName), Bytes.toBytes(columnName));
+        get.setMaxVersions(versions);
+        Result result=htable.get(get);
+         
+        <span class="hljs-keyword">for</span>(KeyValue kv: result.list())&#123;
+ 
+            System.out.println(Bytes.toString(kv.getFamily()));
+            System.out.println(Bytes.toString(kv.getQualifier()));
+            System.out.println(Bytes.toString(kv.getValue()));
+            System.out.println(kv.getTimestamp());
+             
+        &#125;
+ 
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+    <span class="hljs-comment">//删除指定某列</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteColumn</span><span class="hljs-params">(String tableName, String rowKey, String falilyName, String columnName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+ 
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+<span class="hljs-comment">//      Delete delete1=new Delete(Bytes.toBytes(rowKey));</span>
+        <span class="hljs-type">Delete</span> <span class="hljs-variable">de</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Delete</span>(Bytes.toBytes(rowKey));
+        de.deleteColumn(Bytes.toBytes(falilyName), Bytes.toBytes(columnName));
+        htable.delete(de);
+    &#125;
+ 
+     
+    <span class="hljs-comment">//删除指定的某个rowkey</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteColumn</span><span class="hljs-params">(String tableName, String rowKey)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HTable htable=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, tableName);
+ 
+        <span class="hljs-type">Delete</span> <span class="hljs-variable">de</span> <span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">Delete</span>(Bytes.toBytes(rowKey));
+         htable.delete(de);
+         
+    &#125;
+ 
+    <span class="hljs-comment">//让该表失效</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disableTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        admin.disableTable(tableName);
+         
+    &#125;
+ 
+    <span class="hljs-comment">//删除表</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dropTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+         
+        HBaseAdmin admin=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+        admin.disableTable(tableName);
+        admin.deleteTable(tableName);
+         
+    &#125;
+ 
+&#125;</code></pre><p></p><p>使用类</p><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.ghgj.hbase.test1610;
+ 
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Iterator;
+<span class="hljs-keyword">import</span> java.util.List;
+ 
+<span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.Cell;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HColumnDescriptor;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.KeyValue;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.TableName;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Get;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.HBaseAdmin;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.HTable;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Put;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Result;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.ResultScanner;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.client.Scan;
+<span class="hljs-keyword">import</span> org.apache.hadoop.hbase.util.Bytes;
+ 
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HBaseAPIDemo1610</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HBaseDemoInterface</span> &#123;
+ 
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROWKEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;p001&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROWKEY2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;p002&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">FAMILY1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;cf1&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">FAMILY2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;cf2&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;name&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">VALUE</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;huangbo&quot;</span>;
+ 
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">TABLE_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;person&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String[] COLUMN_FAMILY = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] &#123; FAMILY1, FAMILY2 &#125;;
+ 
+    <span class="hljs-keyword">static</span> <span class="hljs-type">Configuration</span> <span class="hljs-variable">conf</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">static</span> <span class="hljs-type">HBaseAdmin</span> <span class="hljs-variable">admin</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">static</span> <span class="hljs-type">HTable</span> <span class="hljs-variable">table</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+ 
+    <span class="hljs-keyword">static</span> &#123;
+        <span class="hljs-keyword">try</span> &#123;
+            conf = HBaseConfiguration.create();
+            conf.set(<span class="hljs-string">&quot;hbase.zookeeper.quorum&quot;</span>, <span class="hljs-string">&quot;hadoop03:2181,hadoop04:2181,hadoop05:2181&quot;</span>);
+            admin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAdmin</span>(conf);
+            table = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTable</span>(conf, TABLE_NAME);
+ 
+        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+            <span class="hljs-comment">// e.printStackTrace();</span>
+            System.out.println(<span class="hljs-string">&quot;报错&quot;</span>);
+        &#125;
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">HBaseAPIDemo1610</span> <span class="hljs-variable">hbase</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HBaseAPIDemo1610</span>();
+ 
+        <span class="hljs-comment">// 测试创建表</span>
+        hbase.createTable(TABLE_NAME, COLUMN_FAMILY);
+ 
+        <span class="hljs-comment">// 测试创建表</span>
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">htd</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(TableName.valueOf(TABLE_NAME));
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; COLUMN_FAMILY.length; i++) &#123;
+            <span class="hljs-type">HColumnDescriptor</span> <span class="hljs-variable">cf1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(COLUMN_FAMILY[i]);
+            htd.addFamily(cf1);
+        &#125;
+        hbase.createTable(TABLE_NAME, htd);
+ 
+        <span class="hljs-comment">// 查看表属性</span>
+        hbase.descTable(TABLE_NAME);
+ 
+        <span class="hljs-comment">// 查询所有的表</span>
+        hbase.getAllTables();
+ 
+        <span class="hljs-comment">// 测试修改表</span>
+        hbase.modifyTable(TABLE_NAME);
+ 
+        <span class="hljs-comment">// 插入数据</span>
+        hbase.putData(TABLE_NAME, ROWKEY, FAMILY1, KEY, VALUE);
+ 
+        <span class="hljs-comment">// 测试插入一堆数据</span>
+        String[] column1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] &#123; <span class="hljs-string">&quot;name1&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;province&quot;</span> &#125;;
+        String[] value1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] &#123; <span class="hljs-string">&quot;huangbo&quot;</span>, <span class="hljs-string">&quot;33&quot;</span>, <span class="hljs-string">&quot;xinjiang&quot;</span> &#125;;
+        String[] column2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] &#123; <span class="hljs-string">&quot;gender&quot;</span> &#125;;
+        String[] value2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] &#123; <span class="hljs-string">&quot;male&quot;</span> &#125;;
+        hbase.addData(TABLE_NAME, ROWKEY2, column1, value1, column2, value2);
+ 
+        <span class="hljs-comment">// 通过rowkey查询数据</span>
+        <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> hbase.getResult(TABLE_NAME, ROWKEY2);
+        System.out.println(result.toString());
+        List&lt;KeyValue&gt; list = result.list();
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; list.size(); i++) &#123;
+            <span class="hljs-type">KeyValue</span> <span class="hljs-variable">kv</span> <span class="hljs-operator">=</span> list.get(i);
+            printKeyValye(kv);
+        &#125;
+ 
+        <span class="hljs-comment">// 通过rowkey, family, province查询数据</span>
+        <span class="hljs-type">Result</span> <span class="hljs-variable">result1</span> <span class="hljs-operator">=</span> hbase.getResult(TABLE_NAME, ROWKEY2, FAMILY1, <span class="hljs-string">&quot;province&quot;</span>);
+        List&lt;Cell&gt; cells = result1.listCells();
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; cells.size(); i++) &#123;
+            <span class="hljs-type">Cell</span> <span class="hljs-variable">cell</span> <span class="hljs-operator">=</span> cells.get(i);
+            printCell(cell);
+        &#125;
+ 
+        <span class="hljs-comment">// 扫描全表数据</span>
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">resultScann</span> <span class="hljs-operator">=</span> hbase.getResultScann(TABLE_NAME);
+        printResultScanner(resultScann);
+         
+        <span class="hljs-comment">/*Iterator&lt;Result&gt; iterator = resultScann.iterator();</span>
+<span class="hljs-comment">        while(iterator.hasNext())&#123;</span>
+<span class="hljs-comment">            Result next = iterator.next();</span>
+<span class="hljs-comment">        &#125;*/</span>
+ 
+        <span class="hljs-comment">// 通过scan扫描全表数据，scan中可以加入一些过滤条件</span>
+        <span class="hljs-type">Scan</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scan</span>();
+        scan.setStartRow(Bytes.toBytes(<span class="hljs-string">&quot;user&quot;</span>));
+        scan.setStopRow(Bytes.toBytes(<span class="hljs-string">&quot;zk002&quot;</span>));
+        scan.setTimeRange(<span class="hljs-number">1488252774189l</span>, <span class="hljs-number">1488252774191l</span>);
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">resultScann1</span> <span class="hljs-operator">=</span> hbase.getResultScann(TABLE_NAME, scan);
+        printResultScanner(resultScann1);
+ 
+        <span class="hljs-comment">// 两种方式查询最大版本数的hbase数据</span>
+        <span class="hljs-type">Result</span> <span class="hljs-variable">resultByVersion</span> <span class="hljs-operator">=</span> hbase.getResultByVersion(TABLE_NAME, ROWKEY, FAMILY1, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-number">3</span>);
+        printResult(resultByVersion);
+        System.out.println(<span class="hljs-string">&quot;-------------------&quot;</span>);
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> hbase.getResultByVersion(ROWKEY, FAMILY1, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-number">3</span>);
+        printResultScanner(rs);
+ 
+        <span class="hljs-comment">// 删除表</span>
+        hbase.dropTable(TABLE_NAME);
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printResultScanner</span><span class="hljs-params">(ResultScanner resultScann)</span> &#123;
+        <span class="hljs-keyword">for</span> (Result result : resultScann) &#123;
+            printResult(result);
+        &#125;
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printResult</span><span class="hljs-params">(Result result)</span> &#123;
+        List&lt;Cell&gt; cells = result.listCells();
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; cells.size(); i++) &#123;
+            <span class="hljs-type">Cell</span> <span class="hljs-variable">cell</span> <span class="hljs-operator">=</span> cells.get(i);
+            printCell(cell);
+        &#125;
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printCell</span><span class="hljs-params">(Cell cell)</span> &#123;
+        System.out.println(Bytes.toString(cell.getRow()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getFamily()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getQualifier()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(cell.getValue()) + <span class="hljs-string">&quot;\t&quot;</span> + cell.getTimestamp());
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printKeyValye</span><span class="hljs-params">(KeyValue kv)</span> &#123;
+        System.out.println(Bytes.toString(kv.getRow()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getFamily()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getQualifier()) + <span class="hljs-string">&quot;\t&quot;</span> + Bytes.toString(kv.getValue()) + <span class="hljs-string">&quot;\t&quot;</span> + kv.getTimestamp());
+    &#125;
+ 
+    <span class="hljs-comment">// create &#x27;tablename&#x27;,&#x27;cf1&#x27;,&#x27;cf2&#x27;</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createTable</span><span class="hljs-params">(String tableName, String[] family)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">htd</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(TableName.valueOf(tableName));
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; family.length; i++) &#123;
+            <span class="hljs-type">HColumnDescriptor</span> <span class="hljs-variable">cf1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(family[i]);
+            htd.addFamily(cf1);
+        &#125;
+        admin.createTable(htd);
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">tableExists</span> <span class="hljs-operator">=</span> admin.tableExists(Bytes.toBytes(tableName));
+        System.out.println(tableExists ? <span class="hljs-string">&quot;创建表成功&quot;</span> : <span class="hljs-string">&quot;创建失败&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">createTable</span><span class="hljs-params">(String tableName, HTableDescriptor htd)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        admin.createTable(htd);
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">tableExists</span> <span class="hljs-operator">=</span> admin.tableExists(Bytes.toBytes(tableName));
+        System.out.println(tableExists ? <span class="hljs-string">&quot;创建表成功&quot;</span> : <span class="hljs-string">&quot;创建失败&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-comment">// desc &#x27;person&#x27;</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">descTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">tableDescriptor</span> <span class="hljs-operator">=</span> table.getTableDescriptor();
+        HColumnDescriptor[] columnFamilies = tableDescriptor.getColumnFamilies();
+        <span class="hljs-keyword">for</span> (HColumnDescriptor hcd : columnFamilies) &#123;
+            <span class="hljs-comment">// System.out.println(hcd.toString()+&quot;\t&quot;);</span>
+            System.out.println(Bytes.toString(hcd.getName()));
+        &#125;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">modifyTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-comment">// 这种方式是替换该表tableName的所有列簇</span>
+        <span class="hljs-type">HTableDescriptor</span> <span class="hljs-variable">htd</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HTableDescriptor</span>(TableName.valueOf(tableName));
+        htd.addFamily(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(Bytes.toBytes(<span class="hljs-string">&quot;cf3&quot;</span>)));
+        htd.addFamily(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HColumnDescriptor</span>(Bytes.toBytes(<span class="hljs-string">&quot;cf2&quot;</span>)));
+        admin.modifyTable(tableName, htd);
+ 
+        <span class="hljs-comment">// 删除该表tableName当中的特定的列簇</span>
+        <span class="hljs-comment">// admin.deleteColumn(tableName, &quot;cf3&quot;);</span>
+ 
+        System.out.println(<span class="hljs-string">&quot;修改成功&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-comment">// list</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getAllTables</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        TableName[] listTableNames = admin.listTableNames();
+        <span class="hljs-keyword">for</span> (TableName tn : listTableNames) &#123;
+            System.out.println(tn.toString());
+        &#125;
+    &#125;
+ 
+    <span class="hljs-comment">// put &#x27;tablename&#x27;,&#x27;rowkey&#x27;,&#x27;familyname:key&#x27;,&#x27;value&#x27;</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putData</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName, String value)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-comment">// HTable table = new HTable(conf, tableName);</span>
+        <span class="hljs-type">Put</span> <span class="hljs-variable">put</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Put</span>(Bytes.toBytes(rowKey));
+        put.add(Bytes.toBytes(familyName), Bytes.toBytes(columnName), Bytes.toBytes(value));
+        table.put(put);
+        System.out.println(<span class="hljs-string">&quot;插入成功&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> tableName</span>
+<span class="hljs-comment">     *            表名</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> rowKey</span>
+<span class="hljs-comment">     *            rowkey</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> column1</span>
+<span class="hljs-comment">     *            第一个列簇的key数组</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value1</span>
+<span class="hljs-comment">     *            第一个列簇的value数组，key数组和value数组长度必须一样</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> column2</span>
+<span class="hljs-comment">     *            第二列簇的key数组</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value2</span>
+<span class="hljs-comment">     *            第二个列簇的values数组， 同上同理</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addData</span><span class="hljs-params">(String tableName, String rowKey, String[] column1, String[] value1, String[] column2, String[] value2)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        List&lt;Put&gt; puts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Put&gt;();
+ 
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; column1.length; i++) &#123;
+            <span class="hljs-type">Put</span> <span class="hljs-variable">put</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Put</span>(Bytes.toBytes(rowKey));
+            put.add(Bytes.toBytes(FAMILY1), Bytes.toBytes(column1[i]), Bytes.toBytes(value1[i]));
+            puts.add(put);
+        &#125;
+ 
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; column2.length; i++) &#123;
+            <span class="hljs-type">Put</span> <span class="hljs-variable">put</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Put</span>(Bytes.toBytes(rowKey));
+            put.add(Bytes.toBytes(FAMILY2), Bytes.toBytes(column2[i]), Bytes.toBytes(value2[i]));
+            puts.add(put);
+        &#125;
+ 
+        table.put(puts);
+        System.out.println(<span class="hljs-string">&quot;插入一堆数据成功&quot;</span>);
+    &#125;
+ 
+    <span class="hljs-comment">// get &#x27;tablename&#x27;,&#x27;rowkey&#x27;</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResult</span><span class="hljs-params">(String tableName, String rowKey)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">Get</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> table.get(get);
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResult</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">Get</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        get.addColumn(Bytes.toBytes(familyName), Bytes.toBytes(columnName));
+        <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> table.get(get);
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> ResultScanner <span class="hljs-title function_">getResultScann</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">Scan</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scan</span>();
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> table.getScanner(scan);
+        <span class="hljs-comment">// ResultScanner scanner = table.getScanner(Bytes.toBytes(FAMILY2));</span>
+        <span class="hljs-comment">// ResultScanner scanner = table.getScanner(Bytes.toBytes(FAMILY1),</span>
+        <span class="hljs-comment">// Bytes.toBytes(&quot;name1&quot;));</span>
+        <span class="hljs-keyword">return</span> scanner;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> ResultScanner <span class="hljs-title function_">getResultScann</span><span class="hljs-params">(String tableName, Scan scan)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-keyword">return</span> table.getScanner(scan);
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResultByColumn</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    &#125;
+ 
+    <span class="hljs-comment">// get &#x27;person&#x27;,&#x27;p001&#x27;,&#123;COLUMNS =&gt; &#x27;cf1:name&#x27;, VERSIONS =&gt; 3&#125;</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getResultByVersion</span><span class="hljs-params">(String tableName, String rowKey, String familyName, String columnName, <span class="hljs-type">int</span> versions)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">Get</span> <span class="hljs-variable">get</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Get</span>(Bytes.toBytes(rowKey));
+        get.addColumn(Bytes.toBytes(familyName), Bytes.toBytes(columnName));
+        get.setMaxVersions(versions);
+        <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> table.get(get);
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+ 
+    <span class="hljs-keyword">public</span> ResultScanner <span class="hljs-title function_">getResultByVersion</span><span class="hljs-params">(String rowKey, String familyName, String columnName, <span class="hljs-type">int</span> versions)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-type">Scan</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scan</span>(Bytes.toBytes(rowKey), Bytes.toBytes(rowKey));
+        scan.addColumn(Bytes.toBytes(familyName), Bytes.toBytes(columnName));
+        scan.setMaxVersions(versions);
+        <span class="hljs-type">ResultScanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> table.getScanner(scan);
+        <span class="hljs-keyword">return</span> scanner;
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteColumn</span><span class="hljs-params">(String tableName, String rowKey, String falilyName, String columnName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+ 
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deleteColumn</span><span class="hljs-params">(String tableName, String rowKey)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+ 
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disableTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        admin.disableTable(tableName);
+    &#125;
+ 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dropTable</span><span class="hljs-params">(String tableName)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        <span class="hljs-keyword">try</span> &#123;
+            admin.deleteTable(tableName);
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+            <span class="hljs-comment">// e.printStackTrace();</span>
+            disableTable(tableName);
+            admin.deleteTable(tableName);
+            System.out.println(<span class="hljs-string">&quot;ssssssss&quot;</span>);
+        &#125; <span class="hljs-keyword">finally</span> &#123;
+            <span class="hljs-type">boolean</span> <span class="hljs-variable">tableExists</span> <span class="hljs-operator">=</span> admin.tableExists(Bytes.toBytes(tableName));
+            System.out.println(tableExists ? <span class="hljs-string">&quot;删除失败&quot;</span> : <span class="hljs-string">&quot;删除成功&quot;</span>);
+        &#125;
+    &#125;
+&#125;</code></pre></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF%E5%B7%A5%E5%85%B7/">技术工具</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Java/">Java</a> <a class="hover-with-bg" href="/tags/Hadoop/">Hadoop</a> <a class="hover-with-bg" href="/tags/HBase/">HBase</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/11/09/Article202011094/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">HBase的hbase-site.xml文件配置详解</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/11/09/Article202011092/"><span class="hidden-mobile">Hbase开机自启动实现</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","HBase Java API基本概念与使用&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

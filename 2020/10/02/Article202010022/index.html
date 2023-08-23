@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="Fulequn"><meta name="keywords" content=""><title>Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题 - FuLeQun&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><script src="/js/color-schema.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.2"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>FuLeQun's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a></li><li class="nav-item" id="color-toggle-btn"><a class="nav-link" href="javascript:">&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a></li></ul></div></div></nav><div class="banner intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container page-header text-center fade-in-up"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-10-02 18:34" pubdate>2020年10月2日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.8k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 52 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><article class="post-content mx-auto" id="post"><h1 style="display:none">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</h1><div class="markdown-body" id="post-body"><blockquote><p>参考文献：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qing0228/p/11183962.html">https://www.cnblogs.com/qing0228/p/11183962.html</a></p></blockquote><p>在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y) 。</p><p>如若想要绘制一个图时写入标签，则写为 plt.plot(x,y,label=“figure1”)。</p><pre><code class="hljs python"><span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+
+<span class="hljs-comment">#生成数据</span>
+x = linspace(<span class="hljs-number">0</span>, <span class="hljs-number">2</span> * pi, <span class="hljs-number">50</span>)
+plt.plot(sin(x))
+
+plt.xlabel(<span class="hljs-string">&#x27;x-label&#x27;</span>)
+plt.ylabel(<span class="hljs-string">&#x27;y-label&#x27;</span>, fontsize=<span class="hljs-string">&#x27;large&#x27;</span>)
+plt.title(<span class="hljs-string">&#x27;title&#x27;</span>)</code></pre><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241908518.png" srcset="/img/loading.gif" alt="1"></p><p>以下先将整体代码插入，再分布讲解：</p><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">Created on Thu Oct 15 20:05:49 2020</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">@author: 23820</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+<span class="hljs-keyword">from</span> matplotlib.ticker <span class="hljs-keyword">import</span> MultipleLocator, FormatStrFormatter 
+
+<span class="hljs-comment">#获取最大最小值</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">minmax_value</span>(<span class="hljs-params">list1</span>):
+    minvalue=<span class="hljs-built_in">min</span>(list1)
+    maxvalue=<span class="hljs-built_in">max</span>(list1)
+    <span class="hljs-keyword">return</span> minvalue,maxvalue
+
+<span class="hljs-comment">#创建画布</span>
+plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">14</span>),dpi=<span class="hljs-number">98</span>)
+xmajorLocator = MultipleLocator(<span class="hljs-number">1</span>) <span class="hljs-comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="hljs-comment">#设置中文字体</span>
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;SimHei&#x27;</span>]  
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment">#生成1行2列的子图</span>
+p1 = plt.subplot(<span class="hljs-number">121</span>)<span class="hljs-comment">#第一行的左边</span>
+p2 = plt.subplot(<span class="hljs-number">122</span>)<span class="hljs-comment">#第一行的右边</span>
+
+
+<span class="hljs-comment">#图中展示点的数量</span>
+pointcount=<span class="hljs-number">5</span>
+
+<span class="hljs-comment">#生成数据</span>
+x=[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+<span class="hljs-built_in">print</span>(x)
+<span class="hljs-comment">#生成数据</span>
+y1=[i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+y2=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+y3=[i*<span class="hljs-number">3</span>+<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+y4=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(x)-<span class="hljs-number">1</span>):
+    <span class="hljs-comment">#如果不够展示点的数量</span>
+    <span class="hljs-keyword">if</span> i&lt;pointcount:
+        minx,maxx=minmax_value(x[:pointcount])
+        minx,maxx=minmax_value(x[:pointcount])
+        minyA,maxyA=minmax_value(y1[:pointcount])
+        minyB,maxyB=minmax_value(y2[:pointcount])
+        
+        maxy1=<span class="hljs-built_in">max</span>(maxyA,maxyB)
+        miny1=<span class="hljs-built_in">min</span>(minyA,minyB)
+        p1.axis([minx,maxx,miny1,maxy1])
+        p1.grid(<span class="hljs-literal">True</span>)
+        A,=p1.plot(x[:pointcount],y1[:pointcount],<span class="hljs-string">&quot;g-&quot;</span>)
+        B,=p1.plot(x[:pointcount],y2[:pointcount],<span class="hljs-string">&quot;b-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1.xaxis.set_major_locator(xmajorLocator)
+        legend=p1.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图1&quot;</span>,<span class="hljs-string">&quot;图2&quot;</span>])    
+        
+        
+        minx,maxx=minmax_value(x[:pointcount])
+        minx,maxx=minmax_value(x[:pointcount])
+        minyA,maxyA=minmax_value(y3[:pointcount])
+        minyB,maxyB=minmax_value(y4[:pointcount])
+        
+        maxy1=<span class="hljs-built_in">max</span>(maxyA,maxyB)
+        miny1=<span class="hljs-built_in">min</span>(minyA,minyB)
+        p2.axis([minx,maxx,miny1,maxy1])
+        p2.grid(<span class="hljs-literal">True</span>)
+        A,=p2.plot(x[:pointcount],y3[:pointcount],<span class="hljs-string">&quot;r-&quot;</span>)
+        B,=p2.plot(x[:pointcount],y4[:pointcount],<span class="hljs-string">&quot;y-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2.xaxis.set_major_locator(xmajorLocator)
+        legend=p2.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图3&quot;</span>,<span class="hljs-string">&quot;图4&quot;</span>])  
+    <span class="hljs-keyword">elif</span> i&gt;=pointcount:
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minyA,maxyA=minmax_value(y1[i-pointcount:i])
+        minyB,maxyB=minmax_value(y2[i-pointcount:i])
+        
+        maxy1=<span class="hljs-built_in">max</span>(maxyA,maxyB)
+        miny1=<span class="hljs-built_in">min</span>(minyA,minyB)
+        p1.axis([minx,maxx,miny1,maxy1])
+        p1.grid(<span class="hljs-literal">True</span>)
+        A,=p1.plot(x[i-pointcount:i],y1[i-pointcount:i],<span class="hljs-string">&quot;g-&quot;</span>)
+        B,=p1.plot(x[i-pointcount:i],y2[i-pointcount:i],<span class="hljs-string">&quot;b-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1.xaxis.set_major_locator(xmajorLocator)
+        legend=p1.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图1&quot;</span>,<span class="hljs-string">&quot;图2&quot;</span>])
+
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minx,maxx=minmax_value(x[i-pointcount:i])
+        minyA,maxyA=minmax_value(y3[i-pointcount:i])
+        minyB,maxyB=minmax_value(y4[i-pointcount:i])
+        
+        maxy1=<span class="hljs-built_in">max</span>(maxyA,maxyB)
+        miny1=<span class="hljs-built_in">min</span>(minyA,minyB)
+        p2.axis([minx,maxx,miny1,maxy1])
+        p2.grid(<span class="hljs-literal">True</span>)
+        A,=p2.plot(x[i-pointcount:i],y3[i-pointcount:i],<span class="hljs-string">&quot;r-&quot;</span>)
+        B,=p2.plot(x[i-pointcount:i],y4[i-pointcount:i],<span class="hljs-string">&quot;y-&quot;</span>)
+
+        <span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2.xaxis.set_major_locator(xmajorLocator)
+        legend=p2.legend(handles=[A,B],labels=[<span class="hljs-string">&quot;图3&quot;</span>,<span class="hljs-string">&quot;图4&quot;</span>])
+
+
+    <span class="hljs-comment">#设置坐标轴标题以及图像的名称</span>
+    p1.set_xlabel(<span class="hljs-string">&quot;横轴属性名一&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p1.set_ylabel(<span class="hljs-string">&quot;纵轴属性名一&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p1.set_title(<span class="hljs-string">&quot;主题一&quot;</span>,fontsize=<span class="hljs-number">18</span>)
+    
+    p2.set_xlabel(<span class="hljs-string">&quot;横轴属性名二&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p2.set_ylabel(<span class="hljs-string">&quot;纵轴属性名二&quot;</span>,fontsize=<span class="hljs-number">14</span>)
+    p2.set_title(<span class="hljs-string">&quot;主题二&quot;</span>,fontsize=<span class="hljs-number">18</span>)
+
+    
+    plt.pause(<span class="hljs-number">0.3</span>)
+    <span class="hljs-comment"># 调用 plt.ion() 可以使能交互绘图功能. plt.show( ) 显示所绘制的图形</span>
+    <span class="hljs-comment"># 调用 plt.pause(0.05) 不仅可以绘图而且鼠标可以继续交互</span>
+    plt.tight_layout(pad=<span class="hljs-number">4</span>, w_pad=<span class="hljs-number">4.0</span>, h_pad=<span class="hljs-number">3.0</span>)
+    <span class="hljs-comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+    <span class="hljs-comment"># 参数：</span>
+    <span class="hljs-comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+    <span class="hljs-comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+    <span class="hljs-comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre><p>运行结果为:</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241908519.gif" srcset="/img/loading.gif" alt="2"></p><p>1、导入库</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt 
+<span class="hljs-keyword">from</span> matplotlib.ticker <span class="hljs-keyword">import</span> MultipleLocator, FormatStrFormatter</code></pre><p>2、由于绘图过程中多次使用获取最大最小值，将获取最大最小值写入函数，后面直接调用函数即可。</p><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">minmax_value</span>(<span class="hljs-params">list1</span>):
+    minvalue=<span class="hljs-built_in">min</span>(list1)
+    maxvalue=<span class="hljs-built_in">max</span>(list1)
+    <span class="hljs-keyword">return</span> minvalue,maxvalue</code></pre><p>3、（1）创建自定义图像，并设置figured的长和宽以及dpi参数指定绘图对象的分辨率；（2）设置x轴刻度的间隔；（3）对本次绘图中的字体进行设置；（4）在matplotlib下，一个figure对象可以包含多个子图（Axes），使用subplot()快速绘制。</p><pre><code class="hljs python"><span class="hljs-comment">#创建画布</span>
+plt.figure(figsize=(<span class="hljs-number">16</span>,<span class="hljs-number">14</span>),dpi=<span class="hljs-number">98</span>)
+xmajorLocator = MultipleLocator(<span class="hljs-number">1</span>) <span class="hljs-comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="hljs-comment">#设置中文字体</span>
+plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>]=[<span class="hljs-string">&#x27;SimHei&#x27;</span>]  
+plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment">#生成1行2列的子图</span>
+p1 = plt.subplot(<span class="hljs-number">121</span>)<span class="hljs-comment">#第一行的左边</span>
+p2 = plt.subplot(<span class="hljs-number">122</span>)<span class="hljs-comment">#第一行的右边</span></code></pre><p>4、当数据量过多时，对数据一次性展示不能够达到对数据内部信息的解读。本例采用一次展示其中一部分数据，并动态的更新图片，于此同时，动态更新横纵坐标轴的取值范围。下面代码首先设置了每次展示点的数量，并获取了主题一中的所有数据值。根据x取值范围和值域y获取当前绘图过程中的横纵坐标取值范围，最后根据x,y的值进行绘图。</p><p>下面将先在一个子图上显示两条静态折现。当使用动态的折线图时，只需动态更新数据和横纵坐标的取值范围。总体代码中已经写出，下面不再赘述。</p><pre><code class="hljs python"><span class="hljs-comment">#图中展示点的数量</span>
+pointcount=<span class="hljs-number">5</span>
+<span class="hljs-comment">#生成数据</span>
+x=[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+
+y1=[i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+y2=[i*<span class="hljs-number">4</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>)]
+
+minx,maxx=minmax_value(x[:pointcount])
+minyA,maxyA=minmax_value(y1[:pointcount])
+minyB,maxyB=minmax_value(y2[:pointcount])
+        
+maxy1=<span class="hljs-built_in">max</span>(maxyA,maxyB)
+miny1=<span class="hljs-built_in">min</span>(minyA,minyB)
+p1.axis([minx,maxx,miny1,maxy1])
+p1.grid(<span class="hljs-literal">True</span>)<span class="hljs-comment">#绘图过程中出现的网格设置</span>
+A,=p1.plot(x[:pointcount],y1[:pointcount],<span class="hljs-string">&quot;g-&quot;</span>)
+B,=p1.plot(x[:pointcount],y2[:pointcount],<span class="hljs-string">&quot;b-&quot;</span>)<span class="hljs-comment">#设置主刻度标签的位置,标签文本的格式p1.xaxis.set_major_locator(xmajorLocator)legend=p1.legend(handles=[A,B],labels=[&quot;图1&quot;,&quot;图2&quot;])</span></code></pre><p>结果如下所示：</p><p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241908520.png" srcset="/img/loading.gif" alt="3"></p><p>5、设置边界，不设置边界经常会因为横纵轴的字体太大等其他原因导致横纵轴或者标题只能显示其中一部分。</p><pre><code class="hljs python">plt.tight_layout(pad=<span class="hljs-number">4</span>, w_pad=<span class="hljs-number">4.0</span>, h_pad=<span class="hljs-number">3.0</span>)
+<span class="hljs-comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+<span class="hljs-comment"># 参数：</span>
+<span class="hljs-comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+<span class="hljs-comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+<span class="hljs-comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre></div><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Python/">Python</a> <a class="hover-with-bg" href="/tags/Matplotlib/">Matplotlib</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><article class="post-prev col-6"><a href="/2020/10/02/Article202010023/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">R语言中的广义线性模型glm</span> <span class="visible-mobile">上一篇</span></a></article><article class="post-next col-6"><a href="/2020/10/02/Article202010021/"><span class="hidden-mobile">MongoDB安装及使用（Windows下）</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></article></div></div></article></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("08/17/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready((function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"#post-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),$(".toc-list-item").length>0&&$("#toc").css("visibility","visible")}))</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready((function(){$(".typed-cursor").addClass("h2"),typed.start()}))</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options={placement:"right",visible:"hover"};var el="h1,h2,h3,h4,h5,h6".split(","),res=[];for(item of el)res.push(".markdown-body > "+item);anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each((function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)}))</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
