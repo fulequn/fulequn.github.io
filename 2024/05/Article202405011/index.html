@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="计算机基础 题目 排序过程中，对尚未确定最终位置的所有元素进行一遍处理称为一 “趟”。下列排序中，不可能是快速排序第二趟结果的是（）【2019 年全国试题 10（2 分）】 A. 5, 2, 16, 12, 28, 60, 32, 72 B. 2, 16, 5, 28, 12, 60, 32, 72 C. 2, 12, 16, 5, 28, 32, 72, 60 D. 5, 2, 12, 28,">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="计算机基础 题目 排序过程中，对尚未确定最终位置的所有元素进行一遍处理称为一 “趟”。下列排序中，不可能是快速排序第二趟结果的是（）【2019 年全国试题 10（2 分）】 A. 5, 2, 16, 12, 28, 60, 32, 72 B. 2, 16, 5, 28, 12, 60, 32, 72 C. 2, 12, 16, 5, 28, 32, 72, 60 D. 5, 2, 12, 28,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024.5.1 计算机基础（快速排序）+算法（最小生成树）">
 <meta property="og:url" content="https://blog.fulequn.online/2024/05/Article202405011/index.html">
@@ -27,258 +21,122 @@
 <meta property="article:modified_time" content="2024-05-30T00:16:56.000Z">
 <meta property="article:author" content="Fulequn">
 <meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>2024.5.1 计算机基础（快速排序）+算法（最小生成树） - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>2024.5.1 计算机基础（快速排序）+算法（最小生成树） - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="2024.5.1 计算机基础（快速排序）+算法（最小生成树）"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-01 20:45" pubdate>
-          2024年5月1日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          2k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          17 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="2024.5.1 计算机基础（快速排序）+算法（最小生成树）"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-05-01 20:45" pubdate>
+2024年5月1日 晚上
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+2k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+17 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">2024.5.1 计算机基础（快速排序）+算法（最小生成树）</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="计算机基础">计算机基础</h1>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">2024.5.1 计算机基础（快速排序）+算法（最小生成树）</h1>
+<div class="markdown-body">
+<h1 id="计算机基础">计算机基础</h1>
 <h3 id="题目">题目</h3>
 <p>排序过程中，对尚未确定最终位置的所有元素进行一遍处理称为一 “趟”。下列排序中，不可能是快速排序第二趟结果的是（）【2019 年全国试题 10（2 分）】</p>
 <p>A. 5, 2, 16, 12, 28, 60, 32, 72</p>
@@ -334,7 +192,7 @@
 <p>仔细一看，是加一个源点的最小生成树。对于每一个删的节点进行枚举，因为n很小。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">// 定义一个结构体用于存储边的信息：起点、终点和边的权重</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;<br>    <span class="hljs-type">int</span> x, y;<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> cost; <span class="hljs-comment">// cost存路程</span><br>&#125;;<br><br><span class="hljs-comment">// 用于查找节点x所在的集合的代表元素</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fi</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> x == fa[x] ? x : fa[x] = <span class="hljs-built_in">fi</span>(fa[x]);<br>&#125;<br><br><span class="hljs-comment">// 用于比较两个节点结构体的大小，按照cost进行排序</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(node a, node b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a.cost &lt; b.cost; <span class="hljs-comment">// 找路程小的</span><br>&#125;<br><br><span class="hljs-comment">// 合并两个节点x和y所在的集合</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">unio</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    <span class="hljs-type">int</span> p1 = <span class="hljs-built_in">fi</span>(x), p2 = <span class="hljs-built_in">fi</span>(y);<br>    <span class="hljs-keyword">if</span> (p1 != p2) fa[p1] = p2;<br>&#125;<br><br><span class="hljs-comment">// 主要的解法函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-keyword">while</span> (cin &gt;&gt; n) &#123;<br>        <span class="hljs-type">int</span> ans = ~<span class="hljs-number">0U</span> &gt;&gt; <span class="hljs-number">1</span>; <span class="hljs-comment">// ans初始化为无穷大</span><br>        <span class="hljs-type">int</span> v[maxn], fa[maxn]; <span class="hljs-comment">// v数组和fa数组</span><br>        node Q[maxn]; <span class="hljs-comment">// 存储边的数组</span><br><br>        <span class="hljs-comment">// 读取顶点的数值和边的数量</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;v[i]);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;m);<br><br>        <span class="hljs-comment">// 读取每条边的信息</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;Q[i].x, &amp;Q[i].y, &amp;Q[i].cost);<br><br>        <span class="hljs-comment">// 将顶点的数值作为边加入到边的数组中</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            Q[i + m].x = <span class="hljs-number">0</span>;<br>            Q[i + m].y = i;<br>            Q[i + m].cost = v[i];<br>        &#125;<br><br>        <span class="hljs-comment">// 对边进行排序，优先选择权重小的边</span><br>        <span class="hljs-built_in">sort</span>(Q + <span class="hljs-number">1</span>, Q + <span class="hljs-number">1</span> + m, cmp);<br><br>        <span class="hljs-comment">// 尝试每一种顶点作为起点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>            <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>; <span class="hljs-comment">// 初始化总权重为0</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) fa[i] = i; <span class="hljs-comment">// 初始化每个节点所在集合的代表元素为自己</span><br><br>            <span class="hljs-comment">// 遍历所有边，如果边的起点或终点是j，则跳过</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>                <span class="hljs-keyword">if</span> (Q[i].x == j || Q[i].y == j) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fi</span>(Q[i].x) == <span class="hljs-built_in">fi</span>(Q[i].y)) <span class="hljs-comment">// 如果两个节点已经在同一个集合中，则跳过</span><br>                    <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-built_in">unio</span>(Q[i].x, Q[i].y); <span class="hljs-comment">// 合并两个节点所在的集合</span><br>                sum += Q[i].cost; <span class="hljs-comment">// 累加权重</span><br>            &#125;<br>            ans = <span class="hljs-built_in">min</span>(ans, sum); <span class="hljs-comment">// 更新最小权重和</span><br>        &#125;<br>        cout &lt;&lt; ans &lt;&lt; endl; <span class="hljs-comment">// 输出最小权重和</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> t = <span class="hljs-number">1</span>; <span class="hljs-comment">// 测试用例个数</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> cas = <span class="hljs-number">1</span>; cas &lt;= t; cas++) &#123;<br>        <span class="hljs-built_in">solve</span>(); <span class="hljs-comment">// 调用解法函数</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/mst/#prim-%E7%AE%97%E6%B3%95">最小生成树 - OI Wiki</a></p>
-<p>是的，这段代码采用的最小生成树算法是基于 Prim 算法的变种。Prim 算法是一种用于寻找图的最小生成树的算法，它通过逐步增加边来构建最小生成树，直到所有需要连接的顶点都被包含在内。在每步中，它都会选择连接树与非树顶点间权重最小的边，将其添加到最小生成树中。<br />
+<p>是的，这段代码采用的最小生成树算法是基于 Prim 算法的变种。Prim 算法是一种用于寻找图的最小生成树的算法，它通过逐步增加边来构建最小生成树，直到所有需要连接的顶点都被包含在内。在每步中，它都会选择连接树与非树顶点间权重最小的边，将其添加到最小生成树中。<br>
 以下是代码中体现 Prim 算法的几个关键点：</p>
 <ol>
 <li><strong>初始化</strong>：<code>ans</code> 用于记录最小生成树的总权重，初始设为无穷大。<code>fa</code> 数组用于记录并查集的父节点，初始时每个节点的父节点都是自己，表示每个节点独立。</li>
@@ -345,345 +203,122 @@
 <li><strong>最小权重更新</strong>：在每次循环结束后，使用 <code>ans = min(ans, sum)</code> 来更新最小生成树的总权重。</li>
 </ol>
 <p>代码通过重复这个过程来找到所有顶点的最小生成树，并输出最小的总权重。这种处理方式是 Prim 算法的典型实现。</p>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>2024.5.1 计算机基础（快速排序）+算法（最小生成树）</div>
-      <div>https://blog.fulequn.online/2024/05/Article202405011/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2024年5月1日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405021/" title="常见的查找算法与排序算法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">常见的查找算法与排序算法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/04/Article202404301/" title="如何实现第三方授权登录？">
-                        <span class="hidden-mobile">如何实现第三方授权登录？</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<hr>
+<div>
+<div class="post-metas my-3">
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>2024.5.1 计算机基础（快速排序）+算法（最小生成树）</div>
+<div>https://blog.fulequn.online/2024/05/Article202405011/</div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年5月1日</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/05/Article202405021/" title="常见的查找算法与排序算法">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">常见的查找算法与排序算法</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/04/Article202404301/" title="如何实现第三方授权登录？">
+<span class="hidden-mobile">如何实现第三方授权登录？</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>

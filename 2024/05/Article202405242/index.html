@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 12345678910&lt;title&gt;CSS 初体验&lt;&#x2F;title&gt;&lt;style&gt;  &#x2F;*">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 12345678910&lt;title&gt;CSS 初体验&lt;&#x2F;title&gt;&lt;style&gt;  &#x2F;*">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端开发-CSS">
 <meta property="og:url" content="https://blog.fulequn.online/2024/05/Article202405242/index.html">
@@ -52,258 +46,122 @@
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043346.png">
-  
-  
-  
-  <title>前端开发-CSS - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>前端开发-CSS - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="前端开发-CSS"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-24 10:38" pubdate>
-          2024年5月24日 上午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          3.5k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          30 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="前端开发-CSS"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-05-24 10:38" pubdate>
+2024年5月24日 上午
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+3.5k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+30 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">前端开发-CSS</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="1-CSS基础">1 CSS基础</h1>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">前端开发-CSS</h1>
+<div class="markdown-body">
+<h1 id="1-CSS基础">1 CSS基础</h1>
 <h2 id="1-1-介绍">1.1 介绍</h2>
 <p>层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 <strong>样式表</strong> 语言，用来<strong>描述 HTML 文档的呈现</strong>（<strong>美化内容</strong>）。</p>
 <p>书写位置：<strong>title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码</strong>。</p>
@@ -380,7 +238,7 @@
 <p>经验：通配符选择器可以用于<strong>清除标签的默认样式</strong>，例如：标签默认的外边距、内边距。</p>
 </blockquote>
 <h2 id="1-4-盒子尺寸和背景色">1.4 盒子尺寸和背景色</h2>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043346.png" srcset="/img/loading.gif" lazyload alt="1680317605797" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043346.png" srcset="/img/loading.gif" lazyload alt="1680317605797"></p>
 <h2 id="1-5-文字控制属性">1.5 文字控制属性</h2>
 <h3 id="字体大小">字体大小</h3>
 <ul>
@@ -408,7 +266,7 @@
 <li>数字（当前标签font-size属性值的倍数）</li>
 </ul>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">line-height</span>: <span class="hljs-number">30px</span>;<br><span class="hljs-comment">/* 当前标签字体大小为16px */</span><br><span class="hljs-attribute">line-height</span>: <span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043341.png" srcset="/img/loading.gif" lazyload alt="1680317770048" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043341.png" srcset="/img/loading.gif" lazyload alt="1680317770048"></p>
 <blockquote>
 <p>行高的测量方法：从一行文字的最顶端（最底端）量到下一行文字的最顶端（最底端）。</p>
 </blockquote>
@@ -426,13 +284,13 @@
 <li>font-family 属性最后设置一个字体族名，网页开发建议使用无衬线字体</li>
 </ul>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043107.png" srcset="/img/loading.gif" lazyload alt="无衬线字体与衬线字体对比" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043107.png" srcset="/img/loading.gif" lazyload alt="无衬线字体与衬线字体对比"></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">font-family</span>: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, <span class="hljs-string">&quot;\5B8B\4F53&quot;</span>, sans-serif;<br></code></pre></td></tr></table></figure>
 <h3 id="font复合属性">font复合属性</h3>
 <p>使用场景：设置网页文字公共样式 。项目初期，用于统一样式。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044161.png" srcset="/img/loading.gif" lazyload alt="1680318326214" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044161.png" srcset="/img/loading.gif" lazyload alt="1680318326214"></p>
 <p>复合属性：属性的简写方式，<strong>一个属性对应多个值的写法</strong>，各个属性值之间用<strong>空格</strong>隔开。</p>
-<p><strong>font: 是否倾斜  是否加粗  字号/行高 字体（必须按顺序书写）</strong></p>
+<p><strong>font: 是否倾斜 是否加粗 字号/行高 字体（必须按顺序书写）</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">font</span>: italic <span class="hljs-number">700</span> <span class="hljs-number">30px</span>/<span class="hljs-number">2</span> 楷体;<br>&#125;<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：字号和字体值必须书写，否则 font 属性不生效 。</p>
@@ -448,7 +306,7 @@
 <h3 id="文本对齐方式">文本对齐方式</h3>
 <p>作用：控制内容水平对齐方式</p>
 <p>属性名：<strong>text-align</strong></p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day03/assets/1680318461130.png" srcset="/img/loading.gif" lazyload alt="1680318461130" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day03/assets/1680318461130.png" srcset="/img/loading.gif" lazyload alt="1680318461130"></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">text-align</span>: center;<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>text-align本质是控制内容的对齐方式，属性要设置给内容的父级。</p>
@@ -456,9 +314,9 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/1.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="文本修饰线">文本修饰线</h3>
 <p>属性名： <strong>text-decoration</strong></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044302.png" srcset="/img/loading.gif" lazyload alt="1680318548558" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044302.png" srcset="/img/loading.gif" lazyload alt="1680318548558"></p>
 <h3 id="color-文字颜色">color 文字颜色</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044529.png" srcset="/img/loading.gif" lazyload alt="样式颜色的几种写法" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044529.png" srcset="/img/loading.gif" lazyload alt="样式颜色的几种写法"></p>
 <blockquote>
 <p>提示：只要属性值为颜色，都可以使用上述四种颜色表示方式，例如：背景色。</p>
 </blockquote>
@@ -474,7 +332,7 @@
 <ol start="2">
 <li>使用调试工具</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241045490.png" srcset="/img/loading.gif" lazyload alt="Web开发的调试工具" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241045490.png" srcset="/img/loading.gif" lazyload alt="Web开发的调试工具"></p>
 <h1 id="day04-CSS进阶">day04-CSS进阶</h1>
 <blockquote>
 <p>目标：掌握复合选择器作用和写法；使用background属性添加背景效果</p>
@@ -484,7 +342,7 @@
 <p>作用：更准确、更高效的选择目标元素（标签）。</p>
 <h3 id="后代选择器">后代选择器</h3>
 <p>后代选择器：<strong>选中某元素的后代元素</strong>。</p>
-<p>选择器写法：父选择器  子选择器 { CSS 属性}，父子选择器之间用<strong>空格</strong>隔开。</p>
+<p>选择器写法：父选择器 子选择器 { CSS 属性}，父子选择器之间用<strong>空格</strong>隔开。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> span 标签<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>这是 div 的儿子 span&lt;/span &gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="子代选择器">子代选择器</h3>
 <p>子代选择器：选中某元素的子代元素（<strong>最近的子级</strong>）。</p>
@@ -506,7 +364,7 @@
 <p>鼠标悬停状态：<strong>选择器:hover { CSS 属性 }</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css">  <span class="hljs-selector-class">.box</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: green;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>a 标签<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h4 id="超链接伪类">超链接伪类</h4>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319272736.png" srcset="/img/loading.gif" lazyload alt="1680319272736" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319272736.png" srcset="/img/loading.gif" lazyload alt="1680319272736"></p>
 <blockquote>
 <p>提示：如果要给超链接设置以上四个状态，需要按 LVHA 的顺序书写。</p>
 <p>经验：工作中，一个 a 标签选择器设置超链接的样式， hover状态特殊设置</p>
@@ -521,7 +379,7 @@
 </ul>
 <h3 id="继承性">继承性</h3>
 <p>继承性：子级默认继承父级的<strong>文字控制属性</strong>。</p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319376438.png" srcset="/img/loading.gif" lazyload alt="1680319376438" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319376438.png" srcset="/img/loading.gif" lazyload alt="1680319376438"></p>
 <blockquote>
 <p>注意：如果标签有默认文字样式会继承失败。 例如：a 标签的颜色、标题的字体大小。</p>
 </blockquote>
@@ -541,11 +399,11 @@
 <h4 id="基础选择器">基础选择器</h4>
 <p>规则：选择器<strong>优先级高的样式生效</strong>。</p>
 <p>公式：<strong>通配符选择器 &lt; 标签选择器 &lt; 类选择器 &lt; id选择器 &lt; 行内样式 &lt; !important</strong></p>
-<p>​           <strong>（选中标签的范围越大，优先级越低）</strong></p>
+<p>​ <strong>（选中标签的范围越大，优先级越低）</strong></p>
 <h4 id="复合选择器-叠加">复合选择器-叠加</h4>
 <p>叠加计算：如果是复合选择器，则需要<strong>权重叠加</strong>计算。</p>
 <p>公式：（每一级之间不存在进位）</p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319646205.png" srcset="/img/loading.gif" lazyload alt="1680319646205" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319646205.png" srcset="/img/loading.gif" lazyload alt="1680319646205"></p>
 <p>规则：</p>
 <ul>
 <li>从左向右依次比较选个数，同一级个数多的优先级高，如果个数相同，则向后比较</li>
@@ -557,13 +415,13 @@
 <ul>
 <li>HTML标签</li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319897697.png" srcset="/img/loading.gif" lazyload alt="1680319897697" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319897697.png" srcset="/img/loading.gif" lazyload alt="1680319897697"></p>
 <ul>
 <li>CSS：大多数简写方式为属性单词的<strong>首字母</strong></li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319926111.png" srcset="/img/loading.gif" lazyload alt="1680319926111" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319926111.png" srcset="/img/loading.gif" lazyload alt="1680319926111"></p>
 <h2 id="04-背景属性">04-背景属性</h2>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319971861.png" srcset="/img/loading.gif" lazyload alt="1680319971861" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319971861.png" srcset="/img/loading.gif" lazyload alt="1680319971861"></p>
 <h3 id="背景图">背景图</h3>
 <p>网页中，使用背景图实现装饰性的图片效果。</p>
 <ul>
@@ -576,7 +434,7 @@
 </blockquote>
 <h3 id="平铺方式">平铺方式</h3>
 <p>属性名：<strong>background-repeat</strong>（bgr）</p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320072292.png" srcset="/img/loading.gif" lazyload alt="1680320072292" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320072292.png" srcset="/img/loading.gif" lazyload alt="1680320072292"></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">background-color</span>: pink;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>);<br><br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="背景图位置">背景图位置</h3>
 <p>属性名：<strong>background-position</strong>（bgp）</p>
@@ -584,7 +442,7 @@
 <ul>
 <li>关键字</li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320211424.png" srcset="/img/loading.gif" lazyload alt="1680320211424" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320211424.png" srcset="/img/loading.gif" lazyload alt="1680320211424"></p>
 <ul>
 <li>坐标
 <ul>
@@ -631,11 +489,11 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/bg.jpg</span>);<br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>  <span class="hljs-attribute">background-attachment</span>: fixed;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="背景复合属性">背景复合属性</h3>
 <p>属性名：<strong>background</strong>（bg）</p>
-<p>属性值：背景色 背景图 背景图平铺方式 背景图位置/背景图缩放  背景图固定（<strong>空格隔开各个属性值，不区分顺序</strong>）</p>
+<p>属性值：背景色 背景图 背景图平铺方式 背景图位置/背景图缩放 背景图固定（<strong>空格隔开各个属性值，不区分顺序</strong>）</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br><br>  <span class="hljs-attribute">background</span>: pink <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>) no-repeat right center/cover;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="05-显示模式">05-显示模式</h2>
 <p>显示模式：标签（元素）的显示方式。</p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320464551.png" srcset="/img/loading.gif" lazyload alt="1680320464551" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320464551.png" srcset="/img/loading.gif" lazyload alt="1680320464551"></p>
 <p>作用：布局网页的时候，根据标签的显示模式选择合适的标签摆放内容。</p>
 <h3 id="块级元素">块级元素</h3>
 <p>特点：</p>
@@ -644,7 +502,7 @@
 <li>宽度默认是父级的100%</li>
 <li>添加宽高属性生效</li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320578369.png" srcset="/img/loading.gif" lazyload alt="1680320578369" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320578369.png" srcset="/img/loading.gif" lazyload alt="1680320578369"></p>
 <h3 id="行内元素">行内元素</h3>
 <p>特点：</p>
 <ul>
@@ -652,7 +510,7 @@
 <li>设置宽高属性不生效</li>
 <li>宽高尺寸由内容撑开</li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320583985.png" srcset="/img/loading.gif" lazyload alt="1680320583985" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320583985.png" srcset="/img/loading.gif" lazyload alt="1680320583985"></p>
 <h3 id="行内块元素">行内块元素</h3>
 <p>特点：</p>
 <ul>
@@ -660,396 +518,152 @@
 <li>设置宽高属性生效</li>
 <li>宽高尺寸也可以由内容撑开</li>
 </ul>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320590005.png" srcset="/img/loading.gif" lazyload alt="1680320590005" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320590005.png" srcset="/img/loading.gif" lazyload alt="1680320590005"></p>
 <h3 id="转换显示模式">转换显示模式</h3>
 <p>属性：<strong>display</strong></p>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320613034.png" srcset="/img/loading.gif" lazyload alt="1680320613034" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320613034.png" srcset="/img/loading.gif" lazyload alt="1680320613034"></p>
 <h2 id="06-综合案例一-热词">06-综合案例一-热词</h2>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320664821.png" srcset="/img/loading.gif" lazyload alt="1680320664821" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320664821.png" srcset="/img/loading.gif" lazyload alt="1680320664821"></p>
 <h3 id="HTML标签">HTML标签</h3>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>HTML<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>CSS<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>JavaScript<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>Vue<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>React<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="CSS样式">CSS样式</h3>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css"><span class="hljs-comment">/* 默认效果 */</span></span><br><span class="language-css"><span class="hljs-selector-tag">a</span> &#123;</span><br><span class="language-css"><span class="hljs-attribute">display</span>: block;</span><br><span class="language-css"><span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;</span><br><span class="language-css"><span class="hljs-attribute">height</span>: <span class="hljs-number">80px</span>;</span><br><span class="language-css"><span class="hljs-attribute">background-color</span>: <span class="hljs-number">#3064bb</span>;</span><br><span class="language-css"><span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;</span><br><span class="language-css"><span class="hljs-attribute">text-decoration</span>: none;</span><br><span class="language-css"><span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css"><span class="hljs-attribute">line-height</span>: <span class="hljs-number">80px</span>;</span><br><span class="language-css"><span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><br><span class="language-css"><span class="hljs-comment">/* 鼠标悬停的效果 */</span></span><br><span class="language-css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css"><span class="hljs-attribute">background-color</span>: <span class="hljs-number">#608dd9</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="07-综合案例二-–-banner-效果">07-综合案例二 – banner 效果</h2>
-<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320758496.png" srcset="/img/loading.gif" lazyload alt="1680320758496" /></p>
+<p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320758496.png" srcset="/img/loading.gif" lazyload alt="1680320758496"></p>
 <h3 id="HTML标签-2">HTML标签</h3>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;banner&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>让创造产生价值<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我们希望小游戏平台可以提供无限的可能性，让每一个创作者都可以将他们的才华和创意传递给用户。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>我要报名<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="CSS样式-2">CSS样式</h3>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">height</span>: <span class="hljs-number">500px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f3f3f4</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/bk.png</span>);</span><br><span class="language-css">    <span class="hljs-attribute">background-repeat</span>: no-repeat;</span><br><span class="language-css">    <span class="hljs-attribute">background-position</span>: left bottom;</span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-comment">/* 文字控制属性，继承给子级 */</span></span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: right;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">h2</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">36px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">400</span>;</span><br><span class="language-css">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">a</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">width</span>: <span class="hljs-number">125px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">height</span>: <span class="hljs-number">40px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f06b1f</span>;</span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="language-css">    <span class="hljs-comment">/* 转块级无法右对齐，因为块元素独占一行 */</span></span><br><span class="language-css">    <span class="hljs-comment">/* display: block; */</span></span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">40px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;</span><br><span class="language-css">    <span class="hljs-attribute">text-decoration</span>: none;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
 <span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/" class="category-chain-item">CSS</a>
-  
-  
-
-  
-
-      </span>
-    
-  
+<span class="category-chain">
+<a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
+<span>></span>
+<a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/" class="category-chain-item">CSS</a>
 </span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/CSS/" class="print-no-link">#CSS</a>
-      
-    </div>
-  
+</span>
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>前端开发-CSS</div>
-      <div>https://blog.fulequn.online/2024/05/Article202405242/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2024年5月24日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/06/Article202406041/" title="Vue基础入门到实战（一）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue基础入门到实战（一）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405241/" title="前端开发-HTML基础">
-                        <span class="hidden-mobile">前端开发-HTML基础</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/CSS/" class="print-no-link">#CSS</a>
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>前端开发-CSS</div>
+<div>https://blog.fulequn.online/2024/05/Article202405242/</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年5月24日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/06/Article202406041/" title="Vue基础入门到实战（一）">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">Vue基础入门到实战（一）</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/05/Article202405241/" title="前端开发-HTML基础">
+<span class="hidden-mobile">前端开发-HTML基础</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>

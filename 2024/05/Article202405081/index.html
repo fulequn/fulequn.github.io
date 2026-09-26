@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="前言 先来就库存超卖的问题作描述：一般电子商务网站都会遇到如团购、秒杀、特价之类的活动，而这样的活动有一个共同的特点就是访问量激增、上千甚至上万人抢购一个商品。然而，作为活动商品，库存肯定是很有限的，如何控制库存不让出现超买，以防止造成不必要的损失是众多电子商务网站程序员头疼的问题，这同时也是最基本的问题。 在秒杀系统设计中，超卖是一个经典、常见的问题，任何商品都会有数量上限，如何避免成功下订单买">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="前言 先来就库存超卖的问题作描述：一般电子商务网站都会遇到如团购、秒杀、特价之类的活动，而这样的活动有一个共同的特点就是访问量激增、上千甚至上万人抢购一个商品。然而，作为活动商品，库存肯定是很有限的，如何控制库存不让出现超买，以防止造成不必要的损失是众多电子商务网站程序员头疼的问题，这同时也是最基本的问题。 在秒杀系统设计中，超卖是一个经典、常见的问题，任何商品都会有数量上限，如何避免成功下订单买">
 <meta property="og:type" content="article">
 <meta property="og:title" content="超卖问题（图解 + 秒懂 + 史上最全）">
 <meta property="og:url" content="https://blog.fulequn.online/2024/05/Article202405081/index.html">
@@ -59,264 +53,128 @@
 <meta property="article:author" content="Fulequn">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107058.png">
-  
-  
-  
-  <title>超卖问题（图解 + 秒懂 + 史上最全） - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>超卖问题（图解 + 秒懂 + 史上最全） - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="超卖问题（图解 + 秒懂 + 史上最全）"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-08 21:05" pubdate>
-          2024年5月8日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          15k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          124 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="超卖问题（图解 + 秒懂 + 史上最全）"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-05-08 21:05" pubdate>
+2024年5月8日 晚上
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+15k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+124 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">超卖问题（图解 + 秒懂 + 史上最全）</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="前言">前言</h1>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">超卖问题（图解 + 秒懂 + 史上最全）</h1>
+<div class="markdown-body">
+<h1 id="前言">前言</h1>
 <p>先来就库存超卖的问题作描述：一般电子商务网站都会遇到如团购、秒杀、特价之类的活动，而这样的活动有一个共同的特点就是访问量激增、上千甚至上万人抢购一个商品。然而，作为活动商品，库存肯定是很有限的，如何控制库存不让出现超买，以防止造成不必要的损失是众多电子商务网站程序员头疼的问题，这同时也是最基本的问题。</p>
 <p>在秒杀系统设计中，超卖是一个经典、常见的问题，任何商品都会有数量上限，如何避免成功下订单买到商品的人数不超过商品数量的上限，这是每个抢购活动都要面临的难点。</p>
 <h1 id="一、问题描述">一、问题描述</h1>
 <p>在多个用户同时发起对同一个商品的下单请求时，先查询商品库存，再修改商品库存，会出现资源竞争问题，导致库存的最终结果出现异常。问题：</p>
 <p>当商品 A 一共有库存 15 件，用户甲先下单 10 件，用户乙下单 8 件，这时候库存只能满足一个人下单成功，如果两个人同时提交，就出现了超卖的问题。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107058.png" srcset="/img/loading.gif" lazyload alt="https://img-blog.csdnimg.cn/20191129105250547.png" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107058.png" srcset="/img/loading.gif" lazyload alt="https://img-blog.csdnimg.cn/20191129105250547.png"></p>
 <h1 id="二、解决的三种方案">二、解决的三种方案</h1>
 <ul>
 <li>悲观锁</li>
@@ -368,7 +226,7 @@
 <blockquote>
 <p>例如：select math from zje where math &gt;60 for update；</p>
 </blockquote>
-<hr />
+<hr>
 <p><strong>死锁</strong></p>
 <ul>
 <li>死锁：例如说两个事务，事务 A 锁住了 15 行，同时事务 B 锁住了 610 行，此时事务 A 请求锁住 610 行，就会阻塞直到事务 B 施放 610 行的锁，而随后事务 B 又请求锁住 15 行，事务 B 也阻塞直到事务 A 释放 15 行的锁。死锁发生时，会产生 Deadlock 错误。</li>
@@ -380,7 +238,7 @@
 <ul>
 <li>行锁：会出现死锁，发生锁冲突几率低，并发高。</li>
 </ul>
-<hr />
+<hr>
 <p><strong>使用行锁需要注意的点：</strong></p>
 <ol>
 <li>
@@ -439,13 +297,13 @@
 <p><a target="_blank" rel="noopener" href="https://img-blog.csdn.net/20180923094753224?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NjQyMDM2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">https://img-blog.csdn.net/20180923094753224?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NjQyMDM2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70</a></p>
 <p><strong>总结</strong></p>
 <p>也就是说：InnoDB 的 B + 树<strong>主键索引</strong>的叶子节点就是数据文件，<strong>辅助索引</strong>的叶子节点是主键的值；而 MyISAM 的 B + 树主键索引和辅助索引的叶子节点都是数据文件的地址指针。</p>
-<hr />
+<hr>
 <ol>
 <li>InnoDB 不保存表的具体行数，执行 select count(*) from table 时需要全表扫描。而 MyISAM 用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何 WHERE 条件）；</li>
 </ol>
 <blockquote>
-<p>那么为什么 InnoDB 没有了这个变量呢？<br />
-因为 InnoDB 的事务特性，在同一时刻表中的行数对于不同的事务而言是不一样的，因此 count 统计会计算对于当前事务而言可以统计到的行数，而不是将总行数储存起来方便快速查询。InnoDB 会尝试遍历一个尽可能小的索引除非优化器提示使用别的索引。如果二级索引不存在，InnoDB 还会尝试去遍历其他聚簇索引。<br />
+<p>那么为什么 InnoDB 没有了这个变量呢？<br>
+因为 InnoDB 的事务特性，在同一时刻表中的行数对于不同的事务而言是不一样的，因此 count 统计会计算对于当前事务而言可以统计到的行数，而不是将总行数储存起来方便快速查询。InnoDB 会尝试遍历一个尽可能小的索引除非优化器提示使用别的索引。如果二级索引不存在，InnoDB 还会尝试去遍历其他聚簇索引。<br>
 如果索引并没有完全处于 InnoDB 维护的缓冲区（Buffer Pool）中，count 操作会比较费时。可以建立一个记录总行数的表并让你的程序在 INSERT/DELETE 时更新对应的数据。和上面提到的问题一样，如果此时存在多个事务的话这种方案也不太好用。如果得到大致的行数值已经足够满足需求可以尝试 SHOW TABLE STATUS。</p>
 </blockquote>
 <ol>
@@ -459,13 +317,13 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros">例如：<br>    t_user(uid, uname, age, sex) innodb;<br><br>    uid PK<br>    无其他索引<br>    update t_user <span class="hljs-built_in">set</span> <span class="hljs-attribute">age</span>=10 where <span class="hljs-attribute">uid</span>=1;             命中索引，行锁。<br><br>    update t_user <span class="hljs-built_in">set</span> <span class="hljs-attribute">age</span>=10 where uid != 1;           未命中索引，表锁。<br><br>    update t_user <span class="hljs-built_in">set</span> <span class="hljs-attribute">age</span>=10 where <span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;chackca&#x27;</span>;    无索引，表锁。<br></code></pre></td></tr></table></figure>
 <ol>
 <li>InnoDB 表必须有唯一索引（如主键）（用户没有指定的话会自己找 / 生产一个隐藏列 Row_id 来充当默认主键），而 MyISAM 可以没有</li>
-<li>Innodb 存储文件有 frm、ibd，而 MyISAM  是 frm、MYD、MYI</li>
+<li>Innodb 存储文件有 frm、ibd，而 MyISAM 是 frm、MYD、MYI</li>
 </ol>
 <blockquote>
-<p>Innodb：frm 是表定义文件，ibd 是数据文件<br />
+<p>Innodb：frm 是表定义文件，ibd 是数据文件<br>
 MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 </blockquote>
-<hr />
+<hr>
 <p><strong>如何选择这两种引擎</strong>：</p>
 <ol>
 <li>
@@ -501,7 +359,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <blockquote>
 <p>简单的说，如果 SELECT 后面若要 UPDATE 同一个表单，最好使用 SELECT … UPDATE。</p>
 </blockquote>
-<hr />
+<hr>
 <p><strong>MySQL SELECT … FOR UPDATE 的 Row Lock 与 Table Lock</strong></p>
 <p>上面介绍过 SELECT … FOR UPDATE 的用法，不过锁定 (Lock) 的数据是判别就得要注意一下了。由于 InnoDB 预设是 <code>Row-Level Lock</code>，所以只有「明确」的指定主键，MySQL 才会执行 Row lock (只锁住被选取的数据) ，否则 MySQL 将会执行 Table Lock (将整个数据表单给锁住)。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">举个例子:<br>假设有个表单 products ，里面有 id 跟 <span class="hljs-type">name</span> 二个栏位，id 是主键。<br><br>例 <span class="hljs-number">1</span>: (明确指定主键，并且有此数据，<span class="hljs-keyword">row</span> <span class="hljs-keyword">lock</span>)<br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> id=<span class="hljs-string">&#x27;3&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br><br>例 <span class="hljs-number">2</span>: (明确指定主键，若查无此数据，无 <span class="hljs-keyword">lock</span>)<br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> id=<span class="hljs-string">&#x27;-1&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br><br>例 <span class="hljs-number">2</span>: (无主键，<span class="hljs-keyword">table</span> <span class="hljs-keyword">lock</span>)<br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> <span class="hljs-type">name</span>=<span class="hljs-string">&#x27;Mouse&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br><br>例 <span class="hljs-number">3</span>: (主键不明确，<span class="hljs-keyword">table</span> <span class="hljs-keyword">lock</span>)<br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> id&lt;&gt;<span class="hljs-string">&#x27;3&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br><br>例 <span class="hljs-number">4</span>: (主键不明确，<span class="hljs-keyword">table</span> <span class="hljs-keyword">lock</span>)<br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> products <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;3&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br></code></pre></td></tr></table></figure>
@@ -513,11 +371,11 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <li>最后，当减库存和高并发碰到一起的时候，由于操作的库存数目在同一行，就会出现争抢 InnoDB 行锁的问题，导致出现互相等待甚至死锁，从而大大降低 MySQL 的处理性能，最终导致前端页面出现超时异常。</li>
 </ol>
 <p>针对上述问题，如何解决呢？ 我们先看眼淘宝的高大上解决方案：</p>
-<hr />
+<hr>
 <p><strong>关闭死锁检测以提高并发处理性能</strong></p>
 <p>在一个高并发的 MySQL 服务器上，事务会递归检测死锁，当超过一定的深度时，性能的下降会变得不可接受。Facebook 早就提出了禁止死锁检测。</p>
 <p>我们做了一个实验，在禁止死锁检测后，TPS 得到了极大的提升，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107749.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107749.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>禁止死锁检测后，即使死锁发生，也不会回滚事务，而是全部等待到超时。</p>
 <p>MySQL 的 <code>innobase_deadlock_check</code> 是在 InnoDB 里新加的系统变量，用于控制是否打开死锁检测。</p>
 <p>死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象。可以认为如果一个资源被锁定，它总会在以后某个时间被释放。而死锁发生在当多个进程访问同一数据库时，其中每个进程拥有的锁都是其他进程所需的，由此造成每个进程都无法继续下去。</p>
@@ -553,13 +411,13 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>总的来说，InnoDB 的锁定机制和 Oracle 数据库有不少相似之处。InnoDB 的行级锁定同样分为两种类型，共享锁和排他锁，而在锁定机制的实现过程中为了让行级锁定和表级锁定共存，InnoDB 也同样使用了意向锁（表级锁定）的概念，也就有了意向共享锁和意向排他锁这两种。</p>
 <p>当一个事务需要给自己需要的某个资源加锁的时候，如果遇到一个共享锁正锁定着自己需要的资源的时候，自己可以再加一个共享锁，不过不能加排他锁。但是，如果遇到自己需要锁定的资源已经被一个排他锁占有之后，则只能等待该锁定释放资源之后自己才能获取锁定资源并添加自己的锁定。而意向锁的作用就是当一个事务在需要获取资源锁定的时候，如果遇到自己需要的资源已经被排他锁占用的时候，该事务可以需要锁定行的表上面添加一个合适的意向锁。如果自己需要一个共享锁，那么就在表上面添加一个意向共享锁。而如果自己需要的是某行（或者某些行）上面添加一个排他锁的话，则先在表上面添加一个意向排他锁。意向共享锁可以同时并存多个，但是意向排他锁同时只能有一个存在。</p>
 <p>InnoDB 的锁定模式实际上可以分为四种：共享锁（S），排他锁（X），意向共享锁（IS）和意向排他锁（IX），我们可以通过以下表格来总结上面这四种所的共存逻辑关系：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107285.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082107285.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如果一个事务请求的锁模式与当前的锁兼容，InnoDB 就将请求的锁授予该事务；反之，如果两者不兼容，该事务就要等待锁释放。</p>
 <p>意向锁是 InnoDB 自动加的，不需用户干预。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及数据集加排他锁（X)；对于普通 SELECT 语句，InnoDB 不会加任何锁；事务可以通过以下语句显示给记录集加共享锁或排他锁。</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">共享锁(S)：<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> table_name <span class="hljs-keyword">WHERE</span> ... LOCK <span class="hljs-keyword">IN</span> SHARE MODE<br>排他锁(X)：<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> table_name <span class="hljs-keyword">WHERE</span> ... <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span><br></code></pre></td></tr></table></figure>
 <p>用 <code>SELECT … IN SHARE MODE</code> 获得共享锁，主要用在需要数据依存关系时来确认某行记录是否存在，并确保没有人对这个记录进行 <code>UPDATE</code> 或者 <code>DELETE</code> 操作。</p>
 <p>但是如果当前事务也需要对该记录进行更新操作，则很有可能造成死锁，对于锁定行记录后需要进行更新操作的应用，应该使用 <code>SELECT… FOR UPDATE</code> 方式获得排他锁。</p>
-<hr />
+<hr>
 <h3 id="间隙锁（Next-Key-锁）"><strong>间隙锁（Next-Key 锁）</strong></h3>
 <p>当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB 会给符合条件的已有数据记录的索引项加锁；</p>
 <p>对于键值在条件范围内但并不存在的记录，叫做 “间隙（GAP)”，InnoDB 也会对这个“间隙” 加锁，这种锁机制就是所谓的间隙锁（Next-Key 锁）。</p>
@@ -583,7 +441,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <li>加锁：在读取数据前，对其加锁，阻止其他事务对数据进行修改。</li>
 <li>提供数据多版本并发控制（MultiVersion Concurrency Control，简称 MVCC 或 MCC），也称为多版本数据库：不用加任何锁， 通过一定机制生成一个数据请求时间点的一致性数据快照（Snapshot)， 并用这个快照来提供一定级别 （语句级或事务级） 的一致性读取，从用户的角度来看，好象是数据库可以提供同一数据的多个版本。</li>
 </ul>
-<hr />
+<hr>
 <h3 id="什么是-MVCC？">什么是 MVCC？</h3>
 <p>MVCC 全称是多版本并发控制系统，InnoDB 和 Falcon 存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）机制解决幻读问题。</p>
 <p><strong>MVCC 是怎么工作的？</strong></p>
@@ -615,11 +473,11 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <li>有几个索引，就有几棵 B + 树 (不考虑 hash 索引的情形)</li>
 <li>聚簇索引的叶子节点为磁盘上的真实数据。非聚簇索引的叶子节点还是索引，指向聚簇索引 B + 树。</li>
 </ul>
-<hr />
+<hr>
 <p><strong>锁类型</strong></p>
 <ul>
 <li>共享锁 (S 锁): 假设事务 T1 对数据 A 加上共享锁，那么事务 T2 可以读数据 A，不能修改数据 A。</li>
-<li>排他锁 (X 锁): 假设事务 T1 对数据 A 加上排他锁 ，那么事务 T2 不能读数据 A，不能修改数据 A。<br />
+<li>排他锁 (X 锁): 假设事务 T1 对数据 A 加上排他锁 ，那么事务 T2 不能读数据 A，不能修改数据 A。<br>
 我们通过 update、delete 等语句加上的锁都是行级别的锁。只有 LOCK TABLE … READ 和 LOCK TABLE … WRITE 才能申请表级别的锁。</li>
 <li>意向共享锁 (IS 锁): 一个事务在获取（任何一行 / 或者全表）S 锁之前，一定会先在所在的表上加 IS 锁。</li>
 <li>意向排他锁 (IX 锁): 一个事务在获取（任何一行 / 或者全表）X 锁之前，一定会先在所在的表上加 IX 锁。</li>
@@ -639,7 +497,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <li>Next-Key Locks：这个理解为 Record Lock + 索引前面的 Gap Lock。记住了，锁住的是索引前面的间隙！比如一个索引包含值，10，11，13 和 20。那么，间隙锁的范围如下</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">(negative infinity, <span class="hljs-number">10</span>]<br>(<span class="hljs-number">10</span>, <span class="hljs-number">11</span>]<br>(<span class="hljs-number">11</span>, <span class="hljs-number">13</span>]<br>(<span class="hljs-number">13</span>, <span class="hljs-number">20</span>]<br>(<span class="hljs-number">20</span>, positive infinity)<br></code></pre></td></tr></table></figure>
-<hr />
+<hr>
 <p><strong>索引原理介绍</strong></p>
 <p>先来一张带主键的表，如下所示，pId 是主键</p>
 <table>
@@ -674,30 +532,30 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 </tbody>
 </table>
 <p>画出该表的结构图如下</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108763.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108763.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如上图所示，分为上下两个部分，上半部分是由主键形成的 B + 树，下半部分就是磁盘上真实的数据！那么，当我们， 执行下面的语句</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">table</span> <span class="hljs-keyword">where</span> pId<span class="hljs-operator">=</span><span class="hljs-string">&#x27;11&#x27;</span><br></code></pre></td></tr></table></figure>
 <p>那么，执行过程如下</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108128.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108128.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如上图所示，从根开始，经过 3 次查找，就可以找到真实数据。如果不使用索引，那就要在磁盘上，进行逐行扫描，直到找到数据位置。显然，使用索引速度会快。但是在写入数据的时候，需要维护这颗 B + 树的结构，因此写入性能会下降！</p>
-<hr />
+<hr>
 <p><strong>聚簇索引、非聚簇索引</strong></p>
 <ul>
 <li>聚簇索引：将数据存储与索引放到了一块，索引结构的叶子节点保存了行数据</li>
 <li>非聚簇索引：将数据与索引分开存储，索引结构的叶子节点指向了数据对应的位置</li>
 </ul>
 <p>在 InnoDB 中，在聚簇索引之上创建的索引称之为辅助索引，非聚簇索引都是辅助索引，像复合索引、前缀索引、唯一索引。<strong>辅助索引叶子节点存储的不再是行的物理位置，而是主键值，辅助索引访问数据总是需要二次查找</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108094.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108094.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
 <li>InnoDB 使用的是聚簇索引，将主键组织到一棵 B + 树中，而行数据就储存在叶子节点上，若使用 “where id = 14” 这样的条件查找主键，则按照 B + 树的检索算法即可查找到对应的叶节点，之后获得行数据。</li>
 <li>若对 Name 列进行条件搜索，则需要两个步骤：第一步在辅助索引 B + 树中检索 Name，到达其叶子节点获取对应的主键。第二步使用主键在主索引 B + 树种再执行一次 B + 树检索操作，最终到达叶子节点即可获取整行数据。（重点在于通过其他键需要建立辅助索引）</li>
 </ol>
 <p><strong>聚簇索引具有唯一性</strong>，由于聚簇索引是将数据跟索引结构放到一块，因此一个表仅有一个聚簇索引。</p>
 <p><strong>表中行的物理顺序和索引中行的物理顺序是相同的</strong>，<strong>在创建任何非聚簇索引之前创建聚簇索引</strong>，这是因为聚簇索引改变了表中行的物理顺序，数据行 按照一定的顺序排列，并且自动维护这个顺序；</p>
-<p><strong>聚簇索引默认是主键</strong>，如果表中没有定义主键，InnoDB 会选择一个<strong>唯一且非空的索引</strong>代替。如果没有这样的索引，InnoDB 会  <strong>隐式定义一个主键</strong>（类似 oracle 中的 RowId）来作为聚簇索引。如果已经设置了主键为聚簇索引又希望再单独设置聚簇索引，必须先删除主键，然后添加我们想要的聚簇索引，最后恢复设置主键即可。</p>
+<p><strong>聚簇索引默认是主键</strong>，如果表中没有定义主键，InnoDB 会选择一个<strong>唯一且非空的索引</strong>代替。如果没有这样的索引，InnoDB 会 <strong>隐式定义一个主键</strong>（类似 oracle 中的 RowId）来作为聚簇索引。如果已经设置了主键为聚簇索引又希望再单独设置聚簇索引，必须先删除主键，然后添加我们想要的聚簇索引，最后恢复设置主键即可。</p>
 <p>MyISAM 使用的是非聚簇索引，<strong>非聚簇索引的两棵 B + 树看上去没什么不同</strong>，节点的结构完全一致只是存储的内容不同而已，主键索引 B + 树的节点存储了主键，辅助键索引 B + 树存储了辅助键。表数据存储在独立的地方，这两颗 B + 树的叶子节点都使用一个地址指向真正的表数据，对于表数据来说，这两个键没有任何差别。由于<strong>索引树是独立的，通过辅助键检索无需访问主键的索引树</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108938.png" srcset="/img/loading.gif" lazyload alt="" /></p>
-<hr />
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082108938.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<hr>
 <p><strong>使用聚簇索引的优势：</strong></p>
 <ul>
 <li>每次使用辅助索引检索都要经过两次 B + 树查找， 看上去聚簇索引的效率明显要低于非聚簇索引，这不是多此一举吗？聚簇索引的优势在哪？</li>
@@ -718,7 +576,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>建议使用 int 类型的自增，方便排序并且默认会在索引树的末尾增加主键值，对索引树的结构影响最小。而且，主键值占用的存储空间越大，辅助索引中保存的主键值也会跟着变大，占用存储空间，也会影响到 IO 操作读取到的数据量。</p>
 <p><strong>为什么主键通常建议使用自增 id</strong></p>
 <p><strong>聚簇索引的数据的物理存放顺序与索引顺序是一致的</strong>，即：<strong>只要索引是相邻的，那么对应的数据一定也是相邻地存放在磁盘上的</strong>。如果主键不是自增 id，那么可以想象，它会干些什么，不断地调整数据的物理地址、分页，当然也有其他一些措施来减少这些操作，但却无法彻底避免。但，如果是自增的，那就简单了，它只需要一页一页地写，索引结构相对紧凑，磁盘碎片少，效率也高。</p>
-<hr />
+<hr>
 <p><strong>四个隔离级别</strong></p>
 <p>我们先回忆一下事务的四个隔离级别，他们由弱到强如下所示:</p>
 <ul>
@@ -800,7 +658,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>当 num = 200，由于 num 列上有索引，因此先在 num = 200 的两条索引记录上加行级 X 锁。接着，去聚簇索引树上查询，这两条记录对应的 pId=2，7，因此在 pId=2，7 的聚簇索引上加行级 X 锁，采用当前读。</p>
 <p>(6)<code>select * from table where num &gt; 200 for update</code></p>
 <p>当 num &gt; 200，由于 num 列上有索引，因此先在符合条件的 num = 300 的一条索引记录上加行级 X 锁。接着，去聚簇索引树上查询，这条记录对应的 pId=3，因此在 pId=3 的聚簇索引上加行级 X 锁，采用当前读。</p>
-<hr />
+<hr>
 <p><strong>隔离级别：RR/Serializable，条件列: 非索引</strong></p>
 <p>RR 级别需要多考虑的就是 gap lock，他的加锁特征在于，无论你怎么查都是锁全表。接下来分析开始</p>
 <p>(1)<code>select * from table where num = 200</code></p>
@@ -859,7 +717,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>注意了，num=250 是不存在的列，这种情况会在 (200,300) 上加 gap lock。</p>
 <p>(8)<code>select * from table where num &gt; 400 [lock in share mode|for update]</code></p>
 <p>注意了，pId&gt;400，查询结果是空的。在这种情况下，是在 (400,+∞) 上加 gap lock。</p>
-<hr />
+<hr>
 <h3 id="死锁">死锁</h3>
 <p>MyISAM 表锁是 deadlock free 的，这是因为 MyISAM 总是一次获得所需的全部锁，要么全部满足，要么等待，因此不会出现死锁。但在 InnoDB 中，除单个 SQL 组成的事务外，锁是逐步获得的，当两个事务都需要获得对方持有的排他锁才能继续完成事务，这种循环锁等待就是典型的死锁。</p>
 <p><strong>如何避免死锁？</strong></p>
@@ -871,7 +729,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <li>在 <code>REPEATABLE-READ</code> 隔离级别下，如果两个线程同时对相同条件记录用 <code>SELECT…FOR UPDATE</code> 加排他锁，在没有符合该条件记录情况下，两个线程都会加锁成功。程序发现记录尚不存在，就试图插入一条新记录，如果两个线程都这么做，就会出现死锁。这种情况下，将隔离级别改成 <code>READ COMMITTED</code>，就可避免问题；</li>
 <li>当隔离级别为 <code>READ COMMITTED</code> 时，如果两个线程都先执行 <code>SELECT…FOR UPDATE</code>，判断是否存在符合条件的记录，如果没有，就插入记录。此时，只有一个线程能插入成功，另一个线程会出现锁等待，当第 1 个线程提交后，第 2 个线程会因主键重出错，但虽然这个线程出错了，却会获得一个排他锁。这时如果有第 3 个线程又来申请排他锁，也会出现死锁。对于这种情况，可以直接做插入操作，然后再捕获主键重异常，或者在遇到主键重错误时，总是执行 ROLLBACK 释放获得的排他锁</li>
 </ul>
-<hr />
+<hr>
 <p><strong>InnoDB 默认是如何对待死锁的？</strong></p>
 <p>InnoDB 默认是使用设置死锁时间来让死锁超时的策略，默认 innodb_lock_wait_timeout 设置的时长是 50s。</p>
 <p><strong>如何开启死锁检测？</strong></p>
@@ -883,8 +741,8 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <h3 id="使用乐观锁需修改数据库的事务隔离级别"><strong>使用乐观锁需修改数据库的事务隔离级别</strong></h3>
 <p>使用乐观锁的时候，如果一个事务修改了库存并提交了事务，那其他的事务应该可以读取到修改后的数据值，所以不能使用<strong>可重复读的隔离级别</strong>，应该修改为读取已提交（Read committed）。</p>
 <p>修改方式：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109519.png" srcset="/img/loading.gif" lazyload alt="" /></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109293.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109519.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109293.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="MySQL-事务隔离级别"><strong>MySQL 事务隔离级别</strong></h3>
 <table>
 <thead>
@@ -923,7 +781,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 </tbody>
 </table>
 <p><strong>mysql 默认的事务隔离级别为 repeatable-read</strong></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109798.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109798.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="并发事务会带来哪些问题？">并发事务会带来哪些问题？</h3>
 <p>1、脏读：事务 A 读取了事务 B 更新的数据，然后 B 回滚操作，那么 A 读取到的数据是脏数据</p>
 <p>2、不可重复读：事务 A 多次读取同一数据，事务 B 在事务 A 多次读取的过程中，对数据作了更新并提交，导致事务 A 多次读取同一数据时，结果<strong>不一致</strong>。</p>
@@ -932,39 +790,39 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <h3 id="用例子说明各个隔离级别的情况"><strong>用例子说明各个隔离级别的情况</strong></h3>
 <p><strong>1、读未提交：</strong></p>
 <p>（1）打开一个客户端 A，并设置当前事务模式为 read uncommitted（未提交读），查询表 account 的初始值：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109991.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109991.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（2）在客户端 A 的事务提交之前，打开另一个客户端 B，更新表 account：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109708.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082109708.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（3）这时，虽然客户端 B 的事务还没提交，但是客户端 A 就可以查询到 B 已经更新的数据：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110346.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110346.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（4）一旦客户端 B 的事务因为某种原因回滚，所有的操作都将会被撤销，那客户端 A 查询到的数据其实就是脏数据：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110049.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110049.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（5）在客户端 A 执行更新语句 <code>update account set balance = balance - 50 where id =1</code>，lilei 的 balance 没有变成 350，居然是 400，是不是很奇怪，数据不一致啊，如果你这么想就太天真 了，在应用程序中，我们会用 400-50=350，并不知道其他会话回滚了，要想解决这个问题可以采用读已提交的隔离级别。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110480.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110480.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>2、读已提交</strong></p>
 <p>（1）打开一个客户端 A，并设置当前事务模式为 read committed（提交读），查询表 account 的所有记录：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110147.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082110147.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（2）在客户端 A 的事务提交之前，打开另一个客户端 B，更新表 account：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111033.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111033.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（3）这时，客户端 B 的事务还没提交，客户端 A 不能查询到 B 已经更新的数据，解决了脏读问题：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111382.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111382.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（4）客户端 B 的事务提交</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111077.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111077.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（5）客户端 A 执行与上一步相同的查询，结果 与上一步不一致，即产生了不可重复读的问题</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111732.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082111732.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>3、可重复读</strong></p>
 <p>（1）打开一个客户端 A，并设置当前事务模式为 repeatable read，查询表 account 的所有记录。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082112097.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082112097.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（2）在客户端 A 的事务提交之前，打开另一个客户端 B，更新表 account 并提交。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113621.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113621.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（3）在客户端 A 查询表 account 的所有记录，与步骤（1）查询结果一致，没有出现不可重复读的问题。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113836.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113836.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（4）在客户端 A，接着执行 update balance = balance - 50 where id = 1，balance 没有变成 400-50=350，lilei 的 balance 值用的是步骤（2）中的 350 来算的，所以是 300，数据的一致性倒是没有被破坏。可重复读的隔离级别下使用了 MVCC 机制，select 操作不会更新版本号，是快照读（历史版本）；insert、update 和 delete 会更新版本号，是当前读（当前版本）。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113733.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082113733.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（5）重新打开客户端 B，插入一条新数据后提交。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082114910.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082114910.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（6）在客户端 A 查询表 account 的所有记录，没有 查出 新增数据，所以没有出现幻读。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082114407.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082114407.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>4. 串行化</strong></p>
 <p>（1）打开一个客户端 A，并设置当前事务模式为 serializable，查询表 account 的初始值：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">set</span> session transaction isolation level serializable;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br><br>mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">start</span> transaction;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br><br>mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> account;<br><span class="hljs-operator">+</span><span class="hljs-comment">------+--------+---------+</span><br><span class="hljs-operator">|</span> id   <span class="hljs-operator">|</span> name   <span class="hljs-operator">|</span> balance <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">------+--------+---------+</span><br><span class="hljs-operator">|</span>    <span class="hljs-number">1</span> <span class="hljs-operator">|</span> lilei  <span class="hljs-operator">|</span>   <span class="hljs-number">10000</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">|</span>    <span class="hljs-number">2</span> <span class="hljs-operator">|</span> hanmei <span class="hljs-operator">|</span>   <span class="hljs-number">10000</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">|</span>    <span class="hljs-number">3</span> <span class="hljs-operator">|</span> lucy   <span class="hljs-operator">|</span>   <span class="hljs-number">10000</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">|</span>    <span class="hljs-number">4</span> <span class="hljs-operator">|</span> lily   <span class="hljs-operator">|</span>   <span class="hljs-number">10000</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">------+--------+---------+</span><br><span class="hljs-number">4</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
@@ -986,11 +844,11 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 </blockquote>
 <p><strong>原始的 CLH 队列</strong></p>
 <p>用于减少线程争用的最简单的队列，CLH 队列，具体可以参考 入大厂必备的基础书籍： 《Java 高并发核心编程 卷 2》</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115036.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115036.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>JUC 的 AQS 内部队列</strong></p>
 <p>AQS 内部队列是 JUC 高性能的基础，AQS 队列，具体可以参考 入大厂必备的基础书籍： 《Java 高并发核心编程 卷 2》</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115140.png" srcset="/img/loading.gif" lazyload alt="" /></p>
-<hr />
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115140.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<hr>
 <h3 id="分阶段排队下单方案">分阶段排队下单方案</h3>
 <p>将提交操作变成两段式：</p>
 <ul>
@@ -1003,7 +861,7 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>然后通过队列等异步手段，将变化的数据异步写入到 DB 中。</p>
 <p>引入队列，然后数据通过队列排序，按照次序更新到 DB 中，完全串行处理。当达到库存阀值的时候就不在消费队列，并关闭购买功能。这就解决了超卖问题。</p>
 <h3 id="分阶段排队架构图">分阶段排队架构图</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115901.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082115901.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>基于分段的排队执行方案的性能提升</strong></p>
 <p>一个高性能秒杀的场景：</p>
 <blockquote>
@@ -1012,10 +870,10 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 <p>但是在下单阶段，就不一样了。假设加锁之后，释放锁之前，查库存 -&gt; 创建订单 -&gt; 扣减库存，经过优化，每个 IO 操作 100ms，大概 200 毫秒，一秒钟 5 个订单。600 个订单需要 120s，2 分钟才能彻底消化。</p>
 </blockquote>
 <p>如何提升下单阶段的性能呢？</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082116508.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082116508.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>可以使用 Redis 分段锁。</strong></p>
 <p>为了达到每秒 600 个订单，可以将锁分成 600 /5 =120 个段，每个段负责 5 个订单，600 个订单，在第二个阶段 1 秒钟下单完成。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082118654.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405082118654.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>有关 Redis 分段锁的详细知识，请阅读下面的博文：</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/crazymakercircle/p/14731826.html">Redis 分布式锁 （图解 - 秒懂 - 史上最全）</a></p>
 <p><strong>基于分段的排队执行方案优点</strong></p>
@@ -1030,350 +888,127 @@ MyISAM：frm 是表定义文件，myd 是数据文件，myi 是索引文件</p>
 </ul>
 <p>可能存在少买，也就是如果拿到号的人不真正下订单，可能库存减为 0，但是订单数并没有达到库存阀值。</p>
 <blockquote>
-<p>参考文献：<br />
-<a target="_blank" rel="noopener" href="https://www.cnblogs.com/rjzheng/p/9950951.html">https://www.cnblogs.com/rjzheng/p/9950951.html</a><br />
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/caoxiaohong1005/article/details/78292457">https://blog.csdn.net/caoxiaohong1005/article/details/78292457</a><br />
+<p>参考文献：<br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/rjzheng/p/9950951.html">https://www.cnblogs.com/rjzheng/p/9950951.html</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/caoxiaohong1005/article/details/78292457">https://blog.csdn.net/caoxiaohong1005/article/details/78292457</a><br>
 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/wyaokai/p/10921323.html">https://www.cnblogs.com/wyaokai/p/10921323.html</a></p>
 </blockquote>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>超卖问题（图解 + 秒懂 + 史上最全）</div>
-      <div>https://blog.fulequn.online/2024/05/Article202405081/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2024年5月8日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405101/" title="算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第一部分">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第一部分</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405072/" title="超卖问题-多位骑手抢一个外卖订单，如何保证只有一个骑手可以接到单子？">
-                        <span class="hidden-mobile">超卖问题-多位骑手抢一个外卖订单，如何保证只有一个骑手可以接到单子？</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<hr>
+<div>
+<div class="post-metas my-3">
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>超卖问题（图解 + 秒懂 + 史上最全）</div>
+<div>https://blog.fulequn.online/2024/05/Article202405081/</div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年5月8日</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/05/Article202405101/" title="算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第一部分">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第一部分</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/05/Article202405072/" title="超卖问题-多位骑手抢一个外卖订单，如何保证只有一个骑手可以接到单子？">
+<span class="hidden-mobile">超卖问题-多位骑手抢一个外卖订单，如何保证只有一个骑手可以接到单子？</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>

@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="1 声明式导航 1.1 导航链接 1.1.1 需求 实现导航高亮效果  如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！ 1.1.2 解决方案 vue-router 提供了一个全局组件 router-link (取代 a 标签)  能跳转，配置 to 属性指定路径(必须) 。本质还是 a 标签 ，to 无需 #  能高亮，默认就会提供 高亮">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="1 声明式导航 1.1 导航链接 1.1.1 需求 实现导航高亮效果  如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！ 1.1.2 解决方案 vue-router 提供了一个全局组件 router-link (取代 a 标签)  能跳转，配置 to 属性指定路径(必须) 。本质还是 a 标签 ，to 无需 #  能高亮，默认就会提供 高亮">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue基础入门到实战6（路由进阶+面经项目）">
 <meta property="og:url" content="https://blog.fulequn.online/2024/06/Article202406111/index.html">
@@ -51,262 +45,126 @@
 <meta property="article:author" content="Fulequn">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244052.png">
-  
-  
-  
-  <title>Vue基础入门到实战6（路由进阶+面经项目） - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>Vue基础入门到实战6（路由进阶+面经项目） - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Vue基础入门到实战6（路由进阶+面经项目）"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-11 15:32" pubdate>
-          2024年6月11日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          6.3k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          53 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Vue基础入门到实战6（路由进阶+面经项目）"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-06-11 15:32" pubdate>
+2024年6月11日 下午
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+6.3k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+53 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">Vue基础入门到实战6（路由进阶+面经项目）</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="1-声明式导航">1 声明式导航</h1>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Vue基础入门到实战6（路由进阶+面经项目）</h1>
+<div class="markdown-body">
+<h1 id="1-声明式导航">1 声明式导航</h1>
 <h2 id="1-1-导航链接">1.1 导航链接</h2>
 <h3 id="1-1-1-需求">1.1.1 需求</h3>
 <p>实现导航高亮效果</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244052.png" srcset="/img/loading.gif" lazyload alt="68249204474" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244052.png" srcset="/img/loading.gif" lazyload alt="68249204474"></p>
 <p>如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！</p>
 <h3 id="1-1-2-解决方案">1.1.2 解决方案</h3>
 <p>vue-router 提供了一个全局组件 router-link (取代 a 标签)</p>
@@ -321,28 +179,28 @@
 <p>我们可以给任意一个 class 属性添加高亮样式即可实现功能</p>
 <h2 id="1-2-高亮类名">1.2 高亮类名</h2>
 <p>当我们使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 跳转时，自动给当前导航加了 <strong>两个类名</strong></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244053.png" srcset="/img/loading.gif" lazyload alt="68249312105" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244053.png" srcset="/img/loading.gif" lazyload alt="68249312105"></p>
 <h3 id="1-2-1-router-link-active">1.2.1 router-link-active</h3>
 <p><strong>模糊匹配（用的多）</strong></p>
-<p>to=“/my”  可以匹配 /my    /my/a    /my/b    …</p>
+<p>to=“/my” 可以匹配 /my /my/a /my/b …</p>
 <p>只要是以/my开头的路径 都可以和 to=&quot;/my&quot;匹配到</p>
 <h3 id="1-2-2-router-link-exact-active">1.2.2 router-link-exact-active</h3>
 <p><strong>精确匹配</strong></p>
-<p>to=“/my” 仅可以匹配  /my</p>
+<p>to=“/my” 仅可以匹配 /my</p>
 <h2 id="1-3-自定义类名">1.3 自定义类名</h2>
 <h3 id="1-3-1-问题">1.3.1 问题</h3>
 <p>router-link 的 <strong>两个高亮类名太长了</strong>，我们希望能定制怎么办？</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244054.png" srcset="/img/loading.gif" lazyload alt="68249361091" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244054.png" srcset="/img/loading.gif" lazyload alt="68249361091"></p>
 <h3 id="1-3-2-解决方案">1.3.2 解决方案</h3>
 <p>我们可以在创建路由对象时，额外配置两个配置项即可。 <code>linkActiveClass</code> 和 <code>linkExactActiveClass</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [...],<br>  <span class="hljs-attr">linkActiveClass</span>: <span class="hljs-string">&quot;类名1&quot;</span>,<br>  <span class="hljs-attr">linkExactActiveClass</span>: <span class="hljs-string">&quot;类名2&quot;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244055.png" srcset="/img/loading.gif" lazyload alt="68249372945" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244055.png" srcset="/img/loading.gif" lazyload alt="68249372945"></p>
 <h3 id="1-3-3-代码演示">1.3.3 代码演示</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 创建了一个路由对象</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>  ], <br>  <span class="hljs-attr">linkActiveClass</span>: <span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-comment">// 配置模糊匹配的类名</span><br>  <span class="hljs-attr">linkExactActiveClass</span>: <span class="hljs-string">&#x27;exact-active&#x27;</span> <span class="hljs-comment">// 配置精确匹配的类名</span><br>&#125;)<br></code></pre></td></tr></table></figure>
 <h2 id="1-4-查询参数传参">1.4 查询参数传参</h2>
 <h3 id="1-4-1-目标">1.4.1 目标</h3>
 <p>在跳转路由时，进行传参。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244056.png" srcset="/img/loading.gif" lazyload alt="68249442392" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244056.png" srcset="/img/loading.gif" lazyload alt="68249442392"></p>
 <p>比如：现在我们在搜索页点击了热门搜索链接，跳转到详情页，<strong>需要把点击的内容带到详情页</strong>，改怎么办呢？</p>
 <h3 id="1-4-2-跳转传参">1.4.2 跳转传参</h3>
 <p>我们可以通过两种方式，在跳转的时候把所需要的参数传到其他页面中</p>
@@ -397,7 +255,7 @@
 <h3 id="1-5-2-查询参数传参-VS-动态路由传参">1.5.2 查询参数传参 VS 动态路由传参</h3>
 <ol>
 <li>
-<p>查询参数传参  (比较适合传 <strong>多个参数</strong>)</p>
+<p>查询参数传参 (比较适合传 <strong>多个参数</strong>)</p>
 <ol>
 <li>跳转：<code>to=&quot;/path?参数名=值&amp;参数名2=值&quot;</code></li>
 <li>获取：<code>$route.query.参数名</code></li>
@@ -414,8 +272,8 @@
 </li>
 </ol>
 <h3 id="1-5-3-动态路由参数的可选符问题-了解">1.5.3 动态路由参数的可选符问题(了解)</h3>
-<p>配了路由 path:“/search/:words”  为什么按下面步骤操作，会未匹配到组件，显示空白？</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244057.png" srcset="/img/loading.gif" lazyload alt="68249723830" /></p>
+<p>配了路由 path:“/search/:words” 为什么按下面步骤操作，会未匹配到组件，显示空白？</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244057.png" srcset="/img/loading.gif" lazyload alt="68249723830"></p>
 <p><strong>原因</strong></p>
 <p>使用 <code>/search/:words</code> 表示，<strong>必须要传参数</strong>。如果不传参数，也希望匹配，可以加个可选符 <code>?</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br> 	...<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/search/:words?&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">Search</span> &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
@@ -423,7 +281,7 @@
 <h2 id="2-1-重定向">2.1 重定向</h2>
 <h3 id="2-1-1-问题">2.1.1 问题</h3>
 <p>网页打开时， url 默认是 <code>/</code> 路径，未匹配到组件时，会出现空白</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244058.png" srcset="/img/loading.gif" lazyload alt="68249787282" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244058.png" srcset="/img/loading.gif" lazyload alt="68249787282"></p>
 <h3 id="2-1-2-解决方案">2.1.2 解决方案</h3>
 <p><strong>重定向</strong> → 匹配 <code>/</code> 后, 强制跳转 <code>/home</code> 路径</p>
 <h3 id="2-1-3-语法">2.1.3 语法</h3>
@@ -434,7 +292,7 @@
 <h3 id="2-2-2-位置">2.2.2 位置</h3>
 <p>404 的路由，虽然配置在任何一个位置都可以，但一般都 <strong>配置在其他路由规则的最后面</strong></p>
 <h3 id="2-2-3-语法">2.2.3 语法</h3>
-<p><code>path: &quot;*&quot;</code>   (任意路径) – 前面不匹配就命中最后这个</p>
+<p><code>path: &quot;*&quot;</code> (任意路径) – 前面不匹配就命中最后这个</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">NotFind</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/NotFind&#x27;</span><br><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">NotFind</span> &#125; <span class="hljs-comment">//最后一个</span><br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
 <h3 id="2-2-4-代码示例">2.2.4 代码示例</h3>
 <p>NotFound.vue</p>
@@ -445,8 +303,8 @@
 <h3 id="2-3-1-问题">2.3.1 问题</h3>
 <p>路由的路径看起来不自然, 有 <code>#</code>，能否切成真正路径形式?</p>
 <ul>
-<li>hash路由(默认)        例如:  <a target="_blank" rel="noopener" href="http://localhost:8080/#/home">http://localhost:8080/#/home</a></li>
-<li>history路由(常用)     例如: <a target="_blank" rel="noopener" href="http://localhost:8080/home">http://localhost:8080/home</a>   (以后上线需要服务器端支持，开发环境webpack给规避掉了history模式的问题)</li>
+<li>hash路由(默认) 例如: <a target="_blank" rel="noopener" href="http://localhost:8080/#/home">http://localhost:8080/#/home</a></li>
+<li>history路由(常用) 例如: <a target="_blank" rel="noopener" href="http://localhost:8080/home">http://localhost:8080/home</a> (以后上线需要服务器端支持，开发环境webpack给规避掉了history模式的问题)</li>
 </ul>
 <h3 id="2-3-2-语法">2.3.2 语法</h3>
 <p>在创建路由实例的时候，指定模式为 <code>history</code></p>
@@ -455,7 +313,7 @@
 <h2 id="3-1-两种路由跳转方式">3.1 两种路由跳转方式</h2>
 <h3 id="3-1-1-问题">3.1.1 问题</h3>
 <p>点击按钮跳转如何实现？</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244059.png" srcset="/img/loading.gif" lazyload alt="68250048105" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244059.png" srcset="/img/loading.gif" lazyload alt="68250048105"></p>
 <h3 id="3-1-2-方案">3.1.2 方案</h3>
 <p>编程式导航：用 JS 代码来进行跳转</p>
 <h3 id="3-1-3-语法">3.1.3 语法</h3>
@@ -487,7 +345,7 @@
 <h2 id="3-2-path路径跳转传参">3.2 path路径跳转传参</h2>
 <h3 id="3-2-1-问题">3.2.1 问题</h3>
 <p>点击搜索按钮，跳转需要把文本框中输入的内容传到下一个页面如何实现？</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244060.png" srcset="/img/loading.gif" lazyload alt="68250272058" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244060.png" srcset="/img/loading.gif" lazyload alt="68250272058"></p>
 <h3 id="3-2-2-两种传参方式">3.2.2 两种传参方式</h3>
 <p>1.查询参数</p>
 <p>2.动态路由传参</p>
@@ -514,7 +372,7 @@
 <li>通过演示效果发现，主要的功能页面有两个，一个是 <strong>列表页</strong>，一个是 <strong>详情页</strong>，并且在列表页点击时可以跳转到详情页</li>
 <li>底部导航可以来回切换，并且切换时，只有上面的主题内容在动态渲染</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244061.png" srcset="/img/loading.gif" lazyload alt="68255978464" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244061.png" srcset="/img/loading.gif" lazyload alt="68255978464"></p>
 <h3 id="4-1-2-实现思路分析：配置路由-功能实现">4.1.2 实现思路分析：配置路由+功能实现</h3>
 <p>1.配置路由</p>
 <ul>
@@ -527,7 +385,7 @@
 <li><strong>跳转传参</strong> 到详情页，详情页动态渲染</li>
 <li>组件缓存，性能优化</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244062.png" srcset="/img/loading.gif" lazyload alt="68256025535" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244062.png" srcset="/img/loading.gif" lazyload alt="68256025535"></p>
 <h2 id="4-2-路由配置">4.2 路由配置</h2>
 <h3 id="4-2-1-一级路由配置">4.2.1 一级路由配置</h3>
 <p>1.把文档中准备的素材拷贝到项目中</p>
@@ -544,7 +402,7 @@
 <li>配置二级路由的出口.</li>
 </ul>
 <p>1.在一级路由下，配置 children 属性</p>
-<p><strong>注意</strong>:一级的路由path 需要加 <code>/</code>   二级路由的path不需要加 <code>/</code></p>
+<p><strong>注意</strong>:一级的路由path 需要加 <code>/</code> 二级路由的path不需要加 <code>/</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Layout</span>,<br>      <span class="hljs-attr">children</span>:[<br>        <span class="hljs-comment">//children中的配置项 跟一级路由中的配置项一模一样 </span><br>        <span class="hljs-comment">// 通过 children 配置项，可以配置嵌套子路由</span><br>        <span class="hljs-comment">// 1. 在children配置项中，配规则</span><br>        <span class="hljs-comment">// 2. 准备二级路由出口，一级路由里面写 router-view</span><br>        <span class="hljs-comment">// 示例：&#123;path: &#x27;/article&#x27;,component: Article&#125;</span><br>        &#123;<span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;xxxx&#x27;</span>,<span class="hljs-attr">component</span>:xxxx&#125;,<br>        &#123;<span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;xxxx&#x27;</span>,<span class="hljs-attr">component</span>:xxxx&#125;,<br>      ]<br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
 <p>2.配置二级路由的出口 <code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
 <p><strong>注意：</strong> 配置了嵌套路由，一定配置对应的路由出口，否则不会渲染出对应的组件</p>
@@ -583,8 +441,8 @@
 <h3 id="4-4-1-说明">4.4.1 说明</h3>
 <p>跳转详情页需要把当前点击的文章 id 传给详情页，获取数据</p>
 <ul>
-<li>查询参数传参  <code>this.$router.push('/detail?参数1=参数值&amp;参数2=参数值')</code></li>
-<li>动态路由传参  先改造路由，再传参  <code>this.$router.push('/detail/参数值')</code></li>
+<li>查询参数传参 <code>this.$router.push('/detail?参数1=参数值&amp;参数2=参数值')</code></li>
+<li>动态路由传参 先改造路由，再传参 <code>this.$router.push('/detail/参数值')</code></li>
 </ul>
 <h3 id="4-4-2-查询参数传参实现">4.4.2 查询参数传参实现</h3>
 <p>Article.vue</p>
@@ -627,8 +485,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-detail-page&quot;&gt;<br>    &lt;nav class=&quot;nav&quot;&gt;<br>      &lt;span class=&quot;back&quot; @click=&quot;$router.back()&quot;&gt;&amp;lt;&lt;/span&gt; 面经详情<br>    &lt;/nav&gt;<br>    &lt;header class=&quot;header&quot;&gt;<br>      &lt;h1&gt;&#123;&#123;articleDetail.stem&#125;&#125;&lt;/h1&gt;<br>      &lt;p&gt;&#123;&#123;articleDetail.createAt&#125;&#125; | &#123;&#123;articleDetail.views&#125;&#125; 浏览量 | &#123;&#123;articleDetail.likeCount&#125;&#125; 点赞数&lt;/p&gt;<br>      &lt;p&gt;<br>        &lt;img<br>          :src=&quot;articleDetail.creatorAvatar&quot;<br>          alt=&quot;&quot;<br>        /&gt;<br>        &lt;span&gt;&#123;&#123;articleDetail.creatorName&#125;&#125;&lt;/span&gt;<br>      &lt;/p&gt;<br>    &lt;/header&gt;<br>    &lt;main class=&quot;body&quot;&gt;<br>      &#123;&#123;articleDetail.content&#125;&#125;<br>    &lt;/main&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="4-6-缓存组件">4.6 缓存组件</h2>
 <h3 id="4-6-1-问题">4.6.1 问题</h3>
-<p>从面经列表 点到 详情页，又点返回，数据重新加载了 →  <strong>希望回到原来的位置</strong></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244063.png" srcset="/img/loading.gif" lazyload alt="68257863006" /></p>
+<p>从面经列表 点到 详情页，又点返回，数据重新加载了 → <strong>希望回到原来的位置</strong></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244063.png" srcset="/img/loading.gif" lazyload alt="68257863006"></p>
 <h3 id="4-6-2-原因">4.6.2 原因</h3>
 <p>当路由被 <strong>跳转</strong> 后，原来所看到的组件就 <strong>被销毁</strong> 了（会执行组件内的 beforeDestroy 和 destroyed 生命周期钩子），<strong>重新返回</strong> 后组件又被 <strong>重新创建</strong> 了（会执行组件内的 beforeCreate,created,beforeMount,Mounted 生命周期钩子），<strong>所以数据被加载了</strong></p>
 <h3 id="4-6-3-解决方案">4.6.3 解决方案</h3>
@@ -642,15 +500,15 @@
 <p>App.vue</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;!-- 所有组件全部缓存 --&gt;<br>    &lt;keep-alive&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/keep-alive&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
 <h3 id="4-6-5-keep-alive-的三个属性">4.6.5 keep-alive 的三个属性</h3>
-<p>① include  ： 组件名数组，只有匹配的组件 <strong>会被缓存</strong> ，最为常用。</p>
+<p>① include ： 组件名数组，只有匹配的组件 <strong>会被缓存</strong> ，最为常用。</p>
 <p>② exclude ： 组件名数组，任何匹配的组件都 <strong>不会被缓存</strong>，会出现性能上面的问题，不推荐。</p>
-<p>③ max       ： 最多可以 <strong>缓存多少</strong> 组件实例</p>
+<p>③ max ： 最多可以 <strong>缓存多少</strong> 组件实例</p>
 <p>App.vue</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;keep-alive :include=&quot;[&#x27;LayoutPage&#x27;]&quot;&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/keep-alive&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
 <h3 id="4-6-6-额外的两个生命周期钩子">4.6.6 额外的两个生命周期钩子</h3>
 <p><strong>keep-alive的使用会触发两个生命周期函数</strong></p>
-<p><strong>activated</strong> 当组件被激活（使用）的时候触发 →  进入这个页面的时候触发</p>
-<p><strong>deactivated</strong> 当组件不被使用的时候触发      →  离开这个页面的时候触发</p>
+<p><strong>activated</strong> 当组件被激活（使用）的时候触发 → 进入这个页面的时候触发</p>
+<p><strong>deactivated</strong> 当组件不被使用的时候触发 → 离开这个页面的时候触发</p>
 <p>组件 <strong>缓存后</strong> 就 <strong>不会执行</strong> 组件的 <strong>created, mounted, destroyed</strong> 等钩子了。</p>
 <p>所以其提供了 <strong>actived 和 deactived</strong> 钩子，帮我们实现业务需求。</p>
 <h1 id="5-项目配置相关">5 项目配置相关</h1>
@@ -666,7 +524,7 @@
 <ul>
 <li>手动选择功能</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244064.png" srcset="/img/loading.gif" lazyload alt="68294185617" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244064.png" srcset="/img/loading.gif" lazyload alt="68294185617"></p>
 <ul>
 <li>选择vue的版本</li>
 </ul>
@@ -674,32 +532,32 @@
 <ul>
 <li>是否使用history模式</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244065.png" srcset="/img/loading.gif" lazyload alt="image-20201025150602129" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244065.png" srcset="/img/loading.gif" lazyload alt="image-20201025150602129"></p>
 <ul>
 <li>选择css预处理</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244066.png" srcset="/img/loading.gif" lazyload alt="image-20220629175133593" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244066.png" srcset="/img/loading.gif" lazyload alt="image-20220629175133593"></p>
 <ul>
 <li>选择eslint的风格 （eslint 代码规范的检验工具，检验代码是否符合规范）</li>
-<li>比如：const age = 18;   =&gt;  报错！多加了分号！后面有工具，一保存，全部格式化成最规范的样子</li>
+<li>比如：const age = 18; =&gt; 报错！多加了分号！后面有工具，一保存，全部格式化成最规范的样子</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244067.png" srcset="/img/loading.gif" lazyload alt="68294191856" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244067.png" srcset="/img/loading.gif" lazyload alt="68294191856"></p>
 <ul>
 <li>选择校验的时机 （直接回车）</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244068.png" srcset="/img/loading.gif" lazyload alt="68294193579" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244068.png" srcset="/img/loading.gif" lazyload alt="68294193579"></p>
 <ul>
 <li>选择配置文件的生成方式 （直接回车）</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244069.png" srcset="/img/loading.gif" lazyload alt="68294194798" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244069.png" srcset="/img/loading.gif" lazyload alt="68294194798"></p>
 <ul>
-<li>是否保存预设，下次直接使用？  =&gt;   不保存，输入 N</li>
+<li>是否保存预设，下次直接使用？ =&gt; 不保存，输入 N</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244070.png" srcset="/img/loading.gif" lazyload alt="68294196155" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244070.png" srcset="/img/loading.gif" lazyload alt="68294196155"></p>
 <ul>
 <li>等待安装，项目初始化完成</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244071.png" srcset="/img/loading.gif" lazyload alt="68294197476" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244071.png" srcset="/img/loading.gif" lazyload alt="68294197476"></p>
 <ul>
 <li>启动项目</li>
 </ul>
@@ -711,7 +569,7 @@
 </blockquote>
 <p>ESLint:是一个代码检查工具，用来检查你的代码是否符合指定的规则(你和你的团队可以自行约定一套规则)。在创建项目时，我们使用的是 <a target="_blank" rel="noopener" href="https://standardjs.com/readme-zhcn.html">JavaScript Standard Style</a> 代码风格的规则。</p>
 <h3 id="5-2-1-JavaScript-Standard-Style-规范说明">5.2.1 JavaScript Standard Style 规范说明</h3>
-<p>建议把：<a target="_blank" rel="noopener" href="https://standardjs.com/rules-zhcn.html">https://standardjs.com/rules-zhcn.html</a> 看一遍，然后在写的时候,  遇到错误就查询解决。</p>
+<p>建议把：<a target="_blank" rel="noopener" href="https://standardjs.com/rules-zhcn.html">https://standardjs.com/rules-zhcn.html</a> 看一遍，然后在写的时候, 遇到错误就查询解决。</p>
 <p>下面是这份规则中的一小部分：</p>
 <ul>
 <li><em>字符串使用单引号</em> – 需要转义的地方除外</li>
@@ -727,7 +585,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./styles/index.less&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-property">config</span>.<span class="hljs-property">productionTip</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span> ( &#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),<br>  router<br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
 <p>按下保存代码之后：</p>
 <p>你将会看在控制台中输出如下错误：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244072.png" srcset="/img/loading.gif" lazyload alt="68294255431" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244072.png" srcset="/img/loading.gif" lazyload alt="68294255431"></p>
 <blockquote>
 <p>eslint 是来帮助你的。心态要好，有错，就改。</p>
 </blockquote>
@@ -735,7 +593,7 @@
 <p>根据错误提示来一项一项手动修正。</p>
 <p>如果你不认识命令行中的语法报错是什么意思，你可以根据错误代码（func-call-spacing, space-in-parens,…）去 ESLint 规则列表中查找其具体含义。</p>
 <p>打开 <a target="_blank" rel="noopener" href="https://zh-hans.eslint.org/docs/latest/rules/">ESLint 规则表</a>，使用页面搜索（Ctrl + F）这个代码，查找对该规则的一个释义。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244073.png" srcset="/img/loading.gif" lazyload alt="68294279221" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244073.png" srcset="/img/loading.gif" lazyload alt="68294279221"></p>
 <h2 id="5-3-通过eslint插件来实现自动修正">5.3 通过eslint插件来实现自动修正</h2>
 <blockquote>
 <ol>
@@ -746,7 +604,7 @@
 <ul>
 <li>如何安装</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244074.png" srcset="/img/loading.gif" lazyload alt="68294292098" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244074.png" srcset="/img/loading.gif" lazyload alt="68294292098"></p>
 <ul>
 <li>如何配置（这里需要关闭默认的代码格式化）</li>
 </ul>
@@ -757,345 +615,122 @@
 </ul>
 <p>settings.json 参考</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jsx">&#123;<br>    <span class="hljs-string">&quot;window.zoomLevel&quot;</span>: <span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;workbench.iconTheme&quot;</span>: <span class="hljs-string">&quot;vscode-icons&quot;</span>,<br>    <span class="hljs-string">&quot;editor.tabSize&quot;</span>: <span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;emmet.triggerExpansionOnTab&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-comment">// 当保存的时候，eslint自动帮我们修复错误</span><br>    <span class="hljs-string">&quot;editor.codeActionsOnSave&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;source.fixAll&quot;</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-comment">// 保存代码，不自动格式化</span><br>    <span class="hljs-string">&quot;editor.formatOnSave&quot;</span>: <span class="hljs-literal">false</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Vue基础入门到实战6（路由进阶+面经项目）</div>
-      <div>https://blog.fulequn.online/2024/06/Article202406111/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2024年6月11日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/06/Article202406201/" title="Article202406201">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Article202406201</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/06/Article202406141/" title="Vue基础入门到实战6（路由进阶+面经项目）">
-                        <span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<hr>
+<div>
+<div class="post-metas my-3">
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Vue基础入门到实战6（路由进阶+面经项目）</div>
+<div>https://blog.fulequn.online/2024/06/Article202406111/</div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年6月11日</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/06/Article202406201/" title="Article202406201">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">Article202406201</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/06/Article202406141/" title="Vue基础入门到实战6（路由进阶+面经项目）">
+<span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>

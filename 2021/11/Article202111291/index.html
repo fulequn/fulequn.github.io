@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="参考链接： https:&#x2F;&#x2F;mofanpy.com&#x2F;tutorials&#x2F;machine-learning&#x2F;reinforcement-learning&#x2F;intro-q-learning&#x2F;  第2章 Q-learning 强化学习中有名的算法，Q-learning。由第一章可知，Q-learning的分类是model-free，基于价值，单步更新，离线学习。 2.1 什么是Q-Learning 2">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="参考链接： https:&#x2F;&#x2F;mofanpy.com&#x2F;tutorials&#x2F;machine-learning&#x2F;reinforcement-learning&#x2F;intro-q-learning&#x2F;  第2章 Q-learning 强化学习中有名的算法，Q-learning。由第一章可知，Q-learning的分类是model-free，基于价值，单步更新，离线学习。 2.1 什么是Q-Learning 2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="莫烦强化学习-Q Leaning">
 <meta property="og:url" content="https://blog.fulequn.online/2021/11/Article202111291/index.html">
@@ -37,258 +31,122 @@
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300843576.png">
-  
-  
-  
-  <title>莫烦强化学习-Q Leaning - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>莫烦强化学习-Q Leaning - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="莫烦强化学习-Q Leaning"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-11-29 10:41" pubdate>
-          2021年11月29日 上午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          4.3k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          37 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="莫烦强化学习-Q Leaning"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2021-11-29 10:41" pubdate>
+2021年11月29日 上午
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+4.3k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+37 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">莫烦强化学习-Q Leaning</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <blockquote>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">莫烦强化学习-Q Leaning</h1>
+<div class="markdown-body">
+<blockquote>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://mofanpy.com/tutorials/machine-learning/reinforcement-learning/intro-q-learning/">https://mofanpy.com/tutorials/machine-learning/reinforcement-learning/intro-q-learning/</a></p>
 </blockquote>
@@ -296,20 +154,20 @@
 <p>强化学习中有名的算法，Q-learning。由第一章可知，Q-learning的分类是model-free，基于价值，单步更新，离线学习。</p>
 <h2 id="2-1-什么是Q-Learning">2.1 什么是Q-Learning</h2>
 <h3 id="2-1-1-行为准则">2.1.1 行为准则</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300843576.png" srcset="/img/loading.gif" lazyload alt="1" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300843576.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>我们做事情都会有一个自己的行为准则, 比如小时候爸妈常说”不写完作业就不准看电视”。所以我们在 写作业的<strong>这种状态</strong>下, <strong>好的行为</strong>就是继续写作业, 直到写完它, 我们还可以得到奖励, <strong>不好的行为</strong>就是没写完就跑去看电视了, 被爸妈发现, 后果很严重。小时候这种事情做多了, 也就变成我们不可磨灭的记忆。这和我们要提到的 Q learning 有什么关系呢? 原来 <strong>Q learning 也是一个决策过程</strong>, 和小时候的这种情况差不多。我们举例说明.</p>
 <p>假设现在我们处于写作业的状态而且我们以前并没有尝试过写作业时看电视, 所以现在我们有两种选择 , 1, 继续写作业, 2, 跑去看电视. 因为以前没有被罚过, 所以我选看电视, 然后现在的状态变成了看电视, 我又选了继续看电视, 接着我还是看电视, 最后爸妈回家, 发现我没写完作业就去看电视了, 狠狠地惩罚了我一次, 我也深刻地记下了这一次经历, 并在我的脑海中将 “没写完作业就看电视” 这种行为更改为负面行为, 我们在看看 Q learning 根据很多这样的经历是如何来决策的吧。</p>
 <h3 id="2-1-2-QLearning-决策">2.1.2 QLearning 决策</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300916525.png" srcset="/img/loading.gif" lazyload alt="1" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300916525.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>假设我们的行为准则已经学习好了, 现在我们处于状态s1, 我在写作业, 我有两个行为 a1, a2, 分别是看电视和写作业, 根据我的经验, 在这种 s1 状态下, a2 写作业带来的潜在奖励要比 a1 看电视高（比较不同决策的价值）, 这里的潜在奖励我们可以用一个有关于 s 和 a 的 Q 表格代替, 在我的记忆Q表格中, Q(s1, a1)=-2 要小于 Q(s1, a2)=1, 所以我们判断要选择 a2 作为下一个行为。现在我们的状态更新成 s2 , 我们还是有两个同样的选择, 重复上面的过程, 在行为准则Q 表中寻找 Q(s2, a1)和Q(s2, a2) 的值, 并比较他们的大小, 选取较大的一个。接着根据 a2 我们到达 s3 并在此重复上面的决策过程. Q learning 的方法也就是这样决策的。看完决策, 我看在来研究一下这张行为准则 Q 表是通过什么样的方式更改, 提升的。</p>
 <h3 id="2-1-3-QLearning-更新">2.1.3 QLearning 更新</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300920463.png" srcset="/img/loading.gif" lazyload alt="3" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300920463.png" srcset="/img/loading.gif" lazyload alt="3"></p>
 <p>所以我们回到之前的流程, 根据 Q 表的估计, 因为在 s1 中, a2 的值比较大, 通过之前的决策方法, 我们在 s1 采取了 a2, 并到达 s2, 这时我们开始更新用于决策的 Q 表, 接着我们并没有在实际中采取任何行为, 而是<strong>再想象自己在 s2 上采取了每种行为</strong>, 分别看看两种行为哪一个的 Q 值大, 比如说 Q(s2, a2) 的值比 Q(s2, a1) 的大, 所以<strong>我们把大的 Q(s2, a2) 乘上一个衰减值 gamma (比如是0.9) 并加上到达s2时所获取的奖励 R (这里还没有获取到我们的棒棒糖, 所以奖励为 0)</strong>, 因为会获取实实在在的奖励 R , 我们将这个作为我现实中 Q(s1, a2) 的值, 但是我们之前是根据 Q 表估计 Q(s1, a2) 的值。<strong>所以有了现实和估计值, 我们就能更新Q(s1, a2) , 根据估计与现实的差距, 将这个差距乘以一个学习效率 alpha 累加上老的 Q(s1, a2) 的值变成新的值</strong>。但时刻记住, 我们虽然用 maxQ(s2) 估算了一下 s2 状态, 但还没有在 s2 做出任何的行为, s2 的行为决策要等到更新完了以后再重新另外做。这就是 off-policy 的 Q learning 是如何决策和学习优化决策的过程。</p>
 <h3 id="2-1-4-QLearning-整体算法">2.1.4 QLearning 整体算法</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300930021.png" srcset="/img/loading.gif" lazyload alt="4" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300930021.png" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p>这一张图概括了我们之前所有的内容。这也是 <strong>Q learning 的算法, 每次更新我们都用到了 Q 现实和 Q 估计, 而且 Q learning 的迷人之处就是 在 Q(s1, a2) 现实中, 也包含了一个 Q(s2) 的最大估计值, 将对下一步的衰减的最大估计和当前所得到的奖励当成这一步的现实</strong>, 很奇妙吧。最后我们来说说这套算法中一些参数的意义。<strong>Epsilon greedy 是用在决策上的一种策略, 比如 epsilon = 0.9 时, 就说明有90% 的情况我会按照 Q 表的最优值选择行为, 10% 的时间使用随机选行为。alpha是学习率, 来决定这次的误差有多少是要被学习的, alpha是一个小于1 的数。gamma 是对未来 reward 的衰减值。</strong></p>
 <h3 id="2-1-5-QLearning-中的-Gamma">2.1.5 QLearning 中的 Gamma</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300934738.png" srcset="/img/loading.gif" lazyload alt="5" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202111300934738.png" srcset="/img/loading.gif" lazyload alt="5"></p>
 <p>我们重写一下 Q(s1) 的公式, 将 Q(s2) 拆开, 因为Q(s2)可以像 Q(s1)一样,是关于Q(s3) 的, 所以可以写成这样, 然后以此类推, 不停地这样写下去, 最后就能写成这样。**可以看出Q(s1) 是有关于之后所有的奖励, 但这些奖励正在衰减, 离 s1 越远的状态衰减越严重。**不好理解? 行, 我们想象 Qlearning 的机器人天生近视眼, gamma = 1 时, 机器人有了一副合适的眼镜, 在 s1 看到的 Q 是未来没有任何衰变的奖励, 也就是机器人能清清楚楚地看到之后所有步的全部价值, 但是当 gamma =0, 近视机器人没了眼镜, 只能摸到眼前的 reward, 同样也就只在乎最近的大奖励, 如果 gamma 从 0 变到 1, 眼镜的度数由浅变深, 对远处的价值看得越清楚, 所以机器人渐渐变得有远见, 不仅仅只看眼前的利益, 也为自己的未来着想。</p>
 <h3 id="2-1-6-补充">2.1.6 补充</h3>
 <p>1.为什么不直接用现实值更新老的Q值呢？</p>
@@ -344,7 +202,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update_env</span>(<span class="hljs-params">S, episode, step_counter</span>):<br>    <span class="hljs-comment"># This is how environment be updated</span><br>    env_list = [<span class="hljs-string">&#x27;-&#x27;</span>]*(N_STATES-<span class="hljs-number">1</span>) + [<span class="hljs-string">&#x27;T&#x27;</span>]   <span class="hljs-comment"># &#x27;---------T&#x27; our environment</span><br>    <span class="hljs-keyword">if</span> S == <span class="hljs-string">&#x27;terminal&#x27;</span>:<br>        interaction = <span class="hljs-string">&#x27;Episode %s: total_steps = %s&#x27;</span> % (episode+<span class="hljs-number">1</span>, step_counter)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(interaction), end=<span class="hljs-string">&#x27;&#x27;</span>)<br>        time.sleep(<span class="hljs-number">2</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r                                &#x27;</span>, end=<span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        env_list[S] = <span class="hljs-string">&#x27;o&#x27;</span><br>        interaction = <span class="hljs-string">&#x27;&#x27;</span>.join(env_list)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(interaction), end=<span class="hljs-string">&#x27;&#x27;</span>)<br>        time.sleep(FRESH_TIME)<br></code></pre></td></tr></table></figure>
 <h3 id="2-2-7-强化学习主循环">2.2.7 强化学习主循环</h3>
 <p>最重要的地方就在这里。 你定义的 RL 方法都在这里体现。 在之后的教程中, 我们会更加详细得讲解 RL 中的各种方法, 下面的内容, 大家大概看看就行, 这节内容不用仔细研究。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112021050182.png" srcset="/img/loading.gif" lazyload alt="6" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112021050182.png" srcset="/img/loading.gif" lazyload alt="6"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">rl</span>():<br>    q_table = build_q_table(N_STATES, ACTIONS)  <span class="hljs-comment"># 初始 q table</span><br>    <span class="hljs-keyword">for</span> episode <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(MAX_EPISODES):     <span class="hljs-comment"># 回合</span><br>        step_counter = <span class="hljs-number">0</span><br>        S = <span class="hljs-number">0</span>   <span class="hljs-comment"># 回合初始位置</span><br>        is_terminated = <span class="hljs-literal">False</span>   <span class="hljs-comment"># 是否回合结束</span><br>        update_env(S, episode, step_counter)    <span class="hljs-comment"># 环境更新</span><br>        <br>        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> is_terminated:<br>            A = choose_action(S, q_table)   <span class="hljs-comment"># 选行为</span><br>            S_, R = get_env_feedback(S, A)  <span class="hljs-comment"># 实施行为并得到环境的反馈</span><br>            q_predict = q_table.loc[S, A]    <span class="hljs-comment"># 估算的(状态-行为)值</span><br>            <span class="hljs-keyword">if</span> S_ != <span class="hljs-string">&#x27;terminal&#x27;</span>:<br>                q_target = R + GAMMA * q_table.iloc[S_, :].<span class="hljs-built_in">max</span>()   <span class="hljs-comment">#  实际的(状态-行为)值 (回合没结束)</span><br>            <span class="hljs-keyword">else</span>:<br>                q_target = R     <span class="hljs-comment">#  实际的(状态-行为)值 (回合结束)</span><br>                is_terminated = <span class="hljs-literal">True</span>    <span class="hljs-comment"># terminate this episode</span><br><br>            q_table.loc[S, A] += ALPHA * (q_target - q_predict)  <span class="hljs-comment">#  q_table 更新</span><br>            S = S_  <span class="hljs-comment"># 探索者移动到下一个 state</span><br><br>            update_env(S, episode, step_counter+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 环境更新</span><br><br>            step_counter += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> q_table<br></code></pre></td></tr></table></figure>
 <p>写好所有的评估和更新准则后, 我们就能开始训练了, 把探索者丢到环境中, 让它自己去玩吧。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    q_table = rl()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r\nQ-table:\n&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(q_table)<br></code></pre></td></tr></table></figure>
@@ -354,9 +212,9 @@
 <h2 id="2-3-Q-learning-算法更新">2.3 Q-learning 算法更新</h2>
 <h3 id="2-3-1-要点">2.3.1 要点</h3>
 <p>上次我们知道了 RL 之中的 Q-learning 方法是在做什么事, 今天我们就来说说一个更具体的例子。让探索者学会走迷宫。黄色的是天堂 (reward 1), 黑色的地狱 (reward -1)。大多数 RL 是由 reward 导向的, 所以定义 reward 是 RL 中比较重要的一点。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112031036521.png" srcset="/img/loading.gif" lazyload alt="7" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112031036521.png" srcset="/img/loading.gif" lazyload alt="7"></p>
 <h3 id="2-3-2-算法">2.3.2 算法</h3>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112031037484.png" srcset="/img/loading.gif" lazyload alt="8" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202112031037484.png" srcset="/img/loading.gif" lazyload alt="8"></p>
 <p>**整个算法就是一直不断更新 Q table 里的值, 然后再根据新的值来判断要在某个 state 采取怎样的 action。**Qlearning 是一个 <strong>off-policy</strong> 的算法, 因为里面的 <code>max</code> action 让 Q table 的更新可以不基于正在经历的经验(可以是现在学习着很久以前的经验,甚至是学习他人的经验)。不过这一次的例子, 我们没有运用到 off-policy, 而是把 Qlearning 用在了 on-policy 上, 也就是现学现卖, 将现在经历的直接当场学习并运用。</p>
 <h3 id="2-3-3-算法的代码形式">2.3.3 算法的代码形式</h3>
 <p>首先我们先 import 两个模块, <code>maze_env</code> 是我们的环境模块, 已经编写好了, 大家可以直接在<a target="_blank" rel="noopener" href="https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/2_Q_Learning_maze/maze_env.py">这里下载</a>, <code>maze_env</code> 模块我们可以不深入研究, 如果你对编辑环境感兴趣, 可以去看看如何使用 python 自带的简单 GUI 模块 <code>tkinter</code> 来编写虚拟环境. 我也有<a target="_blank" rel="noopener" href="https://mofanpy.com/tutorials/python-basic/tkinter/">对应的教程</a>。<code>maze_env</code> 就是用 <code>tkinter</code> 编写的. 而 <code>RL_brain</code> 这个模块是 RL 的大脑部分, 我们下节会讲。</p>
@@ -368,7 +226,7 @@
 <p>应该是 tkinter 的跳帧问题，实际上还是走了 2 步</p>
 <p>2.observation的初始值（5，5，35，35）对应成我们可以理解的坐标（x,y），这应该是怎么转换的呢？</p>
 <p>是正方形的x1,y1,x2,y2 坐标。</p>
-<p>3.您好，我看maze_env的代码时，没有看到针对不同state对action的限制。<br />
+<p>3.您好，我看maze_env的代码时，没有看到针对不同state对action的限制。<br>
 比如当已经走到maze的边界，这时不需要限制方块的行为吗？运行run this后，发现方块在边界的移动刷新速率并不总相同，是否因为上述action未受限？</p>
 <p>在maze_env.py的第95行有限制。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> action == <span class="hljs-number">0</span>:<br>    <span class="hljs-keyword">if</span> s[<span class="hljs-number">1</span>] &gt; UNIT:<br>        base_action[<span class="hljs-number">1</span>] -= UNIT<br><span class="hljs-keyword">elif</span> action == <span class="hljs-number">1</span>:   <br>    <span class="hljs-keyword">if</span> s[<span class="hljs-number">1</span>] &lt; (MAZE_H - <span class="hljs-number">1</span>) * UNIT:<br>        base_action[<span class="hljs-number">1</span>] += UNIT<br><span class="hljs-keyword">elif</span> action == <span class="hljs-number">2</span>:   <br>    <span class="hljs-keyword">if</span> s[<span class="hljs-number">0</span>] &lt; (MAZE_W - <span class="hljs-number">1</span>) * UNIT:<br>        base_action[<span class="hljs-number">0</span>] += UNIT<br><span class="hljs-keyword">elif</span> action == <span class="hljs-number">3</span>:   <br>    <span class="hljs-keyword">if</span> s[<span class="hljs-number">0</span>] &gt; UNIT:<br>        base_action[<span class="hljs-number">0</span>] -= UNIT<br></code></pre></td></tr></table></figure>
@@ -390,373 +248,134 @@
 <h3 id="2-4-5-检测-state-是否存在">2.4.5 检测 state 是否存在</h3>
 <p>这个功能就是检测 <code>q_table</code> 中有没有当前 state 的步骤了, 如果还没有当前 state, 那我们就插入一组全 0 数据, 当做这个 state 的所有 action 初始 values。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">check_state_exist</span>(<span class="hljs-params">self, state</span>):<br>        <span class="hljs-keyword">if</span> state <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.q_table.index:<br>            <span class="hljs-comment"># append new state to q table</span><br>            <span class="hljs-variable language_">self</span>.q_table = <span class="hljs-variable language_">self</span>.q_table.append(<br>                pd.Series(<br>                    [<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.actions),<br>                    index=<span class="hljs-variable language_">self</span>.q_table.columns,<br>                    name=state,<br>                )<br>            )<br></code></pre></td></tr></table></figure>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
 <span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
-  
-  
-
-      </span>
-    
-  
+<span class="category-chain">
+<a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
 </span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="print-no-link">#动态规划</a>
-      
-    </div>
-  
+</span>
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>莫烦强化学习-Q Leaning</div>
-      <div>https://blog.fulequn.online/2021/11/Article202111291/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2021年11月29日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/11/Article202111292/" title="强化学习系列（一）：强化学习简介">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">强化学习系列（一）：强化学习简介</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/11/Article202111226/" title="《深度学习实战》汇总">
-                        <span class="hidden-mobile">《深度学习实战》汇总</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="print-no-link">#动态规划</a>
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>莫烦强化学习-Q Leaning</div>
+<div>https://blog.fulequn.online/2021/11/Article202111291/</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2021年11月29日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2021/11/Article202111292/" title="强化学习系列（一）：强化学习简介">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">强化学习系列（一）：强化学习简介</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2021/11/Article202111226/" title="《深度学习实战》汇总">
+<span class="hidden-mobile">《深度学习实战》汇总</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>

@@ -1,22 +1,16 @@
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Fulequn">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="斐波那契数 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：  F(0) &#x3D; 0，F(1) &#x3D; 1 F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1  给定 n ，请计算 F(n) 。 示例 1：  输入：n &#x3D; 2 输出：1 解释：F(2) &#x3D; F(1) + F(0) &#x3D;">
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="斐波那契数 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：  F(0) &#x3D; 0，F(1) &#x3D; 1 F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1  给定 n ，请计算 F(n) 。 示例 1：  输入：n &#x3D; 2 输出：1 解释：F(2) &#x3D; F(1) + F(0) &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法训练3.2.1 基础DP">
 <meta property="og:url" content="https://blog.fulequn.online/2024/05/Article202405181/index.html">
@@ -42,284 +36,148 @@
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182151752.png">
-  
-  
-  
-  <title>算法训练3.2.1 基础DP - FuLeQun&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
+<title>算法训练3.2.1 基础DP - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.fulequn.online","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null,"tajs":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
-
-
+<meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>FuLeQun&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="算法训练3.2.1 基础DP"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-18 21:30" pubdate>
-          2024年5月18日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          <!-- compatible with older versions-->
-          11k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          <!-- compatible with older versions-->
-          92 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="算法训练3.2.1 基础DP"></span>
 </div>
-
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-05-18 21:30" pubdate>
+2024年5月18日 晚上
+</time>
+</span>
 </div>
-
-  </header>
-
-  <main>
-    
-      
-
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+11k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+92 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
 <div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">算法训练3.2.1 基础DP</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h3 id="斐波那契数"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">斐波那契数</a></h3>
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">算法训练3.2.1 基础DP</h1>
+<div class="markdown-body">
+<h3 id="斐波那契数"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">斐波那契数</a></h3>
 <p><strong>斐波那契数</strong> （通常用 <code>F(n)</code> 表示）形成的序列称为 <strong>斐波那契数列</strong> 。该数列由 <code>0</code> 和 <code>1</code> 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
 <blockquote>
-<p>F(0) = 0，F(1) = 1<br />
+<p>F(0) = 0，F(1) = 1<br>
 F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1</p>
 </blockquote>
 <p>给定 <code>n</code> ，请计算 <code>F(n)</code> 。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：n = 2<br />
-输出：1<br />
+<p>输入：n = 2<br>
+输出：1<br>
 解释：F(2) = F(1) + F(0) = 1 + 0 = 1</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：n = 3<br />
-输出：2<br />
+<p>输入：n = 3<br>
+输出：2<br>
 解释：F(3) = F(2) + F(1) = 1 + 1 = 2</p>
 </blockquote>
 <p>示例 3：</p>
 <blockquote>
-<p>输入：n = 4<br />
-输出：3<br />
+<p>输入：n = 4<br>
+输出：3<br>
 解释：F(4) = F(3) + F(2) = 2 + 1 = 3</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
+<p>提示：<br>
 0 &lt;= n &lt;= 30</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -333,14 +191,14 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1</p>
 </li>
 <li>
 <p>base case：对于任意的 <code>i</code>，都只依赖于 <code>i - 1</code> 和 <code>i - 2</code> ，因此我们只需要将数组下标为 <code>0</code> 和下标为 <code>1</code> 预先填好，后面所有的值都按照式子即可填满表中所有的值。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182151752.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182151752.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
 <p>填表顺序：从下标为 <code>2</code> 开始往后填表即可</p>
 </li>
 </ul>
 <p>过程如下：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182152946.gif" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182152946.gif" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>代码展示</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>; dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> ; i &lt;= n ; i++) dp[i] = dp[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">2</span>];<br>        <span class="hljs-keyword">return</span> dp[n];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="打家劫舍"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">打家劫舍</a></h3>
@@ -348,27 +206,27 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1</p>
 <p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>不触动警报装置的情况下</strong> ，一夜之内能够偷窃到的最高金额。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：[1,2,3,1]<br />
-输出：4<br />
-解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。<br />
+<p>输入：[1,2,3,1]<br>
+输出：4<br>
+解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。<br>
 偷窃到的最高金额 = 1 + 3 = 4 。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：[2,7,9,3,1]<br />
-输出：12<br />
-解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。<br />
+<p>输入：[2,7,9,3,1]<br>
+输出：12<br>
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。<br>
 偷窃到的最高金额 = 2 + 9 + 1 = 12 。</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
-1 &lt;= nums.length &lt;= 100<br />
+<p>提示：<br>
+1 &lt;= nums.length &lt;= 100<br>
 0 &lt;= nums[i] &lt;= 400</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
 <p>此题本质上是斐波那契数列。</p>
 <ul>
-<li>状态转移方程式：<code>dp[i]</code> 表示考虑 <code>[0, i]</code> 的子数组按照规则进行偷窃，能获取的最大价值。对于下标为 <code>i</code> 的元素，可以选和不选，如果选的话则只能考虑 <code>i - 2</code>（因为不能偷相邻的），否则则考虑  <code>i - 1</code>，因此式子为：<code>dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])</code></li>
+<li>状态转移方程式：<code>dp[i]</code> 表示考虑 <code>[0, i]</code> 的子数组按照规则进行偷窃，能获取的最大价值。对于下标为 <code>i</code> 的元素，可以选和不选，如果选的话则只能考虑 <code>i - 2</code>（因为不能偷相邻的），否则则考虑 <code>i - 1</code>，因此式子为：<code>dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])</code></li>
 <li>容器规模：<code>i</code> 的含义是数组下标，因此范围是 <code>[0, nums.length - 1]</code>，因此容器大小是 <code>nums.length</code></li>
 <li>base case：对于任意一个元素 <code>i</code> 只依赖 <code>i - 1</code> 和 <code>i - 2</code>，因此只需要预先填上 <code>nums[0]</code> 和 <code>nums[1]</code> 即可。</li>
 <li>填表顺序：从下标为 <code>2</code> 开始按序填满数组即可。</li>
@@ -379,35 +237,35 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1</p>
 <p>给定一个包含非负整数的 <code>m x n</code> 网格 <code>grid</code> ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。</p>
 <p><strong>说明</strong>：每次只能向下或者向右移动一步。</p>
 <p>示例 1：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182152529.png" srcset="/img/loading.gif" lazyload alt="示例1" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182152529.png" srcset="/img/loading.gif" lazyload alt="示例1"></p>
 <blockquote>
-<p>输入：grid = [[1,3,1],[1,5,1],[4,2,1]]<br />
-输出：7<br />
+<p>输入：grid = [[1,3,1],[1,5,1],[4,2,1]]<br>
+输出：7<br>
 解释：因为路径 1→3→1→1→1 的总和最小。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：grid = [[1,2,3],[4,5,6]]<br />
+<p>输入：grid = [[1,2,3],[4,5,6]]<br>
 输出：12</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
-m == grid.length<br />
-n == grid[i].length<br />
-1 &lt;= m, n &lt;= 200<br />
+<p>提示：<br>
+m == grid.length<br>
+n == grid[i].length<br>
+1 &lt;= m, n &lt;= 200<br>
 0 &lt;= grid[i][j] &lt;= 100</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
 <ul>
 <li>
-<p>状态转移方程式：<code>dp[i][j]</code> 表示走到 <code>(i, j)</code> 这个位置的最小路径和的值。而走到位置 <code>(i, j)</code> 只有两个位置可以走过来，也就是 <code>(i - 1, j)</code>  和 <code>(i, j - 1)</code>，因此我们取最小的即可，也就是 <code>dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]</code></p>
+<p>状态转移方程式：<code>dp[i][j]</code> 表示走到 <code>(i, j)</code> 这个位置的最小路径和的值。而走到位置 <code>(i, j)</code> 只有两个位置可以走过来，也就是 <code>(i - 1, j)</code> 和 <code>(i, j - 1)</code>，因此我们取最小的即可，也就是 <code>dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]</code></p>
 </li>
 <li>
 <p>容器规模：<code>i</code> 和 <code>j</code> 的范围分别是 <code>m</code> 和 <code>n</code> ，因此定义 <code>dp[m][n]</code> 即可</p>
 </li>
 <li>
-<p>base case：对于任意一个位置 <code>(i, j)</code> 都依赖于  <code>(i - 1, j)</code> 和 <code>(i, j - 1)</code>。因此我们只需要填满第一行 <code>f(0, j)</code> 即可，接下来依次填满填满即可 <code>(f(1, j), f(2, j))</code>。有一定基础的同学不难看出，这个依赖关系与“完全背包”一致。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153084.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p>base case：对于任意一个位置 <code>(i, j)</code> 都依赖于 <code>(i - 1, j)</code> 和 <code>(i, j - 1)</code>。因此我们只需要填满第一行 <code>f(0, j)</code> 即可，接下来依次填满填满即可 <code>(f(1, j), f(2, j))</code>。有一定基础的同学不难看出，这个依赖关系与“完全背包”一致。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153084.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
 <p>填表顺序：从 <code>i</code> 等于 <code>1</code> 开始，一行一行从左往右填表即可。</p>
@@ -420,34 +278,34 @@ n == grid[i].length<br />
 <p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
 <p>问总共有多少条不同的路径？</p>
 <p>示例 1：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153939.png" srcset="/img/loading.gif" lazyload alt="示例1" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153939.png" srcset="/img/loading.gif" lazyload alt="示例1"></p>
 <blockquote>
-<p>输入：m = 3, n = 7<br />
+<p>输入：m = 3, n = 7<br>
 输出：28</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：m = 3, n = 2<br />
-输出：3<br />
-解释：<br />
-从左上角开始，总共有 3 条路径可以到达右下角。<br />
-1.向右 -&gt; 向下 -&gt; 向下<br />
-2.向下 -&gt; 向下 -&gt; 向右<br />
+<p>输入：m = 3, n = 2<br>
+输出：3<br>
+解释：<br>
+从左上角开始，总共有 3 条路径可以到达右下角。<br>
+1.向右 -&gt; 向下 -&gt; 向下<br>
+2.向下 -&gt; 向下 -&gt; 向右<br>
 3.向下 -&gt; 向右 -&gt; 向下</p>
 </blockquote>
 <p>示例 3：</p>
 <blockquote>
-<p>输入：m = 7, n = 3<br />
+<p>输入：m = 7, n = 3<br>
 输出：28</p>
 </blockquote>
 <p>示例 4：</p>
 <blockquote>
-<p>输入：m = 3, n = 3<br />
+<p>输入：m = 3, n = 3<br>
 输出：6</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
-1 &lt;= m, n &lt;= 100<br />
+<p>提示：<br>
+1 &lt;= m, n &lt;= 100<br>
 题目数据保证答案小于等于 2 * 10^9</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -460,7 +318,7 @@ n == grid[i].length<br />
 </li>
 <li>
 <p>base case：对于任意位置 <code>(i, j)</code> 都依赖于 <code>(i - 1, j)</code> 和 <code>(i, j -1)</code>，因此我们只需要填满第一行f(0, j)即可，接下来依次填满填满即可 <code>(f(1, j), f(2, j) … f(m - 1, j))</code>。有一定基础的同学不难看出，这个依赖关系与“完全背包”一致。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153862.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153862.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
 <p>填表顺序：从i等于1开始，一行一行从左往右填表即可。</p>
@@ -474,26 +332,26 @@ n == grid[i].length<br />
 <p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
 <p>网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
 <p>示例 1：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153069.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182153069.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
-<p>输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]<br />
-输出：2<br />
-解释：3x3 网格的正中间有一个障碍物。<br />
-从左上角到右下角一共有 2 条不同的路径：<br />
-1.向右 -&gt; 向右 -&gt; 向下 -&gt; 向下<br />
+<p>输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]<br>
+输出：2<br>
+解释：3x3 网格的正中间有一个障碍物。<br>
+从左上角到右下角一共有 2 条不同的路径：<br>
+1.向右 -&gt; 向右 -&gt; 向下 -&gt; 向下<br>
 2.向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</p>
 </blockquote>
 <p>示例 2：</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154994.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154994.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
-<p>输入：obstacleGrid = [[0,1],[0,0]]<br />
+<p>输入：obstacleGrid = [[0,1],[0,0]]<br>
 输出：1</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
-m == obstacleGrid.length<br />
-n == obstacleGrid[i].length<br />
-1 &lt;= m, n &lt;= 100<br />
+<p>提示：<br>
+m == obstacleGrid.length<br>
+n == obstacleGrid[i].length<br>
+1 &lt;= m, n &lt;= 100<br>
 obstacleGrid[i][j] 为 0 或 1</p>
 </blockquote>
 <p><strong>代码展示</strong></p>
@@ -501,19 +359,19 @@ obstacleGrid[i][j] 为 0 或 1</p>
 <h3 id="杨辉三角"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pascals-triangle/">杨辉三角</a></h3>
 <p>给定一个非负整数 <code>numRows</code>，生成「杨辉三角」的前 <code>numRows</code> 行。</p>
 <p>在「杨辉三角」中，每个数是它左上方和右上方的数的和。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154669.gif" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154669.gif" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>示例 1:</p>
 <blockquote>
-<p>输入: numRows = 5<br />
+<p>输入: numRows = 5<br>
 输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]</p>
 </blockquote>
 <p>示例 2:</p>
 <blockquote>
-<p>输入: numRows = 1<br />
+<p>输入: numRows = 1<br>
 输出: [[1]]</p>
 </blockquote>
 <blockquote>
-<p>提示:<br />
+<p>提示:<br>
 1 &lt;= numRows &lt;= 30</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -530,7 +388,7 @@ obstacleGrid[i][j] 为 0 或 1</p>
 <p>每一步只能移动到下一行中相邻的结点上。<strong>相邻的结点</strong> 在这里指的是 <strong>下标</strong> 与 <strong>上一层结点下标</strong> 相同或者等于 <strong>上一层结点下标 + 1</strong> 的两个结点。也就是说，如果正位于当前行的下标 <code>i</code> ，那么下一步可以移动到下一行的下标 <code>i</code> 或 <code>i + 1</code> 。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]<br />
+<p>输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]<br>
 输出：11</p>
 </blockquote>
 <p>解释：如下面简图所示：</p>
@@ -543,11 +401,11 @@ obstacleGrid[i][j] 为 0 或 1</p>
 <p>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：triangle = [[-10]]<br />
+<p>输入：triangle = [[-10]]<br>
 输出：-10</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
+<p>提示：<br>
 1 &lt;= triangle.length &lt;= 200</p>
 <p>triangle[0].length == 1</p>
 <p>triangle[i].length == triangle[i - 1].length + 1</p>
@@ -568,23 +426,23 @@ obstacleGrid[i][j] 为 0 或 1</p>
 <p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：n = 12<br />
-输出：3<br />
+<p>输入：n = 12<br>
+输出：3<br>
 解释：12 = 4 + 4 + 4</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：n = 13<br />
-输出：2<br />
+<p>输入：n = 13<br>
+输出：2<br>
 解释：13 = 4 + 9</p>
 </blockquote>
 <blockquote>
-<p>提示：<br />
+<p>提示：<br>
 1 &lt;= n &lt;= 10^4</p>
 </blockquote>
 <p><strong>题目描述</strong></p>
 <ul>
-<li>状态转移方程式：<code>dp[i]</code> 的含义为 <code>i</code> 的完全平方数的最少数量。枚举思路是把 <code>[1, i]</code> 的每个数字都尝试一次。也就是 <code>dp[i] = min(dp[i - j^2] + 1)</code>，其中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>1</mn><mo separator="true">,</mo><msqrt><mi>i</mi></msqrt><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">j \in [1,\sqrt{i}]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1648em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9148em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">i</span></span></span><span style="top:-2.8748em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+<li>状态转移方程式：<code>dp[i]</code> 的含义为 <code>i</code> 的完全平方数的最少数量。枚举思路是把 <code>[1, i]</code> 的每个数字都尝试一次。也就是 <code>dp[i] = min(dp[i - j^2] + 1)</code>，其中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>1</mn><mo separator="true">,</mo><msqrt><mi>i</mi></msqrt><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">j \in [1,\sqrt{i}]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="vertical-align:-.1944em;height:.854em"></span><span class="mord mathnormal" style="margin-right:.0572em">j</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="base"><span class="strut" style="vertical-align:-.25em;height:1.1648em"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.9148em"><span class="svg-align" style="top:-3em"><span class="pstrut" style="height:3em"></span><span class="mord" style="padding-left:.833em"><span class="mord mathnormal">i</span></span></span><span style="top:-2.8748em"><span class="pstrut" style="height:3em"></span><span class="hide-tail" style="min-width:.853em;height:1.08em"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
 c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
 c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
@@ -595,7 +453,7 @@ c5.3,-9.3,12,-14,20,-14
 H400000v40H845.2724
 s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
 c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
-M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1252em;"><span></span></span></span></span></span><span class="mclose">]</span></span></span></span></li>
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.1252em"><span></span></span></span></span></span><span class="mclose">]</span></span></span></span></li>
 <li>容器规模：<code>i</code> 的范围是 <code>[0, n]</code>，因此 dp[n + 1]</li>
 <li>base case：<code>dp[1] = 1</code>，<code>i</code> 的完全平方数的数量是 <code>1</code></li>
 <li>填表顺序，从 <code>2</code> 开始往后填即可。</li>
@@ -607,22 +465,22 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>题目数据保证答案符合 32 位整数范围。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：nums = [1,2,3], target = 4<br />
-输出：7<br />
-解释：<br />
-所有可能的组合为：<br />
-(1, 1, 1, 1)<br />
-(1, 1, 2)<br />
-(1, 2, 1)<br />
-(1, 3)<br />
-(2, 1, 1)<br />
-(2, 2)<br />
-(3, 1)<br />
+<p>输入：nums = [1,2,3], target = 4<br>
+输出：7<br>
+解释：<br>
+所有可能的组合为：<br>
+(1, 1, 1, 1)<br>
+(1, 1, 2)<br>
+(1, 2, 1)<br>
+(1, 3)<br>
+(2, 1, 1)<br>
+(2, 2)<br>
+(3, 1)<br>
 请注意，顺序不同的序列被视作不同的组合。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：nums = [9], target = 3<br />
+<p>输入：nums = [9], target = 3<br>
 输出：0</p>
 </blockquote>
 <p>提示：</p>
@@ -636,7 +494,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>此题的枚举思路如下：</p>
 <p>以样例1为例：对于数字7，我们可以选择1、2或者3，不同的选择最后求和的即可。</p>
 <ul>
-<li>状态转移方程式：<code>dp[i]</code> 表示用 <code>nums</code> 组成 <code>i</code> 有多少种组合方式。<code>dp[i] = Σ(dp[i - num])</code>  其中 <code>num∈nums</code>。</li>
+<li>状态转移方程式：<code>dp[i]</code> 表示用 <code>nums</code> 组成 <code>i</code> 有多少种组合方式。<code>dp[i] = Σ(dp[i - num])</code> 其中 <code>num∈nums</code>。</li>
 <li>容器规模：<code>i</code> 的范围是 <code>[0, n]</code>。</li>
 <li>base case：<code>dp[0] = 1</code>，0 的组合就只有一种（什么都不选）</li>
 <li>顺序：从 1 到 n 填表</li>
@@ -648,23 +506,23 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p><strong>子序列</strong> 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，<code>[3,6,2,7]</code> 是数组 <code>[0,3,1,6,2,2,7]</code> 的<strong>子序列</strong>。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：nums = [10,9,2,5,3,7,101,18]<br />
-输出：4<br />
+<p>输入：nums = [10,9,2,5,3,7,101,18]<br>
+输出：4<br>
 解释：最长递增子序列是 [2,3,7,101]，因此长度为 4 。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：nums = [0,1,0,3,2,3]<br />
+<p>输入：nums = [0,1,0,3,2,3]<br>
 输出：4</p>
 </blockquote>
 <p>示例 3：</p>
 <blockquote>
-<p>输入：nums = [7,7,7,7,7,7,7]<br />
+<p>输入：nums = [7,7,7,7,7,7,7]<br>
 输出：1</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= nums.length &lt;= 2500<br />
+<p>1 &lt;= nums.length &lt;= 2500<br>
 10^4 &lt;= nums[i] &lt;= 10^4</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -681,20 +539,20 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p><strong>连续递增的子序列</strong> 可以由两个下标 <code>l</code> 和 <code>r</code>（<code>l &lt; r</code>）确定，如果对于每个 <code>l &lt;= i &lt; r</code>，都有 <code>nums[i] &lt; nums[i + 1]</code> ，那么子序列 <code>[nums[l], nums[l + 1], …, nums[r - 1], nums[r]]</code> 就是连续递增子序列。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：nums = [1,3,5,4,7]<br />
-输出：3<br />
-解释：最长连续递增序列是 [1,3,5], 长度为3。<br />
+<p>输入：nums = [1,3,5,4,7]<br>
+输出：3<br>
+解释：最长连续递增序列是 [1,3,5], 长度为3。<br>
 尽管 [1,3,5,7] 也是升序的子序列, 但它不是连续的，因为 5 和 7 在原数组里被 4 隔开。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：nums = [2,2,2,2,2]<br />
-输出：1<br />
+<p>输入：nums = [2,2,2,2,2]<br>
+输出：1<br>
 解释：最长连续递增序列是 [2], 长度为1。</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= nums.length &lt;= 104<br />
+<p>1 &lt;= nums.length &lt;= 104<br>
 -10^9 &lt;= nums[i] &lt;= 10^9</p>
 </blockquote>
 <p>题目解析</p>
@@ -710,18 +568,18 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>给两个整数数组 <code>nums1</code> 和 <code>nums2</code> ，返回 两个数组中 <strong>公共的 、长度最长</strong>的子数组的长度 。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：nums1 = [1,2,3,2,1], nums2 = [3,2,1,4,7]<br />
-输出：3<br />
+<p>输入：nums1 = [1,2,3,2,1], nums2 = [3,2,1,4,7]<br>
+输出：3<br>
 解释：长度最长的公共子数组是 [3,2,1] 。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：nums1 = [0,0,0,0,0], nums2 = [0,0,0,0,0]<br />
+<p>输入：nums1 = [0,0,0,0,0], nums2 = [0,0,0,0,0]<br>
 输出：5</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= nums1.length, nums2.length &lt;= 1000<br />
+<p>1 &lt;= nums1.length, nums2.length &lt;= 1000<br>
 0 &lt;= nums1[i], nums2[i] &lt;= 100</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -735,8 +593,8 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 </li>
 <li>
 <p>base case：由于依赖关系如下因此 basecase 应该是第一行和第一列（红色部分）因此，basecase是 <code>dp[0][j]</code> 和 <code>dp[i][0]</code>，二者均为 0。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154127.png" srcset="/img/loading.gif" lazyload alt="" /></p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154004.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154127.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154004.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
 <p>填表顺序：从[1, 1]开始从左往右，从上到下填表即可。</p>
@@ -751,25 +609,25 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>两个字符串的 <strong>公共子序列</strong> 是这两个字符串所共同拥有的子序列。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：text1 = “abcde”, text2 = “ace”<br />
-输出：3<br />
+<p>输入：text1 = “abcde”, text2 = “ace”<br>
+输出：3<br>
 解释：最长公共子序列是 “ace” ，它的长度为 3 。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：text1 = “abc”, text2 = “abc”<br />
-输出：3<br />
+<p>输入：text1 = “abc”, text2 = “abc”<br>
+输出：3<br>
 解释：最长公共子序列是 “abc” ，它的长度为 3 。</p>
 </blockquote>
 <p>示例 3：</p>
 <blockquote>
-<p>输入：text1 = “abc”, text2 = “def”<br />
-输出：0<br />
+<p>输入：text1 = “abc”, text2 = “def”<br>
+输出：0<br>
 解释：两个字符串没有公共子序列，返回 0 。</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= text1.length, text2.length &lt;= 1000<br />
+<p>1 &lt;= text1.length, text2.length &lt;= 1000<br>
 text1 和 text2 仅由小写英文字符组成。</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -787,18 +645,18 @@ text1 和 text2 仅由小写英文字符组成。</p>
 <p><strong>每步</strong> 可以删除任意一个字符串中的一个字符。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入: word1 = “sea”, word2 = “eat”<br />
-输出: 2<br />
+<p>输入: word1 = “sea”, word2 = “eat”<br>
+输出: 2<br>
 解释: 第一步将 “sea” 变为 “ea” ，第二步将 “eat”变为 “ea”</p>
 </blockquote>
 <p>示例  2:</p>
 <blockquote>
-<p>输入：word1 = “leetcode”, word2 = “etco”<br />
+<p>输入：word1 = “leetcode”, word2 = “etco”<br>
 输出：4</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= word1.length, word2.length &lt;= 500<br />
+<p>1 &lt;= word1.length, word2.length &lt;= 500<br>
 word1 和 word2 只包含小写英文字母</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -820,27 +678,27 @@ word1 和 word2 只包含小写英文字母</p>
 </ul>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：word1 = “horse”, word2 = “ros”<br />
-输出：3<br />
-解释：<br />
-horse -&gt; rorse (将 ‘h’ 替换为 ‘r’)<br />
-rorse -&gt; rose (删除 ‘r’)<br />
+<p>输入：word1 = “horse”, word2 = “ros”<br>
+输出：3<br>
+解释：<br>
+horse -&gt; rorse (将 ‘h’ 替换为 ‘r’)<br>
+rorse -&gt; rose (删除 ‘r’)<br>
 rose -&gt; ros (删除 ‘e’)</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：word1 = “intention”, word2 = “execution”<br />
-输出：5<br />
-解释：<br />
-intention -&gt; inention (删除 ‘t’)<br />
-inention -&gt; enention (将 ‘i’ 替换为 ‘e’)<br />
-enention -&gt; exention (将 ‘n’ 替换为 ‘x’)<br />
-exention -&gt; exection (将 ‘n’ 替换为 ‘c’)<br />
+<p>输入：word1 = “intention”, word2 = “execution”<br>
+输出：5<br>
+解释：<br>
+intention -&gt; inention (删除 ‘t’)<br>
+inention -&gt; enention (将 ‘i’ 替换为 ‘e’)<br>
+enention -&gt; exention (将 ‘n’ 替换为 ‘x’)<br>
+exention -&gt; exection (将 ‘n’ 替换为 ‘c’)<br>
 exection -&gt; execution (插入 ‘u’)</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>0 &lt;= word1.length, word2.length &lt;= 500<br />
+<p>0 &lt;= word1.length, word2.length &lt;= 500<br>
 word1 和 word2 由小写英文字母组成</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -859,19 +717,19 @@ word1 和 word2 由小写英文字母组成</p>
 <p>具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：s = “abc”<br />
-输出：3<br />
+<p>输入：s = “abc”<br>
+输出：3<br>
 解释：三个回文子串: “a”, “b”, “c”</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：s = “aaa”<br />
-输出：6<br />
+<p>输入：s = “aaa”<br>
+输出：6<br>
 解释：6个回文子串: “a”, “a”, “a”, “aa”, “aa”, “aaa”</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= s.length &lt;= 1000<br />
+<p>1 &lt;= s.length &lt;= 1000<br>
 s 由小写英文字母组成</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -885,10 +743,10 @@ s 由小写英文字母组成</p>
 </li>
 <li>
 <p>base case：<code>i == j</code> 和 <code>i + 1==j</code> 的时候。依赖关系如下任何区间 <code>(i, j)</code> 最终都会依赖值对角线的值上（蓝色和黄色的格子），因此 <code>i==j</code> 和 <code>i+1==j</code> 是basecase。当 <code>i==j</code> 的时候，<code>dp[i][j]</code> 表示的是只有一个字符，<code>dp[i][j]=true</code>；当 <code>i + 1==j</code> 的时候，<code>dp[i][j]</code> 表示的是两个连续的字符，因此 <code>dp[i][j]</code> 是 <code>true</code> 或者 <code>false</code> 取决于 <code>s[i]==s[j]</code>。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154396.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182154396.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
-<p>填表顺序：先遍历 <code>j</code>  ，再遍历 <code>i</code>，<code>i</code> 逆序遍历。（这样才可以保证我们填表的时候依赖的值已经填好了）</p>
+<p>填表顺序：先遍历 <code>j</code> ，再遍历 <code>i</code>，<code>i</code> 逆序遍历。（这样才可以保证我们填表的时候依赖的值已经填好了）</p>
 </li>
 </ul>
 <p><strong>代码展示</strong></p>
@@ -898,19 +756,19 @@ s 由小写英文字母组成</p>
 <p>子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：s = “bbbab”<br />
-输出：4<br />
+<p>输入：s = “bbbab”<br>
+输出：4<br>
 解释：一个可能的最长回文子序列为 “bbbb” 。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：s = “cbbd”<br />
-输出：2<br />
+<p>输入：s = “cbbd”<br>
+输出：2<br>
 解释：一个可能的最长回文子序列为 “bb” 。</p>
 </blockquote>
 <p>提示：</p>
 <blockquote>
-<p>1 &lt;= s.length &lt;= 1000<br />
+<p>1 &lt;= s.length &lt;= 1000<br>
 s 仅由小写英文字母组成</p>
 </blockquote>
 <p><strong>题目解析</strong></p>
@@ -923,7 +781,7 @@ s 仅由小写英文字母组成</p>
 </li>
 <li>
 <p>base case：<code>i == j</code> 和 <code>i + 1==j</code> 的时候。依赖关系如下任何区间 <code>(i, j)</code> 最终都会依赖值对角线的值上（蓝色和黄色的格子），因此 <code>i==j</code> 和 <code>i+1==j</code> 是basecase。当 <code>i==j</code> 的时候，<code>dp[i][j]</code> 表示的是只有一个字符，<code>dp[i][j]=1</code>；当 <code>i + 1==j</code> 的时候，<code>dp[i][j]</code> 表示的是两个连续的字符，因此 <code>dp[i][j]</code> 是取决于 <code>s[i]==s[j]</code>，相等的时候是 <code>2</code>，不等则为 <code>1</code>。</p>
-<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182155017.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405182155017.png" srcset="/img/loading.gif" lazyload alt=""></p>
 </li>
 <li>
 <p>填表顺序：先遍历 <code>j</code>，再遍历 <code>i</code>，<code>i</code> 逆序遍历。（这样才可以保证我们填表的时候依赖的值已经填好了）</p>
@@ -931,379 +789,136 @@ s 仅由小写英文字母组成</p>
 </ul>
 <p><strong>代码展示</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestPalindromeSubseq</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <br>        <span class="hljs-comment">// dp[i][j]表示字符串s从索引i到j的子串的最长回文子序列长度</span><br>        <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n][n];<br>        <br>        <span class="hljs-comment">// 使用两层循环遍历字符串s，外层循环固定子串的结束索引j</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span> ; j &lt; n ; j++) &#123;<br>            <span class="hljs-comment">// 内层循环从j向开始遍历，固定子串的开始索引i</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> j ; i &gt;= <span class="hljs-number">0</span> ; i--) &#123;<br>                <span class="hljs-comment">// 如果子串只有一个字符，则最长回文子序列长度为1</span><br>                <span class="hljs-keyword">if</span> (i == j) dp[i][j] = <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">// 如果子串长度为2，且两个字符相同，则最长回文子序列长度为2</span><br>                <span class="hljs-comment">// 如果两个字符不同，则最长回文子序列长度为1</span><br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> == j) dp[i][j] = s.charAt(i) == s.charAt(j) ? <span class="hljs-number">2</span> : <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 如果子串两端的字符相同，则最长回文子序列长度为去掉两端字符后的最长回文子序列长度加2</span><br>                    <span class="hljs-keyword">if</span> (s.charAt(i) == s.charAt(j)) dp[i][j] = dp[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">2</span>;<br>                    <span class="hljs-comment">// 如果子串两端的字符不同，则最长回文子序列长度为不包含当前两端字符中任一端的最长回文子序列长度的最大值</span><br>                    <span class="hljs-keyword">else</span> dp[i][j] = Math.max(dp[i + <span class="hljs-number">1</span>][j], dp[i][j - <span class="hljs-number">1</span>]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-comment">// 返回dp[0][n - 1]，即整个字符串s的最长回文子序列的长度</span><br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>][n - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
 <span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-  
-  
-
-  
-
-      </span>
-    
-  
+<span class="category-chain">
+<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+<span>></span>
+<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
 </span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
-      
-    </div>
-  
+</span>
 </div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>算法训练3.2.1 基础DP</div>
-      <div>https://blog.fulequn.online/2024/05/Article202405181/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Fulequn</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2024年5月18日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405221/" title="算法训练3.2.2 背包模型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法训练3.2.2 背包模型</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2024/05/Article202405121/" title="算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第二部分">
-                        <span class="hidden-mobile">算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第二部分</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
 </div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
 </div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>算法训练3.2.1 基础DP</div>
+<div>https://blog.fulequn.online/2024/05/Article202405181/</div>
 </div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
-    </div>
-  
-  
-  
-  
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
 </div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年5月18日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/05/Article202405221/" title="算法训练3.2.2 背包模型">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">算法训练3.2.2 背包模型</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/05/Article202405121/" title="算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第二部分">
+<span class="hidden-mobile">算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第二部分</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var i=jQuery("#board-ctn").offset().top;window.tocbot.init(Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-i},CONFIG.toc)),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible")}})}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
 </body>
 </html>
