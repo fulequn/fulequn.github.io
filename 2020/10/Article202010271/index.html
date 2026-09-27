@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接： MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)  准备 在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的： 123456&#123;&quot;name&quot;:&quot;your name&quot;, &quot;age&quot;:22, &quot;gender&quot;:&quot;male&quot;,">
+<meta name="description" content="参考链接： MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)  准备 在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的： &#123; &quot;name&quot;:&quot;your name&quot;,  &quot;age&quot;:22,  &quot;gender&quot;:&quot;male&quot;,  &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB如何查询耗时记录的方法">
 <meta property="og:url" content="https://blog.fulequn.online/2020/10/Article202010271/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接： MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)  准备 在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的： 123456&#123;&quot;name&quot;:&quot;your name&quot;, &quot;age&quot;:22, &quot;gender&quot;:&quot;male&quot;,">
+<meta property="og:description" content="参考链接： MongoDB如何查询耗时记录的方法详解_MongoDB_脚本之家 (jb51.net)  准备 在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的： &#123; &quot;name&quot;:&quot;your name&quot;,  &quot;age&quot;:22,  &quot;gender&quot;:&quot;male&quot;,  &amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918083.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918084.png">
@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -154,16 +155,21 @@
 </blockquote>
 <p><strong>准备</strong></p>
 <p>在此之前，我们先在我们的数据库中插入10万条数据。数据的格式是这样的：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;your name&quot;</span><span class="hljs-punctuation">,</span> <br><span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">22</span><span class="hljs-punctuation">,</span> <br><span class="hljs-attr">&quot;gender&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;male&quot;</span><span class="hljs-punctuation">,</span> <br><span class="hljs-attr">&quot;grade&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;
+&quot;name&quot;:&quot;your name&quot;, 
+&quot;age&quot;:22, 
+&quot;gender&quot;:&quot;male&quot;, 
+&quot;grade&quot;:2
+&#125;</code></pre></div></figure>
 <p><strong>explain</strong></p>
 <p>explain方法是用来查看<code>db.collecion.find()</code>的一些查询信息的。例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.collectionName</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.explain</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.collectionName.find().explain()</code></pre></div></figure>
 <p>explain方法有个可选的参数verbose，是个字符串，他表示的是verbose的模式。一共分为3种模式：</p>
 <p>queryPlanner：默认参数，详细说明查询优化器选择的计划并列出被拒绝的计划。例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.students</span><span class="hljs-selector-class">.find</span>(&#123;grade:<span class="hljs-number">1</span>&#125;)<span class="hljs-selector-class">.explain</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.students.find(&#123;grade:1&#125;).explain()</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918083.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>executionStats：MongoDB运行查询优化器选择获胜的计划，执行计划，完成并返回成功，统计描述的胜利计划的执行。例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.students</span><span class="hljs-selector-class">.find</span>(&#123;grade:<span class="hljs-number">1</span>&#125;)<span class="hljs-selector-class">.explain</span>(<span class="hljs-string">&quot;executionStats&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.students.find(&#123;grade:1&#125;).explain(&quot;executionStats&quot;)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918084.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <p>allPlansExecution：MongoDB返回描述获奖计划的执行以及对其他候选人统计计划选择方案时捕获的统计。</p>
 <p>我们的目的是要记录执行find方法的耗时时间，所以用executionStats模式就可以了。</p>
@@ -184,7 +190,8 @@
 <li>也可以在客户端调用<code>db.setProfilingLevel</code>(级别)命令来实时配置。可以通过<code>db.getProfilingLevel()</code>命令来获取当前的Profile级别。</li>
 </ul>
 <p>例如：</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss">db<span class="hljs-selector-class">.setProfilingLevel</span>(<span class="hljs-number">2</span>)<br>db<span class="hljs-selector-class">.getProfilingLevel</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.setProfilingLevel(2)
+db.getProfilingLevel()</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918086.png" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p>Profiling一共分为3个级别：</p>
 <ul>
@@ -193,19 +200,20 @@
 <li>3 - 记录所有命令</li>
 </ul>
 <p>Profile 记录在级别1时会记录慢命令，那么这个慢的定义是什么?上面我们说到其默认为100ms，当然有默认就有设置，其设置方法和级别一样有两种，一种是通过添 加–slowms启动参数配置。第二种是调用<code>db.setProfilingLevel</code>时加上第二个参数：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.setProfilingLevel(level,slowms)<br><span class="hljs-attribute">db</span>.setProfilingLevel( <span class="hljs-number">1</span> , <span class="hljs-number">10</span> );<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.setProfilingLevel(level,slowms)
+db.setProfilingLevel( 1 , 10 );</code></pre></div></figure>
 <p><strong>查询 Profiling 记录</strong></p>
 <p>开启profiling功能后，系统会把相关命令详细信息记录到当前数据库的<code>system.profile</code>集合里。查询方法也是跟普通的集合查询一样。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find()</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918087.png" srcset="/img/loading.gif" lazyload alt="5"></p>
 <p>其中，mills就是命令耗时记录。</p>
 <p>由于我们设置的级别是2，所以所有命令都有记录，现在我们把他改为级别1，且只记录耗时20毫秒以上的记录：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">db</span>.setProfilingLevel( <span class="hljs-number">1</span> , <span class="hljs-number">20</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.setProfilingLevel( 1 , 20)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918088.png" srcset="/img/loading.gif" lazyload alt="6"></p>
 <p>然后我们再执行一下聚合查询，查看下耗时时间：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">db.students.<span class="hljs-title function_ invoke__">aggregate</span>( &#123;<span class="hljs-variable">$group</span>:&#123;<span class="hljs-attr">_id</span>:<span class="hljs-string">&quot;<span class="hljs-subst">$grade</span>&quot;</span>,<span class="hljs-attr">avgAge</span>:&#123;<span class="hljs-variable">$avg</span>:<span class="hljs-string">&quot;<span class="hljs-subst">$age</span>&quot;</span>&#125;&#125;&#125; )<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.students.aggregate( &#123;$group:&#123;_id:&quot;$grade&quot;,avgAge:&#123;$avg:&quot;$age&quot;&#125;&#125;&#125; )</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918089.png" srcset="/img/loading.gif" lazyload alt="7"></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.pretty</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find().pretty()</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918090.png" srcset="/img/loading.gif" lazyload alt="8"></p>
 <p>可以看出，我们的这聚合查询耗时70毫秒。</p>
 <p><strong>profile 部分字段解释</strong></p>
@@ -221,13 +229,13 @@
 </ul>
 <p><strong>下面介绍几个常用的查询命令：</strong></p>
 <p>列出执行时间长于某一限度(例如：20ms)的 Profile 记录.</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>(&#123;millis:&#123;<span class="hljs-variable">$gt</span>:<span class="hljs-number">50</span>&#125;&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find(&#123;millis:&#123;$gt:50&#125;&#125;)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918091.png" srcset="/img/loading.gif" lazyload alt="9"></p>
 <p>查看最新的 3条Profile 记录：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.sort</span>(&#123;<span class="hljs-variable">$natural</span>:-<span class="hljs-number">1</span>&#125;)<span class="hljs-selector-class">.limit</span>(<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find().sort(&#123;$natural:-1&#125;).limit(3)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241918092.png" srcset="/img/loading.gif" lazyload alt="10"></p>
 <p>查看关于某个collection的相关慢查询操作：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db<span class="hljs-selector-class">.system</span><span class="hljs-selector-class">.profile</span><span class="hljs-selector-class">.find</span>(&#123;ns:<span class="hljs-string">&#x27;mydb.students&#x27;</span>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find(&#123;ns:&#39;mydb.students&#39;&#125;)</code></pre></div></figure>
 <p><strong>MongoDB 查询优化</strong></p>
 <p>docsExamined(扫描的记录数)远大于nreturned(返回结果的记录数)的话，那么我们就要考虑通过加索引来优化记录定位了。</p>
 <p>responseLength 如果过大，那么说明我们返回的结果集太大了，这时请查看find函数的第二个参数是否只写上了你需要的属性名。(类似 于MySQL中不要总是select)</p>

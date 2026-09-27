@@ -18,7 +18,7 @@
 <meta property="og:description" content="链接：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;d82cbf9d072f 身为一个小白，在搭建博客的时候也是如履薄冰害怕出现一些难以解决的问题，可是常在河边走哪有不湿鞋。在简书上写完之后去写到博客上去，可是在发布或者其他时候总是会出现许许多多的问题，然后就总结了一下和看了一下大神的操作终于解决了好多问题; 1. 执行命令hexo server，提示：Usage: hexo …. 提示找不">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-26T06:19:58.000Z">
-<meta property="article:modified_time" content="2024-05-30T00:16:18.000Z">
+<meta property="article:modified_time" content="2026-09-27T06:22:44.920Z">
 <meta property="article:author" content="Fulequn">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -143,7 +144,11 @@
 <p>解决方法: 在Hexo 3.0 后server被单独出来了，需要安装server，安装的命令如下：npm install hexo-server –save 安装此server后再试，问题解决。</p>
 <h6 id="2-执行：hexo-server，启动了服务，在浏览器输入本地地址访问，看到白板和Cannot-GET-几个字">2. 执行：hexo server，启动了服务，在浏览器输入本地地址访问，看到白板和Cannot GET / 几个字</h6>
 <p>原因是由于2.6以后就更新了，我们需要手动配置些东西，我们需要输入下面三行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs undefined">npm install hexo-renderer-ejs--save<br><br>npm install hexo-renderer-stylus--save<br><br>npm install hexo-renderer-marked--save<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-ejs--save
+
+<span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-stylus--save
+
+<span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-marked--save</code></pre></div></figure>
 <p>这时候重新启动本地服务在访问。或者： 在空文件夹下，执行hexo init – npm install</p>
 <h6 id="3-localhost-4000-端口被占用，可执行-hexo-s-p-5000-修改成5000-端口">3. localhost:4000 端口被占用，可执行 hexo s -p 5000 修改成5000 端口</h6>
 <h6 id="4-YAMLException-incomplete-explicit-mapping-pair-a-key-node-is-missed-or-followed-by-a-non-tabulated-empty-line-at-line-1-column-33">4. YAMLException: incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 33:</h6>

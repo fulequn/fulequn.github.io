@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="7z是一种常见的压缩文件格式，如果你想要压缩或解压缩7z文件，你需要在你的系统上安装p7zip和p7zip-full。但是，有时候你会发现当你尝试运行7z或7za命令时，它会显示“bash: 7z: command not found”的错误信息。这是由于缺少p7zip或p7zip-full包。 以下是在不同Linux发行版上安装p7zip和p7zip-full的命令： 123sudo apt i">
+<meta name="description" content="7z是一种常见的压缩文件格式，如果你想要压缩或解压缩7z文件，你需要在你的系统上安装p7zip和p7zip-full。但是，有时候你会发现当你尝试运行7z或7za命令时，它会显示“bash: 7z: command not found”的错误信息。这是由于缺少p7zip或p7zip-full包。 以下是在不同Linux发行版上安装p7zip和p7zip-full的命令： sudo apt inst">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何解决7z： command not found问题">
 <meta property="og:url" content="https://blog.fulequn.online/2023/02/Article202302241/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="7z是一种常见的压缩文件格式，如果你想要压缩或解压缩7z文件，你需要在你的系统上安装p7zip和p7zip-full。但是，有时候你会发现当你尝试运行7z或7za命令时，它会显示“bash: 7z: command not found”的错误信息。这是由于缺少p7zip或p7zip-full包。 以下是在不同Linux发行版上安装p7zip和p7zip-full的命令： 123sudo apt i">
+<meta property="og:description" content="7z是一种常见的压缩文件格式，如果你想要压缩或解压缩7z文件，你需要在你的系统上安装p7zip和p7zip-full。但是，有时候你会发现当你尝试运行7z或7za命令时，它会显示“bash: 7z: command not found”的错误信息。这是由于缺少p7zip或p7zip-full包。 以下是在不同Linux发行版上安装p7zip和p7zip-full的命令： sudo apt inst">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-24T02:24:54.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:46.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-427 字
+437 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -139,7 +140,9 @@
 <div class="markdown-body">
 <p>7z是一种常见的压缩文件格式，如果你想要压缩或解压缩7z文件，你需要在你的系统上安装p7zip和p7zip-full。但是，有时候你会发现当你尝试运行7z或7za命令时，它会显示“bash: 7z: command not found”的错误信息。这是由于缺少p7zip或p7zip-full包。</p>
 <p>以下是在不同Linux发行版上安装p7zip和p7zip-full的命令：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo apt install p7zip-full    <span class="hljs-regexp">//</span>Ubuntu/Debian based OS<br>sudo pacman -S p7zip           <span class="hljs-regexp">//</span>Manjaro/Arch based OS<br>sudo dnf install p7zip         <span class="hljs-regexp">//</span>AlmaLinux<span class="hljs-regexp">/Fedora/</span>RHEL based OS<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo apt install p7zip-full    &#x2F;&#x2F;Ubuntu&#x2F;Debian based OS
+sudo pacman -S p7zip           &#x2F;&#x2F;Manjaro&#x2F;Arch based OS
+sudo dnf install p7zip         &#x2F;&#x2F;AlmaLinux&#x2F;Fedora&#x2F;RHEL based OS</code></pre></div></figure>
 <p>如果你仍然无法使用7z命令，你可以尝试使用7za命令进行压缩和解压缩操作。7z和7za是7-Zip压缩软件的一部分，它们是两个不同的可执行文件，但它们的功能基本相同。7z是7-Zip的主要命令行压缩和解压缩工具，而7za是它的另一个命令行工具，提供类似的压缩和解压缩功能。</p>
 <p>尽管7z和7za功能相似，但它们在使用上有一些不同。7z支持压缩和解压缩7z、XZ、BZIP2、GZIP、TAR、ZIP等格式，而7za支持压缩和解压缩7z、ZIP、GZIP、BZIP2、TAR等格式。此外，7z使用的默认压缩格式是7z，而7za使用的默认格式是zip。如果你需要更多的压缩和解压缩格式以及更多功能，你可以尝试安装其他压缩软件，如gzip、bzip2、zip等。</p>
 <p>总之，如果你遇到了7z: command not found问题，只需要安装p7zip和p7zip-full即可。如果7z命令仍然不能使用，你可以尝试使用7za命令。希望这篇博客能够帮助你成功解决7z: command not found问题！</p>

@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -169,7 +170,7 @@
 <p><strong>一次性解决（这个与我们启动时类似）</strong></p>
 <p>1）首先再D盘新建一个文件夹test</p>
 <p>2）在mongodb/bin目录下按住shift+鼠标右键，选择在此处打开Powershell窗口，在powershell内执行命令：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">.<span class="hljs-string">\mongod</span> -dbpath d:<span class="hljs-string">\test</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">.\mongod -dbpath d:\test</code></pre></div></figure>
 <blockquote>
 <p>此时mongod.exe程序就不会闪退了</p>
 </blockquote>
@@ -184,10 +185,21 @@
 <p>1.在data文件夹下新建一个log文件夹，用于存放日志文件，在log文件夹下新建文件mongodb.log</p>
 <p>2.然后再在 mongodb的安装路径的文件夹下新建文件 mongo.config，设置dbpath和logpath路径</p>
 <p>其中关于mongo.config参数的问题</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment">#数据库数据存放目录</span><br><span class="hljs-attr">dbpath</span>=D:\MongoDB\data<br><span class="hljs-comment">#数据库日志存放目录</span><br><span class="hljs-attr">logpath</span>=D:\MongoDB\log\mongodb.log <br><span class="hljs-comment">#以追加的方式记录日志</span><br><span class="hljs-attr">logappend</span> = <span class="hljs-literal">true</span><br><span class="hljs-comment">#端口号 默认为27017</span><br><span class="hljs-attr">port</span>=<span class="hljs-number">27017</span> <br><span class="hljs-comment">#启用日志文件，默认启用</span><br><span class="hljs-attr">journal</span>=<span class="hljs-literal">true</span> <br><span class="hljs-comment">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="hljs-attr">quiet</span>=<span class="hljs-literal">true</span> <br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#数据库数据存放目录
+dbpath&#x3D;D:\MongoDB\data
+#数据库日志存放目录
+logpath&#x3D;D:\MongoDB\log\mongodb.log 
+#以追加的方式记录日志
+logappend &#x3D; true
+#端口号 默认为27017
+port&#x3D;27017 
+#启用日志文件，默认启用
+journal&#x3D;true 
+#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
+quiet&#x3D;true </code></pre></div></figure>
 <p>3.以管理员身份打开cmd命令框</p>
 <p>4.使用以下命令创建MongoDB的Windows服务。其中，–config后写明你配置文件的位置</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">mongod <span class="hljs-attr">--config</span> D:\mongodb\mongo<span class="hljs-selector-class">.config</span> <span class="hljs-attr">--install</span> <span class="hljs-attr">--serviceName</span> <span class="hljs-string">&quot;MongoDB&quot;</span> <span class="hljs-attr">--journal</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mongod --config D:\mongodb\mongo.config --install --serviceName &quot;MongoDB&quot; --journal</code></pre></div></figure>
 <p>如下图所示</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908221.png" srcset="/img/loading.gif" lazyload alt="7"></p>
 <p>5.打开Windows服务，确认服务创建成功<img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908222.png" srcset="/img/loading.gif" lazyload></p>
@@ -195,17 +207,18 @@
 <p>启动mongodb的服务，提示Windows无法启动MongoDB Server服务(位于本地计算机上)…</p>
 <p><strong>解决方法：</strong></p>
 <p><strong>1.添加环境变量MONGO_HOME</strong>（值为mongodb的安装路径）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">变量名：MONGO_HOME<br>变量值：C:\Program Files\MongoDB\Server\<span class="hljs-number">4.0</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">变量名：<span class="token constant">MONGO_HOME</span>
+变量值：<span class="token class-name">C</span><span class="token operator">:</span>\<span class="token class-name">Program</span> <span class="token class-name">Files</span>\<span class="token class-name">MongoDB</span>\<span class="token class-name">Server</span>\<span class="token number">4.0</span></code></pre></div></figure>
 <p><strong>2.添加到Path(注意分号，如果是win10直接添加在尾部即可，无需分号)</strong></p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">;%MONGO_HOME%\bin;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">;%MONGO_HOME%\bin;</code></pre></div></figure>
 <p><strong>3.管理员身份打开cmd，然后删除安装时默认创建的mongodb服务（这里写你的mongodb的服务名（serviceName））:</strong></p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">sc <span class="hljs-keyword">delete</span> MongoDB<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sc delete MongoDB</code></pre></div></figure>
 <p><strong>至此，服务列表中就已经不存在默认安装的MongoDB的服务。</strong></p>
 <p><strong>下面将手动创建一个新的可用的服务：</strong></p>
 <p><strong>4.手动创建目录C:\data\db 、 C:\data\logos</strong></p>
 <p><strong>5.手动创建文件：C:\data\logos\MongoDB.log</strong></p>
 <p><strong>6.命令行运行创建一个新的MongoDB服务（这个也可以将dbpath和logpath写入配置文件，通过设置配置文件也可以启动服务）</strong></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">mongod <span class="hljs-attr">--dbpath</span>=C:\data\db  <span class="hljs-attr">--logpath</span>=C:\data\logs\MongoDB<span class="hljs-selector-class">.log</span> <span class="hljs-attr">--install</span> <span class="hljs-attr">--serviceName</span> <span class="hljs-string">&quot;MongoDB&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mongod --dbpath&#x3D;C:\data\db  --logpath&#x3D;C:\data\logs\MongoDB.log --install --serviceName &quot;MongoDB&quot;</code></pre></div></figure>
 <p><strong>至此，新的服务创建成功，你可手动切换启动类型，并且手动启动不再提示错误</strong></p>
 <p><strong>启动MongoDB客户端</strong></p>
 <p>双击bin文件夹下mongo.exe，出现如下图所示即可。</p>

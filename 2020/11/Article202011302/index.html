@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客  使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。  在plt.show()之前加入以下代码即可。 1plt.tight_layout() 最终结果：  tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工">
+<meta name="description" content="参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客  使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。  在plt.show()之前加入以下代码即可。 plt.tight_layout() 最终结果：  tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib使用subplot时标题与刻度重叠">
 <meta property="og:url" content="https://blog.fulequn.online/2020/11/Article202011302/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客  使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。  在plt.show()之前加入以下代码即可。 1plt.tight_layout() 最终结果：  tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工">
+<meta property="og:description" content="参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客  使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。  在plt.show()之前加入以下代码即可。 plt.tight_layout() 最终结果：  tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211024180802.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202110241809248.png">
@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -148,7 +149,7 @@
 <p>使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211024180802.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>在plt.show()之前加入以下代码即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">plt.tight_layout()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>最终结果：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/202110241809248.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <p>tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作。它仅仅检查坐标轴标签、刻度标签以及标题的部分。</p>

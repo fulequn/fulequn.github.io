@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -215,8 +216,24 @@
 <p><strong>输出描述</strong></p>
 <p>输出一个整数n，表示方案数</p>
 <p><strong>补充说明</strong></p>
-<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">对于<span class="hljs-number">100</span><span class="hljs-comment">%的数据，保证n≥1</span><br>对于<span class="hljs-number">10</span><span class="hljs-comment">%的数据，保证n≤5</span><br>对于<span class="hljs-number">30</span><span class="hljs-comment">%的数据，保证n ≤100</span><br>对于<span class="hljs-number">60</span><span class="hljs-comment">%的数据，保证n≤1000</span><br>对于<span class="hljs-number">100</span><span class="hljs-comment">%的数据，保证n≤10^9</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">示例1</span><br><span class="language-xml">输入</span><br><span class="language-xml">2</span><br><span class="language-xml">输出  </span><br><span class="language-xml">3</span><br><span class="language-xml">解释：环为1,2可以选择</span><span class="hljs-template-variable">&#123;1&#125;</span><span class="language-xml">,</span><span class="hljs-template-variable">&#123;2&#125;</span><span class="language-xml">，</span><span class="hljs-template-variable">&#123;1，2&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">示例2</span><br><span class="language-xml">输入  </span><br><span class="language-xml">4</span><br><span class="language-xml">输出  </span><br><span class="language-xml">13</span><br><span class="language-xml">解释：环为1,2,3,4可以选择</span><span class="hljs-template-variable">&#123;1&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;2&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;3&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;4&#125;</span><span class="language-xml">,</span><span class="hljs-template-variable">&#123;1,2&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;2,3&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;3, 4&#125;</span><span class="language-xml">, </span><span class="hljs-template-variable">&#123;4, 1&#125;</span><span class="language-xml">,</span><span class="hljs-template-variable">&#123;1,2,3&#125;</span><span class="language-xml">,</span><span class="hljs-template-variable">&#123;2,3,4&#125;</span><span class="language-xml">,</span><span class="hljs-template-variable">&#123;3,4,1&#125;</span><span class="language-xml"> </span><span class="hljs-template-variable">&#123;4,1,2&#125;</span><span class="hljs-template-variable">&#123;1,2,3,4&#125;</span><span class="language-xml">共13种情况</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">对于100%的数据，保证n≥1
+对于10%的数据，保证n≤5
+对于30%的数据，保证n ≤100
+对于60%的数据，保证n≤1000
+对于100%的数据，保证n≤10^9</code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">示例1
+输入
+2
+输出  
+3
+解释：环为1,2可以选择&#123;1&#125;,&#123;2&#125;，&#123;1，2&#125;
+
+示例2
+输入  
+4
+输出  
+13
+解释：环为1,2,3,4可以选择&#123;1&#125;, &#123;2&#125;, &#123;3&#125;, &#123;4&#125;,&#123;1,2&#125;, &#123;2,3&#125;, &#123;3, 4&#125;, &#123;4, 1&#125;,&#123;1,2,3&#125;,&#123;2,3,4&#125;,&#123;3,4,1&#125; &#123;4,1,2&#125;&#123;1,2,3,4&#125;共13种情况</code></pre></div></figure>
 <p><strong>思路与代码</strong></p>
 <p>思路非常简单，模拟推理</p>
 <p><strong>基本思路</strong>：观察问题，我们需要计算从n头牛中选出若干头相邻的牛的方案数。由于牛是围成一圈的，这意味着我们可以从任意一头牛开始数。</p>
@@ -226,7 +243,9 @@
 <li><strong>特殊方案</strong>：所有的牛都被选中的情况。这是一个特殊的方案，因为不管从哪头牛开始数，选出的都是全部的牛。这种情况下只有1种方案。</li>
 </ul>
 <p><strong>总结方案数</strong>：将上述两种情况相加，得到的总方案数就是 n*(n-1)+1。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br>N=<span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br><span class="hljs-built_in">print</span>(N*(N-<span class="hljs-number">1</span>)+<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
+N<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>N<span class="token operator">*</span><span class="token punctuation">(</span>N<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="2-翻转字符串"><strong>2 翻转字符串</strong></h2>
 <p>给出一个长度为n的字符串s和一个整数k，现在请你依次按照<strong>i= 1,2,…n-k+1</strong>的顺序求出以下操作得到的字符串将字符串<strong>s</strong>的第<strong>i</strong>个字符至第<strong>i+k- 1</strong>之间的所有字符翻转。 求出最终状态的字符串。 例如:n是5，是3，s是&quot;hello&quot;。 i=1时，翻转[1,3]之间的字符,得到&quot;lehlo&quot; i=2时，翻转 [2,4]之间的字符,得到&quot;llheo&quot; i=3时，翻转 [3,5]之间的字符，得到&quot;lloeh&quot; 因此，最终的s为&quot;lloeh&quot;。</p>
 <p><strong>输入描述</strong></p>
@@ -234,7 +253,19 @@
 <p>第二行输入仅由小写字母构成的字符串s。 2≤k≤n≤2x10^5</p>
 <p><strong>输出描述</strong></p>
 <p>输出s经过翻转后的最终状态。</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">示例<span class="hljs-number">1</span><br>输入<br><span class="hljs-number">5</span> <span class="hljs-number">3</span><br>hello<br>输出<br><span class="hljs-keyword">lloeh</span><br><span class="hljs-keyword"></span><br>示例<span class="hljs-number">2</span><br>输入<br><span class="hljs-number">8</span> <span class="hljs-number">5</span><br>nowcoder<br>输出<br>odernowc<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">示例1
+输入
+5 3
+hello
+输出
+lloeh
+
+示例2
+输入
+8 5
+nowcoder
+输出
+odernowc</code></pre></div></figure>
 <p><strong>思路与代码</strong></p>
 <p>跟上一题类似，需要想象一下这个过程，从第k个字符被翻转，更多是逻辑吧,思路如下：</p>
 <ol>
@@ -249,9 +280,36 @@
 </li>
 </ol>
 <p>正确代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入 sys 模块，用于读取命令行参数或从标准输入读取数据</span><br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-comment"># 读取输入的两个整数 n 和 k，分别表示字符串的长度和翻转窗口的大小</span><br>n, k = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().split())<br><span class="hljs-comment"># 读取输入的字符串 s</span><br>s = <span class="hljs-built_in">input</span>()<br><br><span class="hljs-comment"># 判断 n - k 的差值是否为奇数</span><br><span class="hljs-comment"># 如果是奇数，说明翻转窗口滑动后，中间部分的字符位置会改变</span><br><span class="hljs-keyword">if</span> (n - k) % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>:<br>    <span class="hljs-comment"># 如果翻转窗口滑动后中间部分字符位置会改变，直接将字符串 s 从第 k-1 个字符开始截取到末尾</span><br>    <span class="hljs-comment"># 然后将字符串 s 从开始到第 k-1 个字符的部分拼接在后面</span><br>    <span class="hljs-built_in">print</span>(s[k - <span class="hljs-number">1</span>:] + s[:k - <span class="hljs-number">1</span>])<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-comment"># 如果翻转窗口滑动后中间部分字符位置不会改变，即翻转次数为偶数</span><br>    <span class="hljs-comment"># 同样将字符串 s 从第 k-1 个字符开始截取到末尾</span><br>    <span class="hljs-comment"># 然后将字符串 s 从开始到第 k-1 个字符的部分取反序（使用切片语法 [::-1]）后拼接</span><br>    <span class="hljs-built_in">print</span>(s[k - <span class="hljs-number">1</span>:] + s[:k - <span class="hljs-number">1</span>][::-<span class="hljs-number">1</span>])<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 导入 sys 模块，用于读取命令行参数或从标准输入读取数据</span>
+<span class="token keyword">import</span> sys
+
+<span class="token comment"># 读取输入的两个整数 n 和 k，分别表示字符串的长度和翻转窗口的大小</span>
+n<span class="token punctuation">,</span> k <span class="token operator">=</span> <span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 读取输入的字符串 s</span>
+s <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 判断 n - k 的差值是否为奇数</span>
+<span class="token comment"># 如果是奇数，说明翻转窗口滑动后，中间部分的字符位置会改变</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+    <span class="token comment"># 如果翻转窗口滑动后中间部分字符位置会改变，直接将字符串 s 从第 k-1 个字符开始截取到末尾</span>
+    <span class="token comment"># 然后将字符串 s 从开始到第 k-1 个字符的部分拼接在后面</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span><span class="token punctuation">:</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token comment"># 如果翻转窗口滑动后中间部分字符位置不会改变，即翻转次数为偶数</span>
+    <span class="token comment"># 同样将字符串 s 从第 k-1 个字符开始截取到末尾</span>
+    <span class="token comment"># 然后将字符串 s 从开始到第 k-1 个字符的部分取反序（使用切片语法 [::-1]）后拼接</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span><span class="token punctuation">:</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>不能按模拟，比如以下方法，字符串很多的情况会浪费很多时间：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#错误：</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">string_reverse</span>(<span class="hljs-params">n,k,s</span>):<br>    s=<span class="hljs-built_in">list</span>(s)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,n-k+<span class="hljs-number">2</span>):<br>        s[i-<span class="hljs-number">1</span>:i+k-<span class="hljs-number">1</span>]=<span class="hljs-built_in">reversed</span>(s[i-<span class="hljs-number">1</span>:i+k-<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(s)<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    n,k=<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>,<span class="hljs-built_in">input</span>().split())<br>    s=<span class="hljs-built_in">input</span>()<br>    <span class="hljs-built_in">print</span>(string_reverse(n,k,s))<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#错误：</span>
+<span class="token keyword">def</span> string_reverse<span class="token punctuation">(</span>n<span class="token punctuation">,</span>k<span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    s<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span>k<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        s<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>i<span class="token operator">+</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token builtin">reversed</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>i<span class="token operator">+</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    n<span class="token punctuation">,</span>k<span class="token operator">=</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>string_reverse<span class="token punctuation">(</span>n<span class="token punctuation">,</span>k<span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>由于 <code>n-k+1</code> 是翻转窗口滑动的次数，它等于字符串长度 <code>n</code> 减去翻转窗口的长度 <code>k</code> 再加 1。因为 <code>n</code> 和 <code>k</code> 都是正整数，所以 <code>n-k+1</code> 一定是一个正整数。</p>
 <p>重要的是，无论 <code>n-k+1</code> 是奇数还是偶数，对于中间的字符来说，它们被翻转的次数实际上是 <code>2 * (n-k+1)</code>，因为每次翻转操作实际上是两次位置交换（即一个字符被翻转两次）。因此，无论 <code>n-k+1</code> 是奇数还是偶数，中间字符被翻转的次数总是偶数。</p>
 </div>

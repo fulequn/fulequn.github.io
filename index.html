@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -133,28 +134,6 @@ Article202406201
 <div class="row mx-auto index-card">
 <article class="col-12 col-md-12 mx-auto index-info">
 <h2 class="index-header">
-<a href="/2024/06/Article202406141/" target="_self">
-Vue基础入门到实战6（路由进阶+面经项目）
-</a>
-</h2>
-<a class="index-excerpt index-excerpt__noimg" href="/2024/06/Article202406141/" target="_self">
-<div>
-1 Vuex 概述 1.1 介绍 Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 1.1.1 使用场景 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 1.1.2 优势 共同维护一份数据，数据集中化管理 响应
-</div>
-</a>
-<div class="index-btm post-metas">
-<div class="post-meta mr-3">
-<i class="iconfont icon-date"></i>
-<time datetime="2024-06-11 15:32" pubdate>
-2024-06-11
-</time>
-</div>
-</div>
-</article>
-</div>
-<div class="row mx-auto index-card">
-<article class="col-12 col-md-12 mx-auto index-info">
-<h2 class="index-header">
 <a href="/2024/06/Article202406111/" target="_self">
 Vue基础入门到实战6（路由进阶+面经项目）
 </a>
@@ -177,13 +156,35 @@ Vue基础入门到实战6（路由进阶+面经项目）
 <div class="row mx-auto index-card">
 <article class="col-12 col-md-12 mx-auto index-info">
 <h2 class="index-header">
+<a href="/2024/06/Article202406141/" target="_self">
+Vue基础入门到实战6（路由进阶+面经项目）
+</a>
+</h2>
+<a class="index-excerpt index-excerpt__noimg" href="/2024/06/Article202406141/" target="_self">
+<div>
+1 Vuex 概述 1.1 介绍 Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 1.1.1 使用场景 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 1.1.2 优势 共同维护一份数据，数据集中化管理 响应
+</div>
+</a>
+<div class="index-btm post-metas">
+<div class="post-meta mr-3">
+<i class="iconfont icon-date"></i>
+<time datetime="2024-06-11 15:32" pubdate>
+2024-06-11
+</time>
+</div>
+</div>
+</article>
+</div>
+<div class="row mx-auto index-card">
+<article class="col-12 col-md-12 mx-auto index-info">
+<h2 class="index-header">
 <a href="/2024/06/Article202406071/" target="_self">
 Vue基础入门到实战5（自定义指令+插槽+路由入门）
 </a>
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/06/Article202406071/" target="_self">
 <div>
-1 自定义指令 1.1 简介 内置指令：v-html、v-if、v-bind、v-on… 这都是Vue给咱们内置的一些指令，可以直接使用 自定义指令：同时Vue也支持让开发者，自己注册一些指令。这些指令被称为 自定义指令。每个指令都有自己各自独立的功能 1.1.1 自定义指令 概念：自己定义的指令，可以 封装一些DOM操作，扩展额外的功能 1.1.2 自定义指令语法 全局注册 12
+1 自定义指令 1.1 简介 内置指令：v-html、v-if、v-bind、v-on… 这都是Vue给咱们内置的一些指令，可以直接使用 自定义指令：同时Vue也支持让开发者，自己注册一些指令。这些指令被称为 自定义指令。每个指令都有自己各自独立的功能 1.1.1 自定义指令 概念：自己定义的指令，可以 封装一些DOM操作，扩展额外的功能 1.1.2 自定义指令语法 全局注册 //
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -249,7 +250,7 @@ Vue基础入门到实战2（指令补充+计算属性+侦听器）
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/06/Article202406042/" target="_self">
 <div>
-1 指令修饰符 1.1 什么是指令修饰符？ 所谓指令修饰符就是通过&quot;.&quot;指明一些指令 后缀。不同的后缀封装了不同的处理操作 —&gt; 简化代码 1.2 按键修饰符 @keyup.enter —&gt;当点击enter键的时候才触发 代码演示 123456789101112131415161718&lt;div id=&quot;app&quot;&gt; &lt;h
+1 指令修饰符 1.1 什么是指令修饰符？ 所谓指令修饰符就是通过&quot;.&quot;指明一些指令 后缀。不同的后缀封装了不同的处理操作 —&gt; 简化代码 1.2 按键修饰符 @keyup.enter —&gt;当点击enter键的时候才触发 代码演示 &lt;div id="app"> &lt;h3>@keyup.enter → 监听键盘回车事件&lt;/h3> &
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -293,7 +294,7 @@ Vue基础入门到实战（一）
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405242/" target="_self">
 <div>
-1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 12345678910&lt;title&gt;CSS 初体验&lt;/title&gt;&lt;style&gt; /*
+1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 &lt;title>CSS 初体验&lt;/title> &lt;style> /* 选择器 &#123; &#125;
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -329,7 +330,7 @@ Vue基础入门到实战（一）
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405241/" target="_self">
 <div>
-1 HTML 基础 1.1 标签语法 HTML 超文本标记语言——HyperText Markup Language。 超文本：链接 标记：标签，带尖括号的文本 标签结构 标签要成对出现，中间包裹内容 &lt;&gt;里面放英文字母（标签名） 结束标签比开始标签多 / 标签分类：双标签和单标签 123&lt;strong&gt;需要加粗的文字&lt;strong&gt;&lt;br&gt;
+1 HTML 基础 1.1 标签语法 HTML 超文本标记语言——HyperText Markup Language。 超文本：链接 标记：标签，带尖括号的文本 标签结构 标签要成对出现，中间包裹内容 &lt;&gt;里面放英文字母（标签名） 结束标签比开始标签多 / 标签分类：双标签和单标签 &lt;strong>需要加粗的文字&lt;strong> &lt;br> &lt;hr> 1.
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -509,7 +510,7 @@ Vue基础入门到实战（一）
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405102/" target="_self">
 <div>
-单调队列解决的问题非常单一，用于优化：“区间最值问题”。模板如下： 123456queue;//单调队列for (int i = 0 ; i &lt; n ; i++) &#123; if (窗口达到上限) q.popleft(); while (queue &amp;&amp; nums[q.back()] &gt;= nums[i]) queue.pop(); queue.p
+单调队列解决的问题非常单一，用于优化：“区间最值问题”。模板如下： queue;//单调队列 for (int i = 0 ; i &lt; n ; i++) &#123; if (窗口达到上限) q.popleft(); while (queue &amp;&amp; nums[q.back()] >= nums[i]) queue.pop(); queue.push(i
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -625,7 +626,7 @@ Vue基础入门到实战（一）
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405071/" target="_self">
 <div>
-6.4 单调栈 单调栈是一种基于栈的数据结构，所谓的单调就是满足单调递增（单调递减）的栈。主要用于解决 next_greater 问题，也就是找到下一个更大的元素。 基本模板如下： 12345678stack;//单调栈for (int i = 0 ; i &lt; n ; i++) &#123; while (stack &amp;&amp; nums[stack.top] &lt; n
+6.4 单调栈 单调栈是一种基于栈的数据结构，所谓的单调就是满足单调递增（单调递减）的栈。主要用于解决 next_greater 问题，也就是找到下一个更大的元素。 基本模板如下： stack;//单调栈 for (int i = 0 ; i &lt; n ; i++) &#123; while (stack &amp;&amp; nums[stack.top] &lt; nums[i]
 </div>
 </a>
 <div class="index-btm post-metas">

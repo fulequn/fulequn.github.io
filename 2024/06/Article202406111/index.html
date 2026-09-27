@@ -55,6 +55,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -173,7 +174,17 @@
 </ul>
 <p><strong>能高亮</strong>，默认就会提供 <strong>高亮类名</strong>，可以直接设置高亮样式</p>
 <p>语法： <code>&lt;router-link to=&quot;path的值&quot;&gt;发现音乐&lt;/router-link&gt;</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div&gt;<br>  &lt;div class=&quot;footer_wrap&quot;&gt;<br>    &lt;router-link to=&quot;/find&quot;&gt;发现音乐&lt;/router-link&gt;<br>    &lt;router-link to=&quot;/my&quot;&gt;我的音乐&lt;/router-link&gt;<br>    &lt;router-link to=&quot;/friend&quot;&gt;朋友&lt;/router-link&gt;<br>  &lt;/div&gt;<br>  &lt;div class=&quot;top&quot;&gt;<br>    &lt;!-- 路由出口 → 匹配的组件所展示的位置 --&gt;<br>    &lt;router-view&gt;&lt;/router-view&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;div&gt;
+  &lt;div class&#x3D;&quot;footer_wrap&quot;&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;find&quot;&gt;发现音乐&lt;&#x2F;router-link&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;my&quot;&gt;我的音乐&lt;&#x2F;router-link&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;friend&quot;&gt;朋友&lt;&#x2F;router-link&gt;
+  &lt;&#x2F;div&gt;
+  &lt;div class&#x3D;&quot;top&quot;&gt;
+    &lt;!-- 路由出口 → 匹配的组件所展示的位置 --&gt;
+    &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;</code></pre></div></figure>
 <h3 id="1-1-3-通过-router-link-自带的两个样式进行高亮">1.1.3 通过 router-link 自带的两个样式进行高亮</h3>
 <p>使用 router-link 跳转后，我们发现。当前点击的链接默认加了两个 class 的值 <code>router-link-exact-active</code>和 <code>router-link-active</code></p>
 <p>我们可以给任意一个 class 属性添加高亮样式即可实现功能</p>
@@ -193,10 +204,21 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244054.png" srcset="/img/loading.gif" lazyload alt="68249361091"></p>
 <h3 id="1-3-2-解决方案">1.3.2 解决方案</h3>
 <p>我们可以在创建路由对象时，额外配置两个配置项即可。 <code>linkActiveClass</code> 和 <code>linkExactActiveClass</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [...],<br>  <span class="hljs-attr">linkActiveClass</span>: <span class="hljs-string">&quot;类名1&quot;</span>,<br>  <span class="hljs-attr">linkExactActiveClass</span>: <span class="hljs-string">&quot;类名2&quot;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  routes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  linkActiveClass<span class="token operator">:</span> <span class="token string">"类名1"</span><span class="token punctuation">,</span>
+  linkExactActiveClass<span class="token operator">:</span> <span class="token string">"类名2"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244055.png" srcset="/img/loading.gif" lazyload alt="68249372945"></p>
 <h3 id="1-3-3-代码演示">1.3.3 代码演示</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 创建了一个路由对象</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>  ], <br>  <span class="hljs-attr">linkActiveClass</span>: <span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-comment">// 配置模糊匹配的类名</span><br>  <span class="hljs-attr">linkExactActiveClass</span>: <span class="hljs-string">&#x27;exact-active&#x27;</span> <span class="hljs-comment">// 配置精确匹配的类名</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 创建了一个路由对象</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span> 
+  <span class="token literal-property property">linkActiveClass</span><span class="token operator">:</span> <span class="token string">'active'</span><span class="token punctuation">,</span> <span class="token comment">// 配置模糊匹配的类名</span>
+  <span class="token literal-property property">linkExactActiveClass</span><span class="token operator">:</span> <span class="token string">'exact-active'</span> <span class="token comment">// 配置精确匹配的类名</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="1-4-查询参数传参">1.4 查询参数传参</h2>
 <h3 id="1-4-1-目标">1.4.1 目标</h3>
 <p>在跳转路由时，进行传参。</p>
@@ -221,15 +243,166 @@
 </ul>
 <h3 id="1-4-4-代码演示">1.4.4 代码演示</h3>
 <p><strong>App.vue</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div id=&quot;app&quot;&gt;<br>    &lt;div class=&quot;link&quot;&gt;<br>      &lt;router-link to=&quot;/home&quot;&gt;首页&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/search&quot;&gt;搜索页&lt;/router-link&gt;<br>    &lt;/div&gt;<br><br>    &lt;router-view&gt;&lt;/router-view&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;&#125;<br>&lt;/script&gt;<br><br>&lt;style scoped&gt;<br>.link &#123;<br>  height: 50px;<br>  line-height: 50px;<br>  background-color: #495150;<br>  display: flex;<br>  margin: -8px -8px 0 -8px;<br>  margin-bottom: 50px;<br>&#125;<br>.link a &#123;<br>  display: block;<br>  text-decoration: none;<br>  background-color: #ad2a26;<br>  width: 100px;<br>  text-align: center;<br>  margin-right: 5px;<br>  color: #fff;<br>  border-radius: 5px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;div class&#x3D;&quot;link&quot;&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;home&quot;&gt;首页&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;search&quot;&gt;搜索页&lt;&#x2F;router-link&gt;
+    &lt;&#x2F;div&gt;
+
+    &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.link &#123;
+  height: 50px;
+  line-height: 50px;
+  background-color: #495150;
+  display: flex;
+  margin: -8px -8px 0 -8px;
+  margin-bottom: 50px;
+&#125;
+.link a &#123;
+  display: block;
+  text-decoration: none;
+  background-color: #ad2a26;
+  width: 100px;
+  text-align: center;
+  margin-right: 5px;
+  color: #fff;
+  border-radius: 5px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <p><strong>Home.vue</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;home&quot;&gt;<br>    &lt;div class=&quot;logo-box&quot;&gt;&lt;/div&gt;<br>    &lt;div class=&quot;search-box&quot;&gt;<br>      &lt;input type=&quot;text&quot;&gt;<br>      &lt;button&gt;搜索一下&lt;/button&gt;<br>    &lt;/div&gt;<br>    &lt;div class=&quot;hot-link&quot;&gt;<br>      热门搜索：<br>      &lt;router-link to=&quot;/search?key=黑马程序员&quot;&gt;黑马程序员&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/search?key=前端培训&quot;&gt;前端培训&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/search?key=如何成为前端大牛&quot;&gt;如何成为前端大牛&lt;/router-link&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  name: &#x27;FindMusic&#x27;,<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>.logo-box &#123;<br>  height: 150px;<br>  background: url(&#x27;@/assets/logo.jpeg&#x27;) no-repeat center;<br>&#125;<br>.search-box &#123;<br>  display: flex;<br>  justify-content: center;<br>&#125;<br>.search-box input &#123;<br>  width: 400px;<br>  height: 30px;<br>  line-height: 30px;<br>  border: 2px solid #c4c7ce;<br>  border-radius: 4px 0 0 4px;<br>  outline: none;<br>&#125;<br>.search-box input:focus &#123;<br>  border: 2px solid #ad2a26;<br>&#125;<br>.search-box button &#123;<br>  width: 100px;<br>  height: 36px;<br>  border: none;<br>  background-color: #ad2a26;<br>  color: #fff;<br>  position: relative;<br>  left: -2px;<br>  border-radius: 0 4px 4px 0;<br>&#125;<br>.hot-link &#123;<br>  width: 508px;<br>  height: 60px;<br>  line-height: 60px;<br>  margin: 0 auto;<br>&#125;<br>.hot-link a &#123;<br>  margin: 0 5px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;home&quot;&gt;
+    &lt;div class&#x3D;&quot;logo-box&quot;&gt;&lt;&#x2F;div&gt;
+    &lt;div class&#x3D;&quot;search-box&quot;&gt;
+      &lt;input type&#x3D;&quot;text&quot;&gt;
+      &lt;button&gt;搜索一下&lt;&#x2F;button&gt;
+    &lt;&#x2F;div&gt;
+    &lt;div class&#x3D;&quot;hot-link&quot;&gt;
+      热门搜索：
+      &lt;router-link to&#x3D;&quot;&#x2F;search?key&#x3D;黑马程序员&quot;&gt;黑马程序员&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;search?key&#x3D;前端培训&quot;&gt;前端培训&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;search?key&#x3D;如何成为前端大牛&quot;&gt;如何成为前端大牛&lt;&#x2F;router-link&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  name: &#39;FindMusic&#39;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+.logo-box &#123;
+  height: 150px;
+  background: url(&#39;@&#x2F;assets&#x2F;logo.jpeg&#39;) no-repeat center;
+&#125;
+.search-box &#123;
+  display: flex;
+  justify-content: center;
+&#125;
+.search-box input &#123;
+  width: 400px;
+  height: 30px;
+  line-height: 30px;
+  border: 2px solid #c4c7ce;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+&#125;
+.search-box input:focus &#123;
+  border: 2px solid #ad2a26;
+&#125;
+.search-box button &#123;
+  width: 100px;
+  height: 36px;
+  border: none;
+  background-color: #ad2a26;
+  color: #fff;
+  position: relative;
+  left: -2px;
+  border-radius: 0 4px 4px 0;
+&#125;
+.hot-link &#123;
+  width: 508px;
+  height: 60px;
+  line-height: 60px;
+  margin: 0 auto;
+&#125;
+.hot-link a &#123;
+  margin: 0 5px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <p><strong>Search.vue</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;search&quot;&gt;<br>    &lt;p&gt;搜索关键字: &#123;&#123; $route.query.key &#125;&#125; &lt;/p&gt;<br>    &lt;p&gt;搜索结果: &lt;/p&gt;<br>    &lt;ul&gt;<br>      &lt;li&gt;.............&lt;/li&gt;<br>      &lt;li&gt;.............&lt;/li&gt;<br>      &lt;li&gt;.............&lt;/li&gt;<br>      &lt;li&gt;.............&lt;/li&gt;<br>    &lt;/ul&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  name: &#x27;MyFriend&#x27;,<br>  created() &#123;<br>    // 在created中，获取路由参数<br>    // this.$route.query.参数名 获取<br>    console.log(this.$route.query.key)<br>  &#125;,<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>.search &#123;<br>  width: 400px;<br>  height: 240px;<br>  padding: 0 20px;<br>  margin: 0 auto;<br>  border: 2px solid #c4c7ce;<br>  border-radius: 5px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;search&quot;&gt;
+    &lt;p&gt;搜索关键字: &#123;&#123; $route.query.key &#125;&#125; &lt;&#x2F;p&gt;
+    &lt;p&gt;搜索结果: &lt;&#x2F;p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;.............&lt;&#x2F;li&gt;
+      &lt;li&gt;.............&lt;&#x2F;li&gt;
+      &lt;li&gt;.............&lt;&#x2F;li&gt;
+      &lt;li&gt;.............&lt;&#x2F;li&gt;
+    &lt;&#x2F;ul&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  name: &#39;MyFriend&#39;,
+  created() &#123;
+    &#x2F;&#x2F; 在created中，获取路由参数
+    &#x2F;&#x2F; this.$route.query.参数名 获取
+    console.log(this.$route.query.key)
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+.search &#123;
+  width: 400px;
+  height: 240px;
+  padding: 0 20px;
+  margin: 0 auto;
+  border: 2px solid #c4c7ce;
+  border-radius: 5px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <p><strong>router/index.js</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Home</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Home&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Search</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Search&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueRouter</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueRouter</span>) <span class="hljs-comment">// VueRouter插件初始化</span><br><br><span class="hljs-comment">// 创建了一个路由对象</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/home&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">Home</span> &#125;,<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/search&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">Search</span> &#125;<br>  ]<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">'@/views/Home'</span>
+<span class="token keyword">import</span> Search <span class="token keyword">from</span> <span class="token string">'@/views/Search'</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> VueRouter <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueRouter<span class="token punctuation">)</span> <span class="token comment">// VueRouter插件初始化</span>
+
+<span class="token comment">// 创建了一个路由对象</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/home'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> Home <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/search'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> Search <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> router</code></pre></div></figure>
 <p><strong>main.js</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router/index&#x27;</span><br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-property">config</span>.<span class="hljs-property">productionTip</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),<br>  router<br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router/index'</span>
+
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  router
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="1-5-动态路由传参">1.5 动态路由传参</h2>
 <h3 id="1-5-1-动态路由传参方式">1.5.1 动态路由传参方式</h3>
 <ul>
@@ -238,7 +411,15 @@
 <blockquote>
 <p>动态路由后面的参数可以随便起名，但要有语义</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...,<br>    &#123; <br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/search/:words&#x27;</span>, <br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Search</span> <br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  routes<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span> 
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/search/:words'</span><span class="token punctuation">,</span> 
+      <span class="token literal-property property">component</span><span class="token operator">:</span> Search 
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 </li>
 <li>
 <p>配置导航链接</p>
@@ -276,7 +457,12 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244057.png" srcset="/img/loading.gif" lazyload alt="68249723830"></p>
 <p><strong>原因</strong></p>
 <p>使用 <code>/search/:words</code> 表示，<strong>必须要传参数</strong>。如果不传参数，也希望匹配，可以加个可选符 <code>?</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br> 	...<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/search/:words?&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">Search</span> &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  routes<span class="token operator">:</span> <span class="token punctuation">[</span>
+ 	<span class="token operator">...</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/search/:words?'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> Search <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h1 id="2-Vue-路由">2 Vue 路由</h1>
 <h2 id="2-1-重定向">2.1 重定向</h2>
 <h3 id="2-1-1-问题">2.1.1 问题</h3>
@@ -285,7 +471,9 @@
 <h3 id="2-1-2-解决方案">2.1.2 解决方案</h3>
 <p><strong>重定向</strong> → 匹配 <code>/</code> 后, 强制跳转 <code>/home</code> 路径</p>
 <h3 id="2-1-3-语法">2.1.3 语法</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123; <span class="hljs-attr">path</span>: 匹配路径, <span class="hljs-attr">redirect</span>: 重定向到的路径 &#125;,<br>比如：<br>&#123; <span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;/&#x27;</span> ,<span class="hljs-attr">redirect</span>:<span class="hljs-string">&#x27;/home&#x27;</span> &#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> 匹配路径<span class="token punctuation">,</span> <span class="token literal-property property">redirect</span><span class="token operator">:</span> 重定向到的路径 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+比如：
+<span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span><span class="token string">'/'</span> <span class="token punctuation">,</span><span class="token literal-property property">redirect</span><span class="token operator">:</span><span class="token string">'/home'</span> <span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h2 id="2-2-404-页面">2.2 404 页面</h2>
 <h3 id="2-2-1-作用">2.2.1 作用</h3>
 <p>当路径找不到匹配时，给个提示页面。用于提醒用户资源未找到。</p>
@@ -293,12 +481,44 @@
 <p>404 的路由，虽然配置在任何一个位置都可以，但一般都 <strong>配置在其他路由规则的最后面</strong></p>
 <h3 id="2-2-3-语法">2.2.3 语法</h3>
 <p><code>path: &quot;*&quot;</code> (任意路径) – 前面不匹配就命中最后这个</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">NotFind</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/NotFind&#x27;</span><br><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">NotFind</span> &#125; <span class="hljs-comment">//最后一个</span><br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> NotFind <span class="token keyword">from</span> <span class="token string">'@/views/NotFind'</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  routes<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> NotFind <span class="token punctuation">&#125;</span> <span class="token comment">//最后一个</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="2-2-4-代码示例">2.2.4 代码示例</h3>
 <p>NotFound.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;404 Not Found&lt;/h1&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;404 Not Found&lt;&#x2F;h1&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <p>router/index.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">NotFound</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/NotFound&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueRouter</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br>...<br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueRouter</span>) <span class="hljs-comment">// VueRouter插件初始化</span><br><br><span class="hljs-comment">// 创建了一个路由对象</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>    &#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">NotFound</span> &#125;<br>  ]<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">...</span>
+<span class="token keyword">import</span> NotFound <span class="token keyword">from</span> <span class="token string">'@/views/NotFound'</span>
+<span class="token keyword">import</span> VueRouter <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+<span class="token operator">...</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueRouter<span class="token punctuation">)</span> <span class="token comment">// VueRouter插件初始化</span>
+
+<span class="token comment">// 创建了一个路由对象</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> NotFound <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> router</code></pre></div></figure>
 <h2 id="2-3-模式设置">2.3 模式设置</h2>
 <h3 id="2-3-1-问题">2.3.1 问题</h3>
 <p>路由的路径看起来不自然, 有 <code>#</code>，能否切成真正路径形式?</p>
@@ -308,7 +528,10 @@
 </ul>
 <h3 id="2-3-2-语法">2.3.2 语法</h3>
 <p>在创建路由实例的时候，指定模式为 <code>history</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>    <span class="hljs-attr">mode</span>:<span class="hljs-string">&#x27;histroy&#x27;</span>, <span class="hljs-comment">//默认是hash</span><br>    <span class="hljs-attr">routes</span>:[]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">mode</span><span class="token operator">:</span><span class="token string">'histroy'</span><span class="token punctuation">,</span> <span class="token comment">//默认是hash</span>
+    <span class="token literal-property property">routes</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h1 id="3-编程式导航">3 编程式导航</h1>
 <h2 id="3-1-两种路由跳转方式">3.1 两种路由跳转方式</h2>
 <h3 id="3-1-1-问题">3.1.1 问题</h3>
@@ -324,24 +547,60 @@
 </ul>
 <h3 id="3-1-4-path-路径跳转语法">3.1.4 path 路径跳转语法</h3>
 <p>特点：简易方便。在对应的 .vue 文件里面的 js 部分进行书写。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 简单写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;路由路径&#x27;</span>)<br><br><span class="hljs-comment">// 完整写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;路由路径&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 简单写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'路由路径'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 完整写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  path<span class="token operator">:</span> <span class="token string">'路由路径'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">goSearch</span> () &#123;<br>    <span class="hljs-comment">// 1. 通过路径的方式跳转</span><br>    <span class="hljs-comment">// (1) this.$router.push(&#x27;路由路径&#x27;) [简写]</span><br>    <span class="hljs-comment">// this.$router.push(&#x27;/search&#x27;)</span><br><br>    <span class="hljs-comment">// (2) this.$router.push(&#123;     [完整写法]</span><br>    <span class="hljs-comment">//         path: &#x27;路由路径&#x27; </span><br>    <span class="hljs-comment">//     &#125;)</span><br>    <span class="hljs-comment">// this.$router.push(&#123;</span><br>    <span class="hljs-comment">//   path: &#x27;/search&#x27;</span><br>    <span class="hljs-comment">// &#125;)</span><br><br>    <span class="hljs-comment">// 2. 通过命名路由的方式跳转 (需要给路由起名字) 适合长路径</span><br>    <span class="hljs-comment">//    this.$router.push(&#123;</span><br>    <span class="hljs-comment">//        name: &#x27;路由名&#x27;</span><br>    <span class="hljs-comment">//    &#125;)</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;search&#x27;</span><br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">goSearch</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 1. 通过路径的方式跳转</span>
+    <span class="token comment">// (1) this.$router.push('路由路径') [简写]</span>
+    <span class="token comment">// this.$router.push('/search')</span>
+
+    <span class="token comment">// (2) this.$router.push(&#123;     [完整写法]</span>
+    <span class="token comment">//         path: '路由路径' </span>
+    <span class="token comment">//     &#125;)</span>
+    <span class="token comment">// this.$router.push(&#123;</span>
+    <span class="token comment">//   path: '/search'</span>
+    <span class="token comment">// &#125;)</span>
+
+    <span class="token comment">// 2. 通过命名路由的方式跳转 (需要给路由起名字) 适合长路径</span>
+    <span class="token comment">//    this.$router.push(&#123;</span>
+    <span class="token comment">//        name: '路由名'</span>
+    <span class="token comment">//    &#125;)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'search'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="3-1-5-name-命名路由跳转">3.1.5 name 命名路由跳转</h3>
 <p>特点：适合 path 路径长的场景</p>
 <p>语法：</p>
 <ul>
 <li>
 <p>路由规则，必须配置 name 配置项</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;路由名&#x27;</span>, <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/path/xxx&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-variable constant_">XXX</span> &#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'路由名'</span><span class="token punctuation">,</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/path/xxx'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token constant">XXX</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 </li>
 <li>
 <p>通过 name 来进行跳转</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;路由名&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">'路由名'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 </li>
 </ul>
 <p>示例代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建了一个路由对象</span><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    ...<br>    &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;search&#x27;</span>, <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/search/:words?&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">Search</span> &#125;,<br>    ...<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 创建了一个路由对象</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'search'</span><span class="token punctuation">,</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/search/:words?'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> Search <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="3-2-path路径跳转传参">3.2 path路径跳转传参</h2>
 <h3 id="3-2-1-问题">3.2.1 问题</h3>
 <p>点击搜索按钮，跳转需要把文本框中输入的内容传到下一个页面如何实现？</p>
@@ -354,17 +613,42 @@
 <p>① path 路径跳转传参</p>
 <p>② name 命名路由跳转传参</p>
 <h3 id="3-2-4-path-路径跳转传参（query-传参）">3.2.4 path 路径跳转传参（query 传参）</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 简单写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;/路径?参数名1=参数值1&amp;参数2=参数值2&#x27;</span>)<br><span class="hljs-comment">// 完整写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/路径&#x27;</span>,<br>  <span class="hljs-attr">query</span>: &#123;<br>    参数名<span class="hljs-number">1</span>: <span class="hljs-string">&#x27;参数值1&#x27;</span>,<br>    参数名<span class="hljs-number">2</span>: <span class="hljs-string">&#x27;参数值2&#x27;</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 简单写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/路径?参数名1=参数值1&amp;参数2=参数值2'</span><span class="token punctuation">)</span>
+<span class="token comment">// 完整写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  path<span class="token operator">:</span> <span class="token string">'/路径'</span><span class="token punctuation">,</span>
+  query<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    参数名<span class="token number">1</span><span class="token operator">:</span> <span class="token string">'参数值1'</span><span class="token punctuation">,</span>
+    参数名<span class="token number">2</span><span class="token operator">:</span> <span class="token string">'参数值2'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>接受参数的方式依然是：<code>$route.query.参数名</code></p>
 <h3 id="3-2-5-path-路径跳转传参（动态路由传参）">3.2.5 path 路径跳转传参（动态路由传参）</h3>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 简单写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;/路径/参数值&#x27;</span>)<br><span class="hljs-comment">// 完整写法</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/路径/参数值&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 简单写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/路径/参数值'</span><span class="token punctuation">)</span>
+<span class="token comment">// 完整写法</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  path<span class="token operator">:</span> <span class="token string">'/路径/参数值'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>接受参数的方式依然是：<code>$route.params.参数值</code></p>
 <p>**注意：**path 不能配合 params 使用</p>
 <h2 id="3-3-name-命名路由传参">3.3 name 命名路由传参</h2>
 <h3 id="3-3-1-name-命名路由跳转传参-query传参">3.3.1 name 命名路由跳转传参 (query传参)</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;路由名字&#x27;</span>,<br>  <span class="hljs-attr">query</span>: &#123;<br>    参数名<span class="hljs-number">1</span>: <span class="hljs-string">&#x27;参数值1&#x27;</span>,<br>    参数名<span class="hljs-number">2</span>: <span class="hljs-string">&#x27;参数值2&#x27;</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">'路由名字'</span><span class="token punctuation">,</span>
+  query<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    参数名<span class="token number">1</span><span class="token operator">:</span> <span class="token string">'参数值1'</span><span class="token punctuation">,</span>
+    参数名<span class="token number">2</span><span class="token operator">:</span> <span class="token string">'参数值2'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="3-3-2-name-命名路由跳转传参-动态路由传参">3.3.2 name 命名路由跳转传参 (动态路由传参)</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable language_">this</span>.<span class="hljs-property">$router</span>.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;路由名字&#x27;</span>,<br>  <span class="hljs-attr">params</span>: &#123;<br>    参数名: <span class="hljs-string">&#x27;参数值&#x27;</span>,<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">'路由名字'</span><span class="token punctuation">,</span>
+  params<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    参数名<span class="token operator">:</span> <span class="token string">'参数值'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h1 id="4-面经基础版">4 面经基础版</h1>
 <h2 id="4-1-案例效果分析">4.1 案例效果分析</h2>
 <h3 id="4-1-1-功能分析">4.1.1 功能分析</h3>
@@ -390,7 +674,25 @@
 <h3 id="4-2-1-一级路由配置">4.2.1 一级路由配置</h3>
 <p>1.把文档中准备的素材拷贝到项目中</p>
 <p>2.针对 router/index.js 文件进行一级路由配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Layout</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Layout.vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">ArticleDetail</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/ArticleDetail.vue&#x27;</span><br>...<br><br><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    <span class="hljs-comment">// 一级路由</span><br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Layout</span><br>    &#125;,<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/detail&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">ArticleDetail</span><br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">...</span>
+<span class="token keyword">import</span> Layout <span class="token keyword">from</span> <span class="token string">'@/views/Layout.vue'</span>
+<span class="token keyword">import</span> ArticleDetail <span class="token keyword">from</span> <span class="token string">'@/views/ArticleDetail.vue'</span>
+<span class="token operator">...</span>
+
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// 一级路由</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> Layout
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/detail'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> ArticleDetail
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="4-2-2-二级路由配置">4.2.2 二级路由配置</h3>
 <p>二级路由也叫嵌套路由，当然也可以嵌套三级、四级…</p>
 <p><strong>二级路由对应的组件渲染到哪个一级路由下，children就配置到哪个路由下边</strong></p>
@@ -403,11 +705,34 @@
 </ul>
 <p>1.在一级路由下，配置 children 属性</p>
 <p><strong>注意</strong>:一级的路由path 需要加 <code>/</code> 二级路由的path不需要加 <code>/</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>: [<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Layout</span>,<br>      <span class="hljs-attr">children</span>:[<br>        <span class="hljs-comment">//children中的配置项 跟一级路由中的配置项一模一样 </span><br>        <span class="hljs-comment">// 通过 children 配置项，可以配置嵌套子路由</span><br>        <span class="hljs-comment">// 1. 在children配置项中，配规则</span><br>        <span class="hljs-comment">// 2. 准备二级路由出口，一级路由里面写 router-view</span><br>        <span class="hljs-comment">// 示例：&#123;path: &#x27;/article&#x27;,component: Article&#125;</span><br>        &#123;<span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;xxxx&#x27;</span>,<span class="hljs-attr">component</span>:xxxx&#125;,<br>        &#123;<span class="hljs-attr">path</span>:<span class="hljs-string">&#x27;xxxx&#x27;</span>,<span class="hljs-attr">component</span>:xxxx&#125;,<br>      ]<br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> Layout<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span><span class="token punctuation">[</span>
+        <span class="token comment">//children中的配置项 跟一级路由中的配置项一模一样 </span>
+        <span class="token comment">// 通过 children 配置项，可以配置嵌套子路由</span>
+        <span class="token comment">// 1. 在children配置项中，配规则</span>
+        <span class="token comment">// 2. 准备二级路由出口，一级路由里面写 router-view</span>
+        <span class="token comment">// 示例：&#123;path: '/article',component: Article&#125;</span>
+        <span class="token punctuation">&#123;</span><span class="token literal-property property">path</span><span class="token operator">:</span><span class="token string">'xxxx'</span><span class="token punctuation">,</span><span class="token literal-property property">component</span><span class="token operator">:</span>xxxx<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span><span class="token literal-property property">path</span><span class="token operator">:</span><span class="token string">'xxxx'</span><span class="token punctuation">,</span><span class="token literal-property property">component</span><span class="token operator">:</span>xxxx<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>2.配置二级路由的出口 <code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
 <p><strong>注意：</strong> 配置了嵌套路由，一定配置对应的路由出口，否则不会渲染出对应的组件</p>
 <p>Layout.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;div class=&quot;content&quot;&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/div&gt;<br>  ....<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;h5-wrapper&quot;&gt;
+    &lt;div class&#x3D;&quot;content&quot;&gt;
+      &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+    &lt;&#x2F;div&gt;
+  ....
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h3 id="4-2-3-二级导航高亮">4.2.3 二级导航高亮</h3>
 <p><strong>1.实现思路</strong></p>
 <ul>
@@ -416,12 +741,139 @@
 </ul>
 <p><strong>2.代码实现</strong></p>
 <p>Layout.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">....<br>    &lt;nav class=&quot;tabbar&quot;&gt;<br>      &lt;router-link to=&quot;/article&quot;&gt;面经&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/collect&quot;&gt;收藏&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/like&quot;&gt;喜欢&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/user&quot;&gt;我的&lt;/router-link&gt;<br>    &lt;/nav&gt;<br>&lt;style&gt;<br>    a.router-link-active &#123;<br>      color: orange;<br>    &#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">....
+    &lt;nav class&#x3D;&quot;tabbar&quot;&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;article&quot;&gt;面经&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;collect&quot;&gt;收藏&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;like&quot;&gt;喜欢&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;user&quot;&gt;我的&lt;&#x2F;router-link&gt;
+    &lt;&#x2F;nav&gt;
+&lt;style&gt;
+    a.router-link-active &#123;
+      color: orange;
+    &#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <h3 id="4-2-4-代码实现">4.2.4 代码实现</h3>
 <p>router/index.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueRouter</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Layout</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Layout&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Article</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Article&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Collect</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Collect&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Like</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/Like&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/User&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">ArticleDetail</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/views/ArticleDetail&#x27;</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueRouter</span>)<br><br><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-comment">// /article 路径 → Article组件</span><br>  <span class="hljs-attr">routes</span>: [<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Layout</span>,<br>      <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;/article&#x27;</span>,<br>      <span class="hljs-comment">// 通过 children 配置项，可以配置嵌套子路由</span><br>      <span class="hljs-comment">// 1. 在children配置项中，配规则</span><br>      <span class="hljs-comment">// 2. 准备二级路由出口</span><br>      <span class="hljs-attr">children</span>: [<br>        &#123;<br>          <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/article&#x27;</span>,<br>          <span class="hljs-attr">component</span>: <span class="hljs-title class_">Article</span><br>        &#125;,<br>        &#123;<br>          <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/collect&#x27;</span>,<br>          <span class="hljs-attr">component</span>: <span class="hljs-title class_">Collect</span><br>        &#125;,<br>        &#123;<br>          <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/like&#x27;</span>,<br>          <span class="hljs-attr">component</span>: <span class="hljs-title class_">Like</span>,<br>        &#125;,<br>        &#123;<br>          <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/user&#x27;</span>,<br>          <span class="hljs-attr">component</span>: <span class="hljs-title class_">User</span><br>        &#125;<br>      ]<br>    &#125;,<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/detail/:id&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">ArticleDetail</span><br>    &#125;<br>  ]<br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> VueRouter <span class="token keyword">from</span> <span class="token string">"vue-router"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Layout <span class="token keyword">from</span> <span class="token string">'@/views/Layout'</span>
+<span class="token keyword">import</span> Article <span class="token keyword">from</span> <span class="token string">'@/views/Article'</span>
+<span class="token keyword">import</span> Collect <span class="token keyword">from</span> <span class="token string">'@/views/Collect'</span>
+<span class="token keyword">import</span> Like <span class="token keyword">from</span> <span class="token string">'@/views/Like'</span>
+<span class="token keyword">import</span> User <span class="token keyword">from</span> <span class="token string">'@/views/User'</span>
+<span class="token keyword">import</span> ArticleDetail <span class="token keyword">from</span> <span class="token string">'@/views/ArticleDetail'</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueRouter<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">// /article 路径 → Article组件</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> Layout<span class="token punctuation">,</span>
+      <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">'/article'</span><span class="token punctuation">,</span>
+      <span class="token comment">// 通过 children 配置项，可以配置嵌套子路由</span>
+      <span class="token comment">// 1. 在children配置项中，配规则</span>
+      <span class="token comment">// 2. 准备二级路由出口</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/article'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">component</span><span class="token operator">:</span> Article
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/collect'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">component</span><span class="token operator">:</span> Collect
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/like'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">component</span><span class="token operator">:</span> Like<span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">component</span><span class="token operator">:</span> User
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/detail/:id'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> ArticleDetail
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> router</code></pre></div></figure>
 <p>Layout.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;div class=&quot;content&quot;&gt;<br>      &lt;!-- 二级路由出口, --&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/div&gt;<br>    &lt;nav class=&quot;tabbar&quot;&gt;<br>      &lt;!-- 导航高亮<br>           1. 将a标签，替换成router-link (to)<br>           2. 结合高亮类名实现高亮效果 (router-link-active 模糊匹配)<br>      --&gt;<br>      &lt;router-link to=&quot;/article&quot;&gt;面经&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/collect&quot;&gt;收藏&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/like&quot;&gt;喜欢&lt;/router-link&gt;<br>      &lt;router-link to=&quot;/user&quot;&gt;我的&lt;/router-link&gt;<br>    &lt;/nav&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  // 组件名(如果没有配置 name，才会找文件名作为组件名)<br>  name: &#x27;LayoutPage&#x27;,<br>  // 组件缓存了，就不会执行组件的created，mounted，destroyed等钩子<br>  // 所以提供了 actived 和 deactived<br>  created() &#123;<br>    console.log(&#x27;created 组件被加载了&#x27;)<br>  &#125;,<br>  mounted() &#123;<br>    console.log(&#x27;mounted dom渲染完了&#x27;)<br>  &#125;,<br>  destroyed() &#123;<br>    console.log(&#x27;destroyed 组件被销毁了&#x27;)<br>  &#125;,<br><br>  activated() &#123;<br>    alert(&#x27;你好，欢迎回到首页&#x27;)<br>    console.log(&#x27;activated 组件被激活了，看到页面了&#x27;)<br>  &#125;,<br>  deactivated() &#123;<br>    console.log(&#x27;deactivated 组件失活，离开页面了&#x27;)<br>  &#125;,<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>body &#123;<br>  margin: 0;<br>  padding: 0;<br>&#125;<br>&lt;/style&gt;<br>&lt;style lang=&quot;less&quot; scoped&gt;<br>.h5-wrapper &#123;<br>  .content &#123;<br>    margin-bottom: 51px;<br>  &#125;<br>  .tabbar &#123;<br>		....<br>    a &#123;<br>      flex: 1;<br>      text-decoration: none;<br>      font-size: 14px;<br>      color: #333;<br>      -webkit-tap-highlight-color: transparent;<br>    &#125;<br>    a.router-link-active &#123;<br>      color: orange;<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;h5-wrapper&quot;&gt;
+    &lt;div class&#x3D;&quot;content&quot;&gt;
+      &lt;!-- 二级路由出口, --&gt;
+      &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+    &lt;&#x2F;div&gt;
+    &lt;nav class&#x3D;&quot;tabbar&quot;&gt;
+      &lt;!-- 导航高亮
+           1. 将a标签，替换成router-link (to)
+           2. 结合高亮类名实现高亮效果 (router-link-active 模糊匹配)
+      --&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;article&quot;&gt;面经&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;collect&quot;&gt;收藏&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;like&quot;&gt;喜欢&lt;&#x2F;router-link&gt;
+      &lt;router-link to&#x3D;&quot;&#x2F;user&quot;&gt;我的&lt;&#x2F;router-link&gt;
+    &lt;&#x2F;nav&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  &#x2F;&#x2F; 组件名(如果没有配置 name，才会找文件名作为组件名)
+  name: &#39;LayoutPage&#39;,
+  &#x2F;&#x2F; 组件缓存了，就不会执行组件的created，mounted，destroyed等钩子
+  &#x2F;&#x2F; 所以提供了 actived 和 deactived
+  created() &#123;
+    console.log(&#39;created 组件被加载了&#39;)
+  &#125;,
+  mounted() &#123;
+    console.log(&#39;mounted dom渲染完了&#39;)
+  &#125;,
+  destroyed() &#123;
+    console.log(&#39;destroyed 组件被销毁了&#39;)
+  &#125;,
+
+  activated() &#123;
+    alert(&#39;你好，欢迎回到首页&#39;)
+    console.log(&#39;activated 组件被激活了，看到页面了&#39;)
+  &#125;,
+  deactivated() &#123;
+    console.log(&#39;deactivated 组件失活，离开页面了&#39;)
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+body &#123;
+  margin: 0;
+  padding: 0;
+&#125;
+&lt;&#x2F;style&gt;
+&lt;style lang&#x3D;&quot;less&quot; scoped&gt;
+.h5-wrapper &#123;
+  .content &#123;
+    margin-bottom: 51px;
+  &#125;
+  .tabbar &#123;
+		....
+    a &#123;
+      flex: 1;
+      text-decoration: none;
+      font-size: 14px;
+      color: #333;
+      -webkit-tap-highlight-color: transparent;
+    &#125;
+    a.router-link-active &#123;
+      color: orange;
+    &#125;
+  &#125;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
 <h2 id="4-3-首页请求渲染">4.3 首页请求渲染</h2>
 <h3 id="4-3-1-步骤分析">4.3.1 步骤分析</h3>
 <p>1.安装 axios</p>
@@ -432,11 +884,41 @@
 <p>1.安装 axios</p>
 <p><code>yarn add axios </code> 或 <code>npm i axios</code></p>
 <p>2.接口文档</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vue">请求地址: https://mock.boxuegu.com/mock/3083/articles<br>请求方式: get<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">请求地址: https:&#x2F;&#x2F;mock.boxuegu.com&#x2F;mock&#x2F;3083&#x2F;articles
+请求方式: get</code></pre></div></figure>
 <p>3.created 中发送请求，获取数据，存储到 data 中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">articelList</span>: [],<br>  &#125;<br>&#125;,<br><span class="hljs-keyword">async</span> <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 解构</span><br>  <span class="hljs-keyword">const</span> &#123;<br>    <span class="hljs-attr">data</span>: &#123;<br>      <span class="hljs-attr">result</span>: &#123; rows &#125;,<br>    &#125;,<br>  &#125; = <span class="hljs-keyword">await</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;https://mock.boxuegu.com/mock/3083/articles&#x27;</span>)<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">articelList</span> = rows<br>&#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">articelList</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token keyword">async</span> <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 解构</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">result</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> rows <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">await</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'https://mock.boxuegu.com/mock/3083/articles'</span><span class="token punctuation">)</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>articelList <span class="token operator">=</span> rows
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 <p>4.页面动态渲染</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-page&quot;&gt;<br>    &lt;div class=&quot;article-item&quot; v-for=&quot;item in articelList&quot; :key=&quot;item.id&quot;&gt;<br>      &lt;div class=&quot;head&quot;&gt;<br>        &lt;img :src=&quot;item.creatorAvatar&quot; alt=&quot;&quot; /&gt;<br>        &lt;div class=&quot;con&quot;&gt;<br>          &lt;p class=&quot;title&quot;&gt;&#123;&#123; item.stem &#125;&#125;&lt;/p&gt;<br>          &lt;p class=&quot;other&quot;&gt;&#123;&#123; item.creatorName &#125;&#125; | &#123;&#123; item.createdAt &#125;&#125;&lt;/p&gt;<br>        &lt;/div&gt;<br>      &lt;/div&gt;<br>      &lt;div class=&quot;body&quot;&gt;<br>        &#123;&#123;item.content&#125;&#125;<br>      &lt;/div&gt;<br>      &lt;div class=&quot;foot&quot;&gt;点赞 &#123;&#123;item.likeCount&#125;&#125; | 浏览 &#123;&#123;item.views&#125;&#125;&lt;/div&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;article-page&quot;&gt;
+    &lt;div class&#x3D;&quot;article-item&quot; v-for&#x3D;&quot;item in articelList&quot; :key&#x3D;&quot;item.id&quot;&gt;
+      &lt;div class&#x3D;&quot;head&quot;&gt;
+        &lt;img :src&#x3D;&quot;item.creatorAvatar&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;
+        &lt;div class&#x3D;&quot;con&quot;&gt;
+          &lt;p class&#x3D;&quot;title&quot;&gt;&#123;&#123; item.stem &#125;&#125;&lt;&#x2F;p&gt;
+          &lt;p class&#x3D;&quot;other&quot;&gt;&#123;&#123; item.creatorName &#125;&#125; | &#123;&#123; item.createdAt &#125;&#125;&lt;&#x2F;p&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+      &lt;div class&#x3D;&quot;body&quot;&gt;
+        &#123;&#123;item.content&#125;&#125;
+      &lt;&#x2F;div&gt;
+      &lt;div class&#x3D;&quot;foot&quot;&gt;点赞 &#123;&#123;item.likeCount&#125;&#125; | 浏览 &#123;&#123;item.views&#125;&#125;&lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h2 id="4-4-查询参数传参">4.4 查询参数传参</h2>
 <h3 id="4-4-1-说明">4.4.1 说明</h3>
 <p>跳转详情页需要把当前点击的文章 id 传给详情页，获取数据</p>
@@ -446,9 +928,20 @@
 </ul>
 <h3 id="4-4-2-查询参数传参实现">4.4.2 查询参数传参实现</h3>
 <p>Article.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-page&quot;&gt;<br>    &lt;div class=&quot;article-item&quot; <br>      v-for=&quot;item in articelList&quot; :key=&quot;item.id&quot; <br>      @click=&quot;$router.push(`/detail?id=$&#123;item.id&#125;`)&quot;&gt;<br>     ...<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;article-page&quot;&gt;
+    &lt;div class&#x3D;&quot;article-item&quot; 
+      v-for&#x3D;&quot;item in articelList&quot; :key&#x3D;&quot;item.id&quot; 
+      @click&#x3D;&quot;$router.push(&#96;&#x2F;detail?id&#x3D;$&#123;item.id&#125;&#96;)&quot;&gt;
+     ...
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <p>ArticleDetail.vue</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">created</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-comment">// 获取对应的参数</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">$route</span>.<span class="hljs-property">query</span>.<span class="hljs-property">id</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">// 获取对应的参数</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>query<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="4-4-3-动态路由传参">4.4.3 动态路由传参</h3>
 <p><strong>1.实现步骤</strong></p>
 <ul>
@@ -459,15 +952,31 @@
 <p><strong>2.代码实现</strong></p>
 <p>改造路由</p>
 <p>router/index.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br>  &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/detail/:id&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">ArticleDetail</span><br>  &#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">...</span>
+  <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/detail/:id'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">component</span><span class="token operator">:</span> ArticleDetail
+  <span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>Article.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div class=&quot;article-item&quot; <br>     v-for=&quot;item in articelList&quot; :key=&quot;item.id&quot; <br>     @click=&quot;$router.push(`/detail/$&#123;item.id&#125;`)&quot;&gt;<br>       ....<br> &lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;div class&#x3D;&quot;article-item&quot; 
+     v-for&#x3D;&quot;item in articelList&quot; :key&#x3D;&quot;item.id&quot; 
+     @click&#x3D;&quot;$router.push(&#96;&#x2F;detail&#x2F;$&#123;item.id&#125;&#96;)&quot;&gt;
+       ....
+ &lt;&#x2F;div&gt;</code></pre></div></figure>
 <p>ArticleDetail.vue</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">created</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-comment">// 获取对应的值</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">$route</span>.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">// 获取对应的值</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="4-4-4-额外优化功能点-点击回退跳转到上一页">4.4.4 额外优化功能点-点击回退跳转到上一页</h3>
 <p>ArticleDetail.vue</p>
 <p>使用 <code>$router.back()</code> 实现返回的效果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-detail-page&quot;&gt;<br>    &lt;nav class=&quot;nav&quot;&gt;&lt;span class=&quot;back&quot; @click=&quot;$router.back()&quot;&gt;&amp;lt;&lt;/span&gt; 面经详情&lt;/nav&gt;<br>     ....<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;article-detail-page&quot;&gt;
+    &lt;nav class&#x3D;&quot;nav&quot;&gt;&lt;span class&#x3D;&quot;back&quot; @click&#x3D;&quot;$router.back()&quot;&gt;&lt;&lt;&#x2F;span&gt; 面经详情&lt;&#x2F;nav&gt;
+     ....
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h2 id="4-5-详情页渲染">4.5 详情页渲染</h2>
 <h3 id="4-5-1-实现步骤分析">4.5.1 实现步骤分析</h3>
 <ul>
@@ -478,11 +987,43 @@
 </ul>
 <h3 id="4-5-2-代码实现">4.5.2 代码实现</h3>
 <p>接口文档</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vue">请求地址: https://mock.boxuegu.com/mock/3083/articles/:id<br>请求方式: get<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">请求地址: https:&#x2F;&#x2F;mock.boxuegu.com&#x2F;mock&#x2F;3083&#x2F;articles&#x2F;:id
+请求方式: get</code></pre></div></figure>
 <p>在 created 中发送请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>   <span class="hljs-keyword">return</span> &#123;<br>     <span class="hljs-attr">articleDetail</span>:&#123;&#125;<br>   &#125;<br> &#125;,<br> <span class="hljs-keyword">async</span> <span class="hljs-title function_">created</span>(<span class="hljs-params"></span>) &#123;<br>   <span class="hljs-keyword">const</span> id = <span class="hljs-variable language_">this</span>.<span class="hljs-property">$route</span>.<span class="hljs-property">params</span>.<span class="hljs-property">id</span><br>   <span class="hljs-keyword">const</span> &#123;<span class="hljs-attr">data</span>:&#123;result&#125;&#125; = <span class="hljs-keyword">await</span> axios.<span class="hljs-title function_">get</span>(<br>     <span class="hljs-string">`https://mock.boxuegu.com/mock/3083/articles/<span class="hljs-subst">$&#123;id&#125;</span>`</span><br>   )<br>   <span class="hljs-variable language_">this</span>.<span class="hljs-property">articleDetail</span> = result<br> &#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+     <span class="token literal-property property">articleDetail</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+ <span class="token keyword">async</span> <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id
+   <span class="token keyword">const</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">data</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>result<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">await</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>
+     <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://mock.boxuegu.com/mock/3083/articles/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span>
+   <span class="token punctuation">)</span>
+   <span class="token keyword">this</span><span class="token punctuation">.</span>articleDetail <span class="token operator">=</span> result
+ <span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 <p>页面动态渲染</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-detail-page&quot;&gt;<br>    &lt;nav class=&quot;nav&quot;&gt;<br>      &lt;span class=&quot;back&quot; @click=&quot;$router.back()&quot;&gt;&amp;lt;&lt;/span&gt; 面经详情<br>    &lt;/nav&gt;<br>    &lt;header class=&quot;header&quot;&gt;<br>      &lt;h1&gt;&#123;&#123;articleDetail.stem&#125;&#125;&lt;/h1&gt;<br>      &lt;p&gt;&#123;&#123;articleDetail.createAt&#125;&#125; | &#123;&#123;articleDetail.views&#125;&#125; 浏览量 | &#123;&#123;articleDetail.likeCount&#125;&#125; 点赞数&lt;/p&gt;<br>      &lt;p&gt;<br>        &lt;img<br>          :src=&quot;articleDetail.creatorAvatar&quot;<br>          alt=&quot;&quot;<br>        /&gt;<br>        &lt;span&gt;&#123;&#123;articleDetail.creatorName&#125;&#125;&lt;/span&gt;<br>      &lt;/p&gt;<br>    &lt;/header&gt;<br>    &lt;main class=&quot;body&quot;&gt;<br>      &#123;&#123;articleDetail.content&#125;&#125;<br>    &lt;/main&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;article-detail-page&quot;&gt;
+    &lt;nav class&#x3D;&quot;nav&quot;&gt;
+      &lt;span class&#x3D;&quot;back&quot; @click&#x3D;&quot;$router.back()&quot;&gt;&lt;&lt;&#x2F;span&gt; 面经详情
+    &lt;&#x2F;nav&gt;
+    &lt;header class&#x3D;&quot;header&quot;&gt;
+      &lt;h1&gt;&#123;&#123;articleDetail.stem&#125;&#125;&lt;&#x2F;h1&gt;
+      &lt;p&gt;&#123;&#123;articleDetail.createAt&#125;&#125; | &#123;&#123;articleDetail.views&#125;&#125; 浏览量 | &#123;&#123;articleDetail.likeCount&#125;&#125; 点赞数&lt;&#x2F;p&gt;
+      &lt;p&gt;
+        &lt;img
+          :src&#x3D;&quot;articleDetail.creatorAvatar&quot;
+          alt&#x3D;&quot;&quot;
+        &#x2F;&gt;
+        &lt;span&gt;&#123;&#123;articleDetail.creatorName&#125;&#125;&lt;&#x2F;span&gt;
+      &lt;&#x2F;p&gt;
+    &lt;&#x2F;header&gt;
+    &lt;main class&#x3D;&quot;body&quot;&gt;
+      &#123;&#123;articleDetail.content&#125;&#125;
+    &lt;&#x2F;main&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h2 id="4-6-缓存组件">4.6 缓存组件</h2>
 <h3 id="4-6-1-问题">4.6.1 问题</h3>
 <p>从面经列表 点到 详情页，又点返回，数据重新加载了 → <strong>希望回到原来的位置</strong></p>
@@ -498,13 +1039,26 @@
 <p>在组件切换过程中把切换出去的组件保留在内存中，防止重复渲染DOM，</p>
 <p>减少加载时间及性能消耗，提高用户体验性。</p>
 <p>App.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;!-- 所有组件全部缓存 --&gt;<br>    &lt;keep-alive&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/keep-alive&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;h5-wrapper&quot;&gt;
+    &lt;!-- 所有组件全部缓存 --&gt;
+    &lt;keep-alive&gt;
+      &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+    &lt;&#x2F;keep-alive&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h3 id="4-6-5-keep-alive-的三个属性">4.6.5 keep-alive 的三个属性</h3>
 <p>① include ： 组件名数组，只有匹配的组件 <strong>会被缓存</strong> ，最为常用。</p>
 <p>② exclude ： 组件名数组，任何匹配的组件都 <strong>不会被缓存</strong>，会出现性能上面的问题，不推荐。</p>
 <p>③ max ： 最多可以 <strong>缓存多少</strong> 组件实例</p>
 <p>App.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;h5-wrapper&quot;&gt;<br>    &lt;keep-alive :include=&quot;[&#x27;LayoutPage&#x27;]&quot;&gt;<br>      &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;/keep-alive&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;h5-wrapper&quot;&gt;
+    &lt;keep-alive :include&#x3D;&quot;[&#39;LayoutPage&#39;]&quot;&gt;
+      &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+    &lt;&#x2F;keep-alive&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
 <h3 id="4-6-6-额外的两个生命周期钩子">4.6.6 额外的两个生命周期钩子</h3>
 <p><strong>keep-alive的使用会触发两个生命周期函数</strong></p>
 <p><strong>activated</strong> 当组件被激活（使用）的时候触发 → 进入这个页面的时候触发</p>
@@ -514,13 +1068,17 @@
 <h1 id="5-项目配置相关">5 项目配置相关</h1>
 <h2 id="5-1-VueCli-自定义创建项目">5.1 VueCli 自定义创建项目</h2>
 <p>1.安装脚手架 (已安装)</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> i @vue/cli -g<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">npm i @vue&#x2F;cli -g</code></pre></div></figure>
 <p>2.创建项目</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">vue <span class="hljs-keyword">create</span> hm-<span class="hljs-built_in">exp</span>-mobile<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">vue create hm-exp-mobile</code></pre></div></figure>
 <ul>
 <li>选项</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title class_">Vue</span> <span class="hljs-variable constant_">CLI</span> v5<span class="hljs-number">.0</span><span class="hljs-number">.8</span><br>? <span class="hljs-title class_">Please</span> pick a <span class="hljs-attr">preset</span>:<br>  <span class="hljs-title class_">Default</span> ([<span class="hljs-title class_">Vue</span> <span class="hljs-number">3</span>] babel, eslint)<br>  <span class="hljs-title class_">Default</span> ([<span class="hljs-title class_">Vue</span> <span class="hljs-number">2</span>] babel, eslint)<br>&gt; <span class="hljs-title class_">Manually</span> select features     选自定义<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">Vue <span class="token constant">CLI</span> v5<span class="token punctuation">.</span><span class="token number">0.8</span>
+<span class="token operator">?</span> Please pick a preset<span class="token operator">:</span>
+  <span class="token function">Default</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>Vue <span class="token number">3</span><span class="token punctuation">]</span> babel<span class="token punctuation">,</span> eslint<span class="token punctuation">)</span>
+  <span class="token function">Default</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>Vue <span class="token number">2</span><span class="token punctuation">]</span> babel<span class="token punctuation">,</span> eslint<span class="token punctuation">)</span>
+<span class="token operator">></span> Manually select features     选自定义</code></pre></div></figure>
 <ul>
 <li>手动选择功能</li>
 </ul>
@@ -528,7 +1086,8 @@
 <ul>
 <li>选择vue的版本</li>
 </ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsx">  <span class="hljs-number">3.</span>x<br>&gt; <span class="hljs-number">2.</span>x<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx">  <span class="token number">3</span><span class="token punctuation">.</span>x
+<span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">.</span>x</code></pre></div></figure>
 <ul>
 <li>是否使用history模式</li>
 </ul>
@@ -561,7 +1120,7 @@
 <ul>
 <li>启动项目</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">npm <span class="hljs-built_in">run</span> serve<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">npm run serve</code></pre></div></figure>
 <h2 id="5-2-ESlint-代码规范及手动修复">5.2 ESlint 代码规范及手动修复</h2>
 <p>代码规范：一套写代码的约定规则。例如：赋值符号的左右是否需要空格？一句结束是否是要加;？…</p>
 <blockquote>
@@ -582,7 +1141,17 @@
 <h3 id="5-2-2-代码规范错误">5.2.2 代码规范错误</h3>
 <p>如果你的代码不符合 standard 的要求，eslint 会跳出来刀子嘴，豆腐心地提示你。</p>
 <p>下面我们在 main.js 中随意做一些改动：添加一些空行，空格。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./styles/index.less&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-property">config</span>.<span class="hljs-property">productionTip</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span> ( &#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),<br>  router<br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+
+<span class="token keyword">import</span> <span class="token string">'./styles/index.less'</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span> <span class="token punctuation">(</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  router
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>按下保存代码之后：</p>
 <p>你将会看在控制台中输出如下错误：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242244072.png" srcset="/img/loading.gif" lazyload alt="68294255431"></p>
@@ -608,13 +1177,29 @@
 <ul>
 <li>如何配置（这里需要关闭默认的代码格式化）</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 当保存的时候，eslint自动帮我们修复错误</span><br><span class="hljs-string">&quot;editor.codeActionsOnSave&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;source.fixAll&quot;</span>: <span class="hljs-literal">true</span><br>&#125;,<br><span class="hljs-comment">// 保存代码，不自动格式化</span><br><span class="hljs-string">&quot;editor.formatOnSave&quot;</span>: <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 当保存的时候，eslint自动帮我们修复错误</span>
+<span class="token string-property property">"editor.codeActionsOnSave"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"source.fixAll"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token comment">// 保存代码，不自动格式化</span>
+<span class="token string-property property">"editor.formatOnSave"</span><span class="token operator">:</span> <span class="token boolean">false</span></code></pre></div></figure>
 <ul>
 <li>注意：eslint 的配置文件必须在根目录下，这个插件才能才能生效。打开项目必须以根目录打开，一次打开一个项目</li>
 <li>注意：使用了 eslint 校验之后，把 vscode 带的那些格式化工具全禁用了 Beatify</li>
 </ul>
 <p>settings.json 参考</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jsx">&#123;<br>    <span class="hljs-string">&quot;window.zoomLevel&quot;</span>: <span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;workbench.iconTheme&quot;</span>: <span class="hljs-string">&quot;vscode-icons&quot;</span>,<br>    <span class="hljs-string">&quot;editor.tabSize&quot;</span>: <span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;emmet.triggerExpansionOnTab&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-comment">// 当保存的时候，eslint自动帮我们修复错误</span><br>    <span class="hljs-string">&quot;editor.codeActionsOnSave&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;source.fixAll&quot;</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-comment">// 保存代码，不自动格式化</span><br>    <span class="hljs-string">&quot;editor.formatOnSave&quot;</span>: <span class="hljs-literal">false</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"window.zoomLevel"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"workbench.iconTheme"</span><span class="token operator">:</span> <span class="token string">"vscode-icons"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"editor.tabSize"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"emmet.triggerExpansionOnTab"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// 当保存的时候，eslint自动帮我们修复错误</span>
+    <span class="token string-property property">"editor.codeActionsOnSave"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-property property">"source.fixAll"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">// 保存代码，不自动格式化</span>
+    <span class="token string-property property">"editor.formatOnSave"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 </div>
 <hr>
 <div>
@@ -649,15 +1234,15 @@
 </div>
 <div class="post-prevnext my-3">
 <article class="post-prev col-6">
-<a href="/2024/06/Article202406141/" title="Vue基础入门到实战6（路由进阶+面经项目）">
+<a href="/2024/06/Article202406201/" title="Article202406201">
 <i class="iconfont icon-arrowleft"></i>
-<span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
+<span class="hidden-mobile">Article202406201</span>
 <span class="visible-mobile">上一篇</span>
 </a>
 </article>
 <article class="post-next col-6">
-<a href="/2024/06/Article202406071/" title="Vue基础入门到实战5（自定义指令+插槽+路由入门）">
-<span class="hidden-mobile">Vue基础入门到实战5（自定义指令+插槽+路由入门）</span>
+<a href="/2024/06/Article202406141/" title="Vue基础入门到实战6（路由进阶+面经项目）">
+<span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
 <span class="visible-mobile">下一篇</span>
 <i class="iconfont icon-arrowright"></i>
 </a>

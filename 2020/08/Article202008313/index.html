@@ -45,6 +45,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -130,7 +131,7 @@
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-13 分钟
+14 分钟
 </span>
 </div>
 </div>
@@ -172,7 +173,18 @@
 <p><strong>增量思想</strong></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212030069.png" srcset="/img/loading.gif" lazyload alt="3"></p>
 <p>用DDA扫描转换连接两点P0(0,0)和P1(5,3)的直线段。</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">void DDALine(<span class="hljs-keyword">int</span> x0,<span class="hljs-keyword">int</span> y0,<span class="hljs-keyword">int</span> x1,<span class="hljs-keyword">int</span> y1,<span class="hljs-keyword">int</span> color)     <br>&#123;<br>    <span class="hljs-keyword">int</span> x；							<br>	<span class="hljs-meta">float</span> <span class="hljs-built_in">dx</span>, <span class="hljs-built_in">dy</span>, y, k<span class="hljs-comment">;					</span><br>	<span class="hljs-built_in">dx</span>, = x1-x0, <span class="hljs-built_in">dy</span>=y1-y0<span class="hljs-comment">;					   </span><br>	k=<span class="hljs-built_in">dy</span>/<span class="hljs-built_in">dx</span>, y=y0<span class="hljs-comment">;	 					   </span><br>	for (x=x0<span class="hljs-comment">; x&lt;=x1, x++)					   </span><br>	&#123;  <br>		drawpixel (x, <span class="hljs-keyword">int</span>(y+<span class="hljs-number">0.5</span>), color)<span class="hljs-comment">;		   </span><br>		y=y+k<span class="hljs-comment">;</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">void DDALine(int x0,int y0,int x1,int y1,int color)     
+&#123;
+    int x；							
+	float dx, dy, y, k;					
+	dx, &#x3D; x1-x0, dy&#x3D;y1-y0;					   
+	k&#x3D;dy&#x2F;dx, y&#x3D;y0;	 					   
+	for (x&#x3D;x0; x&lt;&#x3D;x1, x++)					   
+	&#123;  
+		drawpixel (x, int(y+0.5), color);		   
+		y&#x3D;y+k;
+    &#125;
+&#125;</code></pre></div></figure>
 <p>采用增量思想的DDA算法，直观、易实现，每计算 一个象素坐标，只需计算一个加法。</p>
 <p>（1）改进效率。这个算法每步只做一个加法，能否再提高效率？</p>
 <p>一般情况下k与y都是小数，而且每一步运算都要对y 进行四舍五入后取整。</p>
@@ -218,7 +230,21 @@
 <p>可以用2d代替d来摆脱浮点运算，写出仅包含整数运的算法。</p>
 <p>这样，中点生成直线的算法提高到整数加法，优于DDA算法。</p>
 <p>伪代码如下：</p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs gml">void Midpoint Line (int x0,int y0,int x1, int y1,int color)<br>     &#123;   <br>          int a, b, d1, d2, d, <span class="hljs-variable language_">x</span>, <span class="hljs-variable language_">y</span>;<br>    a=y0-y1, b=x1-x0, d=<span class="hljs-number">2</span>*a+b;<br>    d1=<span class="hljs-number">2</span>*a, d2=<span class="hljs-number">2</span>* (a+b);<br>    <span class="hljs-variable language_">x</span>=x0, <span class="hljs-variable language_">y</span>=y0;<br>    drawpixel(<span class="hljs-variable language_">x</span>, <span class="hljs-variable language_">y</span>, color);<br>    <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">x</span>&lt;x1)<br>    &#123; <span class="hljs-keyword">if</span> (d&lt;<span class="hljs-number">0</span>)       &#123;<span class="hljs-variable language_">x</span>++, <span class="hljs-variable language_">y</span>++, d+=d2; &#125;<br>     <span class="hljs-keyword">else</span>       &#123;<span class="hljs-variable language_">x</span>++, d+=d1;&#125;<br>     drawpixel (<span class="hljs-variable language_">x</span>, <span class="hljs-variable language_">y</span>, color);<br>     &#125;  <span class="hljs-comment">/* while */</span><br> &#125; <span class="hljs-comment">/* mid PointLine */</span><br><br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">void Midpoint Line (int x0,int y0,int x1, int y1,int color)
+     &#123;   
+          int a, b, d1, d2, d, x, y;
+    a&#x3D;y0-y1, b&#x3D;x1-x0, d&#x3D;2*a+b;
+    d1&#x3D;2*a, d2&#x3D;2* (a+b);
+    x&#x3D;x0, y&#x3D;y0;
+    drawpixel(x, y, color);
+    while (x&lt;x1)
+    &#123; if (d&lt;0)       &#123;x++, y++, d+&#x3D;d2; &#125;
+     else       &#123;x++, d+&#x3D;d1;&#125;
+     drawpixel (x, y, color);
+     &#125;  &#x2F;* while *&#x2F;
+ &#125; &#x2F;* mid PointLine *&#x2F;
+
+</code></pre></div></figure>
 <p><strong>小结</strong></p>
 <p>(1) Ax + By + C = 0</p>
 <p>(2) 通过判断中点的符号，最终可以只进行整数加法。</p>

@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;hhh5460&#x2F;p&#x2F;4323985.html  【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） 1import matplotlib.pyplot as plt 1import pylab as plt 【效果图】 【方式一】FontProp">
+<meta name="description" content="原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;hhh5460&#x2F;p&#x2F;4323985.html  【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） import matplotlib.pyplot as plt import pylab as plt 【效果图】 【方式一】FontProper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="matplotlib设置中文显示">
 <meta property="og:url" content="https://blog.fulequn.online/2020/09/Article202009112/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;hhh5460&#x2F;p&#x2F;4323985.html  【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） 1import matplotlib.pyplot as plt 1import pylab as plt 【效果图】 【方式一】FontProp">
+<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;hhh5460&#x2F;p&#x2F;4323985.html  【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） import matplotlib.pyplot as plt import pylab as plt 【效果图】 【方式一】FontProper">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212031270.png">
 <meta property="article:published_time" content="2020-09-11T04:24:36.000Z">
@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -116,11 +117,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-665 字
+583 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-6 分钟
+5 分钟
 </span>
 </div>
 </div>
@@ -145,26 +146,86 @@
 </blockquote>
 <p><strong>【注意】</strong></p>
 <p>可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:）</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br></code></pre></td></tr></table></figure>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> pylab <span class="hljs-keyword">as</span> plt<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">import matplotlib.pyplot as plt</code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">import pylab as plt</code></pre></div></figure>
 <p><strong>【效果图】</strong><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212031270.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <h3 id="【方式一】FontProperties">【方式一】FontProperties</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> matplotlib.font_manager <span class="hljs-keyword">import</span> FontProperties  <span class="hljs-comment"># 步骤一</span><br><br><span class="hljs-comment"># ...</span><br><br>font = FontProperties(fname=<span class="hljs-string">r&quot;c:\windows\fonts\simsun.ttc&quot;</span>, size=<span class="hljs-number">14</span>)  <span class="hljs-comment"># 步骤二</span><br>plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>, fontproperties=font) <span class="hljs-comment"># 步骤三</span><br>plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>, fontproperties=font)<br>plt.title(<span class="hljs-string">&quot;标题&quot;</span>, fontproperties=font)<br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> matplotlib<span class="token punctuation">.</span>font_manager <span class="token keyword">import</span> FontProperties  <span class="token comment"># 步骤一</span>
+
+<span class="token comment"># ...</span>
+
+font <span class="token operator">=</span> FontProperties<span class="token punctuation">(</span>fname<span class="token operator">=</span><span class="token string">r"c:\windows\fonts\simsun.ttc"</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">)</span>  <span class="token comment"># 步骤二</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"x轴"</span><span class="token punctuation">,</span> fontproperties<span class="token operator">=</span>font<span class="token punctuation">)</span> <span class="token comment"># 步骤三</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"y轴"</span><span class="token punctuation">,</span> fontproperties<span class="token operator">=</span>font<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"标题"</span><span class="token punctuation">,</span> fontproperties<span class="token operator">=</span>font<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>总的来说，很丑陋。</p>
 <h3 id="【方式二】-fontproperties">【方式二】 fontproperties</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-comment"># ...</span><br><br>plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)<br>plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>, fontproperties=<span class="hljs-string">&quot;SimSun&quot;</span>) <span class="hljs-comment"># 步骤一    （宋体）</span><br>plt.title(<span class="hljs-string">&quot;标题&quot;</span>, fontproperties=<span class="hljs-string">&quot;SimHei&quot;</span>) <span class="hljs-comment">#          （黑体）</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+<span class="token comment"># ...</span>
+
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"x轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"y轴"</span><span class="token punctuation">,</span> fontproperties<span class="token operator">=</span><span class="token string">"SimSun"</span><span class="token punctuation">)</span> <span class="token comment"># 步骤一    （宋体）</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"标题"</span><span class="token punctuation">,</span> fontproperties<span class="token operator">=</span><span class="token string">"SimHei"</span><span class="token punctuation">)</span> <span class="token comment">#          （黑体）</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>灵活，另一个优点：不污染全局字体设置。</p>
 <h3 id="【方式三】rcParams">【方式三】rcParams</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>] <span class="hljs-comment"># 步骤一（替换sans-serif字体）</span><br>plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>   <span class="hljs-comment"># 步骤二（解决坐标轴负数的负号显示问题）</span><br><span class="hljs-comment">#...</span><br><br>plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)<br>plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>)<br>plt.title(<span class="hljs-string">&quot;标题&quot;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.sans-serif'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span> <span class="token comment"># 步骤一（替换sans-serif字体）</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">False</span>   <span class="token comment"># 步骤二（解决坐标轴负数的负号显示问题）</span>
+<span class="token comment">#...</span>
+
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"x轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"y轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"标题"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>简洁的用法。缺点：污染全局字体设置。（所以需要第二步骤）</p>
 <h3 id="【方式四】rc">【方式四】rc</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>font = &#123;<span class="hljs-string">&#x27;family&#x27;</span> : <span class="hljs-string">&#x27;SimHei&#x27;</span>,<br>        <span class="hljs-string">&#x27;weight&#x27;</span> : <span class="hljs-string">&#x27;bold&#x27;</span>,<br>        <span class="hljs-string">&#x27;size&#x27;</span>   : <span class="hljs-string">&#x27;16&#x27;</span>&#125;<br>plt.rc(<span class="hljs-string">&#x27;font&#x27;</span>, **font)               <span class="hljs-comment"># 步骤一（设置字体的更多属性）</span><br>plt.rc(<span class="hljs-string">&#x27;axes&#x27;</span>, unicode_minus=<span class="hljs-literal">False</span>)  <span class="hljs-comment"># 步骤二（解决坐标轴负数的负号显示问题）</span><br><br><span class="hljs-comment">#...</span><br><br>plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)<br>plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>)<br>plt.title(<span class="hljs-string">&quot;标题&quot;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+font <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">'family'</span> <span class="token punctuation">:</span> <span class="token string">'SimHei'</span><span class="token punctuation">,</span>
+        <span class="token string">'weight'</span> <span class="token punctuation">:</span> <span class="token string">'bold'</span><span class="token punctuation">,</span>
+        <span class="token string">'size'</span>   <span class="token punctuation">:</span> <span class="token string">'16'</span><span class="token punctuation">&#125;</span>
+plt<span class="token punctuation">.</span>rc<span class="token punctuation">(</span><span class="token string">'font'</span><span class="token punctuation">,</span> <span class="token operator">**</span>font<span class="token punctuation">)</span>               <span class="token comment"># 步骤一（设置字体的更多属性）</span>
+plt<span class="token punctuation">.</span>rc<span class="token punctuation">(</span><span class="token string">'axes'</span><span class="token punctuation">,</span> unicode_minus<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>  <span class="token comment"># 步骤二（解决坐标轴负数的负号显示问题）</span>
+
+<span class="token comment">#...</span>
+
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"x轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"y轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"标题"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>灵活的用法。缺点：影响全局字体（所以需要第二步骤）</p>
 <h3 id="【总结】">【总结】</h3>
 <p>方式二用时才设置，且不会污染全局字体设置，<strong>更灵活</strong></p>
 <p>方式三、方式四不需要对字体路径硬编码，而且一次设置，多次使用，<strong>更方便。</strong></p>
 <h3 id="【测试代码】">【测试代码】</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>font = &#123;<span class="hljs-string">&#x27;family&#x27;</span> : <span class="hljs-string">&#x27;DFKai-SB&#x27;</span>,<br>        <span class="hljs-string">&#x27;weight&#x27;</span> : <span class="hljs-string">&#x27;bold&#x27;</span>,<br>        <span class="hljs-string">&#x27;size&#x27;</span>   : <span class="hljs-string">&#x27;16&#x27;</span>&#125;<br>plt.rc(<span class="hljs-string">&#x27;font&#x27;</span>, **font)  <span class="hljs-comment"># pass in the font dict as kwargs</span><br>plt.rc(<span class="hljs-string">&#x27;axes&#x27;</span>,unicode_minus=<span class="hljs-literal">False</span>)<br><br><br>x = np.linspace(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">1000</span>)<br>y = np.sin(x)<br>z = np.cos(x**<span class="hljs-number">2</span>)<br><br>plt.figure(figsize=(<span class="hljs-number">8</span>,<span class="hljs-number">4</span>))<br>plt.plot(x,y,label=<span class="hljs-string">&quot;$sin(x)$&quot;</span>,color=<span class="hljs-string">&quot;red&quot;</span>,linewidth=<span class="hljs-number">2</span>)<br>plt.plot(x,z,<span class="hljs-string">&quot;b--&quot;</span>,label=<span class="hljs-string">&quot;$cos(x^2)$&quot;</span>)<br>plt.xlabel(<span class="hljs-string">&quot;x轴&quot;</span>)<br>plt.ylabel(<span class="hljs-string">&quot;y轴&quot;</span>)<br>plt.title(<span class="hljs-string">&quot;标题&quot;</span>)<br>plt.ylim(-<span class="hljs-number">1.2</span>,<span class="hljs-number">1.2</span>)<br>plt.legend()<br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+font <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">'family'</span> <span class="token punctuation">:</span> <span class="token string">'DFKai-SB'</span><span class="token punctuation">,</span>
+        <span class="token string">'weight'</span> <span class="token punctuation">:</span> <span class="token string">'bold'</span><span class="token punctuation">,</span>
+        <span class="token string">'size'</span>   <span class="token punctuation">:</span> <span class="token string">'16'</span><span class="token punctuation">&#125;</span>
+plt<span class="token punctuation">.</span>rc<span class="token punctuation">(</span><span class="token string">'font'</span><span class="token punctuation">,</span> <span class="token operator">**</span>font<span class="token punctuation">)</span>  <span class="token comment"># pass in the font dict as kwargs</span>
+plt<span class="token punctuation">.</span>rc<span class="token punctuation">(</span><span class="token string">'axes'</span><span class="token punctuation">,</span>unicode_minus<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+z <span class="token operator">=</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">"$sin(x)$"</span><span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token string">"red"</span><span class="token punctuation">,</span>linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>z<span class="token punctuation">,</span><span class="token string">"b--"</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">"$cos(x^2)$"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"x轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"y轴"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"标题"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.2</span><span class="token punctuation">,</span><span class="token number">1.2</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="【附录】">【附录】</h3>
 <p>一些中文字体的英文名</p>
 <p>宋体 SimSun<br>

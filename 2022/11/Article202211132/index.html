@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接：  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;20970732&#x2F;jnius-1-1-import-error http:&#x2F;&#x2F;www.dependencywalker.com&#x2F;  1 问题描述 在使用pyjnius来使用jar包时，出现了以下问题： 1234567891011121314152022-11-13 13:26:42.866678: W tenso">
+<meta name="description" content="参考链接：  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;20970732&#x2F;jnius-1-1-import-error http:&#x2F;&#x2F;www.dependencywalker.com&#x2F;  1 问题描述 在使用pyjnius来使用jar包时，出现了以下问题： 2022-11-13 13:26:42.866678: W tensorflow&#x2F;stream_exe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pyjnius提示缺少DLL文件">
 <meta property="og:url" content="https://blog.fulequn.online/2022/11/Article202211132/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接：  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;20970732&#x2F;jnius-1-1-import-error http:&#x2F;&#x2F;www.dependencywalker.com&#x2F;  1 问题描述 在使用pyjnius来使用jar包时，出现了以下问题： 1234567891011121314152022-11-13 13:26:42.866678: W tenso">
+<meta property="og:description" content="参考链接：  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;20970732&#x2F;jnius-1-1-import-error http:&#x2F;&#x2F;www.dependencywalker.com&#x2F;  1 问题描述 在使用pyjnius来使用jar包时，出现了以下问题： 2022-11-13 13:26:42.866678: W tensorflow&#x2F;stream_exe">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-13T05:27:04.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:42.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-384 字
+393 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -144,14 +145,31 @@
 </blockquote>
 <h2 id="1-问题描述">1 问题描述</h2>
 <p>在使用pyjnius来使用jar包时，出现了以下问题：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-number">202</span>2-<span class="hljs-number">1</span>1-<span class="hljs-number">13</span> <span class="hljs-number">13</span>:<span class="hljs-number">26</span>:<span class="hljs-number">42.866678</span>: W tensorflow<span class="hljs-operator">/</span>stream_executor<span class="hljs-operator">/</span>platform<span class="hljs-operator">/</span>default<span class="hljs-operator">/</span>dso_loader.cc:<span class="hljs-number">55</span>] Could not load dynamic library &#x27;cudart64_101.dll&#x27;; <span class="hljs-params">dlerror:</span> cudart64_101.dll not found<br><span class="hljs-number">202</span>2-<span class="hljs-number">1</span>1-<span class="hljs-number">13</span> <span class="hljs-number">13</span>:<span class="hljs-number">26</span>:<span class="hljs-number">43.785389</span>: I tensorflow<span class="hljs-operator">/</span>stream_executor<span class="hljs-operator">/</span>cuda<span class="hljs-operator">/</span>cudart_stub.cc:<span class="hljs-number">29</span>] Ignore above cudart dlerror <span class="hljs-keyword">if</span> you do not have a GPU set up on your machine.<br>NN Class imported<br>NN_MIP Class imported<br>WDP Class imported<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;example_economies.py&quot;</span>, line <span class="hljs-number">30</span>, <span class="hljs-keyword">in</span> <span class="hljs-symbol">&lt;module&gt;</span><br>    <span class="hljs-attr">value_model</span> <span class="hljs-operator">=</span> PySats.getInstance().create_lsvm(seed<span class="hljs-operator">=</span><span class="hljs-number">1</span>)<br>  File <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\w</span>orkspace<span class="hljs-char escape_">\P</span>ython<span class="hljs-char escape_">\j</span>upyter<span class="hljs-char escape_">\M</span>yResearch<span class="hljs-char escape_">\D</span>L-ICA-master<span class="hljs-char escape_">\s</span>ource<span class="hljs-char escape_">\p</span>ysats.py&quot;</span>, line <span class="hljs-number">49</span>, <span class="hljs-keyword">in</span> create_lsvm<br>    from source.lsvm <span class="hljs-built_in">import</span> _Lsvm<br>  File <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\w</span>orkspace<span class="hljs-char escape_">\P</span>ython<span class="hljs-char escape_">\j</span>upyter<span class="hljs-char escape_">\M</span>yResearch<span class="hljs-char escape_">\D</span>L-ICA-master<span class="hljs-char escape_">\s</span>ource<span class="hljs-char escape_">\l</span>svm.py&quot;</span>, line <span class="hljs-number">41</span>, <span class="hljs-keyword">in</span> <span class="hljs-symbol">&lt;module&gt;</span><br>    from jnius <span class="hljs-built_in">import</span> JavaClass, MetaJavaClass, JavaMethod, cast, autoclass<br>  File <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\P</span>rogrammingTools<span class="hljs-char escape_">\m</span>iniconda<span class="hljs-char escape_">\e</span>nvs<span class="hljs-char escape_">\i</span>ca<span class="hljs-char escape_">\l</span>ib<span class="hljs-char escape_">\s</span>ite-packages<span class="hljs-char escape_">\j</span>nius<span class="hljs-char escape_">\_</span>_init__.py&quot;</span>, line <span class="hljs-number">12</span>, <span class="hljs-keyword">in</span> <span class="hljs-symbol">&lt;module&gt;</span><br>    from .jnius <span class="hljs-built_in">import</span> <span class="hljs-operator">*</span>  <span class="hljs-comment"># noqa</span><br><span class="hljs-params">ImportError:</span> DLL load <span class="hljs-params">failed:</span> 找不到指定的模块。<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">2022-11-13 13:26:42.866678: W tensorflow&#x2F;stream_executor&#x2F;platform&#x2F;default&#x2F;dso_loader.cc:55] Could not load dynamic library &#39;cudart64_101.dll&#39;; dlerror: cudart64_101.dll not found
+2022-11-13 13:26:43.785389: I tensorflow&#x2F;stream_executor&#x2F;cuda&#x2F;cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+NN Class imported
+NN_MIP Class imported
+WDP Class imported
+Traceback (most recent call last):
+  File &quot;example_economies.py&quot;, line 30, in &lt;module&gt;
+    value_model &#x3D; PySats.getInstance().create_lsvm(seed&#x3D;1)
+  File &quot;D:\workspace\Python\jupyter\MyResearch\DL-ICA-master\source\pysats.py&quot;, line 49, in create_lsvm
+    from source.lsvm import _Lsvm
+  File &quot;D:\workspace\Python\jupyter\MyResearch\DL-ICA-master\source\lsvm.py&quot;, line 41, in &lt;module&gt;
+    from jnius import JavaClass, MetaJavaClass, JavaMethod, cast, autoclass
+  File &quot;D:\ProgrammingTools\miniconda\envs\ica\lib\site-packages\jnius\__init__.py&quot;, line 12, in &lt;module&gt;
+    from .jnius import *  # noqa
+ImportError: DLL load failed: 找不到指定的模块。</code></pre></div></figure>
 <h2 id="2-解决方案">2 解决方案</h2>
 <p>重新安装jnius，失败。</p>
 <p>如果import jnius就会出现DLL，多半是因为环境变量的问题。</p>
 <p>在你的路径环境变量(“系统变量”下)加入以下内容:</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livescript">C:<span class="hljs-string">\Program</span> Files (x86)<span class="hljs-string">\Java\jdk[YOUR</span> JDK VERSION]<span class="hljs-string">\jre\bin\server</span><br>或者<br>C:<span class="hljs-string">\Program</span> Files (x86)<span class="hljs-string">\Java\jre[YOUR</span> JDK VERSION]<span class="hljs-string">\bin\client</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">C:\Program Files (x86)\Java\jdk[YOUR JDK VERSION]\jre\bin\server
+或者
+C:\Program Files (x86)\Java\jre[YOUR JDK VERSION]\bin\client</code></pre></div></figure>
 <p>在环境变量中，最好应该设置一个用户变量JAVA _ HOME:</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">是<span class="hljs-keyword">java的安装位置，默认的安装位置如下</span><br><span class="hljs-keyword"></span>C:\Program Files (x86)\<span class="hljs-keyword">Java\jdk[YOUR </span><span class="hljs-keyword">JDK </span>VERSION]<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">是java的安装位置，默认的安装位置如下
+C:\Program Files (x86)\Java\jdk[YOUR JDK VERSION]</code></pre></div></figure>
 <p>由于 jnius 是一个java包装器，因此加载失败的DLL通常是位于“server文件夹中的“jvm.DLL”。</p>
 <p>不过，可能还有其他 DLL 文件丢失。确保您拥有msvcr90或msvcr100以及其他通过安装 Visual Studio 2008或2010再发行版提供的软件。通过下载依赖分析软件 Walker (<a target="_blank" rel="noopener" href="http://www.dependencywalker.com/">http://www.dependencywalker.com/</a>)并分析 jnius.pyd 所需的 DLL，可以找到更完整的答案(我记得根据个人经验，它确实需要 msvcr100和 msvcr90)。</p>
 </div>

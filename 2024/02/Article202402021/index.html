@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -174,7 +175,13 @@
 <p>定义格式：</p>
 <p>参数：由数据类型和变量名组成 - 数据类型 变量名</p>
 <p>参数范例：int a</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> 方法名 (参数<span class="hljs-number">1</span>) &#123;<br>	方法体;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> 方法名 (参数<span class="hljs-number">1</span>, 参数<span class="hljs-number">2</span>, 参数<span class="hljs-number">3.</span>..) &#123;<br>	方法体;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> 方法名 <span class="token punctuation">(</span>参数<span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	方法体<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> 方法名 <span class="token punctuation">(</span>参数<span class="token number">1</span><span class="token punctuation">,</span> 参数<span class="token number">2</span><span class="token punctuation">,</span> 参数<span class="token number">3.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	方法体<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 </li>
 </ul>
 <h3 id="3-2-形参和实参">3.2 形参和实参</h3>
@@ -189,7 +196,9 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/Untitled2.png" srcset="/img/loading.gif" lazyload alt="形参和实参"></p>
 <h3 id="1-4-带返回值方法定义和调用">1.4 带返回值方法定义和调用</h3>
 <p>定义格式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> 数据类型 方法名 ( 参数 ) &#123; <br>	<span class="hljs-keyword">return</span> 数据 ;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> 数据类型 方法名 <span class="token punctuation">(</span> 参数 <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+	<span class="token keyword">return</span> 数据 <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>定义方法的时候需要参考IPO编程的思想，In Process Output。我们这个函数要干什么？（P）我们干这件事情需要什么东西才能完成？（I）需要返回什么？（Output）</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/Untitled3.png" srcset="/img/loading.gif" lazyload alt="方法的注意事项"></p>
 <h3 id="1-5-方法重载">1.5 方法重载</h3>

@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -127,11 +128,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-3.4k 字
+3.3k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-29 分钟
+28 分钟
 </span>
 </div>
 </div>
@@ -182,18 +183,40 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247308.png" srcset="/img/loading.gif" lazyload alt="68321278417"></p>
 <h3 id="1-2-1-安装-vuex">1.2.1 安装 vuex</h3>
 <p>安装 vuex 与 vue-router 类似，vuex 是一个独立存在的插件，如果脚手架初始化没有选 vuex，就需要额外安装。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 233 344 vue2 对应的是 vuex3</span><br>yarn add vuex@3 或者 npm i vuex@3<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 233 344 vue2 对应的是 vuex3</span>
+<span class="token function">yarn</span> <span class="token function">add</span> vuex@3 或者 <span class="token function">npm</span> i vuex@3</code></pre></div></figure>
 <h3 id="1-2-2-store-index-js-专门存放-vuex">1.2.2 store/index.js 专门存放 vuex</h3>
 <p>为了维护项目目录的整洁，在 src 目录下新建一个 store 目录其下放置一个 index.js 文件。 (和 <code>router/index.js</code> 类似)</p>
 <p>​	<img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247309.png" srcset="/img/loading.gif" lazyload alt="68321280582"></p>
 <h3 id="1-2-3-创建仓库-store-index-js">1.2.3 创建仓库 store/index.js</h3>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// 导入 vue</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-comment">// 导入 vuex</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vuex</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br><span class="hljs-comment">// vuex 也是 vue 的插件, 需要 use 一下, 进行插件的安装初始化</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Vuex</span>)<br><br><span class="hljs-comment">// 创建仓库 store</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title class_">Store</span>()<br><span class="hljs-comment">// 导出仓库</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 导入 vue</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token comment">// 导入 vuex</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token comment">// vuex 也是 vue 的插件, 需要 use 一下, 进行插件的安装初始化</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token comment">// 创建仓库 store</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">// 导出仓库</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> store</code></pre></div></figure>
 <h3 id="1-2-4-在-main-js-中导入挂载到-Vue-实例上">1.2.4 在 main.js 中导入挂载到 Vue 实例上</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store&#x27;</span><br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-property">config</span>.<span class="hljs-property">productionTip</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),<br>  store<br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span>
+
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  store
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>此刻起, 就成功创建了一个 <strong>空仓库!!</strong></p>
 <h3 id="1-2-5-测试打印-Vuex">1.2.5 测试打印 Vuex</h3>
 <p>App.vue</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">created</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h1 id="2-核心概念">2 核心概念</h1>
 <h2 id="2-1-状态-state">2.1 状态 state</h2>
 <h3 id="2-1-1-单一状态树">2.1.1 单一状态树</h3>
@@ -201,23 +224,49 @@
 <p><strong>1.提供数据</strong></p>
 <p>State 提供唯一的公共数据源，所有共享的数据都要统一放到 Store 中的 State 中存储。</p>
 <p>打开项目中的 store.js 文件，在 state 对象中可以添加我们要共享的数据。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// 创建仓库 store</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title class_">Store</span>(&#123;<br>  <span class="hljs-comment">// state 状态, 即数据, 类似于 vue 组件中的 data,</span><br>  <span class="hljs-comment">// 区别：</span><br>  <span class="hljs-comment">// 1.data 是组件自己的数据, </span><br>  <span class="hljs-comment">// 2.state 中的数据整个 vue 项目的组件都能访问到</span><br>  <span class="hljs-attr">state</span>: &#123;<br>    <span class="hljs-attr">count</span>: <span class="hljs-number">101</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// 创建仓库 store</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">// state 状态, 即数据, 类似于 vue 组件中的 data,</span>
+  <span class="token comment">// 区别：</span>
+  <span class="token comment">// 1.data 是组件自己的数据, </span>
+  <span class="token comment">// 2.state 中的数据整个 vue 项目的组件都能访问到</span>
+  <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">101</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>2.访问 Vuex 中的数据</strong></p>
 <ol>
 <li>通过 $store 直接访问 —&gt; <code>&#123;&#123; $store.state.count &#125;&#125;</code></li>
 <li>通过辅助函数 mapState 映射计算属性 —&gt; <code>&#123;&#123; count &#125;&#125;</code></li>
 </ol>
 <p><strong>3.通过 $store 访问的语法</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">获取 store：<br> <span class="hljs-number">1.</span><span class="hljs-title class_">Vue</span> 模板中获取 <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span><br> <span class="hljs-number">2.</span>js 文件中获取 <span class="hljs-keyword">import</span> 导入 store<br><br><br>模板（没有 <span class="hljs-variable language_">this</span>）中：     &#123;&#123; $store.<span class="hljs-property">state</span>.<span class="hljs-property">xxx</span> &#125;&#125;<br>组件逻辑中：  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">state</span>.<span class="hljs-property">xxx</span><br><span class="hljs-variable constant_">JS</span>模块中：   store.<span class="hljs-property">state</span>.<span class="hljs-property">xxx</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">获取 store：
+ <span class="token number">1</span><span class="token punctuation">.</span>Vue 模板中获取 <span class="token keyword">this</span><span class="token punctuation">.</span>$store
+ <span class="token number">2</span><span class="token punctuation">.</span>js 文件中获取 <span class="token keyword">import</span> 导入 store
+
+
+模板（没有 <span class="token keyword">this</span>）中：     <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> $store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>xxx <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+组件逻辑中：  <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>xxx
+<span class="token constant">JS</span>模块中：   store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>xxx</code></pre></div></figure>
 <p><strong>4.代码实现</strong></p>
 <p><strong>模板中使用</strong></p>
 <p>组件中可以使用 <strong>$store</strong> 获取到 vuex 中的 store 对象实例，可通过 <strong>state</strong> 属性属性获取 <strong>count</strong>， 如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;h1&gt;state的数据 - &#123;&#123; $store.state.count &#125;&#125;&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;h1&gt;state的数据 - &#123;&#123; $store.state.count &#125;&#125;&lt;&#x2F;h1&gt;</code></pre></div></figure>
 <p><strong>组件逻辑中使用</strong></p>
 <p>将 state 属性定义在计算属性中 <a target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/guide/state.html">https://vuex.vuejs.org/zh/guide/state.html</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;h1&gt;state的数据 - &#123;&#123; count &#125;&#125;&lt;/h1&gt;<br><br><span class="hljs-comment">// 把state中数据，定义在组件内的计算属性中</span><br>  <span class="hljs-attr">computed</span>: &#123;<br>    <span class="hljs-title function_">count</span> () &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">state</span>.<span class="hljs-property">count</span><br>    &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>h1<span class="token operator">></span>state的数据 <span class="token operator">-</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> count <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+
+<span class="token comment">// 把state中数据，定义在组件内的计算属性中</span>
+  <span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">count</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>count
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><strong>js 文件中使用</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//main.js</span><br><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/store&quot;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(store.<span class="hljs-property">state</span>.<span class="hljs-property">count</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//main.js</span>
+
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">"@/store"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token punctuation">)</span></code></pre></div></figure>
 <p>每次都像这样一个个的提供计算属性, 太麻烦了,我们有没有简单的语法帮我们获取state中的值呢？</p>
 <h3 id="2-1-2-辅助函数-mapState">2.1.2 辅助函数 mapState</h3>
 <blockquote>
@@ -226,22 +275,35 @@
 <p>用法 ：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247310.png" srcset="/img/loading.gif" lazyload alt="68321471957"></p>
 <p><strong>1.导入 mapState (mapState 是 vuex 中的一个函数)</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; mapState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> mapState <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span></code></pre></div></figure>
 <p><strong>2.采用数组形式引入 state 属性</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">mapState</span>([<span class="hljs-string">&#x27;count&#x27;</span>]) <br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'count'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> </code></pre></div></figure>
 <blockquote>
 <p>上面代码的最终得到的是 <strong>类似于</strong> 计算属性添加了对应的数据</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">count</span> () &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">state</span>.<span class="hljs-property">count</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">count</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>count
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><strong>3.利用展开运算符将导出的状态映射给计算属性</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">computed</span>: &#123;<br>  ...<span class="hljs-title function_">mapState</span>([<span class="hljs-string">&#x27;count&#x27;</span>])<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div&gt; state的数据：&#123;&#123; count &#125;&#125;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'count'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;div&gt; state的数据：&#123;&#123; count &#125;&#125;&lt;&#x2F;div&gt;</code></pre></div></figure>
 <h2 id="2-2-开启严格模式及-Vuex-的单向数据流">2.2 开启严格模式及 Vuex 的单向数据流</h2>
 <p>明确 vuex 同样遵循单向数据流，组件中不能直接修改仓库的数据</p>
 <p><strong>直接在组件中修改Vuex中state的值</strong></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247311.png" srcset="/img/loading.gif" lazyload alt="68321589228"></p>
 <p>Son1.vue</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">button @click=<span class="hljs-string">&quot;handleAdd&quot;</span>&gt;值 + <span class="hljs-number">1</span>&lt;/button&gt;<br><br><br><span class="hljs-attr">methods</span>:&#123;<br>	 <span class="hljs-title function_">handleAdd</span> (n) &#123;<br>      <span class="hljs-comment">// 错误代码(vue默认不会监测，监测需要成本)</span><br>       <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">state</span>.<span class="hljs-property">count</span>++<br>      <span class="hljs-comment">// console.log(this.$store.state.count) </span><br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">button @click<span class="token operator">=</span><span class="token string">"handleAdd"</span><span class="token operator">></span>值 <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+
+
+<span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+	 <span class="token function">handleAdd</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 错误代码(vue默认不会监测，监测需要成本)</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token operator">++</span>
+      <span class="token comment">// console.log(this.$store.state.count) </span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><strong>开启严格模式</strong></p>
 <p>通过 <code>strict: true</code> 可以开启严格模式,开启严格模式后，直接修改 state 中的值会报错</p>
 <blockquote>
@@ -251,12 +313,26 @@
 <h2 id="2-3-Mutation">2.3 Mutation</h2>
 <h3 id="2-3-1-介绍">2.3.1 介绍</h3>
 <p><strong>1.定义 mutations</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> store  = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title class_">Store</span>(&#123;<br>  <span class="hljs-attr">state</span>: &#123;<br>    <span class="hljs-attr">count</span>: <span class="hljs-number">0</span><br>  &#125;,<br>  <span class="hljs-comment">// 定义mutations</span><br>  <span class="hljs-attr">mutations</span>: &#123;<br>     <br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> store  <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 定义mutations</span>
+  <span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+     
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>2.格式说明</strong></p>
 <p>mutations 是一个对象，对象中存放修改state的方法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">mutations</span>: &#123;<br>    <span class="hljs-comment">// 方法里参数 第一个参数是当前store的state属性</span><br>    <span class="hljs-comment">// payload 载荷 运输参数 调用mutaiions的时候 可以传递参数 传递载荷</span><br>    <span class="hljs-title function_">addCount</span> (state) &#123;<br>      state.<span class="hljs-property">count</span> += <span class="hljs-number">1</span><br>    &#125;<br>  &#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 方法里参数 第一个参数是当前store的state属性</span>
+    <span class="token comment">// payload 载荷 运输参数 调用mutaiions的时候 可以传递参数 传递载荷</span>
+    <span class="token function">addCount</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      state<span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 <p><strong>3.组件中提交 mutations</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;addCount&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'addCount'</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>4.总结</strong></p>
 <p>通过 mutations 修改 state 的步骤</p>
 <p>1.定义 mutations 对象，对象中存放修改 state 的方法</p>
@@ -268,23 +344,40 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247313.png" srcset="/img/loading.gif" lazyload alt="68321700423"></p>
 <p>提交 mutation 是可以传递参数的 <code>this.$store.commit('xxx', 参数)</code></p>
 <p><strong>2.1 提供mutation函数（带参数）</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">mutations</span>: &#123;<br>  ...<br>  <span class="hljs-title function_">addCount</span> (state, count) &#123;<br>    state.<span class="hljs-property">count</span> = count<br>  &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span>
+  <span class="token function">addCount</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> count</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>count <span class="token operator">=</span> count
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 <p><strong>2.2 提交mutation</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">handle</span> ( ) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;addCount&#x27;</span>, <span class="hljs-number">10</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token function">handle</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'addCount'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><strong>小tips: 提交的参数只能是一个, 如果有多个参数要传, 可以传递一个对象</strong>。</p>
 <p>在大多数情况下，载荷应该是一个对象，这样可以包含多个字段并且记录的 mutation 会更易读</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;addCount&#x27;</span>, &#123;<br>  <span class="hljs-attr">count</span>: <span class="hljs-number">10</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'addCount'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">10</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="2-3-3-mapMutations">2.3.3 mapMutations</h3>
 <blockquote>
 <p>mapMutations 和 mapState 很像，它把位于 mutations 中的方法提取了出来，我们可以将它导入</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span>  &#123; mapMutations &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br><span class="hljs-attr">methods</span>: &#123;<br>    ...<span class="hljs-title function_">mapMutations</span>([<span class="hljs-string">&#x27;addCount&#x27;</span>])<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span>  <span class="token punctuation">&#123;</span> mapMutations <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token operator">...</span><span class="token function">mapMutations</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'addCount'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>上面代码的含义是将 mutations 的方法导入了 methods 中，等价于</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">methods</span>: &#123;<br>      <span class="hljs-comment">// commit(方法名, 载荷参数)</span><br>      <span class="hljs-title function_">addCount</span> () &#123;<br>          <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;addCount&#x27;</span>)<br>      &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// commit(方法名, 载荷参数)</span>
+      <span class="token function">addCount</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'addCount'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+ <span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>此时，就可以直接通过 this.addCount 调用了</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx">&lt;button @click=<span class="hljs-string">&quot;addCount&quot;</span>&gt;值+<span class="hljs-number">1</span>&lt;/button&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"addCount"</span><span class="token operator">></span>值<span class="token operator">+</span><span class="token number">1</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <p>但是请注意： Vuex 中 mutations 中要求不能写异步代码，如果有异步的 ajax 请求，应该放置在 actions 中。</p>
 <h2 id="2-4-Action">2.4 Action</h2>
 <blockquote>
@@ -295,12 +388,28 @@
 <p><strong>需求: 一秒钟之后，要给一个数去修改 state</strong></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247314.png" srcset="/img/loading.gif" lazyload alt="68321860367"></p>
 <p><strong>1.定义 actions</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">mutations</span>: &#123;<br>  <span class="hljs-title function_">changeCount</span> (state, newCount) &#123;<br>    state.<span class="hljs-property">count</span> = newCount<br>  &#125;<br>&#125;<br><br><br><span class="hljs-attr">actions</span>: &#123;<br>  <span class="hljs-title function_">setAsyncCount</span> (context, num) &#123;<br>    <span class="hljs-comment">// 一秒后, 给一个数, 去修改 num</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      context.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;changeCount&#x27;</span>, num)<br>    &#125;, <span class="hljs-number">1000</span>)<br>  &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">changeCount</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> newCount</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>count <span class="token operator">=</span> newCount
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setAsyncCount</span> <span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> num</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 一秒后, 给一个数, 去修改 num</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'changeCount'</span><span class="token punctuation">,</span> num<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre></div></figure>
 <p><strong>2.组件中通过 dispatch 调用</strong></p>
 <p>Action 通过 <code>store.dispatch</code> 方法触发：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">store.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&#x27;increment&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'increment'</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>如下：</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs haxe">setAsyncCount () &#123;<br>  <span class="hljs-built_in">this</span>.<span class="hljs-variable">$store</span>.dispatch(<span class="hljs-string">&#x27;setAsyncCount&#x27;</span>, <span class="hljs-number">666</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">setAsyncCount () &#123;
+  this.$store.dispatch(&#39;setAsyncCount&#39;, 666)
+&#125;</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247315.png" srcset="/img/loading.gif" lazyload alt="68344198757"></p>
 <h3 id="2-4-1-mapActions">2.4.1 mapActions</h3>
 <p>1.目标：掌握辅助函数 mapActions，映射方法</p>
@@ -308,24 +417,42 @@
 <p>mapActions 是把位于 actions 中的方法提取了出来，映射到组件 methods 中</p>
 </blockquote>
 <p>Son2.vue</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; mapActions &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br><span class="hljs-attr">methods</span>: &#123;<br>   ...<span class="hljs-title function_">mapActions</span>([<span class="hljs-string">&#x27;changeCountAction&#x27;</span>])<br>&#125;<br><br><span class="hljs-comment">//mapActions映射的代码 本质上是以下代码的写法</span><br><span class="hljs-comment">//methods: &#123;</span><br><span class="hljs-comment">//  changeCountAction (n) &#123;</span><br><span class="hljs-comment">//    this.$store.dispatch(&#x27;changeCountAction&#x27;, n)</span><br><span class="hljs-comment">//  &#125;,</span><br><span class="hljs-comment">//&#125;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> mapActions <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+   <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'changeCountAction'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//mapActions映射的代码 本质上是以下代码的写法</span>
+<span class="token comment">//methods: &#123;</span>
+<span class="token comment">//  changeCountAction (n) &#123;</span>
+<span class="token comment">//    this.$store.dispatch('changeCountAction', n)</span>
+<span class="token comment">//  &#125;,</span>
+<span class="token comment">//&#125;</span></code></pre></div></figure>
 <p>直接通过 this.方法 就可以调用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;button @click=&quot;changeCountAction(200)&quot;&gt;+异步&lt;/button&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;button @click&#x3D;&quot;changeCountAction(200)&quot;&gt;+异步&lt;&#x2F;button&gt;</code></pre></div></figure>
 <h2 id="2-5-Getter">2.5 Getter</h2>
 <blockquote>
 <p>除了 state 之外，有时我们还需要从 state 中<strong>筛选出符合条件的一些数据</strong>，这些数据是依赖 state 的，此时会用到 getters</p>
 </blockquote>
 <p>例如，state 中定义了 list，为 1-10 的数组，</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">state</span>: &#123;<br>    <span class="hljs-attr">list</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">list</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>组件中，需要显示所有大于 5 的数据，正常的方式，是需要 list 在组件中进行再一步的处理，但是 getters 可以帮助我们实现它</p>
 <h3 id="2-5-1-定义-getters">2.5.1 定义 getters</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">getters</span>: &#123;<br>   <span class="hljs-comment">// getters 函数的第一个参数是 state</span><br>   <span class="hljs-comment">// 必须要有返回值</span><br>   <span class="hljs-attr">filterList</span>: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.<span class="hljs-property">list</span>.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item &gt; <span class="hljs-number">5</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">getters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+   <span class="token comment">// getters 函数的第一个参数是 state</span>
+   <span class="token comment">// 必须要有返回值</span>
+   <span class="token function-variable function">filterList</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> item <span class="token operator">></span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="2-5-2-使用-getters">2.5.2 使用 getters</h3>
 <p><strong>原始方式-$store</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div&gt;&#123;&#123; $store.getters.filterList &#125;&#125;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;div&gt;&#123;&#123; $store.getters.filterList &#125;&#125;&lt;&#x2F;div&gt;</code></pre></div></figure>
 <p><strong>辅助函数 - mapGetters</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">computed</span>: &#123;<br>    ...<span class="hljs-title function_">mapGetters</span>([<span class="hljs-string">&#x27;filterList&#x27;</span>])<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;div&gt;&#123;&#123; filterList &#125;&#125;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'filterList'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;div&gt;&#123;&#123; filterList &#125;&#125;&lt;&#x2F;div&gt;</code></pre></div></figure>
 <h2 id="2-6-使用小结">2.6 使用小结</h2>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247316.png" srcset="/img/loading.gif" lazyload alt="68344213391"></p>
 <h2 id="2-7-Module">2.7 Module</h2>
@@ -336,11 +463,53 @@
 <p><strong>准备 state</strong></p>
 <p>定义两个模块 <strong>user</strong> 和 <strong>setting</strong></p>
 <p>user中管理用户的信息状态 userInfo <code>modules/user.js</code></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> state = &#123;<br>  <span class="hljs-attr">userInfo</span>: &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;zs&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> mutations = &#123;&#125;<br><br><span class="hljs-keyword">const</span> actions = &#123;&#125;<br><br><span class="hljs-keyword">const</span> getters = &#123;&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  state,<br>  mutations,<br>  actions,<br>  getters<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">userInfo</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'zs'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">18</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+  getters
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>setting 中管理项目应用的，主题色 theme，描述 desc， <code>modules/setting.js</code></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> state = &#123;<br>  <span class="hljs-attr">theme</span>: <span class="hljs-string">&#x27;dark&#x27;</span><br>  <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;描述真呀真不错&#x27;</span><br>&#125;<br><br><span class="hljs-keyword">const</span> mutations = &#123;&#125;<br><br><span class="hljs-keyword">const</span> actions = &#123;&#125;<br><br><span class="hljs-keyword">const</span> getters = &#123;&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  state,<br>  mutations,<br>  actions,<br>  getters<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">theme</span><span class="token operator">:</span> <span class="token string">'dark'</span>
+  <span class="token literal-property property">desc</span><span class="token operator">:</span> <span class="token string">'描述真呀真不错'</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+  getters
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>在 <code>store/index.js</code> 文件中的 modules 配置项中，注册这两个模块</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> user <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./modules/user&#x27;</span><br><span class="hljs-keyword">import</span> setting <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./modules/setting&#x27;</span><br><br><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title class_">Store</span>(&#123;<br>    <span class="hljs-attr">modules</span>:&#123;<br>        user,<br>        setting<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> user <span class="token keyword">from</span> <span class="token string">'./modules/user'</span>
+<span class="token keyword">import</span> setting <span class="token keyword">from</span> <span class="token string">'./modules/setting'</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">modules</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+        user<span class="token punctuation">,</span>
+        setting
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>使用模块中的数据, 可以直接通过模块名访问 <code>$store.state.模块名.xxx</code> =&gt; <code>$store.state.setting.desc</code></p>
 <p>也可以通过 mapState 映射。</p>
 <h1 id="3-项目化-获取模块内信息">3 项目化-获取模块内信息</h1>
@@ -358,12 +527,37 @@
 </li>
 </ol>
 <p><code>modules/user.js</code></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> state = &#123;<br>  <span class="hljs-attr">userInfo</span>: &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;zs&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span><br>  &#125;,<br>  <span class="hljs-attr">myMsg</span>: <span class="hljs-string">&#x27;我的数据&#x27;</span><br>&#125;<br><br><span class="hljs-keyword">const</span> mutations = &#123;<br>  <span class="hljs-title function_">updateMsg</span> (state, msg) &#123;<br>    state.<span class="hljs-property">myMsg</span> = msg<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> actions = &#123;&#125;<br><br><span class="hljs-keyword">const</span> getters = &#123;&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">namespaced</span>: <span class="hljs-literal">true</span>,<br>  state,<br>  mutations,<br>  actions,<br>  getters<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">userInfo</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'zs'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">18</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">myMsg</span><span class="token operator">:</span> <span class="token string">'我的数据'</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">updateMsg</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> msg</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>myMsg <span class="token operator">=</span> msg
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+  getters
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><strong>代码示例</strong></p>
 <p>$store 直接访问</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">$store.<span class="hljs-property">state</span>.<span class="hljs-property">user</span>.<span class="hljs-property">userInfo</span>.<span class="hljs-property">name</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>user<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>name</code></pre></div></figure>
 <p>mapState 辅助函数访问</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">...<span class="hljs-title function_">mapState</span>(<span class="hljs-string">&#x27;user&#x27;</span>, [<span class="hljs-string">&#x27;userInfo&#x27;</span>]),<br>...<span class="hljs-title function_">mapState</span>(<span class="hljs-string">&#x27;setting&#x27;</span>, [<span class="hljs-string">&#x27;theme&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>]),<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'userInfo'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token string">'setting'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'theme'</span><span class="token punctuation">,</span> <span class="token string">'desc'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span></code></pre></div></figure>
 <h2 id="3-2-获取模块内的-getters-数据">3.2 获取模块内的 getters 数据</h2>
 <p>使用模块中 getters 中的数据：</p>
 <ol>
@@ -377,11 +571,19 @@
 </ol>
 <p><strong>代码演示</strong></p>
 <p><code>modules/user.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> getters = &#123;<br>  <span class="hljs-comment">// 分模块后，state指代子模块的state</span><br>  <span class="hljs-title class_">UpperCaseName</span> (state) &#123;<br>    <span class="hljs-keyword">return</span> state.<span class="hljs-property">userInfo</span>.<span class="hljs-property">name</span>.<span class="hljs-title function_">toUpperCase</span>()<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 分模块后，state指代子模块的state</span>
+  <span class="token function">UpperCaseName</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> state<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>Son1.vue 直接访问 getters</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 测试访问模块中的getters - 原生 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;&#123; $store.getters[&#x27;user/UpperCaseName&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- 测试访问模块中的getters - 原生 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>&#123;&#123; $store.getters['user/UpperCaseName'] &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <p>Son2.vue 通过命名空间访问</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">computed</span>:&#123;<br>  ...<span class="hljs-title function_">mapGetters</span>(<span class="hljs-string">&#x27;user&#x27;</span>, [<span class="hljs-string">&#x27;UpperCaseName&#x27;</span>])<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">computed</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'UpperCaseName'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h2 id="3-3-获取模块内的-mutations-方法">3.3 获取模块内的 mutations 方法</h2>
 <p>默认模块中的 mutation 和 actions 会被挂载到全局，<strong>需要开启命名空间</strong>，才会挂载到子模块。</p>
 <p><strong>调用方式</strong></p>
@@ -396,13 +598,45 @@
 </ol>
 <p><strong>代码实现</strong></p>
 <p><code>modules/user.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> mutations = &#123;<br>  <span class="hljs-title function_">setUser</span> (state, newUserInfo) &#123;<br>    state.<span class="hljs-property">userInfo</span> = newUserInfo<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setUser</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> newUserInfo</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>userInfo <span class="token operator">=</span> newUserInfo
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p><code>modules/setting.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> mutations = &#123;<br>  <span class="hljs-title function_">setTheme</span> (state, newTheme) &#123;<br>    state.<span class="hljs-property">theme</span> = newTheme<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setTheme</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> newTheme</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>theme <span class="token operator">=</span> newTheme
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>Son1.vue</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;button @click=<span class="hljs-string">&quot;updateUser&quot;</span>&gt;更新个人信息&lt;/button&gt; <br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;updateTheme&quot;</span>&gt;</span>更新主题色<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-title function_">updateUser</span> () &#123;<br>      <span class="hljs-comment">// $store.commit(&#x27;模块名/mutation名&#x27;, 额外传参)</span><br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;user/setUser&#x27;</span>, &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;xiaowang&#x27;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">25</span><br>      &#125;)<br>    &#125;, <br>    <span class="hljs-title function_">updateTheme</span> () &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;setting/setTheme&#x27;</span>, <span class="hljs-string">&#x27;pink&#x27;</span>)<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"updateUser"</span><span class="token operator">></span>更新个人信息<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span> 
+<span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"updateTheme"</span><span class="token operator">></span>更新主题色<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">updateUser</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// $store.commit('模块名/mutation名', 额外传参)</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'user/setUser'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'xiaowang'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">25</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> 
+    <span class="token function">updateTheme</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setting/setTheme'</span><span class="token punctuation">,</span> <span class="token string">'pink'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>Son2.vue</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;button @click=&quot;setUser(&#123; name: &#x27;xiaoli&#x27;, age: 80 &#125;)&quot;&gt;更新个人信息&lt;/button&gt;<br>&lt;button @click=&quot;setTheme(&#x27;skyblue&#x27;)&quot;&gt;更新主题&lt;/button&gt;<br><br>methods:&#123;<br>// 分模块的映射<br>...mapMutations(&#x27;setting&#x27;, [&#x27;setTheme&#x27;]),<br>...mapMutations(&#x27;user&#x27;, [&#x27;setUser&#x27;]),<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;button @click&#x3D;&quot;setUser(&#123; name: &#39;xiaoli&#39;, age: 80 &#125;)&quot;&gt;更新个人信息&lt;&#x2F;button&gt;
+&lt;button @click&#x3D;&quot;setTheme(&#39;skyblue&#39;)&quot;&gt;更新主题&lt;&#x2F;button&gt;
+
+methods:&#123;
+&#x2F;&#x2F; 分模块的映射
+...mapMutations(&#39;setting&#39;, [&#39;setTheme&#39;]),
+...mapMutations(&#39;user&#39;, [&#39;setUser&#39;]),
+&#125;</code></pre></div></figure>
 <h2 id="3-4-获取模块内的-actions-方法">3.4 获取模块内的 actions 方法</h2>
 <p><strong>注意：</strong></p>
 <p>默认模块中的 mutation 和 actions 会被挂载到全局，<strong>需要开启命名空间</strong>，才会挂载到子模块。</p>
@@ -420,19 +654,51 @@
 <p>需求：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247319.png" srcset="/img/loading.gif" lazyload alt="68343161569"></p>
 <p><code>modules/user.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> actions = &#123;<br>  <span class="hljs-title function_">setUserSecond</span> (context, newUserInfo) &#123;<br>    <span class="hljs-comment">// 将异步在action中进行封装，模拟发送请求</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-comment">// 调用mutation   context上下文，默认提交的就是自己模块的action和mutation</span><br>      context.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;setUser&#x27;</span>, newUserInfo)<br>    &#125;, <span class="hljs-number">1000</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setUserSecond</span> <span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> newUserInfo</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 将异步在action中进行封装，模拟发送请求</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 调用mutation   context上下文，默认提交的就是自己模块的action和mutation</span>
+      context<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setUser'</span><span class="token punctuation">,</span> newUserInfo<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>Son1.vue 直接通过 store 调用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;button @click=&quot;updateUser2&quot;&gt;一秒后更新信息&lt;/button&gt;<br><br>methods:&#123;<br>    updateUser2 () &#123;<br>      // 调用action dispatch<br>      this.$store.dispatch(&#x27;user/setUserSecond&#x27;, &#123;<br>        name: &#x27;xiaohong&#x27;,<br>        age: 28<br>      &#125;)<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;button @click&#x3D;&quot;updateUser2&quot;&gt;一秒后更新信息&lt;&#x2F;button&gt;
+
+methods:&#123;
+    updateUser2 () &#123;
+      &#x2F;&#x2F; 调用action dispatch
+      this.$store.dispatch(&#39;user&#x2F;setUserSecond&#39;, &#123;
+        name: &#39;xiaohong&#39;,
+        age: 28
+      &#125;)
+    &#125;,
+&#125;</code></pre></div></figure>
 <p>Son2.vue mapActions 映射</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;button @click=<span class="hljs-string">&quot;setUserSecond(&#123; name: &#x27;xiaoli&#x27;, age: 80 &#125;)&quot;</span>&gt;一秒后更新信息&lt;/button&gt;<br><br><span class="hljs-attr">methods</span>:&#123;<br>  ...<span class="hljs-title function_">mapActions</span>(<span class="hljs-string">&#x27;user&#x27;</span>, [<span class="hljs-string">&#x27;setUserSecond&#x27;</span>])<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"setUserSecond(&#123; name: 'xiaoli', age: 80 &#125;)"</span><span class="token operator">></span>一秒后更新信息<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+
+<span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'setUserSecond'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h2 id="3-5-Vuex-模块化的使用小结">3.5 Vuex 模块化的使用小结</h2>
 <h3 id="3-5-1-直接使用">3.5.1 直接使用</h3>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span> state --&gt; $store.<span class="hljs-property">state</span>.**模块名**.数据项名<br><span class="hljs-number">2.</span> getters --&gt; $store.<span class="hljs-property">getters</span>[<span class="hljs-string">&#x27;**模块名**/属性名&#x27;</span>]<br><span class="hljs-number">3.</span> mutations --&gt; $store.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;**模块名**/方法名&#x27;</span>, 其他参数)<br><span class="hljs-number">4.</span> actions --&gt; $store.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">&#x27;**模块名**/方法名&#x27;</span>, 其他参数)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.</span> state <span class="token operator">--</span><span class="token operator">></span> $store<span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token operator">**</span>模块名<span class="token operator">**</span><span class="token punctuation">.</span>数据项名
+<span class="token number">2.</span> getters <span class="token operator">--</span><span class="token operator">></span> $store<span class="token punctuation">.</span>getters<span class="token punctuation">[</span><span class="token string">'**模块名**/属性名'</span><span class="token punctuation">]</span>
+<span class="token number">3.</span> mutations <span class="token operator">--</span><span class="token operator">></span> $store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'**模块名**/方法名'</span><span class="token punctuation">,</span> 其他参数<span class="token punctuation">)</span>
+<span class="token number">4.</span> actions <span class="token operator">--</span><span class="token operator">></span> $store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'**模块名**/方法名'</span><span class="token punctuation">,</span> 其他参数<span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="3-5-2-借助辅助方法使用">3.5.2 借助辅助方法使用</h3>
 <ol>
 <li></li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; mapXxxx, mapXxx &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br><br>computed、<span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-comment">//  **...mapState、...mapGetters放computed中；**</span><br>    <span class="hljs-comment">//  **...mapMutations、...mapActions放methods中；**</span><br>    ...<span class="hljs-title function_">mapXxxx</span>(**<span class="hljs-string">&#x27;模块名&#x27;</span>**, [<span class="hljs-string">&#x27;数据项|方法&#x27;</span>]),<br>    ...<span class="hljs-title function_">mapXxxx</span>(**<span class="hljs-string">&#x27;模块名&#x27;</span>**, &#123;<span class="hljs-string">&#x27;新的名字: 原来的名字&#x27;</span>&#125;),<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> mapXxxx<span class="token punctuation">,</span> mapXxx <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+<span class="token literal-property property">computed、methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//  **...mapState、...mapGetters放computed中；**</span>
+    <span class="token comment">//  **...mapMutations、...mapActions放methods中；**</span>
+    <span class="token operator">...</span><span class="token function">mapXxxx</span><span class="token punctuation">(</span><span class="token operator">**</span><span class="token string">'模块名'</span><span class="token operator">**</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'数据项|方法'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span><span class="token function">mapXxxx</span><span class="token punctuation">(</span><span class="token operator">**</span><span class="token string">'模块名'</span><span class="token operator">**</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token string">'新的名字: 原来的名字'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>2.组件中直接使用 属性 <code>&#123;&#123; age &#125;&#125;</code> 或 方法 <code>@click=&quot;updateAge(2)&quot;</code></p>
 </div>
 <hr>
@@ -468,15 +734,15 @@
 </div>
 <div class="post-prevnext my-3">
 <article class="post-prev col-6">
-<a href="/2024/06/Article202406201/" title="Article202406201">
+<a href="/2024/06/Article202406111/" title="Vue基础入门到实战6（路由进阶+面经项目）">
 <i class="iconfont icon-arrowleft"></i>
-<span class="hidden-mobile">Article202406201</span>
+<span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
 <span class="visible-mobile">上一篇</span>
 </a>
 </article>
 <article class="post-next col-6">
-<a href="/2024/06/Article202406111/" title="Vue基础入门到实战6（路由进阶+面经项目）">
-<span class="hidden-mobile">Vue基础入门到实战6（路由进阶+面经项目）</span>
+<a href="/2024/06/Article202406071/" title="Vue基础入门到实战5（自定义指令+插槽+路由入门）">
+<span class="hidden-mobile">Vue基础入门到实战5（自定义指令+插槽+路由入门）</span>
 <span class="visible-mobile">下一篇</span>
 <i class="iconfont icon-arrowright"></i>
 </a>

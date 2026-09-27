@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -292,7 +293,7 @@
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/06/Article202306202/" target="_self">
 <div>
-1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： 12345678X_list[i - 1, c, w] + &quot;0&quot;PyDev console: starting.&#x27;10&#x27;X_list[i - 1, c, w]&
+1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： X_list[i - 1, c, w] + &quot;0&quot; PyDev console: starting. &#39;10&#39; X_list[i - 1, c, w] &#39;1&
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -519,7 +520,7 @@ Nvidia Jetson tx2 安装 miniconda
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/06/Article202306062/" target="_self">
 <div>
-使用miniconda是因为占用的空间更小，而且完全不会使用到任何的GUI界面。推荐安装的是python3.7版本的，找到对应的Miniconda版本（也有很多不兼容，出现 illegal instruction (core dump））。 所以安装流程为先下载对应的安装程序 1wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9
+使用miniconda是因为占用的空间更小，而且完全不会使用到任何的GUI界面。推荐安装的是python3.7版本的，找到对应的Miniconda版本（也有很多不兼容，出现 illegal instruction (core dump））。 所以安装流程为先下载对应的安装程序 wget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;miniconda&#x2F;
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -554,7 +555,7 @@ Nvidia Jetson tx2 安装 miniconda
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/06/Article202306061/" target="_self">
 <div>
-1. 查找符合特定条件的Numpy ndarray对象中元素的数量 np.count_nonzero()函数可以用来完成此操作。以下是使用np.count_nonzero()函数快速查找数组中小于5的元素数量的示例： 1count = np.count_nonzero(array &lt; 5) 在此示例中，我们使用 array &lt; 5 来获取array中小于5的所有元素，然后使用 np.c
+1. 查找符合特定条件的Numpy ndarray对象中元素的数量 np.count_nonzero()函数可以用来完成此操作。以下是使用np.count_nonzero()函数快速查找数组中小于5的元素数量的示例： count &#x3D; np.count_nonzero(array &lt; 5) 在此示例中，我们使用 array &lt; 5 来获取array中小于5的所有元素，然后使用
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -588,7 +589,7 @@ Python实现最大似然估计
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/05/Article202305291/" target="_self">
 <div>
-数据部分 这个部分，我们使用的是csv数据。下面介绍数据处理的方法。 数据读取 在Python中，我们可以使用内置的csv模块来读取csv文件。以下是一个简单的例子，演示如何将csv文件读取为多维列表： 12345678910111213141516import csv# 创建一个空列表来存储数据data = []# 使用with语句打开csv文件，这样可以确保文件在使用完之后会被正确关闭with
+数据部分 这个部分，我们使用的是csv数据。下面介绍数据处理的方法。 数据读取 在Python中，我们可以使用内置的csv模块来读取csv文件。以下是一个简单的例子，演示如何将csv文件读取为多维列表： import csv # 创建一个空列表来存储数据 data &#x3D; [] # 使用with语句打开csv文件，这样可以确保文件在使用完之后会被正确关闭 with open(&#39;y
 </div>
 </a>
 <div class="index-btm post-metas">

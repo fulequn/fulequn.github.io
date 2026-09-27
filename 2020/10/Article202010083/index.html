@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -126,7 +127,7 @@
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-15 分钟
+16 分钟
 </span>
 </div>
 </div>
@@ -190,7 +191,48 @@
 </tbody>
 </table>
 <p><em><strong>二、用iris数据集进行kmeans分析</strong></em></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># kmeans对iris进行聚类分析 </span><br> <br>iris2<span class="hljs-operator">&lt;-</span>iris<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span><span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">]</span><br>iris.kmeans<span class="hljs-operator">&lt;-</span>kmeans<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">,</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span><br>iris.kmeans<br> <br><span class="hljs-comment">#用table函数查看分类结果情况</span><br>table<span class="hljs-punctuation">(</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">,</span>iris.kmeans<span class="hljs-operator">$</span>cluster<span class="hljs-punctuation">)</span><br> <br><span class="hljs-comment"># 1  2  3</span><br><span class="hljs-comment"># setosa     50  0  0</span><br><span class="hljs-comment"># versicolor  0 48  2</span><br><span class="hljs-comment"># virginica   0 14 36</span><br> <br><span class="hljs-comment"># K-means clustering with 3 clusters of sizes 50, 62, 38</span><br> <br><span class="hljs-comment"># Cluster means:</span><br><span class="hljs-comment">#   Sepal.Length Sepal.Width Petal.Length Petal.Width</span><br><span class="hljs-comment"># 1     5.006000    3.428000     1.462000    0.246000</span><br><span class="hljs-comment"># 2     5.901613    2.748387     4.393548    1.433871</span><br><span class="hljs-comment"># 3     6.850000    3.073684     5.742105    2.071053</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment"># Clustering vector:</span><br><span class="hljs-comment">#   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2</span><br><span class="hljs-comment"># [56] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3</span><br><span class="hljs-comment"># [111] 3 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3 3 2</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment"># Within cluster sum of squares by cluster:</span><br><span class="hljs-comment">#   [1] 15.15100 39.82097 23.87947</span><br><span class="hljs-comment"># (between_SS / total_SS =  88.4 %)</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment"># Available components:</span><br><span class="hljs-comment">#   </span><br><span class="hljs-comment">#   [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;        </span><br><span class="hljs-comment"># [8] &quot;iter&quot;         &quot;ifault&quot; </span><br><span class="hljs-comment">#在上述属性中，最常用的就是centers和cluster属性，即中心点和聚类的分类集合</span><br> <br><span class="hljs-comment">#下边我们将分类以及中心点打印出来</span><br> <br>plot<span class="hljs-punctuation">(</span>iris2<span class="hljs-operator">$</span>Sepal.Length<span class="hljs-punctuation">,</span>iris2<span class="hljs-operator">$</span>Sepal.Width<span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span>iris.kmeans<span class="hljs-operator">$</span>cluster<span class="hljs-punctuation">,</span>pch<span class="hljs-operator">=</span><span class="hljs-string">&quot;*&quot;</span><span class="hljs-punctuation">)</span><br> <br>points<span class="hljs-punctuation">(</span>iris.kmeans<span class="hljs-operator">$</span>centers<span class="hljs-punctuation">,</span>pch<span class="hljs-operator">=</span><span class="hljs-string">&quot;X&quot;</span><span class="hljs-punctuation">,</span>cex<span class="hljs-operator">=</span><span class="hljs-number">1.5</span><span class="hljs-punctuation">,</span>col<span class="hljs-operator">=</span><span class="hljs-number">4</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R"># kmeans对iris进行聚类分析 
+ 
+iris2&lt;-iris[,1:4]
+iris.kmeans&lt;-kmeans(iris2,3)
+iris.kmeans
+ 
+#用table函数查看分类结果情况
+table(iris$Species,iris.kmeans$cluster)
+ 
+# 1  2  3
+# setosa     50  0  0
+# versicolor  0 48  2
+# virginica   0 14 36
+ 
+# K-means clustering with 3 clusters of sizes 50, 62, 38
+ 
+# Cluster means:
+#   Sepal.Length Sepal.Width Petal.Length Petal.Width
+# 1     5.006000    3.428000     1.462000    0.246000
+# 2     5.901613    2.748387     4.393548    1.433871
+# 3     6.850000    3.073684     5.742105    2.071053
+# 
+# Clustering vector:
+#   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2
+# [56] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3
+# [111] 3 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3 3 2
+# 
+# Within cluster sum of squares by cluster:
+#   [1] 15.15100 39.82097 23.87947
+# (between_SS &#x2F; total_SS &#x3D;  88.4 %)
+# 
+# Available components:
+#   
+#   [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;        
+# [8] &quot;iter&quot;         &quot;ifault&quot; 
+#在上述属性中，最常用的就是centers和cluster属性，即中心点和聚类的分类集合
+ 
+#下边我们将分类以及中心点打印出来
+ 
+plot(iris2$Sepal.Length,iris2$Sepal.Width,col&#x3D;iris.kmeans$cluster,pch&#x3D;&quot;*&quot;)
+ 
+points(iris.kmeans$centers,pch&#x3D;&quot;X&quot;,cex&#x3D;1.5,col&#x3D;4)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910833.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p><em><strong>三、使用K-Mediods 进行聚类分析</strong></em></p>
 <p>K-Mediods函数跟Kmeans函数基本类似，不同的是，Kmeans是选择簇中心来表示聚类簇，而K-Mediods选择靠近簇中心的对象来表示聚类簇。在含有离群点的情况，下K-Mediods的鲁棒性（稳定性）要更好。</p>
@@ -202,11 +244,51 @@
 <p>c) 计算各样本点到各个中心点的距离（如欧几里德距离），将样本点放入距离中心点最短的那个簇中</p>
 <p>d) 计算各簇中，距簇内各样本点距离的绝度误差最小的点，作为新的中心点</p>
 <p>e) 如果新的中心点集与原中心点集相同，算法终止；如果新的中心点集与原中心点集不完全相同，返回b)</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#-----使用K-mediods方法来进行聚类分析</span><br><span class="hljs-comment">#k-mediods中包含pam、clara、pamk三种算法，我们通过iris数据集来看看三者表现</span><br> <br>install.packages<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;cluster&quot;</span><span class="hljs-punctuation">)</span><br>library<span class="hljs-punctuation">(</span>cluster<span class="hljs-punctuation">)</span><br> <br>iris2.pam<span class="hljs-operator">&lt;-</span>pam<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">,</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span><br>table<span class="hljs-punctuation">(</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">,</span>iris2.pam<span class="hljs-operator">$</span>clustering<span class="hljs-punctuation">)</span><br> <br><span class="hljs-comment">#             1  2  3</span><br><span class="hljs-comment"># setosa     50  0  0</span><br><span class="hljs-comment"># versicolor  0 48  2</span><br><span class="hljs-comment"># virginica   0 14 36</span><br> <br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment">#每页显示两个图</span><br>plot<span class="hljs-punctuation">(</span>iris2.pam<span class="hljs-punctuation">)</span><br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#-----使用K-mediods方法来进行聚类分析
+#k-mediods中包含pam、clara、pamk三种算法，我们通过iris数据集来看看三者表现
+ 
+install.packages(&quot;cluster&quot;)
+library(cluster)
+ 
+iris2.pam&lt;-pam(iris2,3)
+table(iris$Species,iris2.pam$clustering)
+ 
+#             1  2  3
+# setosa     50  0  0
+# versicolor  0 48  2
+# virginica   0 14 36
+ 
+layout(matrix(c(1,2),1,2)) #每页显示两个图
+plot(iris2.pam)
+layout(matrix(1))</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910834.png" srcset="/img/loading.gif" lazyload alt="2"></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs R">iris2.clara<span class="hljs-operator">&lt;-</span>clara<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">,</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span><br>table<span class="hljs-punctuation">(</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">,</span>iris2.clara<span class="hljs-operator">$</span>clustering<span class="hljs-punctuation">)</span><br> <br><span class="hljs-comment">#             1  2  3</span><br><span class="hljs-comment"># setosa     50  0  0</span><br><span class="hljs-comment"># versicolor  0 48  2</span><br><span class="hljs-comment"># virginica   0 13 37</span><br> <br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment">#每页显示两个图</span><br>plot<span class="hljs-punctuation">(</span>iris2.clara<span class="hljs-punctuation">)</span><br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">iris2.clara&lt;-clara(iris2,3)
+table(iris$Species,iris2.clara$clustering)
+ 
+#             1  2  3
+# setosa     50  0  0
+# versicolor  0 48  2
+# virginica   0 13 37
+ 
+layout(matrix(c(1,2),1,2)) #每页显示两个图
+plot(iris2.clara)
+layout(matrix(1))</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910835.png" srcset="/img/loading.gif" lazyload alt="3"></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs R">install.packages<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;fpc&quot;</span><span class="hljs-punctuation">)</span><br>library<span class="hljs-punctuation">(</span>fpc<span class="hljs-punctuation">)</span><br>iris2.pamk<span class="hljs-operator">&lt;-</span>pamk<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">)</span><br>table<span class="hljs-punctuation">(</span>iris2.pamk<span class="hljs-operator">$</span>pamobject<span class="hljs-operator">$</span>clustering<span class="hljs-punctuation">,</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">)</span><br> <br> <br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">2</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-comment">#每页显示两个图</span><br>plot<span class="hljs-punctuation">(</span>iris2.pamk<span class="hljs-operator">$</span>pamobject<span class="hljs-punctuation">)</span><br>layout<span class="hljs-punctuation">(</span>matrix<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br> <br><span class="hljs-comment">#     setosa versicolor virginica</span><br><span class="hljs-comment"># 1     50          1         0</span><br><span class="hljs-comment"># 2      0         49        50</span><br> <br><span class="hljs-comment">#通过上述分类结果可以看到，pam和calra算法分类结果基本类似，但是pamk将三类分为了两类。。</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">install.packages(&quot;fpc&quot;)
+library(fpc)
+iris2.pamk&lt;-pamk(iris2)
+table(iris2.pamk$pamobject$clustering,iris$Species)
+ 
+ 
+layout(matrix(c(1,2),1,2)) #每页显示两个图
+plot(iris2.pamk$pamobject)
+layout(matrix(1))
+ 
+#     setosa versicolor virginica
+# 1     50          1         0
+# 2      0         49        50
+ 
+#通过上述分类结果可以看到，pam和calra算法分类结果基本类似，但是pamk将三类分为了两类。。</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910836.png" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p><em><strong>四、层次聚类HCluster</strong></em></p>
 <p><strong>基本思想：</strong></p>
@@ -215,7 +297,18 @@
 <p>3、将距离最短的两个类合并为一个类。</p>
 <p>4、重复2-3，即不断合并最近的两个类，每次减少一个类，直到所有的样本合并为一个类。</p>
 <p>点与点的距离和类与类之间距离的计算可以参考R-modeling关于距离的介绍。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#---层次聚类 </span><br><span class="hljs-built_in">dim</span><span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span><span class="hljs-comment">#返回行列数</span><br> <br>idx<span class="hljs-operator">&lt;-</span>sample<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-built_in">dim</span><span class="hljs-punctuation">(</span>iris<span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-number">40</span><span class="hljs-punctuation">)</span><br>iris3<span class="hljs-operator">&lt;-</span>iris<span class="hljs-punctuation">[</span>idx<span class="hljs-punctuation">,</span><span class="hljs-operator">-</span><span class="hljs-number">5</span><span class="hljs-punctuation">]</span><br>iris3<br>hc<span class="hljs-operator">&lt;-</span>hclust<span class="hljs-punctuation">(</span>dist<span class="hljs-punctuation">(</span>iris3<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span>method <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ave&quot;</span><span class="hljs-punctuation">)</span>  <span class="hljs-comment">#注意hcluster里边传入的是dist返回值对象</span><br> <br>plot<span class="hljs-punctuation">(</span>hc<span class="hljs-punctuation">,</span>hang<span class="hljs-operator">=</span><span class="hljs-operator">-</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>labels<span class="hljs-operator">=</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">[</span>idx<span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span>  <span class="hljs-comment">#这里的hang=-1使得树的节点在下方对齐</span><br><span class="hljs-comment">#将树分为3块</span><br>rect.hclust<span class="hljs-punctuation">(</span>hc<span class="hljs-punctuation">,</span>k<span class="hljs-operator">=</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span>  <br>groups<span class="hljs-operator">&lt;-</span>cutree<span class="hljs-punctuation">(</span>hc<span class="hljs-punctuation">,</span>k<span class="hljs-operator">=</span><span class="hljs-number">3</span><span class="hljs-punctuation">)</span>   <br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#---层次聚类 
+dim(iris)#返回行列数
+ 
+idx&lt;-sample(1:dim(iris)[1],40)
+iris3&lt;-iris[idx,-5]
+iris3
+hc&lt;-hclust(dist(iris3),method &#x3D; &quot;ave&quot;)  #注意hcluster里边传入的是dist返回值对象
+ 
+plot(hc,hang&#x3D;-1,labels&#x3D;iris$Species[idx])  #这里的hang&#x3D;-1使得树的节点在下方对齐
+#将树分为3块
+rect.hclust(hc,k&#x3D;3)  
+groups&lt;-cutree(hc,k&#x3D;3)   </code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910837.png" srcset="/img/loading.gif" lazyload alt="5"></p>
 <p><em><strong>五、基于密度的聚类</strong></em></p>
 <p>前边的k-Means和k-Mediods算法比较适用于簇为球型的，对于非球型的，一般需要基于密度的聚类，比如DBSCAN</p>
@@ -254,11 +347,20 @@
 <p>（2）当空间聚类的密度不均匀、聚类间距差相差很大时，聚类质量较差，因为这种情况下参数MinPts和Eps选取困难</p>
 <p>（3）算法聚类效果依赖与距离公式选取，实际应用中常用欧式距离，对于高维数据，存在“维数灾难”。</p>
 <p><strong>R语言中的例子：</strong></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#---基于密度的聚类分析</span><br>library<span class="hljs-punctuation">(</span>fpc<span class="hljs-punctuation">)</span><br>iris2<span class="hljs-operator">&lt;-</span>iris<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span><span class="hljs-number">5</span><span class="hljs-punctuation">]</span><br>ds<span class="hljs-operator">&lt;-</span>dbscan<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">,</span>eps<span class="hljs-operator">=</span><span class="hljs-number">0.42</span><span class="hljs-punctuation">,</span>MinPts <span class="hljs-operator">=</span> <span class="hljs-number">5</span><span class="hljs-punctuation">)</span><br>table<span class="hljs-punctuation">(</span>ds<span class="hljs-operator">$</span>cluster<span class="hljs-punctuation">,</span>iris<span class="hljs-operator">$</span>Species<span class="hljs-punctuation">)</span><br> <br><span class="hljs-comment">#打印出ds和iris2的聚类散点图</span><br>plot<span class="hljs-punctuation">(</span>ds<span class="hljs-punctuation">,</span>iris2<span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#---基于密度的聚类分析
+library(fpc)
+iris2&lt;-iris[-5]
+ds&lt;-dbscan(iris2,eps&#x3D;0.42,MinPts &#x3D; 5)
+table(ds$cluster,iris$Species)
+ 
+#打印出ds和iris2的聚类散点图
+plot(ds,iris2)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910838.png" srcset="/img/loading.gif" lazyload alt="6"></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#打印出iris第一列和第四列为坐标轴的聚类结果</span><br>plot<span class="hljs-punctuation">(</span>ds<span class="hljs-punctuation">,</span>iris2<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-number">4</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#打印出iris第一列和第四列为坐标轴的聚类结果
+plot(ds,iris2[,c(1,4)])</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910839.png" srcset="/img/loading.gif" lazyload alt="7"></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#另一个表示聚类结果的函数，plotcluster</span><br>plotcluster<span class="hljs-punctuation">(</span>iris2<span class="hljs-punctuation">,</span>ds<span class="hljs-operator">$</span>cluster<span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#另一个表示聚类结果的函数，plotcluster
+plotcluster(iris2,ds$cluster)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241910840.png" srcset="/img/loading.gif" lazyload alt="8"></p>
 </div>
 <hr>

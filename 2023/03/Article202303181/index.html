@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -117,11 +118,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-5.5k 字
+5.4k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-46 分钟
+45 分钟
 </span>
 </div>
 </div>
@@ -210,50 +211,137 @@
 <ul>
 <li><code>onebot连接信息</code>（使用的是 <code>go-cqhttp</code> 的扫码登录方式，但 QQ 发送图片会出现bug）</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">onebot</span>]<br><span class="hljs-comment"># onebot 相关设置</span><br><span class="hljs-string">qq=请修改为你机器人的QQ号</span><br><span class="hljs-string">manager_qq</span> <span class="hljs-string">=</span> <span class="hljs-string">请修改为机器人管理员的QQ号</span><br><span class="hljs-comment"># 此处的  reverse_ws_host 和 reverse_ws_port 对应</span><br><span class="hljs-comment"># go-cqhttp 中的 反向WS Universal 地址，如：ws://localhost:6555/ws</span><br><span class="hljs-string">reverse_ws_host</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;localhost&quot;</span><br><span class="hljs-string">reverse_ws_port</span> <span class="hljs-string">=</span> <span class="hljs-number">6555</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>onebot<span class="token punctuation">]</span>
+<span class="token comment"># onebot 相关设置</span>
+qq=请修改为你机器人的QQ号
+manager_qq = 请修改为机器人管理员的QQ号
+<span class="token comment"># 此处的  reverse_ws_host 和 reverse_ws_port 对应</span>
+<span class="token comment"># go-cqhttp 中的 反向WS Universal 地址，如：ws://localhost:6555/ws</span>
+reverse_ws_host = "localhost"
+reverse_ws_port = 6555</code></pre></div></figure>
 <ul>
 <li><code>mirai连接信息</code></li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">mirai</span>]<br><span class="hljs-comment"># Mirai 相关设置</span><br><span class="hljs-string">qq</span> <span class="hljs-string">=</span> <span class="hljs-string">请填写机器人的</span> <span class="hljs-string">QQ</span> <span class="hljs-string">号</span><br><span class="hljs-string">manager_qq</span> <span class="hljs-string">=</span> <span class="hljs-string">请修改为机器人管理员的QQ号</span><br><br><span class="hljs-string">api_key</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;1234567890&quot;</span> <span class="hljs-comment"># mirai-http-api 中的 verifyKey </span><br><span class="hljs-string">reverse_ws_host</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span>   <span class="hljs-comment"># 0.0.0.0指任意ip</span><br><span class="hljs-string">reverse_ws_port</span> <span class="hljs-string">=</span> <span class="hljs-number">8554</span><br><br><span class="hljs-comment"># # 下面是 mirai api http 正向连接模式</span><br><span class="hljs-comment"># 使用此模式时需注释上面的反向连接模式 </span><br><span class="hljs-comment"># 要么http+ws要么直接反代reverse_w,建议用反代</span><br><span class="hljs-comment"># http_url = &quot;http://localhost:8080&quot;</span><br><span class="hljs-comment"># ws_url = &quot;http://localhost:8080&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>mirai<span class="token punctuation">]</span>
+<span class="token comment"># Mirai 相关设置</span>
+qq = 请填写机器人的 QQ 号
+manager_qq = 请修改为机器人管理员的QQ号
+
+api_key = "1234567890" <span class="token comment"># mirai-http-api 中的 verifyKey </span>
+reverse_ws_host = "0.0.0.0"   <span class="token comment"># 0.0.0.0指任意ip</span>
+reverse_ws_port = 8554
+
+<span class="token comment"># # 下面是 mirai api http 正向连接模式</span>
+<span class="token comment"># 使用此模式时需注释上面的反向连接模式 </span>
+<span class="token comment"># 要么http+ws要么直接反代reverse_w,建议用反代</span>
+<span class="token comment"># http_url = "http://localhost:8080"</span>
+<span class="token comment"># ws_url = "http://localhost:8080"</span></code></pre></div></figure>
 <ul>
 <li><code>OpenAI登录信息</code></li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">openai</span>]<br><span class="hljs-comment"># OpenAI 相关设置</span><br><br><span class="hljs-comment"># 第 1 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br><br><span class="hljs-comment"># 第 2 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br><br><span class="hljs-comment"># 第 3 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>openai<span class="token punctuation">]</span>
+<span class="token comment"># OpenAI 相关设置</span>
+
+<span class="token comment"># 第 1 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span>
+
+<span class="token comment"># 第 2 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span>
+
+<span class="token comment"># 第 3 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span></code></pre></div></figure>
 <h4 id="3-1-1-OpenAI-多账号支持">3.1.1 OpenAI 多账号支持</h4>
 <p>可以登录多个不同的 OpenAI 账号，当机器人开始产生新对话时，会从你登录的账号中选择<strong>一个</strong>来使用 ChatGPT 和用户聊天。</p>
 <p>（这可以降低聊天频率限制出现的概率）</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">openai</span>]<br><span class="hljs-comment"># OpenAI 相关设置</span><br><br><span class="hljs-comment"># 第 1 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br><br><span class="hljs-comment"># 第 2 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br><br><span class="hljs-comment"># 第 3 个 OpenAI 账号的登录信息</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 里面是一些设置</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>openai<span class="token punctuation">]</span>
+<span class="token comment"># OpenAI 相关设置</span>
+
+<span class="token comment"># 第 1 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span>
+
+<span class="token comment"># 第 2 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span>
+
+<span class="token comment"># 第 3 个 OpenAI 账号的登录信息</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 里面是一些设置</span></code></pre></div></figure>
 <h4 id="3-1-2-OpenAI的设置（主要是无浏览器模式的接入点设置，不建议使用Web）">3.1.2 OpenAI的设置（主要是无浏览器模式的接入点设置，不建议使用Web）</h4>
 <p>2023年3月封禁了大量账户，建议不要用WEB，尽量都使用自己的API。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">openai</span>]<br><span class="hljs-comment"># OpenAI 相关设置</span><br><span class="hljs-comment"># 自定义 ChatGPT 的 browserless 接入点</span><br><span class="hljs-comment"># 自 3月9日 开始，不设置此项将无法正常使用 browserless 模式下的网页版 ChatGPT</span><br><span class="hljs-comment"># browser模式没法用，browserless要endpoint，如果有可以选择自定义</span><br><span class="hljs-string">browserless_endpoint</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;https://bypass.duti.tech/&quot;</span><br><br><span class="hljs-comment"># 自定义 OpenAI 的 API 接口基础地址</span><br><span class="hljs-comment"># 通过此功能，你可以搭建一个 OpenAI 的反向代理来避免网络问题</span><br><span class="hljs-comment"># 例如此项目：https://github.com/Ice-Hazymoon/openai-scf-proxy</span><br><span class="hljs-comment"># api_endpoint = &quot;https://api.openai.com/v1&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>openai<span class="token punctuation">]</span>
+<span class="token comment"># OpenAI 相关设置</span>
+<span class="token comment"># 自定义 ChatGPT 的 browserless 接入点</span>
+<span class="token comment"># 自 3月9日 开始，不设置此项将无法正常使用 browserless 模式下的网页版 ChatGPT</span>
+<span class="token comment"># browser模式没法用，browserless要endpoint，如果有可以选择自定义</span>
+browserless_endpoint = "https<span class="token punctuation">:</span>//bypass.duti.tech/"
+
+<span class="token comment"># 自定义 OpenAI 的 API 接口基础地址</span>
+<span class="token comment"># 通过此功能，你可以搭建一个 OpenAI 的反向代理来避免网络问题</span>
+<span class="token comment"># 例如此项目：https://github.com/Ice-Hazymoon/openai-scf-proxy</span>
+<span class="token comment"># api_endpoint = "https://api.openai.com/v1"</span></code></pre></div></figure>
 <h4 id="3-1-3-账号登录模式选择">3.1.3 账号登录模式选择</h4>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 模式选择</span><br><span class="hljs-string">mode</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;browserless&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 模式选择</span>
+mode = "browserless"</code></pre></div></figure>
 <p>支持的模式有：</p>
 <ul>
 <li>browser - 浏览器登录。该模式会在你的电脑上启动一个 Chrome 浏览器来登录并验证 OpenAI，该模式成功率较低。</li>
 <li>browserless - 无浏览器模式。该模式将你的<strong>聊天请求</strong>发送到第三方服务器进行认证，从而不需要浏览器，该模式成功率较高。（推荐）</li>
 </ul>
 <h4 id="3-1-4-邮箱密码登录">3.1.4 邮箱密码登录</h4>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 你的 OpenAI 邮箱</span><br><span class="hljs-string">email</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;xxxx&quot;</span> <br><span class="hljs-comment"># 你的 OpenAI 密码</span><br><span class="hljs-string">password</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;xxx&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 你的 OpenAI 邮箱</span>
+email = "xxxx" 
+<span class="token comment"># 你的 OpenAI 密码</span>
+password = "xxx"</code></pre></div></figure>
 <h4 id="3-1-5-session-token-登录">3.1.5 session_token 登录</h4>
 <p>对于通过 Google 登录或者微软登录的同学，可以使用 session_token 方式进行登录。使用这种方式登录时不需要填写<strong>密码</strong>。</p>
 <p>需要注意的是，session_token 过期比较频繁，过期后需要重新设置。</p>
 <p>session_token 的获取方式可参考：<a target="_blank" rel="noopener" href="https://github.com/lss233/chatgpt-mirai-qq-bot/issues/96">请问怎么获取 session_token</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><br><span class="hljs-string">session_token</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;一串 ey 开头的东西&quot;</span><br><span class="hljs-string">email</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;你的邮箱&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+session_token = "一串 ey 开头的东西"
+email = "你的邮箱"</code></pre></div></figure>
 <h4 id="3-1-6-access-token-登录">3.1.6 access_token 登录</h4>
 <p>配合 <code>mode=&quot;browserless&quot;</code>使用，这种方式登录时不需要填写邮箱和密码、session_token。<br>
 这种方法比较适合登录时出现 Unknown error,或者回答问题时出现有关 Access Token报错的情况。<br>
 你需要自己登录 OpenAI 网站，然后访问 <a target="_blank" rel="noopener" href="https://chat.openai.com/api/auth/session">https://chat.openai.com/api/auth/session</a> ，你可以看到一段类似下面的代码：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;user&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>		<span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user-*****&quot;</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;***&quot;</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;***&quot;</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;***&quot;</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;picture&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;***&quot;</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;groups&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><br>	<span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;expires&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-03-18T09:11:03.546Z&quot;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;accessToken&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eyJhbGciOiJS*****X7GdA&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+	<span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+		<span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"user-*****"</span><span class="token punctuation">,</span>
+		<span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"***"</span><span class="token punctuation">,</span>
+		<span class="token property">"email"</span><span class="token operator">:</span> <span class="token string">"***"</span><span class="token punctuation">,</span>
+		<span class="token property">"image"</span><span class="token operator">:</span> <span class="token string">"***"</span><span class="token punctuation">,</span>
+		<span class="token property">"picture"</span><span class="token operator">:</span> <span class="token string">"***"</span><span class="token punctuation">,</span>
+		<span class="token property">"groups"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token property">"expires"</span><span class="token operator">:</span> <span class="token string">"2023-03-18T09:11:03.546Z"</span><span class="token punctuation">,</span>
+	<span class="token property">"accessToken"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJS*****X7GdA"</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>获取以上 JSON 中<code>accessToken</code> 后面的值即可，有效期在 30 天左右。过期后需要重新设置。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-string">access_token</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;一串内容为 eyJhbGciOiJS*****X7GdA 的东西&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+access_token = "一串内容为 eyJhbGciOiJS<span class="token important">*****X7GdA</span> 的东西"</code></pre></div></figure>
 <h4 id="3-1-7-使用正向代理（国内搭建的记得开代理）">3.1.7 使用正向代理（国内搭建的记得开代理）</h4>
 <p>如果你的网络访问 OpenAI 出现一直弹浏览器的问题，或者你的 IP 被封锁了，可以通过配置代理的方式来连接到 OpenAI。</p>
 <p>支持使用正向代理方式访问 OpenAI，你需要一个 HTTP/HTTPS 代理服务器：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><br><span class="hljs-comment"># 请注意，由于现在 OpenAI 封锁严格，你需要一个</span><br><span class="hljs-comment"># 尽量使用独立的代理服务器，不要使用和其他人共用 IP 的代理</span><br><span class="hljs-comment"># 否则会出现无限弹出浏览器的问题</span><br><span class="hljs-comment"># 在账号下面加入</span><br><br><span class="hljs-string">proxy=&quot;http://127.0.0.1:1080&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 请注意，由于现在 OpenAI 封锁严格，你需要一个</span>
+<span class="token comment"># 尽量使用独立的代理服务器，不要使用和其他人共用 IP 的代理</span>
+<span class="token comment"># 否则会出现无限弹出浏览器的问题</span>
+<span class="token comment"># 在账号下面加入</span>
+
+proxy="http<span class="token punctuation">:</span>//127.0.0.1<span class="token punctuation">:</span>1080"</code></pre></div></figure>
 <h4 id="3-1-8-对话标题自动重命名">3.1.8 对话标题自动重命名</h4>
 <p>如果你的账号产生了太多的对话，看着不舒服，可以开启配置文件中的标题自动重命名和。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-comment"># 在账号下面加入</span><br><br><span class="hljs-string">title_pattern=&quot;qq-&#123;session_id&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token comment"># 在账号下面加入</span>
+
+title_pattern="qq<span class="token punctuation">-</span><span class="token punctuation">&#123;</span>session_id<span class="token punctuation">&#125;</span>"</code></pre></div></figure>
 <p>当你按照这个格式进行设置之后，新创建的对话将会以 <code>qq-friend-好友QQ</code> 或 <code>qq-group-群号</code> 进行命名。</p>
 <p>这里的 <code>{session_id}</code> 是一个变量，它在程序启动之后会根据聊天信息的发送者动态变化。</p>
 <ul>
@@ -282,7 +370,24 @@
 <li>第一次启动后，可以在 <code>mirai/config/Console/AutoLogin.yml</code> 里面设置自动登录（设置好后，下次启动<code>Mirai.cmd</code>就不用输入机器人登录命令了）</li>
 </ul>
 <p>参考如下设置:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">accounts:</span> <br>  <span class="hljs-bullet">-</span> <span class="hljs-comment"># 账号, 现只支持 QQ 数字账号</span><br>    <span class="hljs-attr">account:</span> <span class="hljs-string">输入你的QQ数字账号</span><br>    <span class="hljs-attr">password:</span> <br>      <span class="hljs-comment"># 密码种类, 可选 PLAIN 或 MD5</span><br>      <span class="hljs-attr">kind:</span> <span class="hljs-string">PLAIN</span><br>      <span class="hljs-comment"># 密码内容, PLAIN 时为密码文本, MD5 时为 16 进制</span><br>      <span class="hljs-attr">value:</span> <span class="hljs-string">输入你的密码（密码最好不要超过16位）</span><br>    <span class="hljs-comment"># 账号配置. 可用配置列表 (注意大小写):</span><br>    <span class="hljs-comment"># &quot;protocol&quot;: &quot;ANDROID_PHONE&quot; / &quot;ANDROID_PAD&quot; / &quot;ANDROID_WATCH&quot; / &quot;MACOS&quot; / &quot;IPAD&quot;</span><br>    <span class="hljs-comment"># &quot;device&quot;: &quot;device.json&quot;</span><br>    <span class="hljs-comment"># &quot;enable&quot;: true</span><br>    <span class="hljs-comment"># &quot;heartbeatStrategy&quot;: &quot;STAT_HB&quot; / &quot;REGISTER&quot; / &quot;NONE&quot;</span><br>    <span class="hljs-attr">configuration:</span> <br>      <span class="hljs-attr">protocol:</span> <span class="hljs-string">MACOS</span><br>      <span class="hljs-attr">device:</span> <span class="hljs-string">device.json</span><br>      <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>      <span class="hljs-attr">heartbeatStrategy:</span> <span class="hljs-string">STAT_HB</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">accounts</span><span class="token punctuation">:</span> 
+  <span class="token punctuation">-</span> <span class="token comment"># 账号, 现只支持 QQ 数字账号</span>
+    <span class="token key atrule">account</span><span class="token punctuation">:</span> 输入你的QQ数字账号
+    <span class="token key atrule">password</span><span class="token punctuation">:</span> 
+      <span class="token comment"># 密码种类, 可选 PLAIN 或 MD5</span>
+      <span class="token key atrule">kind</span><span class="token punctuation">:</span> PLAIN
+      <span class="token comment"># 密码内容, PLAIN 时为密码文本, MD5 时为 16 进制</span>
+      <span class="token key atrule">value</span><span class="token punctuation">:</span> 输入你的密码（密码最好不要超过16位）
+    <span class="token comment"># 账号配置. 可用配置列表 (注意大小写):</span>
+    <span class="token comment"># "protocol": "ANDROID_PHONE" / "ANDROID_PAD" / "ANDROID_WATCH" / "MACOS" / "IPAD"</span>
+    <span class="token comment"># "device": "device.json"</span>
+    <span class="token comment"># "enable": true</span>
+    <span class="token comment"># "heartbeatStrategy": "STAT_HB" / "REGISTER" / "NONE"</span>
+    <span class="token key atrule">configuration</span><span class="token punctuation">:</span> 
+      <span class="token key atrule">protocol</span><span class="token punctuation">:</span> MACOS
+      <span class="token key atrule">device</span><span class="token punctuation">:</span> device.json
+      <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+      <span class="token key atrule">heartbeatStrategy</span><span class="token punctuation">:</span> STAT_HB</code></pre></div></figure>
 <blockquote>
 <p>注意：采用mirai反向代理得配置文件在mirai/config/net.mamoe.mirai-api-http/setting.yml</p>
 <p>验证key和反向代理要与配置文件config/config.cfg中一样才能进行通信</p>
@@ -305,7 +410,16 @@
 <li>输入<code>3</code>，会生成配置文件：<code>config.yaml</code></li>
 <li>打开配置文件<code>config.yaml</code>，只需要配置两个地方：account和servers</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">account:</span> <span class="hljs-comment"># 账号相关</span><br>  <span class="hljs-attr">uin:</span> <span class="hljs-string">输入机器人QQ账号</span> <span class="hljs-comment"># QQ账号</span><br>  <br>  <span class="hljs-comment"># 其他保持不动</span><br><br><span class="hljs-attr">servers:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">ws-reverse:</span><br>      <span class="hljs-attr">universal:</span> <span class="hljs-string">ws://localhost:6555/ws</span>  <span class="hljs-comment"># 与onebot信息设置一致才能通信</span><br>      <br>  <span class="hljs-comment"># 其他保持不动</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">account</span><span class="token punctuation">:</span> <span class="token comment"># 账号相关</span>
+  <span class="token key atrule">uin</span><span class="token punctuation">:</span> 输入机器人QQ账号 <span class="token comment"># QQ账号</span>
+  
+  <span class="token comment"># 其他保持不动</span>
+
+<span class="token key atrule">servers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">ws-reverse</span><span class="token punctuation">:</span>
+      <span class="token key atrule">universal</span><span class="token punctuation">:</span> ws<span class="token punctuation">:</span>//localhost<span class="token punctuation">:</span>6555/ws  <span class="token comment"># 与onebot信息设置一致才能通信</span>
+      
+  <span class="token comment"># 其他保持不动</span></code></pre></div></figure>
 <ul>
 <li>再次运行 <code>go-cqhttp.bat</code>，生成虚拟文件，这一次不用扫码，只是为了生成虚拟设备文件，然后关闭即可</li>
 <li>打开生成的虚拟文件：<code>device.json</code>，将其中的 <code>protocol</code>参数改成2</li>
@@ -316,14 +430,109 @@
 <li>设置好<code>chatgpt/config.cfg</code>点击启动 <code>ChatGPT.cmd</code> ，自动会登录 <code>openai</code></li>
 </ul>
 <p>一个简单的基于mirai启动的配置文件实例：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">mirai</span>]<br><span class="hljs-string">qq</span> <span class="hljs-string">=</span> <span class="hljs-string">请修改为你机器人的QQ号（小号）</span><br><br><span class="hljs-string">manager_qq</span> <span class="hljs-string">=</span> <span class="hljs-string">请修改为机器人管理员的QQ号（大号）</span><br><br><span class="hljs-string">api_key</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;1234567890&quot;</span><br><span class="hljs-string">reverse_ws_host</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span><br><span class="hljs-string">reverse_ws_port</span> <span class="hljs-string">=</span> <span class="hljs-number">8554</span><br><span class="hljs-comment"># # 下面是 mirai api http 正向连接模式</span><br><span class="hljs-comment"># 使用此模式时需注释上面的反向连接模式</span><br><span class="hljs-comment"># http_url = &quot;http://localhost:8080&quot;</span><br><span class="hljs-comment"># ws_url = &quot;http://localhost:8080&quot;</span><br><br>[<span class="hljs-string">openai</span>]<br><span class="hljs-string">browserless_endpoint</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;https://bypass.duti.tech/&quot;</span><br><br><span class="hljs-comment"># 第一个账号</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><span class="hljs-string">mode</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;browserless&quot;</span><br><br><span class="hljs-comment"># 你的 OpenAI 邮箱</span><br><span class="hljs-string">email</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;xxxx&quot;</span><br><span class="hljs-comment"># 你的 OpenAI 密码</span><br><span class="hljs-string">password</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;xxx&quot;</span><br><br><span class="hljs-comment"># clash代理的端口号</span><br><span class="hljs-string">proxy=&quot;http://127.0.0.1:7890&quot;</span><br><br><span class="hljs-comment"># 使用 ChatGPT Plus（plus 用户此项设置为 true 使用 legacy 模型）</span><br><span class="hljs-string">paid</span> <span class="hljs-string">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-comment"># 是否开启标题自动重命名</span><br><span class="hljs-string">title_pattern=&quot;qq-&#123;session_id&#125;&quot;</span><br><br><span class="hljs-comment"># 是否自动删除旧的对话，开启后用户发送重置对话时会自动删除以前的会话内容</span><br><span class="hljs-string">auto_remove_old_conversations</span> <span class="hljs-string">=</span> <span class="hljs-literal">true</span><br><br><span class="hljs-comment"># 第二个账号</span><br>[[<span class="hljs-string">openai.accounts</span>]]<br><br><span class="hljs-string">api_key=&quot;sk-xxxxx&quot;</span><br><br><span class="hljs-string">proxy=&quot;http://127.0.0.1:7890&quot;</span><br><br><span class="hljs-comment"># 是否开启标题自动重命名</span><br><span class="hljs-string">title_pattern=&quot;qq-&#123;session_id&#125;&quot;</span><br><br><span class="hljs-comment"># 是否自动删除旧的对话，开启后用户发送重置对话时会自动删除以前的会话内容</span><br><span class="hljs-string">auto_remove_old_conversations</span> <span class="hljs-string">=</span> <span class="hljs-literal">true</span><br><br>[<span class="hljs-string">baiducloud</span>]<br><span class="hljs-comment">#是否启动百度云内容安全审核</span><br><span class="hljs-string">check</span> <span class="hljs-string">=</span> <span class="hljs-literal">false</span><br><br><span class="hljs-comment">#百度云API_KEY 24位英文数字字符串</span><br><span class="hljs-string">baidu_api_key</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-comment">#百度云SECRET_KEY 32位的英文数字字符串</span><br><span class="hljs-string">baidu_secret_key</span> <span class="hljs-string">=&quot;&quot;</span><br><br><span class="hljs-comment">#不合规消息自定义返回</span><br><span class="hljs-string">illgalmessage</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;[百度云]请珍惜机器人，当前返回内容不合规&quot;</span><br><br>[<span class="hljs-string">system</span>]<br><span class="hljs-comment"># 是否自动同意进群邀请</span><br><span class="hljs-string">accept_group_invite</span> <span class="hljs-string">=</span> <span class="hljs-literal">false</span><br><span class="hljs-comment"># 是否自动同意好友请求</span><br><span class="hljs-string">accept_friend_request</span> <span class="hljs-string">=</span> <span class="hljs-literal">false</span><br><br>[<span class="hljs-string">presets</span>]<br><span class="hljs-comment"># 切换预设的命令： 加载预设 猫娘</span><br><span class="hljs-string">command</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;加载预设 (\\w+)&quot;</span><br><span class="hljs-string">loaded_successful</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;预设加载成功！&quot;</span><br><span class="hljs-string">scan_dir</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;./presets/&quot;</span><br><br>[<span class="hljs-string">presets.keywords</span>]<br><span class="hljs-comment"># 预设关键词 &lt;-&gt; 实际文件</span><br><span class="hljs-string">&quot;正常&quot;</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;presets/default.txt&quot;</span><br><span class="hljs-string">&quot;猫娘&quot;</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;presets/catgirl.txt&quot;</span><br><span class="hljs-comment"># &quot;default&quot; = &quot;presets/default.txt&quot; # 默认预设，开启后所有的会话都会先读这个预设，谨慎使用！</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>mirai<span class="token punctuation">]</span>
+qq = 请修改为你机器人的QQ号（小号）
+
+manager_qq = 请修改为机器人管理员的QQ号（大号）
+
+api_key = "1234567890"
+reverse_ws_host = "0.0.0.0"
+reverse_ws_port = 8554
+<span class="token comment"># # 下面是 mirai api http 正向连接模式</span>
+<span class="token comment"># 使用此模式时需注释上面的反向连接模式</span>
+<span class="token comment"># http_url = "http://localhost:8080"</span>
+<span class="token comment"># ws_url = "http://localhost:8080"</span>
+
+<span class="token punctuation">[</span>openai<span class="token punctuation">]</span>
+browserless_endpoint = "https<span class="token punctuation">:</span>//bypass.duti.tech/"
+
+<span class="token comment"># 第一个账号</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+mode = "browserless"
+
+<span class="token comment"># 你的 OpenAI 邮箱</span>
+email = "xxxx"
+<span class="token comment"># 你的 OpenAI 密码</span>
+password = "xxx"
+
+<span class="token comment"># clash代理的端口号</span>
+proxy="http<span class="token punctuation">:</span>//127.0.0.1<span class="token punctuation">:</span>7890"
+
+<span class="token comment"># 使用 ChatGPT Plus（plus 用户此项设置为 true 使用 legacy 模型）</span>
+paid = false
+
+<span class="token comment"># 是否开启标题自动重命名</span>
+title_pattern="qq<span class="token punctuation">-</span><span class="token punctuation">&#123;</span>session_id<span class="token punctuation">&#125;</span>"
+
+<span class="token comment"># 是否自动删除旧的对话，开启后用户发送重置对话时会自动删除以前的会话内容</span>
+auto_remove_old_conversations = true
+
+<span class="token comment"># 第二个账号</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>openai.accounts<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+api_key="sk<span class="token punctuation">-</span>xxxxx"
+
+proxy="http<span class="token punctuation">:</span>//127.0.0.1<span class="token punctuation">:</span>7890"
+
+<span class="token comment"># 是否开启标题自动重命名</span>
+title_pattern="qq<span class="token punctuation">-</span><span class="token punctuation">&#123;</span>session_id<span class="token punctuation">&#125;</span>"
+
+<span class="token comment"># 是否自动删除旧的对话，开启后用户发送重置对话时会自动删除以前的会话内容</span>
+auto_remove_old_conversations = true
+
+<span class="token punctuation">[</span>baiducloud<span class="token punctuation">]</span>
+<span class="token comment">#是否启动百度云内容安全审核</span>
+check = false
+
+<span class="token comment">#百度云API_KEY 24位英文数字字符串</span>
+baidu_api_key = ""
+
+<span class="token comment">#百度云SECRET_KEY 32位的英文数字字符串</span>
+baidu_secret_key =""
+
+<span class="token comment">#不合规消息自定义返回</span>
+illgalmessage = "<span class="token punctuation">[</span>百度云<span class="token punctuation">]</span>请珍惜机器人，当前返回内容不合规"
+
+<span class="token punctuation">[</span>system<span class="token punctuation">]</span>
+<span class="token comment"># 是否自动同意进群邀请</span>
+accept_group_invite = false
+<span class="token comment"># 是否自动同意好友请求</span>
+accept_friend_request = false
+
+<span class="token punctuation">[</span>presets<span class="token punctuation">]</span>
+<span class="token comment"># 切换预设的命令： 加载预设 猫娘</span>
+command = "加载预设 (\\w+)"
+loaded_successful = "预设加载成功！"
+scan_dir = "./presets/"
+
+<span class="token punctuation">[</span>presets.keywords<span class="token punctuation">]</span>
+<span class="token comment"># 预设关键词 &lt;-> 实际文件</span>
+"正常" = "presets/default.txt"
+"猫娘" = "presets/catgirl.txt"
+<span class="token comment"># "default" = "presets/default.txt" # 默认预设，开启后所有的会话都会先读这个预设，谨慎使用！</span></code></pre></div></figure>
 <ul>
 <li>登录成功后，说明 <code>QQ</code> 机器人已经连接上了 <code>ChatGPT</code>，此时即可跟机器人聊天了</li>
 </ul>
 <h2 id="4-Linux下一键快速部署">4. Linux下一键快速部署</h2>
 <p>在linux服务器上输入最新版的命令即可，命令基于docker容器技术，会自动安装docker并拉取最新版的镜像。</p>
 <p>配置文件路径和功能与Windows几乎一致，请参考前文的配置信息。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># chatgpt-qq下的文件</span><br>tree<br>.<br>├── config.cfg<br>├── docker-compose.yaml<br>└── mirai<br>    ├── config<br>    │   ├── Console<br>    │   │   ├── AutoLogin.yml<br>    │   │   ├── Command.yml<br>    │   │   ├── Logger.yml<br>    │   │   ├── PermissionService.yml<br>    │   │   └── PluginDependencies.yml<br>    │   └── net.mamoe.mirai-api-http<br>    │       └── setting.yml<br>    └── data<br>        └── xyz.cssxsh.mirai.mirai-device-generator<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># chatgpt-qq下的文件</span>
+tree
+<span class="token builtin class-name">.</span>
+├── config.cfg
+├── docker-compose.yaml
+└── mirai
+    ├── config
+    │   ├── Console
+    │   │   ├── AutoLogin.yml
+    │   │   ├── Command.yml
+    │   │   ├── Logger.yml
+    │   │   ├── PermissionService.yml
+    │   │   └── PluginDependencies.yml
+    │   └── net.mamoe.mirai-api-http
+    │       └── setting.yml
+    └── data
+        └── xyz.cssxsh.mirai.mirai-device-generator</code></pre></div></figure>
 <ul>
 <li><code>config.cgf</code> 是配置 openai 和 QQ 的文件（修改文件后重新运行即可<code>docker-compose up -d</code>）</li>
 <li><code>docker-compose.yml</code> 指定了需要启动的容器、服务、映像等信息</li>

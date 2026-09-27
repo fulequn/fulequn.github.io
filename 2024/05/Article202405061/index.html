@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -117,7 +118,7 @@
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-19 分钟
+20 分钟
 </span>
 </div>
 </div>
@@ -144,7 +145,25 @@
 <p>对于贪心，如果准备时间不是非常充裕的同学，可以不用花费太多时间，知道大概思考方向即可，因为即使花费再多时间训练贪心，效果依然是不明显的。</p>
 <h3 id="无重叠区间"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">无重叠区间</a></h3>
 <p>给定一个区间的集合 <code>intervals</code> ，其中 <code>intervals[i] = [starti, endi]</code> 。返回 <em>需要移除区间的最小数量，使剩余区间互不重叠</em> 。</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs inform7">示例 1:<br>输入: intervals = <span class="hljs-comment">[<span class="hljs-comment">[1,2]</span>,<span class="hljs-comment">[2,3]</span>,<span class="hljs-comment">[3,4]</span>,<span class="hljs-comment">[1,3]</span>]</span><br>输出: 1<br>解释: 移除 <span class="hljs-comment">[1,3]</span> 后，剩下的区间没有重叠。<br><br>示例 2:<br>输入: intervals = <span class="hljs-comment">[ <span class="hljs-comment">[1,2]</span>, <span class="hljs-comment">[1,2]</span>, <span class="hljs-comment">[1,2]</span> ]</span><br>输出: 2<br>解释: 你需要移除两个 <span class="hljs-comment">[1,2]</span> 来使剩下的区间没有重叠。<br><br>示例 3:<br>输入: intervals = <span class="hljs-comment">[ <span class="hljs-comment">[1,2]</span>, <span class="hljs-comment">[2,3]</span> ]</span><br>输出: 0<br>解释: 你不需要移除任何区间，因为它们已经是无重叠的了。<br><br>提示:<br>1 &lt;= intervals.length &lt;= 10^5<br>intervals<span class="hljs-comment">[i]</span>.length == 2<br>- 5 * 10^4 &lt;= starti &lt; endi &lt;= 5 * 10^4<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">示例 1:
+输入: intervals &#x3D; [[1,2],[2,3],[3,4],[1,3]]
+输出: 1
+解释: 移除 [1,3] 后，剩下的区间没有重叠。
+
+示例 2:
+输入: intervals &#x3D; [ [1,2], [1,2], [1,2] ]
+输出: 2
+解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。
+
+示例 3:
+输入: intervals &#x3D; [ [1,2], [2,3] ]
+输出: 0
+解释: 你不需要移除任何区间，因为它们已经是无重叠的了。
+
+提示:
+1 &lt;&#x3D; intervals.length &lt;&#x3D; 10^5
+intervals[i].length &#x3D;&#x3D; 2
+- 5 * 10^4 &lt;&#x3D; starti &lt; endi &lt;&#x3D; 5 * 10^4</code></pre></div></figure>
 <p><strong>题目解析</strong></p>
 <p>区间问题的贪心策略常见的有以下几种情况：</p>
 <ul>
@@ -160,25 +179,142 @@
 <li>因此，不存在选择更多区间的方案。</li>
 </ul>
 <p><strong>代码展示</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br>    <span class="hljs-comment">// eraseOverlapIntervals 方法用于找出给定区间数组 intervals 中不重叠区间的数量</span><br>    <span class="hljs-comment">// 通过首先按照结束时间对区间进行排序，然后遍历排序后的区间数组，计算出不重叠的区间数量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">eraseOverlapIntervals</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        <span class="hljs-comment">// 使用 Arrays.sort 方法和 lambda 表达式按照区间的结束时间对 intervals 进行升序排序</span><br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <br>        <span class="hljs-comment">// 初始化计数器 cnt 为 1，表示至少有一个不重叠的区间（即第一个区间）</span><br>        <span class="hljs-comment">// 初始化 pre 为第一个区间的结束时间</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>, pre = intervals[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>        <br>        <span class="hljs-comment">// 从第二个区间开始遍历排序后的 intervals 数组</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; intervals.length; i++) &#123;<br>            <span class="hljs-comment">// 如果当前区间的开始时间大于或等于 pre（即前一个区间的结束时间），</span><br>            <span class="hljs-comment">// 则说明当前区间与前一个区间不重叠，cnt 加 1</span><br>            <span class="hljs-keyword">if</span> (intervals[i][<span class="hljs-number">0</span>] &gt;= pre) &#123;<br>                cnt++;<br>                <span class="hljs-comment">// 更新 pre 为当前区间的结束时间</span><br>                pre = intervals[i][<span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-comment">// 如果当前区间与前一个区间重叠，则跳过当前区间，pre 保持不变</span><br>        &#125;<br>        <br>        <span class="hljs-comment">// 返回 intervals 长度与 cnt 的差值，即为不重叠区间的数量</span><br>        <span class="hljs-keyword">return</span> intervals.length - cnt;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// eraseOverlapIntervals 方法用于找出给定区间数组 intervals 中不重叠区间的数量</span>
+    <span class="token comment">// 通过首先按照结束时间对区间进行排序，然后遍历排序后的区间数组，计算出不重叠的区间数量</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">eraseOverlapIntervals</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intervals<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 使用 Arrays.sort 方法和 lambda 表达式按照区间的结束时间对 intervals 进行升序排序</span>
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>intervals<span class="token punctuation">,</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> a<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> b<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 初始化计数器 cnt 为 1，表示至少有一个不重叠的区间（即第一个区间）</span>
+        <span class="token comment">// 初始化 pre 为第一个区间的结束时间</span>
+        <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> pre <span class="token operator">=</span> intervals<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 从第二个区间开始遍历排序后的 intervals 数组</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> intervals<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 如果当前区间的开始时间大于或等于 pre（即前一个区间的结束时间），</span>
+            <span class="token comment">// 则说明当前区间与前一个区间不重叠，cnt 加 1</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>intervals<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">>=</span> pre<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token comment">// 更新 pre 为当前区间的结束时间</span>
+                pre <span class="token operator">=</span> intervals<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token comment">// 如果当前区间与前一个区间重叠，则跳过当前区间，pre 保持不变</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token comment">// 返回 intervals 长度与 cnt 的差值，即为不重叠区间的数量</span>
+        <span class="token keyword">return</span> intervals<span class="token punctuation">.</span>length <span class="token operator">-</span> cnt<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="分发饼干"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">分发饼干</a></h3>
 <p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
 <p>对每个孩子 <code>i</code>，都有一个胃口值 <code>g[i]</code>，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 <code>j</code>，都有一个尺寸 <code>s[j]</code> 。如果 <code>s[j] &gt;= g[i]</code>，我们可以将这个饼干 <code>j</code> 分配给孩子 <code>i</code> ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">示例 1</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">输入</span><span class="hljs-punctuation">:</span> <span class="hljs-string">g = [1,2,3], s = [1,1]</span><br><span class="hljs-attribute">输出</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1</span><br><span class="hljs-attribute">解释</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。</span><br><span class="hljs-attribute">虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。</span><br><span class="hljs-attribute">所以你应该输出1。</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">示例 2</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">输入</span><span class="hljs-punctuation">:</span> <span class="hljs-string">g = [1,2], s = [1,2,3]</span><br><span class="hljs-attribute">输出</span><span class="hljs-punctuation">:</span> <span class="hljs-string">2</span><br><span class="hljs-attribute">解释</span><span class="hljs-punctuation">:</span><br>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>所以你应该输出2.<br><br>提示：<br>1 &lt;= g.length &lt;= 3 * 10^4<br>0 &lt;= s.length &lt;= 3 * 10^4<br>1 &lt;= g[i], s[j] &lt;= 2^31 - 1<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">示例 1:
+输入: g &#x3D; [1,2,3], s &#x3D; [1,1]
+输出: 1
+解释:
+你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。
+虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。
+所以你应该输出1。
+
+示例 2:
+输入: g &#x3D; [1,2], s &#x3D; [1,2,3]
+输出: 2
+解释:
+你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。
+你拥有的饼干数量和尺寸都足以让所有孩子满足。
+所以你应该输出2.
+
+提示：
+1 &lt;&#x3D; g.length &lt;&#x3D; 3 * 10^4
+0 &lt;&#x3D; s.length &lt;&#x3D; 3 * 10^4
+1 &lt;&#x3D; g[i], s[j] &lt;&#x3D; 2^31 - 1</code></pre></div></figure>
 <p><strong>题目解析</strong></p>
 <p>首先将孩子数组和饼干数组排序。首先将最小的饼干尝试匹配胃口最小的孩子，如果匹配成功，那就直接考虑下一个；否则，则说明这个饼干无法做出贡献。</p>
 <p><strong>代码展示</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br>    <span class="hljs-comment">// findContentChildren 方法用于找出能够满足所有孩子的最少饼干数量</span><br>    <span class="hljs-comment">// g 是孩子们贪婪程度的数组，数值越大表示孩子越贪婪</span><br>    <span class="hljs-comment">// s 是各种饼干的数组，数值越大表示饼干越高级</span><br>    <span class="hljs-comment">// 方法返回能够满足所有孩子的最少饼干数量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findContentChildren</span><span class="hljs-params">(<span class="hljs-type">int</span>[] g, <span class="hljs-type">int</span>[] s)</span> &#123;<br>        <span class="hljs-comment">// 使用 Arrays.sort 方法对孩子们的贪婪程度进行升序排序</span><br>        Arrays.sort(g);<br>        <span class="hljs-comment">// 使用 Arrays.sort 方法对饼干的高级程度进行升序排序</span><br>        Arrays.sort(s);<br>        <br>        <span class="hljs-comment">// 初始化计数器 cnt 为 0，用于记录满足的孩子数量</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-comment">// 初始化两个指针 i 和 j 分别用于遍历饼干数组 s 和孩子们的贪婪程度数组 g</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 使用 for 循环同时遍历两个数组</span><br>        <span class="hljs-comment">// 循环条件是指针 i 和 j 都在各自的数组范围内</span><br>        <span class="hljs-keyword">for</span> (; i &lt; s.length &amp;&amp; j &lt; g.length; i++) &#123;<br>            <span class="hljs-comment">// 如果当前饼干 s[i] 的高级程度大于等于当前孩子的贪婪程度 g[j]，则表示这个孩子可以被满足</span><br>            <span class="hljs-keyword">if</span> (s[i] &gt;= g[j]) &#123;<br>                <span class="hljs-comment">// 满足计数器 cnt 加 1</span><br>                cnt++;<br>                <span class="hljs-comment">// 移动孩子们的贪婪程度数组的指针 j</span><br>                j++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 返回满足的孩子数量 cnt</span><br>        <span class="hljs-keyword">return</span> cnt;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// findContentChildren 方法用于找出能够满足所有孩子的最少饼干数量</span>
+    <span class="token comment">// g 是孩子们贪婪程度的数组，数值越大表示孩子越贪婪</span>
+    <span class="token comment">// s 是各种饼干的数组，数值越大表示饼干越高级</span>
+    <span class="token comment">// 方法返回能够满足所有孩子的最少饼干数量</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">findContentChildren</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> g<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 使用 Arrays.sort 方法对孩子们的贪婪程度进行升序排序</span>
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>g<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 使用 Arrays.sort 方法对饼干的高级程度进行升序排序</span>
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 初始化计数器 cnt 为 0，用于记录满足的孩子数量</span>
+        <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 初始化两个指针 i 和 j 分别用于遍历饼干数组 s 和孩子们的贪婪程度数组 g</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// 使用 for 循环同时遍历两个数组</span>
+        <span class="token comment">// 循环条件是指针 i 和 j 都在各自的数组范围内</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> j <span class="token operator">&lt;</span> g<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 如果当前饼干 s[i] 的高级程度大于等于当前孩子的贪婪程度 g[j]，则表示这个孩子可以被满足</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> g<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 满足计数器 cnt 加 1</span>
+                cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token comment">// 移动孩子们的贪婪程度数组的指针 j</span>
+                j<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 返回满足的孩子数量 cnt</span>
+        <span class="token keyword">return</span> cnt<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="买卖股票的最佳时机-II"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">买卖股票的最佳时机 II</a></h3>
 <p>给你一个整数数组 <code>prices</code> ，其中 <code>prices[i]</code> 表示某支股票第 <code>i</code> 天的价格。</p>
 <p>在每一天，你可以决定是否购买和/或出售股票。你在任何时候 <strong>最多</strong> 只能持有 <strong>一股</strong> 股票。你也可以先购买，然后在 <strong>同一天</strong> 出售。</p>
 <p>返回 <em>你能获得的</em> <strong>最大</strong> 利润 。</p>
-<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs tap">示例 1：<br>输入：prices = [7,1,5,3,6,4]<br>输出：7<br>解释：在第<span class="hljs-number"> 2 </span>天（股票价格 = 1）的时候买入，在第<span class="hljs-number"> 3 </span>天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 =<span class="hljs-number"> 5 </span>-<span class="hljs-number"> 1 </span>=<span class="hljs-number"> 4 </span>。<br>随后，在第<span class="hljs-number"> 4 </span>天（股票价格 = 3）的时候买入，在第<span class="hljs-number"> 5 </span>天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 =<span class="hljs-number"> 6 </span>-<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 3 </span>。<br>总利润为<span class="hljs-number"> 4 </span>+<span class="hljs-number"> 3 </span>=<span class="hljs-number"> 7 </span>。<br><br>示例 2：<br>输入：prices = [1,2,3,4,5]<br>输出：4<br>解释：在第<span class="hljs-number"> 1 </span>天（股票价格 = 1）的时候买入，在第<span class="hljs-number"> 5 </span>天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 =<span class="hljs-number"> 5 </span>-<span class="hljs-number"> 1 </span>=<span class="hljs-number"> 4 </span>。<br>总利润为<span class="hljs-number"> 4 </span>。<br><br>示例 3：<br>输入：prices = [7,6,4,3,1]<br>输出：0<br>解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为<span class="hljs-number"> 0 </span>。<br><br>提示：<br>1 &lt;= prices.length &lt;=<span class="hljs-number"> 3 </span>* 10^4<br>0 &lt;= prices[i] &lt;= 10^4<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">示例 1：
+输入：prices &#x3D; [7,1,5,3,6,4]
+输出：7
+解释：在第 2 天（股票价格 &#x3D; 1）的时候买入，在第 3 天（股票价格 &#x3D; 5）的时候卖出, 这笔交易所能获得利润 &#x3D; 5 - 1 &#x3D; 4 。
+随后，在第 4 天（股票价格 &#x3D; 3）的时候买入，在第 5 天（股票价格 &#x3D; 6）的时候卖出, 这笔交易所能获得利润 &#x3D; 6 - 3 &#x3D; 3 。
+总利润为 4 + 3 &#x3D; 7 。
+
+示例 2：
+输入：prices &#x3D; [1,2,3,4,5]
+输出：4
+解释：在第 1 天（股票价格 &#x3D; 1）的时候买入，在第 5 天 （股票价格 &#x3D; 5）的时候卖出, 这笔交易所能获得利润 &#x3D; 5 - 1 &#x3D; 4 。
+总利润为 4 。
+
+示例 3：
+输入：prices &#x3D; [7,6,4,3,1]
+输出：0
+解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为 0 。
+
+提示：
+1 &lt;&#x3D; prices.length &lt;&#x3D; 3 * 10^4
+0 &lt;&#x3D; prices[i] &lt;&#x3D; 10^4</code></pre></div></figure>
 <p><strong>题目解析</strong></p>
 <p>由于此题不限制买卖次数，因此此题的贪心策略如下：</p>
 <p>如果今天买明天卖可以赚钱，那么我们就执行这个操作。</p>
 <p><strong>代码展示</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br>    <span class="hljs-comment">// maxProfit 方法用于计算在给定价格数组 prices 下，一次股票交易的最大利润</span><br>    <span class="hljs-comment">// 假设可以完成无限次交易，但每笔交易都需要在下一次购买前出售</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxProfit</span><span class="hljs-params">(<span class="hljs-type">int</span>[] prices)</span> &#123;<br>        <span class="hljs-comment">// 初始化利润变量 profit 为 0，用于累加每次交易的利润</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">profit</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-comment">// 遍历 prices 数组，从第二个元素开始</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; prices.length; i++) &#123;<br>            <span class="hljs-comment">// 比较当前价格与上一个价格，如果当前价格更高，说明可以卖出获得利润</span><br>            <span class="hljs-keyword">if</span> (prices[i] &gt; prices[i - <span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-comment">// 计算本次交易的利润，即当前价格与上一个价格的差额，并累加到 profit</span><br>                profit += prices[i] - prices[i - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-comment">// 返回计算出的总利润</span><br>        <span class="hljs-keyword">return</span> profit;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// maxProfit 方法用于计算在给定价格数组 prices 下，一次股票交易的最大利润</span>
+    <span class="token comment">// 假设可以完成无限次交易，但每笔交易都需要在下一次购买前出售</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 初始化利润变量 profit 为 0，用于累加每次交易的利润</span>
+        <span class="token keyword">int</span> profit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 遍历 prices 数组，从第二个元素开始</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 比较当前价格与上一个价格，如果当前价格更高，说明可以卖出获得利润</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> prices<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 计算本次交易的利润，即当前价格与上一个价格的差额，并累加到 profit</span>
+                profit <span class="token operator">+=</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token comment">// 返回计算出的总利润</span>
+        <span class="token keyword">return</span> profit<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 </div>
 <hr>
 <div>

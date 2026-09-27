@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-1k 字
+1.1k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -164,7 +165,8 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/489499097">https://zhuanlan.zhihu.com/p/489499097</a></p>
 </blockquote>
 <p><strong>下载conda</strong></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">##wget 加网址，中间可以加-c参数，断点续传</span><br>wget https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/mi</span>niconda/Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">##wget 加网址，中间可以加-c参数，断点续传
+wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;miniconda&#x2F;Miniconda3-latest-Linux-x86_64.sh</code></pre></div></figure>
 <p><strong>安装conda</strong></p>
 <p>安装过程中注意路径，用<strong>bash</strong>命令去安装。</p>
 <p>认真看安装过程提示信息，需要按**<code>Enter</code>** <strong>(回车键)<strong>或者输入</strong><code>yes</code></strong>，（如果输入yes时，不小心输多了，就按control和退格键删除）。</p>
@@ -175,27 +177,44 @@
 <p>5）显示安装已完成的提示信息</p>
 <p><strong>激活刚安装完成的软件</strong></p>
 <p>一般安装软件完成后需要重启，在Linux叫激活，有两种方式，<strong>第一种</strong>是重新登录服务器，<strong>第二种</strong>是输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br><span class="hljs-comment">##比较常用</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">source ~&#x2F;.bashrc
+##比较常用</code></pre></div></figure>
 <p>左边提示(base)就算安装成功。</p>
 <p><strong>检查conda是否安装成功</strong></p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">conda <span class="hljs-comment">--help</span><br><span class="hljs-comment">#调用出来说明安装成功</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">conda --help
+#调用出来说明安装成功</code></pre></div></figure>
 <p><strong>配置conda镜像</strong></p>
 <p>使用conda是需要它去安装其它软件（如生信软件），conda是默认去自己的官网搜索，而我们使用的服务器是在国内，conda的网在国外，从国内的网络去访问国外的网络就是特别的慢，所以需要配置镜像，如配置清华的镜像。</p>
 <p>主要看自己的服务器在哪里，无论人在国外还是国内，使用的服务器在国内，就配置国内镜像。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 下面这三行配置官网的channel地址</span><br>conda<span class="hljs-built_in"> config </span>--<span class="hljs-built_in">add</span> channels r <br>conda<span class="hljs-built_in"> config </span>--<span class="hljs-built_in">add</span> channels conda-forge <br>conda<span class="hljs-built_in"> config </span>--<span class="hljs-built_in">add</span> channels bioconda<br><span class="hljs-comment">##以上三句命令一次性复制粘贴或是单独复制粘贴到服务器</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># 下面这三行配置官网的channel地址
+conda config --add channels r 
+conda config --add channels conda-forge 
+conda config --add channels bioconda
+##以上三句命令一次性复制粘贴或是单独复制粘贴到服务器</code></pre></div></figure>
 <p>配置国内访问镜像，国内用户推荐的镜像，以下选清华或是北外的镜像都可以，（1）和（2）任选一个，清华镜像的访问量很多，可以选北外镜像。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#（1）下面这四行配置清华大学的conda的channel地址，国内用户推荐</span><br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/main/</span><br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/bioconda/</span><br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/conda-forge/</span><br>conda config --set show_channel_urls yes<br><span class="hljs-comment">##配置清华镜像，四句代码一起复制粘贴到服务器</span><br><br><span class="hljs-comment"># （2）下面四行配置北京外国语大学的conda的channel地址</span><br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.bfsu.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/main/</span> <br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.bfsu.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/conda-forge/</span> <br>conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.bfsu.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/bioconda/</span> <br>conda config --set show_channel_urls yes<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#（1）下面这四行配置清华大学的conda的channel地址，国内用户推荐
+conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;
+conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;bioconda&#x2F;
+conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F;
+conda config --set show_channel_urls yes
+##配置清华镜像，四句代码一起复制粘贴到服务器
+
+# （2）下面四行配置北京外国语大学的conda的channel地址
+conda config --add channels https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F; 
+conda config --add channels https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F; 
+conda config --add channels https:&#x2F;&#x2F;mirrors.bfsu.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;bioconda&#x2F; 
+conda config --set show_channel_urls yes</code></pre></div></figure>
 <p>配置镜像完成后会出现一个.condarc 文件，查看是否配置成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> ~/.condarc<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">cat ~&#x2F;.condarc</code></pre></div></figure>
 <p>之后重新编译文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">source ~&#x2F;.bashrc</code></pre></div></figure>
 <h2 id="1-配置我们所需的环境">1 配置我们所需的环境</h2>
 <h3 id="1-1-Python虚拟环境">1.1 Python虚拟环境</h3>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://fulequn.github.io/2022/09/22/Article202209221/">https://fulequn.github.io/2022/09/22/Article202209221/</a></p>
 </blockquote>
 <p>不建议大家直接装在本机上，推荐使用虚拟环境安装，这样出现问题，可以重新创建虚拟环境来解决。这样可以保证在遇到很多无法解决的情况时，快速复盘。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">conda</span> create -n aiwriter python=<span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">conda create -n aiwriter python&#x3D;3.8.10</code></pre></div></figure>
 </div>
 <hr>
 <div>

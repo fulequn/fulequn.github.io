@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="为了使用waveshare SIM8202G-M2 5G模块，需要先安装和配置驱动。 官方链接：https:&#x2F;&#x2F;www.waveshare.net&#x2F;wiki&#x2F;SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8 123456789101112sudo apt-get install p7zip-full# 如果没有apt-get，可以使用下面的语句# su">
+<meta name="description" content="为了使用waveshare SIM8202G-M2 5G模块，需要先安装和配置驱动。 官方链接：https:&#x2F;&#x2F;www.waveshare.net&#x2F;wiki&#x2F;SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8 sudo apt-get install p7zip-full # 如果没有apt-get，可以使用下面的语句 # sudo dnf instal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何安装和配置waveshare SIM8202G-M2 5G模块驱动？">
 <meta property="og:url" content="https://blog.fulequn.online/2023/03/Article202303051/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="为了使用waveshare SIM8202G-M2 5G模块，需要先安装和配置驱动。 官方链接：https:&#x2F;&#x2F;www.waveshare.net&#x2F;wiki&#x2F;SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8 123456789101112sudo apt-get install p7zip-full# 如果没有apt-get，可以使用下面的语句# su">
+<meta property="og:description" content="为了使用waveshare SIM8202G-M2 5G模块，需要先安装和配置驱动。 官方链接：https:&#x2F;&#x2F;www.waveshare.net&#x2F;wiki&#x2F;SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8 sudo apt-get install p7zip-full # 如果没有apt-get，可以使用下面的语句 # sudo dnf instal">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-05T01:09:46.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:46.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-480 字
+492 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -139,7 +140,18 @@
 <div class="markdown-body">
 <p>为了使用waveshare SIM8202G-M2 5G模块，需要先安装和配置驱动。</p>
 <p>官方链接：<a target="_blank" rel="noopener" href="https://www.waveshare.net/wiki/SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8">https://www.waveshare.net/wiki/SIM8200EA-M2_5G_HAT#Raspberry.E4.BD.BF.E7.94.A8</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install p7zip-full<br><span class="hljs-comment"># 如果没有apt-get，可以使用下面的语句</span><br><span class="hljs-comment"># sudo dnf install p7zip</span><br>wget https://www.waveshare.net/w/upload/8/89/SIM8200_for_RPI.7z<br>7z x SIM8200_for_RPI.7z  -r -o./SIM8200_for_RPI<br><span class="hljs-comment"># 如果这里没有7z命令，可以尝试下列语句。</span><br><span class="hljs-comment"># 这个可以去$PATH的路径中去查看</span><br><span class="hljs-comment"># 7za x SIM8200_for_RPI.7z  -r -o./SIM8200_for_RPI</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 777 -R SIM8200_for_RPI<br><span class="hljs-built_in">cd</span> SIM8200_for_RPI<br><span class="hljs-comment"># 接下来就是安装步骤</span><br><span class="hljs-built_in">sudo</span> ./install.sh<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo apt-get install p7zip-full
+# 如果没有apt-get，可以使用下面的语句
+# sudo dnf install p7zip
+wget https:&#x2F;&#x2F;www.waveshare.net&#x2F;w&#x2F;upload&#x2F;8&#x2F;89&#x2F;SIM8200_for_RPI.7z
+7z x SIM8200_for_RPI.7z  -r -o.&#x2F;SIM8200_for_RPI
+# 如果这里没有7z命令，可以尝试下列语句。
+# 这个可以去$PATH的路径中去查看
+# 7za x SIM8200_for_RPI.7z  -r -o.&#x2F;SIM8200_for_RPI
+sudo chmod 777 -R SIM8200_for_RPI
+cd SIM8200_for_RPI
+# 接下来就是安装步骤
+sudo .&#x2F;install.sh</code></pre></div></figure>
 <p>下面是安装脚本中使用的一些指令，可以帮助您理解：</p>
 <ol>
 <li>定义变量 <code>linuxheaders</code> 为字符串 “linux-headers-”；</li>
@@ -160,9 +172,9 @@
 <li>将脚本 <code>default.script</code> 复制到目录 <code>/usr/share/udhcpc</code> 下。</li>
 </ol>
 <p>为了设置语言环境，可以在root权限下执行如下命令，其中 <em>locale</em> 是您要设置的语言类型，取值范围可通过<strong>localectl list-locales</strong>获取，请根据实际情况修改：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">localectl</span> <span class="hljs-built_in">set-locale</span> <span class="hljs-string">LANG</span>=<span class="hljs-string">locale</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">localectl set-locale LANG&#x3D;locale</code></pre></div></figure>
 <p>例如设置为简体中文语言环境，在root权限下执行如下命令：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">localectl</span> <span class="hljs-built_in">set-locale</span> <span class="hljs-string">LANG</span>=<span class="hljs-string">zh_CN</span>.<span class="hljs-string">UTF-8</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">localectl set-locale LANG&#x3D;zh_CN.UTF-8</code></pre></div></figure>
 <p>请注意，修改后需要重新登录或者在root权限下执行<code>source /etc/locale.conf</code>命令刷新配置文件，使修改生效。</p>
 </div>
 <hr>

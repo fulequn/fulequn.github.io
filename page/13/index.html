@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -187,7 +188,7 @@ matplotlib设置中文显示
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009112/" target="_self">
 <div>
-原文链接：https://www.cnblogs.com/hhh5460/p/4323985.html 【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） 1import matplotlib.pyplot as plt 1import pylab as plt 【效果图】 【方式一】FontProp
+原文链接：https://www.cnblogs.com/hhh5460/p/4323985.html 【注意】 可能与本文主题无关，不过我还是想指出来：使用matplotlib库时，下面两种导入方式是等价的（我指的是等效，当然这个说法可以商榷:） import matplotlib.pyplot as plt import pylab as plt 【效果图】 【方式一】FontProper
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -497,7 +498,7 @@ Java中Hex（十六进制）和byte[]之间相互转化
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/08/Article202008302/" target="_self">
 <div>
-Hex转成byte[] 方法一 1234567891011121314151617/** * hex转byte数组 * @param hex * @return */ public static byte[] hexToByte(String hex)&#123; int m = 0, n = 0; int byteLen = he
+Hex转成byte[] 方法一 /** * hex转byte数组 * @param hex * @return */ public static byte[] hexToByte(String hex)&#123; int m = 0, n = 0; int byteLen = hex.length() / 2; //
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -601,7 +602,7 @@ hexo发生error：spawn failed错误的解决方法
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/08/Article202008292/" target="_self">
 <div>
-java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path 1、错误描述 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676
+java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path 1、错误描述 java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path thrown while loading gnu.io.RXTXCommDriver 2017-03-16 09:29
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -636,7 +637,7 @@ java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path 1、错误描
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/08/Article202008291/" target="_self">
 <div>
-问题描述 123$ hexo dINFO Validating configERROR Deployer not found: git 解决办法 1npm install --save hexo-deployer-git 即可。 补充： 用cnpm并且少加一个–save居然不行，不知道是–save的问题还是cnpm的问题。用npm解决了。
+问题描述 $ hexo d INFO Validating config ERROR Deployer not found: git 解决办法 npm install --save hexo-deployer-git 即可。 补充： 用cnpm并且少加一个–save居然不行，不知道是–save的问题还是cnpm的问题。用npm解决了。
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -670,7 +671,7 @@ Hexo的Fluid主题设置文章隐藏
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/08/Article202008265/" target="_self">
 <div>
-隐藏文章 如果想把某些文章隐藏起来，不在首页和其他分类里展示，可以在文章开头 Front-matter 中配置 hide: true 属性。 1234567---title: 文章标题index_img: /img/example.jpgdate: 2019-10-10 10:00:00hide: true---以下是文章内容 TIP 隐藏会使文章在分类和标签类里都不显示 隐藏后依然可以通过文章
+隐藏文章 如果想把某些文章隐藏起来，不在首页和其他分类里展示，可以在文章开头 Front-matter 中配置 hide: true 属性。 --- title: 文章标题 index_img: /img/example.jpg date: 2019-10-10 10:00:00 hide: true --- 以下是文章内容 TIP 隐藏会使文章在分类和标签类里都不显示 隐藏后依然可以通过文章链
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -704,7 +705,7 @@ Java获取随机数
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/08/Article202008264/" target="_self">
 <div>
-参考链接：https://www.cnblogs.com/haw2106/p/8036523.html 方法1 (数据类型)(最小值+Math.random() 123*(最大值-最小值+1))例:(int)(1+Math.random()*(10-1+1)) 从1到10的int型随数 方法2 获得随机数 123for (int i=0;i&lt;30;i++)&#123;System.out.p
+参考链接：https://www.cnblogs.com/haw2106/p/8036523.html 方法1 (数据类型)(最小值+Math.random() *(最大值-最小值+1)) 例: (int)(1+Math.random()*(10-1+1)) 从1到10的int型随数 方法2 获得随机数 for (int i=0;i&lt;30;i++) &#123;System.out.prin
 </div>
 </a>
 <div class="index-btm post-metas">

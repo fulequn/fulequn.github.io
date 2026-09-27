@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -148,7 +149,16 @@
 <p>MongoDB提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。</p>
 <h3 id="MapReduce-命令">MapReduce 命令</h3>
 <p>以下是MapReduce的基本语法：</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xquery">&gt;db<span class="hljs-built_in">.collection</span>.mapReduce(<br>   <span class="hljs-keyword">function</span>() &#123;emit<span class="hljs-built_in">(key</span>,<span class="hljs-keyword">value</span>);&#125;,  //<span class="hljs-keyword">map</span> 函数<br>   <span class="hljs-keyword">function</span><span class="hljs-built_in">(key</span>,values) &#123;<span class="hljs-keyword">return</span> reduceFunction&#125;,   //reduce 函数<br>   &#123;<br>      out:<span class="hljs-built_in"> collection</span>,<br>      query:<span class="hljs-built_in"> document</span>,<br>     <span class="hljs-built_in"> sort</span>:<span class="hljs-built_in"> document</span>,<br>      limit:<span class="hljs-built_in"> number</span><br>   &#125;<br>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;db.collection.mapReduce(
+   function() &#123;emit(key,value);&#125;,  &#x2F;&#x2F;map 函数
+   function(key,values) &#123;return reduceFunction&#125;,   &#x2F;&#x2F;reduce 函数
+   &#123;
+      out: collection,
+      query: document,
+      sort: document,
+      limit: number
+   &#125;
+)</code></pre></div></figure>
 <p>使用 MapReduce 要实现两个函数 Map 函数和 Reduce 函数,Map 函数调用 emit(key, value), 遍历 collection 中所有的记录, 将 key 与 value 传递给 Reduce 函数进行处理。</p>
 <p>Map 函数必须调用 emit(key, value) 返回键值对。</p>
 <p>参数说明:</p>
@@ -165,11 +175,75 @@
 <hr>
 <h2 id="使用-MapReduce">使用 MapReduce</h2>
 <p>考虑以下文档结构存储用户的文章，文档存储了用户的 user_name 和文章的 status 字段：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs stylus">&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;mark&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;disabled&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;runoob&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;disabled&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;runoob&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;disabled&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br>&gt;db<span class="hljs-selector-class">.posts</span><span class="hljs-selector-class">.insert</span>(&#123;<br>   <span class="hljs-string">&quot;post_text&quot;</span>: <span class="hljs-string">&quot;菜鸟教程，最全的技术文档。&quot;</span>,<br>   <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;runoob&quot;</span>,<br>   <span class="hljs-string">&quot;status&quot;</span>:<span class="hljs-string">&quot;active&quot;</span><br>&#125;)<br><span class="hljs-function"><span class="hljs-title">WriteResult</span><span class="hljs-params">(&#123; <span class="hljs-string">&quot;nInserted&quot;</span> : <span class="hljs-number">1</span> &#125;)</span></span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;mark&quot;,
+   &quot;status&quot;:&quot;active&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;mark&quot;,
+   &quot;status&quot;:&quot;active&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;mark&quot;,
+   &quot;status&quot;:&quot;active&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;mark&quot;,
+   &quot;status&quot;:&quot;active&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;mark&quot;,
+   &quot;status&quot;:&quot;disabled&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;runoob&quot;,
+   &quot;status&quot;:&quot;disabled&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;runoob&quot;,
+   &quot;status&quot;:&quot;disabled&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)
+&gt;db.posts.insert(&#123;
+   &quot;post_text&quot;: &quot;菜鸟教程，最全的技术文档。&quot;,
+   &quot;user_name&quot;: &quot;runoob&quot;,
+   &quot;status&quot;:&quot;active&quot;
+&#125;)
+WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</code></pre></div></figure>
 <p>现在，我们将在 posts 集合中使用 mapReduce 函数来选取已发布的文章(status:“active”)，并通过user_name分组，计算每个用户的文章数：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&gt;db.posts.mapReduce( <br>   <span class="hljs-keyword">function</span>() &#123; emit(this.user_name,<span class="hljs-number">1</span>); &#125;, <br>   <span class="hljs-keyword">function</span>(key, <span class="hljs-keyword">values</span>) &#123;<span class="hljs-keyword">return</span> <span class="hljs-keyword">Array</span>.sum(<span class="hljs-keyword">values</span>)&#125;, <br>      &#123;  <br>         query:&#123;status:&quot;active&quot;&#125;,  <br>         <span class="hljs-keyword">out</span>:&quot;post_total&quot; <br>      &#125;<br>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;db.posts.mapReduce( 
+   function() &#123; emit(this.user_name,1); &#125;, 
+   function(key, values) &#123;return Array.sum(values)&#125;, 
+      &#123;  
+         query:&#123;status:&quot;active&quot;&#125;,  
+         out:&quot;post_total&quot; 
+      &#125;
+)</code></pre></div></figure>
 <p>以上 mapReduce 输出结果为：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css">&#123;<br>        &quot;result&quot; : <span class="hljs-string">&quot;post_total&quot;</span>,<br>        <span class="hljs-string">&quot;timeMillis&quot;</span> : <span class="hljs-number">23</span>,<br>        <span class="hljs-string">&quot;counts&quot;</span> : &#123;<br>                &quot;<span class="hljs-selector-tag">input</span>&quot; : <span class="hljs-number">5</span>,<br>                <span class="hljs-string">&quot;emit&quot;</span> : <span class="hljs-number">5</span>,<br>                <span class="hljs-string">&quot;reduce&quot;</span> : <span class="hljs-number">1</span>,<br>                <span class="hljs-string">&quot;output&quot;</span> : <span class="hljs-number">2</span><br>        &#125;,<br>        &quot;ok&quot; : <span class="hljs-number">1</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;
+        &quot;result&quot; : &quot;post_total&quot;,
+        &quot;timeMillis&quot; : 23,
+        &quot;counts&quot; : &#123;
+                &quot;input&quot; : 5,
+                &quot;emit&quot; : 5,
+                &quot;reduce&quot; : 1,
+                &quot;output&quot; : 2
+        &#125;,
+        &quot;ok&quot; : 1
+&#125;</code></pre></div></figure>
 <p>结果表明，共有 5 个符合查询条件（status:“active”）的文档， 在map函数中生成了 5 个键值对文档，最后使用reduce函数将相同的键值分为 2 组。</p>
 <p>具体参数说明：</p>
 <ul>
@@ -182,17 +256,25 @@
 <li>err：如果失败，这里可以有失败原因，不过从经验上来看，原因比较模糊，作用不大</li>
 </ul>
 <p>使用 <strong>find</strong> 操作符来查看 mapReduce 的查询结果：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs arcade">&gt;db.posts.mapReduce( <br>   <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123; emit(this.user_name,<span class="hljs-number">1</span>); &#125;, <br>   <span class="hljs-keyword">function</span>(<span class="hljs-params">key, values</span>) &#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.<span class="hljs-built_in">sum</span>(values)&#125;, <br>      &#123;  <br>         <span class="hljs-attr">query</span>:&#123;<span class="hljs-attr">status</span>:<span class="hljs-string">&quot;active&quot;</span>&#125;,  <br>         <span class="hljs-attr">out</span>:<span class="hljs-string">&quot;post_total&quot;</span> <br>      &#125;<br>).<span class="hljs-built_in">find</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;db.posts.mapReduce( 
+   function() &#123; emit(this.user_name,1); &#125;, 
+   function(key, values) &#123;return Array.sum(values)&#125;, 
+      &#123;  
+         query:&#123;status:&quot;active&quot;&#125;,  
+         out:&quot;post_total&quot; 
+      &#125;
+).find()</code></pre></div></figure>
 <p>以上查询显示如下结果:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;_id&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mark&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">4</span> <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;_id&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;runoob&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123; &quot;_id&quot; : &quot;mark&quot;, &quot;value&quot; : 4 &#125;
+&#123; &quot;_id&quot; : &quot;runoob&quot;, &quot;value&quot; : 1 &#125;</code></pre></div></figure>
 <p>用类似的方式，MapReduce可以被用来构建大型复杂的聚合查询。</p>
 <p>Map函数和Reduce函数可以使用 JavaScript 来实现，使得MapReduce的使用非常灵活和强大。</p>
 <p>注：</p>
 <p>临时集合参数是这样写的</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">out: &#123; inline: <span class="hljs-number">1</span> &#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">out: &#123; inline: 1 &#125;</code></pre></div></figure>
 <p>设置了 <strong>{inline:1}</strong> 将不会创建集合，整个 <strong>Map/Reduce</strong> 的操作将会在内存中进行。</p>
 <p>注意，这个选项只有在结果集单个文档大小在16MB限制范围内时才有效。</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">db.users.mapReduce(<span class="hljs-built_in">map</span>,<span class="hljs-built_in">reduce</span>,&#123;<span class="hljs-attr">out</span>:&#123;<span class="hljs-attr">inline</span>:<span class="hljs-number">1</span>&#125;&#125;);<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.users.mapReduce(map,reduce,&#123;out:&#123;inline:1&#125;&#125;);</code></pre></div></figure>
 </div>
 <hr>
 <div>

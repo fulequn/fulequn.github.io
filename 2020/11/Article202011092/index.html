@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="1.在&#x2F;etc&#x2F;init.d路径下面创建一个名为hbase的文件，在其中添加如下内容，保存退出。 这里的HBASE_HOME写自己的HBASE的安装路径 1234567891011121314151617181920212223#!&#x2F;bin&#x2F;bash# chkconfig: 345 63 37HBASE_HOME&#x3D;&#x2F;opt&#x2F;bigdata&#x2F;hbase-2.0.5case &quot;$1&amp;quot">
+<meta name="description" content="1.在&#x2F;etc&#x2F;init.d路径下面创建一个名为hbase的文件，在其中添加如下内容，保存退出。 这里的HBASE_HOME写自己的HBASE的安装路径 #!&#x2F;bin&#x2F;bash  # chkconfig: 345 63 37  HBASE_HOME&#x3D;&#x2F;opt&#x2F;bigdata&#x2F;hbase-2.0.5 case &quot;$1&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hbase开机自启动实现">
 <meta property="og:url" content="https://blog.fulequn.online/2020/11/Article202011092/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="1.在&#x2F;etc&#x2F;init.d路径下面创建一个名为hbase的文件，在其中添加如下内容，保存退出。 这里的HBASE_HOME写自己的HBASE的安装路径 1234567891011121314151617181920212223#!&#x2F;bin&#x2F;bash# chkconfig: 345 63 37HBASE_HOME&#x3D;&#x2F;opt&#x2F;bigdata&#x2F;hbase-2.0.5case &quot;$1&amp;quot">
+<meta property="og:description" content="1.在&#x2F;etc&#x2F;init.d路径下面创建一个名为hbase的文件，在其中添加如下内容，保存退出。 这里的HBASE_HOME写自己的HBASE的安装路径 #!&#x2F;bin&#x2F;bash  # chkconfig: 345 63 37  HBASE_HOME&#x3D;&#x2F;opt&#x2F;bigdata&#x2F;hbase-2.0.5 case &quot;$1&quot;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-09T15:35:15.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:30.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-147 字
+171 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -139,19 +140,44 @@
 <div class="markdown-body">
 <p>1.在/etc/init.d路径下面创建一个名为hbase的文件，在其中添加如下内容，保存退出。</p>
 <p>这里的HBASE_HOME写自己的HBASE的安装路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-comment"># chkconfig: 345 63 37</span><br><br>HBASE_HOME=/opt/bigdata/hbase-2.0.5<br><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> <span class="hljs-keyword">in</span><br>    start)<br>        <span class="hljs-variable">$HBASE_HOME</span>/bin/start-hbase.sh<br>        ;;<br>    stop)<br>        <span class="hljs-variable">$HBASE_HOME</span>/bin/stop-hbase.sh<br>        ;;<br>    restart)<br>        <span class="hljs-variable">$HBASE_HOME</span>/bin/start-hbase.sh<br>        <span class="hljs-built_in">sleep</span> 1<br>        <span class="hljs-variable">$HBASE_HOME</span>/bin/stop-hbase.sh<br>        ;;<br>    *)<br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> &#123;start|stop|restart&#125;&quot;</span><br>        ;;<br><br><span class="hljs-keyword">esac</span><br><span class="hljs-built_in">exit</span> 0<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
+
+# chkconfig: 345 63 37
+
+HBASE_HOME&#x3D;&#x2F;opt&#x2F;bigdata&#x2F;hbase-2.0.5
+case &quot;$1&quot; in
+    start)
+        $HBASE_HOME&#x2F;bin&#x2F;start-hbase.sh
+        ;;
+    stop)
+        $HBASE_HOME&#x2F;bin&#x2F;stop-hbase.sh
+        ;;
+    restart)
+        $HBASE_HOME&#x2F;bin&#x2F;start-hbase.sh
+        sleep 1
+        $HBASE_HOME&#x2F;bin&#x2F;stop-hbase.sh
+        ;;
+    *)
+        echo &quot;Usage: $0 &#123;start|stop|restart&#125;&quot;
+        ;;
+
+esac
+exit 0</code></pre></div></figure>
 <ol start="3">
 <li>对hbase文件进行授权</li>
 </ol>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">chmod</span> <span class="hljs-number">777</span> hbase<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">chmod 777 hbase</code></pre></div></figure>
 <ol start="4">
 <li>启动、关闭、重启hbase服务</li>
 </ol>
-<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs protobuf"><span class="hljs-keyword">service </span><span class="hljs-title class_">hbase</span> start   <span class="hljs-comment">// 启动hbase服务</span><br><span class="hljs-keyword">service </span><span class="hljs-title class_">hbase</span> stop    <span class="hljs-comment">// 关闭hbase服务</span><br><span class="hljs-keyword">service </span><span class="hljs-title class_">hbase</span> restart <span class="hljs-comment">// 重启hbase服务</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">service hbase start   &#x2F;&#x2F; 启动hbase服务
+service hbase stop    &#x2F;&#x2F; 关闭hbase服务
+service hbase restart &#x2F;&#x2F; 重启hbase服务</code></pre></div></figure>
 <ol start="5">
 <li>设置开启启动或不启动hbase服务</li>
 </ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">chkconfig hbase <span class="hljs-keyword">on</span>    <span class="hljs-comment">// 设置开机启动</span><br>chkconfig hbase off   <span class="hljs-comment">// 关闭开机启动</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">chkconfig hbase on    &#x2F;&#x2F; 设置开机启动
+chkconfig hbase off   &#x2F;&#x2F; 关闭开机启动</code></pre></div></figure>
 </div>
 <hr>
 <div>

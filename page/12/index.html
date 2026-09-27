@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -118,7 +119,7 @@ R在函数中定义全局变量
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009285/" target="_self">
 <div>
-参考链接： https://blog.csdn.net/weixin_43677260/article/details/86615923 R语言中，定义全局变量的方法为：a&lt;&lt;-1。 在函数内部定义的变量是不会在Global Environment出现的，例如： 12345sigmoid&lt;-function(x)&#123; a = 1 return(1/(1+e
+参考链接： https://blog.csdn.net/weixin_43677260/article/details/86615923 R语言中，定义全局变量的方法为：a&lt;&lt;-1。 在函数内部定义的变量是不会在Global Environment出现的，例如： sigmoid&lt;-function(x) &#123; a = 1 return(1/(1+exp
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -290,7 +291,7 @@ Python设置默认字典
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009268/" target="_self">
 <div>
-参考链接：https://www.cnblogs.com/wangyueyouyi/p/9561057.html 访问字典中某个‘键’时，若键不存在则会报错，比如 123456&gt;&gt;&gt; dic = &#123;&#x27;a&#x27; : 1&#125;&gt;&gt;&gt; dic[&#x27;b&#x27;]Traceback (most recent call las
+参考链接：https://www.cnblogs.com/wangyueyouyi/p/9561057.html 访问字典中某个‘键’时，若键不存在则会报错，比如 >>> dic = &#123;'a' : 1&#125; >>> dic['b'] Traceback (most recent call last): File "&lt;pyshell#24>", line 1, in &
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -324,7 +325,7 @@ Matplotlib中xlim，ylim，axis结构与用法
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009267/" target="_self">
 <div>
-参考链接：https://blog.csdn.net/The_Time_Runner/article/details/89928057 matplotlib.pyplot.xlim() 官方文档 1matplotlib.pyplot.xlim(*args, **kwargs) 获取或者是设定x座标轴的范围，当前axes上的座标轴。 有两种参数输入方式 1plt.xlim(num1,
+参考链接：https://blog.csdn.net/The_Time_Runner/article/details/89928057 matplotlib.pyplot.xlim() 官方文档 matplotlib.pyplot.xlim(*args, **kwargs) 获取或者是设定x座标轴的范围，当前axes上的座标轴。 有两种参数输入方式 plt.xlim(num1, n
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -394,7 +395,7 @@ pandas+matplotlib画图，两张图叠加
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009265/" target="_self">
 <div>
-参考链接：https://blog.csdn.net/o1101574955/article/details/51623018 《python数据分析与挖掘实战》原书上的例子： 12345678910111213import matplotlib.pyplot as pltimport numpy as npimport pandas as pdplt.rcParams[&#x27;font.
+参考链接：https://blog.csdn.net/o1101574955/article/details/51623018 《python数据分析与挖掘实战》原书上的例子： import matplotlib.pyplot as plt import numpy as np import pandas as pd plt.rcParams['font.sans-serif'] = ['S
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -415,8 +416,8 @@ pandas+matplotlib画图，两张图叠加
 <div class="post-meta">
 <i class="iconfont icon-tags"></i>
 <a href="/tags/Python/">#Python</a>
-<a href="/tags/Pandas/">#Pandas</a>
 <a href="/tags/Matplotlib/">#Matplotlib</a>
+<a href="/tags/Pandas/">#Pandas</a>
 </div>
 </div>
 </article>
@@ -500,7 +501,7 @@ Python中的andas进行组合筛选和范围筛选
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009262/" target="_self">
 <div>
-参考链接： https://blog.csdn.net/orangefly0214/article/details/82712117 https://www.cnblogs.com/beyondChan/p/10861045.html 对pandas中的DataFrame进行条件筛选，即筛选出符合条件的数据条；这里经常会遇到以下几种情况，下面举例说明： 12345678df = pd.Data
+参考链接： https://blog.csdn.net/orangefly0214/article/details/82712117 https://www.cnblogs.com/beyondChan/p/10861045.html 对pandas中的DataFrame进行条件筛选，即筛选出符合条件的数据条；这里经常会遇到以下几种情况，下面举例说明： df &#x3D; pd.DataFra
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -569,7 +570,7 @@ Python人名出现次数最多统计
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009244/" target="_self">
 <div>
-原文链接：https://blog.csdn.net/weixin_44591177/article/details/99698117 问题：输出字符串中出现最多的名字 123456789101112131415161718s = &#x27;&#x27;&#x27;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 金轮法王 乔峰 杨过 洪七公 郭靖 杨逍 鳌拜 殷天正 段誉 杨逍
+原文链接：https://blog.csdn.net/weixin_44591177/article/details/99698117 问题：输出字符串中出现最多的名字 s &#x3D; &#39;&#39;&#39;双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 金轮法王 乔峰 杨过 洪七公 郭靖 杨逍 鳌拜 殷天正 段誉 杨逍 慕容复 阿紫 慕容复 郭芙 乔峰 令狐冲 郭芙
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -672,7 +673,7 @@ Python遍历文件夹和读写文件的方法
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/09/Article202009242/" target="_self">
 <div>
-参考链接：https://www.cnblogs.com/jackchiang/p/4605327.html 需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 12345678910111213141516171819202122232425262728293031323334353637383940414243#-*- cod
+参考链接：https://www.cnblogs.com/jackchiang/p/4605327.html 需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 #-*- coding: UTF-8 -*- ''' 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 ''' impo
 </div>
 </a>
 <div class="index-btm post-metas">

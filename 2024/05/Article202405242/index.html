@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 12345678910&lt;title&gt;CSS 初体验&lt;&#x2F;title&gt;&lt;style&gt;  &#x2F;*">
+<meta name="description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 &lt;title&gt;CSS 初体验&lt;&#x2F;title&gt; &lt;style&gt;   &#x2F;* 选择器 &#123; &#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端开发-CSS">
 <meta property="og:url" content="https://blog.fulequn.online/2024/05/Article202405242/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 12345678910&lt;title&gt;CSS 初体验&lt;&#x2F;title&gt;&lt;style&gt;  &#x2F;*">
+<meta property="og:description" content="1 CSS基础 1.1 介绍 层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 文档的呈现（美化内容）。 书写位置：title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码。 &lt;title&gt;CSS 初体验&lt;&#x2F;title&gt; &lt;style&gt;   &#x2F;* 选择器 &#123; &#125;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043346.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043341.png">
@@ -56,6 +56,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -137,11 +138,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-3.5k 字
+3.3k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-30 分钟
+28 分钟
 </span>
 </div>
 </div>
@@ -165,7 +166,16 @@
 <h2 id="1-1-介绍">1.1 介绍</h2>
 <p>层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 <strong>样式表</strong> 语言，用来<strong>描述 HTML 文档的呈现</strong>（<strong>美化内容</strong>）。</p>
 <p>书写位置：<strong>title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码</strong>。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>CSS 初体验<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 选择器 &#123; &#125; */</span></span><br><span class="language-css">  <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="language-css">    <span class="hljs-comment">/* CSS 属性 */</span></span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>体验 CSS<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>CSS 初体验<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token comment">/* 选择器 &#123; &#125; */</span>
+  <span class="token selector">p</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* CSS 属性 */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>体验 CSS<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <blockquote>
 <p>提示：属性名和属性值成对出现 → 键值对。</p>
 </blockquote>
@@ -183,7 +193,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;./my.css&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./my.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre></div></figure>
 <ul>
 <li><strong>行内</strong>样式：配合 JavaScript 使用
 <ul>
@@ -191,13 +201,18 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red; font-size:20px;&quot;</span>&gt;</span>这是 div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token property">font-size</span><span class="token punctuation">:</span>20px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>这是 div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h2 id="1-3-选择器">1.3 选择器</h2>
 <p>作用：<strong>查找标签</strong>，设置样式。</p>
 <h3 id="标签选择器">标签选择器</h3>
 <p>标签选择器：使用<strong>标签名</strong>作为选择器 → 选中<strong>同名标签设置相同的样式</strong>。</p>
 <p>例如：p, h1, div, a, img…</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">p</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+</code></pre></div></figure>
 <blockquote>
 <p>注意：标签选择器<strong>无法差异化</strong>同名标签的显示效果。</p>
 </blockquote>
@@ -208,7 +223,16 @@
 <li>定义类选择器 → <strong>.类名</strong></li>
 <li>使用类选择器 → 标签添加 <strong>class=“类名”</strong></li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 定义类选择器 */</span></span><br><span class="language-css">  <span class="hljs-selector-class">.red</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 使用类选择器 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;red&quot;</span>&gt;</span>这是 div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;red size&quot;</span>&gt;</span>div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token comment">/* 定义类选择器 */</span>
+  <span class="token selector">.red</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 使用类选择器 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>这是 div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red size<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <p>注意：</p>
 <ul>
 <li>类名<strong>自定义</strong>，不要用纯数字或中文，尽量用英文命名</li>
@@ -226,14 +250,24 @@
 <li>定义 id 选择器 → #id名</li>
 <li>使用 id 选择器 → 标签添加 id= “id名”</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-comment">/* 定义 id 选择器 */</span></span><br><span class="language-css">  <span class="hljs-selector-id">#red</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 使用 id 选择器 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;red&quot;</span>&gt;</span>这是 div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token comment">/* 定义 id 选择器 */</span>
+  <span class="token selector">#red</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 使用 id 选择器 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>这是 div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <blockquote>
 <p>规则：同一个 id 选择器在一个页面只能使用一次。</p>
 </blockquote>
 <h3 id="通配符选择器">通配符选择器</h3>
 <p>作用：查找页面<strong>所有</strong>标签，设置相同样式。一般用于项目开发初期，统一样式，取消掉 HTML 的默认样式，方便后期修改。</p>
 <p>通配符选择器： *<strong>，不需要调用</strong>，浏览器自动查找页面所有标签，设置相同的样式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">* &#123;<br>  <span class="hljs-attribute">color</span>: red;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">*</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>经验：通配符选择器可以用于<strong>清除标签的默认样式</strong>，例如：标签默认的外边距、内边距。</p>
 </blockquote>
@@ -245,7 +279,9 @@
 <li>属性名：<strong>font-size</strong></li>
 <li>属性值：文字尺寸，PC 端网页最常用的单位 <strong>px</strong></li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">30px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">p</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>经验：谷歌浏览器默认字号是16px。</p>
 </blockquote>
@@ -265,7 +301,9 @@
 <li>数字 + px</li>
 <li>数字（当前标签font-size属性值的倍数）</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">line-height</span>: <span class="hljs-number">30px</span>;<br><span class="hljs-comment">/* 当前标签字体大小为16px */</span><br><span class="hljs-attribute">line-height</span>: <span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token property">line-height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token comment">/* 当前标签字体大小为16px */</span>
+<span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span></code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043341.png" srcset="/img/loading.gif" lazyload alt="1680317770048"></p>
 <blockquote>
 <p>行高的测量方法：从一行文字的最顶端（最底端）量到下一行文字的最顶端（最底端）。</p>
@@ -273,11 +311,17 @@
 <h4 id="单行文字垂直居中">单行文字垂直居中</h4>
 <p>垂直居中技巧：<strong>行高属性值等于盒子高度属性值</strong></p>
 <p>注意：该技巧适用于单行文字垂直居中效果</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">background-color</span>: skyblue;<br><br>  <span class="hljs-comment">/* 注意：只能是单行文字垂直居中 */</span><br>  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> skyblue<span class="token punctuation">;</span>
+
+  <span class="token comment">/* 注意：只能是单行文字垂直居中 */</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="字体族">字体族</h3>
 <p>属性名：<strong>font-family</strong></p>
 <p>属性值：字体名</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">font-family</span>: 楷体;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token property">font-family</span><span class="token punctuation">:</span> 楷体<span class="token punctuation">;</span></code></pre></div></figure>
 <blockquote>
 <p>拓展（了解）：font-family属性值可以书写多个字体名，各个字体名用逗号隔开，执行顺序是从左向右依次查找</p>
 <ul>
@@ -285,13 +329,15 @@
 </ul>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241043107.png" srcset="/img/loading.gif" lazyload alt="无衬线字体与衬线字体对比"></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">font-family</span>: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, <span class="hljs-string">&quot;\5B8B\4F53&quot;</span>, sans-serif;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token property">font-family</span><span class="token punctuation">:</span> Microsoft YaHei<span class="token punctuation">,</span> Heiti SC<span class="token punctuation">,</span> tahoma<span class="token punctuation">,</span> arial<span class="token punctuation">,</span> Hiragino Sans GB<span class="token punctuation">,</span> <span class="token string">"\5B8B\4F53"</span><span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span></code></pre></div></figure>
 <h3 id="font复合属性">font复合属性</h3>
 <p>使用场景：设置网页文字公共样式 。项目初期，用于统一样式。</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044161.png" srcset="/img/loading.gif" lazyload alt="1680318326214"></p>
 <p>复合属性：属性的简写方式，<strong>一个属性对应多个值的写法</strong>，各个属性值之间用<strong>空格</strong>隔开。</p>
 <p><strong>font: 是否倾斜 是否加粗 字号/行高 字体（必须按顺序书写）</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">font</span>: italic <span class="hljs-number">700</span> <span class="hljs-number">30px</span>/<span class="hljs-number">2</span> 楷体;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font</span><span class="token punctuation">:</span> italic 700 30px/2 楷体<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>注意：字号和字体值必须书写，否则 font 属性不生效 。</p>
 </blockquote>
@@ -302,16 +348,26 @@
 <li>数字 + px</li>
 <li><strong>数字 + em</strong>（推荐：<strong>1em = 当前标签的字号大小</strong>）</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span> &#123;<br>  <span class="hljs-attribute">text-indent</span>: <span class="hljs-number">2em</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">p</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">text-indent</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="文本对齐方式">文本对齐方式</h3>
 <p>作用：控制内容水平对齐方式</p>
 <p>属性名：<strong>text-align</strong></p>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day03/assets/1680318461130.png" srcset="/img/loading.gif" lazyload alt="1680318461130"></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">text-align</span>: center;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span></code></pre></div></figure>
 <blockquote>
 <p>text-align本质是控制内容的对齐方式，属性要设置给内容的父级。</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/1.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./images/1.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h3 id="文本修饰线">文本修饰线</h3>
 <p>属性名： <strong>text-decoration</strong></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405241044302.png" srcset="/img/loading.gif" lazyload alt="1680318548558"></p>
@@ -343,33 +399,87 @@
 <h3 id="后代选择器">后代选择器</h3>
 <p>后代选择器：<strong>选中某元素的后代元素</strong>。</p>
 <p>选择器写法：父选择器 子选择器 { CSS 属性}，父子选择器之间用<strong>空格</strong>隔开。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> span 标签<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>这是 div 的儿子 span&lt;/span &gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div span</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>这是 div 的儿子 span<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span> <span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h3 id="子代选择器">子代选择器</h3>
 <p>子代选择器：选中某元素的子代元素（<strong>最近的子级</strong>）。</p>
 <p>选择器写法：父选择器 &gt; 子选择器 { CSS 属性}，父子选择器之间用 <strong>&gt;</strong> 隔开。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &gt; <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>这是 div 里面的 span<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>这是 div 里面的 p 里面的 span<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div > span</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>这是 div 里面的 span<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>这是 div 里面的 p 里面的 span<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre></div></figure>
 <h3 id="并集选择器">并集选择器</h3>
 <p>并集选择器：选中<strong>多组标签</strong>设置<strong>相同</strong>的样式。</p>
 <p>选择器写法：选择器1, 选择器2, …, 选择器N { CSS 属性}，选择器之间用 <strong>,</strong> 隔开。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span>,</span><br><span class="language-css">  <span class="hljs-selector-tag">p</span>,</span><br><span class="language-css">  <span class="hljs-selector-tag">span</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span> div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p 标签<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 标签<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div,
+  p,
+  span</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span> div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>span 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h3 id="交集选择器">交集选择器</h3>
 <p>交集选择器：选中<strong>同时满足多个条件</strong>的元素。</p>
 <p>选择器写法：选择器1选择器2 { CSS 属性}，选择器之间连写，没有任何符号。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.box</span> &#123;</span><br><span class="language-css">  <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>p 标签，使用了类选择器 box<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>p 标签<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>div 标签，使用了类选择器 box<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">p.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>p 标签，使用了类选择器 box<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>div 标签，使用了类选择器 box<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <blockquote>
 <p>注意：如果交集选择器中有标签选择器，标签选择器必须书写在最前面。</p>
 </blockquote>
 <h3 id="伪类选择器">伪类选择器</h3>
 <p>伪类选择器：伪类表示元素<strong>状态</strong>，选中元素的某个状态设置样式。</p>
 <p>鼠标悬停状态：<strong>选择器:hover { CSS 属性 }</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css">  <span class="hljs-selector-class">.box</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: green;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>a 标签<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">a:hover</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token selector">.box:hover</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>a 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h4 id="超链接伪类">超链接伪类</h4>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680319272736.png" srcset="/img/loading.gif" lazyload alt="1680319272736"></p>
 <blockquote>
 <p>提示：如果要给超链接设置以上四个状态，需要按 LVHA 的顺序书写。</p>
 <p>经验：工作中，一个 a 标签选择器设置超链接的样式， hover状态特殊设置</p>
 </blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span> &#123;<br>  <span class="hljs-attribute">color</span>: red;<br>&#125;<br><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;<br>  <span class="hljs-attribute">color</span>: green;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">a:hover</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h2 id="02-CSS特性">02-CSS特性</h2>
 <p>CSS特性：化简代码 / 定位问题，并解决问题</p>
 <ul>
@@ -389,13 +499,33 @@
 <li>相同的属性会覆盖：<strong>后面的 CSS 属性覆盖前面的 CSS 属性</strong></li>
 <li>不同的属性会叠加：<strong>不同的 CSS 属性都生效</strong></li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: green;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">30px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> 700<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <blockquote>
 <p>注意：选择器类型相同则遵循层叠性，否则按选择器优先级判断。</p>
 </blockquote>
 <h3 id="优先级">优先级</h3>
 <p>优先级：也叫权重，当一个标签<strong>使用了多种选择器时</strong>，基于不同种类的选择器的<strong>匹配规则</strong>。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-tag">div</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">  &#125;</span><br><span class="language-css">  <span class="hljs-selector-class">.box</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: green;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span>div 标签<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>div 标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h4 id="基础选择器">基础选择器</h4>
 <p>规则：选择器<strong>优先级高的样式生效</strong>。</p>
 <p>公式：<strong>通配符选择器 &lt; 标签选择器 &lt; 类选择器 &lt; id选择器 &lt; 行内样式 &lt; !important</strong></p>
@@ -428,14 +558,26 @@
 <li>属性名：<strong>background-image</strong>（bgi）</li>
 <li>属性值：url(背景图 URL)</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br><br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/1.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>提示：背景图默认有<strong>平铺（复制）效果</strong>。</p>
 </blockquote>
 <h3 id="平铺方式">平铺方式</h3>
 <p>属性名：<strong>background-repeat</strong>（bgr）</p>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320072292.png" srcset="/img/loading.gif" lazyload alt="1680320072292"></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">background-color</span>: pink;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>);<br><br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/1.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+
+  <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="背景图位置">背景图位置</h3>
 <p>属性名：<strong>background-position</strong>（bgp）</p>
 <p>属性值：水平方向位置 垂直方向位置</p>
@@ -451,7 +593,17 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">background-color</span>: pink;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>);<br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br><br>  <span class="hljs-attribute">background-position</span>: center bottom;<br>  <span class="hljs-attribute">background-position</span>: <span class="hljs-number">50px</span> -<span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">background-position</span>: <span class="hljs-number">50px</span> center;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/1.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+  <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+
+  <span class="token property">background-position</span><span class="token punctuation">:</span> center bottom<span class="token punctuation">;</span>
+  <span class="token property">background-position</span><span class="token punctuation">:</span> 50px -100px<span class="token punctuation">;</span>
+  <span class="token property">background-position</span><span class="token punctuation">:</span> 50px center<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>提示：</p>
 <ul>
@@ -478,7 +630,16 @@
 <p>数字 + 单位（例如：px）</p>
 </li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">500px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">background-color</span>: pink;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>);<br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>  <br>  <span class="hljs-attribute">background-size</span>: cover;<br>  <span class="hljs-attribute">background-size</span>: contain;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/1.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+  <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+  
+  <span class="token property">background-size</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
+  <span class="token property">background-size</span><span class="token punctuation">:</span> contain<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <blockquote>
 <p>提示：工作中，<strong>图片比例与盒子比例相同</strong>，使用 cover 或 contain 缩放背景图效果相同。</p>
 </blockquote>
@@ -486,11 +647,20 @@
 <p>作用：背景不会随着元素的内容滚动。</p>
 <p>属性名：<strong>background-attachment</strong>（bga）</p>
 <p>属性值：<strong>fixed</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/bg.jpg</span>);<br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>  <span class="hljs-attribute">background-attachment</span>: fixed;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/bg.jpg<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+  <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+  <span class="token property">background-attachment</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h3 id="背景复合属性">背景复合属性</h3>
 <p>属性名：<strong>background</strong>（bg）</p>
 <p>属性值：背景色 背景图 背景图平铺方式 背景图位置/背景图缩放 背景图固定（<strong>空格隔开各个属性值，不区分顺序</strong>）</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;<br><br>  <span class="hljs-attribute">background</span>: pink <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/1.png</span>) no-repeat right center/cover;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+
+  <span class="token property">background</span><span class="token punctuation">:</span> pink <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/1.png<span class="token punctuation">)</span></span> no-repeat right center/cover<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <h2 id="05-显示模式">05-显示模式</h2>
 <p>显示模式：标签（元素）的显示方式。</p>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320464551.png" srcset="/img/loading.gif" lazyload alt="1680320464551"></p>
@@ -525,15 +695,79 @@
 <h2 id="06-综合案例一-热词">06-综合案例一-热词</h2>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320664821.png" srcset="/img/loading.gif" lazyload alt="1680320664821"></p>
 <h3 id="HTML标签">HTML标签</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>HTML<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>CSS<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>JavaScript<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>Vue<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>React<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>HTML<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>CSS<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>JavaScript<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Vue<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>React<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h3 id="CSS样式">CSS样式</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css"><span class="hljs-comment">/* 默认效果 */</span></span><br><span class="language-css"><span class="hljs-selector-tag">a</span> &#123;</span><br><span class="language-css"><span class="hljs-attribute">display</span>: block;</span><br><span class="language-css"><span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;</span><br><span class="language-css"><span class="hljs-attribute">height</span>: <span class="hljs-number">80px</span>;</span><br><span class="language-css"><span class="hljs-attribute">background-color</span>: <span class="hljs-number">#3064bb</span>;</span><br><span class="language-css"><span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;</span><br><span class="language-css"><span class="hljs-attribute">text-decoration</span>: none;</span><br><span class="language-css"><span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css"><span class="hljs-attribute">line-height</span>: <span class="hljs-number">80px</span>;</span><br><span class="language-css"><span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><br><span class="language-css"><span class="hljs-comment">/* 鼠标悬停的效果 */</span></span><br><span class="language-css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;</span><br><span class="language-css"><span class="hljs-attribute">background-color</span>: <span class="hljs-number">#608dd9</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token comment">/* 默认效果 */</span>
+<span class="token selector">a</span> <span class="token punctuation">&#123;</span>
+<span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+<span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+<span class="token property">height</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+<span class="token property">background-color</span><span class="token punctuation">:</span> #3064bb<span class="token punctuation">;</span>
+<span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+<span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token property">line-height</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+<span class="token property">font-size</span><span class="token punctuation">:</span> 18px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/* 鼠标悬停的效果 */</span>
+<span class="token selector">a:hover</span> <span class="token punctuation">&#123;</span>
+<span class="token property">background-color</span><span class="token punctuation">:</span> #608dd9<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h2 id="07-综合案例二-–-banner-效果">07-综合案例二 – banner 效果</h2>
 <p><img src="D:/BaiduNetdiskDownload/1.%E4%BB%8E0%E5%88%B01%E5%AD%A6%E5%89%8D%E7%AB%AF-HTML+CSS+%E7%A7%BB%E5%8A%A8web/%E8%B5%84%E6%96%99/Day01-10%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E5%9F%BA%E7%A1%80%E7%8F%AD%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/%E7%AC%94%E8%AE%B0/day04/assets/1680320758496.png" srcset="/img/loading.gif" lazyload alt="1680320758496"></p>
 <h3 id="HTML标签-2">HTML标签</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;banner&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>让创造产生价值<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我们希望小游戏平台可以提供无限的可能性，让每一个创作者都可以将他们的才华和创意传递给用户。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>我要报名<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>banner<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>让创造产生价值<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>我们希望小游戏平台可以提供无限的可能性，让每一个创作者都可以将他们的才华和创意传递给用户。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我要报名<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
 <h3 id="CSS样式-2">CSS样式</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">height</span>: <span class="hljs-number">500px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f3f3f4</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">./images/bk.png</span>);</span><br><span class="language-css">    <span class="hljs-attribute">background-repeat</span>: no-repeat;</span><br><span class="language-css">    <span class="hljs-attribute">background-position</span>: left bottom;</span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-comment">/* 文字控制属性，继承给子级 */</span></span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: right;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">h2</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">36px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">400</span>;</span><br><span class="language-css">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><br><span class="language-css">  <span class="hljs-selector-class">.banner</span> <span class="hljs-selector-tag">a</span> &#123;</span><br><span class="language-css">    <span class="hljs-attribute">width</span>: <span class="hljs-number">125px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">height</span>: <span class="hljs-number">40px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f06b1f</span>;</span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-attribute">display</span>: inline-block;</span><br><span class="language-css">    <span class="hljs-comment">/* 转块级无法右对齐，因为块元素独占一行 */</span></span><br><span class="language-css">    <span class="hljs-comment">/* display: block; */</span></span><br><span class="language-css"></span><br><span class="language-css">    <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">40px</span>;</span><br><span class="language-css">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;</span><br><span class="language-css">    <span class="hljs-attribute">text-decoration</span>: none;</span><br><span class="language-css">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;</span><br><span class="language-css">  &#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.banner</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> #f3f3f4<span class="token punctuation">;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./images/bk.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+    <span class="token property">background-position</span><span class="token punctuation">:</span> left bottom<span class="token punctuation">;</span>
+
+    <span class="token comment">/* 文字控制属性，继承给子级 */</span>
+    <span class="token property">text-align</span><span class="token punctuation">:</span> right<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">.banner h2</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 36px<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> 400<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">.banner p</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">.banner a</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 125px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> #f06b1f<span class="token punctuation">;</span>
+
+    <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+    <span class="token comment">/* 转块级无法右对齐，因为块元素独占一行 */</span>
+    <span class="token comment">/* display: block; */</span>
+
+    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre></div></figure>
 </div>
 <hr>
 <div>

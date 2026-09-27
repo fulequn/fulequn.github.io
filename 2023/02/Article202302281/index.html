@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -114,7 +115,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-486 字
+506 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -146,10 +147,22 @@
 <li>运行配置。使用 <code>mv clash-linux-amd64 clash</code> 命令修改运行文件名。使用 <code>chmod +x clash</code> 命令添加权限。使用 <code>./clash</code> 命令启动服务，会下载 <code>Country.mmdb</code> 文件，需要等待一会儿（如果无法直接下载，可以参考这个链接 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366589407%EF%BC%89%E3%80%82%E4%BD%BF%E7%94%A8">https://zhuanlan.zhihu.com/p/366589407）。使用</a> <code>export https_proxy=http://127.0.0.1:7890</code> 命令修改系统代理，这是临时的系统代理，退出终端会失效。使用 <code>curl https://www.google.com</code> 命令测试。</li>
 <li>创建服务。使用 <code>cp clash /usr/local/bin</code> 命令将Clash复制到 <code>/usr/local/bin</code> 目录。创建 <code>/etc/systemd/system/clash.service</code> 文件，并更改内容如下：</li>
 </ol>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Clash daemon, A rule-based proxy in Go.<br><span class="hljs-attr">After</span>=network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">Restart</span>=always<br><span class="hljs-attr">ExecStart</span>=/usr/local/bin/clash -d /etc/clash<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">[Unit]
+Description&#x3D;Clash daemon, A rule-based proxy in Go.
+After&#x3D;network.target
+
+[Service]
+Type&#x3D;simple
+Restart&#x3D;always
+ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;clash -d &#x2F;etc&#x2F;clash
+
+[Install]
+WantedBy&#x3D;multi-user.target</code></pre></div></figure>
 <p>使用 <code>systemctl enable clash</code> 命令设置Clash服务在系统启动时运行。使用 <code>systemctl start clash</code> 命令立即运行Clash服务。使用 <code>systemctl status clash</code> 命令查看Clash服务的运行状态。</p>
 <p>5.系统代理。使用 <code>cd ~</code> 命令切换到root账户目录。使用 <code>vi .bashrc</code> 命令编辑文件，并添加系统代理。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=http://127.0.0.1:7890<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=http://127.0.0.1:7890<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">all_proxy</span>=socks5://127.0.0.1:7890<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">export http_proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:7890
+export https_proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:7890
+export all_proxy&#x3D;socks5:&#x2F;&#x2F;127.0.0.1:7890</code></pre></div></figure>
 <blockquote>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7124962244370104350">https://juejin.cn/post/7124962244370104350</a></p>

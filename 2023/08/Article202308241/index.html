@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="1 python-dotenv 项目简介  项目地址：https:&#x2F;&#x2F;github.com&#x2F;theskumar&#x2F;python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。   2 用法 2.1 .env文件内容示例 1234# 这是一个注释，将被忽略REDIS">
+<meta name="description" content="1 python-dotenv 项目简介  项目地址：https:&#x2F;&#x2F;github.com&#x2F;theskumar&#x2F;python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。   2 用法 2.1 .env文件内容示例 # 这是一个注释，将被忽略 REDIS_AD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用python-dotenv进行高效的环境管理">
 <meta property="og:url" content="https://blog.fulequn.online/2023/08/Article202308241/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="1 python-dotenv 项目简介  项目地址：https:&#x2F;&#x2F;github.com&#x2F;theskumar&#x2F;python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。   2 用法 2.1 .env文件内容示例 1234# 这是一个注释，将被忽略REDIS">
+<meta property="og:description" content="1 python-dotenv 项目简介  项目地址：https:&#x2F;&#x2F;github.com&#x2F;theskumar&#x2F;python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。   2 用法 2.1 .env文件内容示例 # 这是一个注释，将被忽略 REDIS_AD">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-24T08:52:48.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:52.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-757 字
+769 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -146,16 +147,28 @@
 <hr>
 <h1 id="2-用法">2 用法</h1>
 <h2 id="2-1-env文件内容示例">2.1 .env文件内容示例</h2>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 这是一个注释，将被忽略</span><br>REDIS<span class="hljs-emphasis">_ADDRESS=localhost:6379</span><br><span class="hljs-emphasis">MEANING_</span>OF<span class="hljs-emphasis">_LIFE=42</span><br><span class="hljs-emphasis">MULTILINE_</span>VAR=&quot;hello\nworld&quot;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 这是一个注释，将被忽略</span>
+REDIS_ADDRESS=localhost:6379
+MEANING_OF_LIFE=42
+MULTILINE_VAR="hello\nworld"</code></pre></div></figure>
 <ul>
 <li><strong>注意</strong>：使用 <code>export</code> 作为每行的前缀，<code>python-dotenv</code> 会忽略该变量，但可以使用 <code>source</code> 命令运行该文件。</li>
 </ul>
 <h2 id="2-2-项目中如何使用">2.2 项目中如何使用</h2>
 <p><strong>安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -U python-dotenv<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-U</span> python-dotenv</code></pre></div></figure>
 <p><strong>基本用法</strong></p>
 <p>确保项目目录下有 <code>.env</code> 文件，然后在 <code>settings.py</code> 中添加以下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># settings.py</span><br><span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv, find_dotenv<br><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path<br><br><span class="hljs-comment"># 自动搜索 .env 文件</span><br>load_dotenv(verbose=<span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 或者指定 .env 文件位置</span><br>env_path = Path(<span class="hljs-string">&#x27;.&#x27;</span>) / <span class="hljs-string">&#x27;.env&#x27;</span><br>load_dotenv(dotenv_path=env_path, verbose=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># settings.py</span>
+<span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv<span class="token punctuation">,</span> find_dotenv
+<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
+
+<span class="token comment"># 自动搜索 .env 文件</span>
+load_dotenv<span class="token punctuation">(</span>verbose<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 或者指定 .env 文件位置</span>
+env_path <span class="token operator">=</span> Path<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token string">'.env'</span>
+load_dotenv<span class="token punctuation">(</span>dotenv_path<span class="token operator">=</span>env_path<span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>通过 <code>load_dotenv</code>，可以像访问系统环境变量一样使用 <code>.env</code> 文件中的变量，例如 <code>os.getenv(key, default=None)</code>。</p>
 <p><strong>参数</strong></p>
 <ul>
@@ -165,7 +178,13 @@
 </ul>
 <p><strong>从流对象加载</strong></p>
 <p>从可读的流对象中加载，记得把读指针调到要开始读取的位置。</p>
-<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python"><span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> StringIO     <span class="hljs-comment"># Python2: from StringIO import StringIO</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python"><span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> dotenv_values</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">filelike = StringIO(<span class="hljs-string">&#x27;SPAM=EGGS\\n&#x27;</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">filelike.seek(<span class="hljs-number">0</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">parsed = dotenv_values(stream=filelike)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">parsed[<span class="hljs-string">&#x27;SPAM&#x27;</span>]</span><br>&#x27;EGGS&#x27;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;&gt;&gt; from io import StringIO     # Python2: from StringIO import StringIO
+&gt;&gt;&gt; from dotenv import dotenv_values
+&gt;&gt;&gt; filelike &#x3D; StringIO(&#39;SPAM&#x3D;EGGS\\n&#39;)
+&gt;&gt;&gt; filelike.seek(0)
+&gt;&gt;&gt; parsed &#x3D; dotenv_values(stream&#x3D;filelike)
+&gt;&gt;&gt; parsed[&#39;SPAM&#39;]
+&#39;EGGS&#39;</code></pre></div></figure>
 <p><strong>注意</strong>：此时返回值是个字典</p>
 <hr>
 <h1 id="3-常见问题及解决方法">3 常见问题及解决方法</h1>
@@ -179,16 +198,19 @@
 <li>
 <p><strong>坑一</strong>：load_dotenv函数默认不会更新的配置项。</p>
 <p>官方文档的例子简单易懂。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">from dotenv import load_dotenv, find_dotenv<br><span class="hljs-function"><span class="hljs-title">load_dotenv</span><span class="hljs-params">(find_dotenv()</span></span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())</code></pre></div></figure>
 <p>然而这个例子里面缺隐藏了一个大坑。此时当用户在<code>.env</code>中更新配置项的值时，是不会生效的。原因是<code>load_dotenv</code>默认不会更新已经存在的配置项。推荐使用<code>override</code>参数，推荐代码如下:</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> dotenv import load_dotenv, find_dotenv<br>load_dotenv(find_dotenv(), <span class="hljs-attribute">override</span>=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv(), override&#x3D;True)</code></pre></div></figure>
 </li>
 <li>
 <p><strong>坑二</strong>：env文件中<code>#</code> 的处理。</p>
 <p>考虑<code>.env</code>中的如下写法:</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">BASEURL</span>=http://codehub.com/<span class="hljs-comment">#/python</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">BASEURL&#x3D;http:&#x2F;&#x2F;codehub.com&#x2F;#&#x2F;python</code></pre></div></figure>
 <p>暂且不讨论在 url 中带<code>#</code>是否优雅。<code>#</code>在 url 中表示锚点，的确是会经常用到的；然而在<code>Python</code>中却是表示注释开始。此时<code>BASEURL</code>的值会是<code>http://codehub.com/</code>。以下写法均符合预期。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">BASEURL</span>=<span class="hljs-string">&quot;&lt;http://codehub.com/#/python&gt;&quot;</span><br><span class="hljs-attr">BASEURL</span>=<span class="hljs-string">&#x27;&lt;http://codehub.com/#/python&gt;&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">BASEURL&#x3D;&quot;&lt;http:&#x2F;&#x2F;codehub.com&#x2F;#&#x2F;python&gt;&quot;
+BASEURL&#x3D;&#39;&lt;http:&#x2F;&#x2F;codehub.com&#x2F;#&#x2F;python&gt;&#39;</code></pre></div></figure>
 <p>需要使用双引号 / 单引号括起来。</p>
 </li>
 </ol>

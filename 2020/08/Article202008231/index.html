@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="前言 在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入-其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。 按照官方的解释，categories 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。 子分类 下面的分类会将该分章放到 Java&#x2F;Servlet这个分类下。 123categories:  - Java  - Ser">
+<meta name="description" content="前言 在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入-其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。 按照官方的解释，categories 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。 子分类 下面的分类会将该分章放到 Java&#x2F;Servlet这个分类下。 categories:   - Java   - Serv">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo一篇文章多个categories">
 <meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008231/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="前言 在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入-其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。 按照官方的解释，categories 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。 子分类 下面的分类会将该分章放到 Java&#x2F;Servlet这个分类下。 123categories:  - Java  - Ser">
+<meta property="og:description" content="前言 在很多情况下，我们希望在 Hexo 中写的一篇文章能够同时属于多个分类，但是如果直接写入-其实是分级分类，如果我们需要多个平行分类我们可以使用下面的方式。 按照官方的解释，categories 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。 子分类 下面的分类会将该分章放到 Java&#x2F;Servlet这个分类下。 categories:   - Java   - Serv">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-23T03:55:06.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:18.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -142,16 +143,22 @@
 <p>按照官方的解释，<code>categories</code> 这个选项有两种配置方法（其实有三种）。那我们就来讲讲这三种配置方法。</p>
 <h2 id="子分类">子分类</h2>
 <p>下面的分类会将该分章放到 <code>Java/Servlet</code>这个分类下。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">categories:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">Java</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">Servlet</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">categories</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> Java
+  <span class="token punctuation">-</span> Servlet</code></pre></div></figure>
 <p>同样的作用我们也可以这样写，这个是按照[]的先后顺序。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">categories:</span> [<span class="hljs-string">Java</span>, <span class="hljs-string">Servlet</span>]<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">categories</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Java<span class="token punctuation">,</span> Servlet<span class="token punctuation">]</span></code></pre></div></figure>
 <p>上面两种方法最终效果一样，都是将文章放在了一个子分类的目录下，效果如图。</p>
 <h2 id="多个分类">多个分类</h2>
 <p>如果我们的要求是将文章同时分到多个不同的分类中呢，我们应该这样：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">categories:</span><br>  <span class="hljs-string">-[Java]</span><br>  <span class="hljs-string">-[Servlet]</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">categories</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span><span class="token punctuation">[</span>Java<span class="token punctuation">]</span>
+  <span class="token punctuation">-</span><span class="token punctuation">[</span>Servlet<span class="token punctuation">]</span></code></pre></div></figure>
 <p>这样，就可以将上面的文章分类到 <code>Java</code> 和 <code>Servlet</code> 这两个不同的目录中了。</p>
 <p>扩展一下，如果我们将其分类到 <code>Java/Servlet</code> 和 <code>Programming</code> 两个不同的目录下，我们应该如下写：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">categories:</span><br>  <span class="hljs-string">-[Java,</span> <span class="hljs-string">Servlet]</span><br>  <span class="hljs-string">-[Programming]</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">categories</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span><span class="token punctuation">[</span>Java<span class="token punctuation">,</span> Servlet<span class="token punctuation">]</span>
+  <span class="token punctuation">-</span><span class="token punctuation">[</span>Programming<span class="token punctuation">]</span></code></pre></div></figure>
 </div>
 <hr>
 <div>

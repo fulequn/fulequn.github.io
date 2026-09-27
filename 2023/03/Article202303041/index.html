@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="Docker 是一种流行的开源容器化平台，它能够将应用程序与其依赖项打包成可移植的容器，从而简化了应用程序的部署和管理。本文将介绍在 OpenEuler 系统中安装 Docker 并使用 Docker 容器控制 5G 模块的具体步骤。 安装 Docker 安装 Docker 的具体步骤如下：   更新系统软件包信息： 1sudo dnf update   安装所需的依赖软件包： 1sudo dnf">
+<meta name="description" content="Docker 是一种流行的开源容器化平台，它能够将应用程序与其依赖项打包成可移植的容器，从而简化了应用程序的部署和管理。本文将介绍在 OpenEuler 系统中安装 Docker 并使用 Docker 容器控制 5G 模块的具体步骤。 安装 Docker 安装 Docker 的具体步骤如下：   更新系统软件包信息： sudo dnf update   安装所需的依赖软件包： sudo dnf i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在 OpenEuler 系统中安装 Docker">
 <meta property="og:url" content="https://blog.fulequn.online/2023/03/Article202303041/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="Docker 是一种流行的开源容器化平台，它能够将应用程序与其依赖项打包成可移植的容器，从而简化了应用程序的部署和管理。本文将介绍在 OpenEuler 系统中安装 Docker 并使用 Docker 容器控制 5G 模块的具体步骤。 安装 Docker 安装 Docker 的具体步骤如下：   更新系统软件包信息： 1sudo dnf update   安装所需的依赖软件包： 1sudo dnf">
+<meta property="og:description" content="Docker 是一种流行的开源容器化平台，它能够将应用程序与其依赖项打包成可移植的容器，从而简化了应用程序的部署和管理。本文将介绍在 OpenEuler 系统中安装 Docker 并使用 Docker 容器控制 5G 模块的具体步骤。 安装 Docker 安装 Docker 的具体步骤如下：   更新系统软件包信息： sudo dnf update   安装所需的依赖软件包： sudo dnf i">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202303041711962.png">
 <meta property="article:published_time" content="2023-03-04T09:06:11.000Z">
@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -116,7 +117,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-372 字
+387 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -146,34 +147,37 @@
 <ol>
 <li>
 <p>更新系统软件包信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf update<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf update</code></pre></div></figure>
 </li>
 <li>
 <p>安装所需的依赖软件包：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">sudo</span> dnf install dnf-utils device-mapper-persistent-<span class="hljs-class"><span class="hljs-keyword">data</span> lvm2 fuse-overlayfs wget</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf install dnf-utils device-mapper-persistent-data lvm2 fuse-overlayfs wget</code></pre></div></figure>
 </li>
 <li>
 <p>添加 Docker CE 的仓库：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># Step 2: 添加软件源信息</span><br>sudo yum-config-manager --add-repo https:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/docker-ce/</span>linux<span class="hljs-regexp">/centos/</span>docker-ce.repo<br><span class="hljs-comment"># Step 3</span><br>sudo sed -i <span class="hljs-string">&#x27;s+download.docker.com+mirrors.aliyun.com/docker-ce+&#x27;</span> <span class="hljs-regexp">/etc/yum</span>.repos.d/docker-ce.repo<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># Step 2: 添加软件源信息
+sudo yum-config-manager --add-repo https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo
+# Step 3
+sudo sed -i &#39;s+download.docker.com+mirrors.aliyun.com&#x2F;docker-ce+&#39; &#x2F;etc&#x2F;yum.repos.d&#x2F;docker-ce.repo</code></pre></div></figure>
 </li>
 <li>
 <p>更新 yum 软件包缓存：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf update<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf update</code></pre></div></figure>
 </li>
 <li>
 <p>安装 Docker CE：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf install -y docker-ce<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf install -y docker-ce</code></pre></div></figure>
 <p>这将会安装最新版本的 Docker CE。如果需要安装特定版本的 Docker CE，可以执行类似以下的命令：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo dnf install -<span class="hljs-keyword">y</span> docker-<span class="hljs-keyword">ce</span>-<span class="hljs-symbol">&lt;VERSION_STRING&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf install -y docker-ce-&lt;VERSION_STRING&gt;</code></pre></div></figure>
 <p>其中，<code>&lt;VERSION_STRING&gt;</code> 是指需要安装的 Docker CE 版本字符串，例如 <code>20.10.6-3.el8</code>。</p>
 </li>
 <li>
 <p>启动 Docker 服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl start docker<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo systemctl start docker</code></pre></div></figure>
 </li>
 <li>
 <p>验证 Docker 是否安装成功：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo docker <span class="hljs-built_in">run</span> hello-world<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo docker run hello-world</code></pre></div></figure>
 <p>如果 Docker 安装成功，你将会看到一些输出信息，表示 Docker 已经运行，并且能够成功运行容器。</p>
 <p>如果出现了 <code>failed to start daemon</code> 的错误提示，那么可以尝试禁用 iptables 或者重新设置并配置 iptables 的防火墙命令。</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202303041711962.png" srcset="/img/loading.gif" lazyload alt="1"></p>
@@ -181,7 +185,11 @@
 </ol>
 <p><strong>禁止docker管理iptables防火墙的方法</strong>（<a target="_blank" rel="noopener" href="https://blog.csdn.net/Jailman/article/details/111591811%EF%BC%89">https://blog.csdn.net/Jailman/article/details/111591811）</a></p>
 <p>修改/etc/docker/daemon.json</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less">&#123;<br>“<span class="hljs-selector-attr">[iptables]</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//so.csdn.net/so/search?q=iptables&amp;spm=1001.2101.3001.7020)”:false</span><br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;
+“[iptables](https:&#x2F;&#x2F;so.csdn.net&#x2F;so&#x2F;search?q&#x3D;iptables&amp;spm&#x3D;1001.2101.3001.7020)”:false
+&#125;
+
+</code></pre></div></figure>
 <p>重启docker。</p>
 </div>
 <hr>

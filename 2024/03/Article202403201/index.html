@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -115,7 +116,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-878 字
+879 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -151,22 +152,40 @@
 <p>下载完后，我们将 zip 包解压到相应的目录，这里我将解压后的文件夹放在 <strong>C:\web\mysql-8.0.36</strong> 下。</p>
 <p><strong>接下来我们需要配置下 MySQL 的配置文件</strong></p>
 <p>打开刚刚解压的文件夹 <strong>C:\web\mysql-8.0.11</strong> ，在该文件夹下创建 <strong>my.ini</strong> 配置文件，编辑 <strong>my.ini</strong> 配置以下基本信息：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[client]</span><br><span class="hljs-comment"># 设置mysql客户端默认字符集</span><br><span class="hljs-attr">default-character-set</span>=utf8<br> <br><span class="hljs-section">[mysqld]</span><br><span class="hljs-comment"># 设置3306端口</span><br><span class="hljs-attr">port</span>=<span class="hljs-number">3306</span><br><span class="hljs-comment"># 设置mysql的安装目录</span><br><span class="hljs-attr">basedir</span>=********* <span class="hljs-comment">#自己对应的安装位置</span><br><span class="hljs-comment"># 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错</span><br><span class="hljs-comment"># datadir=C:\\web\\sqldata</span><br><span class="hljs-comment"># 允许最大连接数</span><br><span class="hljs-attr">max_connections</span>=<span class="hljs-number">20</span><br><span class="hljs-comment"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="hljs-attr">character-set-server</span>=utf8<br><span class="hljs-comment"># 创建新表时将使用的默认存储引擎</span><br><span class="hljs-attr">default-storage-engine</span>=INNODB<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">[client]
+# 设置mysql客户端默认字符集
+default-character-set&#x3D;utf8
+ 
+[mysqld]
+# 设置3306端口
+port&#x3D;3306
+# 设置mysql的安装目录
+basedir&#x3D;********* #自己对应的安装位置
+# 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错
+# datadir&#x3D;C:\\web\\sqldata
+# 允许最大连接数
+max_connections&#x3D;20
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server&#x3D;utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine&#x3D;INNODB</code></pre></div></figure>
 <p><strong>接下来我们来启动下 MySQL 数据库：</strong></p>
 <p>以管理员身份打开 cmd 命令行工具，切换目录到对应的bin文件夹下：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> C:\web\mysql-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>.<span class="hljs-number">11</span>\bin<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">cd C:\web\mysql-8.0.11\bin</code></pre></div></figure>
 <p>初始化数据库：</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">mysqld</span> <span class="hljs-literal">--</span><span class="hljs-comment">initialize</span> <span class="hljs-literal">--</span><span class="hljs-comment">console</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mysqld --initialize --console</code></pre></div></figure>
 <p>执行完成后，会输出 root 用户的初始默认密码，如：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs less">...<br><span class="hljs-number">2024</span><span class="hljs-selector-tag">-03-20T03</span>:<span class="hljs-number">28</span>:<span class="hljs-number">07.635070</span><span class="hljs-selector-tag">Z</span> <span class="hljs-number">6</span> <span class="hljs-selector-attr">[Note]</span> <span class="hljs-selector-attr">[MY-010454]</span> <span class="hljs-selector-attr">[Server]</span> <span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">temporary</span> <span class="hljs-selector-tag">password</span> <span class="hljs-selector-tag">is</span> <span class="hljs-selector-tag">generated</span> <span class="hljs-selector-tag">for</span> <span class="hljs-selector-tag">root</span>@<span class="hljs-selector-tag">localhost</span>: <span class="hljs-selector-tag">G</span><span class="hljs-selector-id">#P2rw</span>&gt;<span class="hljs-number">9</span>,<span class="hljs-selector-tag">BU</span>?<br>...<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">...
+2024-03-20T03:28:07.635070Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: G#P2rw&gt;9,BU?
+...</code></pre></div></figure>
 <p><strong>G#P2rw&gt;9,BU?</strong> 就是初始密码，后续登录需要用到，你也可以在登陆后修改密码。</p>
 <p>输入以下安装命令，这个位置需要使用管理员权限，否则会报权限错误：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">mysqld <span class="hljs-keyword">install</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mysqld install</code></pre></div></figure>
 <p>启动输入以下命令即可：</p>
-<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">net</span> <span class="hljs-built_in">start</span> mysql<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">net start mysql</code></pre></div></figure>
 <h2 id="2-登录-MySQL">2 登录 MySQL</h2>
 <p>当 MySQL 服务已经运行时, 我们可以通过 MySQL 自带的客户端工具登录到 MySQL 数据库中, 首先打开命令提示符, 输入以下格式的命名:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -h 主机名 -u 用户名 -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mysql -h 主机名 -u 用户名 -p</code></pre></div></figure>
 <p>参数说明：</p>
 <ul>
 <li><strong>-h</strong> : 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;</li>
@@ -174,13 +193,13 @@
 <li><strong>-p</strong> : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。</li>
 </ul>
 <p>如果我们要登录本机的 MySQL 数据库，只需要输入以下命令即可：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -u root -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">mysql -u root -p</code></pre></div></figure>
 <p>按回车确认, 如果安装正确且 MySQL 正在运行, 会得到以下响应:</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">Enter</span> <span class="hljs-variable">password</span><span class="hljs-operator">:</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">Enter password:</code></pre></div></figure>
 <p>若密码存在, 输入密码登录, 不存在则直接按回车登录。登录成功后你将会看到 Welcome to the MySQL monitor… 的提示语。</p>
 <p>然后命令提示符会一直以 <strong>mysql&gt;</strong> 加一个闪烁的光标等待命令的输入, 输入 <strong>exit</strong> 或 <strong>quit</strong> 退出登录。</p>
 <p>我们使用临时密码登录进去之后，我们就可以重新修改root的默认密码，直接在mysql界面输入下面命令即可。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">ALTER user root@&#x27;localhost&#x27; identified by &#x27;123456&#x27;;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">ALTER user root@'localhost' identified by '123456';</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/image-20240320154312872.png" srcset="/img/loading.gif" lazyload alt="image-20240320154312872"></p>
 <blockquote>
 <p>参考链接</p>

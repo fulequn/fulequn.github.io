@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-326 字
+333 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -139,18 +140,25 @@
 <div class="markdown-body">
 <p>原文链接:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1">https://blog.csdn.net/qq_44884577/article/details/89202950?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduend~default-6-89202950.nonecase&amp;utm_term=r%E8%AF%AD%E8%A8%80%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1</a></p>
 <h2 id="1-使用tapply函数">1. 使用tapply函数</h2>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment">#INDEX相当于groupBy</span><br>tapply<span class="hljs-punctuation">(</span>salarys<span class="hljs-operator">$</span>SALARY<span class="hljs-punctuation">,</span> INDEX<span class="hljs-operator">=</span>salarys<span class="hljs-operator">$</span>SEX<span class="hljs-punctuation">,</span> FUN<span class="hljs-operator">=</span><span class="hljs-built_in">sum</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">#INDEX相当于groupBy
+tapply(salarys$SALARY, INDEX&#x3D;salarys$SEX, FUN&#x3D;sum)</code></pre></div></figure>
 <p>如果出现参数的长度不一致的错误，如下:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs R">Error <span class="hljs-keyword">in</span> tapply<span class="hljs-punctuation">(</span>salarys<span class="hljs-operator">$</span>SALARY<span class="hljs-punctuation">,</span> INDEX <span class="hljs-operator">=</span> salarys<span class="hljs-operator">$</span>SEX<span class="hljs-punctuation">,</span> FUN <span class="hljs-operator">=</span> <span class="hljs-built_in">max</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">:</span>   参数的长度必需相同<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">Error in tapply(salarys$SALARY, INDEX &#x3D; salarys$SEX, FUN &#x3D; max) :   参数的长度必需相同</code></pre></div></figure>
 <p>请仔细检查salarysSEX的长度是否相等，尤其是检查INDEX的类型，如果是list类型，请务必转换为向量：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs R"><span class="hljs-comment"># 对数据进行处理,返回</span><br>LISTsalarys<span class="hljs-operator">$</span>SEX <span class="hljs-operator">&lt;-</span> lapply<span class="hljs-punctuation">(</span>salarys<span class="hljs-operator">$</span>SEX<span class="hljs-punctuation">,</span> <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span> <span class="hljs-built_in">switch</span><span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">,</span> FEMALE<span class="hljs-operator">=</span><span class="hljs-string">&#x27;女&#x27;</span><span class="hljs-punctuation">,</span> MALE<span class="hljs-operator">=</span><span class="hljs-string">&#x27;男&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-comment"># 返回向量</span><br>salarys<span class="hljs-operator">$</span>SEX <span class="hljs-operator">&lt;-</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span>salarys<span class="hljs-operator">$</span>SEX<span class="hljs-punctuation">,</span> recursive <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><span class="hljs-punctuation">)</span><span class="hljs-number">1234</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R"># 对数据进行处理,返回
+LISTsalarys$SEX &lt;- lapply(salarys$SEX, function(x) switch(x, FEMALE&#x3D;&#39;女&#39;, MALE&#x3D;&#39;男&#39;))# 返回向量
+salarys$SEX &lt;- c(salarys$SEX, recursive &#x3D; TRUE)1234</code></pre></div></figure>
 <h2 id="2-使用by函数">2. 使用by函数</h2>
 <p>使用by函数可以达到同样的效果，唯一需要注意的是，引用的数据必须全是数据列，例如在本例中，数据最多也只能是salarys[c(‘SALARY’, ‘ID’)]。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">by(salarys[c(<span class="hljs-string">&#x27;SALARY&#x27;</span>)], INDICES = list(salarys<span class="hljs-variable">$SEX</span>), FUN=max)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">by<span class="token punctuation">(</span>salarys<span class="token punctuation">[</span>c<span class="token punctuation">(</span><span class="token string">'SALARY'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>, INDICES <span class="token operator">=</span> list<span class="token punctuation">(</span>salarys<span class="token variable">$SEX</span><span class="token punctuation">)</span>, <span class="token assign-left variable">FUN</span><span class="token operator">=</span>max<span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="3-使用aggregate函数">3. 使用aggregate函数</h2>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs R">aggregate<span class="hljs-punctuation">(</span>x<span class="hljs-operator">=</span>salarys<span class="hljs-punctuation">[</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&#x27;SALARY&#x27;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> by <span class="hljs-operator">=</span> <span class="hljs-built_in">list</span><span class="hljs-punctuation">(</span>salarys<span class="hljs-operator">$</span>SEX<span class="hljs-punctuation">,</span> salarys<span class="hljs-operator">$</span>ID<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> FUN<span class="hljs-operator">=</span><span class="hljs-built_in">max</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">aggregate(x&#x3D;salarys[c(&#39;SALARY&#39;)], by &#x3D; list(salarys$SEX, salarys$ID), FUN&#x3D;max)</code></pre></div></figure>
 <p>聚合函数与group by更相似，例如以上语句就表示按SEX、ID进行分组，结果如下：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">  Group.1 Group.2  SALARY1      <br>男       1  300002      <br>男       2    2003      <br>女       3   12004      <br>女       4   3500123451<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">  Group.1 Group.2  SALARY1      
+男       1  300002      
+男       2    2003      
+女       3   12004      
+女       4   3500123451</code></pre></div></figure>
 <p>从以上的数据可以看出，分组的唯一性由（SEX，ID）决定，所以跟SQL一模一样。</p>
 </div>
 <hr>

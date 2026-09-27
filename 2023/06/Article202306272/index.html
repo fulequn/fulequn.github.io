@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -114,7 +115,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-709 字
+712 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -144,10 +145,14 @@
 <p><code>any()</code> 函数用于检查数组中的任何一个元素是否为真。如果数组中至少有一个元素为真，那么 <code>any()</code> 函数返回 <code>True</code>；否则，返回 <code>False</code>。</p>
 <p><code>all()</code> 函数用于检查数组中的所有元素是否都为真。如果数组中的所有元素都为真，那么 <code>all()</code> 函数返回 <code>True</code>；否则，返回 <code>False</code>。</p>
 <p>下面是示例代码：</p>
-<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs glsl"><span class="hljs-keyword">if</span> <span class="hljs-built_in">any</span>(I_un):<br>    <span class="hljs-meta"># 数组不为空的处理逻辑</span><br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-meta"># 数组为空的处理逻辑</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">if any(I_un):
+    # 数组不为空的处理逻辑
+else:
+    # 数组为空的处理逻辑</code></pre></div></figure>
 <p>2.合并两个ndarray数组，并且去重</p>
 <p>如果你想将两个ndarray合并，并且只保留其中不重复的值，你可以使用<code>np.unique()</code>函数。这个函数可以去除数组中的重复元素，并返回一个只包含唯一值的新数组。代码如下：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">I_un</span> = np.concatenate((I_un, I_un_j), axis=<span class="hljs-number">0</span>)<br><span class="hljs-attr">I_un</span> = np.unique(I_un)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">I_un &#x3D; np.concatenate((I_un, I_un_j), axis&#x3D;0)
+I_un &#x3D; np.unique(I_un)</code></pre></div></figure>
 <p>在这个示例中，<code>np.concatenate()</code>函数用于将<code>I_un</code>和<code>I_un_j</code>合并为一个新的数组。然后，<code>np.unique()</code>函数对合并后的数组进行去重操作，得到一个只包含唯一值的新数组。最后，将去重后的数组重新赋值给<code>I_un</code>。</p>
 <p>这样，你就可以将不同的值添加到<code>I_un</code>中，而不存储重复的值。</p>
 <p>3.自定义类型排序</p>
@@ -155,7 +160,13 @@
 <p>当你尝试对自定义类型进行排序或比较操作时，Python不知道如何对其进行排序，因此会引发TypeError异常。</p>
 <p>为了解决这个问题，你可以通过在自定义类中定义<code>__lt__()</code>方法来指定如何比较两个对象的大小。<code>__lt__()</code>方法用于定义小于运算符（&lt;）的行为。你可以根据自己的需求在该方法中实现自定义的比较逻辑。</p>
 <p>以下是一个示例，展示了如何在<code>User</code>类中定义<code>__lt__()</code>方法：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span>:<br>    <span class="hljs-comment"># ... 其他代码 ...</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__lt__</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span>, other</span>):<br>        <span class="hljs-comment"># 比较逻辑，根据自己的需求进行实现</span><br>        <span class="hljs-comment"># 返回True表示当前对象小于other对象，否则返回False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.id &lt; other.id<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">class User:
+    # ... 其他代码 ...
+
+    def __lt__(self, other):
+        # 比较逻辑，根据自己的需求进行实现
+        # 返回True表示当前对象小于other对象，否则返回False
+        return self.id &lt; other.id</code></pre></div></figure>
 <p>在这个示例中，我们在<code>User</code>类中定义了<code>__lt__()</code>方法，比较的依据是用户的<code>id</code>属性。你可以根据自己的需求来定义比较逻辑。</p>
 <p>通过定义<code>__lt__()</code>方法，你可以告诉Python如何比较两个<code>User</code>对象的大小，从而解决TypeError异常。</p>
 </div>

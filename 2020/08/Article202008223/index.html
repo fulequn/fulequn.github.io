@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块 1pip install PyPDF2 1、常用的函数 1234567891011121314#!&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*-# @T">
+<meta name="description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块 pip install PyPDF2 1、常用的函数 #!&#x2F;usr&#x2F;bin&#x2F;env python # -*- coding: utf-8 -*- # @Time">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python之PyPDF2模块的使用">
 <meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008223/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块 1pip install PyPDF2 1、常用的函数 1234567891011121314#!&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*-# @T">
+<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块 pip install PyPDF2 1、常用的函数 #!&#x2F;usr&#x2F;bin&#x2F;env python # -*- coding: utf-8 -*- # @Time">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg">
 <meta property="article:published_time" content="2020-08-22T14:00:16.000Z">
@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -115,11 +116,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-797 字
+854 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-7 分钟
+8 分钟
 </span>
 </div>
 </div>
@@ -142,22 +143,141 @@
 <p>原文链接：<a target="_blank" rel="noopener" href="https://www.zhangshengrong.com/p/8AaYmpoGa2/">https://www.zhangshengrong.com/p/8AaYmpoGa2/</a></p>
 <p>PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。</p>
 <p>0、安装PyPDF2的模块</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> PyPDF2<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">pip install PyPDF2</code></pre></div></figure>
 <p>1、常用的函数</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-comment"># @Time  : 2020/1/15 13:38</span><br><span class="hljs-comment"># @Author : suk</span><br><span class="hljs-comment"># @File  : pyxl.py</span><br><span class="hljs-comment"># @Software: PyCharm</span><br>import PyPDF2<br><br>reader = PyPDF2.PdfFileReader(<span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;linux.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>))<br><span class="hljs-literal">print</span>(reader.getNumPages()) <span class="hljs-comment"># 获取pdf总页数</span><br><span class="hljs-literal">print</span>(reader.isEncrypted) <span class="hljs-comment"># 判断是否有加密</span><br><span class="hljs-keyword">page</span> = reader.getPage(<span class="hljs-number">4</span>) <span class="hljs-comment"># 获取第四页</span><br><span class="hljs-literal">print</span>(<span class="hljs-keyword">page</span>.extractText()) <span class="hljs-comment"># 获取第四页的内容</span><br><span class="hljs-literal">print</span>(reader.getDocumentInfo()) <span class="hljs-comment"># 获取PDF元信息，即创建时间，作者，标题等</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+# @Time  : 2020&#x2F;1&#x2F;15 13:38
+# @Author : suk
+# @File  : pyxl.py
+# @Software: PyCharm
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+print(reader.getNumPages()) # 获取pdf总页数
+print(reader.isEncrypted) # 判断是否有加密
+page &#x3D; reader.getPage(4) # 获取第四页
+print(page.extractText()) # 获取第四页的内容
+print(reader.getDocumentInfo()) # 获取PDF元信息，即创建时间，作者，标题等</code></pre></div></figure>
 <p>2、读取PDF文件，取指定页数，写入到硬盘上的示例</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs css">#!/usr/bin/env python<br># -*- coding: utf-<span class="hljs-number">8</span> -*-<br><br>import PyPDF2<br><br>reader = PyPDF2.<span class="hljs-built_in">PdfFileReader</span>(<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;linux.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>))<br><br>output = PyPDF2.<span class="hljs-built_in">PdfFileWriter</span>()<br><br>output.<span class="hljs-built_in">addPage</span>(reader.<span class="hljs-built_in">getPage</span>(<span class="hljs-number">1</span>))<br>output.<span class="hljs-built_in">addPage</span>(reader.<span class="hljs-built_in">getPage</span>(<span class="hljs-number">4</span>))<br>output.<span class="hljs-built_in">addPage</span>(reader.<span class="hljs-built_in">getPage</span>(<span class="hljs-number">5</span>))<br><span class="hljs-built_in">print</span>(output.<span class="hljs-built_in">getNumPages</span>()) # 获取写入页的总页数<br><br>output.<span class="hljs-built_in">encrypt</span>(<span class="hljs-string">&#x27;123456&#x27;</span>)<br>outputStream = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;PyPDF2-output.pdf&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>)<br>output.<span class="hljs-built_in">write</span>(outputStream)<br>outputStream.<span class="hljs-built_in">close</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+
+output &#x3D; PyPDF2.PdfFileWriter()
+
+output.addPage(reader.getPage(1))
+output.addPage(reader.getPage(4))
+output.addPage(reader.getPage(5))
+print(output.getNumPages()) # 获取写入页的总页数
+
+output.encrypt(&#39;123456&#39;)
+outputStream &#x3D; open(&#39;PyPDF2-output.pdf&#39;, &#39;wb&#39;)
+output.write(outputStream)
+outputStream.close()</code></pre></div></figure>
 <p>3、读取PDF某一页，旋转180度后，写入到新的PDF文件的示例</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br>import PyPDF2<br><br>reader = PyPDF2.PdfFileReader(<span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;linux.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>))<br><br><span class="hljs-keyword">page</span> = reader.getPage(<span class="hljs-number">0</span>) <span class="hljs-comment"># 获取第0页</span><br><span class="hljs-keyword">page</span>.rotateClockwise(<span class="hljs-number">180</span>) <span class="hljs-comment"># 旋转180度</span><br><br>writer = PyPDF2.PdfFileWriter() <span class="hljs-comment"># 创建PDF写入的对象</span><br>writer.addPage(<span class="hljs-keyword">page</span>)<br><br>outputStream = <span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;rotate-page-test.pdf&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-comment"># 创建一个PDF文件</span><br>writer.write(outputStream) <span class="hljs-comment"># 往文件写入PDF数据</span><br>outputStream.close() <span class="hljs-comment"># 写入流</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+
+page &#x3D; reader.getPage(0) # 获取第0页
+page.rotateClockwise(180) # 旋转180度
+
+writer &#x3D; PyPDF2.PdfFileWriter() # 创建PDF写入的对象
+writer.addPage(page)
+
+outputStream &#x3D; open(&#39;rotate-page-test.pdf&#39;, &#39;wb&#39;) # 创建一个PDF文件
+writer.write(outputStream) # 往文件写入PDF数据
+outputStream.close() # 写入流</code></pre></div></figure>
 <p>4、PDF增加水印的示例</p>
 <p>注意：水印模板可以利用WORD文档写好文字，转为PDF即可</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br>import PyPDF2<br><br>reader = PyPDF2.PdfFileReader(<span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;linux.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)) <span class="hljs-comment"># 增加水印的原文件</span><br><br>watermark = PyPDF2.PdfFileReader(<span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;水印模板.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)) <span class="hljs-comment"># 水印的模板</span><br><br>writer = PyPDF2.PdfFileWriter() <span class="hljs-comment"># 写入PDF的对象</span><br><br>for i in range(reader.getNumPages()):<br>  <span class="hljs-keyword">page</span> = reader.getPage(i)<br>  <span class="hljs-keyword">page</span>.mergePage(watermark.getPage(<span class="hljs-number">0</span>)) <span class="hljs-comment"># 将原文件与水印模板合并</span><br>  writer.addPage(<span class="hljs-keyword">page</span>) <span class="hljs-comment"># 增加到写入对象中</span><br><br>outputStream = <span class="hljs-literal">open</span>(<span class="hljs-string">&#x27;watermark-test-linux.pdf&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-comment"># 打开一个写入硬盘的文件对象</span><br>writer.write(outputStream) <span class="hljs-comment"># 将合并好的数据，写入硬盘中</span><br>outputStream.close() <span class="hljs-comment"># 关闭文件句柄</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;)) # 增加水印的原文件
+
+watermark &#x3D; PyPDF2.PdfFileReader(open(&#39;水印模板.pdf&#39;, &#39;rb&#39;)) # 水印的模板
+
+writer &#x3D; PyPDF2.PdfFileWriter() # 写入PDF的对象
+
+for i in range(reader.getNumPages()):
+  page &#x3D; reader.getPage(i)
+  page.mergePage(watermark.getPage(0)) # 将原文件与水印模板合并
+  writer.addPage(page) # 增加到写入对象中
+
+outputStream &#x3D; open(&#39;watermark-test-linux.pdf&#39;, &#39;wb&#39;) # 打开一个写入硬盘的文件对象
+writer.write(outputStream) # 将合并好的数据，写入硬盘中
+outputStream.close() # 关闭文件句柄</code></pre></div></figure>
 <p>测试效果</p>
 <p><img src="https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>5、合并多个指定的PDF文件的示例</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-built_in">from</span> PyPDF2 import PdfFileMerger<br><br>merger = PdfFileMerger() <span class="hljs-comment"># 创建一个合并的对象</span><br><br>input1 = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;01PDF.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)<br>input2 = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;02PDF.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)<br>input3 = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;03PDF.pdf&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>)<br><br>merger.append(fileobj=input1, pages=(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment"># 合并文件1的0到3页</span><br>merger.<span class="hljs-built_in">merge</span>(position=<span class="hljs-number">2</span>, fileobj=input2, pages=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) <span class="hljs-comment"># 合并文件2的0到1页</span><br>merger.append(fileobj=input3) <span class="hljs-comment"># 合并文件的所有页</span><br><br>output = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;document-output.pdf&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-comment"># 保存硬盘上</span><br>merger.<span class="hljs-built_in">write</span>(output) <span class="hljs-comment"># 写入到硬盘上</span><br>output.<span class="hljs-built_in">close</span>() <span class="hljs-comment"># 关闭文件句柄</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+from PyPDF2 import PdfFileMerger
+
+merger &#x3D; PdfFileMerger() # 创建一个合并的对象
+
+input1 &#x3D; open(&#39;01PDF.pdf&#39;, &#39;rb&#39;)
+input2 &#x3D; open(&#39;02PDF.pdf&#39;, &#39;rb&#39;)
+input3 &#x3D; open(&#39;03PDF.pdf&#39;, &#39;rb&#39;)
+
+merger.append(fileobj&#x3D;input1, pages&#x3D;(0, 3)) # 合并文件1的0到3页
+merger.merge(position&#x3D;2, fileobj&#x3D;input2, pages&#x3D;(0, 1)) # 合并文件2的0到1页
+merger.append(fileobj&#x3D;input3) # 合并文件的所有页
+
+output &#x3D; open(&#39;document-output.pdf&#39;, &#39;wb&#39;) # 保存硬盘上
+merger.write(output) # 写入到硬盘上
+output.close() # 关闭文件句柄</code></pre></div></figure>
 <p>6、批量合并指定目录的PDF文件的示例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-keyword">import</span> PyPDF2<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> glob<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_all_pdf_files</span>(<span class="hljs-params">path</span>):<br>  <span class="hljs-string">&quot;&quot;&quot;获取指定目录的所有pdf文件名&quot;&quot;&quot;</span><br>  all_pdfs = glob.glob(<span class="hljs-string">&#x27;&#123;0&#125;/*.pdf&#x27;</span>.<span class="hljs-built_in">format</span>(path))<br>  all_pdfs.sort(key=<span class="hljs-built_in">str</span>.lower) <span class="hljs-comment"># 排序</span><br>  <span class="hljs-keyword">return</span> all_pdfs<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>  path = os.getcwd()<br>  all_pdfs = get_all_pdf_files(path)<br>  <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> all_pdfs:<br>    <span class="hljs-keyword">raise</span> SystemExit(<span class="hljs-string">&#x27;没有可用的PDF类型文件&#x27;</span>)<br><br>  merger = PyPDF2.PdfFileMerger()<br><br>  first_obj = <span class="hljs-built_in">open</span>(all_pdfs[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-comment"># 打开第一个PDF文件</span><br>  merger.append(first_obj) <span class="hljs-comment"># 增加到合并的对象中</span><br><br>  file_objs = []<br>  <span class="hljs-keyword">for</span> pdf <span class="hljs-keyword">in</span> all_pdfs[<span class="hljs-number">1</span>:]: <span class="hljs-comment"># 读取所有的文件对象</span><br>    file_objs.append(<span class="hljs-built_in">open</span>(pdf, <span class="hljs-string">&#x27;rb&#x27;</span>))<br><br>  <span class="hljs-keyword">for</span> file_obj <span class="hljs-keyword">in</span> file_objs:<br>    reader = PyPDF2.PdfFileReader(file_obj)<br>    merger.append(fileobj=file_obj, pages=(<span class="hljs-number">1</span>, reader.getNumPages()))<br><br>  outputStream = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;merge-pdfs.pdf&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>)<br>  merger.write(outputStream)<br>  outputStream.close()<br>  <span class="hljs-keyword">for</span> file_obj <span class="hljs-keyword">in</span> file_objs: <span class="hljs-comment"># 批量关闭文件句柄</span><br>    file_obj.close()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>  main()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+import os
+import glob
+
+def get_all_pdf_files(path):
+  &quot;&quot;&quot;获取指定目录的所有pdf文件名&quot;&quot;&quot;
+  all_pdfs &#x3D; glob.glob(&#39;&#123;0&#125;&#x2F;*.pdf&#39;.format(path))
+  all_pdfs.sort(key&#x3D;str.lower) # 排序
+  return all_pdfs
+
+def main():
+  path &#x3D; os.getcwd()
+  all_pdfs &#x3D; get_all_pdf_files(path)
+  if not all_pdfs:
+    raise SystemExit(&#39;没有可用的PDF类型文件&#39;)
+
+  merger &#x3D; PyPDF2.PdfFileMerger()
+
+  first_obj &#x3D; open(all_pdfs[0], &#39;rb&#39;) # 打开第一个PDF文件
+  merger.append(first_obj) # 增加到合并的对象中
+
+  file_objs &#x3D; []
+  for pdf in all_pdfs[1:]: # 读取所有的文件对象
+    file_objs.append(open(pdf, &#39;rb&#39;))
+
+  for file_obj in file_objs:
+    reader &#x3D; PyPDF2.PdfFileReader(file_obj)
+    merger.append(fileobj&#x3D;file_obj, pages&#x3D;(1, reader.getNumPages()))
+
+  outputStream &#x3D; open(&#39;merge-pdfs.pdf&#39;, &#39;wb&#39;)
+  merger.write(outputStream)
+  outputStream.close()
+  for file_obj in file_objs: # 批量关闭文件句柄
+    file_obj.close()
+
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+  main()</code></pre></div></figure>
 </div>
 <hr>
 <div>

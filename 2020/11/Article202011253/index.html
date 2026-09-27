@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客  字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 1exp &#x3D; u&quot;我是含有中文字符组成的字符串。&quot; 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含">
+<meta name="description" content="参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客  字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 exp &#x3D; u&quot;我是含有中文字符组成的字符串。&quot; 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义的，比如最常见的”\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python字符串前面加u,r,b,f的含义">
 <meta property="og:url" content="https://blog.fulequn.online/2020/11/Article202011253/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客  字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 1exp &#x3D; u&quot;我是含有中文字符组成的字符串。&quot; 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含">
+<meta property="og:description" content="参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客  字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 exp &#x3D; u&quot;我是含有中文字符组成的字符串。&quot; 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义的，比如最常见的”\">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-11-25T10:13:58.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:32.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-353 字
+336 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -143,12 +144,12 @@
 </blockquote>
 <p><strong>字符串前加u</strong></p>
 <p>后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">exp = <span class="hljs-string">u&quot;我是含有中文字符组成的字符串。&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">exp <span class="token operator">=</span> <span class="token string">u"我是含有中文字符组成的字符串。"</span></code></pre></div></figure>
 <p><strong>字符串前加r</strong></p>
 <p>去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义的，比如最常见的”\n”表示换行，”\t”表示Tab等。 ）</p>
 <p>应用：</p>
 <p>常用于正则表达式，对应着re模块。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">exp = <span class="hljs-string">r&quot;\n\n\n\n”　　# 表示一个普通生字符串 \n\n\n\n，而不表示换行了。</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">exp <span class="token operator">=</span> r"\n\n\n\n”　　<span class="token comment"># 表示一个普通生字符串 \n\n\n\n，而不表示换行了。</span></code></pre></div></figure>
 <p><strong>字符串前加b</strong></p>
 <p>b&quot; &quot;前缀表示：后面字符串是bytes 类型。</p>
 <p>用处：网络编程中，服务器和浏览器只认bytes 类型数据。<br>
@@ -156,12 +157,13 @@
 <p>附：在 Python3 中，bytes 和 str 的互相转换方式是</p>
 <p>str.encode(‘utf-8’)</p>
 <p>bytes.decode(‘utf-8’)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">response = <span class="hljs-string">b&#x27;&lt;h1&gt;Hello World!&lt;/h1&gt;&#x27;</span>     <span class="hljs-comment"># b&#x27; &#x27; 表示这是一个 bytes 对象</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">response <span class="token operator">=</span> <span class="token string">b'&lt;h1>Hello World!&lt;/h1>'</span>     <span class="token comment"># b' ' 表示这是一个 bytes 对象</span></code></pre></div></figure>
 <p><strong>字符串前加f</strong></p>
 <p>以 f 开头表示在字符串内支持大括号内的python 表达式,字符串拼接</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">name = <span class="hljs-string">&#x27;Miles&#x27;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;My name is <span class="hljs-subst">&#123;name&#125;</span>.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">'Miles'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'My name is </span><span class="token interpolation"><span class="token punctuation">&#123;</span>name<span class="token punctuation">&#125;</span></span><span class="token string">.'</span></span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>输出结果为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;My name <span class="hljs-keyword">is</span> Miles.<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span>My name <span class="token keyword">is</span> Miles<span class="token punctuation">.</span></code></pre></div></figure>
 </div>
 <hr>
 <div>

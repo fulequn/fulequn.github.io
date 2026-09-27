@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -254,7 +255,7 @@ Ubuntu16桌面版卸载不必要的自带软件
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2021/11/Article202111294/" target="_self">
 <div>
-参考链接： Ubuntu 16.04桌面版卸载不必要的自带软件 - 简书 (jianshu.com) 背景 由于Ubuntu自带了一些例如Firefox、LibreOffice软件，占用系统大量空间，所以需要将其删除。 卸载方法 1.卸载LibreOffice 1sudo apt-get remove libreoffice-common 2.删除Amazon广告图标 1sudo rm -f
+参考链接： Ubuntu 16.04桌面版卸载不必要的自带软件 - 简书 (jianshu.com) 背景 由于Ubuntu自带了一些例如Firefox、LibreOffice软件，占用系统大量空间，所以需要将其删除。 卸载方法 1.卸载LibreOffice sudo apt-get remove libreoffice-common 2.删除Amazon广告图标 sudo rm -f /u
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -594,7 +595,7 @@ K8S内容1
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2021/02/Article202102161/" target="_self">
 <div>
-内容： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011
+内容： kind: ClusterRole #ClusterRole是一组权限的集合，但与Role不同的是，ClusterRole可以在包括所有NameSpce和集群级别的资源或非资源类型进行鉴权。 apiVersion: rbac.authorization.k8s.io/v1 #api版本 metadata: # 资源的元数据/属性 name: multipoint-plugin-exa
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -628,7 +629,7 @@ Centos安装docker以及ServiceAccount
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2021/01/Article202101201/" target="_self">
 <div>
-一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： 1curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： 1curl -sSL https://get.daocloud.io/docker | sh 2、Docker 镜像加速 国内从 Do
+一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker |
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -663,7 +664,7 @@ Centos安装docker以及ServiceAccount
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2021/01/Article202101103/" target="_self">
 <div>
-cnn_layers.py 实现卷积神经网络的前向后传播的函数。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788
+cnn_layers.py 实现卷积神经网络的前向后传播的函数。 #-*- coding: utf-8 -*- import numpy as np from layers import * from bn_layers import * def conv_forward_naive(x, w, b, conv_param): """ 卷积前向传播。 Input:
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -698,7 +699,7 @@ Pytorch的view方法
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2021/01/Article202101102/" target="_self">
 <div>
-参考链接： https://blog.csdn.net/scut_salmon/article/details/82391320 https://www.cnblogs.com/geeksongs/p/15034108.html 结论：Pytorch里的view方法用于改变数据维度，与numpy的reshape方法类似。 一.按照传入数字使数据维度进行转换 示例 123456789101112
+参考链接： https://blog.csdn.net/scut_salmon/article/details/82391320 https://www.cnblogs.com/geeksongs/p/15034108.html 结论：Pytorch里的view方法用于改变数据维度，与numpy的reshape方法类似。 一.按照传入数字使数据维度进行转换 示例 a = torch.arang
 </div>
 </a>
 <div class="index-btm post-metas">

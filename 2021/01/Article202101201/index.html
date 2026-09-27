@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： 1curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： 1curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh 2、Docker 镜像加速 国内从 Do">
+<meta name="description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker |">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos安装docker以及ServiceAccount">
 <meta property="og:url" content="https://blog.fulequn.online/2021/01/Article202101201/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： 1curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： 1curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh 2、Docker 镜像加速 国内从 Do">
+<meta property="og:description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下： curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun 也可以使用国内 daocloud 一键安装命令： curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker |">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812333.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812448.png">
@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -144,9 +145,9 @@
 <h1 id="一、Centos安装docker">一、Centos安装docker</h1>
 <h2 id="1、使用官方安装脚本自动安装">1、使用官方安装脚本自动安装</h2>
 <p>安装命令如下：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">curl -fsSL <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.docker.com | bash -s docker <span class="hljs-comment">--mirror Aliyun</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun</code></pre></div></figure>
 <p>也可以使用国内 daocloud 一键安装命令：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">curl -<span class="hljs-variable">sSL</span> <span class="hljs-keyword">https</span>://<span class="hljs-built_in">get</span>.daocloud.io/docker | sh<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh</code></pre></div></figure>
 <h2 id="2、Docker-镜像加速">2、Docker 镜像加速</h2>
 <p>国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：</p>
 <ul>
@@ -156,20 +157,21 @@
 </ul>
 <h3 id="2-1、Ubuntu16-04-、Debian8-、CentOS7">2.1、Ubuntu16.04+、Debian8+、CentOS7</h3>
 <p>对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<span class="hljs-string">&quot;registry-mirrors&quot;</span>:[<span class="hljs-string">&quot;https://reg-mirror.qiniu.com/&quot;</span>]&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;&quot;registry-mirrors&quot;:[&quot;https:&#x2F;&#x2F;reg-mirror.qiniu.com&#x2F;&quot;]&#125;</code></pre></div></figure>
 <p>之后重新启动服务：</p>
 <p>$ <strong>sudo</strong> systemctl daemon-reload<br>
 $ <strong>sudo</strong> systemctl restart docker</p>
 <h2 id="3、Docker开机自启动">3、Docker开机自启动</h2>
 <p>如果不设置成开机自启动，那么每一次开启机器都需要手动start，因此我们设置成开机自启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable docker<br>systemctl is-enabled docker #检查是否为自启动，enbale则为已经设置成自启动<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+systemctl is-enabled <span class="token function">docker</span> <span class="token comment">#检查是否为自启动，enbale则为已经设置成自启动</span></code></pre></div></figure>
 <p>然后我们可以检查docker的各种信息。使用命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker system info<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> system info</code></pre></div></figure>
 <h2 id="4、出现的异常">4、出现的异常</h2>
 <h3 id="4-1、docker-Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running-See-‘docker-run-help’">4.1、docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.See ‘docker run --help’.</h3>
 <p>一、</p>
 <p>因为，我忘记启动docker这个服务了。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">service docker <span class="hljs-literal">start</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">service docker start</code></pre></div></figure>
 <p>二、</p>
 <p>You need to add user into docker group. by ’ sudo gpasswd-a xxxx docker’(xxx is your user name)</p>
 <p>Then restart your computer.</p>
@@ -206,17 +208,90 @@ $ <strong>sudo</strong> systemctl restart docker</p>
 <p>正常情况下，为了确保kubernetes集群的安全性，Api Server 都会给客户端进行身份认证，但是Pod访问Kubernetes Api Server服务时，也是需要身份认证的。如下图：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812448.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <p>我们在每一个namespace下看到都有一个secret,而我们看svc的时候，api server通过svc的访问访问的，他们的Endpoints是api server。</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ kubectl  <span class="hljs-keyword">get</span> svc <br><span class="hljs-type">NAME</span>         <span class="hljs-keyword">TYPE</span>        <span class="hljs-keyword">CLUSTER</span>-IP     <span class="hljs-keyword">EXTERNAL</span>-IP   PORT(S)   AGE<br>kubernetes   ClusterIP   <span class="hljs-number">10.96</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>      &lt;<span class="hljs-keyword">none</span>&gt;        <span class="hljs-number">443</span>/TCP   <span class="hljs-number">52</span>d<br>$ kubectl describe svc kubernetes <br><span class="hljs-type">Name</span>:              kubernetes<br>Namespace:         <span class="hljs-keyword">default</span><br>Labels:            component=apiserver<br>                   provider=kubernetes<br>Annotations:       &lt;<span class="hljs-keyword">none</span>&gt;<br>Selector:          &lt;<span class="hljs-keyword">none</span>&gt;<br><span class="hljs-keyword">Type</span>:              ClusterIP<br>IP:                <span class="hljs-number">10.96</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>Port:              https  <span class="hljs-number">443</span>/TCP<br>TargetPort:        <span class="hljs-number">6443</span>/TCP<br>Endpoints:         <span class="hljs-number">172.16</span><span class="hljs-number">.138</span><span class="hljs-number">.40</span>:<span class="hljs-number">6443</span>,<span class="hljs-number">172.16</span><span class="hljs-number">.138</span><span class="hljs-number">.41</span>:<span class="hljs-number">6443</span><br><span class="hljs-keyword">Session</span> Affinity:  <span class="hljs-keyword">None</span><br>Events:            &lt;<span class="hljs-keyword">none</span>&gt;<br>$ kubectl <span class="hljs-keyword">get</span> secret  -n <span class="hljs-keyword">default</span><br><span class="hljs-type">NAME</span>                  <span class="hljs-keyword">TYPE</span>                                  DATA      AGE<br><span class="hljs-keyword">default</span>-token-lplp6   kubernetes.io/service-account-token   <span class="hljs-number">3</span>         <span class="hljs-number">52</span>d<br>$ kubectl <span class="hljs-keyword">get</span> secret  -n ingress-nginx<br><span class="hljs-type">NAME</span>                                       <span class="hljs-keyword">TYPE</span>                                  DATA      AGE<br><span class="hljs-keyword">default</span>-token-v58zx                        kubernetes.io/service-account-token   <span class="hljs-number">3</span>         <span class="hljs-number">52</span>d<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$ kubectl  get svc 
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443&#x2F;TCP   52d
+$ kubectl describe svc kubernetes 
+Name:              kubernetes
+Namespace:         default
+Labels:            component&#x3D;apiserver
+                   provider&#x3D;kubernetes
+Annotations:       &lt;none&gt;
+Selector:          &lt;none&gt;
+Type:              ClusterIP
+IP:                10.96.0.1
+Port:              https  443&#x2F;TCP
+TargetPort:        6443&#x2F;TCP
+Endpoints:         172.16.138.40:6443,172.16.138.41:6443
+Session Affinity:  None
+Events:            &lt;none&gt;
+$ kubectl get secret  -n default
+NAME                  TYPE                                  DATA      AGE
+default-token-lplp6   kubernetes.io&#x2F;service-account-token   3         52d
+$ kubectl get secret  -n ingress-nginx
+NAME                                       TYPE                                  DATA      AGE
+default-token-v58zx                        kubernetes.io&#x2F;service-account-token   3         52d</code></pre></div></figure>
 <p>每个Namespace下都有一个名为default的默认的 Service Account对象，这个Service Account里面有一个名为Tokens的可以当作Volume一样被Mount到Pod里的secret，当Pod启动时候，这个Secret会自动Mount到Pod的指定目录下，用来完成Pod中的进程访问API server时的身份认证过程。下面可以看到</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nix">$  kubectl describe pod my-demo<br>.....<br><span class="hljs-params">Volumes:</span><br>  <span class="hljs-params">appindex:</span><br>    <span class="hljs-params">Type:</span>          HostPath (bare host directory volume)<br>    <span class="hljs-params">Path:</span>          <span class="hljs-symbol">/data/pod/myapp</span><br>    <span class="hljs-params">HostPathType:</span>  DirectoryOrCreate<br>  <span class="hljs-params">default-token-lplp6:</span><br>    <span class="hljs-params">Type:</span>        Secret (a volume populated by a Secret)<br>    <span class="hljs-params">SecretName:</span>  default-token-lplp6<br>    <span class="hljs-params">Optional:</span>    <span class="hljs-literal">false</span><br>.....<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$  kubectl describe pod my-demo
+.....
+Volumes:
+  appindex:
+    Type:          HostPath (bare host directory volume)
+    Path:          &#x2F;data&#x2F;pod&#x2F;myapp
+    HostPathType:  DirectoryOrCreate
+  default-token-lplp6:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-lplp6
+    Optional:    false
+.....</code></pre></div></figure>
 <h3 id="创建一个serviceaccount">创建一个serviceaccount</h3>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs nix">$ kubectl create serviceaccount jaxzhai<br>$ kubectl get sa <br>NAME      SECRETS   AGE<br>default   <span class="hljs-number">1</span>         <span class="hljs-number">52</span>d<br>jaxzhai   <span class="hljs-number">1</span>         <span class="hljs-number">8</span>s<br>$ kubectl describe sa jaxzhai<br><span class="hljs-params">Name:</span>                jaxzhai<br><span class="hljs-params">Namespace:</span>           default<br><span class="hljs-params">Labels:</span>              <span class="hljs-symbol">&lt;none&gt;</span><br><span class="hljs-params">Annotations:</span>         <span class="hljs-symbol">&lt;none&gt;</span><br>Image pull <span class="hljs-params">secrets:</span>  <span class="hljs-symbol">&lt;none&gt;</span><br>Mountable <span class="hljs-params">secrets:</span>   jaxzhai-token-<span class="hljs-number">9</span>n5th<br><span class="hljs-params">Tokens:</span>              jaxzhai-token-<span class="hljs-number">9</span>n5th<br><span class="hljs-params">Events:</span>              <span class="hljs-symbol">&lt;none&gt;</span>$ kubectl get secret NAME                  TYPE                                  DATA      AGEdefault-token-lplp6   kubernetes.io<span class="hljs-symbol">/service-account-token</span>   <span class="hljs-number">3</span>         <span class="hljs-number">52</span>djaxzhai-token-<span class="hljs-number">9</span>n5th   kubernetes.io<span class="hljs-symbol">/service-account-token</span>   <span class="hljs-number">3</span>         <span class="hljs-number">4</span>m<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$ kubectl create serviceaccount jaxzhai
+$ kubectl get sa 
+NAME      SECRETS   AGE
+default   1         52d
+jaxzhai   1         8s
+$ kubectl describe sa jaxzhai
+Name:                jaxzhai
+Namespace:           default
+Labels:              &lt;none&gt;
+Annotations:         &lt;none&gt;
+Image pull secrets:  &lt;none&gt;
+Mountable secrets:   jaxzhai-token-9n5th
+Tokens:              jaxzhai-token-9n5th
+Events:              &lt;none&gt;$ kubectl get secret NAME                  TYPE                                  DATA      AGEdefault-token-lplp6   kubernetes.io&#x2F;service-account-token   3         52djaxzhai-token-9n5th   kubernetes.io&#x2F;service-account-token   3         4m</code></pre></div></figure>
 <p>这里我们看到Kubernetes集群会自动创建一个token的secert，并被jaxzhai这个serviceaccount引用。</p>
 <p>设置非默认的 service account，只需要在 pod 的<code>spec.serviceAccountName</code> 字段中将name设置为您想要用的 service account 名字即可。</p>
 <p>在 pod 创建之初 service account 就必须已经存在，否则创建将被拒绝。</p>
 <p>您不能更新已创建的 pod 的 service account。</p>
 <h3 id="在pod中使用service-account">在pod中使用service account</h3>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">apiVersion:</span> v1<br><span class="hljs-params">kind:</span> Pod<br><span class="hljs-params">metadata:</span><br>  <span class="hljs-params">name:</span> my-sa-demo<br>  <span class="hljs-params">namespace:</span> default<br>  <span class="hljs-params">labels:</span><br>    <span class="hljs-params">name:</span> myapp<br>    <span class="hljs-params">tier:</span> appfront<br><span class="hljs-params">spec:</span><br>  <span class="hljs-params">containers:</span><br>  <span class="hljs-operator">-</span> <span class="hljs-params">name:</span> myapp<br>    <span class="hljs-params">image:</span> ikubernetes<span class="hljs-operator">/</span>myapp:v1<br>    <span class="hljs-params">ports:</span><br>    <span class="hljs-operator">-</span> <span class="hljs-params">name:</span> http<br>      <span class="hljs-params">containerPort:</span> <span class="hljs-number">80</span><br>  <span class="hljs-params">serviceAccountName:</span> jaxzhai<br><br>$ kubectl apply <span class="hljs-operator">-</span>f myapp-serviceaccount.yaml <br>pod<span class="hljs-symbol">/my-sa-demo</span> created<br>$ kubectl describe pod my-sa-demo <br>......<br><span class="hljs-params">Volumes:</span><br>  <span class="hljs-params">jaxzhai-token-9n5th:</span><br>    <span class="hljs-params">Type:</span>        Secret (a volume populated by a Secret)<br>    <span class="hljs-params">SecretName:</span>  jaxzhai-token-<span class="hljs-number">9</span>n5th<br>    <span class="hljs-params">Optional:</span>    <span class="hljs-literal">false</span><br>QoS <span class="hljs-params">Class:</span>       BestEffort<br>......<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-sa-demo
+  namespace: default
+  labels:
+    name: myapp
+    tier: appfront
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes&#x2F;myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+  serviceAccountName: jaxzhai
+
+$ kubectl apply -f myapp-serviceaccount.yaml 
+pod&#x2F;my-sa-demo created
+$ kubectl describe pod my-sa-demo 
+......
+Volumes:
+  jaxzhai-token-9n5th:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  jaxzhai-token-9n5th
+    Optional:    false
+QoS Class:       BestEffort
+......</code></pre></div></figure>
 <blockquote>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/centos-docker-install.html">https://www.runoob.com/docker/centos-docker-install.html</a></p>

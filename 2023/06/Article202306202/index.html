@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： 12345678X_list[i - 1, c, w] + &quot;0&quot;PyDev console: starting.&#x27;10&#x27;X_list[i - 1, c, w]&amp;">
+<meta name="description" content="1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： X_list[i - 1, c, w] + &quot;0&quot; PyDev console: starting. &#39;10&#39; X_list[i - 1, c, w] &#39;1&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用numpy的ndarray存储str类型的问题">
 <meta property="og:url" content="https://blog.fulequn.online/2023/06/Article202306202/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： 12345678X_list[i - 1, c, w] + &quot;0&quot;PyDev console: starting.&#x27;10&#x27;X_list[i - 1, c, w]&amp;">
+<meta property="og:description" content="1 问题描述 使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示： X_list[i - 1, c, w] + &quot;0&quot; PyDev console: starting. &#39;10&#39; X_list[i - 1, c, w] &#39;1&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-21T11:56:28.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:50.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-489 字
+497 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -139,20 +140,29 @@
 <div class="markdown-body">
 <h1 id="1-问题描述">1 问题描述</h1>
 <p>使用numpy来存储str类型的数据时，numpy会把这个数据转化为numpy.str_类型的对象。此时，我想要在对应位置上再添加字符的话，会出现字符赋值不成功的情况。情况如下所示：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-symbol">X_list</span>[i - <span class="hljs-number">1</span>, c, w] + <span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-symbol">PyDev</span> console: starting.<br><span class="hljs-string">&#x27;10&#x27;</span><br><span class="hljs-symbol">X_list</span>[i - <span class="hljs-number">1</span>, c, w]<br><span class="hljs-string">&#x27;1&#x27;</span><br><span class="hljs-symbol">X_list</span>[i, c, w] = <span class="hljs-symbol">X_list</span>[i - <span class="hljs-number">1</span>, c, w] + <span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-symbol">X_list</span>[i, c, w]<br><span class="hljs-string">&#x27;1&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">X_list[i - 1, c, w] + &quot;0&quot;
+PyDev console: starting.
+&#39;10&#39;
+X_list[i - 1, c, w]
+&#39;1&#39;
+X_list[i, c, w] &#x3D; X_list[i - 1, c, w] + &quot;0&quot;
+X_list[i, c, w]
+&#39;1&#39;</code></pre></div></figure>
 <h1 id="2-问题原因">2 问题原因</h1>
 <p>由于 numpy 中的 ndarray 要求所有数据为同一种类型，所以在创建时我使用 dtype=str。此时 numpy 会根据创建时所有元素的最大字符串长度设定 str 的类型。例如所有元素中的最大字符串长度为 11，则会将 str 的类型设置为’&lt;U11’。此时所存储最大字符串长度就被设置为了 11，超过这个长度都会被截取，在进行赋值。并且不会抛出任何异常。</p>
 <p>如果默认不声明字符串长度的话，最大字符串长度为1。</p>
 <p>比如下面这个数组，每个数组元素只能放一个字符</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">leg_arr</span>=np.empty(<span class="hljs-number">4</span>,<span class="hljs-number">3</span>),dtype=str)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">leg_arr&#x3D;np.empty(4,3),dtype&#x3D;str)</code></pre></div></figure>
 <p>如果不知道这一点，即使给数组元素赋个长值也白搭，只有首字符能够保存在元素里，示例：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">leg_arr<span class="hljs-selector-attr">[1,3]</span>=<span class="hljs-string">&#x27;人生苦短 我用python&#x27;</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(leg_arr[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>])</span></span><br>&gt;&gt;人<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">leg_arr[1,3]&#x3D;&#39;人生苦短 我用python&#39;
+print(leg_arr[1,3])
+&gt;&gt;人</code></pre></div></figure>
 <h1 id="3-解决方案">3 解决方案</h1>
 <p><strong>解决办法 1</strong>：使其可接受可变长度的字符，修改 str 为 object 数据类型即可。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">leg_arr</span>=np.empty((4,3), <span class="hljs-attribute">dtype</span>=object)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">leg_arr&#x3D;np.empty((4,3), dtype&#x3D;object)</code></pre></div></figure>
 <p>缺点是灵活性带来了低效率，所以比较适合数据量不大的情况。</p>
 <p><strong>解决办法 2</strong>：预先设定好元素的字符串长度，缺点是效率高但不够灵活，适合大数据量情况。“&lt;U100”就是Unicode字符编码100长度以下。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = np.array([], dtype=<span class="hljs-string">&quot;&lt;U100&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">x &#x3D; np.array([], dtype&#x3D;&quot;&lt;U100&quot;)</code></pre></div></figure>
 <blockquote>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36241012/article/details/118184807">https://blog.csdn.net/qq_36241012/article/details/118184807</a></p>

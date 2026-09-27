@@ -64,6 +64,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -206,7 +207,13 @@
 <li>打开 vscode 的<code>集成终端</code>使用命令行编译和运行</li>
 </ol>
 <p><strong>点击：文件 &gt; 新建文件</strong>，出现一个空白文档，将下面的代码复制粘贴到空白文档中</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>   <span class="hljs-type">char</span> name[<span class="hljs-number">100</span>];<br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;What is your name?\n&quot;</span>);<br>   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,name);<br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello,%s,nice to meet you!\n&quot;</span>,name);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#include &lt;stdio.h&gt;
+int main()&#123;
+   char name[100];
+   printf(&quot;What is your name?\n&quot;);
+   scanf(&quot;%s&quot;,name);
+   printf(&quot;Hello,%s,nice to meet you!\n&quot;,name);
+&#125;</code></pre></div></figure>
 <p>然后按<code>Ctrl+S</code>**将文件后缀名改为<code>.c</code>或<code>.cpp</code>**后保存到电脑上，然后点右上角的三角形按钮</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202305251528787.jpeg" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/39723ee0-ed30-4d9b-aaa1-382565952a51.jpeg"></p>
 <p>但现在会出现下面的情况</p>
@@ -227,16 +234,22 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202305251528795.jpeg" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/b9967ffc-e775-43e5-b811-e0720e7e6262.jpeg"></p>
 <p>用插件运行程序是一种偷懒的方法，它本质是替用户输入了命令，它存在局限，<strong>看一个例子</strong></p>
 <p>假设说我们在代码中使用了 <code>winsock2.h</code>这个头文件，我们用刚刚的<code>Code Runner插件</code>的方式编译会无法通过</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;winsock2.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>   SOCKET client_socket=<span class="hljs-built_in">socket</span>(AF_INET,SOCK_STREAM,IPPROTO_TCP);<br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Compile successfully!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#include &lt;winsock2.h&gt;
+#include &lt;stdio.h&gt;
+int main()&#123;
+   SOCKET client_socket&#x3D;socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+   printf(&quot;Compile successfully!&quot;);
+&#125;</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202305251528796.png" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/2480f52e-1229-4327-94af-6982d89a1a68.png"></p>
 <p>造成问题是原因是：Code Runner 是按照预先设定好的规则，自动在终端执行编译运行的指令，也就是图片上红色下划线标注出的</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">g</span>++ Untitled-<span class="hljs-number">1</span>.cpp -o Untitled-<span class="hljs-number">1</span>  ;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">g++ Untitled-1.cpp -o Untitled-1  ;</code></pre></div></figure>
 <p>如果是使用了<code>winsock2.h</code>，同时又是使用<code>gcc/g++</code>编译，在编译时我们应该在编译指令中额外添加<code>-lwsock32</code>指令，而<code>Code Runner</code>默认下并不会添加这条指令</p>
 <p>正确的编译指令应该是：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">g++ xxx<span class="hljs-selector-class">.cpp</span> -o xxx<span class="hljs-selector-class">.exe</span> -lwsock32<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">g++ xxx.cpp -o xxx.exe -lwsock32</code></pre></div></figure>
 <p>为了解决这个问题，可以使用比较原始的方法，**直接在终端上用命令行编译和运行，**vscode 有一个集成终端，可以连通安装在操作系统上的各种终端</p>
 <p><strong>按 <code>Ctrl+~</code> 打开集成终端（其实是 “`”，打 “~” 是方便大家找到），输入</strong></p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">g++ .\文件名<span class="hljs-string">.cpp</span> -o 文件名<span class="hljs-string">.exe</span> -lwsock32<br><span class="hljs-string">./</span>文件名<span class="hljs-string">.exe</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">g++ .\文件名.cpp -o 文件名.exe -lwsock32
+.&#x2F;文件名.exe</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202305251528797.png" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/242a6c96-85a7-4733-9226-c3e49dd4d364.png"></p>
 <h2 id="三、调试程序">三、调试程序</h2>
 <p>当程序遇到 bug，我们可以单步调试来定位错误，vscode 支持添加断点，添加监视，显示鼠标指向变量的值，调试控制台查询变量值，详细细节我录制了一个演示视频（内容是快速排序）</p>
@@ -261,16 +274,86 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202305251528804.jpeg" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/8272591f-1a35-47be-bf7c-c91a72c6aed4.jpeg"></p>
 <p><strong>然后将下面的代码复制到对应的 json 文件中去并保存，要仔细阅读后面两段说明性文字</strong></p>
 <p><strong>launch.json</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>    <span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-string">&quot;0.2.0&quot;</span>,<br>    <span class="hljs-string">&quot;configurations&quot;</span>: [<br>        &#123;<br>            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;C/C++&quot;</span>,<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;cppdbg&quot;</span>,<br>            <span class="hljs-string">&quot;request&quot;</span>: <span class="hljs-string">&quot;launch&quot;</span>,<br>            <span class="hljs-string">&quot;program&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;fileDirname&#125;</span>/<span class="hljs-variable">$&#123;fileBasenameNoExtension&#125;</span>.exe&quot;</span>,<br>            <span class="hljs-string">&quot;args&quot;</span>: [],<br>            <span class="hljs-string">&quot;stopAtEntry&quot;</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-string">&quot;cwd&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;workspaceFolder&#125;</span>&quot;</span>,<br>            <span class="hljs-string">&quot;environment&quot;</span>: [],<br>            <span class="hljs-string">&quot;externalConsole&quot;</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-string">&quot;MIMode&quot;</span>: <span class="hljs-string">&quot;gdb&quot;</span>,<br>            <span class="hljs-string">&quot;miDebuggerPath&quot;</span>: <span class="hljs-string">&quot;gdb.exe&quot;</span>,<br>            <span class="hljs-string">&quot;preLaunchTask&quot;</span>: <span class="hljs-string">&quot;compile&quot;</span>,<br>            <span class="hljs-string">&quot;setupCommands&quot;</span>: [<br>                &#123;<br>                    <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Enable pretty-printing for gdb&quot;</span>,<br>                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;-enable-pretty-printing&quot;</span>,<br>                    <span class="hljs-string">&quot;ignoreFailures&quot;</span>: <span class="hljs-literal">true</span><br>                &#125;<br>            ],<br>        &#125;,<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        &#123;
+            &quot;name&quot;: &quot;C&#x2F;C++&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;$&#123;fileDirname&#125;&#x2F;$&#123;fileBasenameNoExtension&#125;.exe&quot;,
+            &quot;args&quot;: [],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;: false,
+            &quot;MIMode&quot;: &quot;gdb&quot;,
+            &quot;miDebuggerPath&quot;: &quot;gdb.exe&quot;,
+            &quot;preLaunchTask&quot;: &quot;compile&quot;,
+            &quot;setupCommands&quot;: [
+                &#123;
+                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+                    &quot;ignoreFailures&quot;: true
+                &#125;
+            ],
+        &#125;,
+    ]
+&#125;</code></pre></div></figure>
 <p><strong>tasks.json</strong></p>
 <blockquote>
 <p>如果需要是c语言也就是gcc将下面的command项由g++改为gcc</p>
 <p><strong>如果是多文件编译（即函数声明和函数定义分开，不懂的别乱改），需要将 args 列表中的<code>&quot;${file}&quot;</code>项修改为<code>&quot;${workspaceFolder}/*.cpp&quot;</code> ，多文件推荐用 cmake</strong></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>    <span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-string">&quot;2.0.0&quot;</span>,<br>    <span class="hljs-string">&quot;tasks&quot;</span>: [<br>        &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;shell&quot;</span>,<br>            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;compile&quot;</span>,<br>            <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;g++&quot;</span>,<br>            <span class="hljs-string">&quot;args&quot;</span>: [<br>                <span class="hljs-string">&quot;-g&quot;</span>,<br>                <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;file&#125;</span>&quot;</span>,<br>                <span class="hljs-string">&quot;-o&quot;</span>,<br>                <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;fileDirname&#125;</span>\\<span class="hljs-variable">$&#123;fileBasenameNoExtension&#125;</span>.exe&quot;</span><br>            ],<br>            <span class="hljs-string">&quot;problemMatcher&quot;</span>: [<br>                <span class="hljs-string">&quot;<span class="hljs-variable">$gcc</span>&quot;</span><br>            ],<br>            <span class="hljs-string">&quot;group&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;kind&quot;</span>: <span class="hljs-string">&quot;build&quot;</span>,<br>                <span class="hljs-string">&quot;isDefault&quot;</span>: <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;
+    &quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;tasks&quot;: [
+        &#123;
+            &quot;type&quot;: &quot;shell&quot;,
+            &quot;label&quot;: &quot;compile&quot;,
+            &quot;command&quot;: &quot;g++&quot;,
+            &quot;args&quot;: [
+                &quot;-g&quot;,
+                &quot;$&#123;file&#125;&quot;,
+                &quot;-o&quot;,
+                &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;
+            ],
+            &quot;problemMatcher&quot;: [
+                &quot;$gcc&quot;
+            ],
+            &quot;group&quot;: &#123;
+                &quot;kind&quot;: &quot;build&quot;,
+                &quot;isDefault&quot;: true
+            &#125;
+        &#125;
+    ]
+&#125;</code></pre></div></figure>
 <p>事实上现在已经可以正常调试了，并且现在可以按 <strong>ctrl+shift+b</strong> 直接调用配置好的 task 编译而不运行程序，类似于一些 IDE 的编译选项</p>
 <p>测试一下，新建一个<code>.cpp</code>文件将下面的代码粘贴进去，并在适当的地方添加上断点</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quicksort</span><span class="hljs-params">(<span class="hljs-type">int</span> A[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>   <span class="hljs-type">int</span> m=l;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=l;i&lt;r;i++)&#123;<br>      <span class="hljs-keyword">if</span>(A[i]&lt;A[r])&#123;<br>         <span class="hljs-built_in">swap</span>(A[i],A[m]);<br>         ++m;<br>      &#125;<br>   &#125;<br>   <span class="hljs-built_in">swap</span>(A[m],A[r]);<br>   <span class="hljs-keyword">if</span>(m&gt;l<span class="hljs-number">+1</span>)<span class="hljs-built_in">quicksort</span>(A,l,m<span class="hljs-number">-1</span>);<br>   <span class="hljs-keyword">if</span>(m&lt;r<span class="hljs-number">-1</span>)<span class="hljs-built_in">quicksort</span>(A,m<span class="hljs-number">+1</span>,r);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>   <span class="hljs-type">int</span> A[<span class="hljs-number">10</span>];<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++) A[i]=<span class="hljs-number">10</span>-i;<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++) cout&lt;&lt;A[i]&lt;&lt;<span class="hljs-string">&#x27; &#x27;</span>;<br>   cout&lt;&lt;endl;<br>   <span class="hljs-built_in">quicksort</span>(A,<span class="hljs-number">0</span>,<span class="hljs-number">10</span><span class="hljs-number">-1</span>);<br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++) cout&lt;&lt;A[i]&lt;&lt;<span class="hljs-string">&#x27; &#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#include &lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+
+void quicksort(int A[],int l,int r)&#123;
+   int m&#x3D;l;
+   for(int i&#x3D;l;i&lt;r;i++)&#123;
+      if(A[i]&lt;A[r])&#123;
+         swap(A[i],A[m]);
+         ++m;
+      &#125;
+   &#125;
+   swap(A[m],A[r]);
+   if(m&gt;l+1)quicksort(A,l,m-1);
+   if(m&lt;r-1)quicksort(A,m+1,r);
+&#125;
+
+int main()&#123;
+   int A[10];
+   for(int i&#x3D;0;i&lt;10;i++) A[i]&#x3D;10-i;
+   for(int i&#x3D;0;i&lt;10;i++) cout&lt;&lt;A[i]&lt;&lt;&#39; &#39;;
+   cout&lt;&lt;endl;
+   quicksort(A,0,10-1);
+   for(int i&#x3D;0;i&lt;10;i++) cout&lt;&lt;A[i]&lt;&lt;&#39; &#39;;
+&#125;</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202305251528805.jpeg" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/0d52ef06-892f-4cab-930e-5c716225db4d.jpeg"></p>
 <p><strong>按<code>f5</code>或者启动调试的按钮启动调试，程序执行到断点处会停下</strong></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202305251528806.jpeg" srcset="/img/loading.gif" lazyload alt="windows%2010%20%E4%B8%8A%E4%BD%BF%E7%94%A8%20vscode%20%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95%20C%20C++%2075499ad4d6be4c8bae999a3a02e52fed/b1235de9-ea94-4375-bec0-6519161c16c0.jpeg"></p>

@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="Raspberry使用 以下方式为NDIS拨号方式，暂不支持2022-04-04的Raspbian系统，如果出错误了，请确认系统是不是2022-04-04之前的系统；2022-04-04之后的Raspbian系统推荐使用方便快捷的系统自带驱动，内部自动拨号的SIM820X RNDIS拨号 首次使用时需要进行的配置 请不要输错字母，最好复制粘贴 123456sudo dnf install p7zi">
+<meta name="description" content="Raspberry使用 以下方式为NDIS拨号方式，暂不支持2022-04-04的Raspbian系统，如果出错误了，请确认系统是不是2022-04-04之前的系统；2022-04-04之后的Raspbian系统推荐使用方便快捷的系统自带驱动，内部自动拨号的SIM820X RNDIS拨号 首次使用时需要进行的配置 请不要输错字母，最好复制粘贴 sudo dnf install p7zip  # 欧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派上使用欧拉系统安装5G模块">
 <meta property="og:url" content="https://blog.fulequn.online/2023/02/Article202302242/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="Raspberry使用 以下方式为NDIS拨号方式，暂不支持2022-04-04的Raspbian系统，如果出错误了，请确认系统是不是2022-04-04之前的系统；2022-04-04之后的Raspbian系统推荐使用方便快捷的系统自带驱动，内部自动拨号的SIM820X RNDIS拨号 首次使用时需要进行的配置 请不要输错字母，最好复制粘贴 123456sudo dnf install p7zi">
+<meta property="og:description" content="Raspberry使用 以下方式为NDIS拨号方式，暂不支持2022-04-04的Raspbian系统，如果出错误了，请确认系统是不是2022-04-04之前的系统；2022-04-04之后的Raspbian系统推荐使用方便快捷的系统自带驱动，内部自动拨号的SIM820X RNDIS拨号 首次使用时需要进行的配置 请不要输错字母，最好复制粘贴 sudo dnf install p7zip  # 欧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-24T07:43:22.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:46.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-299 字
+310 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -141,11 +142,21 @@
 <p>以下方式为NDIS拨号方式，暂不支持2022-04-04的Raspbian系统，如果出错误了，请确认系统是不是2022-04-04之前的系统；2022-04-04之后的Raspbian系统推荐使用方便快捷的系统自带驱动，内部自动拨号的<a target="_blank" rel="noopener" href="https://www.waveshare.net/wiki/SIM820X_RNDIS%E6%8B%A8%E5%8F%B7%E4%B8%8A%E7%BD%91">SIM820X RNDIS拨号</a></p>
 <h3 id="首次使用时需要进行的配置">首次使用时需要进行的配置</h3>
 <p>请不要输错字母，最好复制粘贴</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf install p7zip  <span class="hljs-comment"># 欧拉系统不支持apt-get</span><br>wget https://www.waveshare.net/w/upload/8/89/SIM8200_for_RPI.7z<br>7za x SIM8200_for_RPI.7z  -r -o./SIM8200_for_RPI  <span class="hljs-comment"># 使用7z会出问题，直接使用7za</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 777 -R SIM8200_for_RPI  <span class="hljs-comment">#改变权限</span><br><span class="hljs-built_in">cd</span> SIM8200_for_RPI<br><span class="hljs-built_in">sudo</span> ./install.sh  <span class="hljs-comment">#这里也会出现问题</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf install p7zip  # 欧拉系统不支持apt-get
+wget https:&#x2F;&#x2F;www.waveshare.net&#x2F;w&#x2F;upload&#x2F;8&#x2F;89&#x2F;SIM8200_for_RPI.7z
+7za x SIM8200_for_RPI.7z  -r -o.&#x2F;SIM8200_for_RPI  # 使用7z会出问题，直接使用7za
+sudo chmod 777 -R SIM8200_for_RPI  #改变权限
+cd SIM8200_for_RPI
+sudo .&#x2F;install.sh  #这里也会出现问题</code></pre></div></figure>
 <p>如果在安装的时候出现如下错误：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">linux-headers-<span class="hljs-number">5.10</span>.<span class="hljs-number">0</span>-<span class="hljs-number">136.12</span>.<span class="hljs-number">0.18</span>.oe2203sp1.raspi.aarch64<br>sudo: apt-<span class="hljs-built_in">get</span>: <span class="hljs-keyword">command</span> not found<br>./install.<span class="hljs-keyword">sh</span>: <span class="hljs-built_in">line</span> <span class="hljs-number">15</span>: <span class="hljs-keyword">make</span>: <span class="hljs-keyword">command</span> not found<br>./install.<span class="hljs-keyword">sh</span>: <span class="hljs-built_in">line</span> <span class="hljs-number">21</span>: <span class="hljs-keyword">make</span>: <span class="hljs-keyword">command</span> not found<br>modprobe: ERROR: could not <span class="hljs-keyword">insert</span> <span class="hljs-string">&#x27;option&#x27;</span>: Exec format error<br>modprobe: ERROR: could not <span class="hljs-keyword">insert</span> <span class="hljs-string">&#x27;qmi_wwan_simcom&#x27;</span>: Exec format error<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">linux-headers-5.10.0-136.12.0.18.oe2203sp1.raspi.aarch64
+sudo: apt-get: command not found
+.&#x2F;install.sh: line 15: make: command not found
+.&#x2F;install.sh: line 21: make: command not found
+modprobe: ERROR: could not insert &#39;option&#39;: Exec format error
+modprobe: ERROR: could not insert &#39;qmi_wwan_simcom&#39;: Exec format error</code></pre></div></figure>
 <p>使用以下命令安装 Linux 内核头文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dnf install kernel-headers kernel-devel<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">sudo dnf install kernel-headers kernel-devel</code></pre></div></figure>
 <p>请不要删除或者修改option目录、qmi_wwan_simcom目录、default.script、install.sh这四个目录文件，否则影响驱动的加载。</p>
 <p>运行ifconfig -a可以看到已经生成了WWAN0。</p>
 <p>参考链接：</p>

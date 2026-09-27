@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -116,7 +117,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-247 字
+246 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -155,11 +156,14 @@
 <p>查找使用yum/rpm安装软件的文件路径</p>
 <p>使用rpm -qa | grep <postgres> 查找出带postgres的rpm包</p>
 <p>rpm -ql postgres-8.4.8-1.i386.openscg 列出dupostgres-8.4.8-1.i386.openscg这款软件安装的所有文件所在路径。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#查找所有名字中带有mysql的已经安装过的rpm包</span><br><span class="hljs-attribute">rpm</span> -qa|grep mysql<br><span class="hljs-comment">#查找mysql-community-client-5.7.30-1.el7.x86_64的文件路径</span><br><span class="hljs-attribute">mysql</span>-community-client-<span class="hljs-number">5</span>.<span class="hljs-number">7</span>.<span class="hljs-number">30</span>-<span class="hljs-number">1</span>.el7.x86_64<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#查找所有名字中带有mysql的已经安装过的rpm包
+rpm -qa|grep mysql
+#查找mysql-community-client-5.7.30-1.el7.x86_64的文件路径
+mysql-community-client-5.7.30-1.el7.x86_64</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241914161.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241914162.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <h3 id="总结">总结</h3>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">rpm -ql <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">rpm -ql &lt;name&gt;</code></pre></div></figure>
 <p>使用rpm命令进行查找有这些好处：</p>
 <ol>
 <li>可以给出对应软件的文件列表</li>

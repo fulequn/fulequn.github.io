@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -154,7 +155,7 @@
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405041/" target="_self">
 <div>
-前言 滑动窗口主要解决“满足某个条件的连续子串”问题，因为我们枚举 区间、子数组、子串 问题的时候时间复杂度是O(n2)O(n^2)O(n2)，使用滑窗可以将时间复杂度优化至O(n)O(n)O(n)。 代码模板如下： 1234for (int l = 0, r = 0 ; r &lt; n ; r++) &#123; // 如果右指针的元素加入到窗口内后，根据题目判断进行滑动左指针 w
+前言 滑动窗口主要解决“满足某个条件的连续子串”问题，因为我们枚举 区间、子数组、子串 问题的时候时间复杂度是O(n2)O(n^2)O(n2)，使用滑窗可以将时间复杂度优化至O(n)O(n)O(n)。 代码模板如下： for (int l = 0, r = 0 ; r &lt; n ; r++) &#123; // 如果右指针的元素加入到窗口内后，根据题目判断进行滑动左指针 whi
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -212,7 +213,7 @@
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405021/" target="_self">
 <div>
-1 常见的七种查找算法 1.1 基本查找 也叫做顺序查找。说明：顺序查找适合于存储结构为数组或者链表。 基本思想：顺序查找也称为线形查找，属于无序查找算法。从数据结构线的一端开始，顺序扫描，依次将遍历到的结点与要查找的值相比较，若相等则表示查找成功；若遍历结束仍没有找到相同的，表示查找失败。 示例代码： 12345678910111213141516171819202122232425262728
+1 常见的七种查找算法 1.1 基本查找 也叫做顺序查找。说明：顺序查找适合于存储结构为数组或者链表。 基本思想：顺序查找也称为线形查找，属于无序查找算法。从数据结构线的一端开始，顺序扫描，依次将遍历到的结点与要查找的值相比较，若相等则表示查找成功；若遍历结束仍没有找到相同的，表示查找失败。 示例代码： public class A01_BasicSearchDemo1 &#123; pu
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -414,7 +415,7 @@ Windows环境下Mysql安装与密码设置
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/02/Article202402251/" target="_self">
 <div>
-Leetcode刷题 2. 两数相加 - 力扣（LeetCode） 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950/** * Definition for singly-linked list. * public class ListNode &#123; *
+Leetcode刷题 2. 两数相加 - 力扣（LeetCode） /** * Definition for singly-linked list. * public class ListNode &#123; * int val; * ListNode next; * ListNode() &#123;&#125; * ListNode(int va
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -629,7 +630,7 @@ Git配置代理实现加速
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/02/Article202402111/" target="_self">
 <div>
-本地开启 VPN 代理后，Git 也需要设置代理。否则就会出现能访问 GitHub 网站，但是 git push 超时等情况。 设置全局 http/https 代理 12345678# 不同代理的端口号不一样git config --global http.proxy http://127.0.0.1:7890git config --global https.proxy https://12
+本地开启 VPN 代理后，Git 也需要设置代理。否则就会出现能访问 GitHub 网站，但是 git push 超时等情况。 设置全局 http/https 代理 # 不同代理的端口号不一样 git config --global http.proxy http://127.0.0.1:7890 git config --global https.proxy https://127.0.0.
 </div>
 </a>
 <div class="index-btm post-metas">

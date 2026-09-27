@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -140,7 +141,7 @@
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2024/02/Article202402071/" target="_self">
 <div>
-Java基础 1 封装 1.1 封装的步骤 1.使用 private 关键字来修饰成员变量。 2.使用public修饰getter和setter方法。 1.2 构造方法 在创建对象的时候，给成员变量进行初始化。初始化即赋值的意思。具体的格式如下所示： 123修饰符 类名(形参列表) &#123; // 构造体代码，执行代码&#125; 可以设置私有化构造方法，例如一些工具类就是私有化构造方法
+Java基础 1 封装 1.1 封装的步骤 1.使用 private 关键字来修饰成员变量。 2.使用public修饰getter和setter方法。 1.2 构造方法 在创建对象的时候，给成员变量进行初始化。初始化即赋值的意思。具体的格式如下所示： 修饰符 类名(形参列表) &#123; // 构造体代码，执行代码 &#125; 可以设置私有化构造方法，例如一些工具类就是私有化构造方法，
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -327,7 +328,7 @@ pgmpy - Python中的概率图模型库 PGMPY是Python中的一个概率图模型
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/09/Article202309132/" target="_self">
 <div>
-可以使用以下几种方式来实现定时运行Python脚本： 使用操作系统的定时任务： 在Windows中，你可以使用任务计划程序（Task Scheduler）来创建定时任务，指定每天晚上9点运行你的Python脚本。 在Linux和macOS中，你可以使用cron作业来定时运行脚本。编辑你的crontab文件（使用crontab -e命令），然后添加一行类似于以下的条目：10 21 * * *
+可以使用以下几种方式来实现定时运行Python脚本： 使用操作系统的定时任务： 在Windows中，你可以使用任务计划程序（Task Scheduler）来创建定时任务，指定每天晚上9点运行你的Python脚本。 在Linux和macOS中，你可以使用cron作业来定时运行脚本。编辑你的crontab文件（使用crontab -e命令），然后添加一行类似于以下的条目：0 21 * * * &
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -498,7 +499,7 @@ Wind量化接口常见错误码(ErrorCode)意义
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/08/Article202308241/" target="_self">
 <div>
-1 python-dotenv 项目简介 项目地址：https://github.com/theskumar/python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。 2 用法 2.1 .env文件内容示例 1234# 这是一个注释，将被忽略REDIS
+1 python-dotenv 项目简介 项目地址：https://github.com/theskumar/python-dotenv 功能描述：从 .env 文件读取键值对，并将它们添加到环境变量中。 核心理念：在项目中，可以将所有使用的环境变量写入 .env 文件，然后以键值对的方式读取作为环境变量。 2 用法 2.1 .env文件内容示例 # 这是一个注释，将被忽略 REDIS_AD
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -588,7 +589,7 @@ IEEE论文从零入门指南
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2023/08/Article202308221/" target="_self">
 <div>
-1 会议参考 确定希望投稿的会议或期刊。 资源： CCF会议 - 会伴 轻松参会，小程序 ccfddl，小程序 2 LaTeX模板 注意：模板是根据每个会议特定的。可以咨询师兄师姐们是否有现成的模板。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515
+1 会议参考 确定希望投稿的会议或期刊。 资源： CCF会议 - 会伴 轻松参会，小程序 ccfddl，小程序 2 LaTeX模板 注意：模板是根据每个会议特定的。可以咨询师兄师姐们是否有现成的模板。 \documentclass[conference]&#123;IEEEtran&#125; %\documentclass[journal,12pt,draftclsnofoot,one
 </div>
 </a>
 <div class="index-btm post-metas">

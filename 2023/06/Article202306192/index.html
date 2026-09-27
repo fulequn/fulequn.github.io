@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -129,11 +130,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-6.8k 字
+7k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-57 分钟
+59 分钟
 </span>
 </div>
 </div>
@@ -257,9 +258,341 @@
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201607995.png" srcset="/img/loading.gif" lazyload alt="data.png"></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201607739.png" srcset="/img/loading.gif" lazyload alt="a90d8988-5fc9-4a30-a3b3-87f1b8404142"></p>
 <p>然后在 Python 中执行以下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> copy<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br><br><span class="hljs-comment"># 运输问题求解：使用Vogel逼近法寻找初始基本可行解</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">TP_split_matrix</span>(<span class="hljs-params">mat</span>):<br>    <span class="hljs-comment"># 将运输表拆分为成本矩阵c、供给向量a、需求向量b</span><br>    c = mat[:-<span class="hljs-number">1</span>, :-<span class="hljs-number">1</span>]<br>    a = mat[:-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>]<br>    b = mat[-<span class="hljs-number">1</span>, :-<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> (c, a, b)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">TP_vogel</span>(<span class="hljs-params">var</span>):<br>    <span class="hljs-comment"># Vogel法代码，变量var可以是以numpy.ndarray保存的运输表，或以tuple或list保存的(成本矩阵,供给向量,需求向量)</span><br>    <span class="hljs-keyword">import</span> numpy<br><br>    <span class="hljs-comment"># 检查var的类型</span><br>    typevar1 = <span class="hljs-built_in">type</span>(var) == numpy.ndarray<br>    typevar2 = <span class="hljs-built_in">type</span>(var) == <span class="hljs-built_in">tuple</span><br>    typevar3 = <span class="hljs-built_in">type</span>(var) == <span class="hljs-built_in">list</span><br><br>    <span class="hljs-comment"># 格式化输入</span><br>    <span class="hljs-keyword">if</span> typevar1 == <span class="hljs-literal">False</span> <span class="hljs-keyword">and</span> typevar2 == <span class="hljs-literal">False</span> <span class="hljs-keyword">and</span> typevar3 == <span class="hljs-literal">False</span>:<br>        <span class="hljs-comment"># 如果var的类型不符合要求，则输出错误信息并返回None</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;非法变量&lt;&lt;&lt;&#x27;</span>)<br>        (cost, x) = (<span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">if</span> typevar1 == <span class="hljs-literal">True</span>:<br>            <span class="hljs-comment"># 如果var是ndarray类型，则将其拆分为成本矩阵c、供给向量a、需求向量b</span><br>            [c, a, b] = TP_split_matrix(var)<br>        <span class="hljs-keyword">elif</span> typevar2 == <span class="hljs-literal">True</span> <span class="hljs-keyword">or</span> typevar3 == <span class="hljs-literal">True</span>:<br>            <span class="hljs-comment"># 如果var是tuple或list类型，则直接取出成本矩阵c、供给向量a、需求向量b</span><br>            [c, a, b] = var<br><br>        <span class="hljs-comment"># 深拷贝成本矩阵c，用于记录原始成本矩阵</span><br>        cost = copy.deepcopy(c)<br><br>        <span class="hljs-comment"># 初始化运输方案矩阵x，全为0</span><br>        x = np.zeros(c.shape)<br><br>        <span class="hljs-comment"># 设置一个大的数M，用于表示无穷大</span><br>        M = <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>)<br><br>        <span class="hljs-comment"># 迭代处理成本矩阵c中的每个元素</span><br>        <span class="hljs-keyword">for</span> factor <span class="hljs-keyword">in</span> c.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>]:<br>            <span class="hljs-comment"># 直到所有元素都达到最大值M，或者成本矩阵中所有元素都相等且等于最大值M。</span><br>            <span class="hljs-keyword">while</span> <span class="hljs-built_in">int</span>(factor) != M:<br>                <span class="hljs-keyword">if</span> np.<span class="hljs-built_in">all</span>(c == M):<br>                    <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-comment"># 在每次迭代时，将打印当前的成本矩阵c，以便观察迭代过程。</span><br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;c:\n&#x27;</span>, c)<br><br>                    <span class="hljs-comment"># 获取行/列最小值数组</span><br>                    row_mini1 = []<br>                    row_mini2 = []<br>                    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(c.shape[<span class="hljs-number">0</span>]):<br>                        Row = <span class="hljs-built_in">list</span>(c[row, :])<br>                        row_min = <span class="hljs-built_in">min</span>(Row)  <span class="hljs-comment"># 最小值</span><br>                        row_mini1.append(row_min)<br>                        Row.remove(row_min)<br>                        row_2nd_min = <span class="hljs-built_in">min</span>(Row)  <span class="hljs-comment"># 次小值</span><br>                        row_mini2.append(row_2nd_min)<br>                    <span class="hljs-comment"># 求解罚数</span><br>                    r_pun = [row_mini2[i] - row_mini1[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(row_mini1))]<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;行罚数：&#x27;</span>, r_pun)<br><br>                    <span class="hljs-comment"># 计算列罚数</span><br>                    col_mini1 = []<br>                    col_mini2 = []<br>                    <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(c.shape[<span class="hljs-number">1</span>]):<br>                        Col = <span class="hljs-built_in">list</span>(c[:, col])<br>                        col_min = <span class="hljs-built_in">min</span>(Col)<br>                        col_mini1.append(col_min)<br>                        Col.remove(col_min)<br>                        col_2nd_min = <span class="hljs-built_in">min</span>(Col)<br>                        col_mini2.append(col_2nd_min)<br>                    c_pun = [col_mini2[i] - col_mini1[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(col_mini1))]<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;列罚数：&#x27;</span>, c_pun)<br><br>                    <span class="hljs-comment"># 将行罚数和列罚数合并为罚数向量</span><br>                    pun = copy.deepcopy(r_pun)<br>                    pun.extend(c_pun)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;罚数向量：&#x27;</span>, pun)<br><br>                    <span class="hljs-comment"># 找到最大罚数及其索引</span><br>                    max_pun = <span class="hljs-built_in">max</span>(pun)<br>                    max_pun_index = pun.index(<span class="hljs-built_in">max</span>(pun))<br>                    max_pun_num = max_pun_index + <span class="hljs-number">1</span><br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;最大罚数：&#x27;</span>, max_pun, <span class="hljs-string">&#x27;元素序号：&#x27;</span>, max_pun_num)<br><br>                    <span class="hljs-comment"># 前面是行，后面是列。这里是判断最大罚数的位置</span><br>                    <span class="hljs-keyword">if</span> max_pun_num &lt;= <span class="hljs-built_in">len</span>(r_pun):<br>                        <span class="hljs-comment"># 对行进行操作</span><br>                        row_num = max_pun_num<br>                        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;对第&#x27;</span>, row_num, <span class="hljs-string">&#x27;行进行操作：&#x27;</span>)<br>                        row_index = row_num - <span class="hljs-number">1</span><br>                        catch_row = c[row_index, :]<br>                        <span class="hljs-built_in">print</span>(catch_row)<br>                        min_cost_colindex = <span class="hljs-built_in">int</span>(np.argwhere(catch_row == <span class="hljs-built_in">min</span>(catch_row)))<br>                        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;最小成本所在列索引：&#x27;</span>, min_cost_colindex)<br><br>                        <span class="hljs-keyword">if</span> a[row_index] &lt;= b[min_cost_colindex]:<br>                            x[row_index, min_cost_colindex] = a[row_index]<br>                            c1 = copy.deepcopy(c)<br>                            c1[row_index, :] = [M] * c1.shape[<span class="hljs-number">1</span>]<br>                            b[min_cost_colindex] -= a[row_index]<br>                            a[row_index] -= a[row_index]<br>                        <span class="hljs-keyword">else</span>:<br>                            x[row_index, min_cost_colindex] = b[min_cost_colindex]<br>                            c1 = copy.deepcopy(c)<br>                            c1[:, min_cost_colindex] = [M] * c1.shape[<span class="hljs-number">0</span>]<br>                            a[row_index] -= b[min_cost_colindex]<br>                            b[min_cost_colindex] -= b[min_cost_colindex]<br>                    <span class="hljs-keyword">else</span>:<br>                        <span class="hljs-comment"># 对列进行操作</span><br>                        col_num = max_pun_num - <span class="hljs-built_in">len</span>(r_pun)<br>                        col_index = col_num - <span class="hljs-number">1</span><br>                        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;对第&#x27;</span>, col_num, <span class="hljs-string">&#x27;列进行操作：&#x27;</span>)<br>                        catch_col = c[:, col_index]<br>                        <span class="hljs-built_in">print</span>(catch_col)<br><br>                        <span class="hljs-comment"># 寻找最大罚数所在行/列的最小成本系数</span><br>                        min_cost_rowindex = <span class="hljs-built_in">int</span>(np.argwhere(catch_col == <span class="hljs-built_in">min</span>(catch_col)))<br>                        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;最小成本所在行索引：&#x27;</span>, min_cost_rowindex)<br><br>                        <span class="hljs-comment"># 计算将该位置应填入x矩阵的数值（a,b中较小值）</span><br>                        <span class="hljs-keyword">if</span> a[min_cost_rowindex] &lt;= b[col_index]:<br>                            x[min_cost_rowindex, col_index] = a[min_cost_rowindex]<br>                            c1 = copy.deepcopy(c)<br>                            c1[min_cost_rowindex, :] = [M] * c1.shape[<span class="hljs-number">1</span>]<br>                            b[col_index] -= a[min_cost_rowindex]<br>                            a[min_cost_rowindex] -= a[min_cost_rowindex]<br>                        <span class="hljs-keyword">else</span>:<br>                            x[min_cost_rowindex, col_index] = b[col_index]<br>                            <span class="hljs-comment"># 填入后删除已满足/耗尽资源系数的行/列，得到剩余的成本矩阵，并改写资源系数</span><br>                            c1 = copy.deepcopy(c)<br>                            c1[:, col_index] = [M] * c1.shape[<span class="hljs-number">0</span>]<br>                            a[min_cost_rowindex] -= b[col_index]<br>                            b[col_index] -= b[col_index]<br><br>                    c = c1<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;本次迭代后的x矩阵：\n&#x27;</span>, x)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;a:&#x27;</span>, a)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;b:&#x27;</span>, b)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;c:\n&#x27;</span>, c)<br><br>                <span class="hljs-keyword">if</span> np.<span class="hljs-built_in">all</span>(c == M):<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;【迭代完成】&#x27;</span>)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span> * <span class="hljs-number">60</span>)<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;【迭代未完成】&#x27;</span>)<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span> * <span class="hljs-number">60</span>)<br><br>        <span class="hljs-comment"># 计算总成本</span><br>        total_cost = np.<span class="hljs-built_in">sum</span>(np.multiply(x, cost))<br><br>        <span class="hljs-comment"># 判断运输问题类别</span><br>        <span class="hljs-keyword">if</span> np.<span class="hljs-built_in">all</span>(a == <span class="hljs-number">0</span>):<br>            <span class="hljs-keyword">if</span> np.<span class="hljs-built_in">all</span>(b == <span class="hljs-number">0</span>):<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;供求平衡&lt;&lt;&lt;&#x27;</span>)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;供不应求，需求方有余量&lt;&lt;&lt;&#x27;</span>)<br>        <span class="hljs-keyword">elif</span> np.<span class="hljs-built_in">all</span>(b == <span class="hljs-number">0</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;供大于求，供给方有余量&lt;&lt;&lt;&#x27;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;无法找到初始基可行解&lt;&lt;&lt;&#x27;</span>)<br><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;初始基本可行解x*：\n&#x27;</span>, x)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;当前总成本：&#x27;</span>, total_cost)<br><br>        [m, n] = x.shape<br>        varnum = np.array(np.nonzero(x)).shape[<span class="hljs-number">1</span>]<br><br>        <span class="hljs-comment"># 根据秩来判断是否有退化解</span><br>        <span class="hljs-keyword">if</span> varnum != m + n - <span class="hljs-number">1</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;【注意：问题含有退化解】&#x27;</span>)<br><br>    <span class="hljs-keyword">return</span> (cost, x)<br><br><br>path = <span class="hljs-string">r&#x27;TP_PPT_Sample1.xlsx&#x27;</span><br>mat = pd.read_excel(path, header=<span class="hljs-literal">None</span>).values<br><span class="hljs-comment"># c=np.array([[3,11,3,10],[1,9,2,8],[7,4,10,5]])</span><br><span class="hljs-comment"># a=np.array([7,4,9])</span><br><span class="hljs-comment"># b=np.array([3,6,5,6])</span><br>[c, x] = TP_vogel(mat)<br><span class="hljs-comment"># [c,x]=TP_vogel([c,a,b])</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">import numpy as np
+import copy
+import pandas as pd
+
+
+# 运输问题求解：使用Vogel逼近法寻找初始基本可行解
+def TP_split_matrix(mat):
+    # 将运输表拆分为成本矩阵c、供给向量a、需求向量b
+    c &#x3D; mat[:-1, :-1]
+    a &#x3D; mat[:-1, -1]
+    b &#x3D; mat[-1, :-1]
+    return (c, a, b)
+
+
+def TP_vogel(var):
+    # Vogel法代码，变量var可以是以numpy.ndarray保存的运输表，或以tuple或list保存的(成本矩阵,供给向量,需求向量)
+    import numpy
+
+    # 检查var的类型
+    typevar1 &#x3D; type(var) &#x3D;&#x3D; numpy.ndarray
+    typevar2 &#x3D; type(var) &#x3D;&#x3D; tuple
+    typevar3 &#x3D; type(var) &#x3D;&#x3D; list
+
+    # 格式化输入
+    if typevar1 &#x3D;&#x3D; False and typevar2 &#x3D;&#x3D; False and typevar3 &#x3D;&#x3D; False:
+        # 如果var的类型不符合要求，则输出错误信息并返回None
+        print(&#39;&gt;&gt;&gt;非法变量&lt;&lt;&lt;&#39;)
+        (cost, x) &#x3D; (None, None)
+    else:
+        if typevar1 &#x3D;&#x3D; True:
+            # 如果var是ndarray类型，则将其拆分为成本矩阵c、供给向量a、需求向量b
+            [c, a, b] &#x3D; TP_split_matrix(var)
+        elif typevar2 &#x3D;&#x3D; True or typevar3 &#x3D;&#x3D; True:
+            # 如果var是tuple或list类型，则直接取出成本矩阵c、供给向量a、需求向量b
+            [c, a, b] &#x3D; var
+
+        # 深拷贝成本矩阵c，用于记录原始成本矩阵
+        cost &#x3D; copy.deepcopy(c)
+
+        # 初始化运输方案矩阵x，全为0
+        x &#x3D; np.zeros(c.shape)
+
+        # 设置一个大的数M，用于表示无穷大
+        M &#x3D; pow(10, 9)
+
+        # 迭代处理成本矩阵c中的每个元素
+        for factor in c.reshape(1, -1)[0]:
+            # 直到所有元素都达到最大值M，或者成本矩阵中所有元素都相等且等于最大值M。
+            while int(factor) !&#x3D; M:
+                if np.all(c &#x3D;&#x3D; M):
+                    break
+                else:
+                    # 在每次迭代时，将打印当前的成本矩阵c，以便观察迭代过程。
+                    print(&#39;c:\n&#39;, c)
+
+                    # 获取行&#x2F;列最小值数组
+                    row_mini1 &#x3D; []
+                    row_mini2 &#x3D; []
+                    for row in range(c.shape[0]):
+                        Row &#x3D; list(c[row, :])
+                        row_min &#x3D; min(Row)  # 最小值
+                        row_mini1.append(row_min)
+                        Row.remove(row_min)
+                        row_2nd_min &#x3D; min(Row)  # 次小值
+                        row_mini2.append(row_2nd_min)
+                    # 求解罚数
+                    r_pun &#x3D; [row_mini2[i] - row_mini1[i] for i in range(len(row_mini1))]
+                    print(&#39;行罚数：&#39;, r_pun)
+
+                    # 计算列罚数
+                    col_mini1 &#x3D; []
+                    col_mini2 &#x3D; []
+                    for col in range(c.shape[1]):
+                        Col &#x3D; list(c[:, col])
+                        col_min &#x3D; min(Col)
+                        col_mini1.append(col_min)
+                        Col.remove(col_min)
+                        col_2nd_min &#x3D; min(Col)
+                        col_mini2.append(col_2nd_min)
+                    c_pun &#x3D; [col_mini2[i] - col_mini1[i] for i in range(len(col_mini1))]
+                    print(&#39;列罚数：&#39;, c_pun)
+
+                    # 将行罚数和列罚数合并为罚数向量
+                    pun &#x3D; copy.deepcopy(r_pun)
+                    pun.extend(c_pun)
+                    print(&#39;罚数向量：&#39;, pun)
+
+                    # 找到最大罚数及其索引
+                    max_pun &#x3D; max(pun)
+                    max_pun_index &#x3D; pun.index(max(pun))
+                    max_pun_num &#x3D; max_pun_index + 1
+                    print(&#39;最大罚数：&#39;, max_pun, &#39;元素序号：&#39;, max_pun_num)
+
+                    # 前面是行，后面是列。这里是判断最大罚数的位置
+                    if max_pun_num &lt;&#x3D; len(r_pun):
+                        # 对行进行操作
+                        row_num &#x3D; max_pun_num
+                        print(&#39;对第&#39;, row_num, &#39;行进行操作：&#39;)
+                        row_index &#x3D; row_num - 1
+                        catch_row &#x3D; c[row_index, :]
+                        print(catch_row)
+                        min_cost_colindex &#x3D; int(np.argwhere(catch_row &#x3D;&#x3D; min(catch_row)))
+                        print(&#39;最小成本所在列索引：&#39;, min_cost_colindex)
+
+                        if a[row_index] &lt;&#x3D; b[min_cost_colindex]:
+                            x[row_index, min_cost_colindex] &#x3D; a[row_index]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[row_index, :] &#x3D; [M] * c1.shape[1]
+                            b[min_cost_colindex] -&#x3D; a[row_index]
+                            a[row_index] -&#x3D; a[row_index]
+                        else:
+                            x[row_index, min_cost_colindex] &#x3D; b[min_cost_colindex]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[:, min_cost_colindex] &#x3D; [M] * c1.shape[0]
+                            a[row_index] -&#x3D; b[min_cost_colindex]
+                            b[min_cost_colindex] -&#x3D; b[min_cost_colindex]
+                    else:
+                        # 对列进行操作
+                        col_num &#x3D; max_pun_num - len(r_pun)
+                        col_index &#x3D; col_num - 1
+                        print(&#39;对第&#39;, col_num, &#39;列进行操作：&#39;)
+                        catch_col &#x3D; c[:, col_index]
+                        print(catch_col)
+
+                        # 寻找最大罚数所在行&#x2F;列的最小成本系数
+                        min_cost_rowindex &#x3D; int(np.argwhere(catch_col &#x3D;&#x3D; min(catch_col)))
+                        print(&#39;最小成本所在行索引：&#39;, min_cost_rowindex)
+
+                        # 计算将该位置应填入x矩阵的数值（a,b中较小值）
+                        if a[min_cost_rowindex] &lt;&#x3D; b[col_index]:
+                            x[min_cost_rowindex, col_index] &#x3D; a[min_cost_rowindex]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[min_cost_rowindex, :] &#x3D; [M] * c1.shape[1]
+                            b[col_index] -&#x3D; a[min_cost_rowindex]
+                            a[min_cost_rowindex] -&#x3D; a[min_cost_rowindex]
+                        else:
+                            x[min_cost_rowindex, col_index] &#x3D; b[col_index]
+                            # 填入后删除已满足&#x2F;耗尽资源系数的行&#x2F;列，得到剩余的成本矩阵，并改写资源系数
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[:, col_index] &#x3D; [M] * c1.shape[0]
+                            a[min_cost_rowindex] -&#x3D; b[col_index]
+                            b[col_index] -&#x3D; b[col_index]
+
+                    c &#x3D; c1
+                    print(&#39;本次迭代后的x矩阵：\n&#39;, x)
+                    print(&#39;a:&#39;, a)
+                    print(&#39;b:&#39;, b)
+                    print(&#39;c:\n&#39;, c)
+
+                if np.all(c &#x3D;&#x3D; M):
+                    print(&#39;【迭代完成】&#39;)
+                    print(&#39;-&#39; * 60)
+                else:
+                    print(&#39;【迭代未完成】&#39;)
+                    print(&#39;-&#39; * 60)
+
+        # 计算总成本
+        total_cost &#x3D; np.sum(np.multiply(x, cost))
+
+        # 判断运输问题类别
+        if np.all(a &#x3D;&#x3D; 0):
+            if np.all(b &#x3D;&#x3D; 0):
+                print(&#39;&gt;&gt;&gt;供求平衡&lt;&lt;&lt;&#39;)
+            else:
+                print(&#39;&gt;&gt;&gt;供不应求，需求方有余量&lt;&lt;&lt;&#39;)
+        elif np.all(b &#x3D;&#x3D; 0):
+            print(&#39;&gt;&gt;&gt;供大于求，供给方有余量&lt;&lt;&lt;&#39;)
+        else:
+            print(&#39;&gt;&gt;&gt;无法找到初始基可行解&lt;&lt;&lt;&#39;)
+
+        print(&#39;&gt;&gt;&gt;初始基本可行解x*：\n&#39;, x)
+        print(&#39;&gt;&gt;&gt;当前总成本：&#39;, total_cost)
+
+        [m, n] &#x3D; x.shape
+        varnum &#x3D; np.array(np.nonzero(x)).shape[1]
+
+        # 根据秩来判断是否有退化解
+        if varnum !&#x3D; m + n - 1:
+            print(&#39;【注意：问题含有退化解】&#39;)
+
+    return (cost, x)
+
+
+path &#x3D; r&#39;TP_PPT_Sample1.xlsx&#39;
+mat &#x3D; pd.read_excel(path, header&#x3D;None).values
+# c&#x3D;np.array([[3,11,3,10],[1,9,2,8],[7,4,10,5]])
+# a&#x3D;np.array([7,4,9])
+# b&#x3D;np.array([3,6,5,6])
+[c, x] &#x3D; TP_vogel(mat)
+# [c,x]&#x3D;TP_vogel([c,a,b])</code></pre></div></figure>
 <p>运行代码结果</p>
-<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><code class="hljs subunit">c:<br> [[ 3. 11.  3. 10.]<br> [ 1.  9.  2.  8.]<br> [ 7.  4. 10.  5.]]<br>行罚数： [0.0, 1.0, 1.0]<br>列罚数： [2.0, 5.0, 1.0, 3.0]<br>罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]<br>最大罚数： 5.0 元素序号： 5<br>对第 2 列进行操作：<br>[11.  9.  4.]<br>最小成本所在行索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 6. 0. 0.]]<br>a: [7. 4. 3.]<br>b: [3. 0. 5. 6.]<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [7.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span> 5.e<span class="hljs-string">+00</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [7.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span> 5.e<span class="hljs-string">+00</span>]]<br>行罚数： [0.0, 1.0, 2.0]<br>列罚数： [2.0, 0.0, 1.0, 3.0]<br>罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]<br>最大罚数： 3.0 元素序号： 7<br>对第 4 列进行操作：<br>[10.  8.  5.]<br>最小成本所在行索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [7. 4. 0.]<br>b: [3. 0. 5. 3.]<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [0.0, 1.0, 0.0]<br>列罚数： [2.0, 0.0, 1.0, 2.0]<br>罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]<br>最大罚数： 2.0 元素序号： 4<br>对第 1 列进行操作：<br>[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span>]<br>最小成本所在行索引： 1<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [3. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [7. 1. 0.]<br>b: [0. 0. 5. 3.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [7.0, 6.0, 0.0]<br>列罚数： [0.0, 0.0, 1.0, 2.0]<br>罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]<br>最大罚数： 7.0 元素序号： 1<br>对第 1 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br>最小成本所在列索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 0.]<br> [3. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [2. 1. 0.]<br>b: [0. 0. 0. 3.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [999999990.0, 999999992.0, 0.0]<br>列罚数： [0.0, 0.0, 0.0, 2.0]<br>罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]<br>最大罚数： 999999992.0 元素序号： 2<br>对第 2 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br>最小成本所在列索引： 3<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 0.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>a: [2. 0. 0.]<br>b: [0. 0. 0. 2.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [999999990.0, 0.0, 0.0]<br>列罚数： [0.0, 0.0, 0.0, 999999990.0]<br>罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]<br>最大罚数： 999999990.0 元素序号： 1<br>对第 1 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br>最小成本所在列索引： 3<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 2.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>a: [0. 0. 0.]<br>b: [0. 0. 0. 0.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代完成】<br>------------------------------------------------------------<br>&gt;&gt;&gt;供求平衡&lt;&lt;&lt;<br>&gt;&gt;&gt;初始基本可行解x*：<br> [[0. 0. 5. 2.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>&gt;&gt;&gt;当前总成本： 85.0<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">c:
+ [[ 3. 11.  3. 10.]
+ [ 1.  9.  2.  8.]
+ [ 7.  4. 10.  5.]]
+行罚数： [0.0, 1.0, 1.0]
+列罚数： [2.0, 5.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]
+最大罚数： 5.0 元素序号： 5
+对第 2 列进行操作：
+[11.  9.  4.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 0.]]
+a: [7. 4. 3.]
+b: [3. 0. 5. 6.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+行罚数： [0.0, 1.0, 2.0]
+列罚数： [2.0, 0.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]
+最大罚数： 3.0 元素序号： 7
+对第 4 列进行操作：
+[10.  8.  5.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 4. 0.]
+b: [3. 0. 5. 3.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [0.0, 1.0, 0.0]
+列罚数： [2.0, 0.0, 1.0, 2.0]
+罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]
+最大罚数： 2.0 元素序号： 4
+对第 1 列进行操作：
+[3.e+00 1.e+00 1.e+09]
+最小成本所在行索引： 1
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 1. 0.]
+b: [0. 0. 5. 3.]
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [7.0, 6.0, 0.0]
+列罚数： [0.0, 0.0, 1.0, 2.0]
+罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]
+最大罚数： 7.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 3.e+00 1.e+01]
+最小成本所在列索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [2. 1. 0.]
+b: [0. 0. 0. 3.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 999999992.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 2.0]
+罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]
+最大罚数： 999999992.0 元素序号： 2
+对第 2 行进行操作：
+[1.e+09 1.e+09 1.e+09 8.e+00]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [2. 0. 0.]
+b: [0. 0. 0. 2.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 0.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 999999990.0]
+罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]
+最大罚数： 999999990.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 1.e+09 1.e+01]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [0. 0. 0.]
+b: [0. 0. 0. 0.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代完成】
+------------------------------------------------------------
+&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+&gt;&gt;&gt;当前总成本： 85.0</code></pre></div></figure>
 <p>下面举一个退化解的例子：</p>
 <p>退化解指的是在计算过程中，初始基本可行解中的基变量数量少于m+n-1，其中m和n分别为运输问题的供应源和需求点的数量。换句话说，退化解是一种特殊情况，其中一些供应源和需求点没有在初始基本可行解中使用。</p>
 <p>退化解的出现可能导致后续的迭代过程无法继续进行，因为基变量数量不足以满足问题的要求。这会影响最终解的有效性和准确性。</p>
@@ -267,15 +600,317 @@
 <p>一运输问题的运输表如下：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201608691.png" srcset="/img/loading.gif" lazyload alt="data2.png"></p>
 <p>将以上表格保存为 TP_Text_5.9.xlsx，在 Python 中求解。程序运行的最终结果为：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;<br>&gt;&gt;&gt;初始基本可行解<span class="hljs-attribute">x</span>*：<br> <span class="hljs-selector-attr">[[1. 0. 0. 0. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 1. 0. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 0. 1. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 0. 0. 1.]</span><br> <span class="hljs-selector-attr">[0. 1. 0. 0. 0.]</span>]<br>&gt;&gt;&gt;当前总成本： <span class="hljs-number">0.8999999999999999</span><br>【注意：问题含有退化解】<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[1. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 1. 0. 0. 0.]]
+&gt;&gt;&gt;当前总成本： 0.8999999999999999
+【注意：问题含有退化解】</code></pre></div></figure>
 <p>最终得到的初始基可行解只含有 5 个非零变量，而 (m+n-1)=9，可见发生了退化。</p>
 <h3 id="2-3-2-位势法判断最优解">2.3.2 位势法判断最优解</h3>
 <p>在实现伏格尔法的基础上添加下列函数，以及函数调用<code>sigma=TP_potential(c,x)</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">create_c_nonzeros</span>(<span class="hljs-params">c, x</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    根据运输问题中的需求矩阵x创建一个与成本矩阵c相同形状的新矩阵c_nonzeros，其中非零元素与x相对应位置上的元素相乘，而零元素仍保持为零。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>    <span class="hljs-keyword">import</span> copy<br>    nonzeros = copy.deepcopy(x)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(x.shape[<span class="hljs-number">0</span>]):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(x.shape[<span class="hljs-number">1</span>]):<br>            <span class="hljs-keyword">if</span> x[i, j] != <span class="hljs-number">0</span>:<br>                nonzeros[i, j] = <span class="hljs-number">1</span><br>    <span class="hljs-comment"># print(nonzeros)</span><br>    c_nonzeros = np.multiply(c, nonzeros)<br>    <span class="hljs-keyword">return</span> c_nonzeros<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">if_dsquare</span>(<span class="hljs-params">a, b</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    函数if_dsquare用于判断位势方程组是否可解。</span><br><span class="hljs-string">    根据输入的系数矩阵a和值向量b，函数检查矩阵的维度和条件来判断是否可解。</span><br><span class="hljs-string">    如果位势方程组可解，则返回True；如果不可解，则返回False。</span><br><span class="hljs-string">    :param a: 系数矩阵a</span><br><span class="hljs-string">    :param b: 值向量b</span><br><span class="hljs-string">    :return: 位势方程组可解，为True</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;a:&#x27;</span>, a.shape, <span class="hljs-string">&#x27;\n&#x27;</span>, <span class="hljs-string">&#x27;b:&#x27;</span>, b.shape)<br>    correct = <span class="hljs-string">&#x27;&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;&#x27;</span><br>    error = <span class="hljs-string">&#x27;&gt;&gt;&gt;位势方程组不可解，请检查基变量个数是否等于(m+n-1)及位势未知量个数是否等于(m+n)&lt;&lt;&lt;&#x27;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(a.shape) == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(b.shape) == <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">if</span> a.shape[<span class="hljs-number">0</span>] == a.shape[<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> a.shape == b.shape:<br>                <span class="hljs-built_in">print</span>(correct)<br>                if_dsquare = <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(error)<br>                if_dsquare = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(b.shape) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> b.shape[<span class="hljs-number">0</span>] != <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">if</span> a.shape[<span class="hljs-number">0</span>] == a.shape[<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> a.shape[<span class="hljs-number">0</span>] == b.shape[<span class="hljs-number">0</span>]:<br>                <span class="hljs-built_in">print</span>(correct)<br>                if_dsquare = <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(error)<br>                if_dsquare = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(error)<br>            if_dsquare = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(a.shape) == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(b.shape) == <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">if</span> b.shape[<span class="hljs-number">0</span>] == b.shape[<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> a.shape[<span class="hljs-number">0</span>] == b.shape[<span class="hljs-number">0</span>]:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;位势方程组系数矩阵与方程组值向量位置错误&lt;&lt;&lt;&#x27;</span>)<br>                if_dsquare = <span class="hljs-string">&#x27;True but not solvable&#x27;</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(error)<br>                if_dsquare = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(b.shape) == <span class="hljs-number">1</span>:<br>            <span class="hljs-built_in">print</span>(error)<br>            if_dsquare = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(error)<br>            if_dsquare = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(error)<br>        if_dsquare = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> if_dsquare<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">TP_potential</span>(<span class="hljs-params">cost, x</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    运输问题的位势法求解函数。首先，它计算变量的数量varnum，如果varnum不等于m + n - 1（基变量的数量），</span><br><span class="hljs-string">    则表示问题存在退化解，将返回None，并输出相应的提示信息。如果varnum满足条件，则继续进行位势法的计算。</span><br><span class="hljs-string">    :param cost: 成本矩阵cost</span><br><span class="hljs-string">    :param x: 需求矩阵x</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    [m, n] = x.shape<br>    varnum = np.array(np.nonzero(x)).shape[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">if</span> varnum != m + n - <span class="hljs-number">1</span>:<br>        sigma = <span class="hljs-literal">None</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;【问题含有退化解，暂时无法判断最优性】&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># print(c_nonzeros.shape)</span><br>        c_nonzeros = create_c_nonzeros(c, x)<br>        cc_nonzeros = np.array(np.nonzero(c_nonzeros))<br>        A = []<br>        B = []<br>        length = c_nonzeros.shape[<span class="hljs-number">0</span>] + c_nonzeros.shape[<span class="hljs-number">1</span>]<br>        zeros = np.zeros((<span class="hljs-number">1</span>, length))[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(cc_nonzeros.shape[<span class="hljs-number">1</span>]):<br>            zeros = np.zeros((<span class="hljs-number">1</span>, length))[<span class="hljs-number">0</span>]<br>            zeros[cc_nonzeros[<span class="hljs-number">0</span>, i]] = <span class="hljs-number">1</span><br>            zeros[cc_nonzeros[<span class="hljs-number">1</span>, i] + c_nonzeros.shape[<span class="hljs-number">0</span>]] = <span class="hljs-number">1</span><br>            A.append(zeros)<br>            B.append(c_nonzeros[cc_nonzeros[<span class="hljs-number">0</span>, i], cc_nonzeros[<span class="hljs-number">1</span>, i]])<br>        l = [<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length - <span class="hljs-number">1</span>):<br>            l.append(<span class="hljs-number">0</span>)  <span class="hljs-comment"># 补充一个x1=0的方程以满足求解条件</span><br>        A.append(l)<br>        B.append(<span class="hljs-number">0</span>)<br>        <span class="hljs-comment"># print(A)</span><br>        <span class="hljs-comment"># print(B)</span><br>        A = np.array(A)<br>        B = np.array(B)<br>        judge = if_dsquare(A, B)<br>        <span class="hljs-keyword">if</span> judge == <span class="hljs-literal">True</span>:<br>            sol = np.linalg.solve(A, B)  <span class="hljs-comment"># 求解条件：A的行数（方程个数)=A的列数(变量个数）=B的个数（方程结果个数）才能解</span><br>            <span class="hljs-comment"># print(sol)</span><br>            var = []  <span class="hljs-comment"># 创建位势名称数组</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(c_nonzeros.shape[<span class="hljs-number">0</span>]):<br>                var.append(<span class="hljs-string">&#x27;u&#x27;</span> + <span class="hljs-built_in">str</span>(i + <span class="hljs-number">1</span>))<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(c_nonzeros.shape[<span class="hljs-number">1</span>]):<br>                var.append(<span class="hljs-string">&#x27;v&#x27;</span> + <span class="hljs-built_in">str</span>(j + <span class="hljs-number">1</span>))<br>            <span class="hljs-comment"># print(var)</span><br>            solset = <span class="hljs-built_in">dict</span>(<span class="hljs-built_in">zip</span>(var, sol))<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;当前位势:\n&#x27;</span>, solset)<br>            u = []<br>            v = []<br>            [m, n] = c_nonzeros.shape<br>            zero_places = np.transpose(np.argwhere(c_nonzeros == <span class="hljs-number">0</span>))<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m):<br>                u.append(sol[i])<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                v.append(sol[j + m])<br>            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(zero_places.shape[<span class="hljs-number">1</span>]):<br>                c_nonzeros[zero_places[<span class="hljs-number">0</span>, k], zero_places[<span class="hljs-number">1</span>, k]] = u[zero_places[<span class="hljs-number">0</span>, k]] + v[zero_places[<span class="hljs-number">1</span>, k]]<br>            <span class="hljs-comment"># print(c_nonzeros)</span><br>            sigma = cost - c_nonzeros<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;检验表σ：\n&#x27;</span>, sigma)<br>            <span class="hljs-keyword">if</span> np.<span class="hljs-built_in">all</span>(sigma &gt;= <span class="hljs-number">0</span>):<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;&#x27;</span>)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;TP未达到最优解&lt;&lt;&lt;&#x27;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            sigma = <span class="hljs-literal">None</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;位势方程组不可解&lt;&lt;&lt;&#x27;</span>)<br>    <span class="hljs-keyword">return</span> sigma<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">def create_c_nonzeros(c, x):
+    &quot;&quot;&quot;
+    根据运输问题中的需求矩阵x创建一个与成本矩阵c相同形状的新矩阵c_nonzeros，其中非零元素与x相对应位置上的元素相乘，而零元素仍保持为零。
+    &quot;&quot;&quot;
+    import numpy as np
+    import copy
+    nonzeros &#x3D; copy.deepcopy(x)
+    for i in range(x.shape[0]):
+        for j in range(x.shape[1]):
+            if x[i, j] !&#x3D; 0:
+                nonzeros[i, j] &#x3D; 1
+    # print(nonzeros)
+    c_nonzeros &#x3D; np.multiply(c, nonzeros)
+    return c_nonzeros
+
+
+def if_dsquare(a, b):
+    &quot;&quot;&quot;
+    函数if_dsquare用于判断位势方程组是否可解。
+    根据输入的系数矩阵a和值向量b，函数检查矩阵的维度和条件来判断是否可解。
+    如果位势方程组可解，则返回True；如果不可解，则返回False。
+    :param a: 系数矩阵a
+    :param b: 值向量b
+    :return: 位势方程组可解，为True
+    &quot;&quot;&quot;
+    print(&#39;a:&#39;, a.shape, &#39;\n&#39;, &#39;b:&#39;, b.shape)
+    correct &#x3D; &#39;&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;&#39;
+    error &#x3D; &#39;&gt;&gt;&gt;位势方程组不可解，请检查基变量个数是否等于(m+n-1)及位势未知量个数是否等于(m+n)&lt;&lt;&lt;&#39;
+    if len(a.shape) &#x3D;&#x3D; 2:
+        if len(b.shape) &#x3D;&#x3D; 2:
+            if a.shape[0] &#x3D;&#x3D; a.shape[1] and a.shape &#x3D;&#x3D; b.shape:
+                print(correct)
+                if_dsquare &#x3D; True
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        elif len(b.shape) &#x3D;&#x3D; 1 and b.shape[0] !&#x3D; 0:
+            if a.shape[0] &#x3D;&#x3D; a.shape[1] and a.shape[0] &#x3D;&#x3D; b.shape[0]:
+                print(correct)
+                if_dsquare &#x3D; True
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        else:
+            print(error)
+            if_dsquare &#x3D; False
+    elif len(a.shape) &#x3D;&#x3D; 1:
+        if len(b.shape) &#x3D;&#x3D; 2:
+            if b.shape[0] &#x3D;&#x3D; b.shape[1] and a.shape[0] &#x3D;&#x3D; b.shape[0]:
+                print(&#39;&gt;&gt;&gt;位势方程组系数矩阵与方程组值向量位置错误&lt;&lt;&lt;&#39;)
+                if_dsquare &#x3D; &#39;True but not solvable&#39;
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        elif len(b.shape) &#x3D;&#x3D; 1:
+            print(error)
+            if_dsquare &#x3D; False
+        else:
+            print(error)
+            if_dsquare &#x3D; False
+    else:
+        print(error)
+        if_dsquare &#x3D; False
+    return if_dsquare
+
+
+def TP_potential(cost, x):
+    &quot;&quot;&quot;
+    运输问题的位势法求解函数。首先，它计算变量的数量varnum，如果varnum不等于m + n - 1（基变量的数量），
+    则表示问题存在退化解，将返回None，并输出相应的提示信息。如果varnum满足条件，则继续进行位势法的计算。
+    :param cost: 成本矩阵cost
+    :param x: 需求矩阵x
+    :return:
+    &quot;&quot;&quot;
+    [m, n] &#x3D; x.shape
+    varnum &#x3D; np.array(np.nonzero(x)).shape[1]
+    if varnum !&#x3D; m + n - 1:
+        sigma &#x3D; None
+        print(&#39;【问题含有退化解，暂时无法判断最优性】&#39;)
+    else:
+        # print(c_nonzeros.shape)
+        c_nonzeros &#x3D; create_c_nonzeros(c, x)
+        cc_nonzeros &#x3D; np.array(np.nonzero(c_nonzeros))
+        A &#x3D; []
+        B &#x3D; []
+        length &#x3D; c_nonzeros.shape[0] + c_nonzeros.shape[1]
+        zeros &#x3D; np.zeros((1, length))[0]
+        for i in range(cc_nonzeros.shape[1]):
+            zeros &#x3D; np.zeros((1, length))[0]
+            zeros[cc_nonzeros[0, i]] &#x3D; 1
+            zeros[cc_nonzeros[1, i] + c_nonzeros.shape[0]] &#x3D; 1
+            A.append(zeros)
+            B.append(c_nonzeros[cc_nonzeros[0, i], cc_nonzeros[1, i]])
+        l &#x3D; [1]
+        for j in range(length - 1):
+            l.append(0)  # 补充一个x1&#x3D;0的方程以满足求解条件
+        A.append(l)
+        B.append(0)
+        # print(A)
+        # print(B)
+        A &#x3D; np.array(A)
+        B &#x3D; np.array(B)
+        judge &#x3D; if_dsquare(A, B)
+        if judge &#x3D;&#x3D; True:
+            sol &#x3D; np.linalg.solve(A, B)  # 求解条件：A的行数（方程个数)&#x3D;A的列数(变量个数）&#x3D;B的个数（方程结果个数）才能解
+            # print(sol)
+            var &#x3D; []  # 创建位势名称数组
+            for i in range(c_nonzeros.shape[0]):
+                var.append(&#39;u&#39; + str(i + 1))
+            for j in range(c_nonzeros.shape[1]):
+                var.append(&#39;v&#39; + str(j + 1))
+            # print(var)
+            solset &#x3D; dict(zip(var, sol))
+            print(&#39;&gt;&gt;&gt;当前位势:\n&#39;, solset)
+            u &#x3D; []
+            v &#x3D; []
+            [m, n] &#x3D; c_nonzeros.shape
+            zero_places &#x3D; np.transpose(np.argwhere(c_nonzeros &#x3D;&#x3D; 0))
+            for i in range(m):
+                u.append(sol[i])
+            for j in range(n):
+                v.append(sol[j + m])
+            for k in range(zero_places.shape[1]):
+                c_nonzeros[zero_places[0, k], zero_places[1, k]] &#x3D; u[zero_places[0, k]] + v[zero_places[1, k]]
+            # print(c_nonzeros)
+            sigma &#x3D; cost - c_nonzeros
+            print(&#39;&gt;&gt;&gt;检验表σ：\n&#39;, sigma)
+            if np.all(sigma &gt;&#x3D; 0):
+                print(&#39;&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;&#39;)
+            else:
+                print(&#39;&gt;&gt;&gt;TP未达到最优解&lt;&lt;&lt;&#39;)
+        else:
+            sigma &#x3D; None
+            print(&#39;&gt;&gt;&gt;位势方程组不可解&lt;&lt;&lt;&#39;)
+    return sigma</code></pre></div></figure>
 <p>结果</p>
-<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><code class="hljs subunit">c:<br> [[ 3. 11.  3. 10.]<br> [ 1.  9.  2.  8.]<br> [ 7.  4. 10.  5.]]<br>行罚数： [0.0, 1.0, 1.0]<br>列罚数： [2.0, 5.0, 1.0, 3.0]<br>罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]<br>最大罚数： 5.0 元素序号： 5<br>对第 2 列进行操作：<br>[11.  9.  4.]<br>最小成本所在行索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 6. 0. 0.]]<br>a: [7. 4. 3.]<br>b: [3. 0. 5. 6.]<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [7.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span> 5.e<span class="hljs-string">+00</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [7.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span> 5.e<span class="hljs-string">+00</span>]]<br>行罚数： [0.0, 1.0, 2.0]<br>列罚数： [2.0, 0.0, 1.0, 3.0]<br>罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]<br>最大罚数： 3.0 元素序号： 7<br>对第 4 列进行操作：<br>[10.  8.  5.]<br>最小成本所在行索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [0. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [7. 4. 0.]<br>b: [3. 0. 5. 3.]<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [0.0, 1.0, 0.0]<br>列罚数： [2.0, 0.0, 1.0, 2.0]<br>罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]<br>最大罚数： 2.0 元素序号： 4<br>对第 1 列进行操作：<br>[3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+09</span>]<br>最小成本所在行索引： 1<br>本次迭代后的x矩阵：<br> [[0. 0. 0. 0.]<br> [3. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [7. 1. 0.]<br>b: [0. 0. 5. 3.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 2.e<span class="hljs-string">+00</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [7.0, 6.0, 0.0]<br>列罚数： [0.0, 0.0, 1.0, 2.0]<br>罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]<br>最大罚数： 7.0 元素序号： 1<br>对第 1 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 3.e<span class="hljs-string">+00</span> 1.e<span class="hljs-string">+01</span>]<br>最小成本所在列索引： 2<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 0.]<br> [3. 0. 0. 0.]<br> [0. 6. 0. 3.]]<br>a: [2. 1. 0.]<br>b: [0. 0. 0. 3.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [999999990.0, 999999992.0, 0.0]<br>列罚数： [0.0, 0.0, 0.0, 2.0]<br>罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]<br>最大罚数： 999999992.0 元素序号： 2<br>对第 2 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 8.e<span class="hljs-string">+00</span>]<br>最小成本所在列索引： 3<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 0.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>a: [2. 0. 0.]<br>b: [0. 0. 0. 2.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代未完成】<br>------------------------------------------------------------<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>行罚数： [999999990.0, 0.0, 0.0]<br>列罚数： [0.0, 0.0, 0.0, 999999990.0]<br>罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]<br>最大罚数： 999999990.0 元素序号： 1<br>对第 1 行进行操作：<br>[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+01</span>]<br>最小成本所在列索引： 3<br>本次迭代后的x矩阵：<br> [[0. 0. 5. 2.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>a: [0. 0. 0.]<br>b: [0. 0. 0. 0.]<br>c:<br> [[1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]<br> [1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span> 1.e<span class="hljs-string">+09</span>]]<br>【迭代完成】<br>------------------------------------------------------------<br>&gt;&gt;&gt;供求平衡&lt;&lt;&lt;<br>&gt;&gt;&gt;初始基本可行解x*：<br> [[0. 0. 5. 2.]<br> [3. 0. 0. 1.]<br> [0. 6. 0. 3.]]<br>&gt;&gt;&gt;当前总成本： 85.0<br>&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;<br>&gt;&gt;&gt;当前位势:<br> &#123;&#x27;u1&#x27;: 0.0, &#x27;u2&#x27;: <span class="hljs-string">-2</span>.0, &#x27;u3&#x27;: <span class="hljs-string">-5</span>.0, &#x27;v1&#x27;: 3.0, &#x27;v2&#x27;: 9.0, &#x27;v3&#x27;: 3.0, &#x27;v4&#x27;: 10.0&#125;<br>&gt;&gt;&gt;检验数表σ：<br> [[ 0.  2.  0.  0.]<br> [ 0.  2.  1.  0.]<br> [ 9.  0. 12.  0.]]<br>&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">c:
+ [[ 3. 11.  3. 10.]
+ [ 1.  9.  2.  8.]
+ [ 7.  4. 10.  5.]]
+行罚数： [0.0, 1.0, 1.0]
+列罚数： [2.0, 5.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]
+最大罚数： 5.0 元素序号： 5
+对第 2 列进行操作：
+[11.  9.  4.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 0.]]
+a: [7. 4. 3.]
+b: [3. 0. 5. 6.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+行罚数： [0.0, 1.0, 2.0]
+列罚数： [2.0, 0.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]
+最大罚数： 3.0 元素序号： 7
+对第 4 列进行操作：
+[10.  8.  5.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 4. 0.]
+b: [3. 0. 5. 3.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [0.0, 1.0, 0.0]
+列罚数： [2.0, 0.0, 1.0, 2.0]
+罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]
+最大罚数： 2.0 元素序号： 4
+对第 1 列进行操作：
+[3.e+00 1.e+00 1.e+09]
+最小成本所在行索引： 1
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 1. 0.]
+b: [0. 0. 5. 3.]
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [7.0, 6.0, 0.0]
+列罚数： [0.0, 0.0, 1.0, 2.0]
+罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]
+最大罚数： 7.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 3.e+00 1.e+01]
+最小成本所在列索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [2. 1. 0.]
+b: [0. 0. 0. 3.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 999999992.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 2.0]
+罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]
+最大罚数： 999999992.0 元素序号： 2
+对第 2 行进行操作：
+[1.e+09 1.e+09 1.e+09 8.e+00]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [2. 0. 0.]
+b: [0. 0. 0. 2.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 0.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 999999990.0]
+罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]
+最大罚数： 999999990.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 1.e+09 1.e+01]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [0. 0. 0.]
+b: [0. 0. 0. 0.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代完成】
+------------------------------------------------------------
+&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+&gt;&gt;&gt;当前总成本： 85.0
+&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;
+&gt;&gt;&gt;当前位势:
+ &#123;&#39;u1&#39;: 0.0, &#39;u2&#39;: -2.0, &#39;u3&#39;: -5.0, &#39;v1&#39;: 3.0, &#39;v2&#39;: 9.0, &#39;v3&#39;: 3.0, &#39;v4&#39;: 10.0&#125;
+&gt;&gt;&gt;检验数表σ：
+ [[ 0.  2.  0.  0.]
+ [ 0.  2.  1.  0.]
+ [ 9.  0. 12.  0.]]
+&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;</code></pre></div></figure>
 <p>退化现象的问题暂时不可解。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;<br>&gt;&gt;&gt;初始基本可行解<span class="hljs-attribute">x</span>*：<br> <span class="hljs-selector-attr">[[1. 0. 0. 0. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 1. 0. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 0. 1. 0.]</span><br> <span class="hljs-selector-attr">[0. 0. 0. 0. 1.]</span><br> <span class="hljs-selector-attr">[0. 1. 0. 0. 0.]</span>]<br>&gt;&gt;&gt;当前总成本： <span class="hljs-number">0.8999999999999999</span><br>【注意：问题含有退化解】<br>【问题含有退化解，暂时无法判断最优性】<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[1. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 1. 0. 0. 0.]]
+&gt;&gt;&gt;当前总成本： 0.8999999999999999
+【注意：问题含有退化解】
+【问题含有退化解，暂时无法判断最优性】</code></pre></div></figure>
 <p>参考资料：</p>
 <blockquote>
 <p>运筹学 第4版 钱颂迪 清华大学出版社</p>

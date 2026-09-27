@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -153,26 +154,54 @@
 <h3 id="Defining-and-registering-the-struct（定义和注册结构）">Defining and registering the struct（定义和注册结构）</h3>
 <p>First, we need to define a struct type named <code>FooPluginArgs</code> in <code>pkg/scheduler/apis/config/types_pluginargs.go</code>, which is the representation of the configuration parameters that is internal to the scheduler.</p>
 <p>首先，我们需要在pkg / scheduler / apis / config / types_pluginargs.go中定义一个名为FooPluginArgs的结构类型，该结构类型表示调度程序内部的配置参数。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> +k8s:deepcopy-gen:interfaces=k8s.io<span class="hljs-regexp">/apimachinery/</span>pkg/runtime.Object<br><br>type FooPluginArgs struct &#123;<br>	<span class="hljs-regexp">//</span> metav1 is k8s.io<span class="hljs-regexp">/apimachinery/</span>pkg<span class="hljs-regexp">/apis/m</span>eta/v1<br>	metav1.TypeMeta<br>	BarParam int32<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#x2F;&#x2F; +k8s:deepcopy-gen:interfaces&#x3D;k8s.io&#x2F;apimachinery&#x2F;pkg&#x2F;runtime.Object
+
+type FooPluginArgs struct &#123;
+	&#x2F;&#x2F; metav1 is k8s.io&#x2F;apimachinery&#x2F;pkg&#x2F;apis&#x2F;meta&#x2F;v1
+	metav1.TypeMeta
+	BarParam int32
+&#125;</code></pre></div></figure>
 <p>Note that we embed <code>k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta</code> to include API metadata for <a target="_blank" rel="noopener" href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#api-conventions">versioning and persistence</a>. We add the <code>+k8s:deepcopy-gen:interfaces</code> comment to <a target="_blank" rel="noopener" href="https://github.com/kubernetes/kubernetes/tree/master/staging/src/k8s.io/code-generator">auto-generate a <code>DeepCopy</code> function</a> for the struct.</p>
 <p>Similarly, define <code>FooPluginArgs</code> in <code>k8s.io/kube-scheduler/config/{version}/types_pluginargs.go</code>, which is the versioned representation used in the <code>kube-scheduler</code> binary used for deserialization. This time, however, in order to allow implicit default values for arguments, the type of the struct’s fields may be pointers; leaving a parameter unspecified will set the pointer field to its zero value (nil), which can be used to let the framework know that it must fill in the default value. <code>BarParam</code> is of type <code>int32</code> and let’s say we want a non-zero default value for it:</p>
 <p>请注意，<a target="_blank" rel="noopener" href="http://xn--k8s-0h9d7rw2jnp1abxi.io/apimachinery/pkg/apis/meta/v1.TypeMeta%EF%BC%8C%E4%BB%A5%E5%8C%85%E5%90%AB%E7%94%A8%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%92%8C%E6%8C%81%E4%B9%85%E6%80%A7%E7%9A%84API%E5%85%83%E6%95%B0%E6%8D%AE%E3%80%82">我们嵌入了k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta，以包含用于版本控制和持久性的API元数据。</a> 我们添加+ k8s：deepcopy-gen：interfaces注释以自动生成该结构的DeepCopy函数。</p>
 <p>同样，<a target="_blank" rel="noopener" href="http://xn--k8s-lp6e.io/kube-scheduler/config/%7Bversion%7D/types_pluginargs.go%E4%B8%AD%E5%AE%9A%E4%B9%89FooPluginArgs%EF%BC%8C%E8%BF%99%E6%98%AF%E7%94%A8%E4%BA%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84kube-scheduler%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E7%89%88%E6%9C%AC%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F%E3%80%82">在k8s.io/kube-scheduler/config/{version}/types_pluginargs.go中定义FooPluginArgs，这是用于反序列化的kube-scheduler二进制文件中使用的版本表示形式。</a> 但是，这一次，为了允许参数使用隐式默认值，结构字段的类型可以是指针。 保留未指定的参数会将指针字段设置为其零值（nil），可用于使框架知道它必须填写默认值。 BarParam的类型为int32，假设我们想要一个非零的默认值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object</span><br><br><span class="hljs-keyword">type</span> FooPluginArgs <span class="hljs-keyword">struct</span> &#123;<br>	metav1.TypeMeta <span class="hljs-string">`json:&quot;,inline&quot;`</span><br>	BarParam *<span class="hljs-type">int32</span> <span class="hljs-string">`json:&quot;barParam,omitempty&quot;`</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#x2F;&#x2F; +k8s:deepcopy-gen:interfaces&#x3D;k8s.io&#x2F;apimachinery&#x2F;pkg&#x2F;runtime.Object
+
+type FooPluginArgs struct &#123;
+	metav1.TypeMeta &#96;json:&quot;,inline&quot;&#96;
+	BarParam *int32 &#96;json:&quot;barParam,omitempty&quot;&#96;
+&#125;</code></pre></div></figure>
 <p>For each <code>types_pluginargs.go</code> addition, remember to register the type in the corresponding <code>register.go</code>, which will allow the scheduler to recognize <code>KubeSchedulerConfiguration</code> values at parse-time.</p>
 <p>对于每个types_pluginargs.go，请记住在相应的register.go中注册类型，这将使调度程序在解析时识别KubeSchedulerConfiguration值。</p>
 <h3 id="Setting-defaults（设置默认值）">Setting defaults（设置默认值）</h3>
 <p>When a <code>KubeSchedulerConfiguration</code> object is parsed (happens in <code>cmd/kube-scheduler/app/options/options.go</code>), the scheduler will convert from the versioned type to the internal type, filling in the unspecified fields with defaults. Speaking of defaults, define <code>SetDefaults_FooPluginArgs</code> in <code>pkg/scheduler/apis/config/v1beta1/defaults.go</code> as follows:</p>
 <p>解析KubeSchedulerConfiguration对象时（发生在cmd / kube-scheduler / app / options / options.go中），调度程序将从版本化类型转换为内部类型，并使用默认值填充未指定的字段。 说到默认值，请在pkg / scheduler / apis / config / v1beta1 / defaults.go中定义SetDefaults_FooPluginArgs，如下所示：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">// v1beta1 refers to k8s.io/kube-scheduler/config/v1beta1.</span><br>func <span class="hljs-built_in">SetDefaults_FooPluginArgs</span>(obj *v1beta1.FooPluginArgs) &#123;<br>	<span class="hljs-keyword">if</span> obj<span class="hljs-selector-class">.BarParam</span> == nil &#123;<br>		obj<span class="hljs-selector-class">.BarParam</span> = pointer<span class="hljs-selector-class">.Int32Ptr</span>(<span class="hljs-number">42</span>)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#x2F;&#x2F; v1beta1 refers to k8s.io&#x2F;kube-scheduler&#x2F;config&#x2F;v1beta1.
+func SetDefaults_FooPluginArgs(obj *v1beta1.FooPluginArgs) &#123;
+	if obj.BarParam &#x3D;&#x3D; nil &#123;
+		obj.BarParam &#x3D; pointer.Int32Ptr(42)
+	&#125;
+&#125;</code></pre></div></figure>
 <h3 id="Validating-configuration-at-runtime（在运行时验证配置）">Validating configuration at runtime（在运行时验证配置）</h3>
 <p>Next, we need to define validators to make sure the user’s configuration and your default values are valid. To do this, add something like this in <code>pkg/scheduler/apis/config/validation/validation_pluginargs.go</code>:</p>
 <p>接下来，我们需要定义验证器以确保用户的配置和您的默认值有效。 为此，请在pkg / scheduler / apis / config / validation / validation_pluginargs.go中添加以下内容：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-comment">// From here on, FooPluginArgs refers to the type defined in pkg/scheduler</span><br><span class="hljs-comment">// definition, not the kube-scheduler definition. We&#x27;re dealing with</span><br><span class="hljs-comment">// post-default values.</span><br>func ValidateFooPluginArgs(<span class="hljs-keyword">args</span> config.FooPluginArgs) <span class="hljs-keyword">error</span> &#123;<br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">args</span>.BarParam &lt; 0 &amp;&amp; <span class="hljs-keyword">args</span>.BarParam &gt; 100 &#123;<br>		<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;must be in the range [0, 100]&quot;</span>)<br>	&#125;<br>	<span class="hljs-keyword">return</span> nil<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#x2F;&#x2F; From here on, FooPluginArgs refers to the type defined in pkg&#x2F;scheduler
+&#x2F;&#x2F; definition, not the kube-scheduler definition. We&#39;re dealing with
+&#x2F;&#x2F; post-default values.
+func ValidateFooPluginArgs(args config.FooPluginArgs) error &#123;
+	if args.BarParam &lt; 0 &amp;&amp; args.BarParam &gt; 100 &#123;
+		return fmt.Errorf(&quot;must be in the range [0, 100]&quot;)
+	&#125;
+	return nil
+&#125;</code></pre></div></figure>
 <h3 id="Code-generation（代码生成）">Code generation（代码生成）</h3>
 <p>We have defined everything necessary to run code generation now. Remember to commit all your changes (not sure why this is needed) and do a <code>make clean</code> first. Then:</p>
 <p>我们已经定义了现在运行代码生成所需的一切。 记住要提交所有更改（不确定为什么需要这样做），并先进行清理。 然后：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$GOPATH</span>/src/k8s.io/kubernetes</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add -A &amp;&amp; git commit</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make clean</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">./hack/update-codegen.sh</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make generated_files</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$ cd $GOPATH&#x2F;src&#x2F;k8s.io&#x2F;kubernetes
+$ git add -A &amp;&amp; git commit
+$ make clean
+$ .&#x2F;hack&#x2F;update-codegen.sh
+$ make generated_files</code></pre></div></figure>
 <p>This should automatically generate code to deep copy objects, convert between different struct types, convert pointer types to raw types, and set defaults.</p>
 <p>这将自动生成代码以深层复制对象，在不同的结构类型之间转换，将指针类型转换为原始类型，并设置默认值。</p>
 <h3 id="Testing（测试）">Testing（测试）</h3>
@@ -186,7 +215,17 @@
 <h3 id="Receiving-the-arguments-in-the-plugin（接收插件中的参数）">Receiving the arguments in the plugin（接收插件中的参数）</h3>
 <p>We can now finally receive <code>FooPluginArgs</code> in the plugin code. To do this, modify the plugin’s <code>New</code> method signature like so:</p>
 <p>现在，我们终于可以在插件代码中接收FooPluginArgs了。 为此，请修改插件的New方法签名，如下所示：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">New</span><span class="hljs-params">(fpArgs runtime.Object, fh framework.FrameworkHandle)</span></span> (framework.Plugin, <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-comment">// config.FooPluginArgs refers to the pkg/scheduler struct type definition.</span><br>	args, ok := fpArgs.(*config.FooPluginArgs)<br>	<span class="hljs-keyword">if</span> !ok &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, fmt.Errorf(<span class="hljs-string">&quot;got args of type %T, want *FooPluginArgs&quot;</span>, fpArgs)<br>	&#125;<br>	<span class="hljs-keyword">if</span> err := validation.ValidateFooPluginArgs(*args); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	<span class="hljs-comment">// Use args.BarParam as you like.</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">func New(fpArgs runtime.Object, fh framework.FrameworkHandle) (framework.Plugin, error) &#123;
+	&#x2F;&#x2F; config.FooPluginArgs refers to the pkg&#x2F;scheduler struct type definition.
+	args, ok :&#x3D; fpArgs.(*config.FooPluginArgs)
+	if !ok &#123;
+		return nil, fmt.Errorf(&quot;got args of type %T, want *FooPluginArgs&quot;, fpArgs)
+	&#125;
+	if err :&#x3D; validation.ValidateFooPluginArgs(*args); err !&#x3D; nil &#123;
+		return nil, err
+	&#125;
+	&#x2F;&#x2F; Use args.BarParam as you like.
+&#125;</code></pre></div></figure>
 <h1 id="Scheduling-Framework（调度框架）">Scheduling Framework（调度框架）</h1>
 <p><strong>FEATURE STATE:</strong> <code>Kubernetes v1.15 [alpha]</code></p>
 <p>The scheduling framework is a pluggable architecture for Kubernetes Scheduler that makes scheduler customizations easy. It adds a new set of “plugin” APIs to the existing scheduler. Plugins are compiled into the scheduler. The APIs allow most scheduling features to be implemented as plugins, while keeping the scheduling “core” simple and maintainable. Refer to the <a target="_blank" rel="noopener" href="https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/624-scheduling-framework/README.md">design proposal of the scheduling framework</a> for more technical information on the design of the framework.</p>
@@ -234,10 +273,20 @@
 <p>For example, suppose a plugin ranks Nodes based on how many blinking lights they have.<code>BlinkingLightScorer</code></p>
 <p>这些插件用于在调度程序计算节点的最终排名之前修改分数。 注册此扩展点的插件将与同一插件的得分结果一起调用。 每个插件每个调度周期调用一次。</p>
 <p>例如，假设一个插件根据节点有多少个闪烁的灯光对节点进行排名。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ScoreNode</span><span class="hljs-params">(_ *v1.pod, n *v1.Node)</span></span> (<span class="hljs-type">int</span>, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">return</span> getBlinkingLightCount(n)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ScoreNode</span><span class="token punctuation">(</span><span class="token boolean">_</span> <span class="token operator">*</span>v1<span class="token punctuation">.</span>pod<span class="token punctuation">,</span> n <span class="token operator">*</span>v1<span class="token punctuation">.</span>Node<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">getBlinkingLightCount</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>However, the maximum count of blinking lights may be small compared to . To fix this, should also register for this extension point.<code>NodeScoreMax``BlinkingLightScorer</code></p>
 <p>但是，与相比，闪烁灯的最大数量可能少。 要解决此问题，还应注册此扩展点。NodeScoreMaxBlinkingLightScorer</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NormalizeScores</span><span class="hljs-params">(scores <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>)</span></span> &#123;<br>    highest := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> _, score := <span class="hljs-keyword">range</span> scores &#123;<br>        highest = max(highest, score)<br>    &#125;<br>    <span class="hljs-keyword">for</span> node, score := <span class="hljs-keyword">range</span> scores &#123;<br>        scores[node] = score*NodeScoreMax/highest<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">NormalizeScores</span><span class="token punctuation">(</span>scores <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    highest <span class="token operator">:=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> score <span class="token operator">:=</span> <span class="token keyword">range</span> scores <span class="token punctuation">&#123;</span>
+        highest <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>highest<span class="token punctuation">,</span> score<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">for</span> node<span class="token punctuation">,</span> score <span class="token operator">:=</span> <span class="token keyword">range</span> scores <span class="token punctuation">&#123;</span>
+        scores<span class="token punctuation">[</span>node<span class="token punctuation">]</span> <span class="token operator">=</span> score<span class="token operator">*</span>NodeScoreMax<span class="token operator">/</span>highest
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
 <p>If any NormalizeScore plugin returns an error, the scheduling cycle is aborted.</p>
 <p>如果任何NormalizeScore插件返回错误，则调度周期将中止。</p>
 <blockquote>
@@ -284,7 +333,21 @@ If a Permit plugin returns “wait”, then the Pod is kept in an internal “wa
 <h2 id="Plugin-API">Plugin API</h2>
 <p>There are two steps to the plugin API. First, plugins must register and get configured, then they use the extension point interfaces. Extension point interfaces have the following form.</p>
 <p>插件API有两个步骤。 首先，插件必须注册并配置，然后才能使用扩展点接口。 扩展点接口具有以下形式。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Plugin <span class="hljs-keyword">interface</span> &#123;<br>    Name() <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> QueueSortPlugin <span class="hljs-keyword">interface</span> &#123;<br>    Plugin<br>    Less(*v1.pod, *v1.pod) <span class="hljs-type">bool</span><br>&#125;<br><br><span class="hljs-keyword">type</span> PreFilterPlugin <span class="hljs-keyword">interface</span> &#123;<br>    Plugin<br>    PreFilter(context.Context, *framework.CycleState, *v1.pod) <span class="hljs-type">error</span><br>&#125;<br><br><span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> Plugin <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> QueueSortPlugin <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+    Plugin
+    <span class="token function">Less</span><span class="token punctuation">(</span><span class="token operator">*</span>v1<span class="token punctuation">.</span>pod<span class="token punctuation">,</span> <span class="token operator">*</span>v1<span class="token punctuation">.</span>pod<span class="token punctuation">)</span> <span class="token builtin">bool</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> PreFilterPlugin <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+    Plugin
+    <span class="token function">PreFilter</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>Context<span class="token punctuation">,</span> <span class="token operator">*</span>framework<span class="token punctuation">.</span>CycleState<span class="token punctuation">,</span> <span class="token operator">*</span>v1<span class="token punctuation">.</span>pod<span class="token punctuation">)</span> <span class="token builtin">error</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ...</span></code></pre></div></figure>
 <h2 id="Plugin-configuration（插件配置）">Plugin configuration（插件配置）</h2>
 <p>You can enable or disable plugins in the scheduler configuration. If you are using Kubernetes v1.18 or later, most scheduling <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins">plugins</a> are in use and enabled by default.</p>
 <p>In addition to default plugins, you can also implement your own scheduling plugins and get them configured along with default plugins. You can visit <a target="_blank" rel="noopener" href="https://github.com/kubernetes-sigs/scheduler-plugins">scheduler-plugins</a> for more details.</p>

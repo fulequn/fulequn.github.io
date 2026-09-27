@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -186,7 +187,7 @@ Typora添加数学公式
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/12/Article202012032/" target="_self">
 <div>
-dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout传播层 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787
+dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout传播层 #-*- coding: utf-8 -*- import sys, os sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__)))) import numpy as np from layers
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -254,7 +255,7 @@ dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011305/" target="_self">
 <div>
-dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout传播层 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787
+dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout传播层 #-*- coding: utf-8 -*- import numpy as np from .layers import * def dropout_forward(x, dropout_param): """ 执行dropout前向传播过程。 Inputs:
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -323,7 +324,7 @@ dropout_layers.py 包含了Dropout前向传播以及反向传播，组合Dropout
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011303/" target="_self">
 <div>
-layers.py 首先实现神经网络中仿射层、ReLU层以及组合单层神经元。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485
+layers.py 首先实现神经网络中仿射层、ReLU层以及组合单层神经元。 #-*- coding: utf-8 -*- import numpy as np def affine_forward(x, w, b): """ 计算神经网络当前层的前馈传播，该方法计算在全连接情况下的得分函数。 注：如果不理解affine仿射变换，简单的理解为在全连接情况下的得分函数即可。
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -358,7 +359,7 @@ Matplotlib使用subplot时标题与刻度重叠
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011302/" target="_self">
 <div>
-参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客 使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。 在plt.show()之前加入以下代码即可。 1plt.tight_layout() 最终结果： tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工
+参考链接： (1条消息) plt.tight_layout()_Du_Shuang的博客-CSDN博客 使用matplotlib绘制子图时，出现下方子图的标题与上方子图的x轴刻度重叠的问题。 在plt.show()之前加入以下代码即可。 plt.tight_layout() 最终结果： tight_layout会自动调整子图参数，使之填充整个图像区域。这是个实验特性，可能在一些情况下不工作
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -428,7 +429,7 @@ python的ModuleNotFoundError解决
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011255/" target="_self">
 <div>
-参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客 第一种 123456789101112131415161718192021222324252627282930313233343536373839404142434445def softmax_loss_naive(W, X, y, reg): &quot;&quot;&q
+参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客 第一种 def softmax_loss_naive(W, X, y, reg): """ 使用显式循环版本计算Softmax损失函数 N表示：数据个数，D表示：数据维度，C：表示数据类别个数。 Inputs: - W: 形状(D, C)
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -498,7 +499,7 @@ Python字符串前面加u,r,b,f的含义
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011253/" target="_self">
 <div>
-参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客 字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 1exp = u&quot;我是含有中文字符组成的字符串。&quot; 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含
+参考链接： Python 字符串前面加u,r,b,f的含义_python学习者的博客-CSDN博客 字符串前加u 后面字符串以 Unicode格式进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。 exp = u"我是含有中文字符组成的字符串。" 字符串前加r 去掉反斜杠的转移机制。（特殊字符：即那些，反斜杠加上对应字母，表示对应的特殊含义的，比如最常见的”\
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -532,7 +533,7 @@ Python字符串前面加u,r,b,f的含义
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011252/" target="_self">
 <div>
-参考链接： https://blog.csdn.net/IMWTJ123/article/details/88547969 导入模块 1import cPickle as pickle 运行程序时发现出现错误： 1ImportError: No module named &#x27;cPickle&#x27; 其实是版本的问题，python3并不兼容python2 因为在python3下，是没
+参考链接： https://blog.csdn.net/IMWTJ123/article/details/88547969 导入模块 import cPickle as pickle 运行程序时发现出现错误： ImportError: No module named &#39;cPickle&#39; 其实是版本的问题，python3并不兼容python2 因为在python3下，是没有cPi
 </div>
 </a>
 <div class="index-btm post-metas">
@@ -601,7 +602,7 @@ Python字符串前面加u,r,b,f的含义
 </h2>
 <a class="index-excerpt index-excerpt__noimg" href="/2020/11/Article202011214/" target="_self">
 <div>
-参考链接： spyder指定python环境_我自横刀向天笑，笑完我就去睡觉-CSDN博客 打开Spyder，Tools-&gt;Preferences-&gt;Python interpreter，将解释器换成用户需要的解释器即可。 但是console可能出现错误，如下图所示。 按照提示的语句直接复制，可能会出现错误。 因为那个‑和咱们的-其实是不一样的 所以要把那个‑改成负号就行： 1pi
+参考链接： spyder指定python环境_我自横刀向天笑，笑完我就去睡觉-CSDN博客 打开Spyder，Tools-&gt;Preferences-&gt;Python interpreter，将解释器换成用户需要的解释器即可。 但是console可能出现错误，如下图所示。 按照提示的语句直接复制，可能会出现错误。 因为那个‑和咱们的-其实是不一样的 所以要把那个‑改成负号就行： pip
 </div>
 </a>
 <div class="index-btm post-metas">

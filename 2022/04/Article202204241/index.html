@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -122,7 +123,7 @@
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-9 分钟
+10 分钟
 </span>
 </div>
 </div>
@@ -157,7 +158,9 @@
 <p>最终使用scatter散点图来完成图片的绘制工作。</p>
 <h3 id="2-应用到的知识内容">2.应用到的知识内容</h3>
 <h4 id="2-1-散点图基础">2.1 散点图基础</h4>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust">plt.<span class="hljs-title function_ invoke__">scatter</span>(<br>    [<span class="hljs-string">&#x27;x&#x27;</span>, <span class="hljs-string">&#x27;y&#x27;</span>, <span class="hljs-symbol">&#x27;s</span>=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>c=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>marker=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>cmap=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>norm=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>vmin=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>vmax=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>alpha=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>linewidths=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>verts=&lt;deprecated parameter&gt;<span class="hljs-string">&#x27;, &#x27;</span>edgecolors=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>*<span class="hljs-string">&#x27;, &#x27;</span>plotnonfinite=False<span class="hljs-string">&#x27;, &#x27;</span>data=<span class="hljs-literal">None</span><span class="hljs-string">&#x27;, &#x27;</span>**kwargs<span class="hljs-string">&#x27;],</span><br><span class="hljs-string">)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.scatter(
+    [&#39;x&#39;, &#39;y&#39;, &#39;s&#x3D;None&#39;, &#39;c&#x3D;None&#39;, &#39;marker&#x3D;None&#39;, &#39;cmap&#x3D;None&#39;, &#39;norm&#x3D;None&#39;, &#39;vmin&#x3D;None&#39;, &#39;vmax&#x3D;None&#39;, &#39;alpha&#x3D;None&#39;, &#39;linewidths&#x3D;None&#39;, &#39;verts&#x3D;&lt;deprecated parameter&gt;&#39;, &#39;edgecolors&#x3D;None&#39;, &#39;*&#39;, &#39;plotnonfinite&#x3D;False&#39;, &#39;data&#x3D;None&#39;, &#39;**kwargs&#39;],
+)</code></pre></div></figure>
 <p>x, y：具有相同长度的一维数据，散点的X和Y轴对应的数据。</p>
 <p>s：数值型，控制点的大小。</p>
 <p>c：字符串，控制点的颜色，常用的颜色字符串为b（blue，蓝色）、c（cyan，品红）、g（green，绿色）、k（black，黑色）、m（magenta，红色）、w（white，白色）、y（yellow，黄色）。</p>
@@ -170,26 +173,36 @@
 <h4 id="2-2-自定义点的样式">2.2 自定义点的样式</h4>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202204241653959.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>指定marker参数就可以选择我们想要的点的样式。</p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gml">plt.scatter(<span class="hljs-variable language_">x</span>, <span class="hljs-variable language_">y</span>, marker=<span class="hljs-string">&#x27;.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.scatter(x, y, marker&#x3D;&#39;.&#39;)</code></pre></div></figure>
 <h4 id="2-3-点大小">2.3 点大小</h4>
 <p>指定s参数就可以控制点的大小。</p>
 <h4 id="2-4-点的颜色和透明度">2.4 点的颜色和透明度</h4>
 <p>使用c和alpha参数来控制透明度。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">plt</span>.scatter(x, y,c=colors,alpha=<span class="hljs-number">0</span>.<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.scatter(x, y,c&#x3D;colors,alpha&#x3D;0.5)</code></pre></div></figure>
 <p>颜色的选取可以参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_41299610/article/details/106912048%E6%9D%A5%E8%BF%9B%E8%A1%8C%E9%80%89%E6%8B%A9%E3%80%82">https://blog.csdn.net/sinat_41299610/article/details/106912048来进行选择。</a></p>
 <p>可以通过为每一个点指定不同的颜色，以区分不同的点。</p>
 <p>这个时候需要对c传入一个数字列表来代表程度。其中颜色列表的意思是，在下图的颜色带中按比例取颜色。如 s=[1, 2] 表示的两个颜色分别是：最左边的颜色和最右边的颜色；s=[100, 103, 150, 200] 的四个颜色分别是：最左边的颜色，最左边的颜色（100和103差别不大），中间的颜色，最右边的颜色。</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202204242023464.png" srcset="/img/loading.gif" lazyload alt="3"></p>
 <h4 id="2-5-线宽度">2.5 线宽度</h4>
 <p>使用linewidths参数来控制线宽度。</p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gml">plt.scatter(<span class="hljs-variable language_">x</span>, <span class="hljs-variable language_">y</span>, linewidths=lines)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.scatter(x, y, linewidths&#x3D;lines)</code></pre></div></figure>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202204242023446.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <h4 id="2-6-加入箭头">2.6 加入箭头</h4>
 <p>使用quiver来构造箭头。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs routeros">plt.quiver(X, Y, U, V, <span class="hljs-attribute">angles</span>=<span class="hljs-string">&#x27;xy&#x27;</span>, <span class="hljs-attribute">scale</span>=1, <span class="hljs-attribute">scale_units</span>=<span class="hljs-string">&#x27;xy&#x27;</span>)<br><br>参数解释：<br>X : 箭头（向量）起点x坐标<br>Y : 箭头（向量）起点y坐标<br>U : 箭头终点坐标为 X+U <br>V : 箭头终点坐标为 Y+V<br><br>注意，这样点到点的箭头，需要将<br>scale       参数设置为 1<br>scale_units 参数设置为 <span class="hljs-string">&#x27;xy&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.quiver(X, Y, U, V, angles&#x3D;&#39;xy&#39;, scale&#x3D;1, scale_units&#x3D;&#39;xy&#39;)
+
+参数解释：
+X : 箭头（向量）起点x坐标
+Y : 箭头（向量）起点y坐标
+U : 箭头终点坐标为 X+U 
+V : 箭头终点坐标为 Y+V
+
+注意，这样点到点的箭头，需要将
+scale       参数设置为 1
+scale_units 参数设置为 &#39;xy&#39;</code></pre></div></figure>
 <h4 id="2-7-加入注解文字">2.7 加入注解文字</h4>
 <p>使用text来加入注解文字。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">matplotlib.pyplot.text(x, y, s, <span class="hljs-attribute">fontdict</span>=None, <span class="hljs-attribute">withdash</span>=<span class="hljs-literal">False</span>, **kwargs)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">matplotlib.pyplot.text(x, y, s, fontdict&#x3D;None, withdash&#x3D;False, **kwargs)</code></pre></div></figure>
 <p>通过函数方式，向axes对象添加text对象，确切的说是向axes的(x,y)位置添加s文本。返回一个text实例。</p>
 <p>参数详解</p>
 <p>1.x, y: scalars 放置text的位置</p>

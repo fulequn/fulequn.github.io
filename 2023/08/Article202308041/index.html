@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -196,7 +197,33 @@
 <p>一面算法：(1) 编写二分查找算法思想就是从中间查找，比较大小后再找左或右半边，这个百度一下，各个语言版本都有，这个问题需要能够手写出来的，回去背吧(2) 二分查找的时间复杂度（O(logn)，最坏 O(n)），时间复杂度，空间复杂度怎么计算的其实这个就是看你代码执行的时间和占用空间，简单方法就是把常见的算法的时间复杂度和空间复杂度记下来，如果实在记不住就百度一下计算的过程(3) 简单问了一下工作经历和所作的工作（这跟第一个面试问的一样，然后就从头到尾的介绍一遍）(4) 在工作中用到了哪些算法，简单介绍这个肯定挑自己掌握度高的和简历中写的介绍，例如 LR，RF,SVM，然后说原理和推导过程。</p>
 <p>二面技术：(1) 分类和聚类的区别从样本数据、模型、方法：分类 (LR，DT…)，聚类 (K-Means,K-Means++)，、产生的结果等方面阐述区别(2) 特征是怎么进行选择的或者说怎么知道选出来的就是最好的这个问题上面已经提过三种方法：Filter、Wrapper、Enbedded，主要从划分的属性上会像决策树生成过程中计算信息增益、增益率、Gini 一样评价一个属性的评分(3) L1 正则化和 L2 正则化的区别这个问题主要从公式，正则化形成过程，功能等方面进行回答，附一个我觉得讲的比较好的正则化的博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuyang_1992/article/details/83685483">https://blog.csdn.net/yuyang_1992/article/details/83685483</a> (4)手推 SVM常用的机器学习算法大家最好还是可以手推出来的，因为有的面试官真的让你手推啊，手推之后回答了一下软间隔与硬间隔，核函数有哪些，区别，拉格朗日乘子法（西瓜书 SVM 那一章安排的明明白白）</p>
 <p>三面人事：这个人事就很牛的样子，完全不是公平性谈判，打压你的信心，说什么他们那都是清华北大的毕业的，我不是名校出身，处于技术初级算法工程师阶段，希不希望有一个好的平台什么的，反正就是各种忽悠，然后压榨工资。这种情况也慢慢跟他聊，拿到 offer 是关键，只不过把它当备胎。结果：最后谈到了 16k / 月 * 14 个月，第二天发 offer。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 返回 x 在 arr 中的索引，如果不存在返回 -1</span><br>def binarySearch (arr, l, r, x): <br>    <span class="hljs-comment"># 基本判断</span><br>    <span class="hljs-keyword">if</span> r &gt;= l: <br>        <span class="hljs-keyword">mid</span> = int(l + (r - l)/<span class="hljs-number">2</span>)<br>        <span class="hljs-comment"># 元素整好的中间位置</span><br>        <span class="hljs-keyword">if</span> arr[<span class="hljs-keyword">mid</span>] == x: <br>            <span class="hljs-literal">return</span> <span class="hljs-keyword">mid</span> <br>        <span class="hljs-comment"># 元素小于中间位置的元素，只需要再比较左边的元素</span><br>        elif arr[<span class="hljs-keyword">mid</span>] &gt; x: <br>            <span class="hljs-literal">return</span> binarySearch(arr, l, <span class="hljs-keyword">mid</span><span class="hljs-number">-1</span>, x) <br>        <span class="hljs-comment"># 元素大于中间位置的元素，只需要再比较右边的元素</span><br>        <span class="hljs-keyword">else</span>: <br>            <span class="hljs-literal">return</span> binarySearch(arr, <span class="hljs-keyword">mid</span>+<span class="hljs-number">1</span>, r, x) <br>    <span class="hljs-keyword">else</span>: <br>        <span class="hljs-comment"># 不存在</span><br>        <span class="hljs-literal">return</span> <span class="hljs-number">-1</span><br>  <br><span class="hljs-comment"># 测试数组</span><br>arr = [ <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">10</span>, <span class="hljs-number">40</span> ] <br>x = <span class="hljs-number">10</span><br><span class="hljs-comment"># 函数调用</span><br><span class="hljs-built_in">result</span> = binarySearch(arr, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(arr)<span class="hljs-number">-1</span>, x) <br><span class="hljs-keyword">if</span> <span class="hljs-built_in">result</span> != <span class="hljs-number">-1</span>: <br>    print (<span class="hljs-string">&quot;元素在数组中的索引为 %d&quot;</span> % <span class="hljs-built_in">result</span> )<br><span class="hljs-keyword">else</span>: <br>    print (<span class="hljs-string">&quot;元素不在数组中&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># 返回 x 在 arr 中的索引，如果不存在返回 -1
+def binarySearch (arr, l, r, x): 
+    # 基本判断
+    if r &gt;&#x3D; l: 
+        mid &#x3D; int(l + (r - l)&#x2F;2)
+        # 元素整好的中间位置
+        if arr[mid] &#x3D;&#x3D; x: 
+            return mid 
+        # 元素小于中间位置的元素，只需要再比较左边的元素
+        elif arr[mid] &gt; x: 
+            return binarySearch(arr, l, mid-1, x) 
+        # 元素大于中间位置的元素，只需要再比较右边的元素
+        else: 
+            return binarySearch(arr, mid+1, r, x) 
+    else: 
+        # 不存在
+        return -1
+  
+# 测试数组
+arr &#x3D; [ 2, 3, 4, 10, 40 ] 
+x &#x3D; 10
+# 函数调用
+result &#x3D; binarySearch(arr, 0, len(arr)-1, x) 
+if result !&#x3D; -1: 
+    print (&quot;元素在数组中的索引为 %d&quot; % result )
+else: 
+    print (&quot;元素不在数组中&quot;)</code></pre></div></figure>
 <ol>
 <li>分类和聚类的区别：
 <ul>

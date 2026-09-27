@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -112,11 +113,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-2.5k 字
+3.5k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-22 分钟
+30 分钟
 </span>
 </div>
 </div>
@@ -151,13 +152,269 @@
 </blockquote>
 <p>你可以在官方链接中找到更多信息和示例代码：<a target="_blank" rel="noopener" href="https://github.com/pgmpy/pgmpy_notebook/blob/master/blob/master/notebooks/9.%20Learning%20Bayesian%20Networks%20from%20Data.ipynb">pgmpy官方链接</a></p>
 <p>这个库使得处理概率图模型变得更加容易，可以帮助你分析和推断各种依赖关系。下面是一个构建贝叶斯网络并且进行学习的示例代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># encoding: utf-8</span><br><span class="hljs-comment"># ====================BN模型=========================</span><br><span class="hljs-comment"># 贝叶斯模型</span><br><span class="hljs-keyword">from</span> pgmpy.models <span class="hljs-keyword">import</span> BayesianNetwork<br><span class="hljs-comment"># ====================参数学习=========================</span><br><span class="hljs-comment"># 参数估计</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> ParameterEstimator<br><span class="hljs-comment"># MLE参数估计</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> MaximumLikelihoodEstimator<br><span class="hljs-comment"># Bayesian参数估计</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> BayesianEstimator<br><span class="hljs-comment"># ====================结构学习=========================</span><br><span class="hljs-comment"># ========评分搜索=========================</span><br><span class="hljs-comment"># 评分</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> BDeuScore, K2Score, BicScore<br><span class="hljs-comment"># 穷举搜索</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> ExhaustiveSearch<br><span class="hljs-comment"># 爬山搜索</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> HillClimbSearch<br><span class="hljs-comment"># ========  混合  =========================</span><br><span class="hljs-keyword">from</span> pgmpy.estimators <span class="hljs-keyword">import</span> MmhcEstimator<br><span class="hljs-comment"># ==================== 通用库 =========================</span><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score<br><br><br><span class="hljs-comment"># 设置随机种子以便复现</span><br>random.seed(<span class="hljs-number">0</span>)<br><br><span class="hljs-comment"># 生成示例数据</span><br>data = &#123;<br>    <span class="hljs-string">&#x27;average_weekly_hours&#x27;</span>: [random.choice([-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;unemployment&#x27;</span>: [random.choice([-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;eci_leading_indicator&#x27;</span>: [random.choice([-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;manufacturing_pmi_inflation&#x27;</span>: [random.choice([-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>: [random.choice([-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;inflation_expectation&#x27;</span>: [random.choice([-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)],<br>    <span class="hljs-string">&#x27;comex_gold_settlement&#x27;</span>: [random.choice([-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)]<br>&#125;<br><br><span class="hljs-comment"># 创建DataFrame</span><br>df = pd.DataFrame(data)<br><span class="hljs-comment"># 打印前几行数据</span><br><span class="hljs-built_in">print</span>(df.head())<br><br><span class="hljs-comment"># 变量附录</span><br><span class="hljs-comment"># 平均每周工时变化量：average_weekly_hours</span><br><span class="hljs-comment"># 新增失业人数变化量：unemployment</span><br><span class="hljs-comment"># ECI领先指标变化量：eci_leading_indicator</span><br><span class="hljs-comment"># 制造业PMI物价变化量：manufacturing_pmi_inflation</span><br><span class="hljs-comment"># 10年期国债收益率变化量：10yr_treasury_yield</span><br><span class="hljs-comment"># 通胀预期变化量：inflation_expectation</span><br><span class="hljs-comment"># COMEX黄金结算价变化量：comex_gold_settlement</span><br>node_tree = [<br>    (<span class="hljs-string">&#x27;average_weekly_hours&#x27;</span>, <span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>), (<span class="hljs-string">&#x27;average_weekly_hours&#x27;</span>, <span class="hljs-string">&#x27;inflation_expectation&#x27;</span>),<br>    (<span class="hljs-string">&#x27;unemployment&#x27;</span>, <span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>), (<span class="hljs-string">&#x27;unemployment&#x27;</span>, <span class="hljs-string">&#x27;inflation_expectation&#x27;</span>),<br>    (<span class="hljs-string">&#x27;eci_leading_indicator&#x27;</span>, <span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>), (<span class="hljs-string">&#x27;eci_leading_indicator&#x27;</span>, <span class="hljs-string">&#x27;inflation_expectation&#x27;</span>),<br>    (<span class="hljs-string">&#x27;manufacturing_pmi_inflation&#x27;</span>, <span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>), (<span class="hljs-string">&#x27;manufacturing_pmi_inflation&#x27;</span>, <span class="hljs-string">&#x27;inflation_expectation&#x27;</span>),<br>    (<span class="hljs-string">&#x27;10yr_treasury_yield&#x27;</span>, <span class="hljs-string">&#x27;comex_gold_settlement&#x27;</span>), (<span class="hljs-string">&#x27;inflation_expectation&#x27;</span>, <span class="hljs-string">&#x27;comex_gold_settlement&#x27;</span>),<br>]<br>model = BayesianNetwork(node_tree)<br><br>train_data = df[:<span class="hljs-number">800</span>]<br>predict_data = df[<span class="hljs-number">800</span>:]<br><span class="hljs-comment"># 用于统计正确率</span><br>actual_values = predict_data[<span class="hljs-string">&#x27;comex_gold_settlement&#x27;</span>].values<br><span class="hljs-built_in">print</span>(actual_values)<br><br>mle = MaximumLikelihoodEstimator(model, df)<br><span class="hljs-comment"># print(mle.estimate_cpd(&#x27;fruit&#x27;))  # unconditional</span><br><span class="hljs-comment"># print(mle.estimate_cpd(&#x27;tasty&#x27;))  # conditional</span><br>model.fit(df, estimator=MaximumLikelihoodEstimator)<br><br>predict_data = predict_data.copy()<br>predict_data.drop(<span class="hljs-string">&#x27;comex_gold_settlement&#x27;</span>, axis=<span class="hljs-number">1</span>, inplace=<span class="hljs-literal">True</span>)<br>y_pred = model.predict(predict_data)<br><span class="hljs-built_in">print</span>(y_pred)<br><br><span class="hljs-comment"># 计算准确率</span><br>accuracy = accuracy_score(actual_values, y_pred)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Accuracy: <span class="hljs-subst">&#123;accuracy * <span class="hljs-number">100</span>:<span class="hljs-number">.2</span>f&#125;</span>%&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># encoding: utf-8
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;BN模型&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+# 贝叶斯模型
+from pgmpy.models import BayesianNetwork
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;参数学习&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+# 参数估计
+from pgmpy.estimators import ParameterEstimator
+# MLE参数估计
+from pgmpy.estimators import MaximumLikelihoodEstimator
+# Bayesian参数估计
+from pgmpy.estimators import BayesianEstimator
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;结构学习&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;评分搜索&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+# 评分
+from pgmpy.estimators import BDeuScore, K2Score, BicScore
+# 穷举搜索
+from pgmpy.estimators import ExhaustiveSearch
+# 爬山搜索
+from pgmpy.estimators import HillClimbSearch
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;  混合  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+from pgmpy.estimators import MmhcEstimator
+# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 通用库 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics import accuracy_score
+
+
+# 设置随机种子以便复现
+random.seed(0)
+
+# 生成示例数据
+data &#x3D; &#123;
+    &#39;average_weekly_hours&#39;: [random.choice([-1, 0, 1]) for _ in range(1000)],
+    &#39;unemployment&#39;: [random.choice([-1, 1]) for _ in range(1000)],
+    &#39;eci_leading_indicator&#39;: [random.choice([-1, 1]) for _ in range(1000)],
+    &#39;manufacturing_pmi_inflation&#39;: [random.choice([-1, 1]) for _ in range(1000)],
+    &#39;10yr_treasury_yield&#39;: [random.choice([-2, -1, 0, 1, 2]) for _ in range(1000)],
+    &#39;inflation_expectation&#39;: [random.choice([-2, -1, 0, 1, 2]) for _ in range(1000)],
+    &#39;comex_gold_settlement&#39;: [random.choice([-2, -1, 0, 1, 2]) for _ in range(1000)]
+&#125;
+
+# 创建DataFrame
+df &#x3D; pd.DataFrame(data)
+# 打印前几行数据
+print(df.head())
+
+# 变量附录
+# 平均每周工时变化量：average_weekly_hours
+# 新增失业人数变化量：unemployment
+# ECI领先指标变化量：eci_leading_indicator
+# 制造业PMI物价变化量：manufacturing_pmi_inflation
+# 10年期国债收益率变化量：10yr_treasury_yield
+# 通胀预期变化量：inflation_expectation
+# COMEX黄金结算价变化量：comex_gold_settlement
+node_tree &#x3D; [
+    (&#39;average_weekly_hours&#39;, &#39;10yr_treasury_yield&#39;), (&#39;average_weekly_hours&#39;, &#39;inflation_expectation&#39;),
+    (&#39;unemployment&#39;, &#39;10yr_treasury_yield&#39;), (&#39;unemployment&#39;, &#39;inflation_expectation&#39;),
+    (&#39;eci_leading_indicator&#39;, &#39;10yr_treasury_yield&#39;), (&#39;eci_leading_indicator&#39;, &#39;inflation_expectation&#39;),
+    (&#39;manufacturing_pmi_inflation&#39;, &#39;10yr_treasury_yield&#39;), (&#39;manufacturing_pmi_inflation&#39;, &#39;inflation_expectation&#39;),
+    (&#39;10yr_treasury_yield&#39;, &#39;comex_gold_settlement&#39;), (&#39;inflation_expectation&#39;, &#39;comex_gold_settlement&#39;),
+]
+model &#x3D; BayesianNetwork(node_tree)
+
+train_data &#x3D; df[:800]
+predict_data &#x3D; df[800:]
+# 用于统计正确率
+actual_values &#x3D; predict_data[&#39;comex_gold_settlement&#39;].values
+print(actual_values)
+
+mle &#x3D; MaximumLikelihoodEstimator(model, df)
+# print(mle.estimate_cpd(&#39;fruit&#39;))  # unconditional
+# print(mle.estimate_cpd(&#39;tasty&#39;))  # conditional
+model.fit(df, estimator&#x3D;MaximumLikelihoodEstimator)
+
+predict_data &#x3D; predict_data.copy()
+predict_data.drop(&#39;comex_gold_settlement&#39;, axis&#x3D;1, inplace&#x3D;True)
+y_pred &#x3D; model.predict(predict_data)
+print(y_pred)
+
+# 计算准确率
+accuracy &#x3D; accuracy_score(actual_values, y_pred)
+
+print(f&quot;Accuracy: &#123;accuracy * 100:.2f&#125;%&quot;)</code></pre></div></figure>
 <h3 id="学习参数">学习参数</h3>
 <p>学习参数通常涉及从一组数据样本和一个有向无环图（DAG）中估计单个变量的概率分布。虽然具体的代码被省略，但通常可以使用统计方法或概率模型来进行参数学习。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">parameterLearning</span>():<br>    <span class="hljs-comment"># ================= 数据部分 ======================</span><br>    data = pd.DataFrame(data=&#123;<span class="hljs-string">&#x27;fruit&#x27;</span>: [<span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>,<br>                                        <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, ],<br>                              <span class="hljs-string">&#x27;tasty&#x27;</span>: [<span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;no&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>,<br>                                        <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>, <span class="hljs-string">&quot;no&quot;</span>, <span class="hljs-string">&quot;no&quot;</span>, <span class="hljs-string">&quot;no&quot;</span>],<br>                              <span class="hljs-string">&#x27;size&#x27;</span>: [<span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;small&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>,<br>                                       <span class="hljs-string">&quot;small&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;large&quot;</span>, <span class="hljs-string">&quot;small&quot;</span>, <span class="hljs-string">&quot;small&quot;</span>]&#125;)<br><br>    <span class="hljs-comment"># ================= 构建网络模型结构 ======================</span><br>    model = BayesianNetwork([(<span class="hljs-string">&#x27;fruit&#x27;</span>, <span class="hljs-string">&#x27;tasty&#x27;</span>), (<span class="hljs-string">&#x27;size&#x27;</span>, <span class="hljs-string">&#x27;tasty&#x27;</span>)])  <span class="hljs-comment"># fruit -&gt; tasty &lt;- size</span><br><br>    <span class="hljs-comment"># ================= 选择合适的参数估计器 =====================</span><br>    <span class="hljs-comment"># 参数估计（Parameter Estimation）：</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># 参数估计是一种直接从数据集中计算条件概率分布的参数的方法。</span><br>    <span class="hljs-comment"># 它不使用任何先验信息，仅根据观察的数据来估计参数。</span><br>    <span class="hljs-comment"># 参数估计器通常用于有限数据集和在没有领域专业知识的情况下。</span><br>    <span class="hljs-comment"># 最大似然估计（Maximum Likelihood Estimation, MLE）：</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># MLE是一种参数估计方法，旨在最大化观察到的数据发生的可能性。</span><br>    <span class="hljs-comment"># 它基于样本数据计算参数，使观察到的数据在给定模型下的概率最大。</span><br>    <span class="hljs-comment"># MLE通常用于大型数据集和参数空间较大的情况，因为它不需要先验知识。</span><br>    <span class="hljs-comment"># 贝叶斯参数估计（Bayesian Parameter Estimation）：</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># Bayesian参数估计是一种使用贝叶斯方法估计参数的方法，它结合了先验知识和观察数据。</span><br>    <span class="hljs-comment"># 它基于贝叶斯定理，将参数的后验分布计算为先验分布和似然性的乘积。</span><br>    <span class="hljs-comment"># Bayesian参数估计通常用于小型数据集和需要领域专业知识的情况，以指导先验的选择。</span><br>    <span class="hljs-comment"># 比较：</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># 参数估计是一种通用方法，但在某些情况下可能不够准确，因为它不考虑先验信息。</span><br>    <span class="hljs-comment"># MLE是无信息估计，通常用于大型数据集，但对数据不足或参数空间复杂的情况不够稳健。</span><br>    <span class="hljs-comment"># Bayesian参数估计结合了先验知识和观察数据，通常更准确和稳健，但需要领域专业知识来指导先验的选择。</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;========================================================&quot;</span>)<br>    pe = ParameterEstimator(model, data)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>, pe.state_counts(<span class="hljs-string">&#x27;fruit&#x27;</span>))  <span class="hljs-comment"># unconditional</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>, pe.state_counts(<span class="hljs-string">&#x27;size&#x27;</span>))  <span class="hljs-comment"># unconditional</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>, pe.state_counts(<span class="hljs-string">&#x27;tasty&#x27;</span>))  <span class="hljs-comment"># conditional on fruit and size</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;========================================================&quot;</span>)<br>    mle = MaximumLikelihoodEstimator(model, data)<br>    <span class="hljs-built_in">print</span>(mle.estimate_cpd(<span class="hljs-string">&#x27;fruit&#x27;</span>))  <span class="hljs-comment"># unconditional</span><br>    <span class="hljs-built_in">print</span>(mle.estimate_cpd(<span class="hljs-string">&#x27;tasty&#x27;</span>))  <span class="hljs-comment"># conditional</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;========================================================&quot;</span>)<br>    est = BayesianEstimator(model, data)<br>    <span class="hljs-built_in">print</span>(est.estimate_cpd(<span class="hljs-string">&#x27;tasty&#x27;</span>, prior_type=<span class="hljs-string">&#x27;BDeu&#x27;</span>, equivalent_sample_size=<span class="hljs-number">10</span>))<br>    <span class="hljs-comment"># Setting equivalent_sample_size to 10 means</span><br>    <span class="hljs-comment"># that for each parent configuration, we add the equivalent of 10 uniform samples</span><br>    <span class="hljs-comment"># (here: +5 small bananas that are tasty and +5 that aren&#x27;t).</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;========================================================&quot;</span>)<br>    <span class="hljs-comment"># Calibrate all CPDs of `model` using MLE:</span><br>    model.fit(data, estimator=MaximumLikelihoodEstimator)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;========================================================&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">structuralLearning_Score</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        score-based structure learning</span><br><span class="hljs-string">        constraint-based structure learning</span><br><span class="hljs-string">    The combination of both techniques allows further improvement:</span><br><span class="hljs-string">        hybrid structure learning</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;===================基于评分=================================&quot;</span>)<br>    <span class="hljs-comment"># create random data sample with 3 variables, where Z is dependent on X, Y:</span><br>    data = pd.DataFrame(np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>, size=(<span class="hljs-number">5000</span>, <span class="hljs-number">2</span>)), columns=<span class="hljs-built_in">list</span>(<span class="hljs-string">&#x27;XY&#x27;</span>))<br>    data[<span class="hljs-string">&#x27;Z&#x27;</span>] = data[<span class="hljs-string">&#x27;X&#x27;</span>] + data[<span class="hljs-string">&#x27;Y&#x27;</span>]<br><br>    bdeu = BDeuScore(data, equivalent_sample_size=<span class="hljs-number">5</span>)<br>    k2 = K2Score(data)<br>    bic = BicScore(data)<br><br>    model1 = BayesianNetwork([(<span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-string">&#x27;Z&#x27;</span>), (<span class="hljs-string">&#x27;Y&#x27;</span>, <span class="hljs-string">&#x27;Z&#x27;</span>)])  <span class="hljs-comment"># X -&gt; Z &lt;- Y</span><br>    model2 = BayesianNetwork([(<span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-string">&#x27;Z&#x27;</span>), (<span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-string">&#x27;Y&#x27;</span>)])  <span class="hljs-comment"># Y &lt;- X -&gt; Z</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;==========基于评分===model1===============&quot;</span>)<br>    <span class="hljs-built_in">print</span>(bdeu.score(model1))<br>    <span class="hljs-built_in">print</span>(k2.score(model1))<br>    <span class="hljs-built_in">print</span>(bic.score(model1))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;==========基于评分===model2===============&quot;</span>)<br>    <span class="hljs-built_in">print</span>(bdeu.score(model2))<br>    <span class="hljs-built_in">print</span>(k2.score(model2))<br>    <span class="hljs-built_in">print</span>(bic.score(model2))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;==========基于评分===局部评分==============&quot;</span>)<br>    <span class="hljs-built_in">print</span>(bdeu.local_score(<span class="hljs-string">&#x27;Z&#x27;</span>, parents=[]))<br>    <span class="hljs-built_in">print</span>(bdeu.local_score(<span class="hljs-string">&#x27;Z&#x27;</span>, parents=[<span class="hljs-string">&#x27;X&#x27;</span>]))<br>    <span class="hljs-built_in">print</span>(bdeu.local_score(<span class="hljs-string">&#x27;Z&#x27;</span>, parents=[<span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-string">&#x27;Y&#x27;</span>]))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;==========基于评分===穷举搜索算法==============&quot;</span>)<br>    <span class="hljs-comment"># 穷举搜索（计算困难），启发式搜索</span><br>    es = ExhaustiveSearch(data, scoring_method=bic)<br>    <span class="hljs-comment"># 获取分数最高的分数</span><br>    best_model = es.estimate()<br>    <span class="hljs-built_in">print</span>(best_model.edges())<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n 遍历所有的分数:&quot;</span>)<br>    <span class="hljs-keyword">for</span> score, dag <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(es.all_scores()):<br>        <span class="hljs-built_in">print</span>(score, dag.edges())<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;==========基于评分===爬山搜索算法==============&quot;</span>)<br>    data = pd.DataFrame(np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, size=(<span class="hljs-number">2500</span>, <span class="hljs-number">8</span>)), columns=<span class="hljs-built_in">list</span>(<span class="hljs-string">&#x27;ABCDEFGH&#x27;</span>))<br>    data[<span class="hljs-string">&#x27;A&#x27;</span>] += data[<span class="hljs-string">&#x27;B&#x27;</span>] + data[<span class="hljs-string">&#x27;C&#x27;</span>]<br>    data[<span class="hljs-string">&#x27;H&#x27;</span>] = data[<span class="hljs-string">&#x27;G&#x27;</span>] - data[<span class="hljs-string">&#x27;A&#x27;</span>]<br>    hc = HillClimbSearch(data, scoring_method=BicScore(data))<br>    best_model = hc.estimate()<br>    <span class="hljs-built_in">print</span>(best_model.edges())<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">structuralLearning_Hybrid</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    MMHC算法[3]结合了基于约束和基于分数的方法。它有两部分:</span><br><span class="hljs-string">        1. 使用基于约束的构造过程MMPC学习无向图骨架</span><br><span class="hljs-string">        2. 基于分数的优化(BDeu分数+修改爬山)</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;===================混合方法=================================&quot;</span>)<br>    <span class="hljs-comment"># 实验数据生成</span><br>    data = pd.DataFrame(np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, size=(<span class="hljs-number">2500</span>, <span class="hljs-number">8</span>)), columns=<span class="hljs-built_in">list</span>(<span class="hljs-string">&#x27;ABCDEFGH&#x27;</span>))<br>    data[<span class="hljs-string">&#x27;A&#x27;</span>] += data[<span class="hljs-string">&#x27;B&#x27;</span>] + data[<span class="hljs-string">&#x27;C&#x27;</span>]<br>    data[<span class="hljs-string">&#x27;H&#x27;</span>] = data[<span class="hljs-string">&#x27;G&#x27;</span>] - data[<span class="hljs-string">&#x27;A&#x27;</span>]<br>    data[<span class="hljs-string">&#x27;E&#x27;</span>] *= data[<span class="hljs-string">&#x27;F&#x27;</span>]<br>    <span class="hljs-comment"># 构建无向图骨架</span><br>    mmhc = MmhcEstimator(data)<br>    skeleton = mmhc.mmpc()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Part 1) Skeleton: &quot;</span>, skeleton.edges())<br>    <span class="hljs-comment"># 基于分数优化</span><br>    <span class="hljs-comment"># use hill climb search to orient the edges:</span><br>    hc = HillClimbSearch(data, scoring_method=BDeuScore(data))<br>    model = hc.estimate(tabu_length=<span class="hljs-number">10</span>, white_list=skeleton.to_directed().edges())<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Part 2) Model:    &quot;</span>, model.edges())<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;===================两步划为一步=================================&quot;</span>)<br>    <span class="hljs-comment"># MmhcEstimator.estimate(self, scoring_method=None, tabu_length=10,</span><br>    <span class="hljs-comment">#       significance_level=0.01)</span><br>    <span class="hljs-comment"># mmhc.estimate(scoring_method=BdeuScore(data),tabu_length=10)</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">def parameterLearning():
+    # &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 数据部分 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+    data &#x3D; pd.DataFrame(data&#x3D;&#123;&#39;fruit&#39;: [&quot;banana&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;apple&quot;, &quot;banana&quot;,
+                                        &quot;apple&quot;, &quot;apple&quot;, &quot;apple&quot;, &quot;banana&quot;, &quot;banana&quot;, &quot;apple&quot;, &quot;banana&quot;, ],
+                              &#39;tasty&#39;: [&quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;,
+                                        &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;],
+                              &#39;size&#39;: [&quot;large&quot;, &quot;large&quot;, &quot;large&quot;, &quot;small&quot;, &quot;large&quot;, &quot;large&quot;, &quot;large&quot;,
+                                       &quot;small&quot;, &quot;large&quot;, &quot;large&quot;, &quot;large&quot;, &quot;large&quot;, &quot;small&quot;, &quot;small&quot;]&#125;)
+
+    # &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 构建网络模型结构 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+    model &#x3D; BayesianNetwork([(&#39;fruit&#39;, &#39;tasty&#39;), (&#39;size&#39;, &#39;tasty&#39;)])  # fruit -&gt; tasty &lt;- size
+
+    # &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 选择合适的参数估计器 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+    # 参数估计（Parameter Estimation）：
+    #
+    # 参数估计是一种直接从数据集中计算条件概率分布的参数的方法。
+    # 它不使用任何先验信息，仅根据观察的数据来估计参数。
+    # 参数估计器通常用于有限数据集和在没有领域专业知识的情况下。
+    # 最大似然估计（Maximum Likelihood Estimation, MLE）：
+    #
+    # MLE是一种参数估计方法，旨在最大化观察到的数据发生的可能性。
+    # 它基于样本数据计算参数，使观察到的数据在给定模型下的概率最大。
+    # MLE通常用于大型数据集和参数空间较大的情况，因为它不需要先验知识。
+    # 贝叶斯参数估计（Bayesian Parameter Estimation）：
+    #
+    # Bayesian参数估计是一种使用贝叶斯方法估计参数的方法，它结合了先验知识和观察数据。
+    # 它基于贝叶斯定理，将参数的后验分布计算为先验分布和似然性的乘积。
+    # Bayesian参数估计通常用于小型数据集和需要领域专业知识的情况，以指导先验的选择。
+    # 比较：
+    #
+    # 参数估计是一种通用方法，但在某些情况下可能不够准确，因为它不考虑先验信息。
+    # MLE是无信息估计，通常用于大型数据集，但对数据不足或参数空间复杂的情况不够稳健。
+    # Bayesian参数估计结合了先验知识和观察数据，通常更准确和稳健，但需要领域专业知识来指导先验的选择。
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    pe &#x3D; ParameterEstimator(model, data)
+    print(&quot;\n&quot;, pe.state_counts(&#39;fruit&#39;))  # unconditional
+    print(&quot;\n&quot;, pe.state_counts(&#39;size&#39;))  # unconditional
+    print(&quot;\n&quot;, pe.state_counts(&#39;tasty&#39;))  # conditional on fruit and size
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    mle &#x3D; MaximumLikelihoodEstimator(model, data)
+    print(mle.estimate_cpd(&#39;fruit&#39;))  # unconditional
+    print(mle.estimate_cpd(&#39;tasty&#39;))  # conditional
+
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    est &#x3D; BayesianEstimator(model, data)
+    print(est.estimate_cpd(&#39;tasty&#39;, prior_type&#x3D;&#39;BDeu&#39;, equivalent_sample_size&#x3D;10))
+    # Setting equivalent_sample_size to 10 means
+    # that for each parent configuration, we add the equivalent of 10 uniform samples
+    # (here: +5 small bananas that are tasty and +5 that aren&#39;t).
+
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    # Calibrate all CPDs of &#96;model&#96; using MLE:
+    model.fit(data, estimator&#x3D;MaximumLikelihoodEstimator)
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+
+
+def structuralLearning_Score():
+    &quot;&quot;&quot;
+        score-based structure learning
+        constraint-based structure learning
+    The combination of both techniques allows further improvement:
+        hybrid structure learning
+    &quot;&quot;&quot;
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    # create random data sample with 3 variables, where Z is dependent on X, Y:
+    data &#x3D; pd.DataFrame(np.random.randint(0, 4, size&#x3D;(5000, 2)), columns&#x3D;list(&#39;XY&#39;))
+    data[&#39;Z&#39;] &#x3D; data[&#39;X&#39;] + data[&#39;Y&#39;]
+
+    bdeu &#x3D; BDeuScore(data, equivalent_sample_size&#x3D;5)
+    k2 &#x3D; K2Score(data)
+    bic &#x3D; BicScore(data)
+
+    model1 &#x3D; BayesianNetwork([(&#39;X&#39;, &#39;Z&#39;), (&#39;Y&#39;, &#39;Z&#39;)])  # X -&gt; Z &lt;- Y
+    model2 &#x3D; BayesianNetwork([(&#39;X&#39;, &#39;Z&#39;), (&#39;X&#39;, &#39;Y&#39;)])  # Y &lt;- X -&gt; Z
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;model1&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    print(bdeu.score(model1))
+    print(k2.score(model1))
+    print(bic.score(model1))
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;model2&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    print(bdeu.score(model2))
+    print(k2.score(model2))
+    print(bic.score(model2))
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;局部评分&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    print(bdeu.local_score(&#39;Z&#39;, parents&#x3D;[]))
+    print(bdeu.local_score(&#39;Z&#39;, parents&#x3D;[&#39;X&#39;]))
+    print(bdeu.local_score(&#39;Z&#39;, parents&#x3D;[&#39;X&#39;, &#39;Y&#39;]))
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;穷举搜索算法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    # 穷举搜索（计算困难），启发式搜索
+    es &#x3D; ExhaustiveSearch(data, scoring_method&#x3D;bic)
+    # 获取分数最高的分数
+    best_model &#x3D; es.estimate()
+    print(best_model.edges())
+    print(&quot;\n 遍历所有的分数:&quot;)
+    for score, dag in reversed(es.all_scores()):
+        print(score, dag.edges())
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;基于评分&#x3D;&#x3D;&#x3D;爬山搜索算法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    data &#x3D; pd.DataFrame(np.random.randint(0, 3, size&#x3D;(2500, 8)), columns&#x3D;list(&#39;ABCDEFGH&#39;))
+    data[&#39;A&#39;] +&#x3D; data[&#39;B&#39;] + data[&#39;C&#39;]
+    data[&#39;H&#39;] &#x3D; data[&#39;G&#39;] - data[&#39;A&#39;]
+    hc &#x3D; HillClimbSearch(data, scoring_method&#x3D;BicScore(data))
+    best_model &#x3D; hc.estimate()
+    print(best_model.edges())
+
+
+def structuralLearning_Hybrid():
+    &quot;&quot;&quot;
+    MMHC算法[3]结合了基于约束和基于分数的方法。它有两部分:
+        1. 使用基于约束的构造过程MMPC学习无向图骨架
+        2. 基于分数的优化(BDeu分数+修改爬山)
+    &quot;&quot;&quot;
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;混合方法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    # 实验数据生成
+    data &#x3D; pd.DataFrame(np.random.randint(0, 3, size&#x3D;(2500, 8)), columns&#x3D;list(&#39;ABCDEFGH&#39;))
+    data[&#39;A&#39;] +&#x3D; data[&#39;B&#39;] + data[&#39;C&#39;]
+    data[&#39;H&#39;] &#x3D; data[&#39;G&#39;] - data[&#39;A&#39;]
+    data[&#39;E&#39;] *&#x3D; data[&#39;F&#39;]
+    # 构建无向图骨架
+    mmhc &#x3D; MmhcEstimator(data)
+    skeleton &#x3D; mmhc.mmpc()
+    print(&quot;Part 1) Skeleton: &quot;, skeleton.edges())
+    # 基于分数优化
+    # use hill climb search to orient the edges:
+    hc &#x3D; HillClimbSearch(data, scoring_method&#x3D;BDeuScore(data))
+    model &#x3D; hc.estimate(tabu_length&#x3D;10, white_list&#x3D;skeleton.to_directed().edges())
+    print(&quot;Part 2) Model:    &quot;, model.edges())
+    print(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;两步划为一步&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)
+    # MmhcEstimator.estimate(self, scoring_method&#x3D;None, tabu_length&#x3D;10,
+    #       significance_level&#x3D;0.01)
+    # mmhc.estimate(scoring_method&#x3D;BdeuScore(data),tabu_length&#x3D;10)</code></pre></div></figure>
 <h3 id="绘制概率图">绘制概率图</h3>
 <p>为了可视化概率图模型，我们需要使用工具来绘制图像。在这里，我们使用 <code>daft</code> 中的 <code>PGM</code>，同时使用 <code>textwrap</code> 进行文本的自动分行。这有助于我们清晰地呈现模型的结构和依赖关系。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python">%matplotlib inline<br><span class="hljs-keyword">import</span> daft<br><span class="hljs-keyword">from</span> daft <span class="hljs-keyword">import</span> PGM<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> textwrap<br><br><br><span class="hljs-comment"># 设置字体为 SimHei（中文黑体）</span><br>plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>]<br>plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>  <span class="hljs-comment"># 用来正常显示负号</span><br><br><span class="hljs-comment"># 7个节点 9条边</span><br>pgm = PGM(shape=[<span class="hljs-number">9</span>, <span class="hljs-number">5.4</span>])<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fit_node</span>(<span class="hljs-params">text, x, y, min_width=<span class="hljs-number">2</span>, min_height=<span class="hljs-number">1</span></span>):<br>    <span class="hljs-comment"># 使用 textwrap 模块来自动分行</span><br>    wrapped_text = textwrap.fill(text, width=<span class="hljs-number">4</span>)  <span class="hljs-comment"># 设置每行最大宽度</span><br>    <br>    <span class="hljs-comment"># 计算节点宽度和高度，根据文本行数自动调整</span><br>    num_lines = <span class="hljs-built_in">len</span>(wrapped_text.split(<span class="hljs-string">&#x27;\n&#x27;</span>))<br>    node_width = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">len</span>(wrapped_text) // num_lines, min_width)<br>    node_height = <span class="hljs-built_in">max</span>(<span class="hljs-number">0.5</span> * num_lines, min_height)<br>    <br>    pgm.add_node(daft.Node(text, wrapped_text, x, y, aspect=node_width/node_height))<br>    <br>fit_node(<span class="hljs-string">&quot;平均每周工时&quot;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>)<br>fit_node(<span class="hljs-string">&quot;新增失业人数&quot;</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>)<br>fit_node(<span class="hljs-string">&quot;ECRI领先指标&quot;</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>)<br>fit_node(<span class="hljs-string">&quot;制造业PMI物价&quot;</span>, <span class="hljs-number">7.4</span>, <span class="hljs-number">5</span>)<br>fit_node(<span class="hljs-string">&quot;名义利率&quot;</span>, <span class="hljs-number">2.5</span>, <span class="hljs-number">3</span>)<br>fit_node(<span class="hljs-string">&quot;通货预期&quot;</span>, <span class="hljs-number">5.5</span>, <span class="hljs-number">3</span>)<br>fit_node(<span class="hljs-string">&quot;黄金价格&quot;</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>)<br><br><br>pgm.add_edge(<span class="hljs-string">&quot;平均每周工时&quot;</span>, <span class="hljs-string">&quot;名义利率&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;平均每周工时&quot;</span>, <span class="hljs-string">&quot;通货预期&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;新增失业人数&quot;</span>, <span class="hljs-string">&quot;名义利率&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;新增失业人数&quot;</span>, <span class="hljs-string">&quot;通货预期&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;ECRI领先指标&quot;</span>, <span class="hljs-string">&quot;名义利率&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;制造业PMI物价&quot;</span>, <span class="hljs-string">&quot;名义利率&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;制造业PMI物价&quot;</span>, <span class="hljs-string">&quot;通货预期&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;名义利率&quot;</span>, <span class="hljs-string">&quot;黄金价格&quot;</span>)<br>pgm.add_edge(<span class="hljs-string">&quot;通货预期&quot;</span>, <span class="hljs-string">&quot;黄金价格&quot;</span>)<br><br>pgm.render()<br>plt.show()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">%matplotlib inline
+import daft
+from daft import PGM
+import matplotlib.pyplot as plt
+import textwrap
+
+
+# 设置字体为 SimHei（中文黑体）
+plt.rcParams[&#39;font.sans-serif&#39;] &#x3D; [&#39;SimHei&#39;]
+plt.rcParams[&#39;axes.unicode_minus&#39;] &#x3D; False  # 用来正常显示负号
+
+# 7个节点 9条边
+pgm &#x3D; PGM(shape&#x3D;[9, 5.4])
+
+def fit_node(text, x, y, min_width&#x3D;2, min_height&#x3D;1):
+    # 使用 textwrap 模块来自动分行
+    wrapped_text &#x3D; textwrap.fill(text, width&#x3D;4)  # 设置每行最大宽度
+    
+    # 计算节点宽度和高度，根据文本行数自动调整
+    num_lines &#x3D; len(wrapped_text.split(&#39;\n&#39;))
+    node_width &#x3D; max(len(wrapped_text) &#x2F;&#x2F; num_lines, min_width)
+    node_height &#x3D; max(0.5 * num_lines, min_height)
+    
+    pgm.add_node(daft.Node(text, wrapped_text, x, y, aspect&#x3D;node_width&#x2F;node_height))
+    
+fit_node(&quot;平均每周工时&quot;, 1, 5)
+fit_node(&quot;新增失业人数&quot;, 3, 5)
+fit_node(&quot;ECRI领先指标&quot;, 5, 5)
+fit_node(&quot;制造业PMI物价&quot;, 7.4, 5)
+fit_node(&quot;名义利率&quot;, 2.5, 3)
+fit_node(&quot;通货预期&quot;, 5.5, 3)
+fit_node(&quot;黄金价格&quot;, 4, 1)
+
+
+pgm.add_edge(&quot;平均每周工时&quot;, &quot;名义利率&quot;)
+pgm.add_edge(&quot;平均每周工时&quot;, &quot;通货预期&quot;)
+pgm.add_edge(&quot;新增失业人数&quot;, &quot;名义利率&quot;)
+pgm.add_edge(&quot;新增失业人数&quot;, &quot;通货预期&quot;)
+pgm.add_edge(&quot;ECRI领先指标&quot;, &quot;名义利率&quot;)
+pgm.add_edge(&quot;制造业PMI物价&quot;, &quot;名义利率&quot;)
+pgm.add_edge(&quot;制造业PMI物价&quot;, &quot;通货预期&quot;)
+pgm.add_edge(&quot;名义利率&quot;, &quot;黄金价格&quot;)
+pgm.add_edge(&quot;通货预期&quot;, &quot;黄金价格&quot;)
+
+pgm.render()
+plt.show()</code></pre></div></figure>
 <p>未来，我们还可以考虑使用 <code>bnlearn</code> 库，这是一个专门用于学习贝叶斯网络的图形结构、参数学习、推理和抽样方法的 Python 包。值得注意的是，<code>bnlearn</code> 建立在 <code>pgmpy</code> 包的基础上，提供更多功能和工具。</p>
 <p>如果你对学习更多关于贝叶斯网络和如何使用这些库感兴趣，可以查看以下链接：</p>
 <ul>

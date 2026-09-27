@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20286226&#x2F;answer&#x2F;242089763 如果对文件的整理需求比较大，建议使用文件管理器，网上有比较多的软件可供选择，百度即可。 如果只是偶尔需要，并不想为此装软件。建议使用批处理脚本。 创建方法 12@echo offfor &#x2F;f &quot;tokens&#x3D;*&quot; %%i in (&#x27;dir&#x2F;s&#x2F;b&#x2F;a">
+<meta name="description" content="链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20286226&#x2F;answer&#x2F;242089763 如果对文件的整理需求比较大，建议使用文件管理器，网上有比较多的软件可供选择，百度即可。 如果只是偶尔需要，并不想为此装软件。建议使用批处理脚本。 创建方法 @echo off for &#x2F;f &quot;tokens&#x3D;*&quot; %%i in (&#39;dir&#x2F;s&#x2F;b&#x2F;ad^|sort &#x2F;r&#39;) do">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何批量删除电脑上的空文件夹？">
 <meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008245/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20286226&#x2F;answer&#x2F;242089763 如果对文件的整理需求比较大，建议使用文件管理器，网上有比较多的软件可供选择，百度即可。 如果只是偶尔需要，并不想为此装软件。建议使用批处理脚本。 创建方法 12@echo offfor &#x2F;f &quot;tokens&#x3D;*&quot; %%i in (&#x27;dir&#x2F;s&#x2F;b&#x2F;a">
+<meta property="og:description" content="链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20286226&#x2F;answer&#x2F;242089763 如果对文件的整理需求比较大，建议使用文件管理器，网上有比较多的软件可供选择，百度即可。 如果只是偶尔需要，并不想为此装软件。建议使用批处理脚本。 创建方法 @echo off for &#x2F;f &quot;tokens&#x3D;*&quot; %%i in (&#39;dir&#x2F;s&#x2F;b&#x2F;ad^|sort &#x2F;r&#39;) do">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306202224794.jpg">
 <meta property="article:published_time" content="2020-08-24T15:14:47.000Z">
@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -115,7 +116,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-216 字
+209 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -143,7 +144,8 @@
 <p>如果对文件的整理需求比较大，建议使用文件管理器，网上有比较多的软件可供选择，百度即可。<br>
 如果只是偶尔需要，并不想为此装软件。建议使用批处理脚本。</p>
 <p>创建方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-keyword">for</span> /f <span class="hljs-string">&quot;tokens=*&quot;</span> %%i <span class="hljs-keyword">in</span> (<span class="hljs-string">&#x27;dir/s/b/ad^|sort /r&#x27;</span>) <span class="hljs-keyword">do</span> rd <span class="hljs-string">&quot;%%i&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">@echo off
+<span class="token keyword">for</span> /f <span class="token string">"tokens=*"</span> %%i <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token string">'dir/s/b/ad^|sort /r'</span><span class="token punctuation">)</span> <span class="token keyword">do</span> rd <span class="token string">"%%i"</span></code></pre></div></figure>
 <p>新建clear.txt文件，使用&quot;记事本&quot;编写，复制上面的代码，关闭并保存，直接将其后缀名，修改为.bat即可。</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306202224794.jpg" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p>两个文件</p>

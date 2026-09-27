@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -115,11 +116,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-7.4k 字
+7.3k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-62 分钟
+61 分钟
 </span>
 </div>
 </div>
@@ -157,12 +158,17 @@
 <p><strong>注：</strong> 修复完成后，可通过“配置详情”按钮查看具体修复了哪些Python。若列表并没有需要使用的Python，可通过“添加路径”按钮修复指定的Python (添加路径格式可参考具体的提示)。</p>
 <h2 id="2-调用WindPy">2. 调用WindPy</h2>
 <p>使用WindPy API接口获取金融数据，按以下步骤操作：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> WindPy <span class="hljs-keyword">import</span> w<br><br><span class="hljs-comment"># 注： w.start不重复启动，若需要改变参数，如超时时间，用户可以使用w.stop命令先停止后再启动。</span><br>w.start()  <span class="hljs-comment"># 默认命令超时时间为120秒，可以设置超时时间，如waitTime=60</span><br>w.isconnected()  <span class="hljs-comment"># 判断WindPy是否已登录成功</span><br>w.stop()  <span class="hljs-comment"># 停止WindPy</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> WindPy <span class="token keyword">import</span> w
+
+<span class="token comment"># 注： w.start不重复启动，若需要改变参数，如超时时间，用户可以使用w.stop命令先停止后再启动。</span>
+w<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 默认命令超时时间为120秒，可以设置超时时间，如waitTime=60</span>
+w<span class="token punctuation">.</span>isconnected<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 判断WindPy是否已登录成功</span>
+w<span class="token punctuation">.</span>stop<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 停止WindPy</span></code></pre></div></figure>
 <p>需要注意，程序退出时会自动执行w.stop()，一般用户不需要手动执行。</p>
 <h2 id="3-获取日时间序列函数WSD">3. 获取日时间序列函数WSD</h2>
 <p><code>wsd</code>可以支持取 <strong>多品种单指标</strong> 或者 <strong>单品种多指标</strong> 的时间序列数据。函数签名：</p>
 <h3 id="函数签名">函数签名</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">w.wsd(codes, fields, beginTime, endTime, options)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">w<span class="token punctuation">.</span>wsd<span class="token punctuation">(</span>codes<span class="token punctuation">,</span> fields<span class="token punctuation">,</span> beginTime<span class="token punctuation">,</span> endTime<span class="token punctuation">,</span> options<span class="token punctuation">)</span></code></pre></div></figure>
 <h3 id="参数说明">参数说明</h3>
 <table>
 <thead>
@@ -287,13 +293,17 @@
 </ul>
 <h3 id="示例">示例</h3>
 <p><strong>示例 1：获取单个证券的历史数据并将结果返回为DataFrame</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 获取证券代码为&#x27;600030.SH&#x27;的指标数据，从&#x27;2020-01-01&#x27;到&#x27;2020-12-31&#x27;的每日数据</span><br>w.wsd(<span class="hljs-string">&quot;600030.SH&quot;</span>, <span class="hljs-string">&quot;CLOSE,HIGH,LOW,OPEN&quot;</span>, <span class="hljs-string">&quot;2020-01-01&quot;</span>, <span class="hljs-string">&quot;2020-12-31&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 获取证券代码为'600030.SH'的指标数据，从'2020-01-01'到'2020-12-31'的每日数据</span>
+w<span class="token punctuation">.</span>wsd<span class="token punctuation">(</span><span class="token string">"600030.SH"</span><span class="token punctuation">,</span> <span class="token string">"CLOSE,HIGH,LOW,OPEN"</span><span class="token punctuation">,</span> <span class="token string">"2020-01-01"</span><span class="token punctuation">,</span> <span class="token string">"2020-12-31"</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>示例 2：获取多个证券的单个指标数据</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 获取多个证券的收盘价数据，从&#x27;2020-01-01&#x27;到&#x27;2020-12-31&#x27;的每日数据</span><br>w.wsd([<span class="hljs-string">&quot;600030.SH&quot;</span>, <span class="hljs-string">&quot;000001.SZ&quot;</span>], <span class="hljs-string">&quot;CLOSE&quot;</span>, <span class="hljs-string">&quot;2020-01-01&quot;</span>, <span class="hljs-string">&quot;2020-12-31&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 获取多个证券的收盘价数据，从'2020-01-01'到'2020-12-31'的每日数据</span>
+w<span class="token punctuation">.</span>wsd<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"600030.SH"</span><span class="token punctuation">,</span> <span class="token string">"000001.SZ"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"CLOSE"</span><span class="token punctuation">,</span> <span class="token string">"2020-01-01"</span><span class="token punctuation">,</span> <span class="token string">"2020-12-31"</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>示例 3：指定选项参数</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 获取证券代码为&#x27;600030.SH&#x27;的最高价和最低价数据，从&#x27;2020-01-01&#x27;到&#x27;2020-12-31&#x27;的每日数据</span><br>w.wsd(<span class="hljs-string">&quot;600030.SH&quot;</span>, <span class="hljs-string">&quot;HIGH,LOW&quot;</span>, <span class="hljs-string">&quot;2020-01-01&quot;</span>, <span class="hljs-string">&quot;2020-12-31&quot;</span>, <span class="hljs-string">&quot;PriceAdj=B;Period=W;TradingCalendar=SSE&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 获取证券代码为'600030.SH'的最高价和最低价数据，从'2020-01-01'到'2020-12-31'的每日数据</span>
+w<span class="token punctuation">.</span>wsd<span class="token punctuation">(</span><span class="token string">"600030.SH"</span><span class="token punctuation">,</span> <span class="token string">"HIGH,LOW"</span><span class="token punctuation">,</span> <span class="token string">"2020-01-01"</span><span class="token punctuation">,</span> <span class="token string">"2020-12-31"</span><span class="token punctuation">,</span> <span class="token string">"PriceAdj=B;Period=W;TradingCalendar=SSE"</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p><strong>示例 4：输出DataFrame格式数据</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 获取证券代码为&#x27;600030.SH&#x27;的收盘价数据，从&#x27;2020-01-01&#x27;到&#x27;2020-12-31&#x27;的每日数据，并输出为DataFrame格式</span><br>w.wsd(<span class="hljs-string">&quot;600030.SH&quot;</span>, <span class="hljs-string">&quot;CLOSE&quot;</span>, <span class="hljs-string">&quot;2020-01-01&quot;</span>, <span class="hljs-string">&quot;2020-12-31&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 获取证券代码为'600030.SH'的收盘价数据，从'2020-01-01'到'2020-12-31'的每日数据，并输出为DataFrame格式</span>
+w<span class="token punctuation">.</span>wsd<span class="token punctuation">(</span><span class="token string">"600030.SH"</span><span class="token punctuation">,</span> <span class="token string">"CLOSE"</span><span class="token punctuation">,</span> <span class="token string">"2020-01-01"</span><span class="token punctuation">,</span> <span class="token string">"2020-12-31"</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre></div></figure>
 <h2 id="4-获取日截面数据函数WSS">4.获取日截面数据函数WSS</h2>
 <p>函数 <code>w.wss</code> 用于获取日截面数据，可以获取多种证券类型的基本资料、市场行情、财务数据等多种数据，支持多个品种和多个指标的获取。以下是详细的参数说明和示例用法。</p>
 <h3 id="参数说明-2">参数说明</h3>
@@ -348,7 +358,12 @@
 </ul>
 <h3 id="示例用法">示例用法</h3>
 <p>以下是一个示例，用于获取被动指数型基金的最新业绩排名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 取被动指数型基金最新业绩排名</span><br>fund = w.wset(<span class="hljs-string">&quot;sectorconstituent&quot;</span>, <span class="hljs-string">&quot;date=2018-06-11;sectorid=2001010102000000&quot;</span>).Data[<span class="hljs-number">1</span>]<br><br>error_code, returns = w.wss(fund,<span class="hljs-string">&quot;sec_name,return_1w,return_1m,return_3m,return_6m,return_1y,return_ytd,fund_fundmanager&quot;</span>,<span class="hljs-string">&quot;annualized=0;tradeDate=20180611&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br><br>returns.head(<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 取被动指数型基金最新业绩排名</span>
+fund <span class="token operator">=</span> w<span class="token punctuation">.</span>wset<span class="token punctuation">(</span><span class="token string">"sectorconstituent"</span><span class="token punctuation">,</span> <span class="token string">"date=2018-06-11;sectorid=2001010102000000"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+error_code<span class="token punctuation">,</span> returns <span class="token operator">=</span> w<span class="token punctuation">.</span>wss<span class="token punctuation">(</span>fund<span class="token punctuation">,</span><span class="token string">"sec_name,return_1w,return_1m,return_3m,return_6m,return_1y,return_ytd,fund_fundmanager"</span><span class="token punctuation">,</span><span class="token string">"annualized=0;tradeDate=20180611"</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+returns<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>这个示例中，首先使用 <code>w.wset</code> 函数获取被动指数型基金的最新业绩排名，然后使用 <code>w.wss</code> 函数获取所选基金的相关数据，包括基金名称、一周、一月、三月、六月、一年、今年以来的回报率等信息。</p>
 <h2 id="5-获取分钟序列数据函数WSI">5. 获取分钟序列数据函数WSI</h2>
 <p>函数 <code>w.wsi</code> 用于获取国内六大交易所（上海交易所、深圳交易所、郑州商品交易所、上海国际能源交易中心、上海期货交易所、大连商品交易所）证券品种的分钟线数据，包括基本行情和部分技术指标的分钟数据。该函数支持分钟周期为1-60分钟，并且可以自定义设置技术指标参数。</p>
@@ -456,7 +471,12 @@
 </ul>
 <h3 id="示例用法-2">示例用法</h3>
 <p>以下是一个示例用法，用于获取 IF00.CFE 的分钟数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 取 IF00.CFE 的分钟数据</span><br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> *<br>codes = <span class="hljs-string">&quot;IF00.CFE&quot;</span><br>fields = <span class="hljs-string">&quot;open,high,low,close&quot;</span><br>error, data = w.wsi(codes, fields, <span class="hljs-string">&quot;2017-06-01 09:30:00&quot;</span>, datetime.today(), <span class="hljs-string">&quot;&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># 其中，datetime.today() 是 Python 内置的日期函数，表示当前时刻。</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 取 IF00.CFE 的分钟数据</span>
+<span class="token keyword">from</span> datetime <span class="token keyword">import</span> <span class="token operator">*</span>
+codes <span class="token operator">=</span> <span class="token string">"IF00.CFE"</span>
+fields <span class="token operator">=</span> <span class="token string">"open,high,low,close"</span>
+error<span class="token punctuation">,</span> data <span class="token operator">=</span> w<span class="token punctuation">.</span>wsi<span class="token punctuation">(</span>codes<span class="token punctuation">,</span> fields<span class="token punctuation">,</span> <span class="token string">"2017-06-01 09:30:00"</span><span class="token punctuation">,</span> datetime<span class="token punctuation">.</span>today<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token comment"># 其中，datetime.today() 是 Python 内置的日期函数，表示当前时刻。</span></code></pre></div></figure>
 <p>在这个示例中，首先从 IF00.CFE 提取分钟数据，包括开盘价、最高价、最低价和收盘价。</p>
 <h2 id="6-获取日内tick数据函数WST">6. 获取日内tick数据函数WST</h2>
 <p>函数 <code>w.wst</code> 用于获取国内六大交易所（上海交易所、深圳交易所、郑州商品交易所、上海国际能源交易中心、上海期货交易所、大连商品交易所）证券品种的日内盘口买卖五档快照数据和分时成交数据（tick数据）。</p>
@@ -527,7 +547,16 @@
 </ul>
 <h3 id="示例用法-3">示例用法</h3>
 <p>以下是一个示例用法，用于提取平安银行（<a target="_blank" rel="noopener" href="http://000001.SZ">000001.SZ</a>）当天的买卖盘数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 提取平安银行（000001.SZ）当天的买卖盘数据。</span><br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 设置起始时间和截止时间，通过 wst 接口提取序列数据</span><br>begintime = datetime.strftime(datetime.now(), <span class="hljs-string">&#x27;%Y-%m-%d 09:30:00&#x27;</span>)<br>endtime = datetime.strftime(datetime.now(), <span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br><span class="hljs-comment"># last最新价，bid1 买1价，ask1 卖1价</span><br>codes = <span class="hljs-string">&quot;000001.SZ&quot;</span><br>fields = <span class="hljs-string">&quot;last,bid1,ask1&quot;</span> <br>w.wst(codes, fields, begintime, endtime)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 提取平安银行（000001.SZ）当天的买卖盘数据。</span>
+<span class="token keyword">from</span> datetime <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># 设置起始时间和截止时间，通过 wst 接口提取序列数据</span>
+begintime <span class="token operator">=</span> datetime<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%d 09:30:00'</span><span class="token punctuation">)</span>
+endtime <span class="token operator">=</span> datetime<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">)</span>
+<span class="token comment"># last最新价，bid1 买1价，ask1 卖1价</span>
+codes <span class="token operator">=</span> <span class="token string">"000001.SZ"</span>
+fields <span class="token operator">=</span> <span class="token string">"last,bid1,ask1"</span> 
+w<span class="token punctuation">.</span>wst<span class="token punctuation">(</span>codes<span class="token punctuation">,</span> fields<span class="token punctuation">,</span> begintime<span class="token punctuation">,</span> endtime<span class="token punctuation">)</span></code></pre></div></figure>
 <p>在这个示例中，首先设置起始时间和截止时间为当天的开盘时间和当前时间，然后通过 <code>wst</code> 接口提取平安银行的买卖盘数据，包括最新价、买一价和卖一价。</p>
 <h2 id="7-实时行情数据函数-WSQ">7.实时行情数据函数 WSQ</h2>
 <p>函数 <code>w.wsq</code> 用于获取股票、债券、基金、期货、指数等选定证券品种的当天指标实时数据。可以通过一次性请求实时快照数据，也可以通过订阅的方式获取实时数据。</p>
@@ -630,7 +659,12 @@
 </ul>
 <h3 id="示例用法-4">示例用法</h3>
 <p>以下是一个示例用法，用于订阅平安银行（<a target="_blank" rel="noopener" href="http://000001.SZ">000001.SZ</a>）的买卖盘数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">data = w.wsq(<span class="hljs-string">&quot;000001.SZ&quot;</span>, <span class="hljs-string">&quot;rt_last,rt_open&quot;</span>, func=DemoWSQCallback)<br><span class="hljs-comment"># 订阅</span><br><span class="hljs-comment"># 等待回调，用户可以根据实际情况写回调函数</span><br><span class="hljs-comment"># ...</span><br><span class="hljs-comment"># 根据刚才 wsq 返回的请求ID，取消订阅</span><br>w.cancelRequest(data.RequestID)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">data <span class="token operator">=</span> w<span class="token punctuation">.</span>wsq<span class="token punctuation">(</span><span class="token string">"000001.SZ"</span><span class="token punctuation">,</span> <span class="token string">"rt_last,rt_open"</span><span class="token punctuation">,</span> func<span class="token operator">=</span>DemoWSQCallback<span class="token punctuation">)</span>
+<span class="token comment"># 订阅</span>
+<span class="token comment"># 等待回调，用户可以根据实际情况写回调函数</span>
+<span class="token comment"># ...</span>
+<span class="token comment"># 根据刚才 wsq 返回的请求ID，取消订阅</span>
+w<span class="token punctuation">.</span>cancelRequest<span class="token punctuation">(</span>data<span class="token punctuation">.</span>RequestID<span class="token punctuation">)</span></code></pre></div></figure>
 <p>在这个示例中，首先使用 <code>w.wsq</code> 订阅平安银行的买卖盘数据，包括最新价 (<code>rt_last</code>) 和开盘价 (<code>rt_open</code>)。然后等待回调函数获取实时数据，并最后根据 <code>wsq</code> 返回的请求ID来取消订阅。</p>
 <h2 id="8-获取板块日序列数据函数WSES">8. 获取板块日序列数据函数WSES</h2>
 <p>函数 <code>w.wses</code> 用于获取沪深股票、香港股票、全球股票的板块的历史日序列数据，包括依据板块个股数据计算的板块日行情数据、基本面数据以及盈利预测数据等。</p>
@@ -739,7 +773,7 @@
 </ul>
 <h3 id="示例用法-5">示例用法</h3>
 <p>以下是一个示例用法，用于提取上证A股和深证A股的当日平均收盘价信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">errorCode, data = w.wses(<span class="hljs-string">&quot;a001010200000000,a001010100000000&quot;</span>, <span class="hljs-string">&quot;sec_close_avg&quot;</span>, <span class="hljs-string">&quot;2018-08-21&quot;</span>, <span class="hljs-string">&quot;2018-08-27&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">errorCode<span class="token punctuation">,</span> data <span class="token operator">=</span> w<span class="token punctuation">.</span>wses<span class="token punctuation">(</span><span class="token string">"a001010200000000,a001010100000000"</span><span class="token punctuation">,</span> <span class="token string">"sec_close_avg"</span><span class="token punctuation">,</span> <span class="token string">"2018-08-21"</span><span class="token punctuation">,</span> <span class="token string">"2018-08-27"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>在这个示例中，首先使用 <code>w.wses</code> 函数提取了上证A股和深证A股的板块数据，包括 “sec_close_avg” 指标，日期范围为 “2018-08-21” 到 “2018-08-27”。最后，将结果存储在 DataFrame 中。</p>
 <h2 id="9-获取板块日截面数据函数WSEE">9. 获取板块日截面数据函数WSEE</h2>
 <p>函数 <code>w.wsee</code> 用于获取沪深股票、香港股票、全球股票的板块的历史日序列数据，包括依据板块个股数据计算的板块日行情数据、基本面数据以及盈利预测数据等。</p>
@@ -803,7 +837,7 @@
 </ul>
 <h3 id="示例用法-6">示例用法</h3>
 <p>以下是一个示例用法，用于提取上证A股和深证A股的当日平均收盘价信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">errorCode, data = w.wsee(<span class="hljs-string">&quot;a001010200000000,a001010300000000&quot;</span>, <span class="hljs-string">&quot;sec_close_avg&quot;</span>, <span class="hljs-string">&quot;tradeDate=20180827&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">errorCode<span class="token punctuation">,</span> data <span class="token operator">=</span> w<span class="token punctuation">.</span>wsee<span class="token punctuation">(</span><span class="token string">"a001010200000000,a001010300000000"</span><span class="token punctuation">,</span> <span class="token string">"sec_close_avg"</span><span class="token punctuation">,</span> <span class="token string">"tradeDate=20180827"</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>在这个示例中，首先使用 <code>w.wsee</code> 函数提取了上证A股和深证A股的板块数据，包括 “sec_close_avg” 指标，日期为 “20180827”。最后，将结果存储在 DataFrame 中。</p>
 <h2 id="10-获取报表数据函数WSET">10.获取报表数据函数WSET</h2>
 <p>函数 <code>w.wset</code> 用于获取数据集信息，包括板块成分、指数成分、ETF申赎成分信息、分级基金明细、融资标的、融券标的、融资融券担保品、回购担保品、停牌股票、复牌股票、分红送转等报表数据。</p>
@@ -851,7 +885,8 @@
 </ul>
 <h3 id="示例用法-7">示例用法</h3>
 <p>以下是一个示例用法，用于获取申万一级行业的成分股：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">sw_index = w.wset(<span class="hljs-string">&quot;sectorconstituent&quot;</span>, <span class="hljs-string">&quot;date=2018-06-12;sectorid=a39901011g000000&quot;</span>, usedf=<span class="hljs-literal">True</span>)<br>sw_index[<span class="hljs-number">1</span>].head(<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">sw_index <span class="token operator">=</span> w<span class="token punctuation">.</span>wset<span class="token punctuation">(</span><span class="token string">"sectorconstituent"</span><span class="token punctuation">,</span> <span class="token string">"date=2018-06-12;sectorid=a39901011g000000"</span><span class="token punctuation">,</span> usedf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+sw_index<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre></div></figure>
 <p>在这个示例中，首先使用 <code>w.wset</code> 函数提取了申万一级行业的成分股信息，日期为 “2018-06-12”，板块ID为 “a39901011g000000”。然后，将结果存储在 DataFrame 中并显示前5行。</p>
 <h2 id="11-推荐的使用场景">11.推荐的使用场景</h2>
 <p>以下是对这些函数的异同点以及推荐的使用场景的概述：</p>

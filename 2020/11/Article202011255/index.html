@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客  第一种 123456789101112131415161718192021222324252627282930313233343536373839404142434445def softmax_loss_naive(W, X, y, reg):    &quot;&quot;&amp;q">
+<meta name="description" content="参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客  第一种 def softmax_loss_naive(W, X, y, reg):     &quot;&quot;&quot;     使用显式循环版本计算Softmax损失函数     N表示：数据个数，D表示：数据维度，C：表示数据类别个数。     Inputs:     - W: 形状(D, C)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用显式循环版本计算Softmax损失函数">
 <meta property="og:url" content="https://blog.fulequn.online/2020/11/Article202011255/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客  第一种 123456789101112131415161718192021222324252627282930313233343536373839404142434445def softmax_loss_naive(W, X, y, reg):    &quot;&quot;&amp;q">
+<meta property="og:description" content="参考链接： (1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客  第一种 def softmax_loss_naive(W, X, y, reg):     &quot;&quot;&quot;     使用显式循环版本计算Softmax损失函数     N表示：数据个数，D表示：数据维度，C：表示数据类别个数。     Inputs:     - W: 形状(D, C)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023202454.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023203046.png">
@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -119,11 +120,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-729 字
+717 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-7 分钟
+6 分钟
 </span>
 </div>
 </div>
@@ -148,12 +149,100 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yjf3151731373/article/details/103293471">(1条消息) cs231n作业：Assignment1-softmax_MR CODER-CSDN博客</a></p>
 </blockquote>
 <h2 id="第一种">第一种</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    使用显式循环版本计算Softmax损失函数</span><br><span class="hljs-string">    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。</span><br><span class="hljs-string">    Inputs:</span><br><span class="hljs-string">    - W: 形状(D, C) numpy数组，表示分类器权重（参数）.</span><br><span class="hljs-string">    - X: 形状(N, D) numpy数组，表示训练数据.</span><br><span class="hljs-string">    - y: 形状(N,) numpy数组，表示数据类标。</span><br><span class="hljs-string">        其中 y[i] = c 意味着X[i]为第c类数据，c取值为[0,c)</span><br><span class="hljs-string">    - reg: 正则化惩罚系数</span><br><span class="hljs-string">    Returns  二元组(tuple):</span><br><span class="hljs-string">    - loss,数据损失值</span><br><span class="hljs-string">    - dW,权重W所对应的梯度，其形状和W相同</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 初始化损失值与梯度.</span><br>    loss = <span class="hljs-number">0.0</span><br>    dW = np.zeros_like(W)<br>    <span class="hljs-comment">#############################################################################        </span><br>    <span class="hljs-comment">#  任务：使用显式循环实现softmax损失值loss及相应的梯度dW 。                 #</span><br>    <span class="hljs-comment">#  温馨提示： 如果不慎,将很容易造成数值上溢。别忘了正则化哟。               #</span><br>    <span class="hljs-comment">#############################################################################</span><br>    num_train = X.shape[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 获取训练样本数</span><br>    num_class = W.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 获取分类总数</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_train):  <br>        s = X[i].dot(W)  <span class="hljs-comment"># (1, C) 每类的可能性</span><br>        scores = s - <span class="hljs-built_in">max</span>(s)  <span class="hljs-comment"># 关注最高分</span><br>        <span class="hljs-comment">#使用指数函数，在不影响单调性的情况下，使相对得分更明显</span><br>        scores_E = np.exp(scores)  <br>        <span class="hljs-comment"># 计算总得分</span><br>        Z = np.<span class="hljs-built_in">sum</span>(scores_E)<br>        <span class="hljs-comment"># 找到目标值</span><br>        score_target = scores_E[y[i]]<br>        <span class="hljs-comment"># 计算出损失值</span><br>        loss += -np.log(score_target/Z)<br>        <span class="hljs-comment"># 计算梯度值</span><br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_class):<br>            <span class="hljs-keyword">if</span> j == y[i]:<br>                dW[:, j] += -(<span class="hljs-number">1</span>-scores_E[j]/Z)*X[i]<br>            <span class="hljs-keyword">else</span>:<br>                dW[:, j] += X[i]*scores_E[j]/Z<br>    <span class="hljs-comment"># 使用平均损失，再引入正则化</span><br>    loss = loss/num_train+<span class="hljs-number">0.5</span>*reg*np.<span class="hljs-built_in">sum</span>(W*W)<br>    <span class="hljs-comment"># 使用平均梯度，再引入正则化</span><br>    dW = dW/num_train+reg*W<br>    <span class="hljs-keyword">return</span> loss, dW<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">softmax_loss_naive</span><span class="token punctuation">(</span>W<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> reg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    使用显式循环版本计算Softmax损失函数
+    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。
+    Inputs:
+    - W: 形状(D, C) numpy数组，表示分类器权重（参数）.
+    - X: 形状(N, D) numpy数组，表示训练数据.
+    - y: 形状(N,) numpy数组，表示数据类标。
+        其中 y[i] = c 意味着X[i]为第c类数据，c取值为[0,c)
+    - reg: 正则化惩罚系数
+    Returns  二元组(tuple):
+    - loss,数据损失值
+    - dW,权重W所对应的梯度，其形状和W相同
+    """</span>
+    <span class="token comment"># 初始化损失值与梯度.</span>
+    loss <span class="token operator">=</span> <span class="token number">0.0</span>
+    dW <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros_like<span class="token punctuation">(</span>W<span class="token punctuation">)</span>
+    <span class="token comment">#############################################################################        </span>
+    <span class="token comment">#  任务：使用显式循环实现softmax损失值loss及相应的梯度dW 。                 #</span>
+    <span class="token comment">#  温馨提示： 如果不慎,将很容易造成数值上溢。别忘了正则化哟。               #</span>
+    <span class="token comment">#############################################################################</span>
+    num_train <span class="token operator">=</span> X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 获取训练样本数</span>
+    num_class <span class="token operator">=</span> W<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment"># 获取分类总数</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_train<span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        s <span class="token operator">=</span> X<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>dot<span class="token punctuation">(</span>W<span class="token punctuation">)</span>  <span class="token comment"># (1, C) 每类的可能性</span>
+        scores <span class="token operator">=</span> s <span class="token operator">-</span> <span class="token builtin">max</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>  <span class="token comment"># 关注最高分</span>
+        <span class="token comment">#使用指数函数，在不影响单调性的情况下，使相对得分更明显</span>
+        scores_E <span class="token operator">=</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>scores<span class="token punctuation">)</span>  
+        <span class="token comment"># 计算总得分</span>
+        Z <span class="token operator">=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>scores_E<span class="token punctuation">)</span>
+        <span class="token comment"># 找到目标值</span>
+        score_target <span class="token operator">=</span> scores_E<span class="token punctuation">[</span>y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span>
+        <span class="token comment"># 计算出损失值</span>
+        loss <span class="token operator">+=</span> <span class="token operator">-</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>score_target<span class="token operator">/</span>Z<span class="token punctuation">)</span>
+        <span class="token comment"># 计算梯度值</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_class<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> j <span class="token operator">==</span> y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                dW<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>scores_E<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">/</span>Z<span class="token punctuation">)</span><span class="token operator">*</span>X<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                dW<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">+=</span> X<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">*</span>scores_E<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">/</span>Z
+    <span class="token comment"># 使用平均损失，再引入正则化</span>
+    loss <span class="token operator">=</span> loss<span class="token operator">/</span>num_train<span class="token operator">+</span><span class="token number">0.5</span><span class="token operator">*</span>reg<span class="token operator">*</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>W<span class="token operator">*</span>W<span class="token punctuation">)</span>
+    <span class="token comment"># 使用平均梯度，再引入正则化</span>
+    dW <span class="token operator">=</span> dW<span class="token operator">/</span>num_train<span class="token operator">+</span>reg<span class="token operator">*</span>W
+    <span class="token keyword">return</span> loss<span class="token punctuation">,</span> dW</code></pre></div></figure>
 <p>结果如下：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023202454.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023203046.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <h2 id="第二种">第二种</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">softmax_loss_naive</span>(<span class="hljs-params">W, X, y, reg</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    使用显式循环版本计算Softmax损失函数</span><br><span class="hljs-string">    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。</span><br><span class="hljs-string">    Inputs:</span><br><span class="hljs-string">    - W: 形状(D, C) numpy数组，表示分类器权重（参数）.</span><br><span class="hljs-string">    - X: 形状(N, D) numpy数组，表示训练数据.</span><br><span class="hljs-string">    - y: 形状(N,) numpy数组，表示数据类标。</span><br><span class="hljs-string">        其中 y[i] = c 意味着X[i]为第c类数据，c取值为[0,c)</span><br><span class="hljs-string">    - reg: 正则化惩罚系数</span><br><span class="hljs-string">    Returns  二元组(tuple):</span><br><span class="hljs-string">    - loss,数据损失值</span><br><span class="hljs-string">    - dW,权重W所对应的梯度，其形状和W相同</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 初始化损失值与梯度.</span><br>    loss = <span class="hljs-number">0.0</span>  <br>    dW = np.zeros_like(W)<br>    <span class="hljs-comment">#############################################################################        </span><br>    <span class="hljs-comment">#  任务：使用显式循环实现softmax损失值loss及相应的梯度dW 。                 #</span><br>    <span class="hljs-comment">#  温馨提示： 如果不慎,将很容易造成数值上溢。别忘了正则化哟。               #</span><br>    <span class="hljs-comment">#############################################################################</span><br><br>    N = X.shape[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 获取训练样本数</span><br>    C = W.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 获取分类总数</span><br><br>    result = X.dot(W)<br>    result -= np.<span class="hljs-built_in">max</span>(result,axis=<span class="hljs-number">1</span>,keepdims=<span class="hljs-literal">True</span>)<span class="hljs-comment">#避免指数太大，导致计算太大，内存不够</span><br><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>        soft_max = np.exp(result[i][y[i]])/np.<span class="hljs-built_in">sum</span>(np.exp(result[i]))<br>        loss += -np.log(soft_max)<br><br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(C):<br>            <span class="hljs-keyword">if</span> j==y[i]:<br>                dW[:,j] += -X[i].T<br>            dW[:,j] += (X[i].T * np.exp(result[i][j])) / (np.<span class="hljs-built_in">sum</span>(np.exp(result[i])))<br><br>    loss/= N<br>    loss += reg*np.<span class="hljs-built_in">sum</span>(W*W)<br>    dW /= N<br>    dW += reg*<span class="hljs-number">2</span>*W<br>    <span class="hljs-comment">#############################################################################</span><br>    <span class="hljs-comment">#                           结束编码                                        #</span><br>    <span class="hljs-comment">#############################################################################</span><br>    <span class="hljs-keyword">return</span> loss, dW<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">softmax_loss_naive</span><span class="token punctuation">(</span>W<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> reg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    使用显式循环版本计算Softmax损失函数
+    N表示：数据个数，D表示：数据维度，C：表示数据类别个数。
+    Inputs:
+    - W: 形状(D, C) numpy数组，表示分类器权重（参数）.
+    - X: 形状(N, D) numpy数组，表示训练数据.
+    - y: 形状(N,) numpy数组，表示数据类标。
+        其中 y[i] = c 意味着X[i]为第c类数据，c取值为[0,c)
+    - reg: 正则化惩罚系数
+    Returns  二元组(tuple):
+    - loss,数据损失值
+    - dW,权重W所对应的梯度，其形状和W相同
+    """</span>
+    <span class="token comment"># 初始化损失值与梯度.</span>
+    loss <span class="token operator">=</span> <span class="token number">0.0</span>  
+    dW <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros_like<span class="token punctuation">(</span>W<span class="token punctuation">)</span>
+    <span class="token comment">#############################################################################        </span>
+    <span class="token comment">#  任务：使用显式循环实现softmax损失值loss及相应的梯度dW 。                 #</span>
+    <span class="token comment">#  温馨提示： 如果不慎,将很容易造成数值上溢。别忘了正则化哟。               #</span>
+    <span class="token comment">#############################################################################</span>
+
+    N <span class="token operator">=</span> X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 获取训练样本数</span>
+    C <span class="token operator">=</span> W<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment"># 获取分类总数</span>
+
+    result <span class="token operator">=</span> X<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>W<span class="token punctuation">)</span>
+    result <span class="token operator">-=</span> np<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>keepdims<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token comment">#避免指数太大，导致计算太大，内存不够</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        soft_max <span class="token operator">=</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">/</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        loss <span class="token operator">+=</span> <span class="token operator">-</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>soft_max<span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>C<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> j<span class="token operator">==</span>y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                dW<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span>j<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token operator">-</span>X<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>T
+            dW<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span>j<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">(</span>X<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>T <span class="token operator">*</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    loss<span class="token operator">/=</span> N
+    loss <span class="token operator">+=</span> reg<span class="token operator">*</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>W<span class="token operator">*</span>W<span class="token punctuation">)</span>
+    dW <span class="token operator">/=</span> N
+    dW <span class="token operator">+=</span> reg<span class="token operator">*</span><span class="token number">2</span><span class="token operator">*</span>W
+    <span class="token comment">#############################################################################</span>
+    <span class="token comment">#                           结束编码                                        #</span>
+    <span class="token comment">#############################################################################</span>
+    <span class="token keyword">return</span> loss<span class="token punctuation">,</span> dW</code></pre></div></figure>
 <p>结果如下：</p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023202031.png" srcset="/img/loading.gif" lazyload alt="3"></p>
 <p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img211/20211023203700.png" srcset="/img/loading.gif" lazyload alt="4"></p>

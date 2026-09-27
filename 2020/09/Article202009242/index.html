@@ -10,12 +10,12 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jackchiang&#x2F;p&#x2F;4605327.html  需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 12345678910111213141516171819202122232425262728293031323334353637383940414243#-*- cod">
+<meta name="description" content="参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jackchiang&#x2F;p&#x2F;4605327.html  需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 #-*- coding: UTF-8 -*-   &#39;&#39;&#39; 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 &#39;&#39;&#39; impo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python遍历文件夹和读写文件的方法">
 <meta property="og:url" content="https://blog.fulequn.online/2020/09/Article202009242/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jackchiang&#x2F;p&#x2F;4605327.html  需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 12345678910111213141516171819202122232425262728293031323334353637383940414243#-*- cod">
+<meta property="og:description" content="参考链接：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jackchiang&#x2F;p&#x2F;4605327.html  需求分析 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 实现过程 #-*- coding: UTF-8 -*-   &#39;&#39;&#39; 1、读取指定目录下的所有文件 2、读取指定文件，输出文件内容 3、创建一个文件并保存到指定目录 &#39;&#39;&#39; impo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-24T12:55:16.000Z">
 <meta property="article:modified_time" content="2024-05-30T00:16:22.000Z">
@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.7",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},woyaola:null,cnzz:null,leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
@@ -113,7 +114,7 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-306 字
+269 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
@@ -145,7 +146,49 @@
 2、读取指定文件，输出文件内容<br>
 3、创建一个文件并保存到指定目录</p>
 <h3 id="实现过程">实现过程</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#-*- coding: UTF-8 -*- </span><br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">1、读取指定目录下的所有文件</span><br><span class="hljs-string">2、读取指定文件，输出文件内容</span><br><span class="hljs-string">3、创建一个文件并保存到指定目录</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-comment"># 遍历指定目录，显示目录下的所有文件名</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">eachFile</span>(<span class="hljs-params">filepath</span>):<br>    pathDir =  os.listdir(filepath)<br>    <span class="hljs-keyword">for</span> allDir <span class="hljs-keyword">in</span> pathDir:<br>        child = os.path.join(<span class="hljs-string">&#x27;%s%s&#x27;</span> % (filepath, allDir))<br>        <span class="hljs-built_in">print</span> child.decode(<span class="hljs-string">&#x27;gbk&#x27;</span>) <span class="hljs-comment"># .decode(&#x27;gbk&#x27;)是解决中文显示乱码问题</span><br><br><span class="hljs-comment"># 读取文件内容并打印</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">readFile</span>(<span class="hljs-params">filename</span>):<br>    fopen = <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-comment"># r 代表read</span><br>    <span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> fopen:<br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;读取到得内容如下：&quot;</span>,eachLine<br>    fopen.close()<br>    <br><span class="hljs-comment"># 输入多行文字，写入指定文件并保存到指定文件夹</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">writeFile</span>(<span class="hljs-params">filename</span>):<br>    fopen = <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;w&#x27;</span>)<br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;\r请任意输入多行文字&quot;</span>,<span class="hljs-string">&quot; ( 输入 .号回车保存)&quot;</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        aLine = raw_input()<br>        <span class="hljs-keyword">if</span> aLine != <span class="hljs-string">&quot;.&quot;</span>:<br>            fopen.write(<span class="hljs-string">&#x27;%s%s&#x27;</span> % (aLine, os.linesep))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;文件已保存!&quot;</span><br>            <span class="hljs-keyword">break</span><br>    fopen.close()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    filePath = <span class="hljs-string">&quot;D:\\FileDemo\\Java\\myJava.txt&quot;</span><br>    filePathI = <span class="hljs-string">&quot;D:\\FileDemo\\Python\\pt.py&quot;</span><br>    filePathC = <span class="hljs-string">&quot;C:\\&quot;</span><br>    eachFile(filePathC)<br>    readFile(filePath)<br>    writeFile(filePathI)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#-*- coding: UTF-8 -*- </span>
+
+<span class="token triple-quoted-string string">'''
+1、读取指定目录下的所有文件
+2、读取指定文件，输出文件内容
+3、创建一个文件并保存到指定目录
+'''</span>
+<span class="token keyword">import</span> os
+
+<span class="token comment"># 遍历指定目录，显示目录下的所有文件名</span>
+<span class="token keyword">def</span> <span class="token function">eachFile</span><span class="token punctuation">(</span>filepath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    pathDir <span class="token operator">=</span>  os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>filepath<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> allDir <span class="token keyword">in</span> pathDir<span class="token punctuation">:</span>
+        child <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">'%s%s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>filepath<span class="token punctuation">,</span> allDir<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span> child<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'gbk'</span><span class="token punctuation">)</span> <span class="token comment"># .decode('gbk')是解决中文显示乱码问题</span>
+
+<span class="token comment"># 读取文件内容并打印</span>
+<span class="token keyword">def</span> <span class="token function">readFile</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fopen <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token comment"># r 代表read</span>
+    <span class="token keyword">for</span> eachLine <span class="token keyword">in</span> fopen<span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"读取到得内容如下："</span><span class="token punctuation">,</span>eachLine
+    fopen<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+<span class="token comment"># 输入多行文字，写入指定文件并保存到指定文件夹</span>
+<span class="token keyword">def</span> <span class="token function">writeFile</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fopen <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span> <span class="token string">"\r请任意输入多行文字"</span><span class="token punctuation">,</span><span class="token string">" ( 输入 .号回车保存)"</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        aLine <span class="token operator">=</span> <span class="token builtin">raw_input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> aLine <span class="token operator">!=</span> <span class="token string">"."</span><span class="token punctuation">:</span>
+            fopen<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">'%s%s'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>aLine<span class="token punctuation">,</span> os<span class="token punctuation">.</span>linesep<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span> <span class="token string">"文件已保存!"</span>
+            <span class="token keyword">break</span>
+    fopen<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    filePath <span class="token operator">=</span> <span class="token string">"D:\\FileDemo\\Java\\myJava.txt"</span>
+    filePathI <span class="token operator">=</span> <span class="token string">"D:\\FileDemo\\Python\\pt.py"</span>
+    filePathC <span class="token operator">=</span> <span class="token string">"C:\\"</span>
+    eachFile<span class="token punctuation">(</span>filePathC<span class="token punctuation">)</span>
+    readFile<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
+    writeFile<span class="token punctuation">(</span>filePathI<span class="token punctuation">)</span></code></pre></div></figure>
 </div>
 <hr>
 <div>
