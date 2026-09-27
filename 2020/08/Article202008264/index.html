@@ -215,53 +215,53 @@ int nextInt(int n)
 <h1 id="Java随机数总结">Java随机数总结</h1>
 <p>随机数在实际中使用很广泛，比如要随即生成一个固定长度的字符串、数字。或者随即生成一个不定长度的数字、或者进行一个模拟的随机选择等等。Java提供了最基本的工具，可以帮助开发者来实现这一切。</p>
 <h2 id="一、Java随机数的产生方式">一、Java随机数的产生方式</h2>
-<p>在Java中，随机数的概念从广义上将，有三种。</p>
-<p>1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p>
-<p>2、通过Math.random()返回一个0到1之间的double值。</p>
-<p>3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p>
+<p>　　在Java中，随机数的概念从广义上将，有三种。</p>
+<p>　　1、通过System.currentTimeMillis()来获取一个当前时间毫秒数的long型数字。</p>
+<p>　　2、通过Math.random()返回一个0到1之间的double值。</p>
+<p>　　3、通过Random类来产生一个随机数，这个是专业的Random工具类，功能强大。</p>
 <h2 id="二、Random类API说明">二、Random类API说明</h2>
-<p>1、Java API说明</p>
-<p>Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p>
-<p>如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p>
-<p>很多应用程序会发现 Math 类中的 random 方法更易于使用。</p>
-<p>2、方法摘要</p>
-<p>Random()</p>
-<p>创建一个新的随机数生成器。</p>
-<p>Random(long seed)</p>
-<p>使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p>
-<p>protected int next(int bits)</p>
-<p>生成下一个伪随机数。</p>
-<p>boolean nextBoolean()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p>
-<p>void nextBytes(byte[] bytes)</p>
-<p>生成随机字节并将其置于用户提供的字节数组中。</p>
-<p>double nextDouble()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p>
-<p>float nextFloat()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p>
-<p>double nextGaussian()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p>
-<p>int nextInt()</p>
-<p>返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p>
-<p>int nextInt(int n)</p>
-<p>返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p>
-<p>long nextLong()</p>
-<p>返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p>
-<p>void setSeed(long seed)</p>
-<p>使用单个 long 种子设置此随机数生成器的种子。</p>
-<p>三、Random类使用说明</p>
-<p>1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p>
-<p>通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p>
-<p>不带种子的，每次运行生成的都是随机的，没有规律可言。</p>
-<p>2、创建不带种子的Random对象</p>
+<p>　　1、Java API说明</p>
+<p>　　Random类的实例用于生成伪随机数流。此类使用 48 位的种子，使用线性同余公式对其进行修改(请参阅 Donald Knuth 的《The Art of Computer Programming， Volume 2》，第 3.2.1 节)。</p>
+<p>　　如果用相同的种子创建两个 Random 实例，则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。为了保证属性的实现，为类 Random 指定了特定的算法。</p>
+<p>　　很多应用程序会发现 Math 类中的 random 方法更易于使用。</p>
+<p>　　2、方法摘要</p>
+<p>　　Random()</p>
+<p>　　创建一个新的随机数生成器。</p>
+<p>　　Random(long seed)</p>
+<p>　　使用单个 long 种子创建一个新随机数生成器： public Random(long seed) { setSeed(seed); } next 方法使用它来保存随机数生成器的状态。</p>
+<p>　　protected int next(int bits)</p>
+<p>　　生成下一个伪随机数。</p>
+<p>　　boolean nextBoolean()</p>
+<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 boolean 值。</p>
+<p>　　void nextBytes(byte[] bytes)</p>
+<p>　　生成随机字节并将其置于用户提供的字节数组中。</p>
+<p>　　double nextDouble()</p>
+<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0之间均匀分布的 double 值。</p>
+<p>　　float nextFloat()</p>
+<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、在 0.0 和 1.0 之间均匀分布的 float 值。</p>
+<p>　　double nextGaussian()</p>
+<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、呈高斯(“正常地”)分布的 double 值，其平均值是 0.0，标准偏差是 1.0。</p>
+<p>　　int nextInt()</p>
+<p>　　返回下一个伪随机数，它是此随机数生成器的序列中均匀分布的 int 值。</p>
+<p>　　int nextInt(int n)</p>
+<p>　　返回一个伪随机数，它是从此随机数生成器的序列中取出的、在 0(包括)和指定值(不包括)之间均匀分布的 int值。</p>
+<p>　　long nextLong()</p>
+<p>　　返回下一个伪随机数，它是从此随机数生成器的序列中取出的、均匀分布的 long 值。</p>
+<p>　　void setSeed(long seed)</p>
+<p>　　使用单个 long 种子设置此随机数生成器的种子。</p>
+<p>　　三、Random类使用说明</p>
+<p>　　1、带种子与不带种子的区别Random类使用的根本是策略分带种子和不带种子的Random的实例。</p>
+<p>　　通俗说，两者的区别是：带种子的，每次运行生成的结果都是一样的。</p>
+<p>　　不带种子的，每次运行生成的都是随机的，没有规律可言。</p>
+<p>　　2、创建不带种子的Random对象</p>
 <figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">　　<span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></figure>
-<p>3、创建不带种子的Random对象有两种方法：</p>
+<p>　　3、创建不带种子的Random对象有两种方法：</p>
 <figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java">　　<span class="token number">1</span><span class="token punctuation">)</span> <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token number">555L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 　　<span class="token number">2</span><span class="token punctuation">)</span> <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>random<span class="token punctuation">.</span><span class="token function">setSeed</span><span class="token punctuation">(</span><span class="token number">555L</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></figure>
-<p>四、测试</p>
-<p>通过一个例子说明上面的用法</p>
-<p></p>
+<p>　　四、测试</p>
+<p>　　通过一个例子说明上面的用法</p>
+<p>　　</p>
 <figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Random</span></span><span class="token punctuation">;</span>
 
 　　
@@ -355,8 +355,8 @@ int nextInt(int n)
 　　<span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">&#125;</span></code></pre></div></figure>
-<p>运行结果：</p>
-<p></p>
+<p>　　运行结果：</p>
+<p>　　</p>
 <figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
 
 　　r1 <span class="token operator">=</span> <span class="token number">1227108626582</span>
@@ -390,10 +390,10 @@ int nextInt(int n)
 　　<span class="token operator">-</span><span class="token number">1462441651</span>
 
 　　<span class="token class-name">Process</span> finished <span class="token keyword">with</span> <span class="token namespace">exit</span> code <span class="token number">0</span></code></pre></div></figure>
-<p>通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p>
-<p>而不带种子的，每次运行结果都是随机的。</p>
-<p>五、综合应用</p>
-<p>下面通过最近写的一个随机数工具类来展示用法：</p>
+<p>　　通过testSeed1()与testSeed2()方法的结果可以看到，两个打印结果相同，因为他们种子相同，再运行一次，结果还是一样的，这就是带种子随机数的特性。</p>
+<p>　　而不带种子的，每次运行结果都是随机的。</p>
+<p>　　五、综合应用</p>
+<p>　　下面通过最近写的一个随机数工具类来展示用法：</p>
 <figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Random</span></span><span class="token punctuation">;</span>
 
 　　
@@ -541,7 +541,7 @@ int nextInt(int n)
 　　<span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">&#125;</span></code></pre></div></figure>
-<p>运行结果：</p>
+<p>　　运行结果：</p>
 <figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">　　vWMBPiNbzfGCpHG
 
 　　23hyraHdJkKPwMv
@@ -557,13 +557,13 @@ int nextInt(int n)
 　　000000000000123
 
 　　Process finished with exit code 0</code></pre></div></figure>
-<p>六、总结</p>
-<p>1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p>
-<p>2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p>
-<p>3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p>
-<p>4、Random的功能涵盖了Math.random()的功能。</p>
-<p>5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p>
-<p>6、不要研究不重复的随机数，意义不大。因为结果不可再现</p>
+<p>　　六、总结</p>
+<p>　　1、随机数很常用，在Java有三种产生方式，以Random随机数的使用最为复杂。</p>
+<p>　　2、Random类对象有是否带种子之分，带种子的只要种子相同，多次运行，生成随机数的结果总是那样。</p>
+<p>　　3、带种子随机数的带种子的对象创建方式有两种，效果一样。但是带种子的随机数用处似乎不大。</p>
+<p>　　4、Random的功能涵盖了Math.random()的功能。</p>
+<p>　　5、可以通过随机数去做实现随机字符串等复杂的随机数据。</p>
+<p>　　6、不要研究不重复的随机数，意义不大。因为结果不可再现</p>
 <p>在Java 中我们可以使用java.util.Random类来产生一个随机数发生器。它有两种形式的构造函数，分别是Random()和Random(long seed)。Random()使用当前时间即System.currentTimeMillis()作为发生器的种子，Random(long seed)使用指定的seed作为发生器的种子。</p>
 <p>​ 随机数发生器(Random)对象产生以后，通过调用不同的method：nextInt()、nextLong()、nextFloat()、nextDouble()等获得不同类型随机数。</p>
 <p>​ 1&gt;生成随机数</p>

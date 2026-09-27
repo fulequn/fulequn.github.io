@@ -237,11 +237,11 @@ db.setProfilingLevel( 1 , 10 );</code></pre></div></figure>
 <p>查看关于某个collection的相关慢查询操作：</p>
 <figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">db.system.profile.find(&#123;ns:&#39;mydb.students&#39;&#125;)</code></pre></div></figure>
 <p><strong>MongoDB 查询优化</strong></p>
-<p>docsExamined(扫描的记录数)远大于nreturned(返回结果的记录数)的话，那么我们就要考虑通过加索引来优化记录定位了。</p>
-<p>responseLength 如果过大，那么说明我们返回的结果集太大了，这时请查看find函数的第二个参数是否只写上了你需要的属性名。(类似 于MySQL中不要总是select)</p>
-<p>对于创建索引的建议是：如果很少读，那么尽量不要添加索引，因为索引越多，写操作会越慢。如果读量很大，那么创建索引还是比较划算的。</p>
+<p>　　docsExamined(扫描的记录数)远大于nreturned(返回结果的记录数)的话，那么我们就要考虑通过加索引来优化记录定位了。</p>
+<p>　　responseLength 如果过大，那么说明我们返回的结果集太大了，这时请查看find函数的第二个参数是否只写上了你需要的属性名。(类似 于MySQL中不要总是select)</p>
+<p>　　对于创建索引的建议是：如果很少读，那么尽量不要添加索引，因为索引越多，写操作会越慢。如果读量很大，那么创建索引还是比较划算的。</p>
 <p><strong>Profiler 的效率</strong></p>
-<p>Profiling 功能肯定是会影响效率的，但是不太严重，原因是他使用的是system.profile 来记录，而<code>system.profile </code>是一个capped collection 这种collection 在操作上有一些限制和特点，但是效率更高。</p>
+<p>　　Profiling 功能肯定是会影响效率的，但是不太严重，原因是他使用的是system.profile 来记录，而<code>system.profile </code>是一个capped collection 这种collection 在操作上有一些限制和特点，但是效率更高。</p>
 </div>
 <hr>
 <div>

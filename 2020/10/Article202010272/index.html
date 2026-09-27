@@ -157,7 +157,7 @@
 <p><strong>hadoop jar wc.jar cn.intsmaze.hadoop.mr.WCRunner(指定运行java类的完整路径)这个时候程序就执行了。</strong></p>
 <p>2:在linux的eclipse中直接运行main方法，也可以提交到集群中去运行，但是，必须采取以下措施：</p>
 <p>----在工程src目录下加入 mapred-site.xml 和 yarn-site.xml （这两个文件在搭建hdfs时修改了的见hdfs文件夹下的搭建日志）</p>
-<p>----将工程打成jar包(wc.jar)，同时在main方法中添加一个conf的配置参数</p>
+<p>----将工程打成jar包(wc.jar)，同时在main方法中添加一个conf的配置参数　</p>
 <figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">Configuration conf &#x3D; new Configuration();
 conf.set(&quot;mapreduce.job.jar&quot;,&quot;wc.jar&quot;);</code></pre></div></figure>
 <p>JAR包的位置要在运行程序的工程里面。</p>
