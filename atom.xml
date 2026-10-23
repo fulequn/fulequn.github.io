@@ -41,12 +41,10 @@
     <author>
       <name>Fulequn</name>
     </author>
-    <id>https://blog.fulequn.online/2024/06/Article202406111/</id>
-    <link href="https://blog.fulequn.online/2024/06/Article202406111/"/>
+    <id>https://blog.fulequn.online/2024/06/Article202406141/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406141/"/>
     <published>2024-06-11T07:32:21.000Z</published>
-    <summary>
-      <![CDATA[实现导航高亮效果 如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！ vue-router 提供了一个全局组件 router-link (取代 a 标签) 能跳转 ，配置 to 属性指定路径( 必须 ) 。本质还是 a 标签 ， to 无需 # 能高亮 ，默认就会提供 高亮类名 ，可以直接设置高亮样式 语法： <router-link to=]]>
-    </summary>
+    <summary>Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 共同维护一份数据， 数据集中化管理 响应式变化 操作简洁 (vuex 提供了一些辅助函数) 官方原文： 不是所有的场景都适用于 vu</summary>
     <title>Vue基础入门到实战6（路由进阶+面经项目）</title>
     <updated>2024-06-11T07:32:21.000Z</updated>
   </entry>
@@ -54,10 +52,12 @@
     <author>
       <name>Fulequn</name>
     </author>
-    <id>https://blog.fulequn.online/2024/06/Article202406141/</id>
-    <link href="https://blog.fulequn.online/2024/06/Article202406141/"/>
+    <id>https://blog.fulequn.online/2024/06/Article202406111/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406111/"/>
     <published>2024-06-11T07:32:21.000Z</published>
-    <summary>Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 共同维护一份数据， 数据集中化管理 响应式变化 操作简洁 (vuex 提供了一些辅助函数) 官方原文： 不是所有的场景都适用于 vu</summary>
+    <summary>
+      <![CDATA[实现导航高亮效果 如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！ vue-router 提供了一个全局组件 router-link (取代 a 标签) 能跳转 ，配置 to 属性指定路径( 必须 ) 。本质还是 a 标签 ， to 无需 # 能高亮 ，默认就会提供 高亮类名 ，可以直接设置高亮样式 语法： <router-link to=]]>
+    </summary>
     <title>Vue基础入门到实战6（路由进阶+面经项目）</title>
     <updated>2024-06-11T07:32:21.000Z</updated>
   </entry>
