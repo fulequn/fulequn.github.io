@@ -1,0 +1,376 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="T3 Code 源码学习：会话发现、进程启动与远程控制的边界 多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg&#x2F;t3code，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a。本文是静态源码与文档学习，不是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="T3 Code 源码学习：会话发现、进程启动与远程控制的边界">
+<meta property="og:url" content="https://blog.fulequn.online/learn/t3code-session-boundaries/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="T3 Code 源码学习：会话发现、进程启动与远程控制的边界 多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg&#x2F;t3code，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a。本文是静态源码与文档学习，不是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2026-10-22T03:29:09.000Z">
+<meta property="article:modified_time" content="2026-10-22T03:29:09.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="T3 Code">
+<meta property="article:tag" content="架构设计">
+<meta property="article:tag" content="源码学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"T3 Code 源码学习：会话发现、进程启动与远程控制的边界","description":"T3 Code 源码学习：会话发现、进程启动与远程控制的边界 多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg/t3code，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a。本文是静态源码与文档学习，不是","url":"https://blog.fulequn.online/learn/t3code-session-boundaries/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/learn/t3code-session-boundaries/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-10-22T03:29:09.000Z","dateModified":"2026-10-22T03:29:09.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>T3 Code 源码学习：会话发现、进程启动与远程控制的边界 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="T3 Code 源码学习：会话发现、进程启动与远程控制的边界"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2026-10-22 11:29" pubdate>
+2026年10月22日 上午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+3.2k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+27 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">T3 Code 源码学习：会话发现、进程启动与远程控制的边界</h1>
+<div class="markdown-body">
+<h1 id="T3-Code-源码学习：会话发现、进程启动与远程控制的边界">T3 Code 源码学习：会话发现、进程启动与远程控制的边界</h1>
+<p>多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。</p>
+<p>这篇笔记围绕这三个问题阅读 <a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code">pingdotgg/t3code</a>，固定版本为 <a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/tree/7d5a42912a4036549ac4c70d0195f02af432115a"><code>7d5a42912a4036549ac4c70d0195f02af432115a</code></a>。<strong>本文是静态源码与文档学习，不是运行验收或安全审计：未运行该项目的测试和 demo，未核实 relay 的完整实现，也未追踪进程崩溃后的完整恢复链路。</strong> 下文将代码观察、上游文档说明和设计推断分别标注。</p>
+<h2 id="会话发现：集成类型与配置实例分开">会话发现：集成类型与配置实例分开</h2>
+<p>一种 provider 集成与一个配置实例不应混为同一个身份。<code>providerInstance.ts</code> 给出的兼容函数 <code>defaultInstanceIdForDriver</code>，仍以 driver kind 构造默认 instance id。注释说明，旧版本每种 driver 只有一个 instance；保留这个映射，是为了让已持久化的线程、绑定和缓存继续可路由，而不必改写它们保存的选择信息（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/packages/contracts/src/providerInstance.ts#L160-L168">E7</a>）。这是类型分离后仍需承担存储兼容成本的一个具体例子，不能据此推断全部迁移路径已经得到验证。</p>
+<p>另一个边界是健康检查与已认证会话的数据来源。Antigravity provider 的注释明确写着：健康检查使用 <code>initialize</code>，账户级元数据由 session 回调提供，禁用的 instance 不展示这些信息（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/provider/AntigravityProvider.ts#L135-L203">E5</a>）。这支持“探测与认证会话分开设计”的判断；它不证明健康检查完全没有进程、网络或文件副作用，因此不能简单概括成“探测零副作用”。</p>
+<p>线程身份还影响 MCP 凭证的准备过程。<code>ProviderSessionManager</code> 用 <code>threadId + mcpCredentialId</code> 构造 reservation key，并通过线程级锁串行化凭证准备。注释指出，凭证从准备函数交出、到 session entry 被登记之间存在一个窗口，reservation 用来避免此时被竞争释放的操作撤销（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/orchestration-v2/ProviderSessionManager.ts#L435-L472">E8</a>）。这里核实的是生命周期保护机制，不是“所有跨线程凭证访问都已被安全审计”的结论。</p>
+<h2 id="进程启动：安装版本与使用版本的生命周期分开">进程启动：安装版本与使用版本的生命周期分开</h2>
+<p><code>AntigravityInstallation</code> 将 <code>releaseId</code> 限定为 64 位十六进制字符串；active release 保存的是一个独立的 release id 指针。<code>acquire</code> 的接口注释要求：持有 lease，直到启动的子进程退出（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/provider/AntigravityInstallation.ts#L46-L90">E6</a>）。</p>
+<p>这是一项值得借鉴的接口约束：客户端连接可以断开，使用中的安装版本却仍需由进程生命周期保护。安装器不能仅因为某个连接结束，就认定对应版本已经无人使用。本文没有对升级、删除及异常退出做运行测试，所以只将“lease 应覆盖子进程生命周期”作为已读到的契约，不写成“运行中的进程绝不会被升级影响”。</p>
+<h2 id="远程控制：命令回执与效果完成分开">远程控制：命令回执与效果完成分开</h2>
+<p>在客户端与 server 的 RPC 契约中，<code>WsRpcGroup</code> 汇总了 WebSocket RPC。<code>RpcScopeAuthorization</code> 的注释说明，连接的 scope 在 handler 运行前与 RPC 声明的 scope 比较，组内每个 RPC 都携带这项中间件（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/packages/contracts/src/rpc.ts#L1868-L1885">E1</a>）。这是把授权要求放在公共契约层的设计证据；它不等于对所有其他入口或运行时实现作出安全保证。</p>
+<p>更值得注意的是回执的含义。<code>EventSink</code> 的 <code>commitProjectCommand</code> 接口把项目事件、投影更新和命令回执放在同一个事务中。实现先尝试保留 command id，已有回执时直接返回；新命令才追加事件、更新投影并写回执（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/orchestration-v2/EventSink.ts#L681-L706">E2</a>）。这能避免同一个 command id 重复提交项目事件，但不能替后续外部效果承诺“只执行一次”。</p>
+<p>外部效果由独立 worker 领取。<code>EffectWorker</code> 调用 <code>outbox.claimNext({ workerId, leaseDurationMs, ... })</code> 取得工作（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/orchestration-v2/EffectWorker.ts#L689-L706">E3</a>）；执行结束后调用 <code>outbox.succeed</code>，无法确认 lease 所有权时返回错误（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/apps/server/src/orchestration-v2/EffectWorker.ts#L739-L760">E4</a>）。</p>
+<p>这个顺序有一个重要限制：效果可能已经执行，随后才发现完成状态无法结算。上述片段证明了完成结算时的所有权检查，并不证明 lease 丢失会立即停止已经发出的外部操作，也不保证所有效果都可以安全重放。本文未追踪 <code>RestartContinuation</code> 的完整恢复逻辑，不能把 outbox 加 lease 等同于端到端的“恰好一次执行”。</p>
+<p>因此，收到命令回执时，能确认的是“意图已提交”；provider 工作、CI 或部署是否完成，还需要各自的结果证据。</p>
+<h2 id="远程路由与-relay：文档说明仍需实现验证">远程路由与 relay：文档说明仍需实现验证</h2>
+<p>上游远程访问文档把环境身份与访问路由分开描述，并说明 learned route 复用发现它的那条路由的凭证，使用之前仍需确认回应者是预期 environment（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/docs/internals/remote.md">E10</a>）。这些是本次读到的文档设计，不是已完成的跨路由运行测试。</p>
+<p>T3 Connect 文档将 relay 称为 trusted broker：relay 请求 environment 铸造绑定客户端 DPoP key 的一次性 bootstrap 凭证，客户端再直接与 environment 交换访问凭证；应用流量通过 environment 的 tunnel hostname 传输，而不是由 relay Worker 代理 HTTP 或 WebSocket 会话（<a target="_blank" rel="noopener" href="https://github.com/pingdotgg/t3code/blob/7d5a42912a4036549ac4c70d0195f02af432115a/docs/internals/t3-connect.md">E9</a>）。“relay 自己铸造全部凭证”不是这段文档的准确表述。</p>
+<p>同一文档也写明了信任假设：relay 持有 mint 请求的签名权，DPoP 防止诚实交换中的凭证复用，却不能使已经泄露的 relay 签名密钥变得无害。个人单机场景如果没有对应的云信任边界，不应只复制流程图中的组件名称。这里的判断仍以文档为依据，relay 凭证铸造与校验的完整代码路径留待后续核实。</p>
+<h2 id="可以迁移的设计，以及不能直接照搬的保证">可以迁移的设计，以及不能直接照搬的保证</h2>
+<p>本次最有用的设计模式是：<strong>先持久化命令意图与回执，再由独立执行者推进效果；命令确认与效果验收使用不同证据。</strong> 它适用于写操作确认后仍可能失败、而失败又不能直接重试的系统，例如源码归档、迁移或发布流程。</p>
+<p>借鉴时至少需要保留三个条件：意图有持久化记录；执行者有 lease 或等价所有权；恢复能判断外部效果当前状态，并区分可重放、不可重放和结果未知。本文核实了前两类机制中的部分代码，第三项只追踪到领取与结算片段，完整恢复策略仍待验证。这些条件是采用该模式时的设计要求，不是对 T3 Code 所有效果类型已经满足它们的保证。</p>
+<p>对 <code>github-trending-tracker</code> 而言，可借鉴的是探测与 setup 的职责拆分，以及“确认记录不代表外部操作完成”的状态语义。多 provider instance 的归一化暂时没有直接需求；relay 与云身份体系也不宜因上游采用了它们，就成为个人单机工具的默认组件。单进程、无持久化要求的小工具，更没有必要为形式上的一致性引入完整 outbox。</p>
+<h2 id="本次学习的证据边界">本次学习的证据边界</h2>
+<ul>
+<li><strong>源码观察</strong>：RPC scope 中间件的契约说明；项目命令回执与事件提交；效果领取与完成结算；Antigravity 探测的数据来源；安装 lease 的接口约束；instance 兼容映射；MCP 凭证准备的 reservation 与线程锁。</li>
+<li><strong>文档说明</strong>：远程路由、bootstrap 交换与 relay 的信任假设。未将其记作已核实的完整实现。</li>
+<li><strong>设计推断</strong>：适配成本不仅在协议格式，还在身份、权限和会话生命周期的归一化；持久化意图与独立效果执行对 tracker 的归档和发布流程有借鉴价值。</li>
+<li><strong>未完成验证</strong>：上游测试与 demo、真实远程连接、relay 铸造及 DPoP 校验全链路、进程崩溃后的效果重放与退役策略。</li>
+</ul>
+<p>后续阅读应沿着 relay 的 bootstrap 代码与 <code>RestartContinuation</code> 恢复链继续，而不是把本次静态学习中的接口约束当成运行验收结论。</p>
+<p><span hidden data-tracker-publication="pub-5-23fd786b7a09065e" data-tracker-revision="rev-059b4eccd64cf1f2"></span></p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="category-chain-item">源码学习</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/T3-Code/" class="print-no-link">#T3 Code</a>
+<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="print-no-link">#架构设计</a>
+<a href="/tags/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="print-no-link">#源码学习</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>T3 Code 源码学习：会话发现、进程启动与远程控制的边界</div>
+<div>https://blog.fulequn.online/learn/t3code-session-boundaries/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2026年10月22日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/learning/github-learning-to-blog-knowledge-base/" title="从 GitHub 学习到可检索知识库">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">从 GitHub 学习到可检索知识库</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/06/Article202406201/" title="Article202406201">
+<span class="hidden-mobile">Article202406201</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

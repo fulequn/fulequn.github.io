@@ -5,6 +5,7 @@
 ## Articles
 
 - [从 GitHub 学习到可检索知识库](https://blog.fulequn.online/ai/content/github-learning-knowledge-pipeline.md): 基于已实现的 tracker learn 审阅闭环与 Hexo AI 导出插件，设计从私有研究原稿到公开博客与手机端检索的分阶段方案，并对比 OpenClaw、QMD、WeKnora 等候选的边界与取舍。
+- [T3 Code 源码学习：会话发现、进程启动与远程控制的边界](https://blog.fulequn.online/ai/content/t3code-session-boundaries.md): 基于固定源码版本记录会话身份、安装租约与命令回执的责任边界，区分静态源码证据、文档说明及尚未验证的恢复风险。
 - [Vue基础入门到实战6（路由进阶+面经项目）](https://blog.fulequn.online/ai/content/vue-vuex-state-management.md): Vue 状态管理 Vuex 学习笔记：state、getter、mutation、action 的核心概念与模块化实践。
 - [Vue基础入门到实战5（自定义指令+插槽+路由入门）](https://blog.fulequn.online/ai/content/vue-directives-slots-router.md): Vue 进阶实战笔记：自定义指令、插槽与 Vue Router 路由入门的用法与常见场景。
 - [算法训练3.2.2 背包模型](https://blog.fulequn.online/ai/content/algorithm-knapsack-models.md): 动态规划背包模型学习笔记：01 背包、完全背包、分组背包与多重背包的状态设计与转移方程。
