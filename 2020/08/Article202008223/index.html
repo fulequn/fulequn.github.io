@@ -1,0 +1,477 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块   1、常用的函数   2、读取PDF文件，取指定页数，写入到硬盘上的示例   3、读取PDF某一页，旋转180度后，写入到新的PDF文件的示例   4、PDF增加水印的示例 注意：水印模板">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之PyPDF2模块的使用">
+<meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008223/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.zhangshengrong.com&#x2F;p&#x2F;8AaYmpoGa2&#x2F; PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块   1、常用的函数   2、读取PDF文件，取指定页数，写入到硬盘上的示例   3、读取PDF某一页，旋转180度后，写入到新的PDF文件的示例   4、PDF增加水印的示例 注意：水印模板">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg">
+<meta property="article:published_time" content="2020-08-22T14:00:16.000Z">
+<meta property="article:modified_time" content="2020-08-22T14:00:16.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python之PyPDF2模块的使用","description":"原文链接：https://www.zhangshengrong.com/p/8AaYmpoGa2/ PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。 0、安装PyPDF2的模块   1、常用的函数   2、读取PDF文件，取指定页数，写入到硬盘上的示例   3、读取PDF某一页，旋转180度后，写入到新的PDF文件的示例   4、PDF增加水印的示例 注意：水印模板","url":"https://blog.fulequn.online/2020/08/Article202008223/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/08/Article202008223/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-08-22T14:00:16.000Z","dateModified":"2020-08-22T14:00:16.000Z","image":"https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg"}</script>
+<title>Python之PyPDF2模块的使用 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Python之PyPDF2模块的使用"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-08-22 22:00" pubdate>
+2020年8月22日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+3.6k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+31 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Python之PyPDF2模块的使用</h1>
+<div class="markdown-body">
+<p>原文链接：<a target="_blank" rel="noopener" href="https://www.zhangshengrong.com/p/8AaYmpoGa2/">https://www.zhangshengrong.com/p/8AaYmpoGa2/</a></p>
+<p>PyPDF2模块主要的功能是分割或合并PDF文件，裁剪或转换PDF文件中的页面。</p>
+<p>0、安装PyPDF2的模块</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">pip install PyPDF2</code></pre></div></figure>
+<p>1、常用的函数</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+# @Time  : 2020&#x2F;1&#x2F;15 13:38
+# @Author : suk
+# @File  : pyxl.py
+# @Software: PyCharm
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+print(reader.getNumPages()) # 获取pdf总页数
+print(reader.isEncrypted) # 判断是否有加密
+page &#x3D; reader.getPage(4) # 获取第四页
+print(page.extractText()) # 获取第四页的内容
+print(reader.getDocumentInfo()) # 获取PDF元信息，即创建时间，作者，标题等</code></pre></div></figure>
+<p>2、读取PDF文件，取指定页数，写入到硬盘上的示例</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+
+output &#x3D; PyPDF2.PdfFileWriter()
+
+output.addPage(reader.getPage(1))
+output.addPage(reader.getPage(4))
+output.addPage(reader.getPage(5))
+print(output.getNumPages()) # 获取写入页的总页数
+
+output.encrypt(&#39;123456&#39;)
+outputStream &#x3D; open(&#39;PyPDF2-output.pdf&#39;, &#39;wb&#39;)
+output.write(outputStream)
+outputStream.close()</code></pre></div></figure>
+<p>3、读取PDF某一页，旋转180度后，写入到新的PDF文件的示例</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;))
+
+page &#x3D; reader.getPage(0) # 获取第0页
+page.rotateClockwise(180) # 旋转180度
+
+writer &#x3D; PyPDF2.PdfFileWriter() # 创建PDF写入的对象
+writer.addPage(page)
+
+outputStream &#x3D; open(&#39;rotate-page-test.pdf&#39;, &#39;wb&#39;) # 创建一个PDF文件
+writer.write(outputStream) # 往文件写入PDF数据
+outputStream.close() # 写入流</code></pre></div></figure>
+<p>4、PDF增加水印的示例</p>
+<p>注意：水印模板可以利用WORD文档写好文字，转为PDF即可</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+
+reader &#x3D; PyPDF2.PdfFileReader(open(&#39;linux.pdf&#39;, &#39;rb&#39;)) # 增加水印的原文件
+
+watermark &#x3D; PyPDF2.PdfFileReader(open(&#39;水印模板.pdf&#39;, &#39;rb&#39;)) # 水印的模板
+
+writer &#x3D; PyPDF2.PdfFileWriter() # 写入PDF的对象
+
+for i in range(reader.getNumPages()):
+  page &#x3D; reader.getPage(i)
+  page.mergePage(watermark.getPage(0)) # 将原文件与水印模板合并
+  writer.addPage(page) # 增加到写入对象中
+
+outputStream &#x3D; open(&#39;watermark-test-linux.pdf&#39;, &#39;wb&#39;) # 打开一个写入硬盘的文件对象
+writer.write(outputStream) # 将合并好的数据，写入硬盘中
+outputStream.close() # 关闭文件句柄</code></pre></div></figure>
+<p>测试效果</p>
+<p><img src="https://pic.ikafan.com/imgp/L3Byb3h5L2h0dHBzL2ZpbGVzLmpiNTEubmV0L2ZpbGVfaW1hZ2VzL2FydGljbGUvMjAyMDAxLzIwMjAxMTk5MTk0Mjc2NS5wbmcmIzA2MzsyMDIwMDE5OTE5NTM=.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>5、合并多个指定的PDF文件的示例</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+from PyPDF2 import PdfFileMerger
+
+merger &#x3D; PdfFileMerger() # 创建一个合并的对象
+
+input1 &#x3D; open(&#39;01PDF.pdf&#39;, &#39;rb&#39;)
+input2 &#x3D; open(&#39;02PDF.pdf&#39;, &#39;rb&#39;)
+input3 &#x3D; open(&#39;03PDF.pdf&#39;, &#39;rb&#39;)
+
+merger.append(fileobj&#x3D;input1, pages&#x3D;(0, 3)) # 合并文件1的0到3页
+merger.merge(position&#x3D;2, fileobj&#x3D;input2, pages&#x3D;(0, 1)) # 合并文件2的0到1页
+merger.append(fileobj&#x3D;input3) # 合并文件的所有页
+
+output &#x3D; open(&#39;document-output.pdf&#39;, &#39;wb&#39;) # 保存硬盘上
+merger.write(output) # 写入到硬盘上
+output.close() # 关闭文件句柄</code></pre></div></figure>
+<p>6、批量合并指定目录的PDF文件的示例</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;env python
+# -*- coding: utf-8 -*-
+
+import PyPDF2
+import os
+import glob
+
+def get_all_pdf_files(path):
+  &quot;&quot;&quot;获取指定目录的所有pdf文件名&quot;&quot;&quot;
+  all_pdfs &#x3D; glob.glob(&#39;&#123;0&#125;&#x2F;*.pdf&#39;.format(path))
+  all_pdfs.sort(key&#x3D;str.lower) # 排序
+  return all_pdfs
+
+def main():
+  path &#x3D; os.getcwd()
+  all_pdfs &#x3D; get_all_pdf_files(path)
+  if not all_pdfs:
+    raise SystemExit(&#39;没有可用的PDF类型文件&#39;)
+
+  merger &#x3D; PyPDF2.PdfFileMerger()
+
+  first_obj &#x3D; open(all_pdfs[0], &#39;rb&#39;) # 打开第一个PDF文件
+  merger.append(first_obj) # 增加到合并的对象中
+
+  file_objs &#x3D; []
+  for pdf in all_pdfs[1:]: # 读取所有的文件对象
+    file_objs.append(open(pdf, &#39;rb&#39;))
+
+  for file_obj in file_objs:
+    reader &#x3D; PyPDF2.PdfFileReader(file_obj)
+    merger.append(fileobj&#x3D;file_obj, pages&#x3D;(1, reader.getNumPages()))
+
+  outputStream &#x3D; open(&#39;merge-pdfs.pdf&#39;, &#39;wb&#39;)
+  merger.write(outputStream)
+  outputStream.close()
+  for file_obj in file_objs: # 批量关闭文件句柄
+    file_obj.close()
+
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+  main()</code></pre></div></figure>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Python/" class="print-no-link">#Python</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Python之PyPDF2模块的使用</div>
+<div>https://blog.fulequn.online/2020/08/Article202008223/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年8月22日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/08/Article202008224/" title="PyPDF2的使用">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">PyPDF2的使用</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/08/Article202008222/" title="PyPDF2 用 Python 操作 PDF">
+<span class="hidden-mobile">PyPDF2 用 Python 操作 PDF</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,501 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下：   也可以使用国内 daocloud 一键安装命令：   2、Docker 镜像加速 国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：  网易：https:&#x2F;&#x2F;hub-mirror.c.163.com&#x2F; 阿里云：https:&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos安装docker以及ServiceAccount">
+<meta property="og:url" content="https://blog.fulequn.online/2021/01/Article202101201/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下：   也可以使用国内 daocloud 一键安装命令：   2、Docker 镜像加速 国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：  网易：https:&#x2F;&#x2F;hub-mirror.c.163.com&#x2F; 阿里云：https:&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812333.png">
+<meta property="article:published_time" content="2021-01-20T08:21:27.000Z">
+<meta property="article:modified_time" content="2021-01-20T08:21:27.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812333.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Centos安装docker以及ServiceAccount","description":"一、Centos安装docker 1、使用官方安装脚本自动安装 安装命令如下：   也可以使用国内 daocloud 一键安装命令：   2、Docker 镜像加速 国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：  网易：https://hub-mirror.c.163.com/ 阿里云：https:/","url":"https://blog.fulequn.online/2021/01/Article202101201/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2021/01/Article202101201/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2021-01-20T08:21:27.000Z","dateModified":"2021-01-20T08:21:27.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812333.png"}</script>
+<title>Centos安装docker以及ServiceAccount - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Centos安装docker以及ServiceAccount"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2021-01-20 16:21" pubdate>
+2021年1月20日 下午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+5.4k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+45 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Centos安装docker以及ServiceAccount</h1>
+<div class="markdown-body">
+<h1 id="一、Centos安装docker">一、Centos安装docker</h1>
+<h2 id="1、使用官方安装脚本自动安装">1、使用官方安装脚本自动安装</h2>
+<p>安装命令如下：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun</code></pre></div></figure>
+<p>也可以使用国内 daocloud 一键安装命令：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh</code></pre></div></figure>
+<h2 id="2、Docker-镜像加速">2、Docker 镜像加速</h2>
+<p>国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：</p>
+<ul>
+<li>网易：<strong><a target="_blank" rel="noopener" href="https://hub-mirror.c.163.com/">https://hub-mirror.c.163.com/</a></strong></li>
+<li>阿里云：<strong>https://&lt;你的ID&gt;.mirror.aliyuncs.com</strong></li>
+<li>七牛云加速器：<strong><a target="_blank" rel="noopener" href="https://reg-mirror.qiniu.com">https://reg-mirror.qiniu.com</a></strong></li>
+</ul>
+<h3 id="2-1、Ubuntu16-04-、Debian8-、CentOS7">2.1、Ubuntu16.04+、Debian8+、CentOS7</h3>
+<p>对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#123;&quot;registry-mirrors&quot;:[&quot;https:&#x2F;&#x2F;reg-mirror.qiniu.com&#x2F;&quot;]&#125;</code></pre></div></figure>
+<p>之后重新启动服务：</p>
+<p>$ <strong>sudo</strong> systemctl daemon-reload<br>
+$ <strong>sudo</strong> systemctl restart docker</p>
+<h2 id="3、Docker开机自启动">3、Docker开机自启动</h2>
+<p>如果不设置成开机自启动，那么每一次开启机器都需要手动start，因此我们设置成开机自启动</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+systemctl is-enabled <span class="token function">docker</span> <span class="token comment">#检查是否为自启动，enbale则为已经设置成自启动</span></code></pre></div></figure>
+<p>然后我们可以检查docker的各种信息。使用命令：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> system info</code></pre></div></figure>
+<h2 id="4、出现的异常">4、出现的异常</h2>
+<h3 id="4-1、docker-Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running-See-‘docker-run-help’">4.1、docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.See ‘docker run --help’.</h3>
+<p>一、</p>
+<p>因为，我忘记启动docker这个服务了。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">service docker start</code></pre></div></figure>
+<p>二、</p>
+<p>You need to add user into docker group. by ’ sudo gpasswd-a xxxx docker’(xxx is your user name)</p>
+<p>Then restart your computer.</p>
+<p>This problem should be solved.</p>
+<p>docker默认只允许root用户连接，想用其他用户需要添加。</p>
+<p>三</p>
+<p>docker-machine restart&amp;&amp;eva&quot;$(docker-machine env default)&quot;&amp;&amp;docker-machine env</p>
+<p>运行这么一串就好了。</p>
+<h3 id="4-2、docker-创建镜像时显示-Forbidden-path-outside-the-build-context">4.2、docker 创建镜像时显示 Forbidden path outside the build context</h3>
+<p>因为<strong>目录不允许超过当前目录</strong>，那两个 … 超出了docker的根目录，所以报这个错了</p>
+<p>解决办法是把dockerfile向上一个级目录，在上一级目录中进行操作。</p>
+<h1 id="二、相关知识">二、相关知识</h1>
+<h2 id="1、ServiceAccount-是什么">1、ServiceAccount 是什么</h2>
+<p>Service Account为Pod中的进程和外部用户提供身份信息。所有的kubernetes集群中账户分为两类，Kubernetes管理的serviceaccount(服务账户)和useraccount（用户账户）。</p>
+<p>大家都知道api server的集群的入口，对于kunbernetes的api server 是肯定不能随便访问。所以我们必须需要一些认证信息。</p>
+<p>例如：</p>
+<p>当用户访问集群（例如使用<code>kubectl</code>命令）时，apiserver 会将您认证为一个特定的 User Account（目前通常是<code>admin</code>，除非您的系统管理员自定义了集群配置）。Pod 容器中的进程也可以与 apiserver 联系。 当它们在联系 apiserver 的时候，它们会被认证为一个特定的 Service Account。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812333.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p>因为kubernetes是高度模块化，所有认证方式和授权方式都可以通过插件的方式让客户自定义的，可以支持很多种。客户端请求的时候首先需要进行认证，认证通过后再进行授权检查，因有些操作需要级联到其他资源或者环境，但是级联环境是否有授权权限，这时候需要准入控制。</p>
+<h3 id="认证插件">认证插件</h3>
+<ul>
+<li><strong>bearer token</strong> 当使用来自 http 客户端的 bearer token 时，API server 期望 <code>Authorization</code> header 中包含 <code>Bearer token</code> 的值。Bearer token 必须是一个字符串序列，只需使用 HTTP 的编码和引用功能就可以将其放入到 HTTP header 中。</li>
+<li><strong>客户端证书</strong> 客户端请求前需要，需要发送api server的办法的证书，由api server来确认是否他来签署的，引用的文件必须包含一个或多个证书颁发机构，用于验证提交给 API server 的客户端证书。如果客户端证书已提交并验证，则使用 subject 的 Common Name（CN）作为请求的用户名。反过来，api server也要验证客户端的证书，所有对于客户端也应该有一个证书，提供api server 验证，此过程是双向验证。</li>
+<li><strong>HTTP BASE 认证</strong>： 通过用户名+密码方式认证。</li>
+</ul>
+<p>当启用了多个认证模块时，第一个认证模块成功认证后将短路请求，不会进行第二个模块的认证。API server 不会保证认证的顺序。</p>
+<h3 id="用户账户需要哪些信息：">用户账户需要哪些信息：</h3>
+<ul>
+<li>user 保护UserName和UID，UserName是标识最终用户的字符串，UID是标识最终用户的字符串，比用户名更加一致切唯一。</li>
+<li>group 一组将用户和常规用户组相关联的字符串</li>
+<li>extra 包含其他有用认证信息的字符串列表</li>
+</ul>
+<p>上述是来自集群外部的访问，我们可以理解成是User Account，是给kubernetes集群外部用户，例如（系统管理员、用户/租户等）。Service Account而是给运行在Pod的容器、或者Pod使用的身份认证。</p>
+<p>正常情况下，为了确保kubernetes集群的安全性，Api Server 都会给客户端进行身份认证，但是Pod访问Kubernetes Api Server服务时，也是需要身份认证的。如下图：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202209211812448.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<p>我们在每一个namespace下看到都有一个secret,而我们看svc的时候，api server通过svc的访问访问的，他们的Endpoints是api server。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$ kubectl  get svc 
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1      &lt;none&gt;        443&#x2F;TCP   52d
+$ kubectl describe svc kubernetes 
+Name:              kubernetes
+Namespace:         default
+Labels:            component&#x3D;apiserver
+                   provider&#x3D;kubernetes
+Annotations:       &lt;none&gt;
+Selector:          &lt;none&gt;
+Type:              ClusterIP
+IP:                10.96.0.1
+Port:              https  443&#x2F;TCP
+TargetPort:        6443&#x2F;TCP
+Endpoints:         172.16.138.40:6443,172.16.138.41:6443
+Session Affinity:  None
+Events:            &lt;none&gt;
+$ kubectl get secret  -n default
+NAME                  TYPE                                  DATA      AGE
+default-token-lplp6   kubernetes.io&#x2F;service-account-token   3         52d
+$ kubectl get secret  -n ingress-nginx
+NAME                                       TYPE                                  DATA      AGE
+default-token-v58zx                        kubernetes.io&#x2F;service-account-token   3         52d</code></pre></div></figure>
+<p>每个Namespace下都有一个名为default的默认的 Service Account对象，这个Service Account里面有一个名为Tokens的可以当作Volume一样被Mount到Pod里的secret，当Pod启动时候，这个Secret会自动Mount到Pod的指定目录下，用来完成Pod中的进程访问API server时的身份认证过程。下面可以看到</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$  kubectl describe pod my-demo
+.....
+Volumes:
+  appindex:
+    Type:          HostPath (bare host directory volume)
+    Path:          &#x2F;data&#x2F;pod&#x2F;myapp
+    HostPathType:  DirectoryOrCreate
+  default-token-lplp6:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-lplp6
+    Optional:    false
+.....</code></pre></div></figure>
+<h3 id="创建一个serviceaccount">创建一个serviceaccount</h3>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">$ kubectl create serviceaccount jaxzhai
+$ kubectl get sa 
+NAME      SECRETS   AGE
+default   1         52d
+jaxzhai   1         8s
+$ kubectl describe sa jaxzhai
+Name:                jaxzhai
+Namespace:           default
+Labels:              &lt;none&gt;
+Annotations:         &lt;none&gt;
+Image pull secrets:  &lt;none&gt;
+Mountable secrets:   jaxzhai-token-9n5th
+Tokens:              jaxzhai-token-9n5th
+Events:              &lt;none&gt;$ kubectl get secret NAME                  TYPE                                  DATA      AGEdefault-token-lplp6   kubernetes.io&#x2F;service-account-token   3         52djaxzhai-token-9n5th   kubernetes.io&#x2F;service-account-token   3         4m</code></pre></div></figure>
+<p>这里我们看到Kubernetes集群会自动创建一个token的secert，并被jaxzhai这个serviceaccount引用。</p>
+<p>设置非默认的 service account，只需要在 pod 的<code>spec.serviceAccountName</code> 字段中将name设置为您想要用的 service account 名字即可。</p>
+<p>在 pod 创建之初 service account 就必须已经存在，否则创建将被拒绝。</p>
+<p>您不能更新已创建的 pod 的 service account。</p>
+<h3 id="在pod中使用service-account">在pod中使用service account</h3>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-sa-demo
+  namespace: default
+  labels:
+    name: myapp
+    tier: appfront
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes&#x2F;myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+  serviceAccountName: jaxzhai
+
+$ kubectl apply -f myapp-serviceaccount.yaml 
+pod&#x2F;my-sa-demo created
+$ kubectl describe pod my-sa-demo 
+......
+Volumes:
+  jaxzhai-token-9n5th:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  jaxzhai-token-9n5th
+    Optional:    false
+QoS Class:       BestEffort
+......</code></pre></div></figure>
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/centos-docker-install.html">https://www.runoob.com/docker/centos-docker-install.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-mirror-acceleration.html">https://www.runoob.com/docker/docker-mirror-acceleration.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000005040763">https://segmentfault.com/q/1010000005040763</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/pub/reader/119632192/chapter/1150819665524715520">https://www.zhihu.com/pub/reader/119632192/chapter/1150819665524715520</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30633405/article/details/99215173">https://blog.csdn.net/weixin_30633405/article/details/99215173</a></p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/">https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xzkzzz/p/9889173.html">https://www.cnblogs.com/xzkzzz/p/9889173.html</a></p>
+</blockquote>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%8A%80%E6%9C%AF%E5%B7%A5%E5%85%B7/" class="category-chain-item">技术工具</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Kubernetes/" class="print-no-link">#Kubernetes</a>
+<a href="/tags/docker/" class="print-no-link">#docker</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Centos安装docker以及ServiceAccount</div>
+<div>https://blog.fulequn.online/2021/01/Article202101201/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2021年1月20日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2021/02/Article202102161/" title="K8S内容1">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">K8S内容1</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2021/01/Article202101103/" title="编码实现卷积神经网络">
+<span class="hidden-mobile">编码实现卷积神经网络</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

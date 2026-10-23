@@ -1,0 +1,852 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现  参考连接： [1] Wang Y , Fang W , Ding Y , et al. Computation offloading optimization for UAV-assisted mobile edge computing: a deep deterministic policy gradient">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现">
+<meta property="og:url" content="https://blog.fulequn.online/2022/01/Article202201211/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现  参考连接： [1] Wang Y , Fang W , Ding Y , et al. Computation offloading optimization for UAV-assisted mobile edge computing: a deep deterministic policy gradient">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202201211736297.png">
+<meta property="article:published_time" content="2022-01-21T04:58:30.000Z">
+<meta property="article:modified_time" content="2022-01-21T04:58:30.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="论文">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202201211736297.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现","description":"无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现  参考连接： [1] Wang Y , Fang W , Ding Y , et al. Computation offloading optimization for UAV-assisted mobile edge computing: a deep deterministic policy gradient","url":"https://blog.fulequn.online/2022/01/Article202201211/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2022/01/Article202201211/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2022-01-21T04:58:30.000Z","dateModified":"2022-01-21T04:58:30.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202201211736297.png"}</script>
+<title>无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2022-01-21 12:58" pubdate>
+2022年1月21日 下午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+15k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+122 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现</h1>
+<div class="markdown-body">
+<h1 id="无人机辅助移动边缘计算的计算卸载优化-一种深度确定性策略梯度方法（6）——代码实现">无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现</h1>
+<blockquote>
+<p>参考连接：</p>
+<p>[1] Wang Y , Fang W , Ding Y , et al. Computation offloading optimization for UAV-assisted mobile edge computing: a deep deterministic policy gradient approach[J]. Wireless Networks, 2021:1-16.doi：<a target="_blank" rel="noopener" href="https://doi.org/10.1007/s11276-021-02632-z">https://doi.org/10.1007/s11276-021-02632-z</a></p>
+<p><a target="_blank" rel="noopener" href="https://morvanzhou.github.io/tutorials/">https://morvanzhou.github.io/tutorials/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fangvv/UAV-DDPG/blob/main/DDPG/DDPG_without_behavior_noise/ddpg_algo.py">https://github.com/fangvv/UAV-DDPG/blob/main/DDPG/DDPG_without_behavior_noise/ddpg_algo.py</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43835470/article/details/120881273">https://blog.csdn.net/weixin_43835470/article/details/120881273</a></p>
+</blockquote>
+<h2 id="6-代码实现">6 代码实现</h2>
+<p>本部分主要包括 Actor Critc，DDPG，DQN，Edge_only，Local_only 算法的基本实现思路，具体细节不予展示。</p>
+<h3 id="6-1-问题环境">6.1 问题环境</h3>
+<p>问题环境主要包括了环境的各种状态 s 、无人机 uav 相关参数、用户 ue 相关参数和一些影响变量。其主要功能是模拟整个实验环境。主要动作包括了无人机飞行、无人机运算、用户移动和用户本地运算。</p>
+<h4 id="6-1-1-参数设计">6.1.1 参数设计</h4>
+<p>参数包括了场地大小，无人机位置，带宽，噪声功率等参数，包括模拟实验中的所有参数。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#################### uav ####################</span>
+height <span class="token operator">=</span> ground_length <span class="token operator">=</span> ground_width <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># 场地长宽均为100m，UAV飞行高度也是</span>
+sum_task_size <span class="token operator">=</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1048576</span>  <span class="token comment"># 总计算任务60 Mbits</span>
+loc_uav <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">]</span>  <span class="token comment">#无人机的初始位置</span>
+
+bandwidth_nums <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token comment"># 1MHz = 10^6Hz</span>
+B <span class="token operator">=</span> bandwidth_nums <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">6</span>  <span class="token comment"># 带宽1MHz</span>
+p_noisy_los <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">13</span><span class="token punctuation">)</span>  <span class="token comment"># 噪声功率-100dBm    ****</span>
+p_noisy_nlos <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">11</span><span class="token punctuation">)</span>  <span class="token comment"># 噪声功率-80dBm    ****</span>
+flight_speed <span class="token operator">=</span> <span class="token number">50.</span>  <span class="token comment"># 飞行速度50m/s</span>
+f_ue <span class="token operator">=</span> <span class="token number">6e8</span>  <span class="token comment"># UE的计算频率0.6GHz</span>
+f_uav <span class="token operator">=</span> <span class="token number">12e8</span>  <span class="token comment"># UAV的计算频率1.2GHz</span>
+r <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">27</span><span class="token punctuation">)</span>  <span class="token comment"># 芯片结构对cpu处理的影响因子</span>
+s <span class="token operator">=</span> <span class="token number">1000</span>  <span class="token comment"># 单位bit处理所需cpu圈数1000</span>
+p_uplink <span class="token operator">=</span> <span class="token number">0.1</span>  <span class="token comment"># 上行链路传输功率0.1W</span>
+<span class="token comment"># alpha0 = -30  # 距离为1m时的参考信道增益-30dB</span>
+alpha0 <span class="token operator">=</span> <span class="token number">1e-5</span>  <span class="token comment"># 距离为1m时的参考信道增益-50dB = 1e-5   ****</span>
+T <span class="token operator">=</span> <span class="token number">200</span>  <span class="token comment"># 周期200s</span>
+delta_t <span class="token operator">=</span> <span class="token number">5</span>  <span class="token comment"># 1s飞行, 后4s用于悬停计算</span>
+slot_num <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>T <span class="token operator">/</span> delta_t<span class="token punctuation">)</span>  <span class="token comment"># 40个间隔</span>
+m_uav <span class="token operator">=</span> <span class="token number">9.65</span>  <span class="token comment"># uav质量/kg</span>
+e_battery_uav <span class="token operator">=</span> <span class="token number">500000</span>  <span class="token comment"># uav电池电量: 500kJ. ref: Mobile Edge Computing via a UAV-Mounted Cloudlet: Optimization of Bit Allocation and Path Planning</span>
+
+<span class="token comment">#################### ues ####################</span>
+M <span class="token operator">=</span> <span class="token number">4</span>  <span class="token comment"># UE数量</span>
+block_flag_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> M<span class="token punctuation">)</span>  <span class="token comment"># 4个ue，ue的遮挡情况</span>
+loc_ue_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">[</span>M<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 位置信息:x在0-100随机</span>
+<span class="token comment"># task_list = np.random.randint(1048576, 2097153, M)    # 随机计算任务1~2Mbits</span>
+task_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1572864</span><span class="token punctuation">,</span> <span class="token number">2097153</span><span class="token punctuation">,</span> M<span class="token punctuation">)</span>  <span class="token comment"># 随机计算任务1.5~2Mbits</span>
+<span class="token comment"># ue位置转移概率</span>
+<span class="token comment"># 0:位置不变; 1:x+1,y; 2:x,y+1; 3:x-1,y; 4:x,y-1</span>
+<span class="token comment"># 60%概率原地不动，10%概率向上下左右</span>
+loc_ue_trans_pro <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">.6</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                             <span class="token punctuation">[</span><span class="token number">.6</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                             <span class="token punctuation">[</span><span class="token number">.6</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                             <span class="token punctuation">[</span><span class="token number">.6</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+action_bound <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment"># 对应tahn激活函数</span>
+action_dim <span class="token operator">=</span> <span class="token number">4</span>  <span class="token comment"># 第一位表示服务的ue id;中间两位表示飞行角度和距离；后1位表示目前服务于UE的卸载率</span>
+state_dim <span class="token operator">=</span> <span class="token number">4</span> <span class="token operator">+</span> M <span class="token operator">*</span> <span class="token number">4</span>  <span class="token comment"># uav 剩余电量, uav 位置, 剩余总任务大小, 所有ue 位置, 所有ue 任务大小, 所有ue 遮挡情况</span></code></pre></div></figure>
+<h4 id="6-1-2-初始化部分">6.1.2 初始化部分</h4>
+<p>初始化包括 uav 剩余电量, uav 位置, 剩余总任务大小, 所有 ue 位置, 所有 ue 任务大小, 所有 ue 遮挡情况。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+        初始化环境
+        包括uav 剩余电量, uav 位置, 剩余总任务大小, 所有ue 位置, 所有ue 任务大小, 所有ue 遮挡情况
+
+        Returns
+        -------
+        None.
+
+        '''</span>
+    <span class="token comment"># uav battery remain, uav loc, remaining sum task size, all ue loc, all ue task size, all ue block_flag</span>
+    self<span class="token punctuation">.</span>start_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>e_battery_uav<span class="token punctuation">,</span> self<span class="token punctuation">.</span>loc_uav<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>start_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>start_state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>sum_task_size<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>start_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>start_state<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span>self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>start_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>start_state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>task_list<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>start_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>start_state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>block_flag_list<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> self<span class="token punctuation">.</span>start_state</code></pre></div></figure>
+<h4 id="6-1-3-重置">6.1.3 重置</h4>
+<p>由于实验是划分时间段进行的，涉及到每个步骤执行后的重置。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">reset</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    重置环境
+
+    Returns
+    -------
+    所有的环境信息
+
+    '''</span>
+    self<span class="token punctuation">.</span>reset_env<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># uav battery remain, uav loc, remaining sum task size, all ue loc, all ue task size, all ue block_flag</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>e_battery_uav<span class="token punctuation">,</span> self<span class="token punctuation">.</span>loc_uav<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>sum_task_size<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>state<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span>self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>task_list<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>state<span class="token punctuation">,</span> self<span class="token punctuation">.</span>block_flag_list<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">.</span>_get_obs<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">reset_env</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    将所有的值设置为默认值
+
+    Returns
+    -------
+    None.
+    '''</span>
+    self<span class="token punctuation">.</span>sum_task_size <span class="token operator">=</span> <span class="token number">100</span> <span class="token operator">*</span> <span class="token number">1048576</span>  <span class="token comment"># 总计算任务60 Mbits</span>
+    self<span class="token punctuation">.</span>e_battery_uav <span class="token operator">=</span> <span class="token number">500000</span>  <span class="token comment"># uav电池电量: 500kJ</span>
+    self<span class="token punctuation">.</span>loc_uav <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">]</span>
+    self<span class="token punctuation">.</span>loc_ue_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>M<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 位置信息:x在0-100随机</span>
+    self<span class="token punctuation">.</span>reset_step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">reset_step</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    随机初始化ue 的计算任务和遮挡情况
+
+    Returns
+    -------
+    None.
+
+    '''</span>
+    self<span class="token punctuation">.</span>task_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">2621440</span><span class="token punctuation">,</span> <span class="token number">3145729</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>M<span class="token punctuation">)</span>  <span class="token comment"># 随机计算任务1.5~2Mbits -> 1.5~2 2~2.5 2.5~3 3~3.5 3.5~4</span>
+    self<span class="token punctuation">.</span>block_flag_list <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>M<span class="token punctuation">)</span>  <span class="token comment"># 4个ue，ue的遮挡情况</span></code></pre></div></figure>
+<h4 id="6-1-4-每段时间动作">6.1.4 每段时间动作</h4>
+<p>在每个时间片段中进行的动作包括了选择用户，无人机飞行，计算任务，算出最大处理时延几个部分。</p>
+<p>选择用户的时候可以随机选择用户，也可以类似DQN中根据对应的动作选择用户。</p>
+<p>无人机飞行时需要计算飞行后的位置以及飞行时的能量消耗。</p>
+<p>计算任务的时候需要考虑特殊情况，如计算任务已经完成，那么实验立刻终止，不进行后续步骤；最后一步的计算任务总量与我们规定的总任务量不一致，那么重置任务大小使其满足总计算任务量；无人机飞行时飞出场地，需要重新进行该步然后进行惩罚；以及无人机的电量不足以飞行或者计算，那么就将无人机所有电量都用完后，再进行下一片段。</p>
+<p>计算最大处理时延后需要更新我们的奖惩，同时考虑用户移动。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">step</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 0: 选择服务的ue编号 ; 1: 方向theta; 2: 距离d; 3: offloading ratio</span>
+    step_redo <span class="token operator">=</span> <span class="token boolean">False</span>  <span class="token comment">#是否重做该步</span>
+    is_terminal <span class="token operator">=</span> <span class="token boolean">False</span>  <span class="token comment">#是否终止</span>
+    ue_id <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>M<span class="token punctuation">)</span> <span class="token comment">#随机选择一个用户</span>
+
+    theta <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 角度</span>
+    offloading_ratio <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># ue卸载率</span>
+    task_size <span class="token operator">=</span> self<span class="token punctuation">.</span>task_list<span class="token punctuation">[</span>ue_id<span class="token punctuation">]</span>  <span class="token comment">#获取该用户的计算任务</span>
+    block_flag <span class="token operator">=</span> self<span class="token punctuation">.</span>block_flag_list<span class="token punctuation">[</span>ue_id<span class="token punctuation">]</span>  <span class="token comment">#获取该用户的遮挡情况</span>
+
+    <span class="token comment"># 飞行距离</span>
+    dis_fly <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 1s飞行距离</span>
+    <span class="token comment"># 飞行能耗</span>
+    <span class="token comment"># delta_t：5s（1s飞行，4s计算）  m_uav：uav质量</span>
+    e_fly <span class="token operator">=</span> <span class="token punctuation">(</span>dis_fly <span class="token operator">/</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>delta_t <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>m_uav <span class="token operator">*</span> <span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>delta_t <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.5</span>  <span class="token comment"># ref: Mobile Edge Computing via a UAV-Mounted Cloudlet: Optimization of Bit Allocation and Path Planning</span>
+    <span class="token comment"># ref：通过无人机装载的云计算的移动边缘计算:位分配和路径规划的优化</span>
+    
+    <span class="token comment"># UAV飞行后的位置</span>
+    dx_uav <span class="token operator">=</span> dis_fly <span class="token operator">*</span> math<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>theta<span class="token punctuation">)</span>
+    dy_uav <span class="token operator">=</span> dis_fly <span class="token operator">*</span> math<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>theta<span class="token punctuation">)</span>
+    loc_uav_after_fly_x <span class="token operator">=</span> self<span class="token punctuation">.</span>loc_uav<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> dx_uav
+    loc_uav_after_fly_y <span class="token operator">=</span> self<span class="token punctuation">.</span>loc_uav<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dy_uav
+
+    <span class="token comment"># 服务器计算耗能</span>
+    <span class="token comment"># f_uav:UAV的计算频率  s：单位bit处理所需cpu圈数</span>
+    t_server <span class="token operator">=</span> offloading_ratio <span class="token operator">*</span> task_size <span class="token operator">/</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>f_uav <span class="token operator">/</span> self<span class="token punctuation">.</span>s<span class="token punctuation">)</span>  <span class="token comment"># 在UAV边缘服务器上计算时延</span>
+    <span class="token comment"># r:芯片结构对cpu处理的影响因子</span>
+    e_server <span class="token operator">=</span> self<span class="token punctuation">.</span>r <span class="token operator">*</span> self<span class="token punctuation">.</span>f_uav <span class="token operator">**</span> <span class="token number">3</span> <span class="token operator">*</span> t_server  <span class="token comment"># 在UAV边缘服务器上计算耗能</span>
+
+    <span class="token comment"># 计算任务全部完成</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>sum_task_size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>  
+        is_terminal <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token comment"># file_name = 'output.txt'</span>
+        <span class="token comment"># with open(file_name, 'a') as file_obj:</span>
+        <span class="token comment">#     file_obj.write("\n======== This episode is done ========")  # 本episode结束</span>
+        reward <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token comment"># 最后一步计算任务和ue的计算任务不匹配</span>
+    <span class="token keyword">elif</span> self<span class="token punctuation">.</span>sum_task_size <span class="token operator">-</span> self<span class="token punctuation">.</span>task_list<span class="token punctuation">[</span>ue_id<span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">:</span>  
+        <span class="token comment"># 将最后一步计算任务改成总计算任务的剩余量</span>
+        self<span class="token punctuation">.</span>task_list <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>self<span class="token punctuation">.</span>M<span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>sum_task_size
+        reward <span class="token operator">=</span> <span class="token number">0</span>
+        step_redo <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token comment"># uav位置不对</span>
+    <span class="token keyword">elif</span> loc_uav_after_fly_x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token keyword">or</span> loc_uav_after_fly_x <span class="token operator">></span> self<span class="token punctuation">.</span>ground_width \
+        <span class="token keyword">or</span> loc_uav_after_fly_y <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token keyword">or</span> loc_uav_after_fly_y <span class="token operator">></span> self<span class="token punctuation">.</span>ground_length<span class="token punctuation">:</span>
+        reward <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">100</span>
+        step_redo <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token comment"># uav电量不能支持飞行</span>
+    <span class="token keyword">elif</span> self<span class="token punctuation">.</span>e_battery_uav <span class="token operator">&lt;</span> e_fly<span class="token punctuation">:</span>  
+        reward <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">100</span>
+    <span class="token comment"># uav电量不能支持计算</span>
+    <span class="token keyword">elif</span> self<span class="token punctuation">.</span>e_battery_uav <span class="token operator">-</span> e_fly <span class="token operator">&lt;</span> e_server<span class="token punctuation">:</span> 
+        reward <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">100</span>
+    <span class="token comment"># 电量支持飞行,且计算任务合理,且计算任务能在剩余电量内计算</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>  
+        delay <span class="token operator">=</span> self<span class="token punctuation">.</span>com_delay<span class="token punctuation">(</span>self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>ue_id<span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>loc_uav_after_fly_x<span class="token punctuation">,</span> loc_uav_after_fly_y<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                               offloading_ratio<span class="token punctuation">,</span> task_size<span class="token punctuation">,</span> block_flag<span class="token punctuation">)</span>  <span class="token comment"># 计算delay</span>
+        reward <span class="token operator">=</span> delay  <span class="token comment">#reward设置为时延</span>
+        <span class="token comment"># 更新下一时刻状态</span>
+        self<span class="token punctuation">.</span>e_battery_uav <span class="token operator">=</span> self<span class="token punctuation">.</span>e_battery_uav <span class="token operator">-</span> e_fly <span class="token operator">-</span> e_server  <span class="token comment"># uav 剩余电量</span>
+        self<span class="token punctuation">.</span>sum_task_size <span class="token operator">-=</span> self<span class="token punctuation">.</span>task_list<span class="token punctuation">[</span>ue_id<span class="token punctuation">]</span>  <span class="token comment"># 剩余任务量</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>M<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># ue随机移动</span>
+            tmp <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token number">0.6</span> <span class="token operator">&lt;</span> tmp <span class="token operator">&lt;=</span> <span class="token number">0.7</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">elif</span> <span class="token number">0.7</span> <span class="token operator">&lt;</span> tmp <span class="token operator">&lt;=</span> <span class="token number">0.8</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">elif</span> <span class="token number">0.8</span> <span class="token operator">&lt;</span> tmp <span class="token operator">&lt;=</span> <span class="token number">0.9</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">elif</span> <span class="token number">0.9</span> <span class="token operator">&lt;</span> tmp <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token comment"># np.clip是一个截取函数，用于截取数组中小于或者大于某值的部分，并使得被截取部分等于固定值。</span>
+            <span class="token comment"># np.clip(a, a_min, a_max, out=None):</span>
+            <span class="token comment"># a：输入矩阵；a_min：被限定的最小值，所有比a_min小的数都会强制变为a_min；</span>
+            <span class="token comment"># a_max：被限定的最大值，所有比a_max大的数都会强制变为a_max；out：可以指定输出矩阵的对象，shape与a相同</span>
+            <span class="token comment"># 限定了用户的位置</span>
+            np<span class="token punctuation">.</span>clip<span class="token punctuation">(</span>self<span class="token punctuation">.</span>loc_ue_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+        <span class="token comment"># self.task_list = np.random.randint(1048576, 2097153, self.M)  # ue随机计算任务1~2Mbits</span>
+        <span class="token comment"># 随机初始化ue 的计算任务和遮挡情况</span>
+        self<span class="token punctuation">.</span>reset_step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> reward<span class="token punctuation">,</span> is_terminal<span class="token punctuation">,</span> step_redo</code></pre></div></figure>
+<h4 id="6-1-5-计算最大处理时延">6.1.5 计算最大处理时延</h4>
+<p>根据用户位置，无人机位置，ue卸载率，ue的计算任务，ue的遮挡情况这些参数来计算出最大处理时延。</p>
+<p>参照下列公式：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">{</mo><msub><mi>t</mi><mrow><mi>l</mi><mi>o</mi><mi>c</mi><mi>a</mi><mi>l</mi><mo separator="true">,</mo><mi>k</mi></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>t</mi><mrow><mi>U</mi><mi>A</mi><mi>V</mi><mo separator="true">,</mo><mi>k</mi></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>t</mi><mrow><mi>t</mi><mi>r</mi><mo separator="true">,</mo><mi>k</mi></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo fence="true">}</mo></mrow></mrow><annotation encoding="application/x-tex">\max \left\{t_{l o c a l, k}(i), t_{U A V, k}(i)+t_{t r, k}(i)\right\}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:1.0361em"></span><span class="mop">max</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner"><span class="mopen delimcenter" style="top:0">{</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3361em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0197em">l</span><span class="mord mathnormal mtight">oc</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:.0197em">l</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:.0315em">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3361em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.109em">U</span><span class="mord mathnormal mtight">A</span><span class="mord mathnormal mtight" style="margin-right:.2222em">V</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:.0315em">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3361em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:.0278em">r</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:.0315em">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0">}</span></span></span></span></span></span></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">com_delay</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> loc_ue<span class="token punctuation">,</span> loc_uav<span class="token punctuation">,</span> offloading_ratio<span class="token punctuation">,</span> task_size<span class="token punctuation">,</span> block_flag<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    计算花费
+
+    Parameters
+    ----------
+    loc_ue : 用户位置
+    loc_uav : 无人机位置
+    offloading_ratio : ue卸载率
+    task_size : ue的计算任务
+    block_flag : ue的遮挡情况
+
+    Returns
+    -------
+    时延
+
+    '''</span>
+    <span class="token comment"># 获取uav与ue之间的距离</span>
+    dx <span class="token operator">=</span> loc_uav<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> loc_ue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    dy <span class="token operator">=</span> loc_uav<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> loc_ue<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    dh <span class="token operator">=</span> self<span class="token punctuation">.</span>height
+    dist_uav_ue <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>dx <span class="token operator">*</span> dx <span class="token operator">+</span> dy <span class="token operator">*</span> dy <span class="token operator">+</span> dh <span class="token operator">*</span> dh<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 噪声功率</span>
+    p_noise <span class="token operator">=</span> self<span class="token punctuation">.</span>p_noisy_los
+    <span class="token keyword">if</span> block_flag <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        p_noise <span class="token operator">=</span> self<span class="token punctuation">.</span>p_noisy_nlos
+    g_uav_ue <span class="token operator">=</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>alpha0 <span class="token operator">/</span> dist_uav_ue <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment"># 信道增益</span>
+    trans_rate <span class="token operator">=</span> self<span class="token punctuation">.</span>B <span class="token operator">*</span> math<span class="token punctuation">.</span>log2<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>p_uplink <span class="token operator">*</span> g_uav_ue <span class="token operator">/</span> p_noise<span class="token punctuation">)</span>  <span class="token comment"># 上行链路传输速率bps</span>
+    t_tr <span class="token operator">=</span> offloading_ratio <span class="token operator">*</span> task_size <span class="token operator">/</span> trans_rate  <span class="token comment"># 上传时延,1B=8bit</span>
+    t_edge_com <span class="token operator">=</span> offloading_ratio <span class="token operator">*</span> task_size <span class="token operator">/</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>f_uav <span class="token operator">/</span> self<span class="token punctuation">.</span>s<span class="token punctuation">)</span>  <span class="token comment"># 在UAV边缘服务器上计算时延</span>
+    t_local_com <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> offloading_ratio<span class="token punctuation">)</span> <span class="token operator">*</span> task_size <span class="token operator">/</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>f_ue <span class="token operator">/</span> self<span class="token punctuation">.</span>s<span class="token punctuation">)</span>  <span class="token comment"># 本地计算时延</span>
+    <span class="token comment"># 比较上传到服务器的时间和本地计算的时间，时延越长，返回的值越高</span>
+    <span class="token keyword">return</span> <span class="token builtin">max</span><span class="token punctuation">(</span><span class="token punctuation">[</span>t_tr <span class="token operator">+</span> t_edge_com<span class="token punctuation">,</span> t_local_com<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
+<h3 id="6-2-状态标准化">6.2 状态标准化</h3>
+<p>使用状态归一化算法对观测状态进行预处理，从而更有效地训练 DNN 。该算法将每个变量的最大值与最小值之差作为尺度因子。所提出的状态归一化算法可以很好地解决输入变量的大小差异问题。</p>
+<p>在我们的工作中，变量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mtext>battery </mtext></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="bold">q</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi mathvariant="bold">p</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi mathvariant="bold">p</mi><mi>K</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>D</mi><mtext>remain </mtext></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi>D</mi><mn>1</mn></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E_{\text {battery }}(i), \mathbf{q}(i), \mathbf{p}_{1}(i), \ldots, \mathbf{p}_{K}(i), D_{\text {remain }}(i), D_{1}(i), \ldots, D_{K-1}(i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:1.0361em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0576em">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3361em"><span style="margin-left:-.0576em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">battery </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathbf">q</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathbf">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3011em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">…</span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathbf">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3283em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0715em">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3175em"><span style="margin-left:-.0278em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">remain </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3011em"><span style="margin-left:-.0278em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">…</span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3283em"><span style="margin-left:-.0278em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0715em">K</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2083em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_{K-1}(i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.25em;height:1em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3283em"><span style="margin-left:-.0278em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0715em">K</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2083em"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span></span></span></span> 在状态集中处于不同的序列，这可能导致在训练中出现问题。如算法 1 所示，通过状态归一化对这些变量进行归一化，以防止出现这种问题。在状态归一化算法中，我们使用了五个尺度因子。每个因素可以解释如下。利用缩放因子 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.625em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0556em">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3361em"><span style="margin-left:-.0556em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span></span></span></span> 来缩小无人机电池容量。由于 UAV 和 UE 具有相同的 x 和 y 坐标范围，我们使用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.625em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0556em">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.1514em"><span style="margin-left:-.0556em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.7167em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0556em">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.1514em"><span style="margin-left:-.0556em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0359em">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span></span> 分别缩小UAV和UE的x和y坐标。我们使用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><msub><mi>D</mi><mrow><mi>r</mi><mi>m</mi></mrow></msub></msub></mrow><annotation encoding="application/x-tex">\gamma_{D_{rm}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2501em;height:.6807em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0556em">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3283em"><span style="margin-left:-.0556em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.1645em"><span style="margin-left:-.0278em;margin-right:.0714em;top:-2.357em"><span class="pstrut" style="height:2.5em"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0278em">r</span><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.143em"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2501em"><span></span></span></span></span></span></span></span></span></span> 来缩小整个时间段内剩余的任务，使用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><msub><mi>D</mi><mrow><mi>U</mi><mi>E</mi></mrow></msub></msub></mrow><annotation encoding="application/x-tex">\gamma_{D_{UE}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2503em;height:.6809em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0556em">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3283em"><span style="margin-left:-.0556em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0278em">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3448em"><span style="margin-left:-.0278em;margin-right:.0714em;top:-2.3567em"><span class="pstrut" style="height:2.5em"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.109em">U</span><span class="mord mathnormal mtight" style="margin-right:.0576em">E</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.1433em"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2503em"><span></span></span></span></span></span></span></span></span></span> 来缩小时间段 i 内每个终端的任务大小。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img221/202201211736297.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> UAV_env <span class="token keyword">import</span> UAVEnv
+
+env <span class="token operator">=</span> UAVEnv<span class="token punctuation">(</span><span class="token punctuation">)</span>
+M <span class="token operator">=</span> env<span class="token punctuation">.</span>M
+
+
+<span class="token keyword">class</span> <span class="token class-name">StateNormalization</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    状态标准化类
+    '''</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>high_state <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>
+            <span class="token punctuation">[</span><span class="token number">5e5</span><span class="token punctuation">,</span> env<span class="token punctuation">.</span>ground_length<span class="token punctuation">,</span> env<span class="token punctuation">.</span>ground_width<span class="token punctuation">,</span> <span class="token number">100</span> <span class="token operator">*</span> <span class="token number">1048576</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>high_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>high_state<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>M <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> env<span class="token punctuation">.</span>ground_length<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>high_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>high_state<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>M<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">3145728</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>high_state <span class="token operator">=</span> np<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>high_state<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>M<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>low_state <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>  <span class="token comment"># uav loc, ue loc, task size, block_flag</span>
+        self<span class="token punctuation">.</span>low_state<span class="token punctuation">[</span><span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>low_state<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> M<span class="token punctuation">:</span><span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>low_state<span class="token punctuation">)</span> <span class="token operator">-</span> M<span class="token punctuation">]</span> <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>M<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2621440</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">state_normal</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        state<span class="token punctuation">[</span><span class="token builtin">len</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> M<span class="token punctuation">:</span> <span class="token builtin">len</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token operator">-</span> M<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token number">2621440</span>
+        res <span class="token operator">=</span> state <span class="token operator">/</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>high_state <span class="token operator">-</span> self<span class="token punctuation">.</span>low_state<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res</code></pre></div></figure>
+<h3 id="6-3-强化学习类">6.3 强化学习类</h3>
+<p>这里使用自己想要的强化学习类来完成对应的策略选择。以DQN为例：</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># Deep Q Network off-policy</span>
+<span class="token keyword">class</span> <span class="token class-name">DeepQNetwork</span><span class="token punctuation">:</span>
+    
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>
+            self<span class="token punctuation">,</span>
+            n_actions<span class="token punctuation">,</span>
+            n_features<span class="token punctuation">,</span>
+            learning_rate<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+            reward_decay<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">,</span>
+            e_greedy<span class="token operator">=</span><span class="token number">0.99</span><span class="token punctuation">,</span>
+            replace_target_iter<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">,</span>
+            memory_size<span class="token operator">=</span>MEMORY_CAPACITY<span class="token punctuation">,</span>
+            batch_size<span class="token operator">=</span>BATCH_SIZE<span class="token punctuation">,</span>
+            <span class="token comment"># e_greedy_increment=8.684615e-05,</span>
+            output_graph<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        初始化DQN网络
+
+        Parameters
+        ----------
+        n_actions : TYPE
+            行为空间大小
+        n_features : TYPE
+            环境特征
+        learning_rate : TYPE, optional
+            学习率. The default is 0.1.
+        reward_decay : TYPE, optional
+            奖励衰减因子. The default is 0.001.
+        e_greedy : TYPE, optional
+            e贪心因子. The default is 0.99.
+        replace_target_iter : TYPE, optional
+            每多少次更新target参数. The default is 200.
+        memory_size : TYPE, optional
+            记忆库大小. The default is MEMORY_CAPACITY.
+        batch_size : TYPE, optional
+            批处理大小. The default is BATCH_SIZE.
+        # e_greedy_increment : TYPE, optional
+            e贪心因子增长幅度. The default is 8.684615e-05.
+        output_graph : TYPE, optional
+            是否输出图表. The default is False.
+
+        Returns
+        -------
+        None.
+
+        '''</span>
+        self<span class="token punctuation">.</span>n_actions <span class="token operator">=</span> n_actions
+        self<span class="token punctuation">.</span>n_features <span class="token operator">=</span> n_features
+        self<span class="token punctuation">.</span>lr <span class="token operator">=</span> learning_rate
+        self<span class="token punctuation">.</span>gamma <span class="token operator">=</span> reward_decay
+        self<span class="token punctuation">.</span>epsilon_max <span class="token operator">=</span> e_greedy
+        self<span class="token punctuation">.</span>replace_target_iter <span class="token operator">=</span> replace_target_iter
+        self<span class="token punctuation">.</span>memory_size <span class="token operator">=</span> memory_size
+        self<span class="token punctuation">.</span>batch_size <span class="token operator">=</span> batch_size
+        <span class="token comment"># self.epsilon_increment = e_greedy_increment</span>
+        <span class="token comment"># self.epsilon = 0 if e_greedy_increment is not None else self.epsilon_max</span>
+        self<span class="token punctuation">.</span>epsilon <span class="token operator">=</span> <span class="token number">0.99</span>
+
+        <span class="token comment"># total learning step</span>
+        self<span class="token punctuation">.</span>learn_step_counter <span class="token operator">=</span> <span class="token number">0</span>
+
+        <span class="token comment"># initialize zero memory [s, a, r, s_]</span>
+        <span class="token comment"># 初始化记忆库</span>
+        self<span class="token punctuation">.</span>memory <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>MEMORY_CAPACITY<span class="token punctuation">,</span> s_dim <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>  <span class="token comment"># memory里存放当前和下一个state，动作和奖励</span>
+
+        <span class="token comment"># consist of [target_net, evaluate_net]</span>
+        <span class="token comment"># 构建神经网络</span>
+        self<span class="token punctuation">.</span>_build_net<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># tf.get_collection()：从一个集合中取出变量 </span>
+        <span class="token comment"># tf.GraphKeys 包含所有graph collection中的标准集合名</span>
+        <span class="token comment"># tf.GraphKeys.GLOBAL_VARIABLES 则应该是所有的图变量的集合</span>
+        t_params <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_collection<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>GraphKeys<span class="token punctuation">.</span>GLOBAL_VARIABLES<span class="token punctuation">,</span> scope<span class="token operator">=</span><span class="token string">'target_net'</span><span class="token punctuation">)</span>
+        e_params <span class="token operator">=</span> tf<span class="token punctuation">.</span>get_collection<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>GraphKeys<span class="token punctuation">.</span>GLOBAL_VARIABLES<span class="token punctuation">,</span> scope<span class="token operator">=</span><span class="token string">'eval_net'</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'hard_replacement'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>target_replace_op <span class="token operator">=</span> <span class="token punctuation">[</span>tf<span class="token punctuation">.</span>assign<span class="token punctuation">(</span>t<span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token keyword">for</span> t<span class="token punctuation">,</span> e <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>t_params<span class="token punctuation">,</span> e_params<span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+        self<span class="token punctuation">.</span>sess <span class="token operator">=</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> output_graph<span class="token punctuation">:</span>
+            <span class="token comment"># $ tensorboard --logdir=logs</span>
+            tf<span class="token punctuation">.</span>summary<span class="token punctuation">.</span>FileWriter<span class="token punctuation">(</span><span class="token string">"logs/"</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>sess<span class="token punctuation">.</span>graph<span class="token punctuation">)</span>
+        
+        <span class="token comment"># 全局变量初始化</span>
+        self<span class="token punctuation">.</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>global_variables_initializer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>cost_his <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">_build_net</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        构建所有的网络图
+
+        Returns
+        -------
+        None.
+
+        '''</span>
+        <span class="token comment"># ------------------ all inputs ------------------------</span>
+        self<span class="token punctuation">.</span>s <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_features<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'s'</span><span class="token punctuation">)</span>  <span class="token comment"># input State</span>
+        self<span class="token punctuation">.</span>s_ <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_features<span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'s_'</span><span class="token punctuation">)</span>  <span class="token comment"># input Next State</span>
+        self<span class="token punctuation">.</span>r <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">)</span>  <span class="token comment"># input Reward</span>
+        self<span class="token punctuation">.</span>a <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>int32<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'a'</span><span class="token punctuation">)</span>  <span class="token comment"># input Action</span>
+        
+        <span class="token comment"># 满足正态分布</span>
+        w_initializer<span class="token punctuation">,</span> b_initializer <span class="token operator">=</span> tf<span class="token punctuation">.</span>random_normal_initializer<span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tf<span class="token punctuation">.</span>constant_initializer<span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">)</span>
+        <span class="token comment"># ------------------ build evaluate_net ------------------</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'eval_net'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># tf.layers.dense()：添加一个全连接层</span>
+            <span class="token comment"># tf.nn.relu6：计算校正线性6：min(max(features, 0), 6)</span>
+            e1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>self<span class="token punctuation">.</span>s<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu6<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                 bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'e1'</span><span class="token punctuation">)</span>
+            <span class="token comment"># e2 = tf.layers.dense(e1, 48, tf.nn.relu6, kernel_initializer=w_initializer,</span>
+            <span class="token comment">#                      bias_initializer=b_initializer, name='e2')</span>
+            e3 <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>e1<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                 bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'e3'</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>q_eval <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>e3<span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_actions<span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>softmax<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                          bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'q'</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># ------------------ build target_net ------------------</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'target_net'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            t1 <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>self<span class="token punctuation">.</span>s_<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu6<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                 bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'t1'</span><span class="token punctuation">)</span>
+            <span class="token comment"># t2 = tf.layers.dense(t1, 48, tf.nn.relu6, kernel_initializer=w_initializer,</span>
+            <span class="token comment">#                      bias_initializer=b_initializer, name='t2')</span>
+            t3 <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>t1<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                 bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'t3'</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>q_next <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>t3<span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_actions<span class="token punctuation">,</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>softmax<span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>w_initializer<span class="token punctuation">,</span>
+                                          bias_initializer<span class="token operator">=</span>b_initializer<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'t4'</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'q_target'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            q_target <span class="token operator">=</span> self<span class="token punctuation">.</span>r <span class="token operator">+</span> self<span class="token punctuation">.</span>gamma <span class="token operator">*</span> tf<span class="token punctuation">.</span>reduce_max<span class="token punctuation">(</span>self<span class="token punctuation">.</span>q_next<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'Qmax_s_'</span><span class="token punctuation">)</span>  <span class="token comment"># shape=(None, )</span>
+            self<span class="token punctuation">.</span>q_target <span class="token operator">=</span> tf<span class="token punctuation">.</span>stop_gradient<span class="token punctuation">(</span>q_target<span class="token punctuation">)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'q_eval'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            a_indices <span class="token operator">=</span> tf<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>tf<span class="token punctuation">.</span><span class="token builtin">range</span><span class="token punctuation">(</span>tf<span class="token punctuation">.</span>shape<span class="token punctuation">(</span>self<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>tf<span class="token punctuation">.</span>int32<span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>a<span class="token punctuation">]</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>q_eval_wrt_a <span class="token operator">=</span> tf<span class="token punctuation">.</span>gather_nd<span class="token punctuation">(</span>params<span class="token operator">=</span>self<span class="token punctuation">.</span>q_eval<span class="token punctuation">,</span> indices<span class="token operator">=</span>a_indices<span class="token punctuation">)</span>  <span class="token comment"># shape=(None, )</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'loss'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>loss <span class="token operator">=</span> tf<span class="token punctuation">.</span>reduce_mean<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>squared_difference<span class="token punctuation">(</span>self<span class="token punctuation">.</span>q_target<span class="token punctuation">,</span> self<span class="token punctuation">.</span>q_eval_wrt_a<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'TD_error'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span><span class="token string">'train'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># self._train_op = tf.train.RMSPropOptimizer(self.lr).minimize(self.loss)</span>
+            self<span class="token punctuation">.</span>_train_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>train<span class="token punctuation">.</span>AdamOptimizer<span class="token punctuation">(</span>self<span class="token punctuation">.</span>lr<span class="token punctuation">)</span><span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>self<span class="token punctuation">.</span>loss<span class="token punctuation">)</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">store_transition</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">,</span> a<span class="token punctuation">,</span> r<span class="token punctuation">,</span> s_<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        存储记忆元组
+
+        Parameters
+        ----------
+        s : 当前状态
+        a : 动作
+        r : 奖惩
+        s_ : 下一状态
+
+        Returns
+        -------
+        None.
+
+        '''</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">hasattr</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token string">'memory_counter'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>memory_counter <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment"># np.hstack将参数元组的元素数组按水平方向进行叠加</span>
+        transition <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> a<span class="token punctuation">,</span> <span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span> s_<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment"># replace the old memory with new memory</span>
+        index <span class="token operator">=</span> self<span class="token punctuation">.</span>memory_counter <span class="token operator">%</span> self<span class="token punctuation">.</span>memory_size
+        self<span class="token punctuation">.</span>memory<span class="token punctuation">[</span>index<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> transition
+        self<span class="token punctuation">.</span>memory_counter <span class="token operator">+=</span> <span class="token number">1</span>
+
+
+    <span class="token keyword">def</span> <span class="token function">choose_action</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> observation<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        根据当前状态选择动作
+
+        Parameters
+        ----------
+        observation : 对环境的观测
+
+        Returns
+        -------
+        action : 做出的动作
+
+        '''</span>
+        <span class="token comment"># to have batch dimension when feed into tf placeholder</span>
+        <span class="token comment"># 环境状态</span>
+        observation <span class="token operator">=</span> observation<span class="token punctuation">[</span>np<span class="token punctuation">.</span>newaxis<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+        
+        <span class="token comment"># e贪心算法</span>
+        <span class="token keyword">if</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>epsilon<span class="token punctuation">:</span>
+            <span class="token comment"># forward feed the observation and get q value for every actions</span>
+            actions_value <span class="token operator">=</span> self<span class="token punctuation">.</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>self<span class="token punctuation">.</span>q_eval<span class="token punctuation">,</span> feed_dict<span class="token operator">=</span><span class="token punctuation">&#123;</span>self<span class="token punctuation">.</span>s<span class="token punctuation">:</span> observation<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+            action <span class="token operator">=</span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>actions_value<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            action <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_actions<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> action
+
+
+    <span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        神经网络训练
+
+        Returns
+        -------
+        None.
+
+        '''</span>
+        <span class="token comment"># check to replace target parameters</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>learn_step_counter <span class="token operator">%</span> self<span class="token punctuation">.</span>replace_target_iter <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>self<span class="token punctuation">.</span>target_replace_op<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\ntarget_params_replaced\n'</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># sample batch memory from all memory</span>
+        <span class="token comment"># 从所有记忆中选取小批量记忆</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>memory_counter <span class="token operator">></span> self<span class="token punctuation">.</span>memory_size<span class="token punctuation">:</span>
+            sample_index <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>self<span class="token punctuation">.</span>memory_size<span class="token punctuation">,</span> size<span class="token operator">=</span>self<span class="token punctuation">.</span>batch_size<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            sample_index <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>self<span class="token punctuation">.</span>memory_counter<span class="token punctuation">,</span> size<span class="token operator">=</span>self<span class="token punctuation">.</span>batch_size<span class="token punctuation">)</span>
+        batch_memory <span class="token operator">=</span> self<span class="token punctuation">.</span>memory<span class="token punctuation">[</span>sample_index<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+
+        _<span class="token punctuation">,</span> cost <span class="token operator">=</span> self<span class="token punctuation">.</span>sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>
+            <span class="token punctuation">[</span>self<span class="token punctuation">.</span>_train_op<span class="token punctuation">,</span> self<span class="token punctuation">.</span>loss<span class="token punctuation">]</span><span class="token punctuation">,</span>
+            feed_dict<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+                self<span class="token punctuation">.</span>s<span class="token punctuation">:</span> batch_memory<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span>self<span class="token punctuation">.</span>n_features<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                self<span class="token punctuation">.</span>a<span class="token punctuation">:</span> batch_memory<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_features<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                self<span class="token punctuation">.</span>r<span class="token punctuation">:</span> batch_memory<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>n_features <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                self<span class="token punctuation">.</span>s_<span class="token punctuation">:</span> batch_memory<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span>self<span class="token punctuation">.</span>n_features<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>cost_his<span class="token punctuation">.</span>append<span class="token punctuation">(</span>cost<span class="token punctuation">)</span>
+
+        <span class="token comment"># increasing epsilon</span>
+        <span class="token comment"># self.epsilon = self.epsilon + self.epsilon_increment if self.epsilon &lt; self.epsilon_max else self.epsilon_max</span>
+        self<span class="token punctuation">.</span>learn_step_counter <span class="token operator">+=</span> <span class="token number">1</span></code></pre></div></figure>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/%E8%AE%BA%E6%96%87/" class="print-no-link">#论文</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（6）——代码实现</div>
+<div>https://blog.fulequn.online/2022/01/Article202201211/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2022年1月21日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2022/02/Article202202121/" title="无人机辅助车载网络的深度强化学习">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">无人机辅助车载网络的深度强化学习</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2022/01/Article202201181/" title="无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（5）——结果与分析">
+<span class="hidden-mobile">无人机辅助移动边缘计算的计算卸载优化:一种深度确定性策略梯度方法（5）——结果与分析</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

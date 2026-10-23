@@ -1,0 +1,604 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="我们为什么需要Huffman树 目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。 什么是Huffman编码 Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。 如何实现Huffman编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用java实现Huffman树">
+<meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008203/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="我们为什么需要Huffman树 目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。 什么是Huffman编码 Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。 如何实现Huffman编码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2020-08-20T13:42:32.000Z">
+<meta property="article:modified_time" content="2020-08-20T13:42:32.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用java实现Huffman树","description":"我们为什么需要Huffman树 目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。 什么是Huffman编码 Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。 如何实现Huffman编码","url":"https://blog.fulequn.online/2020/08/Article202008203/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/08/Article202008203/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-08-20T13:42:32.000Z","dateModified":"2020-08-20T13:42:32.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>使用java实现Huffman树 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="使用java实现Huffman树"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-08-20 21:42" pubdate>
+2020年8月20日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+7.1k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+59 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">使用java实现Huffman树</h1>
+<div class="markdown-body">
+<h2 id="我们为什么需要Huffman树">我们为什么需要Huffman树</h2>
+<p>目前，我们常用的图像、音频、视频等多媒体信息，信息量大，以传统方式存储无疑会占用大量存储空间，因此，我们引入了Huffman编码来解决这个问题。</p>
+<h2 id="什么是Huffman编码">什么是Huffman编码</h2>
+<p>Huffman编码是一种变长的编码方案，数据的编码因其使用频率不同而长短不一，使用频率高的数据其编码较短，使用频率低的数据其编码较长，从而使得所有数据的编码总长度最短。</p>
+<h2 id="如何实现Huffman编码">如何实现Huffman编码</h2>
+<p>考虑实现Huffman编码的结构，我们决定使用二叉树来实现。</p>
+<p>这里涉及到一个概念，二叉树的带权外路径长度：树中所有叶子的带权路径长度之和。而Huffman树则是二叉树的带权外路径长度最小的二叉树，也称最优二叉树。</p>
+<h2 id="构造Huffman树并得到Huffman编码">构造Huffman树并得到Huffman编码</h2>
+<p>这里，我们使用静态三叉链表存储Huffman树。</p>
+<p>这是静态三叉链表结点类TriElement</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&#x2F;**
+ * @author cust
+ * 二叉树的静态三叉链表结点类
+ *&#x2F;
+public class TriElement&#123;
+	
+    int data;                                    &#x2F;&#x2F;数据域
+    int parent,left,right;                       &#x2F;&#x2F;父母结点和左、右孩子结点下标
+
+    &#x2F;&#x2F;不设置setter方法和getter方法,确保静态三叉链表结点只在具有权值时构造，且不可再被修改
+    
+    &#x2F;&#x2F;构造结点，各参数依次指定元素、父母结点下标、左&#x2F;右孩子结点下标
+	public TriElement(int data, int parent, int left, int right)
+	&#123;					
+	    this.data &#x3D; data;
+	    this.parent &#x3D; parent;
+	    this.left &#x3D; left;
+	    this.right &#x3D; right;
+	&#125;
+	
+	public TriElement(int data) &#123;                  &#x2F;&#x2F;构造元素值为data、无父母的叶子结点
+	    this(data, -1, -1, -1);
+	&#125;
+	
+    public String toString() &#123;                     &#x2F;&#x2F;返回结点的描述字符串
+        return &quot;(&quot;+this.data+&quot;,&quot;+this.parent+&quot;,&quot;+this.left+&quot;,&quot;+this.right+&quot;)&quot;;
+    &#125;
+    
+    public boolean isLeaf() &#123;                                &#x2F;&#x2F;判断是否叶子结点
+        return this.left&#x3D;&#x3D;-1 &amp;&amp; this.right&#x3D;&#x3D;-1;
+    &#125;
+    
+    public boolean equals(Object obj) &#123;                      &#x2F;&#x2F;比较是否相等 ，覆盖Object类的equals(obj)方法
+        &#x2F;&#x2F;仅比较元素值
+        return obj&#x3D;&#x3D;this || obj instanceof TriElement &amp;&amp; this.data&#x3D;&#x3D;((TriElement)obj).data;
+    &#125;
+    
+&#125;</code></pre></div></figure>
+<p>这是Huffman树类HuffmanTree</p>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">//哈夫曼树类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HuffmanTree</span><span class="token punctuation">&#123;</span>                                   <span class="token comment">//Huffman树类</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">String</span> charset<span class="token punctuation">;</span>                                <span class="token comment">//字符集合</span>
+    <span class="token keyword">private</span> <span class="token class-name">TriElement</span><span class="token punctuation">[</span><span class="token punctuation">]</span> huftree<span class="token punctuation">;</span>                          <span class="token comment">//静态三叉链表结点数组</span>
+    <span class="token comment">//用来存储数据</span>
+ 
+    <span class="token comment">//不设置setter方法和getter方法,确保每一颗huffman树只在具有权值时构造，且不可再被修改</span>
+    
+    <span class="token comment">/**
+     * @param weights  权重数组
+          * 通过Huffman算法构建Huffman树
+          * 主要由三个步骤组成：
+     * 1.初始化
+          * 构造出wehights.length个结点的森林
+     * 2.合并二叉树
+          * 选择当前根结点权值最小的两颗二叉树合并，左孩子权值较小，合并后根结点的权值为其孩子结点的权值之和
+     * 3.重复2
+          * 只剩下最后一棵二叉树，这就是Huffman树
+     */</span>
+    <span class="token comment">//构造Huffman树，weights指定权值集合，数组长度为叶子结点数；默认字符集合从A开始</span>
+    <span class="token keyword">public</span> <span class="token class-name">HuffmanTree</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> weights<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+    	<span class="token comment">//准备部分</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>charset <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>		
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> weights<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+        	<span class="token comment">//将权值数组中的每一个数字转化为对应的字符</span>
+        	<span class="token comment">//默认字符集合是从'A'开始的weights.length个字符</span>
+<span class="token comment">//        	this.charset += (char)('A'+i);</span>
+        	<span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        		<span class="token keyword">this</span><span class="token punctuation">.</span>charset <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token char">'A'</span><span class="token operator">+</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> <span class="token number">51</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        		<span class="token keyword">this</span><span class="token punctuation">.</span>charset <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token char">'a'</span><span class="token operator">+</span><span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">52</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        		<span class="token keyword">this</span><span class="token punctuation">.</span>charset <span class="token operator">+=</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        	<span class="token punctuation">&#125;</span>
+
+        <span class="token punctuation">&#125;</span>
+<span class="token comment">//        System.out.println(charset);</span>
+<span class="token comment">//        System.out.println(charset);</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> weights<span class="token punctuation">.</span>length<span class="token punctuation">;</span>                            <span class="token comment">//叶子结点数</span>
+        <span class="token comment">//叶子结点数与权值数组一一对应，每一个叶子都对应了一个字符的编码</span>
+        
+        <span class="token comment">//初始化</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>huftree <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriElement</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>              <span class="token comment">//n个叶子的Huffman树共有2n-1个结点</span>
+        <span class="token comment">//前n个存放叶子结点，后n-1个存放2度结点</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>                             <span class="token comment">//Huffman树初始化n个叶子结点</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriElement</span><span class="token punctuation">(</span>weights<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//构造无父母的叶子结点</span>
+
+        <span class="token comment">//合并二叉树</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> n<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token operator">*</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>                         <span class="token comment">//构造n-1个2度结点</span>
+        	<span class="token comment">//当n-1个2度顶点构造完成时结束循环</span>
+        	
+            <span class="token keyword">int</span> min1 <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">,</span> min2 <span class="token operator">=</span> min1<span class="token punctuation">;</span>         <span class="token comment">//最小和次小权值，初值为整数最大值</span>
+            <span class="token keyword">int</span> x1<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> x2<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>                              <span class="token comment">//最小和次小权值结点下标</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>                        <span class="token comment">//寻找两个无父母的最小权值结点下标</span>
+            	<span class="token comment">//若该结点具有父母，说明该结点已经合并</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>parent <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>            <span class="token comment">//第j个结点无父母</span>
+                	<span class="token comment">//若能选出最小的，则用原本最小的记录，然后将原本记录最小的存储到次小的</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">&lt;</span> min1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>         <span class="token comment">//第j个结点权值最小</span>
+                        min2 <span class="token operator">=</span> min1<span class="token punctuation">;</span>                       <span class="token comment">//min2记得次小权值</span>
+                        x2 <span class="token operator">=</span> x1<span class="token punctuation">;</span>                           <span class="token comment">//x2记得次小权值结点下标</span>
+                        min1 <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">;</span>       <span class="token comment">//min1记得最小权值</span>
+                        x1 <span class="token operator">=</span> j<span class="token punctuation">;</span>                            <span class="token comment">//x1记得最小权值结点下标</span>
+                    <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>			<span class="token comment">//若能得到比次小小的，但比最小的大，则只需要更新次小的即可</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">&lt;</span> min2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>     <span class="token comment">//第j个结点权值次小</span>
+                            min2 <span class="token operator">=</span> huftree<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">;</span> 		<span class="token comment">//记录次小权值</span>
+                            x2 <span class="token operator">=</span> j<span class="token punctuation">;</span>				<span class="token comment">//记录次小的位置</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            
+            <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>x1<span class="token punctuation">]</span><span class="token punctuation">.</span>parent <span class="token operator">=</span> i<span class="token punctuation">;</span>                   <span class="token comment">//合并两棵权值最小的子树，左孩子最小</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>x2<span class="token punctuation">]</span><span class="token punctuation">.</span>parent <span class="token operator">=</span> i<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriElement</span><span class="token punctuation">(</span>min1<span class="token operator">+</span>min2<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//构造结点，指定值、父母、左右孩子</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token comment">//Huffman树构造完毕</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">/**
+     * @param i 字符在charset中的位置
+     * @return 对应的描述字符串
+          *  通过访问Huffman树来实现
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> <span class="token function">getCode</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span>                 <span class="token comment">//返回charset第i个字符的Huffman编码字符串</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">59</span><span class="token punctuation">;</span>		
+<span class="token comment">//        int n = 8;		//最多可以表示8个字符的huffman编码，这里可以修改为26</span>
+        <span class="token keyword">char</span> hufcode<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>                      <span class="token comment">//声明字符数组暂存Huffman编码</span>
+        <span class="token keyword">int</span> child <span class="token operator">=</span> i<span class="token punctuation">,</span> parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>child<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token punctuation">;</span>		<span class="token comment">//获取这个元素的父节点</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> parent <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>                       <span class="token comment">//由叶结点向上直到根结点，反序存储编码</span>
+        <span class="token punctuation">&#123;</span>
+            hufcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>huftree<span class="token punctuation">[</span>parent<span class="token punctuation">]</span><span class="token punctuation">.</span>left<span class="token operator">==</span>child<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token char">'0'</span> <span class="token operator">:</span> <span class="token char">'1'</span><span class="token punctuation">;</span>  <span class="token comment">//左、右孩子编码为0、1</span>
+            child <span class="token operator">=</span> parent<span class="token punctuation">;</span>		<span class="token comment">//向上转移到根结点</span>
+            parent <span class="token operator">=</span> huftree<span class="token punctuation">[</span>child<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token punctuation">;</span>  	<span class="token comment">//得到根结点      </span>
+        <span class="token punctuation">&#125;</span>                       
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>hufcode<span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//由hufcode数组从i+1开始的n-1-i个字符构造串</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                     <span class="token comment">//返回Huffman树的结点数组和所有字符的编码字符串</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str<span class="token operator">=</span><span class="token string">"Huffman树的结点数组:"</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            str <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">","</span><span class="token punctuation">;</span>
+        str <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> str<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        str <span class="token operator">+=</span> <span class="token string">"\nHuffman编码： "</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token keyword">this</span><span class="token punctuation">.</span>charset<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>        <span class="token comment">//输出所有叶子结点的Huffman编码</span>
+            str<span class="token operator">+=</span><span class="token keyword">this</span><span class="token punctuation">.</span>charset<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">":"</span><span class="token operator">+</span><span class="token function">getCode</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">","</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> str<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">//数据压缩，将text各字符转换成Huffman编码存储，返回压缩字符串</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">encode</span><span class="token punctuation">(</span><span class="token class-name">String</span> text<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> compressed <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>                              <span class="token comment">//被压缩的数据，以字符串显示</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> text<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">//        	 compressed += getCode(text.charAt(i)-'A');     //默认字符集是从A开始的n个字符</span>
+        	 <span class="token keyword">if</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'A'</span> <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'A'</span> <span class="token operator">&lt;=</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        		 compressed <span class="token operator">+=</span> <span class="token function">getCode</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'A'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//默认字符集是从A开始的n个字符</span>
+        	 <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'a'</span> <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'a'</span> <span class="token operator">&lt;=</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        		 compressed <span class="token operator">+=</span> <span class="token function">getCode</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">-</span><span class="token char">'a'</span><span class="token operator">+</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//默认字符集是从A开始的n个字符</span>
+        	 <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+        		 compressed <span class="token operator">+=</span> <span class="token function">getCode</span><span class="token punctuation">(</span><span class="token number">52</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//默认字符集是从A开始的n个字符 </span>
+        	 <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+           
+        <span class="token keyword">return</span> compressed<span class="token punctuation">;</span>		<span class="token comment">//返回对应字符串</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">//数据解压缩，将压缩compressed中的0/1序列进行Huffman译码，返回译码字符串</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">String</span> compressed<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> text <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>		<span class="token comment">//结果字符串</span>
+        <span class="token keyword">int</span> node <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>               <span class="token comment">//node搜索一条从根到达叶子的路径</span>
+        <span class="token comment">//huftree的最后一个元素是根结点</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> compressed<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> 		<span class="token comment">//将每一段数字转化成对应的英文字符</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>compressed<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token char">'0'</span><span class="token punctuation">)</span>            <span class="token comment">//根据0、1分别向左或右孩子走</span>
+                node <span class="token operator">=</span> huftree<span class="token punctuation">[</span>node<span class="token punctuation">]</span><span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                node <span class="token operator">=</span> huftree<span class="token punctuation">[</span>node<span class="token punctuation">]</span><span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>huftree<span class="token punctuation">[</span>node<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">isLeaf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>               <span class="token comment">//到达叶子结点</span>
+            <span class="token punctuation">&#123;</span>
+                text <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>charset<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//获得一个字符</span>
+                node <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>huftree<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment">//node再从根结点开始</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> text<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<p>这是与Huffman树对应的字符映射类AsciiCodeMap，在Huffman树中指定的默认字符集则是来自于这里，此处我只设置了大小写英文字母和空格，实际上也可以继续添加，最好设置为ASCII的所有字符。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">import java.util.HashMap;
+import java.util.Map;
+
+&#x2F;&#x2F;英文符号对应的映射
+public class AsciiCodeMap &#123;
+
+	public Map&lt;Character, Integer&gt; asciiCodeMap &#x3D; new HashMap&lt;Character, Integer&gt;();
+	
+	public AsciiCodeMap()&#123;
+		
+		for(int i &#x3D; 0; i &lt;&#x3D; 25; i++)&#123;
+			asciiCodeMap.put((char)(&#39;A&#39;+(i-26)), i);
+		&#125;
+		for(int i &#x3D; 26; i &lt;&#x3D; 51; i++)&#123;
+			asciiCodeMap.put((char)(&#39;a&#39;+(i-26)), i);
+		&#125;
+		asciiCodeMap.put(&#39; &#39;, 52);
+		
+	&#125;
+	
+&#125;</code></pre></div></figure>
+<p>这里是测试类</p>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Scanner</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">//采用Huffman算法对字符串进行数据压缩和解压缩。</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HuffmanTree_ex</span> <span class="token punctuation">&#123;</span>
+	
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>        
+<span class="token comment">//        String text="AAAACFHHHFFFCEEEHEHCGBGAFFEHHHHHHHECCAEECDCEEEADC"</span>
+<span class="token comment">//        		+ "CDAACCCCABHHAAGADDAAAFAHHHHAA";                     //【例6.4】 数据</span>
+<span class="token comment">//        int[] weight6_34=&#123;19, 2, 13, 5, 11, 7, 3, 17&#125;;                        //6-34</span>
+<span class="token comment">//        HuffmanTree huffman = new HuffmanTree(weight6_34); //构造Huffman树</span>
+<span class="token comment">//        System.out.println(huffman.toString());            //输出Huffman树的结点数组和所有字符编码</span>
+<span class="token comment">//        String compressed = huffman.encode(text);</span>
+<span class="token comment">//        System.out.println("将"+text+"压缩为"+compressed+"，"+compressed.length()+"位");</span>
+<span class="token comment">//        System.out.println("将"+compressed+"解码为"+huffman.decode(compressed));</span>
+        
+        <span class="token comment">//手动编码，测试</span>
+    	<span class="token class-name">Scanner</span> input <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token class-name">String</span> text2 <span class="token operator">=</span> input<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">AsciiCodeMap</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AsciiCodeMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        String text2="Hello world"; </span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> weight <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">59</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                        <span class="token comment">//6-34</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>weight<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        	weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>text2<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        	<span class="token keyword">int</span> m <span class="token operator">=</span> a<span class="token punctuation">.</span>asciiCodeMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>text2<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment">//找到对应的索引位置</span>
+        	weight<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token comment">//        	System.out.println(text2.charAt(i)+"   "+ m);</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">HuffmanTree</span> huffman2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HuffmanTree</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//构造Huffman树</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>huffman2<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment">//输出Huffman树的结点数组和所有字符编码</span>
+        <span class="token class-name">String</span> compressed2 <span class="token operator">=</span> huffman2<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>text2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"将"</span><span class="token operator">+</span>text2<span class="token operator">+</span><span class="token string">"压缩为"</span><span class="token operator">+</span>compressed2<span class="token operator">+</span><span class="token string">"，"</span><span class="token operator">+</span>compressed2<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"位"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"将"</span><span class="token operator">+</span>compressed2<span class="token operator">+</span><span class="token string">"解码为"</span><span class="token operator">+</span>huffman2<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>compressed2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        input<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>  
+    
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<h2 id="总结">总结</h2>
+<p>构建Huffman树，需要了解Huffman编码的基本原理：也就是出现次数多的字符的编码尽可能地短，这样就可以实现了我们所说的数据压缩。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Java/" class="print-no-link">#Java</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>使用java实现Huffman树</div>
+<div>https://blog.fulequn.online/2020/08/Article202008203/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年8月20日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/08/Article202008204/" title="用JAVA的ObjectOutputStream和ObjectInputStream完成对象的深克隆">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">用JAVA的ObjectOutputStream和ObjectInputStream完成对象的深克隆</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/08/Article202008202/" title="零基础小白也想用6小时学会Python▶清华技能坊——20200820">
+<span class="hidden-mobile">零基础小白也想用6小时学会Python▶清华技能坊——20200820</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

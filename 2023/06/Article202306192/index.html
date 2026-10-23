@@ -1,0 +1,1103 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="物流和供应链管理是当前管理研究的热点和前沿领域。供应链是一个由物流系统和该供应链中的所有单个组织或企业相关活动组成的网络。为满足供应链中顾客需求，需要对商品服务及相关信息，从产地到消费地高效率低成本地流动及储存进行规划、执行和控制。运筹学中对运输模型的研究为达到上述目的提供相应的理论基础。 1 运输问题的数学模型 在经济建设中，经常碰到大宗物资调运问题。如煤、钢铁、木材、粮食等物资，在全国有若干生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用伏格尔法解决运输问题">
+<meta property="og:url" content="https://blog.fulequn.online/2023/06/Article202306192/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="物流和供应链管理是当前管理研究的热点和前沿领域。供应链是一个由物流系统和该供应链中的所有单个组织或企业相关活动组成的网络。为满足供应链中顾客需求，需要对商品服务及相关信息，从产地到消费地高效率低成本地流动及储存进行规划、执行和控制。运筹学中对运输模型的研究为达到上述目的提供相应的理论基础。 1 运输问题的数学模型 在经济建设中，经常碰到大宗物资调运问题。如煤、钢铁、木材、粮食等物资，在全国有若干生">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201509092.png">
+<meta property="article:published_time" content="2023-06-19T14:50:09.000Z">
+<meta property="article:modified_time" content="2023-06-19T14:50:09.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201509092.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用伏格尔法解决运输问题","description":"物流和供应链管理是当前管理研究的热点和前沿领域。供应链是一个由物流系统和该供应链中的所有单个组织或企业相关活动组成的网络。为满足供应链中顾客需求，需要对商品服务及相关信息，从产地到消费地高效率低成本地流动及储存进行规划、执行和控制。运筹学中对运输模型的研究为达到上述目的提供相应的理论基础。 1 运输问题的数学模型 在经济建设中，经常碰到大宗物资调运问题。如煤、钢铁、木材、粮食等物资，在全国有若干生","url":"https://blog.fulequn.online/2023/06/Article202306192/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2023/06/Article202306192/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2023-06-19T14:50:09.000Z","dateModified":"2023-06-19T14:50:09.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201509092.png"}</script>
+<title>使用伏格尔法解决运输问题 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="使用伏格尔法解决运输问题"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2023-06-19 22:50" pubdate>
+2023年6月19日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+18k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+151 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">使用伏格尔法解决运输问题</h1>
+<div class="markdown-body">
+<p>物流和供应链管理是当前管理研究的热点和前沿领域。供应链是一个由物流系统和该供应链中的所有单个组织或企业相关活动组成的网络。为满足供应链中顾客需求，需要对商品服务及相关信息，从产地到消费地高效率低成本地流动及储存进行规划、执行和控制。运筹学中对运输模型的研究为达到上述目的提供相应的理论基础。</p>
+<h1 id="1-运输问题的数学模型">1 运输问题的数学模型</h1>
+<p>在经济建设中，经常碰到大宗物资调运问题。如煤、钢铁、木材、粮食等物资，在全国有若干生产基地，根据已有的交通网，应如何制订调运方案，将这些物资运到各消费地点，而总运费要最小。这问题可用以下数学语言描述。</p>
+<p>已知有m个生产地点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">A_i,i=1,2,\cdots ,m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8778em"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8389em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">m</span></span></span></span>。可供应某种物资，其供应量（产量）分别为<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">a_i,i=1,2,\cdots ,m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.854em"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8389em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">m</span></span></span></span>,有n个销地<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>j</mi></msub><mo separator="true">,</mo><mi>j</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">B_j, j=1,2,\cdots , n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9694em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0502em">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:-.0502em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal" style="margin-right:.0572em">j</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8389em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">n</span></span></span></span>,其需要量分别为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>j</mi></msub><mo separator="true">,</mo><mi>j</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">b_j,j=1,2,\cdots ,n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9805em"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal" style="margin-right:.0572em">j</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8389em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">n</span></span></span></span>，从<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.15em;height:.8333em"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">B_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9694em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0502em">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:-.0502em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span></span>，运输单位物资的运价（单价）为c，这些数据可汇总于产销平衡表和单位运价表中，见<br>
+表4-1，表4-2。有时可把这两表合二为一。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201509092.png" srcset="/img/loading.gif" lazyload alt="QQ截图20230620150836"></p>
+<p>若用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">x_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.7167em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span></span>表示从<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">A_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.15em;height:.8333em"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span></span></span></span>到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">B_j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9694em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.0502em">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:-.0502em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span></span>的运量，那么在产销平衡的条件下，要求得总运费最小的调运方案，可求解以下数学模型</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>min</mi><mo>⁡</mo><mi>z</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>c</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo fence="true">{</mo><mtable rowspacing="0.16em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>b</mi><mi>j</mi></msub><mo separator="true">,</mo><mspace width="1em"/><mi>j</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>n</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>m</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>⩾</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned} \min z=\sum_{i=1}^{m} \sum_{j=1}^{n} c_{i j} x_{i j} \\ \left\{\begin{array}{l} \sum_{i=1}^{m} x_{i j}=b_{j}, \quad j=1,2, \cdots, n \\ \sum_{j=1}^{n} x_{i j}=a_{i}, \quad i=1,2, \cdots, m \\ x_{i j} \geqslant 0 \end{array}\right. \end{aligned}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-3.2705em;height:7.041em"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.7705em"><span style="top:-6.207em"><span class="pstrut" style="height:4.0879em"></span><span class="mord"><span class="mop">min</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal" style="margin-right:.044em">z</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span><span style="top:-2.4053em"><span class="pstrut" style="height:4.0879em"></span><span class="mord"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em"><span style="top:-2.5em"><span class="pstrut" style="height:3.15em"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-2.492em"><span class="pstrut" style="height:3.15em"></span><span style="width:.8889em;height:.016em"><svg xmlns="http://www.w3.org/2000/svg" width="0.8889em" height="0.016em" style="width:.8889em" viewBox="0 0 888.89 16" preserveAspectRatio="xMinYMin"><path d="M384 0 H504 V16 H384z M384 0 H504 V16 H384z"/></svg></span></span><span style="top:-3.15em"><span class="pstrut" style="height:3.15em"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.292em"><span class="pstrut" style="height:3.15em"></span><span style="width:.8889em;height:.016em"><svg xmlns="http://www.w3.org/2000/svg" width="0.8889em" height="0.016em" style="width:.8889em" viewBox="0 0 888.89 16" preserveAspectRatio="xMinYMin"><path d="M384 0 H504 V16 H384z M384 0 H504 V16 H384z"/></svg></span></span><span style="top:-4.3em"><span class="pstrut" style="height:3.15em"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:.5em"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0879em"><span style="top:-4.2479em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.8043em"><span style="margin-left:0;margin-right:.05em;top:-2.4003em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="margin-right:.05em;top:-3.2029em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2997em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal" style="margin-right:.0572em">j</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">n</span></span></span><span style="top:-3.0479em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.8043em"><span style="margin-left:0;margin-right:.05em;top:-2.4003em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="margin-right:.05em;top:-3.2029em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.4358em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">m</span></span></span><span style="top:-1.7721em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel amsrm">⩾</span><span class="mspace" style="margin-right:.2778em"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5879em"><span></span></span></span></span></span><span class="arraycolsep" style="width:.5em"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.2705em"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>这就是运输问题的数学模型。它包含m*n个变量，(m+n)个约束方程。其系数矩阵的结构比较松散，且特殊。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201610931.png" srcset="/img/loading.gif" lazyload alt="QQ截图20230620150836"></p>
+<p>该系数矩阵中对应于变量x的系数向量P,其分量中除第i个和第m+j个为1以外，其余的都为零。即</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo>⋯</mo><mn>1</mn><mo>⋯</mo><mn>0</mn><mo>⋯</mo><mn>1</mn><mo>⋯</mo><mn>0</mn><msup><mo stretchy="false">)</mo><mi>T</mi></msup><mo>=</mo><msub><mi>e</mi><mi>i</mi></msub><mo>+</mo><msub><mi>e</mi><mrow><mi>m</mi><mo>+</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">P_{ij} = (0 \cdots 1 \cdots 0 \cdots 1 \cdots 0)^T = e_i + e_{m+j}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9694em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:.1389em">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:-.1389em;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.25em;height:1.1413em"></span><span class="mopen">(</span><span class="mord">0</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">1</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">0</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">1</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord">0</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:.8913em"><span style="margin-right:.05em;top:-3.113em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.1389em">T</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.15em;height:.7333em"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.7167em"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>对产销平衡的运输问题，由于有以下关系式存在</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>b</mi><mi>j</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo fence="true">(</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo fence="true">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mrow><mo fence="true">(</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo fence="true">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{j=1}^{n} b_{j}=\sum_{j=1}^{n}\left(\sum_{i=1}^{m} x_{i j}\right)=\sum_{i=1}^{m}\left(\sum_{j=1}^{n} x_{i j}\right)=\sum_{i=1}^{m} a_{i}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.4138em;height:3.0652em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.4138em;height:3.1638em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="minner"><span class="mopen delimcenter" style="top:0"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0"><span class="delimsizing size4">)</span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.4138em;height:3.1638em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="minner"><span class="mopen delimcenter" style="top:0"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0"><span class="delimsizing size4">)</span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.2777em;height:2.9291em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>所以模型最多只有m十n一1个独立约束方程。即系数矩阵的秩≤m十n一1。由于有以<br>
+上特征，所以求解运输问题时，可用比较简便的计算方法，习惯上称为表上作业法。</p>
+<p>对产销平衡的运输问题，一定存在可行解。又因为所有变量有界，因而存在最优解。</p>
+<h1 id="2-表上作业法">2 表上作业法</h1>
+<p>表上作业法是单纯形法在求解运输问题时的一种简化方法，其实质是单纯形法，故也<br>
+称运输问题单纯形法。但具体计算和术语有所不同。可归纳为：</p>
+<p>(1)找出初始基可行解。即在有(m*n)格的产销平衡表上按一定的规则，给出m+n-1个数字，称为数字格。它们就是初始基变量的取值。</p>
+<p>(2)求各非基变量的检验数，即在表上计算空格的检验数，判别是否达到最优解。如已是最优解，则停止计算，否则转到下一步。</p>
+<p>(3)确定换入变量和换出变量，找出新的基可行解。在表上用闭回路法调整。</p>
+<p>(4)重复(2),(3)直到得到最优解为止。</p>
+<p>以上运算都可以在表上完成。</p>
+<h2 id="2-1-确定初始基可行解">2.1 确定初始基可行解</h2>
+<p>这与一般线性规划问题不同。产销平衡的运输问题总是存在可行解。因有</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>b</mi><mi>j</mi></msub><mo>=</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">\sum_{i=1}^m a_i = \sum_{j=1}^n b_j = d
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.2777em;height:2.9291em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-1.4138em;height:3.0652em"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em"><span style="margin-left:0;top:-1.8723em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em"><span class="pstrut" style="height:3.05em"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="margin-left:0;top:-4.3em"><span class="pstrut" style="height:3.05em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em"><span></span></span></span></span></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6944em"></span><span class="mord mathnormal">d</span></span></span></span></span></p>
+<p>必存在</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>m</mi><mo separator="true">,</mo><mspace width="1em"/><mi>j</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">x_{ij}≥0, \quad i=1,\cdots,m, \quad j=1,…,n
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9221em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.854em"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.854em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:.1667em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">m</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em"></span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal" style="margin-right:.0572em">j</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.1944em;height:.8389em"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="minner">…</span><span class="mspace" style="margin-right:.1667em"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord mathnormal">n</span></span></span></span></span></p>
+<p>这就是基可行解。又因</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>x</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>≤</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>j</mi></msub><mo separator="true">,</mo><msub><mi>b</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">0 \le x_{ij} \le min(a_j, b_j)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="vertical-align:-.136em;height:.7804em"></span><span class="mord">0</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:.9221em"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.2861em;height:1.0361em"></span><span class="mord mathnormal">min</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:.1667em"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:.3117em"><span style="margin-left:0;margin-right:.05em;top:-2.55em"><span class="pstrut" style="height:2.7em"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:.0572em">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:.2861em"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>故运输问题必定存在最优解。</p>
+<h3 id="2-1-1-最小元素法">2.1.1 最小元素法</h3>
+<p>这方法的基本思想是就近供应，即从单位运价表中最小的运价开始确定供销关系，然后次小。一直到给出初始基可行解为止。</p>
+<h3 id="2-1-2-伏格尔法">2.1.2 伏格尔法</h3>
+<p>最小元素法的缺点是：可能开始时节省一处的费用，但随后在其他处要多花几倍的运费。伏格尔法考虑到，一产地的产品假如不能按最小运费就近供应，就考虑次小运费，这就有一个差额（也称罚数）。差额越大，说明不能按最小运费调运时，运费增加越多。因而对差额最大处，就应当采用最小运费调运。基于此，伏格尔法的步骤是：</p>
+<p>① 首先计算运输表中每一行和每一列的次小单位运价和最小单位运价之间的差值，分别称为行罚数和列罚数。</p>
+<p>② 选取这些罚数中最大者（若存在最大罚数相同的情况，则任选其中一个）所在的行或列的最小单位运价所在的格子，在格子中给其分配尽可能大的运量，划去该行 / 该列。</p>
+<p>③ 在尚未划去的各行或各列中，重复以上步骤，直到最后一个格子也被分配上运量，得到所求运输问题的初始基可行解。</p>
+<p><strong>案例</strong></p>
+<p>某部门有 3 个生产同类型的工厂（产地），生产的产品有 4 个销售点（销地）出售，各工厂的生产量（单位：吨）、各销售点的销售量（单位吨）以及各工厂到各销售点单位运价（百元：吨）如下表所示：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201610932.png" srcset="/img/loading.gif" lazyload alt="题目.png"></p>
+<p>适当安排调运方案，最小总运费为（）</p>
+<p>A . 450</p>
+<p>B . 455</p>
+<p>C . 460</p>
+<p>D . 465</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>找出各行各列最小元素和次小元素的差额，最大差值为 B2 列，该列销售量 28 赋予最小元素 5</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201610933.png" srcset="/img/loading.gif" lazyload alt="0.png"></p>
+<p>第一次计算运费为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>∗</mo><mn>28</mn></mrow><annotation encoding="application/x-tex">5*28</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">5</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">28</span></span></span></span></p>
+<ol>
+<li>
+<p>重新计算各行各列最小元素和次小元素的差额，最大差值为 B4 列，该列销量 24，由于受产量限制，将 A3 产量 16 赋予最小元素 6</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201610934.png" srcset="/img/loading.gif" lazyload alt="1.png"></p>
+</li>
+</ol>
+<p>第二次计算的运费为：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>∗</mo><mn>28</mn><mo>+</mo><mn>16</mn><mo>∗</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">5*28+16*6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">5</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">6</span></span></span></span></p>
+<ol>
+<li>重新计算各行各列最小元素和次小元素的差额。最大差值 B1 列。将销量 16 赋予最小元素 2</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201610935.png" srcset="/img/loading.gif" lazyload alt="2.png"></p>
+<p>第三次计算：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>∗</mo><mn>28</mn><mo>+</mo><mn>16</mn><mo>∗</mo><mn>6</mn><mo>+</mo><mn>2</mn><mo>∗</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">5*28+16*6+2*16</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">5</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">6</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">2</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">16</span></span></span></span></p>
+<ol>
+<li>
+<p>重新计算各行各列最小元素和次小元素的差额，最大差值 A1 行，赋予销量 28 给元素 4</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201536531.png" srcset="/img/loading.gif" lazyload alt="3.png"></p>
+</li>
+</ol>
+<p>第四次计算：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>∗</mo><mn>28</mn><mo>+</mo><mn>16</mn><mo>∗</mo><mn>6</mn><mo>+</mo><mn>2</mn><mo>∗</mo><mn>16</mn><mo>+</mo><mn>28</mn><mo>∗</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">5*28+16*6+2*16+28*4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">5</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">6</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">2</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">4</span></span></span></span></p>
+<ol>
+<li>
+<p>重新计算各行各列最小元素和次小元素的差额，将最后剩下的销量 8 吨中，4 吨分给元素 9，4 吨分元素 11</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201536363.png" srcset="/img/loading.gif" lazyload alt="4.png"></p>
+</li>
+</ol>
+<p>最终总运费为=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>∗</mo><mn>28</mn><mo>+</mo><mn>16</mn><mo>∗</mo><mn>6</mn><mo>+</mo><mn>2</mn><mo>∗</mo><mn>16</mn><mo>+</mo><mn>28</mn><mo>∗</mo><mn>4</mn><mo>+</mo><mn>11</mn><mo>∗</mo><mn>4</mn><mo>+</mo><mn>9</mn><mo>∗</mo><mn>4</mn><mo>=</mo><mn>460</mn></mrow><annotation encoding="application/x-tex">5*28+16*6+2*16+28*4+11*4+9*4=460</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">5</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">6</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">2</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">16</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">28</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">4</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">11</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="vertical-align:-.0833em;height:.7278em"></span><span class="mord">4</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">9</span><span class="mspace" style="margin-right:.2222em"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:.2222em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">4</span><span class="mspace" style="margin-right:.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:.2778em"></span></span><span class="katex-base"><span class="katex-strut" style="height:.6444em"></span><span class="mord">460</span></span></span></span></p>
+<h2 id="2-2-最优解的判别">2.2 最优解的判别</h2>
+<h3 id="2-2-1-闭回路法">2.2.1 闭回路法</h3>
+<h3 id="2-2-2-位势法">2.2.2 位势法</h3>
+<p>在得到运输问题的初始基可行解后，应对该解做最优性判别。位势法就是用来判断解的最优性的一种方法，其实质是在求解单纯形表中非基变量的检验数。该方法适用于产地和销地较少的运输问题。</p>
+<p>★求解步骤</p>
+<p>① 在所求得的初始基可行解的表中增加位势列和位势行；</p>
+<p>② 由于基变量的检验数等于 0，对这组基变量可以构建位势方程组：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306201618711.jpeg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306201618198.jpeg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306201618010.jpeg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306201618247.jpeg" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="2-3-代码实现">2.3 代码实现</h2>
+<h3 id="2-3-1-伏格尔法">2.3.1 伏格尔法</h3>
+<p>使用下面的 EXCEL 文件作为运输表（最后一行表示销量，最后一列表示产量），文件名为 TP_PPT_Sample1.xlsx：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201607995.png" srcset="/img/loading.gif" lazyload alt="data.png"></p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201607739.png" srcset="/img/loading.gif" lazyload alt="a90d8988-5fc9-4a30-a3b3-87f1b8404142"></p>
+<p>然后在 Python 中执行以下代码：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">import numpy as np
+import copy
+import pandas as pd
+
+
+# 运输问题求解：使用Vogel逼近法寻找初始基本可行解
+def TP_split_matrix(mat):
+    # 将运输表拆分为成本矩阵c、供给向量a、需求向量b
+    c &#x3D; mat[:-1, :-1]
+    a &#x3D; mat[:-1, -1]
+    b &#x3D; mat[-1, :-1]
+    return (c, a, b)
+
+
+def TP_vogel(var):
+    # Vogel法代码，变量var可以是以numpy.ndarray保存的运输表，或以tuple或list保存的(成本矩阵,供给向量,需求向量)
+    import numpy
+
+    # 检查var的类型
+    typevar1 &#x3D; type(var) &#x3D;&#x3D; numpy.ndarray
+    typevar2 &#x3D; type(var) &#x3D;&#x3D; tuple
+    typevar3 &#x3D; type(var) &#x3D;&#x3D; list
+
+    # 格式化输入
+    if typevar1 &#x3D;&#x3D; False and typevar2 &#x3D;&#x3D; False and typevar3 &#x3D;&#x3D; False:
+        # 如果var的类型不符合要求，则输出错误信息并返回None
+        print(&#39;&gt;&gt;&gt;非法变量&lt;&lt;&lt;&#39;)
+        (cost, x) &#x3D; (None, None)
+    else:
+        if typevar1 &#x3D;&#x3D; True:
+            # 如果var是ndarray类型，则将其拆分为成本矩阵c、供给向量a、需求向量b
+            [c, a, b] &#x3D; TP_split_matrix(var)
+        elif typevar2 &#x3D;&#x3D; True or typevar3 &#x3D;&#x3D; True:
+            # 如果var是tuple或list类型，则直接取出成本矩阵c、供给向量a、需求向量b
+            [c, a, b] &#x3D; var
+
+        # 深拷贝成本矩阵c，用于记录原始成本矩阵
+        cost &#x3D; copy.deepcopy(c)
+
+        # 初始化运输方案矩阵x，全为0
+        x &#x3D; np.zeros(c.shape)
+
+        # 设置一个大的数M，用于表示无穷大
+        M &#x3D; pow(10, 9)
+
+        # 迭代处理成本矩阵c中的每个元素
+        for factor in c.reshape(1, -1)[0]:
+            # 直到所有元素都达到最大值M，或者成本矩阵中所有元素都相等且等于最大值M。
+            while int(factor) !&#x3D; M:
+                if np.all(c &#x3D;&#x3D; M):
+                    break
+                else:
+                    # 在每次迭代时，将打印当前的成本矩阵c，以便观察迭代过程。
+                    print(&#39;c:\n&#39;, c)
+
+                    # 获取行&#x2F;列最小值数组
+                    row_mini1 &#x3D; []
+                    row_mini2 &#x3D; []
+                    for row in range(c.shape[0]):
+                        Row &#x3D; list(c[row, :])
+                        row_min &#x3D; min(Row)  # 最小值
+                        row_mini1.append(row_min)
+                        Row.remove(row_min)
+                        row_2nd_min &#x3D; min(Row)  # 次小值
+                        row_mini2.append(row_2nd_min)
+                    # 求解罚数
+                    r_pun &#x3D; [row_mini2[i] - row_mini1[i] for i in range(len(row_mini1))]
+                    print(&#39;行罚数：&#39;, r_pun)
+
+                    # 计算列罚数
+                    col_mini1 &#x3D; []
+                    col_mini2 &#x3D; []
+                    for col in range(c.shape[1]):
+                        Col &#x3D; list(c[:, col])
+                        col_min &#x3D; min(Col)
+                        col_mini1.append(col_min)
+                        Col.remove(col_min)
+                        col_2nd_min &#x3D; min(Col)
+                        col_mini2.append(col_2nd_min)
+                    c_pun &#x3D; [col_mini2[i] - col_mini1[i] for i in range(len(col_mini1))]
+                    print(&#39;列罚数：&#39;, c_pun)
+
+                    # 将行罚数和列罚数合并为罚数向量
+                    pun &#x3D; copy.deepcopy(r_pun)
+                    pun.extend(c_pun)
+                    print(&#39;罚数向量：&#39;, pun)
+
+                    # 找到最大罚数及其索引
+                    max_pun &#x3D; max(pun)
+                    max_pun_index &#x3D; pun.index(max(pun))
+                    max_pun_num &#x3D; max_pun_index + 1
+                    print(&#39;最大罚数：&#39;, max_pun, &#39;元素序号：&#39;, max_pun_num)
+
+                    # 前面是行，后面是列。这里是判断最大罚数的位置
+                    if max_pun_num &lt;&#x3D; len(r_pun):
+                        # 对行进行操作
+                        row_num &#x3D; max_pun_num
+                        print(&#39;对第&#39;, row_num, &#39;行进行操作：&#39;)
+                        row_index &#x3D; row_num - 1
+                        catch_row &#x3D; c[row_index, :]
+                        print(catch_row)
+                        min_cost_colindex &#x3D; int(np.argwhere(catch_row &#x3D;&#x3D; min(catch_row)))
+                        print(&#39;最小成本所在列索引：&#39;, min_cost_colindex)
+
+                        if a[row_index] &lt;&#x3D; b[min_cost_colindex]:
+                            x[row_index, min_cost_colindex] &#x3D; a[row_index]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[row_index, :] &#x3D; [M] * c1.shape[1]
+                            b[min_cost_colindex] -&#x3D; a[row_index]
+                            a[row_index] -&#x3D; a[row_index]
+                        else:
+                            x[row_index, min_cost_colindex] &#x3D; b[min_cost_colindex]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[:, min_cost_colindex] &#x3D; [M] * c1.shape[0]
+                            a[row_index] -&#x3D; b[min_cost_colindex]
+                            b[min_cost_colindex] -&#x3D; b[min_cost_colindex]
+                    else:
+                        # 对列进行操作
+                        col_num &#x3D; max_pun_num - len(r_pun)
+                        col_index &#x3D; col_num - 1
+                        print(&#39;对第&#39;, col_num, &#39;列进行操作：&#39;)
+                        catch_col &#x3D; c[:, col_index]
+                        print(catch_col)
+
+                        # 寻找最大罚数所在行&#x2F;列的最小成本系数
+                        min_cost_rowindex &#x3D; int(np.argwhere(catch_col &#x3D;&#x3D; min(catch_col)))
+                        print(&#39;最小成本所在行索引：&#39;, min_cost_rowindex)
+
+                        # 计算将该位置应填入x矩阵的数值（a,b中较小值）
+                        if a[min_cost_rowindex] &lt;&#x3D; b[col_index]:
+                            x[min_cost_rowindex, col_index] &#x3D; a[min_cost_rowindex]
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[min_cost_rowindex, :] &#x3D; [M] * c1.shape[1]
+                            b[col_index] -&#x3D; a[min_cost_rowindex]
+                            a[min_cost_rowindex] -&#x3D; a[min_cost_rowindex]
+                        else:
+                            x[min_cost_rowindex, col_index] &#x3D; b[col_index]
+                            # 填入后删除已满足&#x2F;耗尽资源系数的行&#x2F;列，得到剩余的成本矩阵，并改写资源系数
+                            c1 &#x3D; copy.deepcopy(c)
+                            c1[:, col_index] &#x3D; [M] * c1.shape[0]
+                            a[min_cost_rowindex] -&#x3D; b[col_index]
+                            b[col_index] -&#x3D; b[col_index]
+
+                    c &#x3D; c1
+                    print(&#39;本次迭代后的x矩阵：\n&#39;, x)
+                    print(&#39;a:&#39;, a)
+                    print(&#39;b:&#39;, b)
+                    print(&#39;c:\n&#39;, c)
+
+                if np.all(c &#x3D;&#x3D; M):
+                    print(&#39;【迭代完成】&#39;)
+                    print(&#39;-&#39; * 60)
+                else:
+                    print(&#39;【迭代未完成】&#39;)
+                    print(&#39;-&#39; * 60)
+
+        # 计算总成本
+        total_cost &#x3D; np.sum(np.multiply(x, cost))
+
+        # 判断运输问题类别
+        if np.all(a &#x3D;&#x3D; 0):
+            if np.all(b &#x3D;&#x3D; 0):
+                print(&#39;&gt;&gt;&gt;供求平衡&lt;&lt;&lt;&#39;)
+            else:
+                print(&#39;&gt;&gt;&gt;供不应求，需求方有余量&lt;&lt;&lt;&#39;)
+        elif np.all(b &#x3D;&#x3D; 0):
+            print(&#39;&gt;&gt;&gt;供大于求，供给方有余量&lt;&lt;&lt;&#39;)
+        else:
+            print(&#39;&gt;&gt;&gt;无法找到初始基可行解&lt;&lt;&lt;&#39;)
+
+        print(&#39;&gt;&gt;&gt;初始基本可行解x*：\n&#39;, x)
+        print(&#39;&gt;&gt;&gt;当前总成本：&#39;, total_cost)
+
+        [m, n] &#x3D; x.shape
+        varnum &#x3D; np.array(np.nonzero(x)).shape[1]
+
+        # 根据秩来判断是否有退化解
+        if varnum !&#x3D; m + n - 1:
+            print(&#39;【注意：问题含有退化解】&#39;)
+
+    return (cost, x)
+
+
+path &#x3D; r&#39;TP_PPT_Sample1.xlsx&#39;
+mat &#x3D; pd.read_excel(path, header&#x3D;None).values
+# c&#x3D;np.array([[3,11,3,10],[1,9,2,8],[7,4,10,5]])
+# a&#x3D;np.array([7,4,9])
+# b&#x3D;np.array([3,6,5,6])
+[c, x] &#x3D; TP_vogel(mat)
+# [c,x]&#x3D;TP_vogel([c,a,b])</code></pre></div></figure>
+<p>运行代码结果</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">c:
+ [[ 3. 11.  3. 10.]
+ [ 1.  9.  2.  8.]
+ [ 7.  4. 10.  5.]]
+行罚数： [0.0, 1.0, 1.0]
+列罚数： [2.0, 5.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]
+最大罚数： 5.0 元素序号： 5
+对第 2 列进行操作：
+[11.  9.  4.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 0.]]
+a: [7. 4. 3.]
+b: [3. 0. 5. 6.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+行罚数： [0.0, 1.0, 2.0]
+列罚数： [2.0, 0.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]
+最大罚数： 3.0 元素序号： 7
+对第 4 列进行操作：
+[10.  8.  5.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 4. 0.]
+b: [3. 0. 5. 3.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [0.0, 1.0, 0.0]
+列罚数： [2.0, 0.0, 1.0, 2.0]
+罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]
+最大罚数： 2.0 元素序号： 4
+对第 1 列进行操作：
+[3.e+00 1.e+00 1.e+09]
+最小成本所在行索引： 1
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 1. 0.]
+b: [0. 0. 5. 3.]
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [7.0, 6.0, 0.0]
+列罚数： [0.0, 0.0, 1.0, 2.0]
+罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]
+最大罚数： 7.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 3.e+00 1.e+01]
+最小成本所在列索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [2. 1. 0.]
+b: [0. 0. 0. 3.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 999999992.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 2.0]
+罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]
+最大罚数： 999999992.0 元素序号： 2
+对第 2 行进行操作：
+[1.e+09 1.e+09 1.e+09 8.e+00]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [2. 0. 0.]
+b: [0. 0. 0. 2.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 0.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 999999990.0]
+罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]
+最大罚数： 999999990.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 1.e+09 1.e+01]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [0. 0. 0.]
+b: [0. 0. 0. 0.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代完成】
+------------------------------------------------------------
+&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+&gt;&gt;&gt;当前总成本： 85.0</code></pre></div></figure>
+<p>下面举一个退化解的例子：</p>
+<p>退化解指的是在计算过程中，初始基本可行解中的基变量数量少于m+n-1，其中m和n分别为运输问题的供应源和需求点的数量。换句话说，退化解是一种特殊情况，其中一些供应源和需求点没有在初始基本可行解中使用。</p>
+<p>退化解的出现可能导致后续的迭代过程无法继续进行，因为基变量数量不足以满足问题的要求。这会影响最终解的有效性和准确性。</p>
+<p>在退化解的情况下，通常需要采取特殊的策略来处理，以确保迭代过程的正常进行。这可能包括修改初始基本可行解或应用其他算法来解决问题。</p>
+<p>一运输问题的运输表如下：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306201608691.png" srcset="/img/loading.gif" lazyload alt="data2.png"></p>
+<p>将以上表格保存为 TP_Text_5.9.xlsx，在 Python 中求解。程序运行的最终结果为：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[1. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 1. 0. 0. 0.]]
+&gt;&gt;&gt;当前总成本： 0.8999999999999999
+【注意：问题含有退化解】</code></pre></div></figure>
+<p>最终得到的初始基可行解只含有 5 个非零变量，而 (m+n-1)=9，可见发生了退化。</p>
+<h3 id="2-3-2-位势法判断最优解">2.3.2 位势法判断最优解</h3>
+<p>在实现伏格尔法的基础上添加下列函数，以及函数调用<code>sigma=TP_potential(c,x)</code>。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">def create_c_nonzeros(c, x):
+    &quot;&quot;&quot;
+    根据运输问题中的需求矩阵x创建一个与成本矩阵c相同形状的新矩阵c_nonzeros，其中非零元素与x相对应位置上的元素相乘，而零元素仍保持为零。
+    &quot;&quot;&quot;
+    import numpy as np
+    import copy
+    nonzeros &#x3D; copy.deepcopy(x)
+    for i in range(x.shape[0]):
+        for j in range(x.shape[1]):
+            if x[i, j] !&#x3D; 0:
+                nonzeros[i, j] &#x3D; 1
+    # print(nonzeros)
+    c_nonzeros &#x3D; np.multiply(c, nonzeros)
+    return c_nonzeros
+
+
+def if_dsquare(a, b):
+    &quot;&quot;&quot;
+    函数if_dsquare用于判断位势方程组是否可解。
+    根据输入的系数矩阵a和值向量b，函数检查矩阵的维度和条件来判断是否可解。
+    如果位势方程组可解，则返回True；如果不可解，则返回False。
+    :param a: 系数矩阵a
+    :param b: 值向量b
+    :return: 位势方程组可解，为True
+    &quot;&quot;&quot;
+    print(&#39;a:&#39;, a.shape, &#39;\n&#39;, &#39;b:&#39;, b.shape)
+    correct &#x3D; &#39;&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;&#39;
+    error &#x3D; &#39;&gt;&gt;&gt;位势方程组不可解，请检查基变量个数是否等于(m+n-1)及位势未知量个数是否等于(m+n)&lt;&lt;&lt;&#39;
+    if len(a.shape) &#x3D;&#x3D; 2:
+        if len(b.shape) &#x3D;&#x3D; 2:
+            if a.shape[0] &#x3D;&#x3D; a.shape[1] and a.shape &#x3D;&#x3D; b.shape:
+                print(correct)
+                if_dsquare &#x3D; True
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        elif len(b.shape) &#x3D;&#x3D; 1 and b.shape[0] !&#x3D; 0:
+            if a.shape[0] &#x3D;&#x3D; a.shape[1] and a.shape[0] &#x3D;&#x3D; b.shape[0]:
+                print(correct)
+                if_dsquare &#x3D; True
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        else:
+            print(error)
+            if_dsquare &#x3D; False
+    elif len(a.shape) &#x3D;&#x3D; 1:
+        if len(b.shape) &#x3D;&#x3D; 2:
+            if b.shape[0] &#x3D;&#x3D; b.shape[1] and a.shape[0] &#x3D;&#x3D; b.shape[0]:
+                print(&#39;&gt;&gt;&gt;位势方程组系数矩阵与方程组值向量位置错误&lt;&lt;&lt;&#39;)
+                if_dsquare &#x3D; &#39;True but not solvable&#39;
+            else:
+                print(error)
+                if_dsquare &#x3D; False
+        elif len(b.shape) &#x3D;&#x3D; 1:
+            print(error)
+            if_dsquare &#x3D; False
+        else:
+            print(error)
+            if_dsquare &#x3D; False
+    else:
+        print(error)
+        if_dsquare &#x3D; False
+    return if_dsquare
+
+
+def TP_potential(cost, x):
+    &quot;&quot;&quot;
+    运输问题的位势法求解函数。首先，它计算变量的数量varnum，如果varnum不等于m + n - 1（基变量的数量），
+    则表示问题存在退化解，将返回None，并输出相应的提示信息。如果varnum满足条件，则继续进行位势法的计算。
+    :param cost: 成本矩阵cost
+    :param x: 需求矩阵x
+    :return:
+    &quot;&quot;&quot;
+    [m, n] &#x3D; x.shape
+    varnum &#x3D; np.array(np.nonzero(x)).shape[1]
+    if varnum !&#x3D; m + n - 1:
+        sigma &#x3D; None
+        print(&#39;【问题含有退化解，暂时无法判断最优性】&#39;)
+    else:
+        # print(c_nonzeros.shape)
+        c_nonzeros &#x3D; create_c_nonzeros(c, x)
+        cc_nonzeros &#x3D; np.array(np.nonzero(c_nonzeros))
+        A &#x3D; []
+        B &#x3D; []
+        length &#x3D; c_nonzeros.shape[0] + c_nonzeros.shape[1]
+        zeros &#x3D; np.zeros((1, length))[0]
+        for i in range(cc_nonzeros.shape[1]):
+            zeros &#x3D; np.zeros((1, length))[0]
+            zeros[cc_nonzeros[0, i]] &#x3D; 1
+            zeros[cc_nonzeros[1, i] + c_nonzeros.shape[0]] &#x3D; 1
+            A.append(zeros)
+            B.append(c_nonzeros[cc_nonzeros[0, i], cc_nonzeros[1, i]])
+        l &#x3D; [1]
+        for j in range(length - 1):
+            l.append(0)  # 补充一个x1&#x3D;0的方程以满足求解条件
+        A.append(l)
+        B.append(0)
+        # print(A)
+        # print(B)
+        A &#x3D; np.array(A)
+        B &#x3D; np.array(B)
+        judge &#x3D; if_dsquare(A, B)
+        if judge &#x3D;&#x3D; True:
+            sol &#x3D; np.linalg.solve(A, B)  # 求解条件：A的行数（方程个数)&#x3D;A的列数(变量个数）&#x3D;B的个数（方程结果个数）才能解
+            # print(sol)
+            var &#x3D; []  # 创建位势名称数组
+            for i in range(c_nonzeros.shape[0]):
+                var.append(&#39;u&#39; + str(i + 1))
+            for j in range(c_nonzeros.shape[1]):
+                var.append(&#39;v&#39; + str(j + 1))
+            # print(var)
+            solset &#x3D; dict(zip(var, sol))
+            print(&#39;&gt;&gt;&gt;当前位势:\n&#39;, solset)
+            u &#x3D; []
+            v &#x3D; []
+            [m, n] &#x3D; c_nonzeros.shape
+            zero_places &#x3D; np.transpose(np.argwhere(c_nonzeros &#x3D;&#x3D; 0))
+            for i in range(m):
+                u.append(sol[i])
+            for j in range(n):
+                v.append(sol[j + m])
+            for k in range(zero_places.shape[1]):
+                c_nonzeros[zero_places[0, k], zero_places[1, k]] &#x3D; u[zero_places[0, k]] + v[zero_places[1, k]]
+            # print(c_nonzeros)
+            sigma &#x3D; cost - c_nonzeros
+            print(&#39;&gt;&gt;&gt;检验表σ：\n&#39;, sigma)
+            if np.all(sigma &gt;&#x3D; 0):
+                print(&#39;&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;&#39;)
+            else:
+                print(&#39;&gt;&gt;&gt;TP未达到最优解&lt;&lt;&lt;&#39;)
+        else:
+            sigma &#x3D; None
+            print(&#39;&gt;&gt;&gt;位势方程组不可解&lt;&lt;&lt;&#39;)
+    return sigma</code></pre></div></figure>
+<p>结果</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">c:
+ [[ 3. 11.  3. 10.]
+ [ 1.  9.  2.  8.]
+ [ 7.  4. 10.  5.]]
+行罚数： [0.0, 1.0, 1.0]
+列罚数： [2.0, 5.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 1.0, 2.0, 5.0, 1.0, 3.0]
+最大罚数： 5.0 元素序号： 5
+对第 2 列进行操作：
+[11.  9.  4.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 0.]]
+a: [7. 4. 3.]
+b: [3. 0. 5. 6.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [7.e+00 1.e+09 1.e+01 5.e+00]]
+行罚数： [0.0, 1.0, 2.0]
+列罚数： [2.0, 0.0, 1.0, 3.0]
+罚数向量： [0.0, 1.0, 2.0, 2.0, 0.0, 1.0, 3.0]
+最大罚数： 3.0 元素序号： 7
+对第 4 列进行操作：
+[10.  8.  5.]
+最小成本所在行索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 4. 0.]
+b: [3. 0. 5. 3.]
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[3.e+00 1.e+09 3.e+00 1.e+01]
+ [1.e+00 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [0.0, 1.0, 0.0]
+列罚数： [2.0, 0.0, 1.0, 2.0]
+罚数向量： [0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 2.0]
+最大罚数： 2.0 元素序号： 4
+对第 1 列进行操作：
+[3.e+00 1.e+00 1.e+09]
+最小成本所在行索引： 1
+本次迭代后的x矩阵：
+ [[0. 0. 0. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [7. 1. 0.]
+b: [0. 0. 5. 3.]
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 3.e+00 1.e+01]
+ [1.e+09 1.e+09 2.e+00 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [7.0, 6.0, 0.0]
+列罚数： [0.0, 0.0, 1.0, 2.0]
+罚数向量： [7.0, 6.0, 0.0, 0.0, 0.0, 1.0, 2.0]
+最大罚数： 7.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 3.e+00 1.e+01]
+最小成本所在列索引： 2
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 0.]
+ [0. 6. 0. 3.]]
+a: [2. 1. 0.]
+b: [0. 0. 0. 3.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 8.e+00]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 999999992.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 2.0]
+罚数向量： [999999990.0, 999999992.0, 0.0, 0.0, 0.0, 0.0, 2.0]
+最大罚数： 999999992.0 元素序号： 2
+对第 2 行进行操作：
+[1.e+09 1.e+09 1.e+09 8.e+00]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 0.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [2. 0. 0.]
+b: [0. 0. 0. 2.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代未完成】
+------------------------------------------------------------
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+01]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+行罚数： [999999990.0, 0.0, 0.0]
+列罚数： [0.0, 0.0, 0.0, 999999990.0]
+罚数向量： [999999990.0, 0.0, 0.0, 0.0, 0.0, 0.0, 999999990.0]
+最大罚数： 999999990.0 元素序号： 1
+对第 1 行进行操作：
+[1.e+09 1.e+09 1.e+09 1.e+01]
+最小成本所在列索引： 3
+本次迭代后的x矩阵：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+a: [0. 0. 0.]
+b: [0. 0. 0. 0.]
+c:
+ [[1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]
+ [1.e+09 1.e+09 1.e+09 1.e+09]]
+【迭代完成】
+------------------------------------------------------------
+&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[0. 0. 5. 2.]
+ [3. 0. 0. 1.]
+ [0. 6. 0. 3.]]
+&gt;&gt;&gt;当前总成本： 85.0
+&gt;&gt;&gt;位势方程组可解&lt;&lt;&lt;
+&gt;&gt;&gt;当前位势:
+ &#123;&#39;u1&#39;: 0.0, &#39;u2&#39;: -2.0, &#39;u3&#39;: -5.0, &#39;v1&#39;: 3.0, &#39;v2&#39;: 9.0, &#39;v3&#39;: 3.0, &#39;v4&#39;: 10.0&#125;
+&gt;&gt;&gt;检验数表σ：
+ [[ 0.  2.  0.  0.]
+ [ 0.  2.  1.  0.]
+ [ 9.  0. 12.  0.]]
+&gt;&gt;&gt;TP已达到最优解&lt;&lt;&lt;</code></pre></div></figure>
+<p>退化现象的问题暂时不可解。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt;&gt;&gt;供求平衡&lt;&lt;&lt;
+&gt;&gt;&gt;初始基本可行解x*：
+ [[1. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 1. 0. 0. 0.]]
+&gt;&gt;&gt;当前总成本： 0.8999999999999999
+【注意：问题含有退化解】
+【问题含有退化解，暂时无法判断最优性】</code></pre></div></figure>
+<p>参考资料：</p>
+<blockquote>
+<p>运筹学 第4版 钱颂迪 清华大学出版社</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/448725456">https://zhuanlan.zhihu.com/p/448725456</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46927406/article/details/109903843">https://blog.csdn.net/m0_46927406/article/details/109903843</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46927406/article/details/110070154">https://blog.csdn.net/m0_46927406/article/details/110070154</a></p>
+</blockquote>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/" class="category-chain-item">研究方向</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Python/" class="print-no-link">#Python</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>使用伏格尔法解决运输问题</div>
+<div>https://blog.fulequn.online/2023/06/Article202306192/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2023年6月19日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2023/06/Article202306201/" title="语音方面的项目（包含介绍）">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">语音方面的项目（包含介绍）</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2023/06/Article202306191/" title="组合拍卖知识总结">
+<span class="hidden-mobile">组合拍卖知识总结</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

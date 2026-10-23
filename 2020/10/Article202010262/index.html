@@ -1,0 +1,1318 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="参考链接： https:&#x2F;&#x2F;blog.csdn.net&#x2F;lm_is_dc&#x2F;article&#x2F;details&#x2F;81191207  matplotlib绘图 关注公众号“轻松学编程”了解更多。 Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图 %matplotlib inline 是IPython 中的一个魔法函数。 以下命令都是在浏览器中输入。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据分析使用matplotlib">
+<meta property="og:url" content="https://blog.fulequn.online/2020/10/Article202010262/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="参考链接： https:&#x2F;&#x2F;blog.csdn.net&#x2F;lm_is_dc&#x2F;article&#x2F;details&#x2F;81191207  matplotlib绘图 关注公众号“轻松学编程”了解更多。 Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图 %matplotlib inline 是IPython 中的一个魔法函数。 以下命令都是在浏览器中输入。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919156.png">
+<meta property="article:published_time" content="2020-10-26T01:09:30.000Z">
+<meta property="article:modified_time" content="2020-10-26T01:09:30.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Matplotlib">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919156.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python数据分析使用matplotlib","description":"参考链接： https://blog.csdn.net/lm_is_dc/article/details/81191207  matplotlib绘图 关注公众号“轻松学编程”了解更多。 Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图 %matplotlib inline 是IPython 中的一个魔法函数。 以下命令都是在浏览器中输入。","url":"https://blog.fulequn.online/2020/10/Article202010262/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/10/Article202010262/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-10-26T01:09:30.000Z","dateModified":"2020-10-26T01:09:30.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919156.png"}</script>
+<title>Python数据分析使用matplotlib - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Python数据分析使用matplotlib"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-10-26 09:09" pubdate>
+2020年10月26日 上午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+12k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+101 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Python数据分析使用matplotlib</h1>
+<div class="markdown-body">
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lm_is_dc/article/details/81191207">https://blog.csdn.net/lm_is_dc/article/details/81191207</a></p>
+</blockquote>
+<h1 id="matplotlib绘图">matplotlib绘图</h1>
+<p><strong>关注公众号“轻松学编程”了解更多。</strong></p>
+<p>Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图</p>
+<p>%matplotlib inline 是IPython 中的一个魔法函数。</p>
+<p>以下命令都是在浏览器中输入。</p>
+<p>cmd命令窗口输入：jupyter notebook</p>
+<p>后打开浏览器输入网址<a target="_blank" rel="noopener" href="http://localhost:8888/">http://localhost:8888/</a></p>
+<h2 id="导入库">导入库</h2>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> pandas <span class="token keyword">import</span> Series<span class="token punctuation">,</span>DataFrame
+<span class="token comment">#内嵌画图</span>
+<span class="token operator">%</span>matplotlib inline
+<span class="token comment">#绘图时可以显示中文</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.sans-serif'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">False</span></code></pre></div></figure>
+<h2 id="一、Matplotlib基础知识">一、Matplotlib基础知识</h2>
+<p>Matplotlib中的基本图表包括的元素</p>
+<ul>
+<li>x轴和y轴 axis<br>
+水平和垂直的轴线</li>
+<li>x轴和y轴刻度 tick<br>
+刻度标示坐标轴的分隔，包括最小刻度和最大刻度</li>
+<li>x轴和y轴刻度标签 tick label<br>
+表示特定坐标轴的值</li>
+<li>绘图区域（坐标系） axes</li>
+<li>坐标系标题 title</li>
+<li>轴标签 xlabel ylabel</li>
+</ul>
+<h3 id="1、包含单条曲线的图-plt-plot-x">1、包含单条曲线的图 plt.plot(x)</h3>
+<ul>
+<li>注意：y,x轴的值必须为数字</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#只有一个参数的话，默认的下标做x轴</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919156.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
+y<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919157.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<ul>
+<li>绘制抛物线 :使用arange函数 y=x**2</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x1<span class="token operator">=</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+y1<span class="token operator">=</span>x1<span class="token operator">**</span><span class="token number">2</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241917359.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<ul>
+<li>绘制正弦曲线图 y=sin(x)</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919158.png" srcset="/img/loading.gif" lazyload alt="4"></p>
+<h3 id="2、包含多个曲线的图">2、包含多个曲线的图</h3>
+<h4 id="2-1、连续调用多次plot函数">2.1、连续调用多次plot函数</h4>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919159.png" srcset="/img/loading.gif" lazyload alt="5"></p>
+<h4 id="2-2、也可以在一个plot函数中传入多对X-Y值，在一个图中绘制多个曲线">2.2、也可以在一个plot函数中传入多对X,Y值，在一个图中绘制多个曲线</h4>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x1<span class="token punctuation">,</span>y1<span class="token punctuation">,</span>x1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919160.png" srcset="/img/loading.gif" lazyload alt="6"></p>
+<h3 id="3、将多个曲线图绘制在一个table区域中：对象形式创建表图">3、将多个曲线图绘制在一个table区域中：对象形式创建表图</h3>
+<ul>
+<li>a=plt.subplot（row,col,loc） 创建曲线图</li>
+<li>a.plot(x,y) 绘制曲线图</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#把table区域分成2行2列，最后一个1表示位置</span>
+a1<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+a1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+
+a2<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+a2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+a2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+a3<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+a3<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+
+<span class="token comment">#也可以去掉逗号</span>
+a4<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span>
+a4<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919161.png" srcset="/img/loading.gif" lazyload alt="7"></p>
+<h3 id="4、网格线-gride-XXX">4、网格线 gride(XXX)</h3>
+<p>参数：</p>
+<ul>
+<li>axis</li>
+<li>color:支持十六进制颜色</li>
+<li>linestyle: – -. :</li>
+<li>alpha</li>
+</ul>
+<p>绘制一个正弦曲线图，并设置网格</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>color<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">,</span>linestyle<span class="token operator">=</span><span class="token string">'-.'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919162.png" srcset="/img/loading.gif" lazyload alt="8"></p>
+<ul>
+<li>使用对象形式设置网格</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">ax_1<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax_1<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>color<span class="token operator">=</span><span class="token string">'y'</span><span class="token punctuation">)</span>
+ax_1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919163.png" srcset="/img/loading.gif" lazyload alt="9"></p>
+<ul>
+<li>绘制一个两行两列的曲线图阵,并设置网格</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+a1<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">221</span><span class="token punctuation">)</span>
+a1<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+a2<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span>
+a2<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+a3<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">223</span><span class="token punctuation">)</span>
+a3<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a3<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+a4<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span>
+a4<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a4<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919164.png" srcset="/img/loading.gif" lazyload alt="10"></p>
+<h3 id="5、坐标轴界限">5、坐标轴界限</h3>
+<h4 id="5-1-axis方法-修改x，y轴刻度值">5.1 axis方法:修改x，y轴刻度值</h4>
+<p>plt.axis([xmin,xmax,ymin,ymax])</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919165.png" srcset="/img/loading.gif" lazyload alt="11"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919166.png" srcset="/img/loading.gif" lazyload alt="12"></p>
+<h4 id="5-2-plt-axis-‘off’">5.2 plt.axis(‘off’)</h4>
+<p>关闭坐标轴</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919167.png" srcset="/img/loading.gif" lazyload alt="13"></p>
+<h4 id="5-3-plt-figure-figsize-a-b">5.3 plt.figure(figsize=(a,b))</h4>
+<p>设置画布比例：plt.figure(figsize=(a,b))</p>
+<p>a:x刻度比例；</p>
+<p>b：y刻度比例 （2:1）表示x刻度显示为y刻度显示的2倍 。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919168.png" srcset="/img/loading.gif" lazyload alt="14"></p>
+<h4 id="5-4-xlim方法和ylim方法">5.4 xlim方法和ylim方法</h4>
+<p>还可以通过plt的xlim(xmin,xmax)，ylim方法设置坐标轴范围</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919169.png" srcset="/img/loading.gif" lazyload alt="15"></p>
+<h4 id="5-5-通过对象的方式设置x，y轴的刻度值范围-ax-set-xlim-a-b">5.5 通过对象的方式设置x，y轴的刻度值范围 ax.set_xlim(a,b)</h4>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">ax1<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>set_xlim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>set_ylim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919170.png" srcset="/img/loading.gif" lazyload alt="16"></p>
+<ul>
+<li>绘制一个圆 x<strong>2+y</strong>2=1 y=1-x<strong>2</strong> 0.5</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 圆的基本信息</span>
+<span class="token comment"># 1.圆半径</span>
+r <span class="token operator">=</span> <span class="token number">2.0</span>
+<span class="token comment"># 2.圆心坐标</span>
+a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">0.</span><span class="token punctuation">)</span>
+
+theta <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> a <span class="token operator">+</span> r <span class="token operator">*</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>theta<span class="token punctuation">)</span>
+y <span class="token operator">=</span> b <span class="token operator">+</span> r <span class="token operator">*</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>theta<span class="token punctuation">)</span> 
+axes <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span> 
+axes<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'equal'</span><span class="token punctuation">)</span>
+axes<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919171.png" srcset="/img/loading.gif" lazyload alt="17"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">0.5</span>
+y_<span class="token operator">=</span><span class="token operator">-</span>y
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y_<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'equal'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919172.png" srcset="/img/loading.gif" lazyload alt="18"></p>
+<h3 id="6、坐标轴标签">6、坐标轴标签</h3>
+<ul>
+<li>color 标签颜色</li>
+<li>fontsize 字体大小</li>
+<li>rotation 旋转角度</li>
+<li>plt的xlabel方法和ylabel方法</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Title'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span>s<span class="token operator">=</span><span class="token string">'yyy'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">,</span>rotation<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span>s<span class="token operator">=</span><span class="token string">'xxx'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919173.png" srcset="/img/loading.gif" lazyload alt="19"></p>
+<ul>
+<li>对象方法set_xlabel/ylabel()</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">ax<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'x_label'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'y_label'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919174.png" srcset="/img/loading.gif" lazyload alt="20"></p>
+<h5 id="6-1-显示坐标轴中文标签">6.1 显示坐标轴中文标签</h5>
+<p>设置参数：fontproperties</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+ax<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'x轴'</span><span class="token punctuation">,</span>fontproperties<span class="token operator">=</span><span class="token string">'KaiTi'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'y轴'</span><span class="token punctuation">,</span>fontproperties<span class="token operator">=</span><span class="token string">'KaiTi'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919175.png" srcset="/img/loading.gif" lazyload alt="21"><br>
+其它字体：<br>
+<img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919176.png" srcset="/img/loading.gif" lazyload alt="22"></p>
+<h3 id="7、标题">7、标题</h3>
+<p>plt.title()方法</p>
+<p>ax.set_title()方法</p>
+<h3 id="8、图例">8、图例</h3>
+<h4 id="8-1-legend方法">8.1 legend方法</h4>
+<p>两种传参方法：</p>
+<ul>
+<li>分别在plot函数中增加label参数,再调用plt.legend()方法显示</li>
+<li>直接在legend方法中传入字符串列表</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>x <span class="token operator">**</span> <span class="token number">2</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">'aaa'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">'bbb'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919177.png" srcset="/img/loading.gif" lazyload alt="23"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919178.png" srcset="/img/loading.gif" lazyload alt="24"></p>
+<h3 id="8-2-legend的参数">8.2 legend的参数</h3>
+<ul>
+<li>loc参数</li>
+<li>loc参数用于设置图例标签的位置，一般在legend函数内</li>
+<li>matplotlib已经预定义好几种数字表示的位置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字符串</th>
+<th>数值</th>
+<th>字符串</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>best</td>
+<td>0</td>
+<td>center left</td>
+<td>6</td>
+</tr>
+<tr>
+<td>upper right</td>
+<td>1</td>
+<td>center right</td>
+<td>7</td>
+</tr>
+<tr>
+<td>upper left</td>
+<td>2</td>
+<td>lower center</td>
+<td>8</td>
+</tr>
+<tr>
+<td>lower left</td>
+<td>3</td>
+<td>upper center</td>
+<td>9</td>
+</tr>
+<tr>
+<td>lower right</td>
+<td>4</td>
+<td>center</td>
+<td>10</td>
+</tr>
+<tr>
+<td>right</td>
+<td>5</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span><span class="token string">'bbb'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>loc<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919179.png" srcset="/img/loading.gif" lazyload alt="25"></p>
+<p>loc参数可以是2元素的元组，表示图例左下角的坐标</p>
+<ul>
+<li>[0,0] 左下</li>
+<li>[0,1] 左上</li>
+<li>[1,0] 右下</li>
+<li>[1,1] 右上</li>
+<li>ncol参数</li>
+</ul>
+<p>ncol控制图例中有几列,在legend中设置ncol</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'aaa'</span><span class="token punctuation">,</span><span class="token string">'bbb'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>loc<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>ncol<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919180.png" srcset="/img/loading.gif" lazyload alt="26"></p>
+<h3 id="9、保存图片">9、保存图片</h3>
+<h4 id="9-1-使用figure对象的savefig函数来保存图片">9.1 使用figure对象的savefig函数来保存图片</h4>
+<p>fig = plt.figure()</p>
+<p>figure.savefig的参数选项</p>
+<ul>
+<li>filename<br>
+含有文件路径的字符串或Python的文件型对象。图像格式由文件扩展名推断得出，例如，.pdf推断出PDF，.png推断出PNG<br>
+（“png”、“pdf”、“svg”、“ps”、“eps”……）</li>
+<li>dpi<br>
+图像分辨率（每英寸点数），默认为100</li>
+<li>facecolor ，打开保存图片查看<br>
+图像的背景色，默认为“w”（白色）</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#保存图片注意事项：第一步必须先得到figure对象，</span>
+<span class="token comment">#再使用plt进行绘图，然后保存图片</span>
+fig<span class="token operator">=</span>plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#关闭坐标轴</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+fig<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span>filename<span class="token operator">=</span><span class="token string">'./111.jpg'</span><span class="token punctuation">,</span>dpi<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919181.png" srcset="/img/loading.gif" lazyload alt="27"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#读取图片</span>
+img<span class="token operator">=</span>plt<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'./111.jpg'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919182.png" srcset="/img/loading.gif" lazyload alt="28"></p>
+<h2 id="二、设置plot的风格和样式">二、设置plot的风格和样式</h2>
+<p>plot语句中支持除X,Y以外的参数，以字符串形式存在，来控制颜色、线型、点型等要素，语法形式为： plt.plot(X, Y, ‘format’, …)</p>
+<h3 id="1、颜色">1、颜色</h3>
+<p>参数color或c</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>x <span class="token operator">**</span> <span class="token number">2</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token string">'y'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919183.png" srcset="/img/loading.gif" lazyload alt="29"></p>
+<h5 id="颜色值的方式">颜色值的方式</h5>
+<ul>
+<li>别名
+<ul>
+<li>color=‘r’</li>
+</ul>
+</li>
+<li>合法的HTML颜色名
+<ul>
+<li>color = ‘red’</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>颜色</th>
+<th>别名</th>
+<th>HTML颜色名</th>
+<th>颜色</th>
+<th>别名</th>
+<th>HTML颜色名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蓝色</td>
+<td>b</td>
+<td>blue</td>
+<td>绿色</td>
+<td>g</td>
+<td>green</td>
+</tr>
+<tr>
+<td>红色</td>
+<td>r</td>
+<td>red</td>
+<td>黄色</td>
+<td>y</td>
+<td>yellow</td>
+</tr>
+<tr>
+<td>青色</td>
+<td>c</td>
+<td>cyan</td>
+<td>黑色</td>
+<td>k</td>
+<td>black</td>
+</tr>
+<tr>
+<td>洋红色</td>
+<td>m</td>
+<td>magenta</td>
+<td>白色</td>
+<td>w</td>
+<td>white</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>HTML十六进制字符串
+<ul>
+<li>color = ‘#eeefff’</li>
+</ul>
+</li>
+<li>归一化到[0, 1]的RGB元组
+<ul>
+<li>color = (0.3, 0.3, 0.4)</li>
+</ul>
+</li>
+</ul>
+<h3 id="2、透明度">2、透明度</h3>
+<p>alpha参数</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">ax<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">,</span>alpha<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919184.png" srcset="/img/loading.gif" lazyload alt="30"></p>
+<h3 id="3、背景色">3、背景色</h3>
+<p>设置背景色，通过传入facecolor参数，来设置坐标轴的背景色</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#设置坐标系的前景色</span>
+ax<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_facecolor<span class="token punctuation">(</span><span class="token string">'green'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919185.png" srcset="/img/loading.gif" lazyload alt="31"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#设置坐标系的背景色</span>
+f<span class="token operator">=</span>plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+p<span class="token operator">=</span>plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>set_facecolor<span class="token punctuation">(</span><span class="token string">'yellow'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919186.png" srcset="/img/loading.gif" lazyload alt="32"></p>
+<h3 id="4、线型">4、线型</h3>
+<p>参数linestyle或ls</p>
+<table>
+<thead>
+<tr>
+<th>线条风格</th>
+<th>描述</th>
+<th>线条风格</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘-’</td>
+<td>实线</td>
+<td>‘:’</td>
+<td>虚线</td>
+</tr>
+<tr>
+<td>‘–’</td>
+<td>破折线</td>
+<td>‘steps’</td>
+<td>阶梯线</td>
+</tr>
+<tr>
+<td>‘-.’</td>
+<td>点划线</td>
+<td>‘None’ / ‘，’</td>
+<td>什么都不画</td>
+</tr>
+</tbody>
+</table>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>ls<span class="token operator">=</span><span class="token string">':'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919187.png" srcset="/img/loading.gif" lazyload alt="33"></p>
+<h3 id="5、线宽">5、线宽</h3>
+<p>linewidth或lw参数</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>ls<span class="token operator">=</span><span class="token string">'steps'</span><span class="token punctuation">,</span>lw<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919188.png" srcset="/img/loading.gif" lazyload alt="34"></p>
+<h3 id="6、点型">6、点型</h3>
+<ul>
+<li>marker 设置点形</li>
+<li>markersize 设置点形大小</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>描述</th>
+<th>标记</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘s’</td>
+<td>正方形</td>
+<td>‘p’</td>
+<td>五边形</td>
+</tr>
+<tr>
+<td>‘h’</td>
+<td>六边形1</td>
+<td>‘H’</td>
+<td>六边形2</td>
+</tr>
+<tr>
+<td>‘8’</td>
+<td>八边形</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>描述</th>
+<th>标记</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘.’</td>
+<td>点</td>
+<td>‘x’</td>
+<td>X</td>
+</tr>
+<tr>
+<td>‘*’</td>
+<td>星号</td>
+<td>‘+’</td>
+<td>加号</td>
+</tr>
+<tr>
+<td>‘,’</td>
+<td>像素</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>描述</th>
+<th>标记</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘o’</td>
+<td>圆圈</td>
+<td>‘D’</td>
+<td>菱形</td>
+</tr>
+<tr>
+<td>‘d’</td>
+<td>小菱形</td>
+<td>‘’,‘None’,’ ',None</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>描述</th>
+<th>标记</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘1’</td>
+<td>一角朝下的三脚架</td>
+<td>‘3’</td>
+<td>一角朝左的三脚架</td>
+</tr>
+<tr>
+<td>‘2’</td>
+<td>一角朝上的三脚架</td>
+<td>‘4’</td>
+<td>一角朝右的三脚架</td>
+</tr>
+</tbody>
+</table>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">plt.plot(x,y,marker&#x3D;&#39;o&#39;,lw&#x3D;1)</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919189.png" srcset="/img/loading.gif" lazyload alt="35"><br>
+plot参数设置marker前后景色：markerfacecolor=‘white’,markeredgecolor=‘black’ markersize=30设置大小 。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>marker<span class="token operator">=</span><span class="token string">'d'</span><span class="token punctuation">,</span>lw<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>markerfacecolor<span class="token operator">=</span><span class="token string">'yellow'</span><span class="token punctuation">,</span>markeredgecolor<span class="token operator">=</span><span class="token string">'red'</span><span class="token punctuation">,</span>markersize<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919190.png" srcset="/img/loading.gif" lazyload alt="36"></p>
+<h3 id="7、多参数连用">7、多参数连用</h3>
+<p>注意：只可以设置颜色、点型、线型，可以把几种参数写在一个字符串内进行设置 ‘r-.o’ 。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token string">'or-.'</span><span class="token punctuation">,</span>x<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'b--&lt;'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919191.png" srcset="/img/loading.gif" lazyload alt="37"></p>
+<h4 id="更多点和线的设置">更多点和线的设置</h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>color或c</td>
+<td>线的颜色</td>
+<td>linestyle或ls</td>
+<td>线型</td>
+</tr>
+<tr>
+<td>linewidth或lw</td>
+<td>线宽</td>
+<td>marker</td>
+<td>点型</td>
+</tr>
+<tr>
+<td>markeredgecolor</td>
+<td>点边缘的颜色</td>
+<td>markeredgewidth</td>
+<td>点边缘的宽度</td>
+</tr>
+<tr>
+<td>markerfacecolor</td>
+<td>点内部的颜色</td>
+<td>markersize</td>
+<td>点的大小</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8、在一条语句中为多个曲线进行设置">8、在一条语句中为多个曲线进行设置</h3>
+<h5 id="8-1-多个曲线同一设置">8.1 多个曲线同一设置</h5>
+<p>属性名声明</p>
+<p>注意：不能多参数连用的形式设置 例如：‘rh–’</p>
+<p>plt.plot(x1, y1, x2, y2, fmt, …)</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919192.png" srcset="/img/loading.gif" lazyload alt="38"></p>
+<h5 id="8-2-多个曲线不同设置">8.2 多个曲线不同设置</h5>
+<p>多个都进行设置,可以使用多参连用的形式 plt.plot(x1, y1, fmt1, x2, y2, fmt2, …)</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">p1<span class="token punctuation">,</span>p2<span class="token punctuation">,</span>p3<span class="token operator">=</span>plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span>
+p1<span class="token punctuation">.</span>set_lw<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+p3<span class="token punctuation">.</span>set_color<span class="token punctuation">(</span><span class="token string">'y'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919193.png" srcset="/img/loading.gif" lazyload alt="39"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token string">'or-.'</span><span class="token punctuation">,</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'yd'</span><span class="token punctuation">,</span>y<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">,</span>y<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'g--'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919194.png" srcset="/img/loading.gif" lazyload alt="40"></p>
+<h3 id="9、X、Y轴坐标刻度">9、X、Y轴坐标刻度</h3>
+<h5 id="9-1-对x和y轴的刻度做映射">9.1 对x和y轴的刻度做映射</h5>
+<p>如下方法是对x和y轴的刻度做映射而并非修改</p>
+<p>plt.xticks()和plt.yticks()方法</p>
+<ul>
+<li>需指定刻度值和刻度名称 plt.xticks([刻度列表],[名称列表])</li>
+<li>支持fontsize、rotation、color等参数设置</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919195.png" srcset="/img/loading.gif" lazyload alt="41"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">,</span><span class="token string">'e'</span><span class="token punctuation">,</span><span class="token string">'f'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919196.png" srcset="/img/loading.gif" lazyload alt="42"></p>
+<h5 id="9-2-使用面向对象的方法设置刻度方法">9.2 使用面向对象的方法设置刻度方法</h5>
+<p>如下方法是用来修改x和y轴的刻度值，而不是映射 使用画板的如下方法设置刻度axes = plt.subplot()</p>
+<ul>
+<li>set_xticks、set_yticks 设置刻度值</li>
+<li>set_xticklabels、set_yticklabels 设置刻度名称</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">ax<span class="token operator">=</span>plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token number">400</span><span class="token punctuation">,</span><span class="token number">600</span><span class="token punctuation">,</span><span class="token number">800</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919197.png" srcset="/img/loading.gif" lazyload alt="43"></p>
+<h2 id="三、2D图形">三、2D图形</h2>
+<h3 id="1、直方图">1、直方图</h3>
+<ul>
+<li>是一个特殊的柱状图，又叫做密度图。</li>
+</ul>
+<p>【直方图的参数只有一个x！！！不像条形图需要传入x,y】</p>
+<p>plt.hist()的参数：</p>
+<ul>
+<li>bins<br>
+可以是一个bin数量的整数值，也可以是表示bin的一个序列。默认值为10</li>
+<li>normed<br>
+如果值为True，直方图的值将进行归一化处理，形成概率密度，默认值为False</li>
+<li>color<br>
+指定直方图的颜色。可以是单一颜色值或颜色的序列。如果指定了多个数据集合,例如DataFrame对象，颜色序列将会设置为相同的顺序。如果未指定，将会使用一个默认的线条颜色</li>
+<li>orientation<br>
+通过设置orientation为horizontal创建水平直方图。默认值为vertical</li>
+</ul>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">x&#x3D;[1,2,2,3,4,4,5]
+plt.hist(x,color&#x3D;&#39;red&#39;)</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919198.png" srcset="/img/loading.gif" lazyload alt="44"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>x<span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token string">'g'</span><span class="token punctuation">,</span>normed<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919199.png" srcset="/img/loading.gif" lazyload alt="45"></p>
+<h3 id="2、条形图：plt-bar">2、条形图：plt.bar()</h3>
+<ul>
+<li>参数：第一个参数是索引。第二个参数是数据值。第三个参数是条形的宽度</li>
+</ul>
+<p>-【条形图有两个参数x,y】</p>
+<ul>
+<li>width 纵向设置条形宽度</li>
+<li>height 横向设置条形高度</li>
+</ul>
+<p>bar()、barh()</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
+y<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token number">0.5</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919200.png" srcset="/img/loading.gif" lazyload alt="46"></p>
+<h4 id="水平条形图">水平条形图</h4>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>barh<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token number">0.5</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919201.png" srcset="/img/loading.gif" lazyload alt="47"></p>
+<h3 id="3、饼图">3、饼图</h3>
+<p>【饼图也只有一个参数x】</p>
+<p>pie()<br>
+饼图适合展示各部分占总体的比例，条形图适合比较各部分的大小</p>
+<h5 id="3-1-普通各部分占满饼图">3.1 普通各部分占满饼图</h5>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">arr<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>pie<span class="token punctuation">(</span>arr<span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919202.png" srcset="/img/loading.gif" lazyload alt="48"></p>
+<h5 id="3-2-普通未占满饼图：小数-比例">3.2 普通未占满饼图：小数/比例</h5>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919203.png" srcset="/img/loading.gif" lazyload alt="49"><br>
+饼图阴影、分裂等属性设置</p>
+<p>labels参数设置每一块的标签；</p>
+<p>labeldistance参数设置标签距离圆心的距离（比例值）</p>
+<p>autopct参数设置比例值小数保留位(%.3f%%)；</p>
+<p>%<a target="_blank" rel="noopener" href="http://m.nf">m.nf</a> m 占位 n 小数点后保留几位 f 是以float格式输出</p>
+<p>pctdistance参数设置比例值文字距离圆心的距离</p>
+<p>explode参数设置每一块顶点距圆心的长度（比例值,列表）；</p>
+<p>colors参数设置每一块的颜色（列表）；</p>
+<p>shadow参数为布尔值，设置是否绘制阴影</p>
+<p>startangle参数设置饼图起始角度</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">arr<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>pie<span class="token punctuation">(</span>arr<span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919204.png" srcset="/img/loading.gif" lazyload alt="50"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">arr<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>pie<span class="token punctuation">(</span>arr<span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>labeldistance<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919205.png" srcset="/img/loading.gif" lazyload alt="51"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">arr<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span>
+<span class="token comment">#显示占比</span>
+<span class="token comment">#%m.nf m 占位 n 小数点后保留几位 f 是以float格式输出</span>
+plt<span class="token punctuation">.</span>pie<span class="token punctuation">(</span>arr<span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+		labeldistance<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">,</span>autopct<span class="token operator">=</span><span class="token string">'%.6f%%'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919206.png" srcset="/img/loading.gif" lazyload alt="52"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">arr<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>pie<span class="token punctuation">(</span>arr<span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'酱'</span><span class="token punctuation">,</span><span class="token string">'醋'</span><span class="token punctuation">,</span><span class="token string">'油'</span><span class="token punctuation">,</span><span class="token string">'盐'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        labeldistance<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">,</span>
+        shadow<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        explode<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.2</span><span class="token punctuation">,</span><span class="token number">0.3</span><span class="token punctuation">,</span><span class="token number">0.2</span><span class="token punctuation">,</span><span class="token number">0.4</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919207.png" srcset="/img/loading.gif" lazyload alt="53"></p>
+<h3 id="4、散点图：因变量随自变量而变化的大致趋势">4、散点图：因变量随自变量而变化的大致趋势</h3>
+<p>【散点图需要两个参数x,y，但此时x不是表示x轴的刻度，而是每个点的横坐标！】</p>
+<p>plt.scatter()</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>marker<span class="token operator">=</span><span class="token string">'d'</span><span class="token punctuation">,</span>c<span class="token operator">=</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919208.png" srcset="/img/loading.gif" lazyload alt="54"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> random_color<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token number">123</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919209.png" srcset="/img/loading.gif" lazyload alt="55"></p>
+<h2 id="四、图形内的文字、注释、箭头">四、图形内的文字、注释、箭头</h2>
+<p>控制文字属性的方法:</p>
+<table>
+<thead>
+<tr>
+<th>Pyplot函数</th>
+<th>API方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text()</td>
+<td>mpl.axes.Axes.text()</td>
+<td>在Axes对象的任意位置添加文字</td>
+</tr>
+<tr>
+<td>xlabel()</td>
+<td>mpl.axes.Axes.set_xlabel()</td>
+<td>为X轴添加标签</td>
+</tr>
+<tr>
+<td>ylabel()</td>
+<td>mpl.axes.Axes.set_ylabel()</td>
+<td>为Y轴添加标签</td>
+</tr>
+<tr>
+<td>title()</td>
+<td>mpl.axes.Axes.set_title()</td>
+<td>为Axes对象添加标题</td>
+</tr>
+<tr>
+<td>legend()</td>
+<td>mpl.axes.Axes.legend()</td>
+<td>为Axes对象添加图例</td>
+</tr>
+<tr>
+<td>figtext()</td>
+<td>mpl.figure.Figure.text()</td>
+<td>在Figure对象的任意位置添加文字</td>
+</tr>
+<tr>
+<td>suptitle()</td>
+<td>mpl.figure.Figure.suptitle()</td>
+<td>为Figure对象添加中心化的标题</td>
+</tr>
+<tr>
+<td>annnotate()</td>
+<td>mpl.axes.Axes.annotate()</td>
+<td>为Axes对象添加注释（箭头可选）</td>
+</tr>
+</tbody>
+</table>
+<p>所有的方法会返回一个matplotlib.text.Text对象</p>
+<h3 id="1、图形内的文字">1、图形内的文字</h3>
+<p>plt.text()</p>
+<p>plt.figtext()</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+y<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token number">0.7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>s<span class="token operator">=</span><span class="token string">'第三'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figtext<span class="token punctuation">(</span><span class="token number">0.4</span><span class="token punctuation">,</span><span class="token number">0.8</span><span class="token punctuation">,</span>s<span class="token operator">=</span><span class="token string">'排名'</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919210.png" srcset="/img/loading.gif" lazyload alt="56"></p>
+<h3 id="2、注释">2、注释</h3>
+<p>annotate() xy参数设置箭头指示的位置，xytext参数设置注释文字的位置 arrowprops参数以字典的形式设置箭头的样式 width参数设置箭头长方形部分的宽度，headlength参数设置箭头尖端的长度， headwidth参数设置箭头尖端底部的宽度，shrink参数设置箭头顶点、尾部与指示点、注释文字的距离（比例值）</p>
+<h3 id="3、箭头">3、箭头</h3>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+arrstyles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'-'</span><span class="token punctuation">,</span> <span class="token string">'->'</span><span class="token punctuation">,</span> <span class="token string">'-['</span><span class="token punctuation">,</span> <span class="token string">'&lt;-'</span><span class="token punctuation">,</span> <span class="token string">'&lt;->'</span><span class="token punctuation">,</span> <span class="token string">'fancy'</span><span class="token punctuation">,</span> 
+<span class="token string">'simple'</span><span class="token punctuation">,</span> <span class="token string">'wedge'</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> style <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>arrstyles<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>annotate<span class="token punctuation">(</span>style<span class="token punctuation">,</span> xytext<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> xy<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span>
+			     arrowprops<span class="token operator">=</span><span class="token builtin">dict</span><span class="token punctuation">(</span>arrowstyle<span class="token operator">=</span>style<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+connstyles<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"arc"</span><span class="token punctuation">,</span> <span class="token string">"arc,angleA=10,armA=30,rad=30"</span><span class="token punctuation">,</span> <span class="token string">"arc3,rad=.2"</span><span class="token punctuation">,</span>
+		 <span class="token string">"arc3,rad=-.2"</span><span class="token punctuation">,</span> <span class="token string">"angle"</span><span class="token punctuation">,</span> <span class="token string">"angle3"</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> style <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>connstyles<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>annotate<span class="token punctuation">(</span>style<span class="token punctuation">,</span> xytext<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> xy<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	     arrowprops<span class="token operator">=</span><span class="token builtin">dict</span><span class="token punctuation">(</span>arrowstyle<span class="token operator">=</span><span class="token string">'->'</span><span class="token punctuation">,</span> connectionstyle<span class="token operator">=</span>style<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919211.png" srcset="/img/loading.gif" lazyload alt="57"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">``<span class="token string">'-'</span>``        <span class="token boolean">None</span>
+``<span class="token string">'->'</span>``       head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'-['</span>``       widthB<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span>lengthB<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span>angleB<span class="token operator">=</span><span class="token boolean">None</span>
+``<span class="token string">'|-|'</span>``      widthA<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span>widthB<span class="token operator">=</span><span class="token number">1.0</span>
+``<span class="token string">'-|>'</span>``      head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'&lt;-'</span>``       head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'&lt;->'</span>``      head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'&lt;|-'</span>``      head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'&lt;|-|>'</span>``    head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'fancy'</span>``    head_length<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>tail_width<span class="token operator">=</span><span class="token number">0.4</span>
+``<span class="token string">'simple'</span>``   head_length<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>head_width<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span>tail_width<span class="token operator">=</span><span class="token number">0.2</span>
+``<span class="token string">'wedge'</span>``    tail_width<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">,</span>shrink_factor<span class="token operator">=</span><span class="token number">0.5</span>
+<span class="token comment"># xy参数设置箭头指示的位置，xytext参数设置注释文字的位置</span>
+<span class="token comment"># arrowprops参数以字典的形式设置箭头的样式</span>
+<span class="token comment"># width参数设置箭头长方形部分的宽度，</span>
+<span class="token comment"># headlength参数设置箭头尖端的长度，</span>
+<span class="token comment"># headwidth参数设置箭头尖端底部的宽度，</span>
+<span class="token comment"># shrink参数设置箭头顶点、尾部与指示点、注释文字的距离（比例值）</span>
+
+y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment"># 为了让注释不会超出图的范围，需要调整y坐标轴的界限</span>
+plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span>ymax<span class="token operator">=</span><span class="token number">35</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+plt<span class="token punctuation">.</span>annotate<span class="token punctuation">(</span><span class="token string">'this spot must really\nmean something'</span><span class="token punctuation">,</span> xy<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+			 xytext<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">31.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             arrowprops<span class="token operator">=</span><span class="token builtin">dict</span><span class="token punctuation">(</span>width<span class="token operator">=</span><span class="token number">15</span><span class="token punctuation">,</span> 
+             headlength<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> headwidth<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> 
+             facecolor<span class="token operator">=</span><span class="token string">'black'</span><span class="token punctuation">,</span> shrink<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919212.png" srcset="/img/loading.gif" lazyload alt="58"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 生成3个正态分布数据数据集</span>
+x1 <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+x2 <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+x3 <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 绘制3个数据集，并为每个plot指定一个字符串标签</span>
+ <span class="token comment">#如果不想在图例中显示标签，可以将标签设置为_nolegend_</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x1<span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'plot'</span><span class="token punctuation">)</span> 
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x2<span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'2nd plot'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x3<span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'last plot'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 绘制图例</span>
+<span class="token comment"># 指定边界框起始位置为(0, 1.02)，并设置宽度为1，高度为0.102</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>bbox_to_anchor<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1.02</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.102</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+           ncol<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token comment"># 设置列数为3，默认值为1</span>
+           mode<span class="token operator">=</span><span class="token string">"expand"</span><span class="token punctuation">,</span> 
+ <span class="token comment"># mode为None或者expand，当为expand时，图例框会扩展至整个坐标轴区域</span>
+           borderaxespad<span class="token operator">=</span><span class="token number">0.</span><span class="token punctuation">)</span> <span class="token comment"># 指定坐标轴和图例边界之间的间距</span>
+
+<span class="token comment"># 绘制注解</span>
+plt<span class="token punctuation">.</span>annotate<span class="token punctuation">(</span><span class="token string">"Important value"</span><span class="token punctuation">,</span> <span class="token comment"># 注解文本的内容</span>
+             xy<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">55</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment"># 箭头终点所在位置</span>
+             xytext<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">38</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+             <span class="token comment"># 注解文本的起始位置，箭头由xytext指向xy坐标位置</span>
+             arrowprops<span class="token operator">=</span><span class="token builtin">dict</span><span class="token punctuation">(</span>arrowstyle<span class="token operator">=</span><span class="token string">'->'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+       <span class="token comment"># arrowprops字典定义箭头属性，此处用arrowstyle定义箭头风格</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919213.png" srcset="/img/loading.gif" lazyload alt="59"></p>
+<h2 id="五、3D图">五、3D图</h2>
+<p>导包 from mpl_toolkits.mplot3d.axes3d import Axes3D</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token comment">#3d图形必须的</span>
+<span class="token keyword">from</span> mpl_toolkits<span class="token punctuation">.</span>mplot3d<span class="token punctuation">.</span>axes3d <span class="token keyword">import</span> Axes3D
+<span class="token operator">%</span>matplotlib inline</code></pre></div></figure>
+<h3 id="1、曲面图">1、曲面图</h3>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#系数，由X，Y生成Z</span>
+a <span class="token operator">=</span> <span class="token number">0.7</span>
+b <span class="token operator">=</span>  np<span class="token punctuation">.</span>pi 
+
+<span class="token comment">#计算Z轴的值</span>
+<span class="token keyword">def</span> <span class="token function">mk_Z</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> Y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">+</span> a <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>X<span class="token punctuation">)</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>Y<span class="token punctuation">)</span> <span class="token operator">-</span> a <span class="token operator">*</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>b <span class="token operator">-</span> <span class="token number">2</span><span class="token operator">*</span>X<span class="token punctuation">)</span>
+
+<span class="token comment">#生成X，Y，Z</span>
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+X<span class="token punctuation">,</span>Y <span class="token operator">=</span> np<span class="token punctuation">.</span>meshgrid<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+Z <span class="token operator">=</span> mk_Z<span class="token punctuation">(</span>X<span class="token punctuation">,</span> Y<span class="token punctuation">)</span>
+
+
+fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">#创建3d的视图，使用属性projection</span>
+ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> projection<span class="token operator">=</span><span class="token string">'3d'</span><span class="token punctuation">)</span>
+
+ax<span class="token punctuation">.</span>plot_surface<span class="token punctuation">(</span>X<span class="token punctuation">,</span>Y<span class="token punctuation">,</span>Z<span class="token punctuation">,</span>rstride <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span>cstride <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+
+<span class="token comment">#创建3d视图，使用colorbar，添加颜色柱</span>
+ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> projection<span class="token operator">=</span><span class="token string">'3d'</span><span class="token punctuation">)</span>
+p <span class="token operator">=</span> ax<span class="token punctuation">.</span>plot_surface<span class="token punctuation">(</span>X<span class="token punctuation">,</span> Y<span class="token punctuation">,</span> Z<span class="token punctuation">,</span> rstride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> cstride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> 
+					cmap<span class="token operator">=</span><span class="token string">'rainbow'</span><span class="token punctuation">,</span> antialiased<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+cb <span class="token operator">=</span> fig<span class="token punctuation">.</span>colorbar<span class="token punctuation">(</span>p<span class="token punctuation">,</span> shrink<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919214.png" srcset="/img/loading.gif" lazyload alt="60"></p>
+<h3 id="2、玫瑰图-极坐标条形图">2、玫瑰图/极坐标条形图</h3>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#极坐标条形图</span>
+<span class="token keyword">def</span> <span class="token function">showRose</span><span class="token punctuation">(</span>values<span class="token punctuation">,</span>title<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    
+    max_value <span class="token operator">=</span> values<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># 分为8个面元</span>
+    N <span class="token operator">=</span> <span class="token number">8</span>
+    <span class="token comment"># 面元的分隔角度</span>
+    angle <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">2</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi <span class="token operator">/</span> N<span class="token punctuation">)</span>
+    <span class="token comment"># 每个面元的大小（半径）</span>
+    radius <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+    <span class="token comment"># 设置极坐标条形图</span>
+    
+    plt<span class="token punctuation">.</span>axes<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> polar<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>facecolor <span class="token operator">=</span> <span class="token string">'g'</span><span class="token punctuation">)</span>
+    
+    colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> x<span class="token operator">/</span>max_value<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">-</span> x<span class="token operator">/</span>max_value<span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> radius<span class="token punctuation">]</span>
+    <span class="token comment"># 画图</span>
+    
+    plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>angle<span class="token punctuation">,</span> radius<span class="token punctuation">,</span> width<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>pi<span class="token operator">/</span>N<span class="token punctuation">)</span><span class="token punctuation">,</span> bottom<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span> 
+		    color<span class="token operator">=</span>colors<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span>title<span class="token punctuation">,</span>x<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
+    
+<span class="token comment">#拉韦纳(Ravenna)又译“腊万纳”“拉文纳”“拉温拿”。</span>
+<span class="token comment">#意大利北部城市。位于距亚得里亚海10公里的沿海平原上</span>
+data <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'Ravenna_wind.npy'</span><span class="token punctuation">)</span>
+hist<span class="token punctuation">,</span> angle <span class="token operator">=</span> np<span class="token punctuation">.</span>histogram<span class="token punctuation">(</span>data<span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">360</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+showRose<span class="token punctuation">(</span>hist<span class="token punctuation">,</span><span class="token string">'Ravenna'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919215.png" srcset="/img/loading.gif" lazyload alt="61"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 绘制一个极坐标图形</span>
+plt<span class="token punctuation">.</span>axes<span class="token punctuation">(</span>polar<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>align<span class="token operator">=</span><span class="token string">'edge'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919216.png" srcset="/img/loading.gif" lazyload alt="62"></p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">70</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">]</span>
+<span class="token comment"># 如果映射成一个圆，第一个点（0点）和最后一个点（360点）容易重合</span>
+<span class="token comment"># 所以一般把315°的点作为最后一个点处理</span>
+
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+c <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span>size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>axes<span class="token punctuation">(</span>polar<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token comment"># param1 x 索引</span>
+<span class="token comment"># param2 height 数据的值</span>
+<span class="token comment"># param3 width  扇形区的宽度</span>
+<span class="token comment"># align 设置扇形的对齐方式</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>x<span class="token punctuation">,</span>values<span class="token punctuation">,</span>width<span class="token operator">=</span><span class="token number">0.8</span><span class="token punctuation">,</span>color<span class="token operator">=</span>c<span class="token punctuation">,</span>align<span class="token operator">=</span><span class="token string">'edge'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241919217.png" srcset="/img/loading.gif" lazyload alt="63"></p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Python/" class="print-no-link">#Python</a>
+<a href="/tags/Matplotlib/" class="print-no-link">#Matplotlib</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Python数据分析使用matplotlib</div>
+<div>https://blog.fulequn.online/2020/10/Article202010262/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年10月26日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/10/Article202010263/" title="MongoDB中导入数据的使用（mongoimport）">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">MongoDB中导入数据的使用（mongoimport）</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/10/Article202010261/" title="Linux不能上网ping:unknown host问题怎么解决">
+<span class="hidden-mobile">Linux不能上网ping:unknown host问题怎么解决</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

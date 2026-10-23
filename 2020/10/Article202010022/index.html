@@ -1,0 +1,540 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="参考文献：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qing0228&#x2F;p&#x2F;11183962.html  在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题">
+<meta property="og:url" content="https://blog.fulequn.online/2020/10/Article202010022/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="参考文献：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qing0228&#x2F;p&#x2F;11183962.html  在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908518.png">
+<meta property="article:published_time" content="2020-10-02T10:34:52.000Z">
+<meta property="article:modified_time" content="2020-10-02T10:34:52.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Matplotlib">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908518.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题","description":"参考文献：https://www.cnblogs.com/qing0228/p/11183962.html  在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y)","url":"https://blog.fulequn.online/2020/10/Article202010022/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/10/Article202010022/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-10-02T10:34:52.000Z","dateModified":"2020-10-02T10:34:52.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908518.png"}</script>
+<title>Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-10-02 18:34" pubdate>
+2020年10月2日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+5.1k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+43 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</h1>
+<div class="markdown-body">
+<blockquote>
+<p>参考文献：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qing0228/p/11183962.html">https://www.cnblogs.com/qing0228/p/11183962.html</a></p>
+</blockquote>
+<p>在讲解绘制多个子图之前先简单了解一下使用matplotlib绘制一个图，导入绘图所需库matplotlib并创建一个等间隔的列表x，将[0,2*pi]等分为50等份，绘制函数sin(x)。当没有给定x轴数值时，默认以下标作为x的值，如果x值确定，则绘图时写为 plt.plot(x,y) 。</p>
+<p>如若想要绘制一个图时写入标签，则写为 plt.plot(x,y,label=“figure1”)。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> numpy <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt 
+
+<span class="token comment">#生成数据</span>
+x <span class="token operator">=</span> linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> pi<span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'x-label'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'y-label'</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token string">'large'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908518.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p>以下先将整体代码插入，再分布讲解：</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<span class="token triple-quoted-string string">"""
+Created on Thu Oct 15 20:05:49 2020
+
+@author: 23820
+"""</span>
+
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt 
+<span class="token keyword">from</span> matplotlib<span class="token punctuation">.</span>ticker <span class="token keyword">import</span> MultipleLocator<span class="token punctuation">,</span> FormatStrFormatter 
+
+<span class="token comment">#获取最大最小值</span>
+<span class="token keyword">def</span> <span class="token function">minmax_value</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    minvalue<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span>
+    maxvalue<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> minvalue<span class="token punctuation">,</span>maxvalue
+
+<span class="token comment">#创建画布</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span><span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">,</span>dpi<span class="token operator">=</span><span class="token number">98</span><span class="token punctuation">)</span>
+xmajorLocator <span class="token operator">=</span> MultipleLocator<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="token comment">#设置中文字体</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.sans-serif'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span>  
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+
+<span class="token comment">#生成1行2列的子图</span>
+p1 <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span><span class="token comment">#第一行的左边</span>
+p2 <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span><span class="token comment">#第一行的右边</span>
+
+
+<span class="token comment">#图中展示点的数量</span>
+pointcount<span class="token operator">=</span><span class="token number">5</span>
+
+<span class="token comment">#生成数据</span>
+x<span class="token operator">=</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token comment">#生成数据</span>
+y1<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+y2<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">*</span><span class="token number">4</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+y3<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">*</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+y4<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">*</span><span class="token number">4</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment">#如果不够展示点的数量</span>
+    <span class="token keyword">if</span> i<span class="token operator">&lt;</span>pointcount<span class="token punctuation">:</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyA<span class="token punctuation">,</span>maxyA<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y1<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyB<span class="token punctuation">,</span>maxyB<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y2<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+        maxy1<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>maxyA<span class="token punctuation">,</span>maxyB<span class="token punctuation">)</span>
+        miny1<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>minyA<span class="token punctuation">,</span>minyB<span class="token punctuation">)</span>
+        p1<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span>minx<span class="token punctuation">,</span>maxx<span class="token punctuation">,</span>miny1<span class="token punctuation">,</span>maxy1<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        p1<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        A<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y1<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"g-"</span><span class="token punctuation">)</span>
+        B<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y2<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"b-"</span><span class="token punctuation">)</span>
+
+        <span class="token comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1<span class="token punctuation">.</span>xaxis<span class="token punctuation">.</span>set_major_locator<span class="token punctuation">(</span>xmajorLocator<span class="token punctuation">)</span>
+        legend<span class="token operator">=</span>p1<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>handles<span class="token operator">=</span><span class="token punctuation">[</span>A<span class="token punctuation">,</span>B<span class="token punctuation">]</span><span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"图1"</span><span class="token punctuation">,</span><span class="token string">"图2"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    
+        
+        
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyA<span class="token punctuation">,</span>maxyA<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y3<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyB<span class="token punctuation">,</span>maxyB<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y4<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+        maxy1<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>maxyA<span class="token punctuation">,</span>maxyB<span class="token punctuation">)</span>
+        miny1<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>minyA<span class="token punctuation">,</span>minyB<span class="token punctuation">)</span>
+        p2<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span>minx<span class="token punctuation">,</span>maxx<span class="token punctuation">,</span>miny1<span class="token punctuation">,</span>maxy1<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        p2<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        A<span class="token punctuation">,</span><span class="token operator">=</span>p2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y3<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"r-"</span><span class="token punctuation">)</span>
+        B<span class="token punctuation">,</span><span class="token operator">=</span>p2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y4<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"y-"</span><span class="token punctuation">)</span>
+
+        <span class="token comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2<span class="token punctuation">.</span>xaxis<span class="token punctuation">.</span>set_major_locator<span class="token punctuation">(</span>xmajorLocator<span class="token punctuation">)</span>
+        legend<span class="token operator">=</span>p2<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>handles<span class="token operator">=</span><span class="token punctuation">[</span>A<span class="token punctuation">,</span>B<span class="token punctuation">]</span><span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"图3"</span><span class="token punctuation">,</span><span class="token string">"图4"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  
+    <span class="token keyword">elif</span> i<span class="token operator">>=</span>pointcount<span class="token punctuation">:</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyA<span class="token punctuation">,</span>maxyA<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y1<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyB<span class="token punctuation">,</span>maxyB<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y2<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+        maxy1<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>maxyA<span class="token punctuation">,</span>maxyB<span class="token punctuation">)</span>
+        miny1<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>minyA<span class="token punctuation">,</span>minyB<span class="token punctuation">)</span>
+        p1<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span>minx<span class="token punctuation">,</span>maxx<span class="token punctuation">,</span>miny1<span class="token punctuation">,</span>maxy1<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        p1<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        A<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>y1<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"g-"</span><span class="token punctuation">)</span>
+        B<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>y2<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"b-"</span><span class="token punctuation">)</span>
+
+        <span class="token comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p1<span class="token punctuation">.</span>xaxis<span class="token punctuation">.</span>set_major_locator<span class="token punctuation">(</span>xmajorLocator<span class="token punctuation">)</span>
+        legend<span class="token operator">=</span>p1<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>handles<span class="token operator">=</span><span class="token punctuation">[</span>A<span class="token punctuation">,</span>B<span class="token punctuation">]</span><span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"图1"</span><span class="token punctuation">,</span><span class="token string">"图2"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyA<span class="token punctuation">,</span>maxyA<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y3<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        minyB<span class="token punctuation">,</span>maxyB<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y4<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+        maxy1<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>maxyA<span class="token punctuation">,</span>maxyB<span class="token punctuation">)</span>
+        miny1<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>minyA<span class="token punctuation">,</span>minyB<span class="token punctuation">)</span>
+        p2<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span>minx<span class="token punctuation">,</span>maxx<span class="token punctuation">,</span>miny1<span class="token punctuation">,</span>maxy1<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        p2<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        A<span class="token punctuation">,</span><span class="token operator">=</span>p2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>y3<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"r-"</span><span class="token punctuation">)</span>
+        B<span class="token punctuation">,</span><span class="token operator">=</span>p2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>y4<span class="token punctuation">[</span>i<span class="token operator">-</span>pointcount<span class="token punctuation">:</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"y-"</span><span class="token punctuation">)</span>
+
+        <span class="token comment">#设置主刻度标签的位置,标签文本的格式</span>
+        p2<span class="token punctuation">.</span>xaxis<span class="token punctuation">.</span>set_major_locator<span class="token punctuation">(</span>xmajorLocator<span class="token punctuation">)</span>
+        legend<span class="token operator">=</span>p2<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>handles<span class="token operator">=</span><span class="token punctuation">[</span>A<span class="token punctuation">,</span>B<span class="token punctuation">]</span><span class="token punctuation">,</span>labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"图3"</span><span class="token punctuation">,</span><span class="token string">"图4"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+    <span class="token comment">#设置坐标轴标题以及图像的名称</span>
+    p1<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">"横轴属性名一"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">)</span>
+    p1<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">"纵轴属性名一"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">)</span>
+    p1<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">"主题一"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">18</span><span class="token punctuation">)</span>
+    
+    p2<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">"横轴属性名二"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">)</span>
+    p2<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">"纵轴属性名二"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">14</span><span class="token punctuation">)</span>
+    p2<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">"主题二"</span><span class="token punctuation">,</span>fontsize<span class="token operator">=</span><span class="token number">18</span><span class="token punctuation">)</span>
+
+    
+    plt<span class="token punctuation">.</span>pause<span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">)</span>
+    <span class="token comment"># 调用 plt.ion() 可以使能交互绘图功能. plt.show( ) 显示所绘制的图形</span>
+    <span class="token comment"># 调用 plt.pause(0.05) 不仅可以绘图而且鼠标可以继续交互</span>
+    plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span>pad<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> w_pad<span class="token operator">=</span><span class="token number">4.0</span><span class="token punctuation">,</span> h_pad<span class="token operator">=</span><span class="token number">3.0</span><span class="token punctuation">)</span>
+    <span class="token comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+    <span class="token comment"># 参数：</span>
+    <span class="token comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+    <span class="token comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+    <span class="token comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre></div></figure>
+<p>运行结果为:</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/202306241908519.gif" srcset="/img/loading.gif" lazyload alt="2"></p>
+<p>1、导入库</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt 
+<span class="token keyword">from</span> matplotlib<span class="token punctuation">.</span>ticker <span class="token keyword">import</span> MultipleLocator<span class="token punctuation">,</span> FormatStrFormatter </code></pre></div></figure>
+<p>2、由于绘图过程中多次使用获取最大最小值，将获取最大最小值写入函数，后面直接调用函数即可。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">minmax_value</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    minvalue<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span>
+    maxvalue<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> minvalue<span class="token punctuation">,</span>maxvalue</code></pre></div></figure>
+<p>3、（1）创建自定义图像，并设置figured的长和宽以及dpi参数指定绘图对象的分辨率；（2）设置x轴刻度的间隔；（3）对本次绘图中的字体进行设置；（4）在matplotlib下，一个figure对象可以包含多个子图（Axes），使用subplot()快速绘制。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#创建画布</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span><span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">,</span>dpi<span class="token operator">=</span><span class="token number">98</span><span class="token punctuation">)</span>
+xmajorLocator <span class="token operator">=</span> MultipleLocator<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">#将x主刻度标签设置为1的倍数</span>
+
+<span class="token comment">#设置中文字体</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'font.sans-serif'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'SimHei'</span><span class="token punctuation">]</span>  
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.unicode_minus'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+
+<span class="token comment">#生成1行2列的子图</span>
+p1 <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span><span class="token comment">#第一行的左边</span>
+p2 <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span><span class="token comment">#第一行的右边</span></code></pre></div></figure>
+<p>4、当数据量过多时，对数据一次性展示不能够达到对数据内部信息的解读。本例采用一次展示其中一部分数据，并动态的更新图片，于此同时，动态更新横纵坐标轴的取值范围。下面代码首先设置了每次展示点的数量，并获取了主题一中的所有数据值。根据x取值范围和值域y获取当前绘图过程中的横纵坐标取值范围，最后根据x,y的值进行绘图。</p>
+<p>下面将先在一个子图上显示两条静态折现。当使用动态的折线图时，只需动态更新数据和横纵坐标的取值范围。总体代码中已经写出，下面不再赘述。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#图中展示点的数量</span>
+pointcount<span class="token operator">=</span><span class="token number">5</span>
+<span class="token comment">#生成数据</span>
+x<span class="token operator">=</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+y1<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+y2<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">*</span><span class="token number">4</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+minx<span class="token punctuation">,</span>maxx<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+minyA<span class="token punctuation">,</span>maxyA<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y1<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+minyB<span class="token punctuation">,</span>maxyB<span class="token operator">=</span>minmax_value<span class="token punctuation">(</span>y2<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+maxy1<span class="token operator">=</span><span class="token builtin">max</span><span class="token punctuation">(</span>maxyA<span class="token punctuation">,</span>maxyB<span class="token punctuation">)</span>
+miny1<span class="token operator">=</span><span class="token builtin">min</span><span class="token punctuation">(</span>minyA<span class="token punctuation">,</span>minyB<span class="token punctuation">)</span>
+p1<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span>minx<span class="token punctuation">,</span>maxx<span class="token punctuation">,</span>miny1<span class="token punctuation">,</span>maxy1<span class="token punctuation">]</span><span class="token punctuation">)</span>
+p1<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token comment">#绘图过程中出现的网格设置</span>
+A<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y1<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"g-"</span><span class="token punctuation">)</span>
+B<span class="token punctuation">,</span><span class="token operator">=</span>p1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span>y2<span class="token punctuation">[</span><span class="token punctuation">:</span>pointcount<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">"b-"</span><span class="token punctuation">)</span><span class="token comment">#设置主刻度标签的位置,标签文本的格式p1.xaxis.set_major_locator(xmajorLocator)legend=p1.legend(handles=[A,B],labels=["图1","图2"])</span></code></pre></div></figure>
+<p>结果如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241908520.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<p>5、设置边界，不设置边界经常会因为横纵轴的字体太大等其他原因导致横纵轴或者标题只能显示其中一部分。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span>pad<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> w_pad<span class="token operator">=</span><span class="token number">4.0</span><span class="token punctuation">,</span> h_pad<span class="token operator">=</span><span class="token number">3.0</span><span class="token punctuation">)</span>
+<span class="token comment"># 功能:使得子图横纵坐标更加紧凑，主要用于自动调整图区的大小以及间距，使所有的绘图及其标题、坐标轴标签等都可以不重叠的完整显示在画布上。</span>
+<span class="token comment"># 参数：</span>
+<span class="token comment"># Pad:用于设置绘图区边缘与画布边缘的距离大小</span>
+<span class="token comment"># w_pad:用于设置绘图区之间的水平距离的大小</span>
+<span class="token comment"># H_pad:用于设置绘图区之间的垂直距离的大小</span></code></pre></div></figure>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Python/" class="print-no-link">#Python</a>
+<a href="/tags/Matplotlib/" class="print-no-link">#Matplotlib</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Python使用matplotlib在一个图形中绘制多个子图以及一个子图中绘制多条动态折线问题</div>
+<div>https://blog.fulequn.online/2020/10/Article202010022/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年10月2日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/10/Article202010023/" title="R语言中的广义线性模型glm">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">R语言中的广义线性模型glm</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/10/Article202010021/" title="MongoDB安装及使用（Windows下）">
+<span class="hidden-mobile">MongoDB安装及使用（Windows下）</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

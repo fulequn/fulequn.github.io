@@ -1,0 +1,1245 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="1 组件组成部分 1.1 scoped 解决样式冲突 写在组件中的样式会 全局生效 →  因此很容易造成多个组件之间的样式冲突问题。   全局样式: 默认组件中的样式会作用到全局，任何一个组件中都会受到此样式的影响   局部样式: 可以给组件加上scoped 属性,可以让样式只作用于当前组件   scoped 原理  当前组件内标签都被添加 data-v-hash值 的属性 css选择器都被添加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）">
+<meta property="og:url" content="https://blog.fulequn.online/2024/06/Article202406061/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="1 组件组成部分 1.1 scoped 解决样式冲突 写在组件中的样式会 全局生效 →  因此很容易造成多个组件之间的样式冲突问题。   全局样式: 默认组件中的样式会作用到全局，任何一个组件中都会受到此样式的影响   局部样式: 可以给组件加上scoped 属性,可以让样式只作用于当前组件   scoped 原理  当前组件内标签都被添加 data-v-hash值 的属性 css选择器都被添加">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238700.png">
+<meta property="article:published_time" content="2024-06-06T08:45:54.000Z">
+<meta property="article:modified_time" content="2024-06-06T08:45:54.000Z">
+<meta property="article:author" content="Fulequn">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238700.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）","description":"1 组件组成部分 1.1 scoped 解决样式冲突 写在组件中的样式会 全局生效 →  因此很容易造成多个组件之间的样式冲突问题。   全局样式: 默认组件中的样式会作用到全局，任何一个组件中都会受到此样式的影响   局部样式: 可以给组件加上scoped 属性,可以让样式只作用于当前组件   scoped 原理  当前组件内标签都被添加 data-v-hash值 的属性 css选择器都被添加","url":"https://blog.fulequn.online/2024/06/Article202406061/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/06/Article202406061/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-06-06T08:45:54.000Z","dateModified":"2024-06-06T08:45:54.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238700.png"}</script>
+<title>Vue基础入门到实战4（组件组成部分+组件通信+进阶语法） - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-06-06 16:45" pubdate>
+2024年6月6日 下午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+18k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+147 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）</h1>
+<div class="markdown-body">
+<h1 id="1-组件组成部分">1 组件组成部分</h1>
+<h2 id="1-1-scoped-解决样式冲突">1.1 scoped 解决样式冲突</h2>
+<p>写在组件中的样式会 <strong>全局生效</strong> → 因此很容易造成多个组件之间的样式冲突问题。</p>
+<ol>
+<li>
+<p><strong>全局样式</strong>: 默认组件中的样式会作用到全局，任何一个组件中都会受到此样式的影响</p>
+</li>
+<li>
+<p><strong>局部样式</strong>: 可以给组件加上<strong>scoped</strong> 属性,可以<strong>让样式只作用于当前组件</strong></p>
+</li>
+</ol>
+<h3 id="scoped-原理">scoped 原理</h3>
+<ol>
+<li>当前组件内标签都被添加 <strong>data-v-hash值</strong> 的属性</li>
+<li>css选择器都被添加 [<strong>data-v-hash值</strong>] 的属性选择器</li>
+</ol>
+<p>最终效果: <strong>必须是当前组件的元素</strong>, 才会有这个自定义属性, 才会被这个样式作用到</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238700.png" srcset="/img/loading.gif" lazyload alt="68230651737"></p>
+<h2 id="1-2-data-必须是一个函数">1.2 data 必须是一个函数</h2>
+<p>一个组件的 <strong>data</strong> 选项必须 <strong>是一个函数</strong>。目的是为了：保证每个组件实例，维护 <strong>独立</strong> 的一份 <strong>数据</strong> 对象。</p>
+<p>每次创建新的组件实例，都会新 <strong>执行一次data 函数</strong>，得到一个新对象。</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238701.png" srcset="/img/loading.gif" lazyload alt="68230695207"></p>
+<h1 id="2-组件通信">2 组件通信</h1>
+<h2 id="2-1-什么是组件通信？">2.1 什么是组件通信？</h2>
+<p>组件通信，就是指 <strong>组件与组件</strong> 之间的 <strong>数据传递</strong></p>
+<ul>
+<li>组件的数据是独立的，无法直接访问其他组件的数据。</li>
+<li>想使用其他组件的数据，就需要组件通信</li>
+</ul>
+<h2 id="2-2-组件之间如何通信">2.2 组件之间如何通信</h2>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238702.png" srcset="/img/loading.gif" lazyload alt="68230890309"></p>
+<h2 id="2-3-组件关系分类">2.3 组件关系分类</h2>
+<ol>
+<li>父子关系</li>
+<li>非父子关系</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238703.png" srcset="/img/loading.gif" lazyload alt="68231807380"></p>
+<h2 id="2-4-通信解决方案">2.4 通信解决方案</h2>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238704.png" srcset="/img/loading.gif" lazyload alt="68231811109"></p>
+<h2 id="2-5-父子通信流程">2.5 父子通信流程</h2>
+<ol>
+<li>父组件通过 <strong>props</strong> 将数据传递给子组件</li>
+<li>子组件利用 <strong>$emit</strong> 通知父组件修改更新</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238705.png" srcset="/img/loading.gif" lazyload alt="68231844456"></p>
+<h3 id="2-5-1-父向子通信代码示例">2.5.1 父向子通信代码示例</h3>
+<p>父组件通过 <strong>props</strong> 将数据传递给子组件</p>
+<p>父组件App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot; style&#x3D;&quot;border: 3px solid #000; margin: 10px&quot;&gt;
+    我是APP组件 
+    &lt;!-- 1.给组件标签，添加属性方式 赋值 --&gt;
+    &lt;Son :title&#x3D;&quot;myTitle&quot;&gt;&lt;&#x2F;Son&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import Son from &#39;.&#x2F;components&#x2F;Son.vue&#39;
+export default &#123;
+  name: &#39;App&#39;,
+  data() &#123;
+    return &#123;
+      myTitle: &#39;学前端，就来黑马程序员&#39;,
+    &#125;
+  &#125;,
+  components: &#123;
+    Son,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>子组件Son.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;son&quot; style&#x3D;&quot;border:3px solid #000;margin:10px&quot;&gt;
+    &lt;!-- 3.直接使用props的值 --&gt;
+    我是Son组件 &#123;&#123;title&#125;&#125;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  name: &#39;Son-Child&#39;,
+  &#x2F;&#x2F; 2.通过props来接受
+  props: [&#39;title&#39;],
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238706.png" srcset="/img/loading.gif" lazyload alt="68231871178"></p>
+<p><strong>父向子传值步骤</strong></p>
+<ol>
+<li>给子组件以添加属性的方式传值</li>
+<li>子组件内部通过 props 接收</li>
+<li>模板中直接使用 props接收的值</li>
+</ol>
+<h3 id="2-5-2-子向父通信代码示例">2.5.2 子向父通信代码示例</h3>
+<p>子组件利用 <strong>$emit</strong> 通知父组件，进行修改更新</p>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238707.png" srcset="/img/loading.gif" lazyload alt="68231896563"></p>
+<p><strong>子向父传值步骤</strong></p>
+<ol>
+<li>$emit 触发事件，给父组件发送消息通知</li>
+<li>父组件监听 $emit 触发的事件</li>
+<li>提供处理函数，在函数的性参中获取传过来的参数</li>
+</ol>
+<h1 id="3-props">3 props</h1>
+<h2 id="3-1-props-基础">3.1 props 基础</h2>
+<p><strong>Props 定义</strong></p>
+<p>组件上注册的一些 <strong>自定义属性</strong></p>
+<p><strong>Props 作用</strong></p>
+<p>向子组件传递数据</p>
+<p><strong>特点</strong></p>
+<ol>
+<li>可以 传递 <strong>任意数量</strong> 的 prop</li>
+<li>可以 传递 <strong>任意类型</strong> 的 prop</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238708.png" srcset="/img/loading.gif" lazyload alt="68232015691"></p>
+<p><strong>代码演示</strong></p>
+<p>父组件App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;UserInfo :username&#x3D;&quot;username&quot; :age&#x3D;&quot;age&quot; :isSingle&#x3D;&quot;isSingle&quot; :car&#x3D;&quot;car&quot; :hobby&#x3D;&quot;hobby&quot;&gt;
+    &lt;&#x2F;UserInfo&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import UserInfo from &#39;.&#x2F;components&#x2F;UserInfo.vue&#39;
+export default &#123;
+  data() &#123;
+    return &#123;
+      username: &#39;小帅&#39;,
+      age: 28,
+      isSingle: true,
+      car: &#123;
+        brand: &#39;宝马&#39;,
+      &#125;,
+      hobby: [&#39;篮球&#39;, &#39;足球&#39;, &#39;羽毛球&#39;],
+    &#125;
+  &#125;,
+  components: &#123;
+    UserInfo,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>子组件UserInfo.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;userinfo&quot;&gt;
+    &lt;h3&gt;我是个人信息组件&lt;&#x2F;h3&gt;
+    &lt;div&gt;姓名：&#123;&#123;username&#125;&#125;&lt;&#x2F;div&gt;
+    &lt;div&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;div&gt;
+    &lt;div&gt;是否单身：&#123;&#123;isSingle&#125;&#125;&lt;&#x2F;div&gt;
+    &lt;div&gt;座驾：&#123;&#123;car.brand&#125;&#125;&lt;&#x2F;div&gt;
+    &lt;div&gt;兴趣爱好：&#123;&#123;hobby.join(&#39;、&#39;)&#125;&#125;&lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  props: [&#39;username&#39;, &#39;age&#39;, &#39;isSingle&#39;, &#39;car&#39;, &#39;hobby&#39;],
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+.userinfo &#123;
+  width: 300px;
+  border: 3px solid #000;
+  padding: 20px;
+&#125;
+.userinfo &gt; div &#123;
+  margin: 20px 10px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h2 id="3-2-props校验">3.2 props校验</h2>
+<p>为组件的 prop 指定 <strong>验证要求</strong>，不符合要求，控制台就会有 <strong>错误提示</strong> → 帮助开发者，快速发现错误</p>
+<p><strong>语法</strong></p>
+<ul>
+<li><strong>类型校验</strong></li>
+<li>非空校验</li>
+<li>默认值</li>
+<li>自定义校验</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238709.png" srcset="/img/loading.gif" lazyload alt="68232068405"></p>
+<p><strong>4.代码演示</strong></p>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;BaseProgress :w&#x3D;&quot;width&quot;&gt;&lt;&#x2F;BaseProgress&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseProgress from &#39;.&#x2F;components&#x2F;BaseProgress.vue&#39;
+export default &#123;
+  data() &#123;
+    return &#123;
+      width: 30,
+    &#125;
+  &#125;,
+  components: &#123;
+    BaseProgress,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseProgress.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-progress&quot;&gt;
+    &lt;div class&#x3D;&quot;inner&quot; :style&#x3D;&quot;&#123; width: w + &#39;%&#39; &#125;&quot;&gt;
+      &lt;span&gt;&#123;&#123; w &#125;&#125;%&lt;&#x2F;span&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  props: &#123;
+    w: Number,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.base-progress &#123;
+  height: 26px;
+  width: 400px;
+  border-radius: 15px;
+  background-color: #272425;
+  border: 3px solid #272425;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+&#125;
+.inner &#123;
+  position: relative;
+  background: #379bff;
+  border-radius: 15px;
+  height: 25px;
+  box-sizing: border-box;
+  left: -3px;
+  top: -2px;
+&#125;
+.inner span &#123;
+  position: absolute;
+  right: 0;
+  top: 26px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h2 id="3-3-props校验完整写法">3.3 props校验完整写法</h2>
+<h3 id="3-3-1-语法">3.3.1 语法</h3>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">props: &#123;
+  校验的属性名: &#123;
+    type: 类型,  &#x2F;&#x2F; Number String Boolean ...
+    required: true, &#x2F;&#x2F; 是否必填
+    default: 默认值, &#x2F;&#x2F; 默认值
+    validator (value) &#123;
+      &#x2F;&#x2F; 自定义校验逻辑
+      return 是否通过校验
+    &#125;
+  &#125;
+&#125;,</code></pre></div></figure>
+<h3 id="3-3-2-代码实例">3.3.2 代码实例</h3>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
+export default &#123;
+  &#x2F;&#x2F; 完整写法（类型、默认值、非空、自定义校验）
+  props: &#123;
+    w: &#123;
+      type: Number,
+      required: true,
+      default: 0,
+      validator(val) &#123;
+        &#x2F;&#x2F; console.log(val)
+        if (val &gt;&#x3D; 100 || val &lt;&#x3D; 0) &#123;
+          console.error(&#39;传入的范围必须是0-100之间&#39;)
+          return false
+        &#125; else &#123;
+          return true
+        &#125;
+      &#125;,
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;</code></pre></div></figure>
+<h3 id="3-3-3-注意">3.3.3 注意</h3>
+<p>1.default 和 required 一般不同时写（因为当时必填项时，肯定是有值的）</p>
+<p>2.default 后面如果是简单类型的值，可以直接写默认。如果是复杂类型的值，则需要以函数的形式 return 一个默认值</p>
+<h2 id="3-4-props-data、单向数据流">3.4 props&amp;data、单向数据流</h2>
+<h3 id="3-4-1-共同点">3.4.1 共同点</h3>
+<p>都可以给组件提供数据</p>
+<h3 id="3-4-2-区别">3.4.2 区别</h3>
+<ul>
+<li>data 的数据是 <strong>自己</strong> 的 → 随便改</li>
+<li>prop 的数据是 <strong>外部</strong> 的 → 不能直接改，要遵循 <strong>单向数据流</strong></li>
+</ul>
+<h3 id="3-4-3-单向数据流">3.4.3 单向数据流</h3>
+<p>父级 props 的数据更新，会向下流动，影响子组件。这个数据流动是单向的</p>
+<h3 id="4-代码演示">4.代码演示</h3>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;BaseCount :count&#x3D;&quot;count&quot; @changeCount&#x3D;&quot;handleChange&quot;&gt;&lt;&#x2F;BaseCount&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseCount from &#39;.&#x2F;components&#x2F;BaseCount.vue&#39;
+export default &#123;
+  components: &#123;
+    BaseCount,
+  &#125;,
+  data() &#123;
+    return &#123;
+      count: 100,
+    &#125;
+  &#125;,
+  methods: &#123;
+    handleChange(newVal) &#123;
+      &#x2F;&#x2F; console.log(newVal);
+      this.count &#x3D; newVal
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseCount.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-count&quot;&gt;
+    &lt;button @click&#x3D;&quot;handleSub&quot;&gt;-&lt;&#x2F;button&gt;
+    &lt;span&gt;&#123;&#123; count &#125;&#125;&lt;&#x2F;span&gt;
+    &lt;button @click&#x3D;&quot;handleAdd&quot;&gt;+&lt;&#x2F;button&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  &#x2F;&#x2F; 1.自己的数据随便修改  （谁的数据 谁负责）
+  &#x2F;&#x2F; data () &#123;
+  &#x2F;&#x2F;   return &#123;
+  &#x2F;&#x2F;     count: 100,
+  &#x2F;&#x2F;   &#125;
+  &#x2F;&#x2F; &#125;,
+  &#x2F;&#x2F; 2.外部传过来的数据 不能随便修改
+  props: &#123;
+    count: &#123;
+      type: Number,
+    &#125;,
+  &#125;,
+  methods: &#123;
+    handleSub() &#123;
+      this.$emit(&#39;changeCount&#39;, this.count - 1)
+    &#125;,
+    handleAdd() &#123;
+      this.$emit(&#39;changeCount&#39;, this.count + 1)
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+.base-count &#123;
+  margin: 20px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238710.png" srcset="/img/loading.gif" lazyload alt="68232373422"></p>
+<h3 id="5-口诀">5.口诀</h3>
+<p><strong>谁的数据谁负责</strong></p>
+<h1 id="4-非父子通信">4 非父子通信</h1>
+<h2 id="4-1-event-bus-事件总线">4.1 event bus 事件总线</h2>
+<p>非父子组件之间，进行简易消息传递。(复杂场景→ Vuex)</p>
+<p><strong>步骤</strong></p>
+<ol>
+<li>
+<p>创建一个都能访问的事件总线 （空 Vue 实例）</p>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">const</span> Bus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> Bus</code></pre></div></figure>
+</li>
+<li>
+<p>A 组件（接受方），监听 Bus 的 $on 事件</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">created () &#123;
+  Bus.$on(&#39;sendMsg&#39;, (msg) &#x3D;&gt; &#123;
+    this.msg &#x3D; msg
+  &#125;)
+&#125;</code></pre></div></figure>
+</li>
+<li>
+<p>B 组件（发送方），触发 Bus 的 $emit 事件</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">Bus.$emit(&#39;sendMsg&#39;, &#39;这是一个消息&#39;)</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238711.png" srcset="/img/loading.gif" lazyload alt="68232839240"></p>
+</li>
+</ol>
+<p><strong>代码示例</strong></p>
+<p>EventBus.js</p>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">const</span> Bus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> Bus</code></pre></div></figure>
+<p>BaseA.vue(接受方)</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-a&quot;&gt;
+    我是A组件（接受方）
+    &lt;p&gt;&#123;&#123;msg&#125;&#125;&lt;&#x2F;p&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import Bus from &#39;..&#x2F;utils&#x2F;EventBus&#39;
+export default &#123;
+  data() &#123;
+    return &#123;
+      msg: &#39;&#39;,
+    &#125;
+  &#125;,
+  created() &#123;
+    &#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 监听事件 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+    Bus.$on(&#39;sendMsg&#39;, (msg) &#x3D;&gt; &#123;
+      &#x2F;&#x2F; console.log(msg)
+      this.msg &#x3D; msg
+    &#125;)
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.base-a &#123;
+  width: 200px;
+  height: 200px;
+  border: 3px solid #000;
+  border-radius: 3px;
+  margin: 10px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseB.vue(发送方)</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-b&quot;&gt;
+    &lt;div&gt;我是B组件（发布方）&lt;&#x2F;div&gt;
+    &lt;button @click&#x3D;&quot;sendMsgFn&quot;&gt;发送消息&lt;&#x2F;button&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import Bus from &#39;..&#x2F;utils&#x2F;EventBus&#39;
+export default &#123;
+  methods: &#123;
+    sendMsgFn() &#123;
+      &#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 触发事件 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+      Bus.$emit(&#39;sendMsg&#39;, &#39;今天天气不错，适合旅游&#39;)
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.base-b &#123;
+  width: 200px;
+  height: 200px;
+  border: 3px solid #000;
+  border-radius: 3px;
+  margin: 10px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;BaseA&gt;&lt;&#x2F;BaseA&gt;
+    &lt;BaseB&gt;&lt;&#x2F;BaseB&gt;
+    &lt;BaseC&gt;&lt;&#x2F;BaseC&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseA from &#39;.&#x2F;components&#x2F;BaseA.vue&#39;
+import BaseB from &#39;.&#x2F;components&#x2F;BaseB.vue&#39;
+import BaseC from &#39;.&#x2F;components&#x2F;BaseC.vue&#39;
+export default &#123;
+  components: &#123;
+    BaseA,
+    BaseB,
+    BaseC,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h2 id="4-2-provide-inject">4.2 provide&amp;inject</h2>
+<p>跨层级共享数据</p>
+<h3 id="4-2-1-场景">4.2.1 场景</h3>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238712.png" srcset="/img/loading.gif" lazyload alt="68232950551"></p>
+<h3 id="4-2-2-语法">4.2.2 语法</h3>
+<ol>
+<li>父组件 provide 提供数据</li>
+</ol>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">provide</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+       <span class="token comment">// 普通类型【非响应式】</span>
+       <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>color<span class="token punctuation">,</span> 
+       <span class="token comment">// 复杂类型【响应式】</span>
+       <span class="token literal-property property">userInfo</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>userInfo<span class="token punctuation">,</span> 
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<p>2.子/孙组件 inject 获取数据</p>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  inject<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'color'</span><span class="token punctuation">,</span><span class="token string">'userInfo'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token function">created</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>color<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>userInfo<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></div></figure>
+<h3 id="4-2-3-注意">4.2.3 注意</h3>
+<ul>
+<li>provide 提供的简单类型的数据不是响应式的，复杂类型数据是响应式。（推荐提供复杂类型数据）</li>
+<li>子/孙组件通过 inject 获取的数据，不能在自身组件内修改</li>
+</ul>
+<h1 id="5-v-model">5 v-model</h1>
+<h2 id="5-1-原理">5.1 原理</h2>
+<p>v-model 本质上是一个语法糖。例如应用在输入框上，就是 value 属性和 input 事件的合写</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;app&quot; &gt;
+    &lt;input v-model&#x3D;&quot;msg&quot; type&#x3D;&quot;text&quot;&gt;
+		&lt;!-- 等价于 --&gt;
+    &lt;input :value&#x3D;&quot;msg&quot; @input&#x3D;&quot;msg &#x3D; $event.target.value&quot; type&#x3D;&quot;text&quot;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;</code></pre></div></figure>
+<h3 id="5-1-1-作用">5.1.1 作用</h3>
+<p>提供数据的双向绑定</p>
+<ul>
+<li>数据变，视图跟着变 <code>:value</code></li>
+<li>视图变，数据跟着变 <code>@input</code></li>
+</ul>
+<h3 id="5-1-2-注意">5.1.2 注意</h3>
+<p><strong>$event</strong> 用于在模板中，获取事件的形参</p>
+<h3 id="5-1-3-代码示例">5.1.3 代码示例</h3>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;msg1&quot; &#x2F;&gt;
+    &lt;br &#x2F;&gt;
+    &lt;!-- v-model的底层其实就是：value和 @input的简写 --&gt;
+    &lt;input type&#x3D;&quot;text&quot; :value&#x3D;&quot;msg2&quot; @input&#x3D;&quot;msg2 &#x3D; $event.target.value&quot; &#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      msg1: &#39;&#39;,
+      msg2: &#39;&#39;,
+    &#125;
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h3 id="5-1-4-v-model-使用在其他表单元素上的原理">5.1.4 v-model 使用在其他表单元素上的原理</h3>
+<p>不同的表单元素， v-model 在底层的处理机制是不一样的。比如给 checkbox 使用 v-model，底层处理的是 checked 属性和 change 事件。</p>
+<p><strong>不过咱们只需要掌握应用在文本框上的原理即可</strong></p>
+<h2 id="5-2-表单类组件封装">5.2 表单类组件封装</h2>
+<p><strong>需求目标</strong></p>
+<p>实现子组件和父组件数据的双向绑定 （实现App.vue中的selectId和子组件选中的数据进行双向绑定）</p>
+<p><strong>代码演示</strong></p>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;BaseSelect :selectId&#x3D;&quot;selectId&quot; @changeCity&#x3D;&quot;selectId &#x3D; $event&quot;&gt;&lt;&#x2F;BaseSelect&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseSelect from &#39;.&#x2F;components&#x2F;BaseSelect.vue&#39;
+export default &#123;
+  data() &#123;
+    return &#123;
+      selectId: &#39;102&#39;,
+    &#125;
+  &#125;,
+  components: &#123;
+    BaseSelect,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseSelect.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;select :value&#x3D;&quot;selectId&quot; @change&#x3D;&quot;selectCity&quot;&gt;
+      &lt;option value&#x3D;&quot;101&quot;&gt;北京&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;102&quot;&gt;上海&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;103&quot;&gt;武汉&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;104&quot;&gt;广州&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;105&quot;&gt;深圳&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  props: &#123;
+    selectId: String,
+  &#125;,
+  methods: &#123;
+    selectCity(e) &#123;
+      this.$emit(&#39;changeCity&#39;, e.target.value)
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h2 id="5-3-v-model简化代码">5.3 v-model简化代码</h2>
+<h3 id="5-3-1-目标">5.3.1 目标</h3>
+<p>父组件通过 v-model <strong>简化代码</strong>，实现子组件和父组件数据 <strong>双向绑定</strong></p>
+<h3 id="5-3-2-如何简化">5.3.2 如何简化</h3>
+<p>v-model 其实就是 :value 和 @input 事件的简写</p>
+<ul>
+<li>子组件：props 通过 value 接收数据，事件触发 input</li>
+<li>父组件：v-model 直接绑定数据</li>
+</ul>
+<h3 id="5-3-3-代码示例">5.3.3 代码示例</h3>
+<p>子组件</p>
+<p>这里 props 必须使用 value 这个词，发送时必须使用 input 这个函数名</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;select :value&#x3D;&quot;value&quot; @change&#x3D;&quot;handleChange&quot;&gt;...&lt;&#x2F;select&gt;
+props: &#123;
+  value: String
+&#125;,
+methods: &#123;
+  handleChange (e) &#123;
+    this.$emit(&#39;input&#39;, e.target.value)
+  &#125;
+&#125;</code></pre></div></figure>
+<p>父组件</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;BaseSelect v-model&#x3D;&quot;selectId&quot;&gt;&lt;&#x2F;BaseSelect&gt;</code></pre></div></figure>
+<h1 id="6-sync修饰符">6 .sync修饰符</h1>
+<h2 id="6-1-作用">6.1 作用</h2>
+<p>可以实现 <strong>子组件</strong> 与 <strong>父组件数据</strong> 的 <strong>双向绑定</strong>，简化代码</p>
+<p>简单理解：<strong>子组件可以修改父组件传过来的props值</strong></p>
+<h2 id="6-2-场景">6.2 场景</h2>
+<p>封装弹框类的基础组件， visible 属性 true 显示 false 隐藏</p>
+<h2 id="6-3-本质">6.3 本质</h2>
+<p>.sync修饰符 就是 <strong>:属性名</strong> 和 <strong>@update:属性名</strong> 合写</p>
+<h2 id="6-4-语法">6.4 语法</h2>
+<p>父组件</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&#x2F;&#x2F;.sync写法
+&lt;BaseDialog :visible.sync&#x3D;&quot;isShow&quot; &#x2F;&gt;
+--------------------------------------
+&#x2F;&#x2F;完整写法
+&lt;BaseDialog 
+  :visible&#x3D;&quot;isShow&quot; 
+  @update:visible&#x3D;&quot;isShow &#x3D; $event&quot; 
+&#x2F;&gt;</code></pre></div></figure>
+<p>子组件</p>
+<p>名字需要注意，这里需要写 <code>update:数据名</code></p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">props: &#123;
+  visible: Boolean
+&#125;,
+
+this.$emit(&#39;update:visible&#39;, false)</code></pre></div></figure>
+<h2 id="6-5-代码示例">6.5 代码示例</h2>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;button @click&#x3D;&quot;openDialog&quot;&gt;退出按钮&lt;&#x2F;button&gt;
+    &lt;!-- isShow.sync  &#x3D;&gt; :isShow&#x3D;&quot;isShow&quot; @update:isShow&#x3D;&quot;isShow&#x3D;$event&quot; --&gt;
+    &lt;BaseDialog :isShow.sync&#x3D;&quot;isShow&quot;&gt;&lt;&#x2F;BaseDialog&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseDialog from &#39;.&#x2F;components&#x2F;BaseDialog.vue&#39;
+export default &#123;
+  data() &#123;
+    return &#123;
+      isShow: false,
+    &#125;
+  &#125;,
+  methods: &#123;
+    openDialog() &#123;
+      this.isShow &#x3D; true
+      &#x2F;&#x2F; console.log(document.querySelectorAll(&#39;.box&#39;));
+    &#125;,
+  &#125;,
+  components: &#123;
+    BaseDialog,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseDialog.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-dialog-wrap&quot; v-show&#x3D;&quot;isShow&quot;&gt;
+    &lt;div class&#x3D;&quot;base-dialog&quot;&gt;
+      &lt;div class&#x3D;&quot;title&quot;&gt;
+        &lt;h3&gt;温馨提示：&lt;&#x2F;h3&gt;
+        &lt;button class&#x3D;&quot;close&quot; @click&#x3D;&quot;closeDialog&quot;&gt;x&lt;&#x2F;button&gt;
+      &lt;&#x2F;div&gt;
+      &lt;div class&#x3D;&quot;content&quot;&gt;
+        &lt;p&gt;你确认要退出本系统么？&lt;&#x2F;p&gt;
+      &lt;&#x2F;div&gt;
+      &lt;div class&#x3D;&quot;footer&quot;&gt;
+        &lt;button&gt;确认&lt;&#x2F;button&gt;
+        &lt;button&gt;取消&lt;&#x2F;button&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  props: &#123;
+    isShow: Boolean,
+  &#125;,
+  methods: &#123;
+    closeDialog() &#123;
+      this.$emit(&#39;update:isShow&#39;, false)
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.base-dialog-wrap &#123;
+  width: 300px;
+  height: 200px;
+  box-shadow: 2px 2px 2px 2px #ccc;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 10px;
+&#125;
+.base-dialog .title &#123;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000;
+&#125;
+.base-dialog .content &#123;
+  margin-top: 38px;
+&#125;
+.base-dialog .title .close &#123;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  line-height: 10px;
+&#125;
+.footer &#123;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 26px;
+&#125;
+.footer button &#123;
+  width: 80px;
+  height: 40px;
+&#125;
+.footer button:nth-child(1) &#123;
+  margin-right: 10px;
+  cursor: pointer;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h1 id="7-ref和-refs">7 ref和$refs</h1>
+<h2 id="7-1-作用">7.1 作用</h2>
+<p>利用ref 和 $refs 可以用于 获取 dom 元素 或 组件实例</p>
+<h2 id="7-2-特点">7.2 特点</h2>
+<p>查找范围 → 当前组件内(更精确稳定)</p>
+<h2 id="7-3-语法">7.3 语法</h2>
+<p>1.给要获取的盒子添加 ref 属性</p>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>chartRef<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>我是渲染图表的容器<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></figure>
+<p>2.获取时通过 $refs 获取 <code>this.\$refs.chartRef</code> 获取</p>
+<figure><div class="code-wrapper"><pre class="language-markup" data-language="markup"><code class="language-markup">mounted () &#123;
+  console.log(this.$refs.chartRef)
+&#125;</code></pre></div></figure>
+<h2 id="7-4-注意">7.4 注意</h2>
+<p>之前只用document.querySelect(‘.box’) 获取的是整个页面中的盒子。如果遇到同名的元素，就无法区分。</p>
+<h2 id="7-5-代码示例">7.5 代码示例</h2>
+<p>App.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;div class&#x3D;&quot;base-chart-box&quot;&gt;
+      这是一个捣乱的盒子
+    &lt;&#x2F;div&gt;
+    &lt;BaseChart&gt;&lt;&#x2F;BaseChart&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import BaseChart from &#39;.&#x2F;components&#x2F;BaseChart.vue&#39;
+export default &#123;
+  components: &#123;
+    BaseChart,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+.base-chart-box &#123;
+  width: 300px;
+  height: 200px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<p>BaseChart.vue</p>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;base-chart-box&quot; ref&#x3D;&quot;baseChartBox&quot;&gt;子组件&lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import * as echarts from &#39;echarts&#39;
+
+export default &#123;
+  mounted() &#123;
+    &#x2F;&#x2F; 基于准备好的dom，初始化echarts实例
+    &#x2F;&#x2F; document.querySelector 会查找项目中所有的元素
+    &#x2F;&#x2F; $refs只会在当前组件查找盒子
+    &#x2F;&#x2F; var myChart &#x3D; echarts.init(document.querySelector(&#39;.base-chart-box&#39;))
+    var myChart &#x3D; echarts.init(this.$refs.baseChartBox)
+    &#x2F;&#x2F; 绘制图表
+    myChart.setOption(&#123;
+      title: &#123;
+        text: &#39;ECharts 入门示例&#39;,
+      &#125;,
+      tooltip: &#123;&#125;,
+      xAxis: &#123;
+        data: [&#39;衬衫&#39;, &#39;羊毛衫&#39;, &#39;雪纺衫&#39;, &#39;裤子&#39;, &#39;高跟鞋&#39;, &#39;袜子&#39;],
+      &#125;,
+      yAxis: &#123;&#125;,
+      series: [
+        &#123;
+          name: &#39;销量&#39;,
+          type: &#39;bar&#39;,
+          data: [5, 20, 36, 10, 10, 20],
+        &#125;,
+      ],
+    &#125;)
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+.base-chart-box &#123;
+  width: 400px;
+  height: 300px;
+  border: 3px solid #000;
+  border-radius: 6px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h1 id="8-异步更新-nextTick">8 异步更新 &amp; $nextTick</h1>
+<h2 id="8-1-需求">8.1 需求</h2>
+<p>编辑标题, 编辑框自动聚焦</p>
+<ol>
+<li>点击编辑，显示编辑框</li>
+<li>让编辑框，立刻获取焦点</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242238713.png" srcset="/img/loading.gif" lazyload alt="68239449534"></p>
+<h2 id="8-2-代码实现">8.2 代码实现</h2>
+<figure><div class="code-wrapper"><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;app&quot;&gt;
+    &lt;div v-if&#x3D;&quot;isShowEdit&quot;&gt;
+      &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;editValue&quot; ref&#x3D;&quot;inp&quot; &#x2F;&gt;
+      &lt;button&gt;确认&lt;&#x2F;button&gt;
+    &lt;&#x2F;div&gt;
+    &lt;div v-else&gt;
+      &lt;span&gt;&#123;&#123; title &#125;&#125;&lt;&#x2F;span&gt;
+      &lt;button @click&#x3D;&quot;editFn&quot;&gt;编辑&lt;&#x2F;button&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      title: &#39;大标题&#39;,
+      isShowEdit: false,
+      editValue: &#39;&#39;,
+    &#125;
+  &#125;,
+  methods: &#123;
+    editFn() &#123;
+      &#x2F;&#x2F; 1.显示文本框
+      this.isShowEdit &#x3D; true
+      &#x2F;&#x2F; 2.让文本框聚焦 （会等dom更新完之后 立马执行nextTick中的回调函数）
+      &#x2F;&#x2F; this.$nextTick(() &#x3D;&gt; &#123;
+      &#x2F;&#x2F;   console.log(this.$refs.inp)
+      &#x2F;&#x2F;   this.$refs.inp.focus()
+      &#x2F;&#x2F; &#125;)
+
+      setTimeout(() &#x3D;&gt; &#123;
+        this.$refs.inp.focus()
+      &#125;, 0)
+    &#125;,
+  &#125;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+&lt;&#x2F;style&gt;</code></pre></div></figure>
+<h3 id="8-3-问题">8.3 问题</h3>
+<p>“显示之后”，立刻获取焦点是不能成功的！</p>
+<p>原因：Vue 是异步更新DOM (提升性能)</p>
+<h2 id="8-4-解决方案">8.4 解决方案</h2>
+<p>$nextTick：<strong>等 DOM更新后</strong>,才会触发执行此方法里的函数体</p>
+<p><strong>语法:</strong> this.$nextTick(函数体)</p>
+<figure><div class="code-wrapper"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>inp<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p><strong>注意：</strong>$nextTick 内的函数体 一定是<strong>箭头函数</strong>，这样才能让函数内部的 this 指向 Vue 实例。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）</div>
+<div>https://blog.fulequn.online/2024/06/Article202406061/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年6月6日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/06/Article202406071/" title="Vue基础入门到实战5（自定义指令+插槽+路由入门）">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">Vue基础入门到实战5（自定义指令+插槽+路由入门）</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/06/Article202406051/" title="Vue基础入门到实战3（生命周期+工程化开发+组件化开发）">
+<span class="hidden-mobile">Vue基础入门到实战3（生命周期+工程化开发+组件化开发）</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

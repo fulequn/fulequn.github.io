@@ -1,0 +1,385 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry 运行SpringMVC时控制台报错   解决办法 1.检查定义的接口和实体类映射的接口名是否一致   特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决BindingException问题">
+<meta property="og:url" content="https://blog.fulequn.online/2020/08/Article202008243/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry 运行SpringMVC时控制台报错   解决办法 1.检查定义的接口和实体类映射的接口名是否一致   特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212028604.png">
+<meta property="article:published_time" content="2020-08-24T14:31:12.000Z">
+<meta property="article:modified_time" content="2020-08-24T14:31:12.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="Bug">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212028604.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"解决BindingException问题","description":"解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry 运行SpringMVC时控制台报错   解决办法 1.检查定义的接口和实体类映射的接口名是否一致   特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.","url":"https://blog.fulequn.online/2020/08/Article202008243/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/08/Article202008243/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-08-24T14:31:12.000Z","dateModified":"2020-08-24T14:31:12.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212028604.png"}</script>
+<title>解决BindingException问题 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="解决BindingException问题"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-08-24 22:31" pubdate>
+2020年8月24日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+5.1k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+43 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">解决BindingException问题</h1>
+<div class="markdown-body">
+<h1 id="解决org-apache-ibatis-binding-BindingException-Type-interface-xxx-is-not-known-to-the-MapperRegistry">解决org.apache.ibatis.binding.BindingException: Type interface xxx is not known to the MapperRegistry</h1>
+<p>运行SpringMVC时控制台报错</p>
+<figure><div class="code-wrapper"><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\bin\java<span class="token punctuation">.</span>exe <span class="token operator">-</span>ea <span class="token operator">-</span><span class="token class-name">Didea</span><span class="token punctuation">.</span>test<span class="token punctuation">.</span>cyclic<span class="token punctuation">.</span>buffer<span class="token punctuation">.</span>size<span class="token operator">=</span><span class="token number">1048576</span> <span class="token operator">-</span>javaagent<span class="token operator">:</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">IntelliJ_IDEA</span>\lib\idea_rt<span class="token punctuation">.</span>jar<span class="token operator">=</span><span class="token number">55364</span><span class="token operator">:</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">IntelliJ_IDEA</span>\bin <span class="token operator">-</span><span class="token class-name">Dfile</span><span class="token punctuation">.</span>encoding<span class="token operator">=</span><span class="token constant">UTF</span><span class="token operator">-</span><span class="token number">8</span> <span class="token operator">-</span>classpath <span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">IntelliJ_IDEA</span>\lib\idea_rt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">IntelliJ_IDEA</span>\plugins\junit\lib\junit<span class="token operator">-</span>rt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">IntelliJ_IDEA</span>\plugins\junit\lib\junit5<span class="token operator">-</span>rt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\charsets<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\deploy<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\access<span class="token operator">-</span>bridge<span class="token operator">-</span><span class="token number">64.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\cldrdata<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\dnsns<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\jaccess<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\jfxrt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\localedata<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\nashorn<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\sunec<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\sunjce_provider<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\sunmscapi<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\sunpkcs11<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\ext\zipfs<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\javaws<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\jce<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\jfr<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\jfxswt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\jsse<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\management<span class="token operator">-</span>agent<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\plugin<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\resources<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\<span class="token class-name">Java</span>\jdk1<span class="token punctuation">.</span><span class="token number">8.0_131</span>\jre\lib\rt<span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\idea_workspace\<span class="token class-name">SpringMVC</span>\<span class="token class-name">SpringMVC_02</span>\target\test<span class="token operator">-</span>classes<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\idea_workspace\<span class="token class-name">SpringMVC</span>\<span class="token class-name">SpringMVC_02</span>\target\classes<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\junit\junit\<span class="token number">4.12</span>\junit<span class="token operator">-</span><span class="token number">4.12</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\hamcrest\hamcrest<span class="token operator">-</span>core\<span class="token number">1.3</span>\hamcrest<span class="token operator">-</span>core<span class="token operator">-</span><span class="token number">1.3</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>webmvc\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>webmvc<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>aop\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>aop<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>beans\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>beans<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>context\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>context<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>core\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>core<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\commons<span class="token operator">-</span>logging\commons<span class="token operator">-</span>logging\<span class="token number">1.2</span>\commons<span class="token operator">-</span>logging<span class="token operator">-</span><span class="token number">1.2</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>expression\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>expression<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\springframework\spring<span class="token operator">-</span>web\<span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span>\spring<span class="token operator">-</span>web<span class="token operator">-</span><span class="token number">4.3</span><span class="token number">.10</span><span class="token punctuation">.</span><span class="token constant">RELEASE</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\org\mybatis\mybatis\<span class="token number">3.4</span><span class="token number">.1</span>\mybatis<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.1</span><span class="token punctuation">.</span>jar<span class="token punctuation">;</span><span class="token class-name">D</span><span class="token operator">:</span>\oxy\<span class="token class-name">MyRepository</span>\mysql\mysql<span class="token operator">-</span>connector<span class="token operator">-</span>java\<span class="token number">5.1</span><span class="token number">.43</span>\mysql<span class="token operator">-</span>connector<span class="token operator">-</span>java<span class="token operator">-</span><span class="token number">5.1</span><span class="token number">.43</span><span class="token punctuation">.</span>jar <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>intellij<span class="token punctuation">.</span>rt<span class="token punctuation">.</span>execution<span class="token punctuation">.</span>junit<span class="token punctuation">.</span></span>JUnitStarter</span> <span class="token operator">-</span>ideVersion5 <span class="token operator">-</span>junit4 <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>zs<span class="token punctuation">.</span>test<span class="token punctuation">.</span></span>StudentTest</span>
+
+<span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>binding<span class="token punctuation">.</span></span>BindingException</span><span class="token operator">:</span> <span class="token class-name">Type</span> <span class="token keyword">interface</span> <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>zs<span class="token punctuation">.</span>dao<span class="token punctuation">.</span></span>StudentDao</span> is not known <span class="token keyword">to</span> <span class="token namespace">the</span> <span class="token class-name">MapperRegistry</span><span class="token punctuation">.</span>
+
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>binding<span class="token punctuation">.</span></span>MapperRegistry</span><span class="token punctuation">.</span><span class="token function">getMapper</span><span class="token punctuation">(</span><span class="token class-name">MapperRegistry</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">47</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>session<span class="token punctuation">.</span></span>Configuration</span><span class="token punctuation">.</span><span class="token function">getMapper</span><span class="token punctuation">(</span><span class="token class-name">Configuration</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">717</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>session<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span></span>DefaultSqlSession</span><span class="token punctuation">.</span><span class="token function">getMapper</span><span class="token punctuation">(</span><span class="token class-name">DefaultSqlSession</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">292</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>zs<span class="token punctuation">.</span>test<span class="token punctuation">.</span></span>StudentTest</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">StudentTest</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">34</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span>NativeMethodAccessorImpl</span><span class="token punctuation">.</span><span class="token function">invoke0</span><span class="token punctuation">(</span><span class="token class-name">Native</span> <span class="token class-name">Method</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span>NativeMethodAccessorImpl</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">NativeMethodAccessorImpl</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">62</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">sun<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span>DelegatingMethodAccessorImpl</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">DelegatingMethodAccessorImpl</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">43</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>reflect<span class="token punctuation">.</span></span>Method</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">Method</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">498</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>model<span class="token punctuation">.</span></span>FrameworkMethod</span>$<span class="token number">1.</span><span class="token function">runReflectiveCall</span><span class="token punctuation">(</span><span class="token class-name">FrameworkMethod</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>internal<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>model<span class="token punctuation">.</span></span>ReflectiveCallable</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ReflectiveCallable</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">12</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>model<span class="token punctuation">.</span></span>FrameworkMethod</span><span class="token punctuation">.</span><span class="token function">invokeExplosively</span><span class="token punctuation">(</span><span class="token class-name">FrameworkMethod</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">47</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>internal<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>statements<span class="token punctuation">.</span></span>InvokeMethod</span><span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token class-name">InvokeMethod</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">17</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>internal<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>statements<span class="token punctuation">.</span></span>RunBefores</span><span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token class-name">RunBefores</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>internal<span class="token punctuation">.</span>runners<span class="token punctuation">.</span>statements<span class="token punctuation">.</span></span>RunAfters</span><span class="token punctuation">.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token class-name">RunAfters</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">27</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span><span class="token punctuation">.</span><span class="token function">runLeaf</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">325</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>BlockJUnit4ClassRunner</span><span class="token punctuation">.</span><span class="token function">runChild</span><span class="token punctuation">(</span><span class="token class-name">BlockJUnit4ClassRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">78</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>BlockJUnit4ClassRunner</span><span class="token punctuation">.</span><span class="token function">runChild</span><span class="token punctuation">(</span><span class="token class-name">BlockJUnit4ClassRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">57</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span>$<span class="token number">3.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">290</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span>$<span class="token number">1.</span><span class="token function">schedule</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">71</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span><span class="token punctuation">.</span><span class="token function">runChildren</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">288</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span><span class="token punctuation">.</span>access$<span class="token function">000</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">58</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span>$<span class="token number">2.</span><span class="token function">evaluate</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">268</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runners<span class="token punctuation">.</span></span>ParentRunner</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ParentRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">363</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>runner<span class="token punctuation">.</span></span>JUnitCore</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">JUnitCore</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">137</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>intellij<span class="token punctuation">.</span>junit4<span class="token punctuation">.</span></span>JUnit4IdeaTestRunner</span><span class="token punctuation">.</span><span class="token function">startRunnerWithArgs</span><span class="token punctuation">(</span><span class="token class-name">JUnit4IdeaTestRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">68</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>intellij<span class="token punctuation">.</span>rt<span class="token punctuation">.</span>execution<span class="token punctuation">.</span>junit<span class="token punctuation">.</span></span>IdeaTestRunner</span>$<span class="token class-name">Repeater</span><span class="token punctuation">.</span><span class="token function">startRunnerWithArgs</span><span class="token punctuation">(</span><span class="token class-name">IdeaTestRunner</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">47</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>intellij<span class="token punctuation">.</span>rt<span class="token punctuation">.</span>execution<span class="token punctuation">.</span>junit<span class="token punctuation">.</span></span>JUnitStarter</span><span class="token punctuation">.</span><span class="token function">prepareStreamsAndStart</span><span class="token punctuation">(</span><span class="token class-name">JUnitStarter</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">242</span><span class="token punctuation">)</span>
+	at <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>intellij<span class="token punctuation">.</span>rt<span class="token punctuation">.</span>execution<span class="token punctuation">.</span>junit<span class="token punctuation">.</span></span>JUnitStarter</span><span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">JUnitStarter</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">70</span><span class="token punctuation">)</span>
+
+
+<span class="token class-name">Process</span> finished <span class="token keyword">with</span> <span class="token namespace">exit</span> code <span class="token operator">-</span><span class="token number">1</span></code></pre></div></figure>
+<h1 id="解决办法">解决办法</h1>
+<h3 id="1-检查定义的接口和实体类映射的接口名是否一致">1.检查定义的接口和实体类映射的接口名是否一致</h3>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212028604.png" srcset="/img/loading.gif" lazyload alt="1"><br>
+<img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212028605.png" srcset="/img/loading.gif" lazyload alt="2"><br>
+特别注意的是当项目只有一个包的时候可以只写com.zs.dao，但是有多个包，要具体到类名com.zs.dao.StudentDao。</p>
+<h3 id="2-配置文件里xml扫描器扫描">2.配置文件里xml扫描器扫描</h3>
+<p>在配置文件中我发现使用.xml出现了这个错误，把改成具体我要实现的那个接口，解决了问题。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Java/" class="print-no-link">#Java</a>
+<a href="/tags/Bug/" class="print-no-link">#Bug</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>解决BindingException问题</div>
+<div>https://blog.fulequn.online/2020/08/Article202008243/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年8月24日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/08/Article202008244/" title="eclipse怎么全局搜索">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">eclipse怎么全局搜索</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/08/Article202008242/" title="Windows10下C盘清理">
+<span class="hidden-mobile">Windows10下C盘清理</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

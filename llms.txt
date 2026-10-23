@@ -1,0 +1,10 @@
+# FuLeQun's Blog
+
+> 阿付的博客：公开分享前端与算法学习笔记、自托管服务与工具实践。
+
+## Articles
+
+- [从 GitHub 学习到可检索知识库](https://blog.fulequn.online/ai/content/github-learning-knowledge-pipeline.md): 基于已实现的 tracker learn 审阅闭环与 Hexo AI 导出插件，设计从私有研究原稿到公开博客与手机端检索的分阶段方案，并对比 OpenClaw、QMD、WeKnora 等候选的边界与取舍。
+- [Vue基础入门到实战6（路由进阶+面经项目）](https://blog.fulequn.online/ai/content/vue-vuex-state-management.md): Vue 状态管理 Vuex 学习笔记：state、getter、mutation、action 的核心概念与模块化实践。
+- [Vue基础入门到实战5（自定义指令+插槽+路由入门）](https://blog.fulequn.online/ai/content/vue-directives-slots-router.md): Vue 进阶实战笔记：自定义指令、插槽与 Vue Router 路由入门的用法与常见场景。
+- [算法训练3.2.2 背包模型](https://blog.fulequn.online/ai/content/algorithm-knapsack-models.md): 动态规划背包模型学习笔记：01 背包、完全背包、分组背包与多重背包的状态设计与转移方程。

@@ -1,0 +1,685 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="参考链接： http:&#x2F;&#x2F;blog.fens.me&#x2F;r-multi-linear-regression&#x2F;  前言 本文接上一篇R语言解读一元线性回归模型。在许多生活和工作的实际问题中，影响因变量的因素可能不止一个，比如对于知识水平越高的人，收入水平也越高，这样的一个结论。这其中可能包括了因为更好的家庭条件，所以有了更好的教育；因为在一线城市发展，所以有了更好的工作机会；所处的行业赶上了大的经济上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言解读多元线性回归模型">
+<meta property="og:url" content="https://blog.fulequn.online/2020/10/Article202010131/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="参考链接： http:&#x2F;&#x2F;blog.fens.me&#x2F;r-multi-linear-regression&#x2F;  前言 本文接上一篇R语言解读一元线性回归模型。在许多生活和工作的实际问题中，影响因变量的因素可能不止一个，比如对于知识水平越高的人，收入水平也越高，这样的一个结论。这其中可能包括了因为更好的家庭条件，所以有了更好的教育；因为在一线城市发展，所以有了更好的工作机会；所处的行业赶上了大的经济上">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909598.png">
+<meta property="article:published_time" content="2020-10-13T12:32:28.000Z">
+<meta property="article:modified_time" content="2020-10-13T12:32:28.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909598.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"R语言解读多元线性回归模型","description":"参考链接： http://blog.fens.me/r-multi-linear-regression/  前言 本文接上一篇R语言解读一元线性回归模型。在许多生活和工作的实际问题中，影响因变量的因素可能不止一个，比如对于知识水平越高的人，收入水平也越高，这样的一个结论。这其中可能包括了因为更好的家庭条件，所以有了更好的教育；因为在一线城市发展，所以有了更好的工作机会；所处的行业赶上了大的经济上","url":"https://blog.fulequn.online/2020/10/Article202010131/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/10/Article202010131/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-10-13T12:32:28.000Z","dateModified":"2020-10-13T12:32:28.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909598.png"}</script>
+<title>R语言解读多元线性回归模型 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="R语言解读多元线性回归模型"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2020-10-13 20:32" pubdate>
+2020年10月13日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+9.2k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+77 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">R语言解读多元线性回归模型</h1>
+<div class="markdown-body">
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.fens.me/r-multi-linear-regression/">http://blog.fens.me/r-multi-linear-regression/</a></p>
+</blockquote>
+<p><strong>前言</strong></p>
+<p>本文接上一篇<a target="_blank" rel="noopener" href="http://blog.fens.me/r-linear-regression/">R语言解读一元线性回归模型</a>。在许多生活和工作的实际问题中，影响因变量的因素可能不止一个，比如对于知识水平越高的人，收入水平也越高，这样的一个结论。这其中可能包括了因为更好的家庭条件，所以有了更好的教育；因为在一线城市发展，所以有了更好的工作机会；所处的行业赶上了大的经济上行周期等。要想解读这些规律，是复杂的、多维度的，多元回归分析方法更适合解读生活的规律。</p>
+<p>由于本文为非统计的专业文章，所以当出现与教课书不符的描述，请以教课书为准。本文力求用简化的语言，来介绍多元线性回归的知识，同时配合R语言的实现。</p>
+<p><strong>目录</strong></p>
+<ol>
+<li>多元线性回归介绍</li>
+<li>元线性回归建模</li>
+<li>模型优化</li>
+<li>案例：黑色系期货日K线数据验证</li>
+</ol>
+<h2 id="1-多元线性回归介绍">1. 多元线性回归介绍</h2>
+<p>对比一元线性回归，多元线性回归是用来确定2个或2个以上变量间关系的统计分析方法。多元线性回归的基本的分析方法与一元线性回归方法是类似的，我们首先需要对选取多元数据集并定义数学模型，然后进行参数估计，对估计出来的参数进行显著性检验，残差分析，异常点检测，最后确定回归方程进行模型预测。</p>
+<p>由于多元回归方程有多个自变量，区别于一元回归方程，有一项很重要的操作就是自变量的优化，挑选出相关性最显著的自变量，同时去除不显著的自变量。在R语言中，有很方便地用于优化函数，可以很好的帮助我们来改进回归模型。</p>
+<p>下面就开始多元线性回归的建模过程。</p>
+<h2 id="2-多元线性回归建模">2. 多元线性回归建模</h2>
+<p>做过商品期货研究的人，都知道黑色系品种是具有产业链上下游的关系。铁矿石是炼钢的原材料，焦煤和焦炭是炼钢的能源资源，热卷即热轧卷板是以板坯为原料经加热后制成的钢板，螺纹钢是表面带肋的钢筋。</p>
+<p>由于有产业链的关系，假设我们想要预测螺纹钢的价格，那么影响螺纹钢价格的因素可以会涉及到原材料，能源资源和同类材料等。比如，铁矿石价格如果上涨，螺纹钢就应该要涨价了。</p>
+<p><strong>2.1 数据集和数学模型</strong></p>
+<p>先从数据开始介绍，这次的数据集，我选择的期货黑色系的品种的商品期货，包括了大连期货交易所的 焦煤(JM)，焦炭(J)，铁矿石(I)，上海期货交易所的 螺纹钢(RU) 和 热卷(HC)。</p>
+<p>数据集为2016年3月15日，当日白天开盘的交易数据，为黑色系的5个期货合约的分钟线的价格数据。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># 数据集已存在df变量中
+&gt; head(df,20)
+                       x1    x2    x3   x4    y
+2016-03-15 09:01:00 754.5 616.5 426.5 2215 2055
+2016-03-15 09:02:00 752.5 614.5 423.5 2206 2048
+2016-03-15 09:03:00 753.0 614.0 423.0 2199 2044
+2016-03-15 09:04:00 752.5 613.0 422.5 2197 2040
+2016-03-15 09:05:00 753.0 615.5 424.0 2198 2043
+2016-03-15 09:06:00 752.5 614.5 422.0 2195 2040
+2016-03-15 09:07:00 752.0 614.0 421.5 2193 2036
+2016-03-15 09:08:00 753.0 615.0 422.5 2197 2043
+2016-03-15 09:09:00 754.0 615.5 422.5 2197 2041
+2016-03-15 09:10:00 754.5 615.5 423.0 2200 2044
+2016-03-15 09:11:00 757.0 616.5 423.0 2201 2045
+2016-03-15 09:12:00 756.0 615.5 423.0 2200 2044
+2016-03-15 09:13:00 755.5 615.0 423.0 2197 2042
+2016-03-15 09:14:00 755.5 615.0 423.0 2196 2042
+2016-03-15 09:15:00 756.0 616.0 423.5 2200 2045
+2016-03-15 09:16:00 757.5 616.0 424.0 2205 2052
+2016-03-15 09:17:00 758.5 618.0 424.0 2204 2051
+2016-03-15 09:18:00 759.5 618.5 424.0 2205 2053
+2016-03-15 09:19:00 759.5 617.5 424.5 2206 2053
+2016-03-15 09:20:00 758.5 617.5 423.5 2201 2050</code></pre></div></figure>
+<p>数据集包括有6列:</p>
+<ul>
+<li>索引, 为时间</li>
+<li>x1, 为焦炭(j1605)合约的1分钟线的报价数据</li>
+<li>x2, 为焦煤(jm1605)合约的1分钟线的报价数据</li>
+<li>x3, 为铁矿石(i1605)合约的1分钟线的报价数据</li>
+<li>x4, 为热卷(hc1605)合约的1分钟线的报价数据</li>
+<li>y, 为螺纹钢(rb1605)合约的1分钟线的报价数据</li>
+</ul>
+<p>假设螺纹钢的价格与其他4个商品的价格有线性关系，那么我们建立以螺纹钢为因变量，以焦煤、焦炭、铁矿石和热卷的为自变量的多元线性回归模型。用公式表示为：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">y &#x3D; a + b * x1 + c * x2 + d * x3 + e * x4 + ε</code></pre></div></figure>
+<ul>
+<li>y，为因变量，螺纹钢</li>
+<li>x1，为自变量，焦煤</li>
+<li>x2，为自变量，焦炭</li>
+<li>x3，为自变量，铁矿石</li>
+<li>x4，为自变量，热卷</li>
+<li>a，为截距</li>
+<li>b,c,d,e，为自变量系数</li>
+<li>ε, 为残差，是其他一切不确定因素影响的总和，其值不可观测。假定ε服从正态分布N(0,σ^2)。</li>
+</ul>
+<p>通过对多元线性回归模型的数学定义，接下来让我们利用数据集做多元回归模型的参数估计。</p>
+<p><strong>2.2. 回归参数估计</strong></p>
+<p>上面公式中，回归参数 a, b, c, d,e都是我们不知道的，参数估计就是通过数据来估计出这些参数，从而确定自变量和因变量之前的关系。我们的目标是要计算出一条直线，使直线上每个点的Y值和实际数据的Y值之差的平方和最小，即（Y1实际-Y1预测）^2+（Y2实际-Y2预测）^2+ …… +（Yn实际-Yn预测）^2 的值最小。参数估计时，我们只考虑Y随X自变量的线性变化的部分，而残差ε是不可观测的，参数估计法并不需要考虑残差。</p>
+<p>类似于一元线性回归，我们用R语言来实现对数据的回归模型的参数估计，用lm()函数来实现多元线性回归的建模过程。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none"># 建立多元线性回归模型
+&gt; lm1&lt;-lm(y~x1+x2+x3+x4,data&#x3D;df)
+
+# 打印参数估计的结果
+&gt; lm1
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4, data &#x3D; df)
+
+Coefficients:
+(Intercept)           x1           x2           x3           x4  
+   212.8780       0.8542       0.6672      -0.6674       0.4821  </code></pre></div></figure>
+<p>这样我们就得到了y和x关系的方程。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">y &#x3D; 212.8780 + 0.8542 * x1 + 0.6672 * x2 - 0.6674 * x3 + 0.4821 * x4</code></pre></div></figure>
+<p><strong>2.3. 回归方程的显著性检验</strong></p>
+<p>参考一元线性回归的显著性检验，多元线性回归的显著性检验，同样是需要经过 T检验，F检验，和R^2(R平方)相关系统检验。在R语言中这三种检验的方法都已被实现，我们只需要把结果解读，我们可以summary()函数来提取模型的计算结果。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt; summary(lm1)
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4, data &#x3D; df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.9648 -1.3241 -0.0319  1.2403  5.4194 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 212.87796   58.26788   3.653 0.000323 ***
+x1            0.85423    0.10958   7.795 2.50e-13 ***
+x2            0.66724    0.12938   5.157 5.57e-07 ***
+x3           -0.66741    0.15421  -4.328 2.28e-05 ***
+x4            0.48214    0.01959  24.609  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.028 on 221 degrees of freedom
+Multiple R-squared:  0.9725,	Adjusted R-squared:  0.972 
+F-statistic:  1956 on 4 and 221 DF,  p-value: &lt; 2.2e-16</code></pre></div></figure>
+<ul>
+<li>T检验：所自变量都是非常显著***</li>
+<li>F检验：同样是非常显著，p-value &lt; 2.2e-16</li>
+<li>调整后的R^2：相关性非常强为0.972</li>
+</ul>
+<p>最后，我们通过的回归参数的检验与回归方程的检验，得到最后多元线性回归方程为：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">y &#x3D; 212.87796 + 0.85423 * x1 + 0.66724 * x2 - 0.66741 * x3 + 0.48214 * x4
+
+即
+
+螺纹钢 &#x3D; 212.87796 + 0.85423 * 焦炭 + 0.66724 * 焦煤 - 0.66741 * 铁矿石 + 0.48214 * 热卷</code></pre></div></figure>
+<p><strong>2.4 残差分析和异常点检测</strong></p>
+<p>在得到的回归模型进行显著性检验后，还要在做残差分析(预测值和实际值之间的差)，检验模型的正确性，残差必须服从正态分布N(0,σ^2)。直接用plot()函数生成4种用于模型诊断的图形，进行直观地分析。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt; par(mfrow&#x3D;c(2,2))
+&gt; plot(lm1)</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909598.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<ul>
+<li>残差和拟合值(左上)，残差和拟合值之间数据点均匀分布在y=0两侧，呈现出随机的分布，红色线呈现出一条平稳的曲线并没有明显的形状特征。</li>
+<li>残差QQ图(右上)，数据点按对角直线排列，趋于一条直线，并被对角直接穿过，直观上符合正态分布。</li>
+<li>标准化残差平方根和拟合值(左下)，数据点均匀分布在y=0两侧，呈现出随机的分布，红色线呈现出一条平稳的曲线并没有明显的形状特征。</li>
+<li>标准化残差和杠杆值(右下)，没有出现红色的等高线，则说明数据中没有特别影响回归结果的异常点。</li>
+</ul>
+<p>结论，没有明显的异常点，残差符合假设条件。</p>
+<p><strong>2.5. 模型预测</strong></p>
+<p>我们得到了多元线性回归方程的公式，就可以对数据进行预测了。我们可以用R语言的predict()函数来计算预测值y0和相应的预测区间，并把实际值和预测值一起可视化化展示。</p>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">&gt; par(mfrow&#x3D;c(1,1))  #设置画面布局
+
+# 预测计算
+&gt; dfp&lt;-predict(lm1,interval&#x3D;&quot;prediction&quot;)
+
+# 打印预测时
+&gt; head(dfp,10)
+                fit      lwr      upr
+2014-03-21 3160.526 3046.425 3274.626
+2014-03-24 3193.253 3078.868 3307.637
+2014-03-25 3240.389 3126.171 3354.607
+2014-03-26 3228.565 3114.420 3342.710
+2014-03-27 3222.528 3108.342 3336.713
+2014-03-28 3262.399 3148.132 3376.666
+2014-03-31 3291.996 3177.648 3406.344
+2014-04-01 3305.870 3191.447 3420.294
+2014-04-02 3275.370 3161.018 3389.723
+2014-04-03 3297.358 3182.960 3411.755
+
+# 合并数据
+&gt; mdf&lt;-merge(df$y,dfp)	 
+
+# 画图
+&gt; draw(mdf)</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909599.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<p>图例说明</p>
+<ul>
+<li>y, 实际价格，红色线</li>
+<li>fit, 预测价格，绿色线</li>
+<li>lwr，预测最低价，蓝色线</li>
+<li>upr，预测最高价，紫色线</li>
+</ul>
+<p>从图中看出，实际价格y和预测价格fit，在大多数的时候都是很贴近的。我们的一个模型就训练好了！</p>
+<h2 id="3-模型优化">3. 模型优化</h2>
+<p>上文中，我们已经很顺利的发现了一个非常不错的模型。如果要进行模型优化，可以用R语言中update()函数进行模型的调整。我们首先检查一下每个自变量x1,x2,x3,x4和因变量y之间的关系。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">pairs(as.data.frame(df))</code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909600.png" srcset="/img/loading.gif" lazyload alt="4"></p>
+<p>从图中，我们可以发现x2与Y的关系，可能是最偏离线性的。那么，我们尝试对多元线性回归模型进行调整，从原模型中去掉x2变量。</p>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R"># 模型调整
+&gt; lm2&lt;-update(lm1, .~. -x2)
+
+&gt; summary(lm2)
+
+Call:
+lm(formula &#x3D; y ~ x1 + x3 + x4, data &#x3D; df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.0039 -1.3842  0.0177  1.3513  4.8028 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 462.47104   34.26636   13.50  &lt; 2e-16 ***
+x1            1.08728    0.10543   10.31  &lt; 2e-16 ***
+x3           -0.40788    0.15394   -2.65  0.00864 ** 
+x4            0.42582    0.01718   24.79  &lt; 2e-16 ***
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.142 on 222 degrees of freedom
+Multiple R-squared:  0.9692,	Adjusted R-squared:  0.9688 
+F-statistic:  2330 on 3 and 222 DF,  p-value: &lt; 2.2e-16</code></pre></div></figure>
+<p>当把自变量x2去掉后，自变量x3的T检验反而变大了，同时Adjusted R-squared变小了，所以我们这次调整是有问题的。</p>
+<p>如果通过生产和原材料的内在逻辑分析，焦煤与焦炭属于上下游关系。焦煤是生产焦炭的一种原材料，焦炭是焦煤与其他炼焦煤经过配煤焦化形成的产品，一般生产 1 吨焦炭需要1.33 吨炼焦煤，其中焦煤至少占 30% 。</p>
+<p>我们把焦煤和焦炭的关系改变一下，增加x1*x2的关系匹配到模型，看看效果。</p>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R"># 模型调整
+&gt; lm3&lt;-update(lm1, .~. + x1*x2)
+&gt; summary(lm3)
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4 + x1:x2, data &#x3D; df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.8110 -1.3501 -0.0595  1.2019  5.3884 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 7160.32231 7814.50048   0.916    0.361    
+x1            -8.45530   10.47167  -0.807    0.420    
+x2           -10.58406   12.65579  -0.836    0.404    
+x3            -0.64344    0.15662  -4.108 5.63e-05 ***
+x4             0.48363    0.01967  24.584  &lt; 2e-16 ***
+x1:x2          0.01505    0.01693   0.889    0.375    
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.029 on 220 degrees of freedom
+Multiple R-squared:  0.9726,	Adjusted R-squared:  0.972 
+F-statistic:  1563 on 5 and 220 DF,  p-value: &lt; 2.2e-16</code></pre></div></figure>
+<p>从结果中发现，增加了x1*x2列后，原来的x1,x2和Intercept的T检验都不显著。继续调整模型，从模型中去掉x1,x2两个自变量。</p>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R"># 模型调整
+&gt; lm4&lt;-update(lm3, .~. -x1-x2)
+&gt; summary(lm4)
+
+Call:
+lm(formula &#x3D; y ~ x3 + x4 + x1:x2, data &#x3D; df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.9027 -1.2516 -0.0167  1.2748  5.8683 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.950e+02  1.609e+01  43.183  &lt; 2e-16 ***
+x3          -6.284e-01  1.530e-01  -4.108 5.61e-05 ***
+x4           4.959e-01  1.785e-02  27.783  &lt; 2e-16 ***
+x1:x2        1.133e-03  9.524e-05  11.897  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.035 on 222 degrees of freedom
+Multiple R-squared:  0.9722,	Adjusted R-squared:  0.9718 
+F-statistic:  2588 on 3 and 222 DF,  p-value: &lt; 2.2e-16</code></pre></div></figure>
+<p>从调整后的结果来看，效果还不错。不过，也并没有比最初的模型有所提高。</p>
+<p>对于模型调整的过程，如果我们手动调整测试时，一般都会基于业务知识来操作。如果是按照数据指标来计算，我们可以用R语言中提供的逐步回归的优化方法，通过AIC指标来判断是否需要参数优化。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#对lm1模型做逐步回归
+&gt; step(lm1)
+Start:  AIC&#x3D;324.51
+y ~ x1 + x2 + x3 + x4
+
+       Df Sum of Sq    RSS    AIC
+               908.8 324.51
+- x3    1     77.03  985.9 340.90
+- x2    1    109.37 1018.2 348.19
+- x1    1    249.90 1158.8 377.41
+- x4    1   2490.56 3399.4 620.65
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4, data &#x3D; df)
+
+Coefficients:
+(Intercept)           x1           x2           x3           x4  
+   212.8780       0.8542       0.6672      -0.6674       0.4821  </code></pre></div></figure>
+<p>通过计算AIC指标，lm1的模型AIC最小时为324.51，每次去掉一个自变量都会让AIC的值变大，所以我们还是不调整比较好。</p>
+<p>对刚才的lm3模型做逐步回归的模型调整。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">#对lm3模型做逐步回归
+&gt; step(lm3)
+Start:  AIC&#x3D;325.7               #当前AIC
+y ~ x1 + x2 + x3 + x4 + x1:x2
+
+        Df Sum of Sq    RSS    AIC
+- x1:x2  1      3.25  908.8 324.51
+                905.6 325.70
+- x3     1     69.47  975.1 340.41
+- x4     1   2487.86 3393.5 622.25
+
+Step:  AIC&#x3D;324.51               #去掉x1*x2项的AIC
+y ~ x1 + x2 + x3 + x4
+
+       Df Sum of Sq    RSS    AIC
+               908.8 324.51
+- x3    1     77.03  985.9 340.90
+- x2    1    109.37 1018.2 348.19
+- x1    1    249.90 1158.8 377.41
+- x4    1   2490.56 3399.4 620.65
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4, data &#x3D; df)
+
+Coefficients:
+(Intercept)           x1           x2           x3           x4  
+   212.8780       0.8542       0.6672      -0.6674       0.4821  </code></pre></div></figure>
+<p>通过AIC的判断，去掉X1*X2项后AIC最小，最后的检验结果告诉我们，还是原初的模型是最好的。</p>
+<h2 id="4-案例：黑色系期货日K线数据验证">4. 案例：黑色系期货日K线数据验证</h2>
+<p>最后，我们用上面5个期货合约的日K线数据测试一下，找到多元回归关系。</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">&gt; lm9&lt;-lm(y~x1+x2+x3+x4,data&#x3D;df)  # 日K线数据
+&gt; summary(lm9)
+
+Call:
+lm(formula &#x3D; y ~ x1 + x2 + x3 + x4, data &#x3D; df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-173.338  -37.470    3.465   32.158  178.982 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 386.33482   31.07729  12.431  &lt; 2e-16 ***
+x1            0.75871    0.07554  10.045  &lt; 2e-16 ***
+x2           -0.62907    0.14715  -4.275 2.24e-05 ***
+x3            1.16070    0.05224  22.219  &lt; 2e-16 ***
+x4            0.46461    0.02168  21.427  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 57.78 on 565 degrees of freedom
+Multiple R-squared:  0.9844,	Adjusted R-squared:  0.9843 
+F-statistic:  8906 on 4 and 565 DF,  p-value: &lt; 2.2e-16</code></pre></div></figure>
+<p>数据集的基本统计信息。</p>
+<figure><div class="code-wrapper"><pre class="language-R" data-language="R"><code class="language-R">&gt; summary(df)
+     Index                           x1               x2       
+ Min.   :2014-03-21 00:00:00   Min.   : 606.5   Min.   :494.0  
+ 1st Qu.:2014-10-21 06:00:00   1st Qu.: 803.5   1st Qu.:613.1  
+ Median :2015-05-20 12:00:00   Median : 939.0   Median :705.8  
+ Mean   :2015-05-21 08:02:31   Mean   : 936.1   Mean   :695.3  
+ 3rd Qu.:2015-12-16 18:00:00   3rd Qu.:1075.0   3rd Qu.:773.0  
+ Max.   :2016-07-25 00:00:00   Max.   :1280.0   Max.   :898.0  
+
+       x3              x4             y       
+ Min.   :284.0   Min.   :1691   Min.   :1626  
+ 1st Qu.:374.1   1st Qu.:2084   1st Qu.:2012  
+ Median :434.0   Median :2503   Median :2378  
+ Mean   :476.5   Mean   :2545   Mean   :2395  
+ 3rd Qu.:545.8   3rd Qu.:2916   3rd Qu.:2592  
+ Max.   :825.0   Max.   :3480   Max.   :3414  </code></pre></div></figure>
+<p><img src="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306241909601.png" srcset="/img/loading.gif" lazyload alt="5"></p>
+<p>对于日K线数据，黑色系的5个品种，同样具有非常强的相关关系，那么我们就可以把这个结论应用到实际的交易中了。</p>
+<p>本文通过多元回归的统计分析方法，介绍多元回归在金融市场的基本应用。我们通过建立因变量和多个自变量的模型，从而发现生活中更复杂的规律，并建立有效的验证指标。让我们我们的技术优势，去金融市场抢钱吧。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/R/" class="print-no-link">#R</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>R语言解读多元线性回归模型</div>
+<div>https://blog.fulequn.online/2020/10/Article202010131/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2020年10月13日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2020/10/Article202010132/" title="Unexpected UTF-8 BOM(decode using utf-8-sig)">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">Unexpected UTF-8 BOM(decode using utf-8-sig)</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2020/10/Article202010084/" title="R做多元线性回归全攻略">
+<span class="hidden-mobile">R做多元线性回归全攻略</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>

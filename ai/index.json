@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "site": {
+    "title": "FuLeQun's Blog",
+    "url": "https://blog.fulequn.online/"
+  },
+  "items": [
+    {
+      "id": "github-learning-knowledge-pipeline",
+      "title": "从 GitHub 学习到可检索知识库",
+      "summary": "基于已实现的 tracker learn 审阅闭环与 Hexo AI 导出插件，设计从私有研究原稿到公开博客与手机端检索的分阶段方案，并对比 OpenClaw、QMD、WeKnora 等候选的边界与取舍。",
+      "canonical_url": "https://blog.fulequn.online/learning/github-learning-to-blog-knowledge-base/",
+      "markdown_url": "https://blog.fulequn.online/ai/content/github-learning-knowledge-pipeline.md",
+      "published_at": "2026-10-22T16:00:00.000Z",
+      "updated_at": "2026-10-22T16:00:00.000Z",
+      "tags": [
+        "Hexo",
+        "GitHub",
+        "OpenClaw",
+        "知识管理"
+      ],
+      "sha256": "c655896dec69f62a0e58a7d038ffe5a580f5d7860996ec8fbcd412c8213c27f5"
+    },
+    {
+      "id": "vue-vuex-state-management",
+      "title": "Vue基础入门到实战6（路由进阶+面经项目）",
+      "summary": "Vue 状态管理 Vuex 学习笔记：state、getter、mutation、action 的核心概念与模块化实践。",
+      "canonical_url": "https://blog.fulequn.online/2024/06/Article202406141/",
+      "markdown_url": "https://blog.fulequn.online/ai/content/vue-vuex-state-management.md",
+      "published_at": "2024-06-11T07:32:21.000Z",
+      "updated_at": "2024-06-11T07:32:21.000Z",
+      "tags": [],
+      "sha256": "cd74f9880c9f8a2251ac39f5e3856ee71b7dc4e0312cc7a58f79dee30fbd9b81"
+    },
+    {
+      "id": "vue-directives-slots-router",
+      "title": "Vue基础入门到实战5（自定义指令+插槽+路由入门）",
+      "summary": "Vue 进阶实战笔记：自定义指令、插槽与 Vue Router 路由入门的用法与常见场景。",
+      "canonical_url": "https://blog.fulequn.online/2024/06/Article202406071/",
+      "markdown_url": "https://blog.fulequn.online/ai/content/vue-directives-slots-router.md",
+      "published_at": "2024-06-07T02:12:02.000Z",
+      "updated_at": "2024-06-07T02:12:02.000Z",
+      "tags": [],
+      "sha256": "b7b315ebf833e04f35a73fe5900aca8cb6eed04b0175bf7a4c9f14e16890d41f"
+    },
+    {
+      "id": "algorithm-knapsack-models",
+      "title": "算法训练3.2.2 背包模型",
+      "summary": "动态规划背包模型学习笔记：01 背包、完全背包、分组背包与多重背包的状态设计与转移方程。",
+      "canonical_url": "https://blog.fulequn.online/2024/05/Article202405221/",
+      "markdown_url": "https://blog.fulequn.online/ai/content/algorithm-knapsack-models.md",
+      "published_at": "2024-05-22T08:23:27.000Z",
+      "updated_at": "2024-05-22T08:23:27.000Z",
+      "tags": [
+        "算法"
+      ],
+      "sha256": "d7ab0c2dbc929fd420da534d1d158592930e7147dbda9eee881f62479d1037b7"
+    }
+  ]
+}

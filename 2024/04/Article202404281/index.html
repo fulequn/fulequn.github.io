@@ -1,0 +1,713 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="算法 美团0427笔试 美团笔试，上强度了！（0427春招实习笔试真题解析） 1 小美换团 小美拿到了一个字符串，她准备把其中所有的&quot;mei&quot;子串替换为&quot;tuan&quot;子串，你能帮帮她吗？ 输入描述 一个仅由小写字母组成的字符串。长度不超100000 输出描述 修改后的字符串。 示例 1 输入 meituan 输出 tuantuan 思路与代码 打卡题。直接模拟即可。   2 小美的特殊矩形 小美拿到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024.4.28 美团笔试复盘">
+<meta property="og:url" content="https://blog.fulequn.online/2024/04/Article202404281/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="算法 美团0427笔试 美团笔试，上强度了！（0427春招实习笔试真题解析） 1 小美换团 小美拿到了一个字符串，她准备把其中所有的&quot;mei&quot;子串替换为&quot;tuan&quot;子串，你能帮帮她吗？ 输入描述 一个仅由小写字母组成的字符串。长度不超100000 输出描述 修改后的字符串。 示例 1 输入 meituan 输出 tuantuan 思路与代码 打卡题。直接模拟即可。   2 小美的特殊矩形 小美拿到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2024-04-28T04:47:17.000Z">
+<meta property="article:modified_time" content="2024-04-28T04:47:17.000Z">
+<meta property="article:author" content="Fulequn">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"2024.4.28 美团笔试复盘","description":"算法 美团0427笔试 美团笔试，上强度了！（0427春招实习笔试真题解析） 1 小美换团 小美拿到了一个字符串，她准备把其中所有的\"mei\"子串替换为\"tuan\"子串，你能帮帮她吗？ 输入描述 一个仅由小写字母组成的字符串。长度不超100000 输出描述 修改后的字符串。 示例 1 输入 meituan 输出 tuantuan 思路与代码 打卡题。直接模拟即可。   2 小美的特殊矩形 小美拿到","url":"https://blog.fulequn.online/2024/04/Article202404281/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/04/Article202404281/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-04-28T04:47:17.000Z","dateModified":"2024-04-28T04:47:17.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>2024.4.28 美团笔试复盘 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="2024.4.28 美团笔试复盘"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2024-04-28 12:47" pubdate>
+2024年4月28日 下午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+6.8k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+57 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">2024.4.28 美团笔试复盘</h1>
+<div class="markdown-body">
+<h1 id="算法">算法</h1>
+<h2 id="美团0427笔试">美团0427笔试</h2>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KLzXH5y0unAKT8zvoSLMxA">美团笔试，上强度了！（0427春招实习笔试真题解析）</a></p>
+<h3 id="1-小美换团"><strong>1 小美换团</strong></h3>
+<p>小美拿到了一个字符串，她准备把其中所有的&quot;mei&quot;子串替换为&quot;tuan&quot;子串，你能帮帮她吗？</p>
+<p><strong>输入描述</strong></p>
+<p>一个仅由小写字母组成的字符串。长度不超100000</p>
+<p><strong>输出描述</strong></p>
+<p>修改后的字符串。</p>
+<p><strong>示例 1</strong></p>
+<p><strong>输入</strong></p>
+<p>meituan</p>
+<p><strong>输出</strong></p>
+<p>tuantuan</p>
+<p><strong>思路与代码</strong></p>
+<p>打卡题。直接模拟即可。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">s <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"mei"</span><span class="token punctuation">,</span><span class="token string">"tuan"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span></code></pre></div></figure>
+<h3 id="2-小美的特殊矩形"><strong>2 小美的特殊矩形</strong></h3>
+<p>小美拿到了一个字符矩阵，她定义一个矩形区域是“特殊的”，当且仅当这个矩形区域中没有两个相同的字符。 现在小美想知道，有多少个2行2列的矩阵区域是特殊的？</p>
+<p><strong>输入描述</strong></p>
+<p>第一行输入两个正整数n,m，代表矩阵的行数和列数。</p>
+<p>接下来的n行，每行输入一个长度为m的、仅由小写字母组成的字符串，代表小美拿到的字符矩阵。</p>
+<p>1&lt;=n,m&lt;=200</p>
+<p><strong>输出描述</strong></p>
+<p>一个整数，代表&quot;特殊的&quot;矩形区域的数量。</p>
+<p><strong>示例 1</strong></p>
+<p><strong>输入</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">2 3
+abb
+aac</code></pre></div></figure>
+<p><strong>输出</strong></p>
+<p>0</p>
+<p><strong>思路与代码</strong></p>
+<p>模拟题。 直接枚举所有的2*2的子矩阵，判断是否存在重复的字符即可。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python">n<span class="token punctuation">,</span>m <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+res <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        s <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> y <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token operator">+</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">+</span>y<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">:</span>
+            res <span class="token operator">+=</span> <span class="token number">1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span></code></pre></div></figure>
+<h3 id="3-小美的数组合并"><strong>3 小美的数组合并</strong></h3>
+<p>小美拿到了一个数组，她每次操作可以将两个相邻元素ai合并为一个元素，合并后的元素为原来两个元素之和。小美希望最终数组的最小值不小于k。她想知道有多少种不同的合并结果？</p>
+<p><strong>输入描述</strong></p>
+<p>第一行输入两个正整数n,k，代表数组大小和数组的最大值。</p>
+<p>第二行输入个正整数ai，代表小美拿到的数组。</p>
+<p>1&lt;=n,k,ai&lt;=200</p>
+<p><strong>输出描述</strong></p>
+<p>输出一个整数，代表小美可以得到多少种不同的结果。由于结果可能很大，输出对10^9+7取模的结果。</p>
+<p><strong>示例 1</strong></p>
+<p><strong>输入</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">4 4
+2 3 4 5</code></pre></div></figure>
+<p><strong>输出</strong></p>
+<p>4</p>
+<p><strong>说明</strong></p>
+<p>可能得到的数组有：[5,4,5]、[9,5]、[5,9]、[14]这四种。</p>
+<p><strong>思路与代码</strong></p>
+<p>动态规划。</p>
+<p>对于每一个数字来说，如果当前和是小于k的，那么只能选择合并；否则的话，合并和不合并都可以。</p>
+<p><code>f[i,j]</code>考虑i往后的数字，当前和是p，组成满足条件的方案数有多少。</p>
+<p>推导如下：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">if j&gt;&#x3D;k: 
+	f[i,j] +&#x3D; f[i+1,j+a[i]] + f[i+1,a[i]] 
+else:  
+	f[i,j] &#x3D; f[i+1,j+a[i]]</code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 读取输入的整数 n 和 k</span>
+n<span class="token punctuation">,</span> k <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 读取输入的数组 arr，并将其转换为整数列表</span>
+arr <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义一个常量 MOD，用于在计算过程中取模以避免整数溢出</span>
+MOD <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">9</span> <span class="token operator">+</span> <span class="token number">7</span>
+
+<span class="token comment"># 初始化动态规划数组 dp，其大小为 (n+1) x (sum(arr)+1)，所有值初始化为 -1</span>
+<span class="token comment"># dp[i][j] 表示在考虑前 i 个数，当前取到的总和为 j 时的方法数</span>
+dp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token builtin">sum</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 定义深度优先搜索函数 dfs，参数 i 表示当前考虑的数组元素索引，参数 p 表示当前的累计和</span>
+<span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 如果已经到达数组末尾，则根据当前累计和 p 是否大于等于 k 来返回 1 或 0</span>
+    <span class="token keyword">if</span> i <span class="token operator">==</span> n<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">1</span> <span class="token keyword">if</span> p <span class="token operator">>=</span> k <span class="token keyword">else</span> <span class="token number">0</span>
+
+    <span class="token comment"># 如果当前状态已经计算过，则直接返回结果</span>
+    <span class="token keyword">if</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+
+    <span class="token comment"># 初始化方法数 cnt 为 0</span>
+    cnt <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token comment"># 如果当前累计和 p 大于等于 k，则可以选择取当前元素，或者不取</span>
+    <span class="token keyword">if</span> p <span class="token operator">>=</span> k<span class="token punctuation">:</span>
+        cnt <span class="token operator">+=</span> dfs<span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 不取当前元素的情况</span>
+        cnt <span class="token operator">+=</span> dfs<span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p <span class="token operator">+</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 取当前元素的情况</span>
+    <span class="token comment"># 如果当前累计和 p 小于 k，则只能选择取当前元素</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        cnt <span class="token operator">+=</span> dfs<span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p <span class="token operator">+</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 在计算过程中，为了减少计算量，每次加和后都进行取模操作</span>
+    cnt <span class="token operator">%=</span> MOD
+    <span class="token comment"># 将当前状态的计算结果存储在 dp 数组中，以便后续使用</span>
+    dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">=</span> cnt
+    <span class="token comment"># 返回当前状态的方法数</span>
+    <span class="token keyword">return</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+
+<span class="token comment"># 调用 dfs 函数，从索引 0 开始，初始累计和为 0，并打印结果</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>dfs<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div></figure>
+<p>这个的终结条件还是比较难想出来的。看最后一个的结果，然后进行回收。重点是中间进行递归的条件，如果当前累计和 p 大于等于 k，则可以选择取当前元素，或者不取；如果当前累计和 p 小于 k，则只能选择取当前元素。</p>
+<p>这个动态规划的数组大小也是比较重要的一个，dp[i][j] 表示在考虑前 i 个数，当前取到的总和为 j 时的方法数。</p>
+<h3 id="4-小美的树上联通块"><strong>4 小美的树上联通块</strong></h3>
+<p>小美拿到了一棵树，其中有一些节点被染成红色。</p>
+<p>小美定义一个红色连通块的权值为：所有节点编号乘积的因子数量。</p>
+<p>小美想知道，所有红色连通块的权值之和是多少？由于答案过大，请对10^9+7取模。</p>
+<p><strong>输入描述</strong></p>
+<p>第一行输入一个正整数n，代表节点数量。</p>
+<p>第二行输入一个长度为n的、仅由’R’和’W’组成的字符串，第i个字符为’R’代表i号节点被染成红色，'W’代表未被染色。保证至少有一个节点被染成红色。</p>
+<p>接下来的n-1行，每行输入2个正整数u,v，代表u号节点和v号节点有一条边连接。</p>
+<p>1&lt;=n&lt;=10^5</p>
+<p>1&lt;=u,v&lt;=n</p>
+<p><strong>输出描述</strong></p>
+<p>一个整数，代表所有红色连通块的权值之和。</p>
+<p><strong>示例 1</strong></p>
+<p><strong>输入</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">3
+WRR
+1 2
+2 3</code></pre></div></figure>
+<p><strong>输出</strong></p>
+<p>4</p>
+<p><strong>说明</strong></p>
+<p>只有一个红色连通块，权值为6的因子数量：1、2、3、6共4个。</p>
+<p><strong>思路与代码</strong></p>
+<p>树的遍历+因子定理。</p>
+<p>公式1：因子计算，算乘积的因子数(k1+1)×(k2+1)×…×(kr+1)，其中k1,k2,…,kr 是各个质因数的总幂次。</p>
+<p>所以我们dfs遍历每一个红色的节点，然后分解每一个节点的质因子，统计当前连通块的质因子的数量，使用公式1进行运算即可。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+
+<span class="token comment"># 读取输入的整数 n，表示节点的数量</span>
+n <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 读取输入的字符串 colors，表示每个节点的颜色，'R' 表示红色，'W' 表示白色</span>
+colors <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># 初始化邻接表 graph，表示图中的边</span>
+graph <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 读取 n-1 行输入，构建树的邻接表</span>
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    u<span class="token punctuation">,</span> v <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+    graph<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+
+<span class="token comment"># 定义一个大数 MOD，用于在计算过程中取模</span>
+MOD <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">9</span> <span class="token operator">+</span> <span class="token number">7</span>
+
+<span class="token comment"># 定义 get_factors 函数，用于求一个数的所有质因子</span>
+<span class="token keyword">def</span> <span class="token function">get_factors</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    prime_factors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token comment"># 将 n 除以 2，直到 n 为奇数</span>
+    <span class="token keyword">while</span> n <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        prime_factors<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+        n <span class="token operator">//=</span> <span class="token number">2</span>
+    <span class="token comment"># 从 3 开始到 n 的平方根，每次增加 2（跳过偶数），检查每个数是否是 n 的质因子</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>n <span class="token operator">**</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">while</span> n <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            prime_factors<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            n <span class="token operator">//=</span> i
+    <span class="token comment"># 如果 n 大于 2，说明 n 是质数，将其加入质因子列表</span>
+    <span class="token keyword">if</span> n <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">:</span>
+        prime_factors<span class="token punctuation">.</span>append<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> prime_factors
+
+<span class="token comment"># 初始化一个布尔数组 vst，用于标记节点是否已访问</span>
+vst <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义 dfs 函数，用于深度优先搜索图中的节点，并计算质因子的个数</span>
+<span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> f<span class="token punctuation">,</span> factors<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    vst<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">True</span>  <span class="token comment"># 标记节点 u 为已访问</span>
+    primes <span class="token operator">=</span> get_factors<span class="token punctuation">(</span>u<span class="token punctuation">)</span>  <span class="token comment"># 获取节点 u 的质因子</span>
+    <span class="token keyword">for</span> p <span class="token keyword">in</span> primes<span class="token punctuation">:</span>  <span class="token comment"># 对每个质因子进行计数</span>
+        factors<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">for</span> v <span class="token keyword">in</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">:</span>  <span class="token comment"># 遍历节点 u 的所有邻居节点</span>
+        <span class="token keyword">if</span> v <span class="token operator">==</span> f <span class="token keyword">or</span> colors<span class="token punctuation">[</span>v <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'W'</span><span class="token punctuation">:</span>  <span class="token comment"># 如果是父亲节点或颜色为白色，则跳过</span>
+            <span class="token keyword">continue</span>
+        dfs<span class="token punctuation">(</span>v<span class="token punctuation">,</span> u<span class="token punctuation">,</span> factors<span class="token punctuation">)</span>  <span class="token comment"># 对邻居节点进行深度优先搜索</span>
+    <span class="token keyword">return</span> factors  <span class="token comment"># 返回质因子计数</span>
+
+res <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 初始化结果变量</span>
+<span class="token comment"># 从 1 到 n 遍历每个节点</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> colors<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'R'</span> <span class="token keyword">and</span> <span class="token keyword">not</span> vst<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>  <span class="token comment"># 如果节点颜色为红色且未访问</span>
+        factors <span class="token operator">=</span> dfs<span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> defaultdict<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 从节点 i 开始进行深度优先搜索，并计算质因子个数</span>
+        ans <span class="token operator">=</span> <span class="token number">1</span>  <span class="token comment"># 初始化答案变量</span>
+        <span class="token keyword">for</span> p <span class="token keyword">in</span> factors<span class="token punctuation">:</span>  <span class="token comment"># 对每个质因子进行处理</span>
+            ans <span class="token operator">=</span> ans <span class="token operator">*</span> <span class="token punctuation">(</span>factors<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> MOD  <span class="token comment"># 更新答案</span>
+        res <span class="token operator">=</span> <span class="token punctuation">(</span>res <span class="token operator">+</span> ans<span class="token punctuation">)</span> <span class="token operator">%</span> MOD  <span class="token comment"># 更新结果变量</span>
+
+<span class="token comment"># 打印最终结果</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span></code></pre></div></figure>
+<p>首先，这个就得先理解题意，红色连通块的权值为所有节点编号乘积的因子数量。也就是节点编号相乘，之后再求因子数量。例如，4的因子为2、2，也就是获取对应的质因子数目。</p>
+<p>这个因子定理是挺需要记住的，他的核心逻辑就是先统计每个因子的数目，例如2有k1个、3有个k2个，以此类推。最终，乘积的因子数(k1+1)×(k2+1)×…×(kr+1)，其中k1,k2,…,kr 是各个质因数的总幂次。</p>
+<p>这里还有一个记录是否访问过的数组，如果访问过了就代表这个节点在这个联通块中，在刚才的计算中以及考虑进去了，就不需要重新考虑了。也就可以跳过。</p>
+<h3 id="5-小苯的树上询问"><strong>5 小苯的树上询问</strong></h3>
+<p>小苯有一个 n 个节点的无向树，每条边都有权重 wi，他将进行 q 次操作，每次操作是以下之一：</p>
+<ol>
+<li>删除第 i 条边。</li>
+<li>询问从 u 号点到 v 号点的最短路径上所有边的边权异或和。</li>
+</ol>
+<p>小苯希望你帮他处理完所有的操作，并对所有操作 2 ，输出对应的异或和。</p>
+<p><strong>输入描述</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">第一行两个正整数 n,q (1&lt;&#x3D;q&lt;&#x3D;n&lt;&#x3D;2*10^5)。
+接下来 n-1 行，每行三个正整数 ui,vi,wi(1&lt;&#x3D;ui,vi&lt;&#x3D;n), (ui !&#x3D; vi), (1&lt;&#x3D;wi&lt;&#x3D;10^9)，表示 ui 到 vi 连了一条权重为 wi 的边。
+接下来 q 行，每行代表一次操作，首先输入一个正整数 op(1&lt;&#x3D;op&lt;&#x3D;2) 表示操作种类。
+如果 op&#x3D;1，则再输入一个正整数 i 表示删除第 i 条边。（保证每条边最多被删除一次）
+如果 op&#x3D;2，则再输入两个正整数 u,v(1&lt;&#x3D;u,v&lt;&#x3D;n)，表示询问 u 号点到 v 号点的最短路径中，所有边权的异或和。
+（注意：如果从 u 没法到达 v，则输出 -1。）</code></pre></div></figure>
+<p><strong>输出描述</strong></p>
+<p>输出包含若干行。</p>
+<p>每行一个整数，对于每次操作 2，输出 u 到 v 的最短路径上所有边权的异或和，路径不存在输出 -1。</p>
+<p><strong>示例 1</strong></p>
+<p><strong>输入</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">5 5
+1 2 1
+2 3 2
+3 4 3
+3 5 3
+2 1 2
+2 1 4
+2 4 5
+1 2
+2 1 4</code></pre></div></figure>
+<p><strong>输出</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">1
+0
+0
+-1</code></pre></div></figure>
+<p><strong>说明</strong></p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">样例的树如图所示，前三次询问的结果分别为：
+1 号点到 2 号点路径异或和为：1
+1 号点到 4 号点路径异或和为：1 ^ 2 ^ 3 &#x3D; 0
+4 号点到 5 号点路径异或和为：3 ^ 3 &#x3D; 0
+第五步操作删除第 2 条边，即变为下图：
+
+接着询问 1 好点到 4 号点的路径异或和，由于无法到达，因此输出 -1。</code></pre></div></figure>
+<p><strong>思路与代码</strong></p>
+<p>lca（最近公共祖先）+倍增优化+并查集+逆向思维。</p>
+<p>tip1：树上的最短路其实就是两个点的路径。 tip2：异或运算符合交换律。</p>
+<p>思路如下： 1.对于删除的边，我们可以使用并查集+逆向遍历来判断是否连通。 2.对于连通的点，我们使用lca算法来检查两个节点之间的最近公共祖先，并且记录路径的异或和的值。</p>
+<figure><div class="code-wrapper"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 读取输入的整数 n 和 q</span>
+n<span class="token punctuation">,</span> q <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 初始化邻接表 G，表示图中的边</span>
+G <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 初始化边的列表 edges，用于存储所有的边</span>
+edges <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 读取 n-1 行输入，构建图的邻接表和边的列表</span>
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> w <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    edges<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    G<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    G<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 初始化操作列表 ops，用于存储 q 个操作</span>
+ops <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ops<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义常量 N，表示节点的总数加 1</span>
+N <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">1</span>
+
+<span class="token comment"># 初始化全局变量</span>
+<span class="token comment"># pre 数组，用于存储到达每个节点的路径上的异或和</span>
+<span class="token comment"># par 数组，用于存储重根路径上的父节点</span>
+<span class="token comment"># bit 数组，用于存储深度的二进制表示中每一位的值</span>
+<span class="token comment"># f 数组，用于存储重根路径上的祖先节点</span>
+<span class="token comment"># depth 数组，用于存储每个节点的深度</span>
+pre <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> N
+par <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> N
+bit <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">30</span>
+f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">30</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">]</span>
+depth <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> N
+
+<span class="token comment"># 定义 dfs 函数，用于深度优先搜索，计算每个节点的深度和重根路径上的祖先节点</span>
+<span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    depth<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> depth<span class="token punctuation">[</span>parent<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span>
+    f<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> parent
+    i <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token comment"># 利用二进制提升，计算更高层次的祖先节点</span>
+    <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token number">30</span> <span class="token keyword">and</span> bit<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> depth<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        f<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>f<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token comment"># 遍历节点 u 的所有邻居节点</span>
+    <span class="token keyword">for</span> v<span class="token punctuation">,</span> w <span class="token keyword">in</span> G<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> v <span class="token operator">!=</span> parent<span class="token punctuation">:</span>
+            dfs<span class="token punctuation">(</span>v<span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+
+<span class="token comment"># 定义 lca 函数，用于计算两个节点的最近公共祖先</span>
+<span class="token keyword">def</span> <span class="token function">lca</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 确保 x 的深度小于等于 y 的深度</span>
+    <span class="token keyword">if</span> depth<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">&lt;</span> depth<span class="token punctuation">[</span>y<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        x<span class="token punctuation">,</span> y <span class="token operator">=</span> y<span class="token punctuation">,</span> x
+    <span class="token comment"># 从高层次到低层次，检查两个节点的祖先节点是否相同</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">29</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> depth<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">-</span> depth<span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">>=</span> bit<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            x <span class="token operator">=</span> f<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token comment"># 如果 x 和 y 相等，则它们是同一个节点，返回 x</span>
+    <span class="token keyword">if</span> x <span class="token operator">==</span> y<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> x
+    <span class="token comment"># 从高层次到低层次，将 x 和 y 同时上溯，直到它们的祖先节点不相同</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">29</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> f<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> f<span class="token punctuation">[</span>y<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            x <span class="token operator">=</span> f<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            y <span class="token operator">=</span> f<span class="token punctuation">[</span>y<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token comment"># 返回 x 和 y 的最近公共祖先</span>
+    <span class="token keyword">return</span> f<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 定义 dfs_xor 函数，用于计算到达每个节点的路径上的异或和</span>
+<span class="token keyword">def</span> <span class="token function">dfs_xor</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> fa<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    par<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> fa
+    <span class="token keyword">for</span> v<span class="token punctuation">,</span> w <span class="token keyword">in</span> G<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> v <span class="token operator">!=</span> fa<span class="token punctuation">:</span>
+            pre<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> pre<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">^</span> w
+            dfs_xor<span class="token punctuation">(</span>v<span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+
+<span class="token comment"># 从节点 1 开始进行深度优先搜索，计算深度和重根路径上的祖先节点</span>
+dfs<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 计算到达每个节点的路径上的异或和</span>
+dfs_xor<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 初始化并查集的 parent 数组，用于存储节点的父节点</span>
+parent <span class="token operator">=</span> <span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 定义 find 函数，用于查找节点 x 的根节点</span>
+<span class="token keyword">def</span> <span class="token function">find</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> parent<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">!=</span> x<span class="token punctuation">:</span>
+        parent<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> find<span class="token punctuation">(</span>parent<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> parent<span class="token punctuation">[</span>x<span class="token punctuation">]</span>
+
+<span class="token comment"># 定义 union 函数，用于合并两个节点的集合</span>
+<span class="token keyword">def</span> <span class="token function">union</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x<span class="token punctuation">,</span> y <span class="token operator">=</span> find<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> find<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> x <span class="token operator">==</span> y<span class="token punctuation">:</span>
+        <span class="token keyword">return</span>
+    parent<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> y
+
+<span class="token comment"># 初始化删除边的集合 del_edges</span>
+del_edges <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> op <span class="token keyword">in</span> ops<span class="token punctuation">:</span>
+    <span class="token keyword">if</span> op<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        del_edges<span class="token punctuation">.</span>add<span class="token punctuation">(</span>op<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 逆向遍历边的列表 edges，将未被删除的边加入到并查集中</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> edge <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>edges<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> i <span class="token operator">+</span> <span class="token number">1</span> <span class="token keyword">not</span> <span class="token keyword">in</span> del_edges<span class="token punctuation">:</span>
+        union<span class="token punctuation">(</span>edge<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> edge<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 逆向遍历操作列表 ops，处理每个操作</span>
+ops<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ans <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> op <span class="token keyword">in</span> ops<span class="token punctuation">:</span>
+    <span class="token keyword">if</span> op<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token comment"># 如果是删除边的操作，将对应的边加入到并查集中</span>
+        u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> w <span class="token operator">=</span> edges<span class="token punctuation">[</span>op<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
+        union<span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token comment"># 如果是查询操作，计算并返回两个节点的异或和</span>
+        u<span class="token punctuation">,</span> v <span class="token operator">=</span> op<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> op<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> find<span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">!=</span> find<span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            p <span class="token operator">=</span> lca<span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+            c <span class="token operator">=</span> par<span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+            ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pre<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">^</span> pre<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">^</span> pre<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">^</span> pre<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 逆向遍历答案列表 ans，输出每个操作的结果</span>
+ans<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span> ans<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div></figure>
+<p>这题不看了，遇到基本做不出来。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>2024.4.28 美团笔试复盘</div>
+<div>https://blog.fulequn.online/2024/04/Article202404281/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2024年4月28日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/2024/04/Article202404291/" title="2024.4.29 计算机基础+算法">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">2024.4.29 计算机基础+算法</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/2024/03/Article202403201/" title="Windows环境下Mysql安装与密码设置">
+<span class="hidden-mobile">Windows环境下Mysql安装与密码设置</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>
