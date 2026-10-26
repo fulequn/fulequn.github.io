@@ -18,12 +18,12 @@
 <meta property="og:description" content="1 Vuex 概述 1.1 介绍 Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据   个人信息数 1.1.1 使用场景   某个状态 在 很多个组件 来使用 (个人信息)   多个组件 共同维护 一份数据 (购物车)    1.1.2 优势  共同维护一份数据，数据集中化管理 响应">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247306.png">
-<meta property="article:published_time" content="2024-06-11T07:32:21.000Z">
-<meta property="article:modified_time" content="2024-06-11T07:32:21.000Z">
+<meta property="article:published_time" content="2024-06-11T07:32:22.000Z">
+<meta property="article:modified_time" content="2024-06-11T07:32:22.000Z">
 <meta property="article:author" content="Fulequn">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247306.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Vue基础入门到实战6（路由进阶+面经项目）","description":"1 Vuex 概述 1.1 介绍 Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据   个人信息数 1.1.1 使用场景   某个状态 在 很多个组件 来使用 (个人信息)   多个组件 共同维护 一份数据 (购物车)    1.1.2 优势  共同维护一份数据，数据集中化管理 响应","url":"https://blog.fulequn.online/2024/06/Article202406141/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/06/Article202406141/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-06-11T07:32:21.000Z","dateModified":"2024-06-11T07:32:21.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247306.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Vue基础入门到实战6（路由进阶+面经项目）","description":"1 Vuex 概述 1.1 介绍 Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据   个人信息数 1.1.1 使用场景   某个状态 在 很多个组件 来使用 (个人信息)   多个组件 共同维护 一份数据 (购物车)    1.1.2 优势  共同维护一份数据，数据集中化管理 响应","url":"https://blog.fulequn.online/2024/06/Article202406141/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/06/Article202406141/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-06-11T07:32:22.000Z","dateModified":"2024-06-11T07:32:22.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202406242247306.png"}</script>
 <title>Vue基础入门到实战6（路由进阶+面经项目） - FuLeQun&#39;s Blog</title>
 <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
@@ -35,11 +35,11 @@
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
 <link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
-<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
 <meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
 </head>
 <body>
@@ -787,9 +787,9 @@ methods:&#123;
 </div>
 <div class="post-prevnext my-3">
 <article class="post-prev col-6">
-<a href="/2024/06/Article202406201/" title="Article202406201">
+<a href="/learn/t3code-session-boundaries/" title="T3 Code 源码学习：会话发现、进程启动与远程控制的边界">
 <i class="iconfont icon-arrowleft"></i>
-<span class="hidden-mobile">Article202406201</span>
+<span class="hidden-mobile">T3 Code 源码学习：会话发现、进程启动与远程控制的边界</span>
 <span class="visible-mobile">上一篇</span>
 </a>
 </article>

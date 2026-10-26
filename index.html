@@ -30,11 +30,11 @@
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
 <link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
-<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
 <meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
 </head>
 <body>
@@ -221,20 +221,70 @@
 <div class="row mx-auto index-card">
 <article class="col-12 col-md-12 mx-auto index-info">
 <h2 class="index-header">
-<a href="/2024/06/Article202406201/" target="_self">
-Article202406201
+<a href="/2026/10/pi-agent-loop/" target="_self">
+读懂 pi 的 Agent 循环：一次工具调用要经过哪些状态
 </a>
 </h2>
-<a class="index-excerpt index-excerpt__noimg" href="/2024/06/Article202406201/" target="_self">
+<a class="index-excerpt index-excerpt__noimg" href="/2026/10/pi-agent-loop/" target="_self">
 <div>
+读 Agent 框架的源码时，最容易卡住的往往不是某个函数写得多复杂，而是&quot;模型吐出的那段文本，究竟在哪一刻变成了真正执行的调用&quot;。 这篇笔记用固定版本的 pi（commit 58c0b02）回答这一个问题，并跑了一个不依赖网络和密钥的最小 Demo。结论都基于这个版本的源码，不评估实现质量。 问题 一次工具调用在 agent loop 里经过哪些状态迁移，模型输出在哪个边界被
 </div>
 </a>
 <div class="index-btm post-metas">
 <div class="post-meta mr-3">
 <i class="iconfont icon-date"></i>
-<time datetime="2024-06-20 16:05" pubdate>
-2024-06-20
+<time datetime="2026-10-22 11:49" pubdate>
+2026-10-22
 </time>
+</div>
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="category-chain-item">源码学习</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/Agent/">#Agent</a>
+<a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">#源码阅读</a>
+</div>
+</div>
+</article>
+</div>
+<div class="row mx-auto index-card">
+<article class="col-12 col-md-12 mx-auto index-info">
+<h2 class="index-header">
+<a href="/learn/t3code-session-boundaries/" target="_self">
+T3 Code 源码学习：会话发现、进程启动与远程控制的边界
+</a>
+</h2>
+<a class="index-excerpt index-excerpt__noimg" href="/learn/t3code-session-boundaries/" target="_self">
+<div>
+T3 Code 源码学习：会话发现、进程启动与远程控制的边界 多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg/t3code，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a。本文是静态源码与文档学习，不是
+</div>
+</a>
+<div class="index-btm post-metas">
+<div class="post-meta mr-3">
+<i class="iconfont icon-date"></i>
+<time datetime="2026-10-22 11:29" pubdate>
+2026-10-22
+</time>
+</div>
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="category-chain-item">源码学习</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/T3-Code/">#T3 Code</a>
+<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">#架构设计</a>
+<a href="/tags/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">#源码学习</a>
 </div>
 </div>
 </article>
@@ -721,42 +771,6 @@ Vue基础入门到实战（一）
 <time datetime="2024-05-07 22:50" pubdate>
 2024-05-07
 </time>
-</div>
-</div>
-</article>
-</div>
-<div class="row mx-auto index-card">
-<article class="col-12 col-md-12 mx-auto index-info">
-<h2 class="index-header">
-<a href="/2024/05/Article202405071/" target="_self">
-算法训练-6高效算法部分 单调栈
-</a>
-</h2>
-<a class="index-excerpt index-excerpt__noimg" href="/2024/05/Article202405071/" target="_self">
-<div>
-6.4 单调栈 单调栈是一种基于栈的数据结构，所谓的单调就是满足单调递增（单调递减）的栈。主要用于解决 next_greater 问题，也就是找到下一个更大的元素。 基本模板如下： stack;//单调栈 for (int i = 0 ; i &lt; n ; i++) &#123; while (stack &amp;&amp; nums[stack.top] &lt; nums[i]
-</div>
-</a>
-<div class="index-btm post-metas">
-<div class="post-meta mr-3">
-<i class="iconfont icon-date"></i>
-<time datetime="2024-05-07 22:49" pubdate>
-2024-05-07
-</time>
-</div>
-<div class="post-meta mr-3 d-flex align-items-center">
-<i class="iconfont icon-category"></i>
-<span class="category-chains">
-<span class="category-chain">
-<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
-<span>></span>
-<a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-</span>
-</span>
-</div>
-<div class="post-meta">
-<i class="iconfont icon-tags"></i>
-<a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
 </div>
 </div>
 </article>

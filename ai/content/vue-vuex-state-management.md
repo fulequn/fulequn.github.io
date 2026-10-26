@@ -3,8 +3,8 @@ id: "vue-vuex-state-management"
 title: "Vue基础入门到实战6（路由进阶+面经项目）"
 summary: "Vue 状态管理 Vuex 学习笔记：state、getter、mutation、action 的核心概念与模块化实践。"
 canonical_url: "https://blog.fulequn.online/2024/06/Article202406141/"
-published_at: "2024-06-11T07:32:21.000Z"
-updated_at: "2024-06-11T07:32:21.000Z"
+published_at: "2024-06-11T07:32:22.000Z"
+updated_at: "2024-06-11T07:32:22.000Z"
 tags: []
 ---
 

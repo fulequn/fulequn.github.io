@@ -22,15 +22,30 @@
       "sha256": "c655896dec69f62a0e58a7d038ffe5a580f5d7860996ec8fbcd412c8213c27f5"
     },
     {
+      "id": "t3code-session-boundaries",
+      "title": "T3 Code 源码学习：会话发现、进程启动与远程控制的边界",
+      "summary": "基于固定源码版本记录会话身份、安装租约与命令回执的责任边界，区分静态源码证据、文档说明及尚未验证的恢复风险。",
+      "canonical_url": "https://blog.fulequn.online/learn/t3code-session-boundaries/",
+      "markdown_url": "https://blog.fulequn.online/ai/content/t3code-session-boundaries.md",
+      "published_at": "2026-10-22T03:29:09.000Z",
+      "updated_at": "2026-10-22T03:29:09.000Z",
+      "tags": [
+        "T3 Code",
+        "架构设计",
+        "源码学习"
+      ],
+      "sha256": "c74310cf9b1bfb79b5bba2e52bffb47fe75d3c8848b026488824795749122d4b"
+    },
+    {
       "id": "vue-vuex-state-management",
       "title": "Vue基础入门到实战6（路由进阶+面经项目）",
       "summary": "Vue 状态管理 Vuex 学习笔记：state、getter、mutation、action 的核心概念与模块化实践。",
       "canonical_url": "https://blog.fulequn.online/2024/06/Article202406141/",
       "markdown_url": "https://blog.fulequn.online/ai/content/vue-vuex-state-management.md",
-      "published_at": "2024-06-11T07:32:21.000Z",
-      "updated_at": "2024-06-11T07:32:21.000Z",
+      "published_at": "2024-06-11T07:32:22.000Z",
+      "updated_at": "2024-06-11T07:32:22.000Z",
       "tags": [],
-      "sha256": "cd74f9880c9f8a2251ac39f5e3856ee71b7dc4e0312cc7a58f79dee30fbd9b81"
+      "sha256": "5c37a9a53eeed53b0bfece888ec4942d0f5edb69cab8808638155d56575e63d9"
     },
     {
       "id": "vue-directives-slots-router",

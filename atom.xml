@@ -31,11 +31,30 @@
     <author>
       <name>Fulequn</name>
     </author>
-    <id>https://blog.fulequn.online/2024/06/Article202406201/</id>
-    <link href="https://blog.fulequn.online/2024/06/Article202406201/"/>
-    <published>2024-06-20T08:05:43.000Z</published>
-    <title>Article202406201</title>
-    <updated>2024-06-20T08:05:43.000Z</updated>
+    <category term="源码学习" scheme="https://blog.fulequn.online/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <category term="Agent" scheme="https://blog.fulequn.online/tags/Agent/"/>
+    <category term="源码阅读" scheme="https://blog.fulequn.online/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>https://blog.fulequn.online/2026/10/pi-agent-loop/</id>
+    <link href="https://blog.fulequn.online/2026/10/pi-agent-loop/"/>
+    <published>2026-10-22T03:49:03.000Z</published>
+    <summary>读 Agent 框架的源码时，最容易卡住的往往不是某个函数写得多复杂，而是&quot;模型吐出的那段文本，究竟在哪一刻变成了真正执行的调用&quot;。 这篇笔记用固定版本的 pi （commit 58c0b02 ）回答这一个问题，并跑了一个不依赖网络和密钥的最小 Demo。结论都基于这个版本的源码，不评估实现质量。 一次工具调用在 agent loop 里经过哪些状态迁移，模型输出在哪个边界被转成可执行调用？ 需要</summary>
+    <title>读懂 pi 的 Agent 循环：一次工具调用要经过哪些状态</title>
+    <updated>2026-10-22T03:49:03.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="源码学习" scheme="https://blog.fulequn.online/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <category term="T3 Code" scheme="https://blog.fulequn.online/tags/T3-Code/"/>
+    <category term="架构设计" scheme="https://blog.fulequn.online/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    <category term="源码学习" scheme="https://blog.fulequn.online/tags/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://blog.fulequn.online/learn/t3code-session-boundaries/</id>
+    <link href="https://blog.fulequn.online/learn/t3code-session-boundaries/"/>
+    <published>2026-10-22T03:29:09.000Z</published>
+    <summary>多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg/t3code ，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a 。 本文是静态源码与文档学习，不是运行验收或安全审计：未运行该项目的测试和 demo，未核</summary>
+    <title>T3 Code 源码学习：会话发现、进程启动与远程控制的边界</title>
+    <updated>2026-10-22T03:29:09.000Z</updated>
   </entry>
   <entry>
     <author>
@@ -43,10 +62,10 @@
     </author>
     <id>https://blog.fulequn.online/2024/06/Article202406141/</id>
     <link href="https://blog.fulequn.online/2024/06/Article202406141/"/>
-    <published>2024-06-11T07:32:21.000Z</published>
+    <published>2024-06-11T07:32:22.000Z</published>
     <summary>Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 共同维护一份数据， 数据集中化管理 响应式变化 操作简洁 (vuex 提供了一些辅助函数) 官方原文： 不是所有的场景都适用于 vu</summary>
     <title>Vue基础入门到实战6（路由进阶+面经项目）</title>
-    <updated>2024-06-11T07:32:21.000Z</updated>
+    <updated>2024-06-11T07:32:22.000Z</updated>
   </entry>
   <entry>
     <author>
@@ -257,19 +276,5 @@
     <summary>类似的问题： 多位用户抢一个商品，如何保证只有一个用户可以抢到商品？ 多位用户抢一个红包，如何保证只有一个抢到？ 在多线程环境中，如果多个线程同时访问共享资源（例如商品库存、外卖订单），会发生数据竞争，可能会导致出现脏数据或者系统问题，威胁到程序的正常运行。 举个例子，假设现在有 100 个用户参与某个限时秒杀活动，每位用户限购 1 件商品，且商品的数量只有 3 个。如果不对共享资源进行互斥访问，</summary>
     <title>超卖问题-多位骑手抢一个外卖订单，如何保证只有一个骑手可以接到单子？</title>
     <updated>2024-05-07T14:50:00.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Fulequn</name>
-    </author>
-    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
-    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
-    <id>https://blog.fulequn.online/2024/05/Article202405071/</id>
-    <link href="https://blog.fulequn.online/2024/05/Article202405071/"/>
-    <published>2024-05-07T14:49:54.000Z</published>
-    <summary>单调栈是一种基于栈的数据结构，所谓的单调就是满足单调递增（单调递减）的栈。主要用于解决 next_greater 问题，也就是找到下一个更大的元素。 基本模板如下： 给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替。 题目解析 此</summary>
-    <title>算法训练-6高效算法部分 单调栈</title>
-    <updated>2024-05-07T14:49:54.000Z</updated>
   </entry>
 </feed>

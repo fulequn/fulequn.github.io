@@ -18,14 +18,14 @@
 <meta property="og:description" content="参考链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;Poul_henry&#x2F;article&#x2F;details&#x2F;88602806  plot() 根据关于matplotlip.pyplot的官方文档：pyplot，其plot部分的解释plot()的作用是画出线条和线条上的标记： 大致意思就是： 将线条和&#x2F;或标记绘制到轴上。args 是一个可变长度参数，允许使用可选格式字符串进行多个 x、y 对。例如">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212032112.png">
-<meta property="article:published_time" content="2020-09-24T13:07:57.000Z">
-<meta property="article:modified_time" content="2020-09-24T13:07:57.000Z">
+<meta property="article:published_time" content="2020-09-24T13:07:58.000Z">
+<meta property="article:modified_time" content="2020-09-24T13:07:58.000Z">
 <meta property="article:author" content="Fulequn">
 <meta property="article:tag" content="Matplotlib">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212032112.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用plot以及scatter来绘制散点图，同时改变点的大小","description":"参考链接：https://blog.csdn.net/Poul_henry/article/details/88602806  plot() 根据关于matplotlip.pyplot的官方文档：pyplot，其plot部分的解释plot()的作用是画出线条和线条上的标记： 大致意思就是： 将线条和/或标记绘制到轴上。args 是一个可变长度参数，允许使用可选格式字符串进行多个 x、y 对。例如","url":"https://blog.fulequn.online/2020/09/Article202009243/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/09/Article202009243/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-09-24T13:07:57.000Z","dateModified":"2020-09-24T13:07:57.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212032112.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用plot以及scatter来绘制散点图，同时改变点的大小","description":"参考链接：https://blog.csdn.net/Poul_henry/article/details/88602806  plot() 根据关于matplotlip.pyplot的官方文档：pyplot，其plot部分的解释plot()的作用是画出线条和线条上的标记： 大致意思就是： 将线条和/或标记绘制到轴上。args 是一个可变长度参数，允许使用可选格式字符串进行多个 x、y 对。例如","url":"https://blog.fulequn.online/2020/09/Article202009243/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2020/09/Article202009243/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2020-09-24T13:07:58.000Z","dateModified":"2020-09-24T13:07:58.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img231/202306212032112.png"}</script>
 <title>使用plot以及scatter来绘制散点图，同时改变点的大小 - FuLeQun&#39;s Blog</title>
 <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
@@ -37,11 +37,11 @@
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
 <link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
-<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
 <meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
 </head>
 <body>
@@ -357,15 +357,15 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 </div>
 <div class="post-prevnext my-3">
 <article class="post-prev col-6">
-<a href="/2020/09/Article202009014/" title="使用plot以及scatter来绘制散点图，同时改变点的大小">
+<a href="/2020/09/Article202009244/" title="Python人名出现次数最多统计">
 <i class="iconfont icon-arrowleft"></i>
-<span class="hidden-mobile">使用plot以及scatter来绘制散点图，同时改变点的大小</span>
+<span class="hidden-mobile">Python人名出现次数最多统计</span>
 <span class="visible-mobile">上一篇</span>
 </a>
 </article>
 <article class="post-next col-6">
-<a href="/2020/09/Article202009242/" title="Python遍历文件夹和读写文件的方法">
-<span class="hidden-mobile">Python遍历文件夹和读写文件的方法</span>
+<a href="/2020/09/Article202009014/" title="使用plot以及scatter来绘制散点图，同时改变点的大小">
+<span class="hidden-mobile">使用plot以及scatter来绘制散点图，同时改变点的大小</span>
 <span class="visible-mobile">下一篇</span>
 <i class="iconfont icon-arrowright"></i>
 </a>

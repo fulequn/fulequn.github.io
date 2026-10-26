@@ -24,7 +24,7 @@
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405052154132.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"2024.2.17 Java基础（泛型+Set+数据结构）","description":"*1 泛型 1.1 泛型概述   泛型的介绍 泛型是JDK5中引入的特性，它提供了编译时类型安全检测机制。   泛型的好处  把运行时期的问题提前到了编译期间； 避免了强制类型转换。    泛型的定义格式  \u003C类型>: 指定一种类型的格式.尖括号里面可以任意书写,一般只写一个字母.例如: \u003CE>、 \u003CT>； \u003C类型1,类型2…>: 指定多种类型的格式,多种类型之间用逗号隔开.例如: \u003CE,T>、","url":"https://blog.fulequn.online/2024/02/Article202402171/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/02/Article202402171/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-02-17T12:39:00.000Z","dateModified":"2024-02-17T12:39:00.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405052154132.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"2024.2.17 Java基础（泛型+Set+数据结构）","description":"*1 泛型 1.1 泛型概述   泛型的介绍 泛型是JDK5中引入的特性，它提供了编译时类型安全检测机制。   泛型的好处  把运行时期的问题提前到了编译期间； 避免了强制类型转换。    泛型的定义格式  \u003c类型>: 指定一种类型的格式.尖括号里面可以任意书写,一般只写一个字母.例如: \u003cE>、 \u003cT>； \u003c类型1,类型2…>: 指定多种类型的格式,多种类型之间用逗号隔开.例如: \u003cE,T>、","url":"https://blog.fulequn.online/2024/02/Article202402171/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2024/02/Article202402171/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2024-02-17T12:39:00.000Z","dateModified":"2024-02-17T12:39:00.000Z","image":"https://raw.githubusercontent.com/fulequn/oss_img/master/img241/202405052154132.png"}</script>
 <title>2024.2.17 Java基础（泛型+Set+数据结构） - FuLeQun&#39;s Blog</title>
 <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
@@ -36,11 +36,11 @@
 <link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
 <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
 <link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
 <script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
 <script src="/js/utils.js"></script>
 <script src="/js/color-schema.js"></script>
-<link rel="stylesheet" href="/lib/katex/0.18.7/katex.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
 <meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
 </head>
 <body>
