@@ -5,7 +5,7 @@ summary: "基于已实现的 tracker learn 审阅闭环与 Hexo AI 导出插件�
 canonical_url: "https://blog.fulequn.online/learning/github-learning-to-blog-knowledge-base/"
 published_at: "2026-10-22T16:00:00.000Z"
 updated_at: "2026-10-22T16:00:00.000Z"
-tags: ["Hexo","GitHub","OpenClaw","知识管理"]
+tags: ["GitHub","Hexo","OpenClaw","知识管理"]
 ---
 
 # 从 GitHub 学习到可检索知识库
