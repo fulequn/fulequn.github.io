@@ -2585,13 +2585,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fulequn.online/tags/Docker/</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fulequn.online/tags/GitHub/</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -2739,13 +2732,6 @@
   </url>
   
   <url>
-    <loc>https://blog.fulequn.online/tags/Spark/</loc>
-    <lastmod>2026-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.fulequn.online/tags/T3-Code/</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -2781,7 +2767,21 @@
   </url>
   
   <url>
+    <loc>https://blog.fulequn.online/tags/docker/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.fulequn.online/tags/eclipse/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.fulequn.online/tags/spark/</loc>
     <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

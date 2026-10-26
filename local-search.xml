@@ -1837,7 +1837,7 @@
     
     <tags>
       
-      <tag>Docker</tag>
+      <tag>docker</tag>
       
     </tags>
     
@@ -1862,9 +1862,9 @@
     
     <tags>
       
-      <tag>Docker</tag>
-      
       <tag>OpenEuler</tag>
+      
+      <tag>docker</tag>
       
     </tags>
     
@@ -1891,7 +1891,7 @@
       
       <tag>Bug</tag>
       
-      <tag>Docker</tag>
+      <tag>docker</tag>
       
     </tags>
     
@@ -3607,9 +3607,9 @@
     
     <tags>
       
-      <tag>Docker</tag>
-      
       <tag>Kubernetes</tag>
+      
+      <tag>docker</tag>
       
     </tags>
     
@@ -4183,7 +4183,7 @@
       
       <tag>Hadoop</tag>
       
-      <tag>Spark</tag>
+      <tag>spark</tag>
       
     </tags>
     
@@ -4210,7 +4210,7 @@
       
       <tag>Hadoop</tag>
       
-      <tag>Spark</tag>
+      <tag>spark</tag>
       
     </tags>
     
@@ -6005,7 +6005,7 @@
     
     <tags>
       
-      <tag>Spark</tag>
+      <tag>spark</tag>
       
     </tags>
     
