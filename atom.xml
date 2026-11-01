@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>Fulequn</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <id>https://blog.fulequn.online/</id>
+  <link href="https://blog.fulequn.online/" rel="alternate"/>
+  <link href="https://blog.fulequn.online/atom.xml" rel="self"/>
+  <rights>All rights reserved 2026, Fulequn</rights>
+  <subtitle>阿付的博客：公开分享前端与算法学习笔记、自托管服务与工具实践。</subtitle>
+  <title>FuLeQun's Blog</title>
+  <updated>2026-11-01T04:00:00.000Z</updated>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="工程实践" scheme="https://blog.fulequn.online/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    <category term="DevOps" scheme="https://blog.fulequn.online/tags/DevOps/"/>
+    <category term="docker" scheme="https://blog.fulequn.online/tags/docker/"/>
+    <category term="发布工程" scheme="https://blog.fulequn.online/tags/%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/"/>
+    <category term="音乐舱" scheme="https://blog.fulequn.online/tags/%E9%9F%B3%E4%B9%90%E8%88%B1/"/>
+    <id>https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/</id>
+    <link href="https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/"/>
+    <published>2026-11-01T04:00:00.000Z</published>
+    <summary>音乐舱的“三个统一”已经完成开发，并在 2026 年 11 月 1 日执行过一次生产发布：统一版本清单、统一构建入口、统一部署入口。它解决的是“构建了什么、切换了什么、出了问题怎样核实和恢复”，不是把所有组件强行标成同一个版本。 本文同时是实现说明和线上验收手册。普通使用者从第一节开始；负责发布的人继续看版本、命令和异常处理。文中的生产结果是 2026 年 11 月 1 日这次发布的证据快照，不是</summary>
+    <title>音乐舱三个统一：完整实现、发布流程与线上验收手册</title>
+    <updated>2026-11-01T04:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="技术实践" scheme="https://blog.fulequn.online/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/"/>
+    <category term="GitHub" scheme="https://blog.fulequn.online/tags/GitHub/"/>
+    <category term="Hexo" scheme="https://blog.fulequn.online/tags/Hexo/"/>
+    <category term="OpenClaw" scheme="https://blog.fulequn.online/tags/OpenClaw/"/>
+    <category term="知识管理" scheme="https://blog.fulequn.online/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/"/>
+    <id>https://blog.fulequn.online/learning/github-learning-to-blog-knowledge-base/</id>
+    <link href="https://blog.fulequn.online/learning/github-learning-to-blog-knowledge-base/"/>
+    <published>2026-10-22T16:00:00.000Z</published>
+    <summary>一个常见的场景是：在 GitHub Trending 上看到一个有意思的仓库，收藏进列表，过两周再打开时只剩下一个名字。当时为什么看、读到哪一层、结论是否验证过，全凭记忆。有些结论写进了博客，有些留在私有笔记，还有一些只出现在某次对话里。等到在手机上想问「之前研究过的那个会话恢复机制到底怎么做的」，得到的往往是一句含糊的「好像看过」。 工具并不少。代码托管、笔记软件、博客框架、手机助手都不缺，缺的</summary>
+    <title>从 GitHub 学习到可检索知识库</title>
+    <updated>2026-10-22T16:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="源码学习" scheme="https://blog.fulequn.online/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <category term="Agent" scheme="https://blog.fulequn.online/tags/Agent/"/>
+    <category term="源码阅读" scheme="https://blog.fulequn.online/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>https://blog.fulequn.online/2026/10/pi-agent-loop/</id>
+    <link href="https://blog.fulequn.online/2026/10/pi-agent-loop/"/>
+    <published>2026-10-22T03:49:03.000Z</published>
+    <summary>读 Agent 框架的源码时，最容易卡住的往往不是某个函数写得多复杂，而是&quot;模型吐出的那段文本，究竟在哪一刻变成了真正执行的调用&quot;。 这篇笔记用固定版本的 pi （commit 58c0b02 ）回答这一个问题，并跑了一个不依赖网络和密钥的最小 Demo。结论都基于这个版本的源码，不评估实现质量。 一次工具调用在 agent loop 里经过哪些状态迁移，模型输出在哪个边界被转成可执行调用？ 需要</summary>
+    <title>读懂 pi 的 Agent 循环：一次工具调用要经过哪些状态</title>
+    <updated>2026-10-22T03:49:03.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="源码学习" scheme="https://blog.fulequn.online/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <category term="T3 Code" scheme="https://blog.fulequn.online/tags/T3-Code/"/>
+    <category term="架构设计" scheme="https://blog.fulequn.online/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    <category term="源码学习" scheme="https://blog.fulequn.online/tags/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://blog.fulequn.online/learn/t3code-session-boundaries/</id>
+    <link href="https://blog.fulequn.online/learn/t3code-session-boundaries/"/>
+    <published>2026-10-22T03:29:09.000Z</published>
+    <summary>多个编码 Agent 接入同一个控制面之后，最容易混淆的并不是协议格式，而是谁负责发现会话、谁能启动进程，以及远程客户端收到的“成功”究竟确认了什么。 这篇笔记围绕这三个问题阅读 pingdotgg/t3code ，固定版本为 7d5a42912a4036549ac4c70d0195f02af432115a 。 本文是静态源码与文档学习，不是运行验收或安全审计：未运行该项目的测试和 demo，未核</summary>
+    <title>T3 Code 源码学习：会话发现、进程启动与远程控制的边界</title>
+    <updated>2026-10-22T03:29:09.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406141/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406141/"/>
+    <published>2024-06-11T07:32:22.000Z</published>
+    <summary>Vuex 是一个 Vue 的 状态管理工具，状态就是数据。 大白话：Vuex 是一个插件，可以帮我们管理 Vue 通用的数据 (多组件共享的数据)。例如：购物车数据 个人信息数 某个状态 在 很多个组件 来使用 (个人信息) 多个组件 共同维护 一份数据 (购物车) 共同维护一份数据， 数据集中化管理 响应式变化 操作简洁 (vuex 提供了一些辅助函数) 官方原文： 不是所有的场景都适用于 vu</summary>
+    <title>Vue基础入门到实战6（路由进阶+面经项目）</title>
+    <updated>2024-06-11T07:32:22.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406111/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406111/"/>
+    <published>2024-06-11T07:32:21.000Z</published>
+    <summary>
+      <![CDATA[实现导航高亮效果 如果使用 a 标签进行跳转的话，需要给当前跳转的导航加样式，同时要移除上一个 a 标签的样式，太麻烦！！！ vue-router 提供了一个全局组件 router-link (取代 a 标签) 能跳转 ，配置 to 属性指定路径( 必须 ) 。本质还是 a 标签 ， to 无需 # 能高亮 ，默认就会提供 高亮类名 ，可以直接设置高亮样式 语法： <router-link to=]]>
+    </summary>
+    <title>Vue基础入门到实战6（路由进阶+面经项目）</title>
+    <updated>2024-06-11T07:32:21.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406071/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406071/"/>
+    <published>2024-06-07T02:12:02.000Z</published>
+    <summary>内置指令： v-html、v-if、v-bind、v-on … 这都是Vue给咱们内置的一些指令，可以直接使用 自定义指令：同时Vue也支持让开发者，自己注册一些指令。这些指令被称为 自定义指令 。每个指令都有自己各自独立的功能 概念：自己定义的指令，可以 封装一些DOM操作 ，扩展额外的功能 全局注册 局部注册 使用指令 注意：在使用指令的时候，一定要 先注册 ， 再使用 ，否则会报错 使用指令</summary>
+    <title>Vue基础入门到实战5（自定义指令+插槽+路由入门）</title>
+    <updated>2024-06-07T02:12:02.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406061/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406061/"/>
+    <published>2024-06-06T08:45:54.000Z</published>
+    <summary>写在组件中的样式会 全局生效 → 因此很容易造成多个组件之间的样式冲突问题。 全局样式 : 默认组件中的样式会作用到全局，任何一个组件中都会受到此样式的影响 局部样式 : 可以给组件加上 scoped 属性,可以 让样式只作用于当前组件 当前组件内标签都被添加 data-v-hash值 的属性 css选择器都被添加 [ data-v-hash值 ] 的属性选择器 最终效果: 必须是当前组件的元素</summary>
+    <title>Vue基础入门到实战4（组件组成部分+组件通信+进阶语法）</title>
+    <updated>2024-06-06T08:45:54.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406051/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406051/"/>
+    <published>2024-06-05T11:45:39.000Z</published>
+    <summary>思考：什么时候可以发送初始化渲染请求？（越早越好）什么时候可以开始操作dom？（至少dom得渲染出来） Vue生命周期：就是一个Vue实例从创建 到 销毁 的整个过程。 生命周期四个阶段：① 创建 ② 挂载 ③ 更新 ④ 销毁 1.创建阶段：创建响应式数据； 2.挂载阶段：渲染模板； 3.更新阶段：修改数据，更新视图； 4.销毁阶段：销毁Vue实例。 Vue生命周期过程中，会 自动运行一些函数 ，</summary>
+    <title>Vue基础入门到实战3（生命周期+工程化开发+组件化开发）</title>
+    <updated>2024-06-05T11:45:39.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406042/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406042/"/>
+    <published>2024-06-04T11:09:45.000Z</published>
+    <summary>
+      <![CDATA[所谓指令修饰符就是通过 "." 指明一些指令 后缀 。不同的 后缀 封装了不同的处理操作 —> 简化代码 @keyup.enter —>当点击enter键的时候才触发 代码演示 v-model.trim —>去除首位空格 v-model.number —>转数字 @事件名.stop —> 阻止冒泡 @事件名.prevent —>阻止默认行为 @事件名.stop.prevent —> 可以连用 即阻]]>
+    </summary>
+    <title>Vue基础入门到实战2（指令补充+计算属性+侦听器）</title>
+    <updated>2024-06-04T11:09:45.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/06/Article202406041/</id>
+    <link href="https://blog.fulequn.online/2024/06/Article202406041/"/>
+    <published>2024-06-04T07:58:16.000Z</published>
+    <summary>
+      <![CDATA[概念：Vue (读音 /vjuː/，类似于 view) 是一套 **构建用户界面 ** 的 渐进式 框架 Vue2官网： https:/v2.cn.vuejs.org/ 基于数据 渲染出用户可以看到的 界面 所谓渐进式就是循序渐进，不一定非得把Vue中的所有API都学完才能开发Vue，可以学一点开发一点 Vue 核心包开发 场景：局部模块改造 Vue 核心包&Vue 插件&工程化 场景：整站开发]]>
+    </summary>
+    <title>Vue基础入门到实战（一）</title>
+    <updated>2024-06-04T07:58:16.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="CSS" scheme="https://blog.fulequn.online/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/CSS/"/>
+    <category term="前端开发" scheme="https://blog.fulequn.online/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    <category term="CSS" scheme="https://blog.fulequn.online/tags/CSS/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405242/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405242/"/>
+    <published>2024-05-24T02:38:36.000Z</published>
+    <summary>层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来 描述 HTML 文档的呈现 （ 美化内容 ）。 书写位置： title 标签下方添加 style 双标签，style 标签里面书写 CSS 代码 。 提示：属性名和属性值成对出现 → 键值对。 内部 样式表：学习使用 CSS 代码写在 style 标签里面 外部 样式表： 开发使用，非常常用</summary>
+    <title>前端开发-CSS</title>
+    <updated>2024-05-24T02:38:36.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="HTML" scheme="https://blog.fulequn.online/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/HTML/"/>
+    <category term="前端开发" scheme="https://blog.fulequn.online/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    <category term="HTML" scheme="https://blog.fulequn.online/tags/HTML/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405241/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405241/"/>
+    <published>2024-05-24T00:34:37.000Z</published>
+    <summary>
+      <![CDATA[HTML 超文本标记语言——HyperText Markup Language。 超文本：链接 标记：标签，带尖括号的文本 标签结构 标签要成对出现，中间包裹内容 <>里面放英文字母（标签名） 结束标签比开始标签多 / 标签分类：双标签和单标签 html：整个网页 head：网页头部，用来存放给浏览器看的信息，例如 CSS title：网页标题 body：网页主体，用来存放给用户看的信息，例如图片]]>
+    </summary>
+    <title>前端开发-HTML基础</title>
+    <updated>2024-05-24T00:34:37.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405221/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405221/"/>
+    <published>2024-05-22T08:23:27.000Z</published>
+    <summary>背包模型的核心在于： n 个物品做一些选择，使得最终 值最大/值最小/数量最多 等。解题思路就是： 挨个物品考虑 ，每个物品有两种选择： 选和不选 。 背包最常见的两类模型： 01背包 ： f(i, j) → f(i - 1, j), f(i - 1, j - v[i]) 。 f(i, j) 只依赖于 f(i - 1, j) 和 f(i - 1, j - v[i]) 。因此base case是 f</summary>
+    <title>算法训练3.2.2 背包模型</title>
+    <updated>2024-05-22T08:23:27.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405181/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405181/"/>
+    <published>2024-05-18T13:30:17.000Z</published>
+    <summary>
+      <![CDATA[斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) = 0，F(1) = 1 F(n) = F(n - 1) + F(n - 2)，其中 n > 1 给定 n ，请计算 F(n) 。 示例 1： 输入：n = 2 输出：1 解释：F(2) = F(1) + F(0) = 1 + 0 = 1 示例]]>
+    </summary>
+    <title>算法训练3.2.1 基础DP</title>
+    <updated>2024-05-18T13:30:17.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405121/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405121/"/>
+    <published>2024-05-12T13:25:36.000Z</published>
+    <summary>给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。 你可以认为每种硬币的数量是无限的。 示例 1： 输入：coins = [1, 2, 5], amount = 11 输出：3 解释：11 = 5 + 5 + 1 示例 2： 输入：coins = [2</summary>
+    <title>算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第二部分</title>
+    <updated>2024-05-12T13:25:36.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405111/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405111/"/>
+    <published>2024-05-11T13:45:25.000Z</published>
+    <summary>快速排序用到了分治思想，同样的还有归并排序。乍看起来快速排序和归并排序非常相似，都是将问题变小，先排序子串，最后合并。不同的是快速排序在划分子问题的时候经过多一步处理，将划分的两组数据划分为一大一小，这样在最后合并的时候就不必像归并排序那样再进行比较。但也正因为如此，划分的不定性使得快速排序的时间复杂度并不稳定。 快速排序的基本思想：通过一趟排序将待排序列分隔成独立的两部分，其中一部分记录的元素均</summary>
+    <title>使用 Java 实现快速排序（递归+非递归）</title>
+    <updated>2024-05-11T13:45:25.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405102/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405102/"/>
+    <published>2024-05-10T15:39:29.000Z</published>
+    <summary>单调队列解决的问题非常单一，用于优化：“区间最值问题”。模板如下： 给定一个数组 nums 和滑动窗口的大小 k ，请找出所有滑动窗口里的最大值。 示例: 输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3 输出: [3,3,5,5,6,7] 解释: 滑动窗口的位置 最大值 [1 3 -1] -3 5 3 6 7 3 1 [3 -1 -3] 5 3 6 7 3 1 3</summary>
+    <title>算法训练-6高效算法部分 单调队列</title>
+    <updated>2024-05-10T15:39:29.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <category term="算法" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%AE%97%E6%B3%95/"/>
+    <category term="计算机基础" scheme="https://blog.fulequn.online/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    <category term="算法" scheme="https://blog.fulequn.online/tags/%E7%AE%97%E6%B3%95/"/>
+    <id>https://blog.fulequn.online/2024/05/Article202405101/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405101/"/>
+    <published>2024-05-10T15:03:31.000Z</published>
+    <summary>记忆化搜索其实就是在递归的基础上记录已经算过的状态，下次如果运算过相同的状态后，直接返回已经算过的状态，避免重复运算。 这种算法在笔试过程中是非常好用的一个算法，能够解决非常多的问题，特别是一些比较复杂的动态规划，用记忆化搜索可以很快且很形象的解决问题。 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统， 如果两间相邻的</summary>
+    <title>算法训练3.1 单调栈自顶向下的动态规划（记忆化搜索）第一部分</title>
+    <updated>2024-05-10T15:03:31.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>Fulequn</name>
+    </author>
+    <id>https://blog.fulequn.online/2024/05/Article202405081/</id>
+    <link href="https://blog.fulequn.online/2024/05/Article202405081/"/>
+    <published>2024-05-08T13:05:13.000Z</published>
+    <summary>先来就库存超卖的问题作描述：一般电子商务网站都会遇到如团购、秒杀、特价之类的活动，而这样的活动有一个共同的特点就是访问量激增、上千甚至上万人抢购一个商品。然而，作为活动商品，库存肯定是很有限的，如何控制库存不让出现超买，以防止造成不必要的损失是众多电子商务网站程序员头疼的问题，这同时也是最基本的问题。 在秒杀系统设计中，超卖是一个经典、常见的问题，任何商品都会有数量上限，如何避免成功下订单买到商品</summary>
+    <title>超卖问题（图解 + 秒懂 + 史上最全）</title>
+    <updated>2024-05-08T13:05:13.000Z</updated>
+  </entry>
+</feed>

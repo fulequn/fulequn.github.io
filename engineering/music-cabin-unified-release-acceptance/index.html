@@ -1,0 +1,725 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+<link rel="icon" href="/img/favicon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="音乐舱三个统一：完整实现、发布流程与线上验收手册">
+<meta property="og:url" content="https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2026-11-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-01T04:00:00.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="DevOps">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="发布工程">
+<meta property="article:tag" content="音乐舱">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"音乐舱三个统一：完整实现、发布流程与线上验收手册","description":"从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。","url":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-11-01T04:00:00.000Z","dateModified":"2026-11-01T04:00:00.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>音乐舱三个统一：完整实现、发布流程与线上验收手册 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="音乐舱三个统一：完整实现、发布流程与线上验收手册"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2026-11-01 12:00" pubdate>
+2026年11月1日 中午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+10k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+84 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">音乐舱三个统一：完整实现、发布流程与线上验收手册</h1>
+<div class="markdown-body">
+<p>音乐舱的“三个统一”已经完成开发，并在 2026 年 11 月 1 日执行过一次生产发布：统一版本清单、统一构建入口、统一部署入口。它解决的是“构建了什么、切换了什么、出了问题怎样核实和恢复”，不是把所有组件强行标成同一个版本。</p>
+<p>本文同时是实现说明和线上验收手册。普通使用者从第一节开始；负责发布的人继续看版本、命令和异常处理。文中的生产结果是 2026 年 11 月 1 日这次发布的证据快照，不是长期有效的健康保证。示例中的 <code>/absolute/...</code> 路径需要替换成本机实际位置；公开文章不附生产 target、凭据、服务器地址或原始数据。</p>
+<h2 id="一、先在线上验收：从能打开到真正能听">一、先在线上验收：从能打开到真正能听</h2>
+<h3 id="1-适用范围与停止条件">1. 适用范围与停止条件</h3>
+<p>主要验收入口是<a target="_blank" rel="noopener" href="https://test.music.fulequn.online/">音乐舱新站</a>，原有<a target="_blank" rel="noopener" href="https://music.fulequn.online/">旧站</a>作为兼容回归入口。两个站目前共用 TS 音频网关，但播放器实例和用户数据独立。旧站列表与新站列表不同，不等于数据丢失；不要为了让截图一致而覆盖其中一边。</p>
+<p>出现以下情况时，停止反复点击发布、登录或刷新凭据：歌单/历史明显减少、账户绑定变了、发布状态为 <code>unknown</code>、凭据提交未决、部署后反复重启。先保存时间、页面提示和公开关联 ID，再按第六节排查。不要清空缓存来“证明”未缓存播放，也不要通过多次扫码掩盖未决事务。</p>
+<h3 id="2-普通使用者的-10—15-分钟验收">2. 普通使用者的 10—15 分钟验收</h3>
+<p>准备一台电脑和你实际听歌的手机，记录浏览器、系统、网络和验收时间。先截图自己在同一个站点的歌单、收藏数和当前队列；验收期间若主动修改收藏或播放历史，要把这部分正常变化记下来。</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+<th>通过标准</th>
+<th>不通过时记录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>正常登录新站，打开“我喜欢”和曲库列表</td>
+<td>能进入页面，原有列表与收藏可见，无反复登录</td>
+<td>时间、入口、HTTP/页面提示</td>
+</tr>
+<tr>
+<td>2</td>
+<td>播放原先报错的收藏曲，再选两首不同歌曲</td>
+<td>能听见声音，进度持续推进至少 30 秒；不能只看按钮变成暂停</td>
+<td>曲名或公开曲目 ID、错误文案、是否所有曲目都失败</td>
+</tr>
+<tr>
+<td>3</td>
+<td>暂停后继续，把进度拖到歌曲中段</td>
+<td>暂停与继续对应真实声音，拖动后从新位置播放，不无限缓冲</td>
+<td>目标位置、实际位置、等待时长</td>
+</tr>
+<tr>
+<td>4</td>
+<td>手动下一首，再把一首歌拖近结尾并等待自然结束</td>
+<td>手动切歌与自然跨曲都成功，队列顺序正确</td>
+<td>队列、上一首与下一首、是否出现假结束</td>
+</tr>
+<tr>
+<td>5</td>
+<td>手机播放后切到其他应用，再锁屏等待自然跨曲</td>
+<td>当前曲继续，锁屏后下一首能自动播放；记录实际等待时长</td>
+<td>系统/浏览器、锁屏时刻、停在哪一步</td>
+</tr>
+<tr>
+<td>6</td>
+<td>使用锁屏或耳机控制播放/暂停；若系统支持，再测下一首</td>
+<td>支持的动作确实改变播放；不支持时标“未支持/未验证”</td>
+<td>控件是否出现、点击后实际声音</td>
+</tr>
+<tr>
+<td>7</td>
+<td>回到页面、刷新，再重新打开</td>
+<td>页面曲目和真实播放状态可核对；收藏、歌单、排序仍在</td>
+<td>页面状态与真实声音是否不一致</td>
+</tr>
+<tr>
+<td>8</td>
+<td>打开旧站做一次播放与列表核对</td>
+<td>旧站仍可访问，其自身历史和列表未丢失</td>
+<td>与该站发布前的差异</td>
+</tr>
+</tbody>
+</table>
+<p>手机中断测试单独记。 有条件时测试来电/系统音频抢占、网络短暂断开再恢复、第二台设备独立播放。页面隐藏或锁屏不应被误当成来电而直接暂停；系统明确打断后默认暂停，不应突然自行出声。尚未做的项目标 <code>not_tested</code>，不要因为桌面播放通过就把 iOS、Android、耳机和跨设备全部签成通过。</p>
+<p>以上是验收动作和通过标准，不是对每台设备已通过的声明。拖到结尾可以快速验证跨曲，但不能替代较长时间的后台播放测试。</p>
+<h3 id="3-管理页面应该怎么看">3. 管理页面应该怎么看</h3>
+<p>管理员使用已有管理入口，不在浏览器里粘贴服务器 Bearer token。重点看账号、目录、音频、持久化等维度，以及观察时间、凭据版本和待处理动作。一个总的 <code>healthy</code> 或 <code>degraded</code> 标签不足以判断能否播放。</p>
+<p>本次发布后，账号、目录、音频和持久化证据正常，但 <code>player</code> 仍为 <code>not_tested</code>；恢复账本与网关还存在历史版本差异。验收记录必须同时保留这两个事实，不能手工改账本让页面“变绿”。如果概要建议与各维度、时间戳不一致，应记录为状态展示问题，以实际接口和播放证据继续定位。</p>
+<h3 id="4-可直接复制的验收记录">4. 可直接复制的验收记录</h3>
+<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">验收日期与时区：
+站点：新站 / 旧站
+设备、系统、浏览器：
+网络：Wi-Fi / 蜂窝
+产品 releaseId：
+部署 deploymentId：
+
+原收藏曲播放：通过 / 失败 / 未测
+其他两首播放：通过 / 失败 / 未测
+暂停、继续、拖动：通过 / 失败 / 未测
+手动切歌、自然跨曲：通过 / 失败 / 未测
+手机后台与锁屏跨曲：通过 / 失败 / 未测
+锁屏/耳机控制：通过 / 失败 / 不支持 / 未测
+来电与断网恢复：通过 / 失败 / 未测
+歌单、收藏、排序、历史：保留 / 异常
+旧站回归：通过 / 失败 / 未测
+
+异常发生时间、公开关联 ID、曲目、操作、实际结果：
+未完成项目及原因：
+结论：本设备通过 / 有条件通过 / 不通过</code></pre></div></figure>
+<h2 id="二、为什么做三个统一，以及现在统一了什么">二、为什么做三个统一，以及现在统一了什么</h2>
+<p>音乐舱不是一个单独的播放器容器。浏览器使用 Any Listen；音乐扩展向 TS 网关请求目录和音频；恢复服务负责受控续期与登录协调；OpenClaw 插件连接 QQ；入口服务提供访问与管理边界。逐个手工更新时，很容易出现“代码已上传但进程没切换”“扩展还是旧版”“镜像标签相同但实际内容不同”。</p>
+<p>最终选择是把发布交付集中在 <code>music-cabin</code> 仓库，继续固定 Any Listen 上游并应用仓库内补丁。没有把播放器全部复制进来长期分叉，也没有引入新的发布平台。旧 Go 网关和独立 kuake CLI 已退役；新发布不能再依赖它们作为运行组件或可播放的回退路径。</p>
+<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">music-cabin 固定源码 + Any Listen 固定上游 + 七个补丁
+                         |
+                 build-release.sh
+                         |
+             发布包 + release.json
+                         |
+          deploy-release.sh plan / apply
+                         |
+         实际运行组件 + deployment.json
+                         |
+           status / verify + 人工听感验收</code></pre></div></figure>
+<table>
+<thead>
+<tr>
+<th>统一项</th>
+<th>实现入口</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本</td>
+<td><code>release/manifest.json</code>、生成的 <code>release.json</code>、部署回执</td>
+<td>输入、产物和运行状态各有依据，避免手填一个版本代表所有组件</td>
+</tr>
+<tr>
+<td>构建</td>
+<td><code>scripts/build-release.sh</code></td>
+<td>固定上游和补丁，生成目标平台产物，校验后才形成完整发布包</td>
+</tr>
+<tr>
+<td>部署</td>
+<td><code>scripts/deploy-release.sh</code></td>
+<td>先计划，再切换变化组件；重复执行可核对，异常不盲重放，回退保留数据</td>
+</tr>
+</tbody>
+</table>
+<p>发布包包含六类组件：gateway、recovery、player、extension、plugin、entry。目标文件只声明本次管理的实例；未声明的旧站播放器与共享入口不会被顺带替换。</p>
+<h2 id="三、版本不是一个数字：三份清单怎样对应">三、版本不是一个数字：三份清单怎样对应</h2>
+<h3 id="1-输入清单：固定“用什么构建”">1. 输入清单：固定“用什么构建”</h3>
+<p>Git 中的 <code>release/manifest.json</code> 固定上游完整 commit、补丁顺序与哈希、工具链、基础镜像 digest、目标平台和六组件定义。输入文件不写自己的 Git 提交号，避免自引用；构建时从干净工作区取得完整 HEAD。</p>
+<p>七个补丁的顺序是 Media Session、诊断、后台预取、手机播放契约、元数据刷新、播放错误、维护者更新提示。缺补丁、顺序错误、前像不符或哈希不同，构建应失败，而不是尽量打上去继续发布。</p>
+<h3 id="2-发布清单：记录“实际构建出了什么”">2. 发布清单：记录“实际构建出了什么”</h3>
+<p>发布包根目录的 <code>release.json</code> 是生成物。<code>releaseId</code> 与 <code>sourceCommit</code> 等于构建时源码完整 SHA；它还记录输入清单哈希、平台、实际工具版本、组件和构件。每个构件记录相对路径、字节数及 SHA-256；每个组件记录构件集合及内容摘要。</p>
+<p><code>verifyBundle</code> 会拒绝缺失文件、未申报文件、路径越界、外层文件符号链接、哈希不符及不安全归档。归档解包还有嵌套与链接链检查。这是操作者选定发布包的完整性校验，不能夸大为第三方签名认证。</p>
+<p>镜像至少区分本地构建 config digest、运行时镜像身份与 registry digest。本次生产 Docker 的 containerd image store 暴露 OCI manifest digest，和构建侧 config digest不一定相同。工具从已校验的镜像归档推导对应关系，不能只比较镜像标签，也不能把“未推镜像仓库”写成“已获得 registry digest”。</p>
+<h3 id="3-部署回执：记录“真正运行了什么”">3. 部署回执：记录“真正运行了什么”</h3>
+<p><code>deployment.json</code> 记录 deploymentId、releaseId、发布清单哈希、时间、状态，以及逐组件的 before/after 和检查结果。没有更新的组件保留原版本；未知来源明确为 <code>null</code>，不能补一个看似整齐的提交号。</p>
+<p>本次版本关系如下。它说明了为什么工具版本和产品版本不同仍然可以是一次有效发布：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>本次记录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品包源码提交</td>
+<td><code>dcb06c4b94fcac06b5355753ec46d305b5745089</code></td>
+</tr>
+<tr>
+<td>最终部署工具提交</td>
+<td><code>ee05387a10e56d4e350f4b23b82a087c1d23ab0d</code></td>
+</tr>
+<tr>
+<td>产品包清单 SHA-256</td>
+<td><code>a091dada2e8440fcc60062b6af0f30ef7fbac2a68700d47421b98379dcd2ae7a</code></td>
+</tr>
+<tr>
+<td>成功部署 ID</td>
+<td><code>deploy-20261101T021345-7f93be25</code></td>
+</tr>
+<tr>
+<td>最后记录的回执状态</td>
+<td><code>verified</code></td>
+</tr>
+</tbody>
+</table>
+<p>产品包构建后又补了部署工具的生产路径与镜像身份兼容，所以工具提交更晚；产品包并没有被悄悄修改。历史 <code>deploy/cloud/release.json</code> 已成为退役说明，不再是发布真源。源码仓库的 <code>main</code> 已推送至工具提交，不能沿用早期子任务读到的旧远端记录。</p>
+<h2 id="四、执行前准备与发布步骤">四、执行前准备与发布步骤</h2>
+<h3 id="1-执行前准备">1. 执行前准备</h3>
+<p>在有权限的发布工作机上准备 Node.js 24、npm 11、锁定的 pnpm、可用的 Docker/BuildKit、Git 和到目标机的 SSH。目标产物是 <code>linux/amd64</code>；Apple Silicon 可以通过模拟构建，但播放器原生模块仍须在 Linux 目标环境生成并验证，不能把 macOS 的二进制复制到服务器。</p>
+<p>目标 JSON 使用已有私有配置，精确指定实例、端口、用户、工作目录、挂载、env-file 路径与检查项。仓库的 <code>deploy/release/targets/example.json</code> 只是结构示例，不是可以覆盖现有生产的配置。不得把 target 或 env-file 放进博客附件；读者需要向实例维护者取得属于自己的配置。</p>
+<p>先运行独立测试，再构建。下面的路径是示例，不包含秘密：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 执行位置：music-cabin 仓库根目录</span>
+<span class="token function">node</span> <span class="token parameter variable">--test</span> scripts/release/test/*.test.mjs
+<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts run typecheck
+<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts <span class="token builtin class-name">test</span>
+
+scripts/build-release.sh <span class="token punctuation">\</span>
+  <span class="token parameter variable">--output</span> /absolute/releases/cabin-release <span class="token punctuation">\</span>
+  <span class="token parameter variable">--platform</span> linux/amd64</code></pre></div></figure>
+<p>预期：测试退出 0，构建退出 0，输出包含 <code>release.json</code> 与六组件产物。输出必须在仓库外，源码必须 clean。构建器会执行编译、补丁门禁、播放器产物校验等，但构建成功不代表已经执行所有网关和宿主行为测试，因此不能省去发布前独立检查。</p>
+<p>已有输出若不匹配应拒绝覆盖；同样的有效输出可以复用。最终生产包使用工具链默认优化。受限环境的 <code>--player-native-cflags &quot;-O0 -g0&quot;</code> 是显式选项并记录进构件，不是生产性能等价保证。</p>
+<h3 id="2-独立检查发布包">2. 独立检查发布包</h3>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 将路径替换为刚构建的发布包；此操作不连接生产</span>
+<span class="token function">node</span> --input-type<span class="token operator">=</span>module - /absolute/releases/cabin-release <span class="token operator">&lt;&lt;</span><span class="token string">'JS'
+import &#123; verifyBundle &#125; from './scripts/release/manifest.mjs';
+const result = await verifyBundle(process.argv[2]);
+console.log(JSON.stringify(&#123;
+  ok: result.ok,
+  errors: result.errors,
+  releaseId: result.manifest?.releaseId,
+  manifestSha256: result.manifestSha256
+&#125;, null, 2));
+process.exitCode = result.ok ? 0 : 1;
+JS</span></code></pre></div></figure>
+<p>预期 <code>ok: true</code>、<code>errors: []</code>，releaseId 与本次选定源码一致；以后比对部署回执中的 <code>releaseManifestSha256</code>。校验失败要重新取得或构建包，不能手改清单“修复哈希”。</p>
+<h3 id="3-先-plan，再-apply">3. 先 plan，再 apply</h3>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 执行位置：发布工作机的仓库根目录</span>
+<span class="token comment"># TARGET 是私有配置路径，不是 token；先替换下面两条路径</span>
+<span class="token assign-left variable">CABIN_BUNDLE</span><span class="token operator">=</span>/absolute/releases/cabin-release
+<span class="token assign-left variable">CABIN_TARGET</span><span class="token operator">=</span>/absolute/private/target.json
+
+scripts/deploy-release.sh plan <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p>plan 不加载镜像、不停止服务、不改运行状态。检查 <code>ready</code>、<code>preconditionBlockers</code>、每个组件的 <code>action/reasons</code>，以及未受管理的实例。新发布允许出现预期的 replace；对已经发布的同一包验收时，应当是 <code>noop: true</code> 且全部 <code>none</code>。退出码 0 不等于 <code>ready: true</code>，必须读 JSON。</p>
+<p>只有变更集和前置条件符合预期时执行：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这是变更命令，不是日常验收命令</span>
+scripts/deploy-release.sh apply <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p>apply 获取目标锁、复验发布包与配置，按依赖顺序更新变化组件，并写回执。容器可能经历 stop、rename、create、start，有短暂中断；这不是零停机发布。相同包与配置重复 apply 应为 no-op，但日常验收优先用 plan/status，不靠再次 apply 来验证幂等。</p>
+<h3 id="4-Caddy-配置如何真正生效">4. Caddy 配置如何真正生效</h3>
+<p>entry 使用受控 <code>caddy-container</code> 类型：先对候选执行 validate/adapt，再原地写宿主配置、重启既有入口并验证宿主文件、容器文件和运行配置。没有变化时不重启；入口镜像和外层共享 Caddy 不随配置发布重建。</p>
+<p>这里不能只用 rename 替换文件。Docker 单文件 bind mount 可能仍钉住旧 inode，导致宿主看起来是新文件、容器仍读旧文件。工具以实际哈希和运行配置收口。生产采用 <code>admin off</code> 时，可以读取 autosave 核实；无法读到可靠运行配置就不能签署生效。重启既有容器不会重读 <code>--env-file</code>，密钥环境轮换需要单独重建，不能当作普通 Caddyfile 更新。</p>
+<h2 id="五、线上技术验收：先查状态，再写复核回执">五、线上技术验收：先查状态，再写复核回执</h2>
+<h3 id="1-日常只读检查">1. 日常只读检查</h3>
+<p>保持第四节的 <code>CABIN_BUNDLE</code>、<code>CABIN_TARGET</code> 指向这次实际部署的包与目标，不要临时拿一个新构建包去核对旧生产：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">scripts/deploy-release.sh status <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span>
+
+scripts/deploy-release.sh plan <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p>预期：status 的 <code>inSync: true</code>、<code>pendingUnknown: null</code>、回执 releaseId 正确；plan 的 <code>ready: true</code>、<code>noop: true</code>、所有 action 为 <code>none</code>。status 有 drift 时不应被退出码 0 误导，必须读 <code>drift</code> 数组；无漂移只证明部署身份和声明一致，不能代替真实听感。</p>
+<h3 id="2-指定回执重新验证">2. 指定回执重新验证</h3>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CABIN_DEPLOYMENT</span><span class="token operator">=</span>deploy-20261101T021345-7f93be25
+scripts/deploy-release.sh verify <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
+  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
+<p>这里的 ID 是本文首次生产发布示例，之后发布要使用自己的实际 ID。verify 会取锁、更新部署回执，也可能清理本地已收敛状态；它不是完全不写入的命令。 它不切换产品组件。执行后同时检查顶层 <code>ok</code>、<code>receipt.status</code>、<code>checks</code> 和 drift；不要只看 shell 退出码或最后一行“完成”。</p>
+<p><code>verified</code> 表示这份 target 中要求的检查满足条件。非必需项可以仍是 <code>not_tested</code>；没有写进 target 的功能也不会被自动验证。每次验收都要展开检查列表，而不是截取绿色总状态。</p>
+<h3 id="3-入口与鉴权">3. 入口与鉴权</h3>
+<p>以下公网请求不含凭据，只检查基础边界，可在自己的终端运行：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/manage/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/api/health
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  http://test.music.fulequn.online/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://music.fulequn.online/</code></pre></div></figure>
+<p>本实例的预期依次为 <code>200 / 401 / 404 / 308 / 200</code>，不要添加 <code>-L</code> 后再判断原始 308。网络不可达与返回错误是不同事实；有 CDN 或网络策略时，先分清请求是否到达服务。</p>
+<p>服务器内部的网关 Bearer 校验、私网监听、recovery 健康、凭据版本和持久化证据由受控 target checks 检查。不要为了让公网 <code>/api/health</code> 返回 200 而开放内部接口。revision 应等于这次发布前后的实际业务版本，而不是永远硬编码成本文的 13；部署程序不能替业务制造新凭据版本。</p>
+<h3 id="4-音频验证不能被缓存蒙混过去">4. 音频验证不能被缓存蒙混过去</h3>
+<p>HTTP 206 和真实音频字节说明该样本的数据链路能返回音频；实际听到声音、进度推进还要靠播放器验收。ID3 是 MP3 样本的一种标记，不是 FLAC/M4A 等全部格式的统一通过标准。</p>
+<p>缓存命中只能证明缓存读取和 Range 链路，不能证明当前夸克授权有效。未缓存验证需要可核实的缓存未命中证据，再结合该请求的上游访问与音频结果。当前统一工具可按缓存响应头分类；没有可信缓存头时，即使请求返回 206，也会把严格的未缓存证据标为 <code>not_tested</code>。不要改名当“新歌”、清掉生产缓存，或只凭第一次点击就签署上游验证通过。</p>
+<p>本次生产回执中的两个普通 Range 检查通过，但 <code>uncached-audio-evidence</code> 为 <code>not_tested</code>，原因是网关没有可识别的缓存头。库存中没有同尺寸对象只是补充证据，不等同于完整的缓存未命中证明。若把该项设为必需，未验证就不能作为通过项发布。</p>
+<h3 id="5-用户数据与版本验收">5. 用户数据与版本验收</h3>
+<p>将同一站点发布前后的列表、收藏、排序与队列做比对。服务器证据应基于一致读取得到的表行数和内容摘要；只比较数据库文件大小或 WAL 文件哈希不足以判断数据是否丢失。真实播放会更新历史，播放器启动可能更新备份时间戳，需要逐字段解释正常差异，不能一句“所有文件完全一致”带过。</p>
+<p>凭据、恢复账本、待提交事务与数据卷不属于代码回退内容。新的合法凭据提交若发生在验收期间，应记录其回执和版本推进；不能为了让前后哈希一样恢复旧文件。浏览器可见版本标识也只是辅助信息，运行镜像及构件哈希才是部署身份依据。</p>
+<h2 id="六、中止与异常处置：哪些动作不能重试">六、中止与异常处置：哪些动作不能重试</h2>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>首先做什么</th>
+<th>不要做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bundle_invalid</code>、哈希不符</td>
+<td>停止，核对来源并重新构建/取得包</td>
+<td>修改 JSON 中的哈希使其通过</td>
+</tr>
+<tr>
+<td><code>locked</code></td>
+<td>核实另一发布进程与目标</td>
+<td>直接删锁并同时发布</td>
+</tr>
+<tr>
+<td><code>unknown</code>、SSH 超时</td>
+<td>用同一 target 和状态目录执行 status，对比 before/after</td>
+<td>立刻再次 apply、重新生成事务 ID</td>
+</tr>
+<tr>
+<td>mixed / drift</td>
+<td>保留逐组件实际值，按已核实状态处置</td>
+<td>把部分切换当作从未执行</td>
+</tr>
+<tr>
+<td><code>rollback_incompatible</code></td>
+<td>检查当前数据 schema 与候选代码兼容性</td>
+<td>强制退回读不了当前数据的代码</td>
+</tr>
+<tr>
+<td>Caddy 候选无效</td>
+<td>修复候选后重新计划；原配置应保持运行</td>
+<td>跳过 validate，直接重启</td>
+</tr>
+<tr>
+<td>播放地址获取失败</td>
+<td>区分扩展注册、代理、网关响应和媒体授权</td>
+<td>一律归为“需要扫码”，或只改提示文案</td>
+</tr>
+<tr>
+<td>概要 degraded，但各维度正常</td>
+<td>检查观察时间、player 未验项和恢复账本差异</td>
+<td>为消除告警伪造验收或改账本</td>
+</tr>
+</tbody>
+</table>
+<p>工具的错误类别通常对应退出码：参数/包错误 2、锁冲突 4、未知状态 5、不兼容回退 6、前置条件拒绝 7；其他失败可能为 1 或验证相关错误。业务 JSON 仍须检查：特别是 plan 的 ready、status 的 inSync，以及 verify 的 ok/回执状态，不能只靠 <code>$?</code>。</p>
+<h3 id="1-明确选择要回退的部署">1. 明确选择要回退的部署</h3>
+<p>确认那次部署的记录和恢复资料仍存在、没有 unknown/applying 未决状态、代码与当前数据兼容后，才执行：</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这是恢复变更命令，仅在已确认需要回退时执行</span>
+scripts/deploy-release.sh rollback <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
+  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
+<p>它只回退该次部署改变过的组件，保留最新 active、ledger、pendingCommit 和所有业务卷；入口回退也要验证实际运行配置。回退不是完整数据灾备，更不是恢复旧 Cookie。旧 Go 镜像已永久删除，也不能作为回退选项。</p>
+<h3 id="2-媒体授权故障的经验">2. 媒体授权故障的经验</h3>
+<p>之前的 <code>source not found</code> 并非真的丢了音源：账号接口和取下载地址接口可用，但媒体直链拒绝请求；播放器的回退又覆盖了原始错误。已有受控刷新恢复了媒体授权，新协调器也补上了“账号健康但音频认证失败”触发刷新、失败后冷却且不自动升级为二维码的处理。</p>
+<p>因此，“QQ 扫过码”“账号接口 200”和“未缓存歌曲可播放”是不同证据。再次故障时，应查登录操作回执、网关实际生效版本和同一曲目的媒体请求，不能只根据聊天中的成功提示要求用户无限重登。</p>
+<h2 id="七、这次已经验到了哪里">七、这次已经验到了哪里</h2>
+<p>以下是首次统一生产发布与最终工具提交的记录，不是本文重新运行的全量验收：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>已有证据</th>
+<th>结论边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发布工具回归</td>
+<td>最终 110 项通过；网关完整测试 1325 项通过</td>
+<td>自动测试不能替代真实设备</td>
+</tr>
+<tr>
+<td>隔离部署演练</td>
+<td>真实容器/镜像替换、no-op、兼容回退、卷标记保留、unknown 对账，16 项通过</td>
+<td>使用隔离目标与模拟账号</td>
+</tr>
+<tr>
+<td>入口激活演练</td>
+<td>候选校验、单文件挂载、旧→新 HTTP、失败恢复、no-op 等 11 项通过</td>
+<td>生产这次 entry 无变化，没有重启</td>
+</tr>
+<tr>
+<td>生产发布</td>
+<td>回执 verified；部署后 plan 全 none；status inSync，无 pendingUnknown</td>
+<td>仅该目标和时间点</td>
+</tr>
+<tr>
+<td>访问与鉴权</td>
+<td>两站 200、管理无凭据 401、公网内部接口 404、HTTP 308</td>
+<td>不等于音频或手机验收</td>
+</tr>
+<tr>
+<td>代表音频</td>
+<td>收藏曲与缓存代表返回 206，人工探针取得 1024 B、ID3</td>
+<td>严格未缓存项仍 not_tested</td>
+</tr>
+<tr>
+<td>用户数据</td>
+<td>主要列表、曲目、排序、队列与 URL 表对照一致；metadata 仅备份时间变化</td>
+<td>实时日志/WAL等有正常写入</td>
+</tr>
+<tr>
+<td>真实手机矩阵</td>
+<td>未形成完整签署证据</td>
+<td>由第一节的设备验收补齐</td>
+</tr>
+</tbody>
+</table>
+<p>当前仍需明确的边界：entry 环境变量轮换需要独立重建；混合 unknown 状态会拒绝盲重放，仍需按实际状态处置；镜像目前通过 tar 分发而非 registry；本次没有实现完整备份恢复功能，也没有把 R10 真机验收伪装成完成。</p>
+<p>阅读实现时，建议从以下固定版本入口开始：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/docs/ops/unified-release.md">发布操作说明</a>：命令与配置说明；其旧“未生产 apply”段落反映集成阶段，生产现状以本文发布记录为准。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/release/manifest.json">版本清单</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/manifest.mjs">共享校验器</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/build-release.sh">构建入口</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy.mjs">部署入口</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy-core.mjs">部署状态机</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy-host.mjs">目标实例适配</a>。</li>
+</ul>
+<p>验收时把“部署身份一致”“服务接口正常”“本设备真实可听”分别留下结果，才能在下次出问题时知道应该检查哪一层。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="category-chain-item">工程实践</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/DevOps/" class="print-no-link">#DevOps</a>
+<a href="/tags/docker/" class="print-no-link">#docker</a>
+<a href="/tags/%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/" class="print-no-link">#发布工程</a>
+<a href="/tags/%E9%9F%B3%E4%B9%90%E8%88%B1/" class="print-no-link">#音乐舱</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>音乐舱三个统一：完整实现、发布流程与线上验收手册</div>
+<div>https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2026年11月1日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+</article>
+<article class="post-next col-6">
+<a href="/learning/github-learning-to-blog-knowledge-base/" title="从 GitHub 学习到可检索知识库">
+<span class="hidden-mobile">从 GitHub 学习到可检索知识库</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>
