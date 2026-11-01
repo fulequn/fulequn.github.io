@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Fulequn</rights>
   <subtitle>阿付的博客：公开分享前端与算法学习笔记、自托管服务与工具实践。</subtitle>
   <title>FuLeQun's Blog</title>
-  <updated>2026-11-01T04:00:00.000Z</updated>
+  <updated>2026-11-01T04:17:52.000Z</updated>
   <entry>
     <author>
       <name>Fulequn</name>
@@ -23,9 +23,9 @@
     <id>https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/</id>
     <link href="https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/"/>
     <published>2026-11-01T04:00:00.000Z</published>
-    <summary>音乐舱的“三个统一”已经完成开发，并在 2026 年 11 月 1 日执行过一次生产发布：统一版本清单、统一构建入口、统一部署入口。它解决的是“构建了什么、切换了什么、出了问题怎样核实和恢复”，不是把所有组件强行标成同一个版本。 本文同时是实现说明和线上验收手册。普通使用者从第一节开始；负责发布的人继续看版本、命令和异常处理。文中的生产结果是 2026 年 11 月 1 日这次发布的证据快照，不是</summary>
-    <title>音乐舱三个统一：完整实现、发布流程与线上验收手册</title>
-    <updated>2026-11-01T04:00:00.000Z</updated>
+    <summary>音乐舱的一次更新涉及播放器、扩展、音频网关、恢复服务、QQ 插件和访问入口。单独看，每个组件都能构建和启动；放到一起，维护者还要回答另一组问题：这次采用了哪些源码和补丁，交付的文件是否完整，哪些实例真正切换了，失败之后应该恢复什么、保留什么？ “三个统一”围绕这些问题建立发布约束：统一版本清单固定输入与身份，统一构建入口形成可校验的发布包，统一部署入口把计划、切换和运行回执连起来。本文先讲它们为什</summary>
+    <title>音乐舱怎样统一多组件发布</title>
+    <updated>2026-11-01T04:17:52.000Z</updated>
   </entry>
   <entry>
     <author>

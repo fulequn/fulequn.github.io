@@ -10,16 +10,16 @@
 <meta name="theme-color" content="#2f4154">
 <meta name="author" content="Fulequn">
 <meta name="keywords" content="">
-<meta name="description" content="从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。">
+<meta name="description" content="从分散更新的确认难题出发，讲解版本清单、构建产物和部署回执怎样衔接，并区分部署身份、服务链路与真实播放验收。附发布操作和首次生产记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="音乐舱三个统一：完整实现、发布流程与线上验收手册">
+<meta property="og:title" content="音乐舱怎样统一多组件发布">
 <meta property="og:url" content="https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/index.html">
 <meta property="og:site_name" content="FuLeQun&#39;s Blog">
-<meta property="og:description" content="从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。">
+<meta property="og:description" content="从分散更新的确认难题出发，讲解版本清单、构建产物和部署回执怎样衔接，并区分部署身份、服务链路与真实播放验收。附发布操作和首次生产记录。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.fulequn.online/img/default.png">
 <meta property="article:published_time" content="2026-11-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-01T04:17:52.000Z">
 <meta property="article:author" content="Fulequn">
 <meta property="article:tag" content="DevOps">
 <meta property="article:tag" content="docker">
@@ -27,8 +27,8 @@
 <meta property="article:tag" content="音乐舱">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"音乐舱三个统一：完整实现、发布流程与线上验收手册","description":"从版本清单、构建产物和部署回执，到网页手机验收、只读巡检、缓存证据与失败恢复，说明音乐舱统一发布的实现及边界。","url":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-11-01T04:00:00.000Z","dateModified":"2026-11-01T04:00:00.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
-<title>音乐舱三个统一：完整实现、发布流程与线上验收手册 - FuLeQun&#39;s Blog</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"音乐舱怎样统一多组件发布","description":"从分散更新的确认难题出发，讲解版本清单、构建产物和部署回执怎样衔接，并区分部署身份、服务链路与真实播放验收。附发布操作和首次生产记录。","url":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-11-01T04:00:00.000Z","dateModified":"2026-11-01T04:17:52.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>音乐舱怎样统一多组件发布 - FuLeQun&#39;s Blog</title>
 <link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
 <link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
@@ -172,7 +172,7 @@
 <div class="mask flex-center" style="background-color:#0000004d">
 <div class="banner-text text-center fade-in-up">
 <div class="h2">
-<span id="subtitle" data-typed-text="音乐舱三个统一：完整实现、发布流程与线上验收手册"></span>
+<span id="subtitle" data-typed-text="音乐舱怎样统一多组件发布"></span>
 </div>
 <div class="mt-3">
 <span class="post-meta">
@@ -185,11 +185,11 @@
 <div class="mt-1">
 <span class="post-meta mr-2">
 <i class="iconfont icon-chart"></i>
-10k 字
+13k 字
 </span>
 <span class="post-meta mr-2">
 <i class="iconfont icon-clock-fill"></i>
-84 分钟
+105 分钟
 </span>
 </div>
 </div>
@@ -207,16 +207,250 @@
 <div class="container nopadding-x-md" id="board-ctn">
 <div id="board">
 <article class="post-content mx-auto">
-<h1 id="seo-header">音乐舱三个统一：完整实现、发布流程与线上验收手册</h1>
+<h1 id="seo-header">音乐舱怎样统一多组件发布</h1>
 <div class="markdown-body">
-<p>音乐舱的“三个统一”已经完成开发，并在 2026 年 11 月 1 日执行过一次生产发布：统一版本清单、统一构建入口、统一部署入口。它解决的是“构建了什么、切换了什么、出了问题怎样核实和恢复”，不是把所有组件强行标成同一个版本。</p>
-<p>本文同时是实现说明和线上验收手册。普通使用者从第一节开始；负责发布的人继续看版本、命令和异常处理。文中的生产结果是 2026 年 11 月 1 日这次发布的证据快照，不是长期有效的健康保证。示例中的 <code>/absolute/...</code> 路径需要替换成本机实际位置；公开文章不附生产 target、凭据、服务器地址或原始数据。</p>
-<h2 id="一、先在线上验收：从能打开到真正能听">一、先在线上验收：从能打开到真正能听</h2>
-<h3 id="1-适用范围与停止条件">1. 适用范围与停止条件</h3>
-<p>主要验收入口是<a target="_blank" rel="noopener" href="https://test.music.fulequn.online/">音乐舱新站</a>，原有<a target="_blank" rel="noopener" href="https://music.fulequn.online/">旧站</a>作为兼容回归入口。两个站目前共用 TS 音频网关，但播放器实例和用户数据独立。旧站列表与新站列表不同，不等于数据丢失；不要为了让截图一致而覆盖其中一边。</p>
-<p>出现以下情况时，停止反复点击发布、登录或刷新凭据：歌单/历史明显减少、账户绑定变了、发布状态为 <code>unknown</code>、凭据提交未决、部署后反复重启。先保存时间、页面提示和公开关联 ID，再按第六节排查。不要清空缓存来“证明”未缓存播放，也不要通过多次扫码掩盖未决事务。</p>
-<h3 id="2-普通使用者的-10—15-分钟验收">2. 普通使用者的 10—15 分钟验收</h3>
-<p>准备一台电脑和你实际听歌的手机，记录浏览器、系统、网络和验收时间。先截图自己在同一个站点的歌单、收藏数和当前队列；验收期间若主动修改收藏或播放历史，要把这部分正常变化记下来。</p>
+<p>音乐舱的一次更新涉及播放器、扩展、音频网关、恢复服务、QQ 插件和访问入口。单独看，每个组件都能构建和启动；放到一起，维护者还要回答另一组问题：这次采用了哪些源码和补丁，交付的文件是否完整，哪些实例真正切换了，失败之后应该恢复什么、保留什么？</p>
+<p>“三个统一”围绕这些问题建立发布约束：统一版本清单固定输入与身份，统一构建入口形成可校验的发布包，统一部署入口把计划、切换和运行回执连起来。本文先讲它们为什么需要一起工作，再讲怎样验证结果。发布命令见附录 A，网页与手机验收见附录 B；2026 年 11 月 1 日首次生产发布的记录集中放在附录 C，不作为长期有效的健康保证。</p>
+<h2 id="一、分散更新留下的确认难题">一、分散更新留下的确认难题</h2>
+<p>浏览器中的 Any Listen 负责播放，音乐扩展向 TS 网关请求目录和音频，恢复服务协调受控续期与登录，OpenClaw 插件连接 QQ，入口服务提供访问和管理边界。一次产品更新可能涉及其中几个组件，也可能只改变一个。发布者必须同时知道组件之间的关系，以及本次有权管理哪些实例。</p>
+<p>逐个手工更新时，“已经上传代码”“镜像构建成功”“容器启动了”分别描述不同阶段。它们不能互相代替：源码变了，进程未必切换；播放器更新了，扩展仍可能是旧版；镜像标签相同，实际内容也未必相同。问题不仅是操作次数多，还在于输入、产物与运行状态之间缺少可核对的对应关系。出错时，维护者需要重新查文件、镜像和进程，才能判断究竟执行到了哪里。</p>
+<p>这次改造要回答的核心问题是：<strong>多组件音乐服务怎样让构建输入、发布产物和线上运行状态保持可核对的一致，并在发布异常时安全恢复？</strong> 目标包含固定构建来源、核实交付完整性、限制部署影响范围和保存恢复依据；不要求所有组件使用相同版本，也不要求每次发布都替换全部实例。</p>
+<h2 id="二、三个统一分别约束发布的哪一段">二、三个统一分别约束发布的哪一段</h2>
+<h3 id="2-1-统一版本清单，区分输入、产物和运行身份">2.1 统一版本清单，区分输入、产物和运行身份</h3>
+<p>单个版本号只能给一次发布命名，无法充分说明组成它的内容。音乐舱使用三份职责不同的记录：Git 中的 <code>release/manifest.json</code> 描述构建输入，发布包中的 <code>release.json</code> 描述实际产物，部署产生的 <code>deployment.json</code> 描述运行变化。输入清单不能证明文件已经构建出来，产物清单也不能证明服务器已经切换；三份记录通过源码提交、清单哈希和组件身份建立对应关系。</p>
+<p>输入清单固定 Any Listen 上游完整 commit、补丁顺序与哈希、工具链、基础镜像 digest、目标平台和六组件定义。它不写自己的 Git 提交号，避免自引用；构建时从干净工作区取得完整 HEAD。发布清单中的 <code>releaseId</code> 与 <code>sourceCommit</code> 等于这次构建采用的源码完整 SHA，并记录输入清单哈希、平台、实际工具版本和组件构件。构件逐项保存相对路径、字节数与 SHA-256，组件保存构件集合及内容摘要。</p>
+<p>运行记录则保留 deploymentId、releaseId、发布清单哈希、时间、状态和逐组件 before/after、检查结果。没有更新的组件继续保留原版本，未知来源明确为 <code>null</code>。统一的是描述和核对规则；如果用同一个提交号填满所有组件，反而会丢掉“哪些改变了、哪些没有改变”的事实。</p>
+<h3 id="2-2-统一构建入口，把固定输入变成可检查的交付物">2.2 统一构建入口，把固定输入变成可检查的交付物</h3>
+<p>只有输入固定，仍不能排除缺文件、补丁未应用、目标平台错误等产物问题。<code>scripts/build-release.sh</code> 将固定源码、Any Listen 固定上游与仓库内补丁汇成一次构建，输出六类组件的发布包：gateway、recovery、player、extension、plugin、entry。构建和校验完成后才形成完整交付物，不依赖发布者临时在服务器上拼凑文件。</p>
+<p>七个补丁依次覆盖 Media Session、诊断、后台预取、手机播放契约、元数据刷新、播放错误和维护者更新提示。缺补丁、顺序错误、前像不符或哈希不同都应让构建失败。播放器的原生模块也必须在 Linux 目标环境生成并验证，不能用 macOS 二进制代替 <code>linux/amd64</code> 产物。</p>
+<p>发布包还需独立校验。<code>verifyBundle</code> 拒绝缺失文件、未申报文件、路径越界、外层文件符号链接、哈希不符及不安全归档，解包过程检查嵌套与链接链。这里能证明的是操作者选定发布包的完整性；没有第三方签名，不能据此宣称来源已经得到第三方认证。</p>
+<h3 id="2-3-统一部署入口，把变化范围和实际结果留下来">2.3 统一部署入口，把变化范围和实际结果留下来</h3>
+<p>发布包正确仍不等于运行正确。<code>scripts/deploy-release.sh</code> 先依据发布包与私有 target 生成计划，再更新变化组件并记录结果。target 精确声明实例、端口、用户、目录、挂载、env-file 路径与检查项；未声明的旧站播放器和共享入口不随本次部署被顺带替换。</p>
+<p>这使“发布什么”与“允许影响哪里”分开。相同包与配置再次检查时，计划应能说明为什么不需要切换；发现漂移时，也应展示逐组件差异，而不是只返回一个成功退出码。发生 SSH 超时或部分切换时，部署结果可能成为 <code>unknown</code> 或 mixed，后续处理依靠原事务与实际状态核对，不能把没有收到成功消息解释成没有执行。</p>
+<table>
+<thead>
+<tr>
+<th>统一项</th>
+<th>关键记录或入口</th>
+<th>防止哪一种判断失误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本</td>
+<td><code>release/manifest.json</code>、<code>release.json</code>、<code>deployment.json</code></td>
+<td>用一个版本号代替输入、产物和实际运行身份</td>
+</tr>
+<tr>
+<td>构建</td>
+<td><code>scripts/build-release.sh</code>、<code>verifyBundle</code></td>
+<td>把源码固定或编译成功当成完整交付物已经可用</td>
+</tr>
+<tr>
+<td>部署</td>
+<td><code>scripts/deploy-release.sh</code>、私有 target 与回执</td>
+<td>把包正确、命令退出 0 或超时当成运行状态已确定</td>
+</tr>
+</tbody>
+</table>
+<p>三个入口需要衔接。统一构建若没有固定输入，无法追溯差异；统一版本若没有部署回执，无法回答线上实际运行什么；部署脚本若不复验发布包，也无法保证计划中的内容就是收到的文件。</p>
+<h2 id="三、一次发布怎样从固定输入走到运行回执">三、一次发布怎样从固定输入走到运行回执</h2>
+<p>发布从干净源码工作区开始，构建器按输入清单获取上游、应用补丁并生成目标平台产物；独立校验通过后，发布者选择该包与对应 target，先查看 plan。只有变化范围和前置条件符合预期，才进入 apply。这个顺序把“准备的内容正确”和“允许切换的对象正确”分别检查，避免在停止服务以后才发现基础条件不成立。</p>
+<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">music-cabin 固定源码 + Any Listen 固定上游 + 七个补丁
+                         |
+                 build-release.sh
+                         |
+             发布包 + release.json
+                         |
+          deploy-release.sh plan / apply
+                         |
+         实际运行组件 + deployment.json
+                         |
+           status / verify + 人工听感验收</code></pre></div></figure>
+<p>apply 获取目标锁，复验包与配置，按依赖顺序更新变化组件并写回执。容器可能经历 stop、rename、create、start，因此会有短暂中断，不属于零停机发布。相同包与配置重复 apply 应为 no-op，不过日常检查应优先使用 plan/status，不能靠再次执行变更来证明部署一致。</p>
+<p><strong>运行身份要核对实际内容。</strong> 镜像至少区分本地构建 config digest、运行时镜像身份与 registry digest。本次生产 Docker 的 containerd image store 暴露 OCI manifest digest，与构建侧 config digest 不一定相同。工具从已校验镜像归档推导对应关系；只比较标签会漏掉内容变化，直接比较不同种类的 digest 又可能制造假漂移。镜像未推仓库时，也不能声称已经取得 registry digest。</p>
+<p>入口配置同样存在“文件更新了，运行却未变”的风险。Docker 单文件 bind mount 可能钉住旧 inode，rename 替换宿主文件后容器仍读旧内容。entry 的 <code>caddy-container</code> 适配先 validate/adapt 候选，再原地写宿主配置、重启既有入口，核对宿主文件、容器文件和运行配置；生产采用 <code>admin off</code> 时可读取 autosave。无法取得可靠运行配置就不能签署生效。没有变化时不重启，入口镜像与外层共享 Caddy 也不随配置发布重建。</p>
+<p><strong>恢复依靠实际状态，而不是重新执行猜测。</strong> 超时后先保留原 target、状态目录和事务信息，再查看 before/after；存在未决状态时不盲目 apply。确认需要回退后，只恢复那次部署改变过的组件，并检查候选代码能否读取当前数据。最新 active、ledger、pendingCommit 和业务卷要保留，因为代码回退不能抹掉发布后发生的合法凭据提交或用户操作。</p>
+<h2 id="四、怎样证明统一发布有效，而不把部署成功当成可用">四、怎样证明统一发布有效，而不把部署成功当成可用</h2>
+<p>验收需要回答三个不同的问题：运行内容是否与声明对应，服务请求是否按边界工作，用户是否真实完成播放。前一层通过只能支持该层结论。<code>status.inSync</code> 不能证明手机锁屏跨曲，HTTP 206 不能证明播放器持续出声，桌面听感也不能替所有手机和耳机签署结果。</p>
+<table>
+<thead>
+<tr>
+<th>验证层</th>
+<th>要回答的问题</th>
+<th>应保留的证据与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>部署身份</td>
+<td>选定发布包与受管实例是否一致？</td>
+<td>releaseId、清单哈希、逐组件身份、drift 与未决状态；不证明用户功能正常</td>
+</tr>
+<tr>
+<td>服务链路</td>
+<td>入口、鉴权、音频和持久化是否满足检查要求？</td>
+<td>目标 checks、状态码、音频字节与一致读摘要；结论只覆盖相应样本和时间</td>
+</tr>
+<tr>
+<td>用户体验</td>
+<td>本设备能否真实播放、拖动、跨曲并保留数据？</td>
+<td>实际声音、进度、手机后台与锁屏操作、同站点前后数据；未测设备单独标注</td>
+</tr>
+</tbody>
+</table>
+<p>部署层通过 plan/status 观察，必要时对指定部署执行 verify。<code>verified</code> 只表示该 target 中要求的检查满足条件：非必需项仍可能为 <code>not_tested</code>，没有写进 target 的功能不会自动被验证。verify 会取锁并更新回执，可能清理本地已收敛状态，不是完全只读；它不切换产品组件。检查时应展开 <code>checks</code> 和 drift，不能截取绿色总状态。</p>
+<p>音频层还要区分缓存与上游授权。缓存命中并返回 Range 数据，可以证明缓存读取和传输链路工作，却不能证明当前夸克授权仍有效。严格未缓存验证需要可信缓存未命中证据，再结合该请求的上游访问与音频结果；缺少可信缓存头时，即使返回 206，也应标 <code>not_tested</code>。库存中没有同尺寸对象只作补充证据，不足以独立证明未缓存。不能用改名或清空生产缓存代替验证。</p>
+<p><code>source not found</code> 的既往故障说明了这一区分的价值：账号接口和取下载地址接口可用，但媒体直链拒绝请求，播放器回退又覆盖原始错误。受控刷新恢复了媒体授权，协调器补上账号健康而音频认证失败时触发刷新、失败冷却且不自动升级二维码的处理。因此，“QQ 扫过码”“账号接口 200”“未缓存歌曲可播放”必须分别核实，不能看到聊天中的成功提示就要求无限重登。</p>
+<p>用户数据也要按同一站点前后比较。新旧站共用 TS 音频网关，但播放器实例与用户数据独立，两站列表不同不能推断为丢失。服务器侧使用一致读取得的行数和内容摘要，浏览器侧核对收藏、歌单、排序和队列；文件大小与 WAL 哈希不足以证明数据保留，正常播放产生的历史变化和启动产生的备份时间变化需要逐项解释。</p>
+<h2 id="五、这个方案的选择与尚未解决的边界">五、这个方案的选择与尚未解决的边界</h2>
+<p>音乐舱将发布交付集中在 <code>music-cabin</code>，继续固定 Any Listen 上游并应用仓库补丁。这个选择沿用现有播放器能力，发布来源仍能追溯；代价是每次调整上游都要维护补丁前像、顺序和目标平台构建。另一种做法是复制播放器长期分叉，获得更大的直接修改自由，但也要自行承担后续上游合入；本次没有采用它。继续逐个手工交付则保留了操作灵活性，却无法解决第一章描述的对应关系问题。</p>
+<p>本次也没有引入新的发布平台，镜像通过 tar 分发而非 registry。统一入口先服务于现有实例和受控 target，而不承诺通用平台能力。旧 Go 网关与独立 kuake CLI 已退役，旧 Go 镜像已永久删除，不能作为新发布的运行依赖或可播放回退选项。</p>
+<p>仍有几项边界必须保留：入口环境变量轮换需要独立重建，重启既有容器不会重读 <code>--env-file</code>；混合 unknown 状态要依照实际状态处置，工具拒绝盲重放；代码回退不等于完整数据灾备，本次没有实现完整备份恢复；包完整性校验不等于第三方签名认证；真实手机矩阵与严格未缓存证据尚未完整验收，详见附录 C。</p>
+<p>三个统一让第一章的问题有了可以查证的回答：输入由清单固定，产物由构建和哈希约束，运行由目标与回执核对，恢复由变化记录和当前数据兼容性决定。它没有消除所有运行故障，却让维护者能够区分“交付内容不对”“切换未收敛”和“部署正确但用户仍不可用”，据此选择下一步，而不是重复上传、重启或扫码。</p>
+<h2 id="附录-A：发布、复核与回退操作">附录 A：发布、复核与回退操作</h2>
+<p>本附录供有权限的发布者使用，不适用于只想检查网页播放的普通使用者；只做日常验收时跳过构建和 apply，从步骤 6 的只读命令开始。以下命令是操作说明，本次文章改写没有重新执行生产发布、verify 或回退。公开稿不附生产 target、凭据、服务器地址或原始数据。</p>
+<h3 id="A-1-执行前准备与参数">A.1 执行前准备与参数</h3>
+<p>发布工作机需要 Node.js 24、npm 11、锁定的 pnpm、Docker/BuildKit、Git 和目标机 SSH 权限。目标为 <code>linux/amd64</code>；Apple Silicon 可以模拟构建，但原生模块仍在 Linux 目标环境生成。发布者确认包和目标，实例维护者提供私有配置并授权变更；复核者按回执与设备实际结果记录结论。</p>
+<p>开始前逐项确认：源码 clean；输出目录在仓库外；target 属于本实例且挂载、env-file 和检查项正确；没有 unknown/applying 未决状态；变更范围得到授权。任一条件不满足就停止。<code>deploy/release/targets/example.json</code> 只是结构示例，不能作为覆盖现有生产的配置。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>填写规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CABIN_BUNDLE</code></td>
+<td>本次选定发布包的绝对路径</td>
+<td>新发布填目标输出目录，复核填已部署的原包，不要拿新包核对旧生产</td>
+</tr>
+<tr>
+<td><code>CABIN_TARGET</code></td>
+<td>私有 target JSON 的绝对路径</td>
+<td>使用维护者提供的实际配置；不是 token，不公开 target 或 env-file</td>
+</tr>
+<tr>
+<td><code>CABIN_DEPLOYMENT</code></td>
+<td>要验证或回退的部署 ID</td>
+<td>取该次实际回执，不沿用文章历史 ID；首次发布示例集中在附录 C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="A-2-按执行顺序完成发布">A.2 按执行顺序完成发布</h3>
+<p><strong>步骤 0：确定状态与停止条件。</strong> 在发布工作机确认上面的前置条件，先保留原部署记录和用户数据基线。出现歌单/历史明显减少、账户绑定变化、凭据提交未决、部署反复重启或 <code>unknown</code> 时停止变更，记录时间与关联 ID，进入 A.3；不要连续 apply 或重登。</p>
+<p><strong>步骤 1：设置本次参数并执行独立测试。</strong> 执行位置为 <code>music-cabin</code> 仓库根目录。替换路径并设置实际部署 ID，测试应全部退出 0；任一测试失败就停在本步，先定位失败，不能继续构建和发布。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 执行位置：music-cabin 仓库根目录；按 A.1 参数表替换路径</span>
+<span class="token assign-left variable">CABIN_BUNDLE</span><span class="token operator">=</span>/absolute/releases/cabin-release
+<span class="token assign-left variable">CABIN_TARGET</span><span class="token operator">=</span>/absolute/private/target.json
+<span class="token comment"># 复核或回退时填实际回执 ID；新发布完成后再设置</span>
+<span class="token assign-left variable">CABIN_DEPLOYMENT</span><span class="token operator">=</span>
+
+<span class="token function">node</span> <span class="token parameter variable">--test</span> scripts/release/test/*.test.mjs
+<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts run typecheck
+<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts <span class="token builtin class-name">test</span>
+</code></pre></div></figure>
+<p><strong>步骤 2：构建并核对输出。</strong> 仅在步骤 1 的测试全部退出 0 后，在同一仓库根目录执行下面命令。预期退出 0，输出包含 <code>release.json</code> 与六组件产物。构建器执行编译、补丁门禁和播放器产物校验，不能替代步骤 1 的独立测试。失败时保留日志，修复输入或环境后再构建；已有输出不匹配应拒绝覆盖，有效且相同的输出可以复用。生产包采用默认优化，受限环境显式使用 <code>--player-native-cflags &quot;-O0 -g0&quot;</code> 时会记录进构件，不保证生产性能等价。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">scripts/build-release.sh <span class="token punctuation">\</span>
+  <span class="token parameter variable">--output</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--platform</span> linux/amd64</code></pre></div></figure>
+<p><strong>步骤 3：独立校验包。</strong> 在同一仓库根目录执行，不连接生产。预期 <code>ok: true</code>、<code>errors: []</code>，releaseId 对应所选源码；记录 manifestSha256，后面核对回执的 <code>releaseManifestSha256</code>。失败则停止，重新取得或构建包，不手改哈希。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> --input-type<span class="token operator">=</span>module - <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token operator">&lt;&lt;</span><span class="token string">'JS'
+import &#123; verifyBundle &#125; from './scripts/release/manifest.mjs';
+const result = await verifyBundle(process.argv[2]);
+console.log(JSON.stringify(&#123;
+  ok: result.ok,
+  errors: result.errors,
+  releaseId: result.manifest?.releaseId,
+  manifestSha256: result.manifestSha256
+&#125;, null, 2));
+process.exitCode = result.ok ? 0 : 1;
+JS</span></code></pre></div></figure>
+<p><strong>步骤 4：查看计划。</strong> 在发布工作机的仓库根目录执行 plan。它不加载镜像、不停止服务、不改运行状态。读取 <code>ready</code>、<code>preconditionBlockers</code>、每个组件 <code>action/reasons</code> 和未受管理实例；新发布可以有预期 replace，同包复核应是 <code>noop: true</code> 且全 <code>none</code>。ready 为 false 或范围不符时停在本步，核实包与 target，不能仅凭退出码 0 放行。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">scripts/deploy-release.sh plan <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p><strong>步骤 5：按已核对计划切换。</strong> 只有步骤 4 满足条件且已获得变更授权时执行。预期产生本次回执和逐组件检查结果；保存实际 deploymentId 并填入 <code>CABIN_DEPLOYMENT</code>。失败、超时或出现 mixed/unknown 时保留同一状态目录和事务，停止重放并进入 A.3，不重新生成事务 ID 掩盖未决结果。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 变更命令；不是日常验收命令</span>
+scripts/deploy-release.sh apply <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p><strong>步骤 6：只读复核部署身份。</strong> 使用刚部署的原包和同一 target。预期 status 的 <code>inSync: true</code>、<code>pendingUnknown: null</code>、releaseId 正确；plan 的 <code>ready: true</code>、<code>noop: true</code>、action 全为 <code>none</code>。失败时读取 drift 和 before/after，按 A.3 处理，不用再次 apply 代替排查。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">scripts/deploy-release.sh status <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span>
+
+scripts/deploy-release.sh plan <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
+<p><strong>步骤 7：复验回执并补用户验收。</strong> 在确认可以更新回执时执行 verify，先确保 <code>CABIN_DEPLOYMENT</code> 为实际 ID。展开顶层 <code>ok</code>、<code>receipt.status</code>、<code>checks</code> 和 drift；必需项不满足不能签署通过，非必需未测项原样记录。失败则保留检查结果并进入 A.3。最后按附录 B 做真实设备验收，不能以 verified 代替听感。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 会取锁、更新回执；不切换产品组件</span>
+scripts/deploy-release.sh verify <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
+  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
+<h3 id="A-3-中止分支与受控回退">A.3 中止分支与受控回退</h3>
+<p>以下表格用于前面步骤的失败分流。先记录信号、发生步骤、时间与逐组件状态，再按首查动作确定安全位置；未决状态未核实前不执行新的切换。锁冲突也需要确认另一个发布进程，不能直接删锁。</p>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>首先做什么</th>
+<th>不要做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bundle_invalid</code>、哈希不符</td>
+<td>停止，核对来源并重新构建/取得包</td>
+<td>修改 JSON 中的哈希使其通过</td>
+</tr>
+<tr>
+<td><code>locked</code></td>
+<td>核实另一发布进程与目标</td>
+<td>直接删锁并同时发布</td>
+</tr>
+<tr>
+<td><code>unknown</code>、SSH 超时</td>
+<td>用同一 target 和状态目录执行 status，对比 before/after</td>
+<td>立刻再次 apply、重新生成事务 ID</td>
+</tr>
+<tr>
+<td>mixed / drift</td>
+<td>保留逐组件实际值，按已核实状态处置</td>
+<td>把部分切换当作从未执行</td>
+</tr>
+<tr>
+<td><code>rollback_incompatible</code></td>
+<td>检查当前数据 schema 与候选代码兼容性</td>
+<td>强制退回读不了当前数据的代码</td>
+</tr>
+<tr>
+<td>Caddy 候选无效</td>
+<td>修复候选后重新计划；原配置应保持运行</td>
+<td>跳过 validate，直接重启</td>
+</tr>
+<tr>
+<td>播放地址获取失败</td>
+<td>区分扩展注册、代理、网关响应和媒体授权</td>
+<td>一律归为“需要扫码”，或只改提示文案</td>
+</tr>
+<tr>
+<td>概要 degraded，但各维度正常</td>
+<td>检查观察时间、player 未验项和恢复账本差异</td>
+<td>为消除告警伪造验收或改账本</td>
+</tr>
+</tbody>
+</table>
+<p>参数/包错误通常退出 2，锁冲突 4，未知状态 5，不兼容回退 6，前置拒绝 7；其他失败可能为 1 或验证相关错误。仍必须读取业务 JSON，尤其 plan.ready、status.inSync 和 verify.ok，不能仅看 <code>$?</code>。</p>
+<p><strong>回退步骤 1：选定记录并核实兼容性。</strong> 确认那次部署记录与恢复资料存在，没有 unknown/applying 未决状态，候选代码兼容当前数据；把该部署 ID 填入 A.1 的参数。任一条件不满足则停止，先由维护者核实，不强制回退。</p>
+<p><strong>回退步骤 2：执行并回读实际状态。</strong> 在发布工作机的仓库根目录执行以下变更命令。它仅恢复该次部署改变过的组件，保留最新 active、ledger、pendingCommit 和业务卷；入口回退也要验证运行配置。随后执行步骤 6 的 status/plan，依据恢复后回执核对实际身份与剩余 drift，不假定回退后仍与撤销前的包一致；失败进入上表，不盲重试。回退不是完整数据灾备，也不是恢复旧 Cookie。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 恢复变更命令；仅在已经确认需要回退时执行</span>
+scripts/deploy-release.sh rollback <span class="token punctuation">\</span>
+  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
+  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
+<h2 id="附录-B：网页、手机与服务边界验收">附录 B：网页、手机与服务边界验收</h2>
+<p>普通使用者从这里开始，不需要执行 apply、verify 或回退。主入口为<a target="_blank" rel="noopener" href="https://test.music.fulequn.online/">音乐舱新站</a>，<a target="_blank" rel="noopener" href="https://music.fulequn.online/">旧站</a>作兼容回归。准备电脑和实际听歌手机，记录系统、浏览器、网络与时间，先截图同站点的歌单、收藏数和队列。验收过程中主动修改的数据也要记录。</p>
+<p>出现收藏或历史明显减少、账户绑定变化、凭据事务未决或服务反复重启时，停止连续刷新、登录和变更，记录提示与公开关联 ID，交维护者按 A.3 处理。不要覆盖另一站点的列表，也不要清空缓存来证明未缓存播放。</p>
+<h3 id="B-1-普通使用者的-10—15-分钟验收">B.1 普通使用者的 10—15 分钟验收</h3>
+<p>按下表做基础检查，并填写本附录末尾的记录。通过条件是可观察的真实结果，不是播放按钮变形或页面显示“成功”。没有执行的项目保留“未测”，不推断为通过。</p>
 <table>
 <thead>
 <tr>
@@ -277,12 +511,23 @@
 </tr>
 </tbody>
 </table>
-<p>手机中断测试单独记。 有条件时测试来电/系统音频抢占、网络短暂断开再恢复、第二台设备独立播放。页面隐藏或锁屏不应被误当成来电而直接暂停；系统明确打断后默认暂停，不应突然自行出声。尚未做的项目标 <code>not_tested</code>，不要因为桌面播放通过就把 iOS、Android、耳机和跨设备全部签成通过。</p>
-<p>以上是验收动作和通过标准，不是对每台设备已通过的声明。拖到结尾可以快速验证跨曲，但不能替代较长时间的后台播放测试。</p>
-<h3 id="3-管理页面应该怎么看">3. 管理页面应该怎么看</h3>
-<p>管理员使用已有管理入口，不在浏览器里粘贴服务器 Bearer token。重点看账号、目录、音频、持久化等维度，以及观察时间、凭据版本和待处理动作。一个总的 <code>healthy</code> 或 <code>degraded</code> 标签不足以判断能否播放。</p>
-<p>本次发布后，账号、目录、音频和持久化证据正常，但 <code>player</code> 仍为 <code>not_tested</code>；恢复账本与网关还存在历史版本差异。验收记录必须同时保留这两个事实，不能手工改账本让页面“变绿”。如果概要建议与各维度、时间戳不一致，应记录为状态展示问题，以实际接口和播放证据继续定位。</p>
-<h3 id="4-可直接复制的验收记录">4. 可直接复制的验收记录</h3>
+<p>拖近结尾可以快速验证跨曲，但不能替代较长时间的后台播放。手机中断项目单独记录：有条件时检查来电或系统音频抢占、网络短暂断开与恢复、第二台设备独立播放。页面隐藏和锁屏不应被误当成来电直接暂停；系统明确打断后默认暂停，不应突然自行出声。桌面通过不覆盖 iOS、Android、耳机和跨设备矩阵。</p>
+<h3 id="B-2-服务边界与管理页面核对">B.2 服务边界与管理页面核对</h3>
+<p>下面的公开请求不带凭据，只检查入口和鉴权边界，不证明手机或音频已经正常。可以在自己的终端执行，预期依次为 <code>200 / 401 / 404 / 308 / 200</code>；不加 <code>-L</code>，否则会掩盖原始 308。网络不可达和服务返回错误分别记录。</p>
+<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/manage/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://test.music.fulequn.online/api/health
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  http://test.music.fulequn.online/
+<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
+  https://music.fulequn.online/</code></pre></div></figure>
+<p>内部网关 Bearer、私网监听、recovery 健康、凭据版本与持久化由受控 target checks 检查；不要为让公网 <code>/api/health</code> 返回 200 而开放内部接口。业务 revision 对应当前实际凭据版本，不能永远写死为历史值 13，也不能由部署程序制造新凭据版本。音频取得 206 和真实字节只能支持相应样本链路，ID3 只适用于部分 MP3 样本，不作 FLAC/M4A 的统一标准。</p>
+<p>管理员通过已有管理入口访问，不在浏览器粘贴服务器 Bearer token。分别核对账号、目录、音频、持久化、观察时间、凭据版本和待处理动作，不只看 healthy/degraded。概览与各维度不一致时保留结果，记录状态展示问题；历史恢复账本与网关版本差异也要保留，不能为变绿而手改账本。</p>
+<p><strong>验收记录。</strong></p>
+<p>将以下记录对应到具体设备、站点和发布身份；没有权限取得部署 ID 时向维护者确认，不自行猜测。分别给出部署身份、服务链路和本设备听感结论，保留未完成项目及原因。</p>
 <figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">验收日期与时区：
 站点：新站 / 旧站
 设备、系统、浏览器：
@@ -302,64 +547,17 @@
 
 异常发生时间、公开关联 ID、曲目、操作、实际结果：
 未完成项目及原因：
+部署身份结论：一致 / 漂移 / 未核实
+服务链路结论：通过 / 失败 / 未测
 结论：本设备通过 / 有条件通过 / 不通过</code></pre></div></figure>
-<h2 id="二、为什么做三个统一，以及现在统一了什么">二、为什么做三个统一，以及现在统一了什么</h2>
-<p>音乐舱不是一个单独的播放器容器。浏览器使用 Any Listen；音乐扩展向 TS 网关请求目录和音频；恢复服务负责受控续期与登录协调；OpenClaw 插件连接 QQ；入口服务提供访问与管理边界。逐个手工更新时，很容易出现“代码已上传但进程没切换”“扩展还是旧版”“镜像标签相同但实际内容不同”。</p>
-<p>最终选择是把发布交付集中在 <code>music-cabin</code> 仓库，继续固定 Any Listen 上游并应用仓库内补丁。没有把播放器全部复制进来长期分叉，也没有引入新的发布平台。旧 Go 网关和独立 kuake CLI 已退役；新发布不能再依赖它们作为运行组件或可播放的回退路径。</p>
-<figure><div class="code-wrapper"><pre class="language-text" data-language="text"><code class="language-text">music-cabin 固定源码 + Any Listen 固定上游 + 七个补丁
-                         |
-                 build-release.sh
-                         |
-             发布包 + release.json
-                         |
-          deploy-release.sh plan / apply
-                         |
-         实际运行组件 + deployment.json
-                         |
-           status / verify + 人工听感验收</code></pre></div></figure>
-<table>
-<thead>
-<tr>
-<th>统一项</th>
-<th>实现入口</th>
-<th>解决的问题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>版本</td>
-<td><code>release/manifest.json</code>、生成的 <code>release.json</code>、部署回执</td>
-<td>输入、产物和运行状态各有依据，避免手填一个版本代表所有组件</td>
-</tr>
-<tr>
-<td>构建</td>
-<td><code>scripts/build-release.sh</code></td>
-<td>固定上游和补丁，生成目标平台产物，校验后才形成完整发布包</td>
-</tr>
-<tr>
-<td>部署</td>
-<td><code>scripts/deploy-release.sh</code></td>
-<td>先计划，再切换变化组件；重复执行可核对，异常不盲重放，回退保留数据</td>
-</tr>
-</tbody>
-</table>
-<p>发布包包含六类组件：gateway、recovery、player、extension、plugin、entry。目标文件只声明本次管理的实例；未声明的旧站播放器与共享入口不会被顺带替换。</p>
-<h2 id="三、版本不是一个数字：三份清单怎样对应">三、版本不是一个数字：三份清单怎样对应</h2>
-<h3 id="1-输入清单：固定“用什么构建”">1. 输入清单：固定“用什么构建”</h3>
-<p>Git 中的 <code>release/manifest.json</code> 固定上游完整 commit、补丁顺序与哈希、工具链、基础镜像 digest、目标平台和六组件定义。输入文件不写自己的 Git 提交号，避免自引用；构建时从干净工作区取得完整 HEAD。</p>
-<p>七个补丁的顺序是 Media Session、诊断、后台预取、手机播放契约、元数据刷新、播放错误、维护者更新提示。缺补丁、顺序错误、前像不符或哈希不同，构建应失败，而不是尽量打上去继续发布。</p>
-<h3 id="2-发布清单：记录“实际构建出了什么”">2. 发布清单：记录“实际构建出了什么”</h3>
-<p>发布包根目录的 <code>release.json</code> 是生成物。<code>releaseId</code> 与 <code>sourceCommit</code> 等于构建时源码完整 SHA；它还记录输入清单哈希、平台、实际工具版本、组件和构件。每个构件记录相对路径、字节数及 SHA-256；每个组件记录构件集合及内容摘要。</p>
-<p><code>verifyBundle</code> 会拒绝缺失文件、未申报文件、路径越界、外层文件符号链接、哈希不符及不安全归档。归档解包还有嵌套与链接链检查。这是操作者选定发布包的完整性校验，不能夸大为第三方签名认证。</p>
-<p>镜像至少区分本地构建 config digest、运行时镜像身份与 registry digest。本次生产 Docker 的 containerd image store 暴露 OCI manifest digest，和构建侧 config digest不一定相同。工具从已校验的镜像归档推导对应关系，不能只比较镜像标签，也不能把“未推镜像仓库”写成“已获得 registry digest”。</p>
-<h3 id="3-部署回执：记录“真正运行了什么”">3. 部署回执：记录“真正运行了什么”</h3>
-<p><code>deployment.json</code> 记录 deploymentId、releaseId、发布清单哈希、时间、状态，以及逐组件的 before/after 和检查结果。没有更新的组件保留原版本；未知来源明确为 <code>null</code>，不能补一个看似整齐的提交号。</p>
-<p>本次版本关系如下。它说明了为什么工具版本和产品版本不同仍然可以是一次有效发布：</p>
+<h2 id="附录-C：首次发布记录与固定源码入口">附录 C：首次发布记录与固定源码入口</h2>
+<p>本节仅汇总 2026 年 11 月 1 日首次统一生产发布与最终工具版本的已有证据。本次文档重构没有重新运行这些生产检查，以下数量与状态沿用该次记录；它们不是当前每台设备均已通过的声明。</p>
+<p>产品包构建后，部署工具补充了生产路径与镜像身份兼容，因此工具提交晚于产品提交，产品包没有因此被修改。<code>deploy/cloud/release.json</code> 已成为退役说明，不再是发布真源；源码仓库 <code>main</code> 在该次发布记录中已推送到最终工具提交。</p>
 <table>
 <thead>
 <tr>
 <th>项目</th>
-<th>本次记录</th>
+<th>首次发布记录</th>
 </tr>
 </thead>
 <tbody>
@@ -385,155 +583,6 @@
 </tr>
 </tbody>
 </table>
-<p>产品包构建后又补了部署工具的生产路径与镜像身份兼容，所以工具提交更晚；产品包并没有被悄悄修改。历史 <code>deploy/cloud/release.json</code> 已成为退役说明，不再是发布真源。源码仓库的 <code>main</code> 已推送至工具提交，不能沿用早期子任务读到的旧远端记录。</p>
-<h2 id="四、执行前准备与发布步骤">四、执行前准备与发布步骤</h2>
-<h3 id="1-执行前准备">1. 执行前准备</h3>
-<p>在有权限的发布工作机上准备 Node.js 24、npm 11、锁定的 pnpm、可用的 Docker/BuildKit、Git 和到目标机的 SSH。目标产物是 <code>linux/amd64</code>；Apple Silicon 可以通过模拟构建，但播放器原生模块仍须在 Linux 目标环境生成并验证，不能把 macOS 的二进制复制到服务器。</p>
-<p>目标 JSON 使用已有私有配置，精确指定实例、端口、用户、工作目录、挂载、env-file 路径与检查项。仓库的 <code>deploy/release/targets/example.json</code> 只是结构示例，不是可以覆盖现有生产的配置。不得把 target 或 env-file 放进博客附件；读者需要向实例维护者取得属于自己的配置。</p>
-<p>先运行独立测试，再构建。下面的路径是示例，不包含秘密：</p>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 执行位置：music-cabin 仓库根目录</span>
-<span class="token function">node</span> <span class="token parameter variable">--test</span> scripts/release/test/*.test.mjs
-<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts run typecheck
-<span class="token function">npm</span> <span class="token parameter variable">--prefix</span> services/music-cabin-ts <span class="token builtin class-name">test</span>
-
-scripts/build-release.sh <span class="token punctuation">\</span>
-  <span class="token parameter variable">--output</span> /absolute/releases/cabin-release <span class="token punctuation">\</span>
-  <span class="token parameter variable">--platform</span> linux/amd64</code></pre></div></figure>
-<p>预期：测试退出 0，构建退出 0，输出包含 <code>release.json</code> 与六组件产物。输出必须在仓库外，源码必须 clean。构建器会执行编译、补丁门禁、播放器产物校验等，但构建成功不代表已经执行所有网关和宿主行为测试，因此不能省去发布前独立检查。</p>
-<p>已有输出若不匹配应拒绝覆盖；同样的有效输出可以复用。最终生产包使用工具链默认优化。受限环境的 <code>--player-native-cflags &quot;-O0 -g0&quot;</code> 是显式选项并记录进构件，不是生产性能等价保证。</p>
-<h3 id="2-独立检查发布包">2. 独立检查发布包</h3>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 将路径替换为刚构建的发布包；此操作不连接生产</span>
-<span class="token function">node</span> --input-type<span class="token operator">=</span>module - /absolute/releases/cabin-release <span class="token operator">&lt;&lt;</span><span class="token string">'JS'
-import &#123; verifyBundle &#125; from './scripts/release/manifest.mjs';
-const result = await verifyBundle(process.argv[2]);
-console.log(JSON.stringify(&#123;
-  ok: result.ok,
-  errors: result.errors,
-  releaseId: result.manifest?.releaseId,
-  manifestSha256: result.manifestSha256
-&#125;, null, 2));
-process.exitCode = result.ok ? 0 : 1;
-JS</span></code></pre></div></figure>
-<p>预期 <code>ok: true</code>、<code>errors: []</code>，releaseId 与本次选定源码一致；以后比对部署回执中的 <code>releaseManifestSha256</code>。校验失败要重新取得或构建包，不能手改清单“修复哈希”。</p>
-<h3 id="3-先-plan，再-apply">3. 先 plan，再 apply</h3>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 执行位置：发布工作机的仓库根目录</span>
-<span class="token comment"># TARGET 是私有配置路径，不是 token；先替换下面两条路径</span>
-<span class="token assign-left variable">CABIN_BUNDLE</span><span class="token operator">=</span>/absolute/releases/cabin-release
-<span class="token assign-left variable">CABIN_TARGET</span><span class="token operator">=</span>/absolute/private/target.json
-
-scripts/deploy-release.sh plan <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
-<p>plan 不加载镜像、不停止服务、不改运行状态。检查 <code>ready</code>、<code>preconditionBlockers</code>、每个组件的 <code>action/reasons</code>，以及未受管理的实例。新发布允许出现预期的 replace；对已经发布的同一包验收时，应当是 <code>noop: true</code> 且全部 <code>none</code>。退出码 0 不等于 <code>ready: true</code>，必须读 JSON。</p>
-<p>只有变更集和前置条件符合预期时执行：</p>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这是变更命令，不是日常验收命令</span>
-scripts/deploy-release.sh apply <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
-<p>apply 获取目标锁、复验发布包与配置，按依赖顺序更新变化组件，并写回执。容器可能经历 stop、rename、create、start，有短暂中断；这不是零停机发布。相同包与配置重复 apply 应为 no-op，但日常验收优先用 plan/status，不靠再次 apply 来验证幂等。</p>
-<h3 id="4-Caddy-配置如何真正生效">4. Caddy 配置如何真正生效</h3>
-<p>entry 使用受控 <code>caddy-container</code> 类型：先对候选执行 validate/adapt，再原地写宿主配置、重启既有入口并验证宿主文件、容器文件和运行配置。没有变化时不重启；入口镜像和外层共享 Caddy 不随配置发布重建。</p>
-<p>这里不能只用 rename 替换文件。Docker 单文件 bind mount 可能仍钉住旧 inode，导致宿主看起来是新文件、容器仍读旧文件。工具以实际哈希和运行配置收口。生产采用 <code>admin off</code> 时，可以读取 autosave 核实；无法读到可靠运行配置就不能签署生效。重启既有容器不会重读 <code>--env-file</code>，密钥环境轮换需要单独重建，不能当作普通 Caddyfile 更新。</p>
-<h2 id="五、线上技术验收：先查状态，再写复核回执">五、线上技术验收：先查状态，再写复核回执</h2>
-<h3 id="1-日常只读检查">1. 日常只读检查</h3>
-<p>保持第四节的 <code>CABIN_BUNDLE</code>、<code>CABIN_TARGET</code> 指向这次实际部署的包与目标，不要临时拿一个新构建包去核对旧生产：</p>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash">scripts/deploy-release.sh status <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span>
-
-scripts/deploy-release.sh plan <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span></code></pre></div></figure>
-<p>预期：status 的 <code>inSync: true</code>、<code>pendingUnknown: null</code>、回执 releaseId 正确；plan 的 <code>ready: true</code>、<code>noop: true</code>、所有 action 为 <code>none</code>。status 有 drift 时不应被退出码 0 误导，必须读 <code>drift</code> 数组；无漂移只证明部署身份和声明一致，不能代替真实听感。</p>
-<h3 id="2-指定回执重新验证">2. 指定回执重新验证</h3>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CABIN_DEPLOYMENT</span><span class="token operator">=</span>deploy-20261101T021345-7f93be25
-scripts/deploy-release.sh verify <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
-  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
-<p>这里的 ID 是本文首次生产发布示例，之后发布要使用自己的实际 ID。verify 会取锁、更新部署回执，也可能清理本地已收敛状态；它不是完全不写入的命令。 它不切换产品组件。执行后同时检查顶层 <code>ok</code>、<code>receipt.status</code>、<code>checks</code> 和 drift；不要只看 shell 退出码或最后一行“完成”。</p>
-<p><code>verified</code> 表示这份 target 中要求的检查满足条件。非必需项可以仍是 <code>not_tested</code>；没有写进 target 的功能也不会被自动验证。每次验收都要展开检查列表，而不是截取绿色总状态。</p>
-<h3 id="3-入口与鉴权">3. 入口与鉴权</h3>
-<p>以下公网请求不含凭据，只检查基础边界，可在自己的终端运行：</p>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
-  https://test.music.fulequn.online/
-<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
-  https://test.music.fulequn.online/manage/
-<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
-  https://test.music.fulequn.online/api/health
-<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
-  http://test.music.fulequn.online/
-<span class="token function">curl</span> --max-time <span class="token number">15</span> <span class="token parameter variable">-sS</span> <span class="token parameter variable">-o</span> /dev/null <span class="token parameter variable">-w</span> <span class="token string">'%&#123;http_code&#125;\n'</span> <span class="token punctuation">\</span>
-  https://music.fulequn.online/</code></pre></div></figure>
-<p>本实例的预期依次为 <code>200 / 401 / 404 / 308 / 200</code>，不要添加 <code>-L</code> 后再判断原始 308。网络不可达与返回错误是不同事实；有 CDN 或网络策略时，先分清请求是否到达服务。</p>
-<p>服务器内部的网关 Bearer 校验、私网监听、recovery 健康、凭据版本和持久化证据由受控 target checks 检查。不要为了让公网 <code>/api/health</code> 返回 200 而开放内部接口。revision 应等于这次发布前后的实际业务版本，而不是永远硬编码成本文的 13；部署程序不能替业务制造新凭据版本。</p>
-<h3 id="4-音频验证不能被缓存蒙混过去">4. 音频验证不能被缓存蒙混过去</h3>
-<p>HTTP 206 和真实音频字节说明该样本的数据链路能返回音频；实际听到声音、进度推进还要靠播放器验收。ID3 是 MP3 样本的一种标记，不是 FLAC/M4A 等全部格式的统一通过标准。</p>
-<p>缓存命中只能证明缓存读取和 Range 链路，不能证明当前夸克授权有效。未缓存验证需要可核实的缓存未命中证据，再结合该请求的上游访问与音频结果。当前统一工具可按缓存响应头分类；没有可信缓存头时，即使请求返回 206，也会把严格的未缓存证据标为 <code>not_tested</code>。不要改名当“新歌”、清掉生产缓存，或只凭第一次点击就签署上游验证通过。</p>
-<p>本次生产回执中的两个普通 Range 检查通过，但 <code>uncached-audio-evidence</code> 为 <code>not_tested</code>，原因是网关没有可识别的缓存头。库存中没有同尺寸对象只是补充证据，不等同于完整的缓存未命中证明。若把该项设为必需，未验证就不能作为通过项发布。</p>
-<h3 id="5-用户数据与版本验收">5. 用户数据与版本验收</h3>
-<p>将同一站点发布前后的列表、收藏、排序与队列做比对。服务器证据应基于一致读取得到的表行数和内容摘要；只比较数据库文件大小或 WAL 文件哈希不足以判断数据是否丢失。真实播放会更新历史，播放器启动可能更新备份时间戳，需要逐字段解释正常差异，不能一句“所有文件完全一致”带过。</p>
-<p>凭据、恢复账本、待提交事务与数据卷不属于代码回退内容。新的合法凭据提交若发生在验收期间，应记录其回执和版本推进；不能为了让前后哈希一样恢复旧文件。浏览器可见版本标识也只是辅助信息，运行镜像及构件哈希才是部署身份依据。</p>
-<h2 id="六、中止与异常处置：哪些动作不能重试">六、中止与异常处置：哪些动作不能重试</h2>
-<table>
-<thead>
-<tr>
-<th>信号</th>
-<th>首先做什么</th>
-<th>不要做什么</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bundle_invalid</code>、哈希不符</td>
-<td>停止，核对来源并重新构建/取得包</td>
-<td>修改 JSON 中的哈希使其通过</td>
-</tr>
-<tr>
-<td><code>locked</code></td>
-<td>核实另一发布进程与目标</td>
-<td>直接删锁并同时发布</td>
-</tr>
-<tr>
-<td><code>unknown</code>、SSH 超时</td>
-<td>用同一 target 和状态目录执行 status，对比 before/after</td>
-<td>立刻再次 apply、重新生成事务 ID</td>
-</tr>
-<tr>
-<td>mixed / drift</td>
-<td>保留逐组件实际值，按已核实状态处置</td>
-<td>把部分切换当作从未执行</td>
-</tr>
-<tr>
-<td><code>rollback_incompatible</code></td>
-<td>检查当前数据 schema 与候选代码兼容性</td>
-<td>强制退回读不了当前数据的代码</td>
-</tr>
-<tr>
-<td>Caddy 候选无效</td>
-<td>修复候选后重新计划；原配置应保持运行</td>
-<td>跳过 validate，直接重启</td>
-</tr>
-<tr>
-<td>播放地址获取失败</td>
-<td>区分扩展注册、代理、网关响应和媒体授权</td>
-<td>一律归为“需要扫码”，或只改提示文案</td>
-</tr>
-<tr>
-<td>概要 degraded，但各维度正常</td>
-<td>检查观察时间、player 未验项和恢复账本差异</td>
-<td>为消除告警伪造验收或改账本</td>
-</tr>
-</tbody>
-</table>
-<p>工具的错误类别通常对应退出码：参数/包错误 2、锁冲突 4、未知状态 5、不兼容回退 6、前置条件拒绝 7；其他失败可能为 1 或验证相关错误。业务 JSON 仍须检查：特别是 plan 的 ready、status 的 inSync，以及 verify 的 ok/回执状态，不能只靠 <code>$?</code>。</p>
-<h3 id="1-明确选择要回退的部署">1. 明确选择要回退的部署</h3>
-<p>确认那次部署的记录和恢复资料仍存在、没有 unknown/applying 未决状态、代码与当前数据兼容后，才执行：</p>
-<figure><div class="code-wrapper"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这是恢复变更命令，仅在已确认需要回退时执行</span>
-scripts/deploy-release.sh rollback <span class="token punctuation">\</span>
-  <span class="token parameter variable">--bundle</span> <span class="token string">"<span class="token variable">$CABIN_BUNDLE</span>"</span> <span class="token parameter variable">--target</span> <span class="token string">"<span class="token variable">$CABIN_TARGET</span>"</span> <span class="token punctuation">\</span>
-  --deployment-id <span class="token string">"<span class="token variable">$CABIN_DEPLOYMENT</span>"</span></code></pre></div></figure>
-<p>它只回退该次部署改变过的组件，保留最新 active、ledger、pendingCommit 和所有业务卷；入口回退也要验证实际运行配置。回退不是完整数据灾备，更不是恢复旧 Cookie。旧 Go 镜像已永久删除，也不能作为回退选项。</p>
-<h3 id="2-媒体授权故障的经验">2. 媒体授权故障的经验</h3>
-<p>之前的 <code>source not found</code> 并非真的丢了音源：账号接口和取下载地址接口可用，但媒体直链拒绝请求；播放器的回退又覆盖了原始错误。已有受控刷新恢复了媒体授权，新协调器也补上了“账号健康但音频认证失败”触发刷新、失败后冷却且不自动升级为二维码的处理。</p>
-<p>因此，“QQ 扫过码”“账号接口 200”和“未缓存歌曲可播放”是不同证据。再次故障时，应查登录操作回执、网关实际生效版本和同一曲目的媒体请求，不能只根据聊天中的成功提示要求用户无限重登。</p>
-<h2 id="七、这次已经验到了哪里">七、这次已经验到了哪里</h2>
-<p>以下是首次统一生产发布与最终工具提交的记录，不是本文重新运行的全量验收：</p>
 <table>
 <thead>
 <tr>
@@ -576,24 +625,23 @@ scripts/deploy-release.sh rollback <span class="token punctuation">\</span>
 <tr>
 <td>用户数据</td>
 <td>主要列表、曲目、排序、队列与 URL 表对照一致；metadata 仅备份时间变化</td>
-<td>实时日志/WAL等有正常写入</td>
+<td>实时日志/WAL 等有正常写入</td>
 </tr>
 <tr>
 <td>真实手机矩阵</td>
 <td>未形成完整签署证据</td>
-<td>由第一节的设备验收补齐</td>
+<td>由附录 B 的设备验收补齐</td>
 </tr>
 </tbody>
 </table>
-<p>当前仍需明确的边界：entry 环境变量轮换需要独立重建；混合 unknown 状态会拒绝盲重放，仍需按实际状态处置；镜像目前通过 tar 分发而非 registry；本次没有实现完整备份恢复功能，也没有把 R10 真机验收伪装成完成。</p>
-<p>阅读实现时，建议从以下固定版本入口开始：</p>
+<p>该次管理证据中账号、目录、音频与持久化正常，player 仍为 <code>not_tested</code>，恢复账本和网关存在历史版本差异。两个普通 Range 检查通过，但 <code>uncached-audio-evidence</code> 为 <code>not_tested</code>，原因是网关没有可识别缓存头；该项若被 target 设为必需，未验证就不能作为通过项发布。</p>
+<p>固定版本入口如下，用于追溯实现；其中发布操作说明里的旧“未生产 apply”段落对应集成阶段，该次生产结果以本节记录为准，不将旧段落解释成后来未发布。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/docs/ops/unified-release.md">发布操作说明</a>：命令与配置说明；其旧“未生产 apply”段落反映集成阶段，生产现状以本文发布记录为准。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/docs/ops/unified-release.md">发布操作说明</a>：命令与配置。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/release/manifest.json">版本清单</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/manifest.mjs">共享校验器</a>。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/build-release.sh">构建入口</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy.mjs">部署入口</a>。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy-core.mjs">部署状态机</a>与<a target="_blank" rel="noopener" href="https://github.com/fulequn/music-cabin/blob/ee05387a10e56d4e350f4b23b82a087c1d23ab0d/scripts/release/deploy-host.mjs">目标实例适配</a>。</li>
 </ul>
-<p>验收时把“部署身份一致”“服务接口正常”“本设备真实可听”分别留下结果，才能在下次出问题时知道应该检查哪一层。</p>
 </div>
 <hr>
 <div>
@@ -616,7 +664,7 @@ scripts/deploy-release.sh rollback <span class="token punctuation">\</span>
 </div>
 <div class="license-box my-3">
 <div class="license-title">
-<div>音乐舱三个统一：完整实现、发布流程与线上验收手册</div>
+<div>音乐舱怎样统一多组件发布</div>
 <div>https://blog.fulequn.online/engineering/music-cabin-unified-release-acceptance/</div>
 </div>
 <div class="license-meta">
