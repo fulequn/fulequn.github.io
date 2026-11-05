@@ -1,0 +1,816 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/site-icons/meigen-yellow-dog/apple-touch-icon-180.png">
+<link rel="icon" href="/img/site-icons/meigen-yellow-dog/favicon-64.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="过去一个月，AI 短剧&#x2F;漫剧方向的 Skill 仓库突然多了起来，标题都很像——“一句话到成片”“工业级流水线”“人设不崩、伏笔不丢”。但把仓库拉下来读一遍会发现，同样是 3K star，有的只是几百行提示词，有的真的带检查器、测试和出片链路；同样宣称&quot;实测&quot;，有的有提交回执，有的只有一份预期输出。 我把 16 个仓库全部克隆到本地，逐个读 SKILL.md、脚本和测试，并跑了它们零依赖的确定性自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界">
+<meta property="og:url" content="https://blog.fulequn.online/2026/10/short-drama-agent-skills-survey-2026-10/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="过去一个月，AI 短剧&#x2F;漫剧方向的 Skill 仓库突然多了起来，标题都很像——“一句话到成片”“工业级流水线”“人设不崩、伏笔不丢”。但把仓库拉下来读一遍会发现，同样是 3K star，有的只是几百行提示词，有的真的带检查器、测试和出片链路；同样宣称&quot;实测&quot;，有的有提交回执，有的只有一份预期输出。 我把 16 个仓库全部克隆到本地，逐个读 SKILL.md、脚本和测试，并跑了它们零依赖的确定性自">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2026-10-26T15:48:23.000Z">
+<meta property="article:modified_time" content="2026-10-26T15:48:23.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="AI短剧">
+<meta property="article:tag" content="Agent Skills">
+<meta property="article:tag" content="开源调研">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界","description":"过去一个月，AI 短剧/漫剧方向的 Skill 仓库突然多了起来，标题都很像——“一句话到成片”“工业级流水线”“人设不崩、伏笔不丢”。但把仓库拉下来读一遍会发现，同样是 3K star，有的只是几百行提示词，有的真的带检查器、测试和出片链路；同样宣称\"实测\"，有的有提交回执，有的只有一份预期输出。 我把 16 个仓库全部克隆到本地，逐个读 SKILL.md、脚本和测试，并跑了它们零依赖的确定性自","url":"https://blog.fulequn.online/2026/10/short-drama-agent-skills-survey-2026-10/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2026/10/short-drama-agent-skills-survey-2026-10/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-10-26T15:48:23.000Z","dateModified":"2026-10-26T15:48:23.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2026-10-26 23:48" pubdate>
+2026年10月26日 晚上
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+8.8k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+74 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界</h1>
+<div class="markdown-body">
+<p>过去一个月，AI 短剧/漫剧方向的 Skill 仓库突然多了起来，标题都很像——“一句话到成片”“工业级流水线”“人设不崩、伏笔不丢”。但把仓库拉下来读一遍会发现，同样是 3K star，有的只是几百行提示词，有的真的带检查器、测试和出片链路；同样宣称&quot;实测&quot;，有的有提交回执，有的只有一份预期输出。</p>
+<p>我把 16 个仓库全部克隆到本地，逐个读 <code>SKILL.md</code>、脚本和测试，并跑了它们零依赖的确定性自测（没有调用任何生成 API）。这篇文章回答三个问题——每个仓库到底有什么，哪些可以直接用，哪些只能看思路。</p>
+<p>判断标准不看 star，看四样东西——工程机制（有没有检查器、状态文件、门禁脚本，还是纯提示词）、方法论沉淀（规则是否有判据、反例和失败模式，而不只是口号）、流程能走多远（停在文本，还是能到分镜图、视频提交、成片）、验证证据（自测、夹具、真实产出、成本记录）。16 个仓库之外，我自己的 <code>ai-comic-skills</code> 也作为对照放进了总表。</p>
+<h2 id="一、总表与三个梯队">一、总表与三个梯队</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>License</th>
+<th>最强机制</th>
+<th>实测验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>drama-skills</td>
+<td>MIT</td>
+<td>五文档模型 + 连续性锁，到提示词与剪辑为止</td>
+<td>713 tests + 3338 subtests 全过</td>
+</tr>
+<tr>
+<td>shuohao-skills</td>
+<td>Apache-2.0</td>
+<td>18 道质量门 + 确定性 seed，到角色图为止</td>
+<td>1651 项断言全绿</td>
+</tr>
+<tr>
+<td>ai-comic-drama-director</td>
+<td>MIT</td>
+<td>规则 + validator + 单测三件套</td>
+<td>149 tests 全过</td>
+</tr>
+<tr>
+<td>OnlyShot</td>
+<td>MIT</td>
+<td>17 失败模式 + 三阶段成本分层，能到视频段</td>
+<td>仅 1 份 eval 用例</td>
+</tr>
+<tr>
+<td>ManjuForge</td>
+<td>MIT-0</td>
+<td>七记忆文件 + 22 项跨文件检查</td>
+<td>自测 47 项过；demo 8 红</td>
+</tr>
+<tr>
+<td>manju-laoli</td>
+<td>MIT</td>
+<td>六道锁 + 契约核销 + 上下文切片</td>
+<td>9 项稳定性测试</td>
+</tr>
+<tr>
+<td>Micro-Drama</td>
+<td>无</td>
+<td>50 任务 JSON + 提交回执，能到视频提交</td>
+<td>DM-003 有 10 条回执</td>
+</tr>
+<tr>
+<td>spark-video</td>
+<td>无</td>
+<td>4 道 gate + 渲染/剪辑代码，能出成片</td>
+<td>无仓库内产出</td>
+</tr>
+<tr>
+<td>short-drama-factory</td>
+<td>MIT</td>
+<td>E1~E26 + S1~S8 机检，只管纯剧本</td>
+<td>自测通过</td>
+</tr>
+<tr>
+<td>jingju-skills</td>
+<td>无</td>
+<td>6 状态标签 + 10 阶段门禁</td>
+<td>无脚本</td>
+</tr>
+<tr>
+<td>ai-manga-drama</td>
+<td>无</td>
+<td>neta 接口串起出片</td>
+<td>无</td>
+</tr>
+<tr>
+<td>screenwriter-skill</td>
+<td>MIT</td>
+<td>38 条创作铁律</td>
+<td>无脚本</td>
+</tr>
+<tr>
+<td>seedance2-skill</td>
+<td>MIT</td>
+<td>Seedance 提示词生成</td>
+<td>无脚本</td>
+</tr>
+<tr>
+<td>awesome-short-drama-skills</td>
+<td>CC0</td>
+<td>索引 + eval harness</td>
+<td>有评测框架</td>
+</tr>
+<tr>
+<td>awesome-ai-micro-drama</td>
+<td>无</td>
+<td>一份 README</td>
+<td>无</td>
+</tr>
+<tr>
+<td>ai-comic-skills（我的）</td>
+<td>MIT</td>
+<td>4 个 skill、988 行，到提示词为止</td>
+<td>0 脚本</td>
+</tr>
+</tbody>
+</table>
+<p>star 数没有进表格，因为放在梯队正文里更有用。下文按三个梯队展开，每个仓库的取舍都在正文里说。</p>
+<p>实测验证那一列还要打个折扣。&quot;自测通过&quot;只能证明工具逻辑正确，证明不了创作质量——这批仓库里真正跑到成片验证的只有两家，drama-skills 的 68 秒样片（外部视频，约 40 元）和 Micro-Drama 的任务提交回执，其余大多停在检查器自测层级。</p>
+<h3 id="1-1-第一梯队（机制、验证、流程完整度至少占两样）">1.1 第一梯队（机制、验证、流程完整度至少占两样）</h3>
+<p>drama-skills（MIT，3.4K star）是工程完整度最高的一个。每集只维护五份 Markdown——剧本、视觉设定、分镜、图片提示词、视频提示词——刻意不建数据库，理由是&quot;改文件就是改决策层&quot;。真正把它和其他仓库拉开距离的是连续性锁（Continuity Lock）。它把跨镜头必须保持的可见事实写成带 ID 的短语，例如 <code>LOCK-JIANGCHEN-DRESS</code>，锁面是 <code>pine-green lapel service jacket</code>；锁面必须逐字出现在图片提示词、冻结关键帧提示词、视频提示词三份正文里，粘在字母数字上的匹配不算，负面提示词里的匹配也不算；锁面只写&quot;颜色 + 材质/形制 + 物体&quot;，不写动作、状态、剧情。这几条边界看起来吹毛求疵，其实都是被真实漂移坑出来的。仓库带 29 个测试文件、713 个测试和 3338 个子测试，<code>creator_markdown_check.py</code> 能在公开样例上故意改坏两处后准确报错——这批仓库里唯一让我觉得&quot;检查器真的会咬人&quot;的实现。局限也要说清楚，它自己不生成视频，生产阶段要接外部 adapter；68 秒样片是 README 里的外部视频，不是仓库内可复现产物。</p>
+<p>shuohao-skills（Apache-2.0，5.3K star）的验证强度第一。7 个 skill 边界切得很干净——大纲、人物、美术、剧本、站位、分镜，加一个真正出图的 <code>character-refs</code>。最值得学的是确定性 seed，每个节拍几秒由脚本算出来，模型只负责切镜，&quot;模型瞎估时长&quot;这种常见漂移被直接消灭。分镜有 18 道质量门，全部代码化；<code>.gates.jsonl</code> 还会统计哪道门最常响、哪道门从没响过，把规则库当产品在运营。我实际跑了 7 个 skill 的自测和报告自测，1559 + 92 项断言全绿，这在开源 Skill 里非常少见。局限在于只有 <code>character-refs</code> 真出图，全链路不出视频；README 声明只在 macOS + Node 24 验过。</p>
+<p>ai-comic-drama-director-skills（MIT，15 star）把规则做成了可执行的三件套，每个 skill 都是&quot;规则 + validator + 单测&quot;，37 个 Python 脚本，149 个测试全过，工程化程度高于 star 更多的 ManjuForge 和 OnlyShot。<code>ai-shot-execution-continuity</code> 的 12 步检查非常实战，覆盖第一帧、空间阻挡、摄影机轴线、道具手、光线物理、语言触发、切镜继承、跨组继承、局部修复锁；测试里甚至有&quot;8 秒连续表演不默认切镜&quot;&quot;跨组同角色特写硬切应拒绝&quot;这类语义断言，不止测字段存在。局限在于仍是 prompt-only，没有记忆文件、没有出片链路，文档偏作者个人工作流，通用性需要改写。</p>
+<h3 id="1-2-第二梯队（有真机制，但有明显短板）">1.2 第二梯队（有真机制，但有明显短板）</h3>
+<p>ManjuForge（MIT-0，24 star）的记忆机制最深——七个记忆文件加三套引擎（Story Bible、Character Graph、Foreshadow Engine），22 项跨文件检查加 18 项单集检查，结构是这批里最完整的。报错格式值得直接抄，每条同时给出哪两个文件在哪一点矛盾、怎么修。但 demo 跑它自己的检查器，结果是 8 红 / 7 黄 / 3 绿——缺 <code>场景布局.md</code>、E6 剧情摘要缺林老太君、6 处碎片时间轴空档。README 写明了&quot;检查器在 Demo 上抓出这些问题&quot;，谈不上造假，问题在于把检查器演示和干净基线混在了一起；&quot;伏笔回收率 100%“的表述同样有歧义，伏笔表 12 根里只有 2 根已回收，其余 10 根活跃，100% 指的是全部有回收或推进。结论是抄它的检查器和记忆分层，不要把它当&quot;已验证的干净模板”。</p>
+<p>manju-laoli-skill（MIT，1.7K star）规则最厚，也重到需要专用基础设施——13 个 skill、19 个脚本、六道前置锁加画风锁、契约核销、上下文切片、约 130 个机检码，9 项稳定性测试通过。它最聪明的一点是 M0/M1/M2 素材形态，承认&quot;图不在我手里&quot;，把图片入库从阻塞条件降级为可选登记，这是对&quot;prompt-only 工具如何不卡死&quot;的正确回答。代价是 2.8MB 规则、单文件 5.7 万汉字当量，没有它的 <code>slice_context.py</code> 根本跑不动，中小项目抄这套会先被上下文压死。</p>
+<p>OnlyShot（MIT，339 star）产线经验最真，证据也最薄。17 个失败模式全是真金白银——3 类 fail 区分（字数超 / 审核 / 网络）、1500 字符硬上限、反派词替换表、长 prompt 必单跑、静态图成本是视频的 1/18；三阶段成本分层（剧本 → 分镜图锁构图 → 视频）是短剧生产最该学的经济账。但仓库里只有 1 份 eval 用例（21 条断言），没有跑分结果，也没有任何生成产物，默认工作区还写死了 Windows 路径 <code>D:\hrdai\</code>。</p>
+<p>Micro-Drama-Skills（无 License，326 star）是唯一真跑到提交的——4 个 skill、5 个样例项目、352 张 PNG，DM-003 有 10 条真实 <code>taskCodes</code>；<code>seedance_project_tasks.json</code> 的 <code>(@ref.png)</code> 引用、base64 展开、<code>submission_report.json</code> 是一套完整可抄的交付协议。硬伤同样明确——无 License，写死 <code>/data/dongman/</code> 和 <code>localhost:3456</code>，强绑 Gemini 加 Seedance。技术上有价值，法律上不能复制。</p>
+<h3 id="1-3-第三梯队（单点优秀或偏薄）">1.3 第三梯队（单点优秀或偏薄）</h3>
+<p>偏薄的项目里有四个连 License 都没有。spark-video 是真端到端代码，render、TTS、stitch、review 和 4 道 gate 都有，但绑阿里云百炼，仓库无产出。jingju-skills 有 6 种状态标签、10 阶段门禁和 3 个 JSON 模板，全是散文没有脚本。ai-manga-drama 三个 md 写死个人路径，调 neta CLI。awesome-ai-micro-drama 只有一份 README，忽略。</p>
+<p>有 License 但单点突出的也有四个。short-drama-factory（MIT）的 E1~E26 单集机检加 S1~S8 台账机检是剧本层最扎实的，不管分镜、资产和视频。screenwriter-skill（MIT）是 38 条创作铁律的单点规则库。seedance2-skill（MIT，4.4K star）是纯提示词生成器，无脚本。awesome-short-drama-skills（CC0）是带 eval harness 的索引层，适合用来找项目，本身不是 skill。</p>
+<h2 id="二、能用什么，该学什么">二、能用什么，该学什么</h2>
+<p>先说可以直接用或二次开发的八个项目，License 都允许，按对我的价值排序。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>License</th>
+<th>怎么用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>drama-skills</td>
+<td>MIT</td>
+<td>首选工程参考，连续性锁、五文档模型、检查器、713 测试可直接学，代码可复用</td>
+</tr>
+<tr>
+<td>shuohao-skills</td>
+<td>Apache-2.0</td>
+<td>首选验证体系，18 道门、1651 项断言、确定性 seed 适合做质量底座</td>
+</tr>
+<tr>
+<td>ai-comic-drama-director-skills</td>
+<td>MIT</td>
+<td>首选&quot;规则可执行化&quot;参考，149 个测试是现成模板</td>
+</tr>
+<tr>
+<td>short-drama-factory</td>
+<td>MIT</td>
+<td>只做剧本层可直接用，E1~E26 机检可单独拿</td>
+</tr>
+<tr>
+<td>OnlyShot</td>
+<td>MIT</td>
+<td>产线经验和失败模式可直接用，路径要改</td>
+</tr>
+<tr>
+<td>ManjuForge</td>
+<td>MIT-0</td>
+<td>记忆机制可参考，检查器可用，demo 不能当干净基线</td>
+</tr>
+<tr>
+<td>manju-laoli</td>
+<td>MIT</td>
+<td>能接受重型流程和切片器时才用</td>
+</tr>
+<tr>
+<td>screenwriter / seedance2</td>
+<td>MIT</td>
+<td>单点参考，不值得整套引入</td>
+</tr>
+</tbody>
+</table>
+<p>没有 License 的五个仓库——Micro-Drama-Skills、spark-video、ai-manga-drama、jingju-skills、awesome-ai-micro-drama——只能读思路。没有 License 不等于没有价值，但默认版权是&quot;保留所有权利&quot;，任务 JSON 设计、门禁顺序、失败模式都可以读，代码、提示词原文和文档不要复制；确实要用的，先联系作者拿授权。</p>
+<p>另有三个项目不建议整包引入。manju-laoli 规则墙太重，没有配套切片器会稀释注意力；spark-video 是 Python/uv/ffmpeg 重栈加单一供应商，除非确定要自己跑完整渲染；Micro-Drama 则是 License、绝对路径、本地服务三重耦合。</p>
+<p>如果只记 7 件事，我选下表这些。</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>出处</th>
+<th>学什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连续性锁</td>
+<td>drama-skills</td>
+<td>把&quot;跨镜不变的事实&quot;写成可逐字校验的锁面，三份正文都要出现</td>
+</tr>
+<tr>
+<td>跨文件报错格式</td>
+<td>ManjuForge</td>
+<td>每条问题说清哪两个文件在哪一点矛盾、怎么修</td>
+</tr>
+<tr>
+<td>确定性 seed + 质量门</td>
+<td>shuohao</td>
+<td>秒数由脚本算，模型只切镜；每道门有击穿用例</td>
+</tr>
+<tr>
+<td>规则 + validator + 单测三件套</td>
+<td>ai-comic-drama-director</td>
+<td>每条规则都能被代码验证</td>
+</tr>
+<tr>
+<td>成本分层</td>
+<td>OnlyShot</td>
+<td>先静态图锁构图再烧视频钱，明确成本比</td>
+</tr>
+<tr>
+<td>项目状态/决策记录</td>
+<td>drama-skills、shuohao、jingju</td>
+<td>跨会话恢复不靠扫描目录</td>
+</tr>
+<tr>
+<td>契约核销 + 上下文切片</td>
+<td>manju-laoli</td>
+<td>流程大到需要它时才用</td>
+</tr>
+</tbody>
+</table>
+<p>对应的坑有五个。规则墙，2.8MB 的规则库没有切片器就是灾难；绝对路径，<code>D:\hrdai\</code>、<code>/data/dongman/</code>、<code>/Users/yves/</code> 都是作者本机工作区，产品设计里不该出现；无 License 的代码，技术上能跑，法律上不能复制；手动记忆同步，七个记忆文件靠模型自觉更新，迁移到长项目必然漂移；为出片自建重栈，先用 adapter 契约接一个可用后端，不要一上来重写渲染管线。</p>
+<p>这份清单最后落回我自己的 <code>ai-comic-skills</code>。它现在有 4 个 skill——script、visual-assets、storyboard、video-prompts，链路是完整的，文案和防覆盖规则也写得不错。对照上面的标准，差距很清楚。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>现状</th>
+<th>差距</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工程机制</td>
+<td>0 脚本、0 检查器、0 状态文件</td>
+<td>所有质检都是散文表格里的勾选符号</td>
+</tr>
+<tr>
+<td>方法论</td>
+<td>4 份 SKILL + 3 份 checklist</td>
+<td>有检查项，没有判据、反例、退出码</td>
+</tr>
+<tr>
+<td>流程</td>
+<td>到提示词表为止</td>
+<td>不生成图、不生成视频、不剪片</td>
+</tr>
+<tr>
+<td>证据</td>
+<td>3 个 eval 用例</td>
+<td>没有跑分结果、没有 demo</td>
+</tr>
+</tbody>
+</table>
+<p>落地顺序分三步。P0 补机制——在 visual-assets 里加 <code>LOCK-*</code> 连续性锁；分镜表加&quot;视觉依据&quot;列；写 <code>check_continuity.py</code>（逐字校验、负面词排除、粘词排除）和 <code>validate_storyboard.py</code>（镜号、时长、台词逐字、素材存在、总时长）；再配干净 fixture 和故意改坏的 fixture，证明检查器会咬人。</p>
+<p>P1 补证据——加 <code>project-state.json</code>，把跨会话续作从&quot;扫目录&quot;升级成&quot;读状态&quot;；跑一部 3 集 demo，公开输入、输出、失败修复记录和成本；把 3 个 eval 用例真正跑一遍并记录结果。</p>
+<p>P2 接后端——加 <code>produce</code> skill，走 preview → explicit confirm → run；接一个实际能用的视频后端，保留 prompt-only fallback。</p>
+<h2 id="三、学习优先级：先吃透这-5-个">三、学习优先级：先吃透这 5 个</h2>
+<p>前面两节回答的是&quot;能用什么&quot;，这一节回答&quot;先学什么&quot;。16 个仓库不可能都吃透，挑选是一个四步过滤。第一步按 License 过滤，无 License 的 5 个仓库只能读思路、不能抄代码，直接出局；第二步按&quot;机制独有&quot;过滤，教的东西别的仓库也覆盖的单点工具出局（纯规则库、提示词生成器、索引站）；第三步按&quot;验证强度&quot;排序，优先留有可跑自测和负向断言的仓库——&quot;我宣称有规则&quot;和&quot;我的规则被测试盯着&quot;是两回事；第四步按&quot;缺口对口&quot;收口，ai-comic-skills 缺的是工程机制、验证、记忆和成本视角，不是剧本文案，剧本层专用工具在这一步让位。</p>
+<p>16 个仓库减去 5 个入选，再减去 ai-comic-skills 自己（对照物，不参选），剩 10 个落选。每一步淘汰了谁、为什么，见下面两张表。</p>
+<p>入选的 5 个如下，按学习优先级排序。</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>仓库</th>
+<th>GitHub</th>
+<th>学什么</th>
+<th>对比优势（同位置候选为什么输）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>drama-skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zenstory-ai/drama-skills">zenstory-ai/drama-skills</a></td>
+<td>文档模型 + 连续性锁</td>
+<td>检查器强度第一——713 个测试，远超 director 的 149 和 ManjuForge 的 47；锁面逐字校验全场独有。director 输在 prompt-only、没有记忆和资产层</td>
+</tr>
+<tr>
+<td>2</td>
+<td>shuohao-skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/eternityspring/shuohao-skills">eternityspring/shuohao-skills</a></td>
+<td>确定性 seed + 质量门运营</td>
+<td>断言数第一（1651 项）；全场唯一统计&quot;哪道门最常响&quot;，把规则库当产品运营。没有同量级竞品</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ai-comic-drama-director-skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/djyy1031/ai-comic-drama-director-skills">djyy1031/ai-comic-drama-director-skills</a></td>
+<td>规则 + validator + 单测三件套</td>
+<td>结构最轻、最适合直接抄——比 drama-skills 小两个量级，比 ManjuForge 的 demo 干净；149 个测试是现成模板</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ManjuForge</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/mengxiujie/ManjuForge">mengxiujie/ManjuForge</a></td>
+<td>记忆分层 + 跨文件报错格式</td>
+<td>全场唯一的记忆文件体系；&quot;哪两个文件在哪一点矛盾、怎么修&quot;的报错格式最好；demo 不自洽恰好构成反面教材</td>
+</tr>
+<tr>
+<td>5</td>
+<td>OnlyShot</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/A-cat-with-carrots/OnlyShot">A-cat-with-carrots/OnlyShot</a></td>
+<td>产线经济账</td>
+<td>全场唯一有成本视角——静态图成本是视频的 1/18、三阶段分层、17 条真实失败模式；其他仓库都只有生产视角没有成本视角</td>
+</tr>
+</tbody>
+</table>
+<p>落选的 10 个也不是没有价值，只是各自卡在了不同的步骤上。</p>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>GitHub</th>
+<th>卡在哪一步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>short-drama-factory</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lixiaoxiao9888-create/short-drama-factory">lixiaoxiao9888-create/short-drama-factory</a></td>
+<td>过了 License 和验证关，第四步让位——只管剧本层，机检思路 director 已覆盖；只做剧本时可顶替 OnlyShot 入选</td>
+</tr>
+<tr>
+<td>manju-laoli-skill</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lixiaoxiao9888-create/manju-laoli-skill">lixiaoxiao9888-create/manju-laoli-skill</a></td>
+<td>过了 License 和验证关，第四步让位——2.8MB 规则墙必须配专用切片器，中小项目先被上下文压死</td>
+</tr>
+<tr>
+<td>screenwriter-skill</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Vi7QY/screenwriter-skill">Vi7QY/screenwriter-skill</a></td>
+<td>第二步出局——38 条创作铁律是单点规则库，无可跑测试，机制上没有独占性</td>
+</tr>
+<tr>
+<td>seedance2-skill</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/dexhunter/seedance2-skill">dexhunter/seedance2-skill</a></td>
+<td>第二步出局——纯提示词生成器，无脚本无测试</td>
+</tr>
+<tr>
+<td>awesome-short-drama-skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/UnderleveledBuilder/awesome-short-drama-skills">UnderleveledBuilder/awesome-short-drama-skills</a></td>
+<td>第二步出局——是带 eval harness 的索引，本身不是 skill</td>
+</tr>
+<tr>
+<td>jingju-skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/jxshow/jingju-skills">jxshow/jingju-skills</a></td>
+<td>第一步出局——无 License，且全是散文无脚本</td>
+</tr>
+<tr>
+<td>ai-manga-drama</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Yvelinmoon/ai-manga-drama">Yvelinmoon/ai-manga-drama</a></td>
+<td>第一步出局——无 License，且写死个人路径</td>
+</tr>
+<tr>
+<td>spark-video</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/JohnKeating1997/spark-video">JohnKeating1997/spark-video</a></td>
+<td>第一步出局——无 License，且强绑单一供应商</td>
+</tr>
+<tr>
+<td>Micro-Drama-Skills</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zhaihao118/Micro-Drama-Skills">zhaihao118/Micro-Drama-Skills</a></td>
+<td>第一步出局——无 License，交付协议设计值得读但代码不能抄</td>
+</tr>
+<tr>
+<td>awesome-ai-micro-drama</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ken-fs/awesome-ai-micro-drama">ken-fs/awesome-ai-micro-drama</a></td>
+<td>第一步出局——无 License，且只有一份 README</td>
+</tr>
+</tbody>
+</table>
+<p>这个排序是对补齐 ai-comic-skills 机制而言的，边界要说清楚——已验证的是工具层（自测全绿、检查器能抓错），&quot;用它们能提升多少创作质量&quot;仍未验证。真正的效果证据要靠拿一个 3 集小项目，把 P0 的检查器和 fixture 真实跑通。</p>
+<h2 id="四、附录">四、附录</h2>
+<p>所有仓库已克隆到本地，固定到以下 commit；本文结论只对这些版本负责。</p>
+<table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>Commit</th>
+<th>License</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zenstory-ai/drama-skills</td>
+<td><code>fdb7b7c</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>eternityspring/shuohao-skills</td>
+<td><code>5612d2a</code></td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td>djyy1031/ai-comic-drama-director-skills</td>
+<td><code>47df367</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>A-cat-with-carrots/OnlyShot</td>
+<td><code>75c57f2</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>mengxiujie/ManjuForge</td>
+<td><code>e6a42b2</code></td>
+<td>MIT-0</td>
+</tr>
+<tr>
+<td>lixiaoxiao9888-create/manju-laoli-skill</td>
+<td><code>6f16955</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>zhaihao118/Micro-Drama-Skills</td>
+<td><code>b3a521f</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>JohnKeating1997/spark-video</td>
+<td><code>11589d4</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>lixiaoxiao9888-create/short-drama-factory</td>
+<td><code>33d9988</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>jxshow/jingju-skills</td>
+<td><code>2fe25e4</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>Yvelinmoon/ai-manga-drama</td>
+<td><code>5361068</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>Vi7QY/screenwriter-skill</td>
+<td><code>cf22b23</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>dexhunter/seedance2-skill</td>
+<td><code>516284d</code></td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>UnderleveledBuilder/awesome-short-drama-skills</td>
+<td><code>edcedf6</code></td>
+<td>CC0</td>
+</tr>
+<tr>
+<td>ken-fs/awesome-ai-micro-drama</td>
+<td><code>f551373</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>jis60224/ai-comic-skills</td>
+<td><code>01b16c3</code></td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<p>最后说一句。这批仓库里最值得学的东西，是它们如何证明自己没骗人——检查器能抓错、夹具能复现、门禁能拦住、产出能回放，这四件事比再多 3K star 都值钱。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%8A%80%E6%9C%AF%E8%B0%83%E7%A0%94/" class="category-chain-item">技术调研</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/AI%E7%9F%AD%E5%89%A7/" class="print-no-link">#AI短剧</a>
+<a href="/tags/Agent-Skills/" class="print-no-link">#Agent Skills</a>
+<a href="/tags/%E5%BC%80%E6%BA%90%E8%B0%83%E7%A0%94/" class="print-no-link">#开源调研</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>短剧与漫剧 Agent Skills 调研：16 个仓库的机制、验证与可用边界</div>
+<div>https://blog.fulequn.online/2026/10/short-drama-agent-skills-survey-2026-10/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2026年10月26日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+<a href="/engineering/music-cabin-unified-release-acceptance/" title="音乐舱怎样统一多组件发布">
+<i class="iconfont icon-arrowleft"></i>
+<span class="hidden-mobile">音乐舱怎样统一多组件发布</span>
+<span class="visible-mobile">上一篇</span>
+</a>
+</article>
+<article class="post-next col-6">
+<a href="/learning/github-learning-to-blog-knowledge-base/" title="从 GitHub 学习到可检索知识库">
+<span class="hidden-mobile">从 GitHub 学习到可检索知识库</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>
