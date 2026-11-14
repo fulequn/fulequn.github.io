@@ -1,0 +1,794 @@
+
+<!doctype html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/site-icons/meigen-yellow-dog/apple-touch-icon-180.png">
+<link rel="icon" href="/img/site-icons/meigen-yellow-dog/favicon-64.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="theme-color" content="#2f4154">
+<meta name="author" content="Fulequn">
+<meta name="keywords" content="">
+<meta name="description" content="上一篇飞签记忆模型分析的结论建立在两类原文上：仓库内的四份设计文档，和作者发布在鱼皮 AI 导航的产品推广文章。这篇把原文按来源集中收录，方便回头核对某一条判断究竟对应哪段原文。 整理口径有三条。仓库内文档保留原表与关键段落，标注文件名和起始行号，只做删减不做改写；推广文章不逐字转载，只还原章节结构和关键表述，全文见原链接；凡属归纳或点评的内容，写进&quot;整理说明&quot;段落，与引文分开。原文仓库未声明 L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="飞签原文整理：四份设计文档与一份推广文案">
+<meta property="og:url" content="https://blog.fulequn.online/2026/11/feiqian-source-digest/index.html">
+<meta property="og:site_name" content="FuLeQun&#39;s Blog">
+<meta property="og:description" content="上一篇飞签记忆模型分析的结论建立在两类原文上：仓库内的四份设计文档，和作者发布在鱼皮 AI 导航的产品推广文章。这篇把原文按来源集中收录，方便回头核对某一条判断究竟对应哪段原文。 整理口径有三条。仓库内文档保留原表与关键段落，标注文件名和起始行号，只做删减不做改写；推广文章不逐字转载，只还原章节结构和关键表述，全文见原链接；凡属归纳或点评的内容，写进&quot;整理说明&quot;段落，与引文分开。原文仓库未声明 L">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fulequn.online/img/default.png">
+<meta property="article:published_time" content="2026-11-15T02:20:00.000Z">
+<meta property="article:modified_time" content="2026-11-15T02:20:00.000Z">
+<meta property="article:author" content="Fulequn">
+<meta property="article:tag" content="浏览器扩展">
+<meta property="article:tag" content="源码分析">
+<meta property="article:tag" content="记忆模型">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.fulequn.online/img/default.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"飞签原文整理：四份设计文档与一份推广文案","description":"上一篇飞签记忆模型分析的结论建立在两类原文上：仓库内的四份设计文档，和作者发布在鱼皮 AI 导航的产品推广文章。这篇把原文按来源集中收录，方便回头核对某一条判断究竟对应哪段原文。 整理口径有三条。仓库内文档保留原表与关键段落，标注文件名和起始行号，只做删减不做改写；推广文章不逐字转载，只还原章节结构和关键表述，全文见原链接；凡属归纳或点评的内容，写进\"整理说明\"段落，与引文分开。原文仓库未声明 L","url":"https://blog.fulequn.online/2026/11/feiqian-source-digest/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.fulequn.online/2026/11/feiqian-source-digest/"},"author":{"@type":"Person","name":"Fulequn"},"publisher":{"@type":"Organization","name":"FuLeQun's Blog"},"inLanguage":"zh-CN","datePublished":"2026-11-15T02:20:00.000Z","dateModified":"2026-11-15T02:20:00.000Z","image":"https://blog.fulequn.online/img/default.png"}</script>
+<title>飞签原文整理：四份设计文档与一份推广文案 - FuLeQun&#39;s Blog</title>
+<link rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css">
+<link rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+<link rel="stylesheet" href="/css/main.css">
+<link id="highlight-css" rel="stylesheet" href="/css/highlight.css">
+<link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css">
+<link rel="stylesheet" href="/css/code-blocks.css">
+<link rel="stylesheet" href="/css/m3.css">
+<script id="fluid-configs">var Fluid=window.Fluid||{};Fluid.ctx=Object.assign({},Fluid.ctx);var CONFIG={hostname:"blog.fulequn.online",root:"/",version:"1.9.9",typing:{enable:!0,typeSpeed:60,cursorChar:"_",loop:!1,scope:[]},anchorjs:{enable:!0,element:"h1,h2,h3,h4,h5,h6",placement:"right",visible:"hover",icon:""},progressbar:{enable:!0,height_px:3,color:"#29d",options:{showSpinner:!1,trickleSpeed:100}},code_language:{enable:!0,default:"TEXT"},copy_btn:!0,image_caption:{enable:!0},image_zoom:{enable:!0,img_url_replace:["",""]},toc:{enable:!0,expand_all:!0,placement:"right",headingSelector:"h1,h2,h3,h4,h5,h6",collapseDepth:0},lazyload:{enable:!0,loading_img:"/img/loading.gif",onlypost:!1,offset_factor:2},web_analytics:{enable:!1,follow_dnt:!0,baidu:null,google:null,tencent:{sid:null,cid:null},leancloud:{app_id:null,app_key:null,server_url:null,path:"window.location.pathname",ignore_local:!1},openkounter:{server_url:"https://open-kounter.mintimate.cn",path:"window.location.pathname",ignore_local:!1},umami:{src:null,website_id:null,domains:null,start_time:"2024-01-01T00:00:00.000Z",token:null,api_server:null},gtag:null,tajs:null},search_path:"/local-search.xml",include_content_in_search:!0};if(CONFIG.web_analytics.follow_dnt){var dntVal=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;Fluid.ctx.dnt=dntVal&&(dntVal.startsWith("1")||dntVal.startsWith("yes")||dntVal.startsWith("on"))}</script>
+<script src="/js/utils.js"></script>
+<script src="/js/color-schema.js"></script>
+<link rel="stylesheet" href="/lib/katex/0.19.1/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="FuLeQun's Blog" type="application/atom+xml">
+</head>
+<body>
+<header>
+<div class="header-inner" style="height:70vh">
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+<a class="navbar-brand" href="/">
+<strong>FuLeQun&#39;s Blog</strong>
+</a>
+<button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="animated-icon"><span></span><span></span><span></span></div>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto text-center">
+<li class="nav-item">
+<a class="nav-link" href="/" target="_self">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/archives/" target="_self">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/categories/" target="_self">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/tags/" target="_self">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/" target="_self">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</a>
+</li>
+<li class="nav-item" id="search-btn">
+<a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<i class="iconfont icon-search"></i>
+</a>
+</li>
+<li class="nav-item" id="color-toggle-btn">
+<a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+<i class="iconfont icon-dark" id="color-toggle-icon"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div id="mobile-grid-menu" class="d-lg-none">
+<div class="mobile-grid-menu-inner">
+<div class="container">
+<div class="row">
+<div class="col-4 mobile-grid-cell">
+<a href="/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-home-fill"></i>
+<span>首页</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/archives/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-archive-fill"></i>
+<span>归档</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/categories/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-category-fill"></i>
+<span>分类</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/tags/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-tags-fill"></i>
+<span>标签</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell">
+<a href="/about/" target="_self">
+<div class="mobile-grid-item">
+<i class="iconfont icon-user-fill"></i>
+<span>关于</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+<a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+<div class="mobile-grid-item">
+<i class="iconfont icon-search"></i>
+<span>搜索</span>
+</div>
+</a>
+</div>
+<div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn" data-label-light="开灯" data-label-dark="关灯">
+<a href="javascript:;" aria-label="Color Toggle">
+<div class="mobile-grid-item">
+<i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+<span id="mobile-color-toggle-label">关灯</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="banner" class="banner" parallax=true style="background:url(/img/default.png) 50%/cover no-repeat">
+<div class="full-bg-img">
+<div class="mask flex-center" style="background-color:#0000004d">
+<div class="banner-text text-center fade-in-up">
+<div class="h2">
+<span id="subtitle" data-typed-text="飞签原文整理：四份设计文档与一份推广文案"></span>
+</div>
+<div class="mt-3">
+<span class="post-meta">
+<i class="iconfont icon-date-fill" aria-hidden="true"></i>
+<time datetime="2026-11-15 10:20" pubdate>
+2026年11月15日 上午
+</time>
+</span>
+</div>
+<div class="mt-1">
+<span class="post-meta mr-2">
+<i class="iconfont icon-chart"></i>
+8.2k 字
+</span>
+<span class="post-meta mr-2">
+<i class="iconfont icon-clock-fill"></i>
+69 分钟
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div class="container-fluid nopadding-x">
+<div class="row nomargin-x">
+<div class="side-col d-none d-lg-block col-lg-2">
+</div>
+<div class="col-lg-8 nopadding-x-md">
+<div class="container nopadding-x-md" id="board-ctn">
+<div id="board">
+<article class="post-content mx-auto">
+<h1 id="seo-header">飞签原文整理：四份设计文档与一份推广文案</h1>
+<div class="markdown-body">
+<p>上一篇<a href="/2026/11/feiqian-memory-model-analysis/">飞签记忆模型分析</a>的结论建立在两类原文上：仓库内的四份设计文档，和作者发布在鱼皮 AI 导航的产品推广文章。这篇把原文按来源集中收录，方便回头核对某一条判断究竟对应哪段原文。</p>
+<p>整理口径有三条。仓库内文档保留原表与关键段落，标注文件名和起始行号，只做删减不做改写；推广文章不逐字转载，只还原章节结构和关键表述，全文见原链接；凡属归纳或点评的内容，写进&quot;整理说明&quot;段落，与引文分开。原文仓库未声明 LICENSE，此处摘录主要用于个人研究与对照。</p>
+<h2 id="一、材料清单">一、材料清单</h2>
+<table>
+<thead>
+<tr>
+<th>材料</th>
+<th>版本</th>
+<th>规模</th>
+<th>原文位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>飞签 · 产品详细设计文档</td>
+<td>V1.1</td>
+<td>505 行 / 11,091 字</td>
+<td><code>飞签_产品详细设计文档_V1.1.md</code></td>
+</tr>
+<tr>
+<td>飞签 · 开发文档（技术设计）</td>
+<td>V1.1</td>
+<td>329 行 / 8,174 字</td>
+<td><code>飞签_开发文档.md</code></td>
+</tr>
+<tr>
+<td>飞签 · 记忆回溯检索开发设计书</td>
+<td>V1.2</td>
+<td>453 行 / 8,863 字</td>
+<td><code>飞签_记忆回溯检索开发设计书_V1.2.md</code></td>
+</tr>
+<tr>
+<td>飞签 · 手动验证清单</td>
+<td>V0.1.0（2026-09-22）</td>
+<td>50 行 / 1,787 字</td>
+<td><code>飞签_手动验证清单.md</code></td>
+</tr>
+<tr>
+<td>推广文章《告别&quot;金鱼记忆&quot;：我开发了一款能当&quot;第二大脑&quot;的浏览器 AI 助手》</td>
+<td>2026-10-22</td>
+<td>约 1,500–1,800 字</td>
+<td><a target="_blank" rel="noopener" href="https://ai.codefather.cn/post/2113085678806941698">ai.codefather.cn/post/2113085678806941698</a></td>
+</tr>
+</tbody>
+</table>
+<p>仓库地址是 <code>https://gitee.com/PerFectLi7/feiqian.git</code>，核对版本 <code>master @ 311e789</code>。仓库只有一次提交，四份文档与源码在同一个快照里。</p>
+<h2 id="二、推广文章说了什么">二、推广文章说了什么</h2>
+<p>文章面向普通用户，六个小节，没有技术细节，也没有出现&quot;功能画像&quot;&quot;多轮追问&quot;这些设计文档里的核心概念。</p>
+<table>
+<thead>
+<tr>
+<th>小节</th>
+<th>原文讲了什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前言：我们每天都在丢失记忆</td>
+<td>浏览器历史只能字面匹配，&quot;上个月看过的那篇讲 CAP 定理的英文文章&quot;这类模糊印象搜不到；长文阅读效率低</td>
+</tr>
+<tr>
+<td>核心功能：记忆回溯</td>
+<td>本地语义索引，用自然语言描述即可检索；三个场景：按内容找文章、只记得功能找工具、想不起关键词时由助手追问；书签同样可检索</td>
+</tr>
+<tr>
+<td>网页智能助手：重塑阅读体验</td>
+<td>常驻侧边栏；一键总结长文；划词即问即答；多标签页横向对比并以表格输出</td>
+</tr>
+<tr>
+<td>隐私优先</td>
+<td>强调本地优先，索引与向量计算都在浏览器内完成；内置域名黑名单自动跳过敏感站点</td>
+</tr>
+<tr>
+<td>如何获取</td>
+<td>Chrome 应用商店与 Edge 加载项商店免费上架</td>
+</tr>
+<tr>
+<td>结尾</td>
+<td>口号&quot;拒绝金鱼记忆，给你的浏览器装上第二大脑&quot;</td>
+</tr>
+</tbody>
+</table>
+<p>文章的角色是获客文案，它与设计文档的关系是&quot;承诺面&quot;与&quot;设计面&quot;。上一篇里&quot;宣传口径需要打折&quot;的判断，依据的是这条承诺面与 <code>cloudEnabled</code> 开关未落地、云端 LLM 确实会收到标题与摘要这两处事实之间的落差，不是文章措辞本身有问题。</p>
+<h2 id="三、产品详细设计文档-V1-1">三、产品详细设计文档 V1.1</h2>
+<p>一句话定位是&quot;用你记忆中的模糊描述，找回你曾经浏览过的任何网页&quot;。背景判断的关键句在第 29 行：Chrome 原生历史搜索只能做字面匹配，“标题不含关键词就完全找不到”。</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>数据源</th>
+<th>定位</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本查询库</td>
+<td>历史浏览记录</td>
+<td>覆盖所有浏览过的页面，解决&quot;遗忘地址&quot;</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>扩展查询库</td>
+<td>书签收藏</td>
+<td>用户主动保存的高价值内容，精度更高</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>实时上下文</td>
+<td>当前标签页</td>
+<td>结合正在看的页面做即时推理</td>
+<td>P1</td>
+</tr>
+</tbody>
+</table>
+<p>目标用户分了五类（第 33–39 行）：通用浏览器用户、重度收藏者、研究者/学生、产品/投资从业者、开发者。这张表决定了产品把&quot;所有浏览器用户&quot;而非&quot;书签使用者&quot;当作基本盘。</p>
+<p>F0 记忆回溯检索的典型场景对照（第 84–89 行）把&quot;传统历史搜索搜不到&quot;逐条列了出来：</p>
+<table>
+<thead>
+<tr>
+<th>用户记忆</th>
+<th>传统历史搜索</th>
+<th>飞签</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“上个月看的那篇讲数据库 CAP 定理的文章”</td>
+<td>标题是 “Understanding the CAP Theorem”，输入&quot;数据库&quot;搜不到</td>
+<td>语义匹配，直接命中</td>
+</tr>
+<tr>
+<td>“一个讲 Rust 所有权的教程，标题好像有’Ownership’”</td>
+<td>标题不含 “Rust” 就漏掉</td>
+<td>结合页面内容语义</td>
+</tr>
+<tr>
+<td>“那个蓝色调、讲设计系统的网站”</td>
+<td>完全无法搜索</td>
+<td>页面摘要/正文语义匹配</td>
+</tr>
+<tr>
+<td>“大概两三周前，看了一篇关于 React 性能优化的”</td>
+<td>需要手动翻历史</td>
+<td>时间范围过滤 + 语义检索</td>
+</tr>
+</tbody>
+</table>
+<p>同一节给出的检索策略是三分通道（第 130–134 行）：语义向量匹配为主，元数据过滤（时间、<code>visitCount</code>、<code>typedCount</code>）为辅，最后做融合排序。性能参考标注了来源 SmrutiCortex：索引体积约 4KB/页、缓存命中检索延迟约 50ms、嵌入生成 1–3 条/秒（第 138–142 行）。这三项在源码里没有对应基准，上一篇因此把它们处理为设计目标。</p>
+<p>F2 标签页能力的技术要点列了八个环节（第 201–210 行）：DOM 获取、Readability 抽取、多标签页合并、按标题/段落分块保留锚点、语义检索加关键词命中的查找定位、结果附原文片段与锚点的溯源、PDF/图片走 OCR 或解析、超长页面分段摘要后再推理。</p>
+<p>扩展功能四个。E1 混合上下文被写成差异化核心：同一次对话里同时引用历史、书签、标签页，回答标注 <code>[历史]</code>/<code>[书签]</code>/<code>[标签页]</code> 来源；原文的判断是 ChatGPT/Gemini 扩展&quot;有标签页能力，但不碰用户的本地历史和书签&quot;（第 240 行）。E2 主动遗忘管理针对&quot;历史比书签更脏&quot;，规则包括忽略搜索引擎结果页、登录页、短停留页，对超过 18 个月未打开的记录生成归档建议。E3 场景化恢复按设备与时段区分推荐策略。E4 知识闭环在关闭标签页、打开书签、新存书签三个事件上触发摘要与关联。</p>
+<p>技术选型表（第 305–313 行）有两处后来没有按原文落地：向量索引写的是&quot;WASM 向量库 / IndexedDB&quot;，嵌入模型写的是 “MiniLM-L6-v2 / mxbai-embed-large” 二选一。代码最终用的是 IndexedDB 全量扫描加 <code>all-MiniLM-L6-v2</code>，没有引入向量库。</p>
+<p><code>IndexEntry</code> 原文 13 个字段（第 351–364 行）：<code>id</code>（URL 哈希）、<code>url</code>、<code>title</code>、<code>source</code>（<code>history</code>/<code>bookmark</code>/<code>tab</code>）、<code>embedding</code>、<code>summary</code>、<code>lastVisitTime</code>、<code>visitCount</code>、<code>typedCount</code>、<code>tags</code>、<code>folder</code>、<code>indexedAt</code>、<code>archived</code>。隐私黑名单只有 <code>domain</code>、<code>reason</code>、<code>addedAt</code> 三个字段，默认覆盖银行、邮箱、登录页、密码管理器、支付页面。</p>
+<p>商业模式是三层定价：免费版（50 个书签检索/周、每周 3 次标签页引用、历史限最近 7 天）、专业版 ¥25/月、团队版 ¥68/月。竞品对比表的结论句值得单独摘出来：历史语义搜索已有竞品验证需求，但它们的共同局限是只做历史语义搜索，不做三库混合推理（第 468 行）。</p>
+<p>路线图分四段：MVP 0–3 月做 F0+F2，V1.0 3–6 月做 F1+付费墙，V1.5 6–9 月做 E1+隐私控制，V2.0 9–12 月做 E2/E3/E4+多浏览器+端到端加密同步。成功指标里最硬的一条是&quot;记忆回溯检索 Top-3 命中率 ≥ 70%&quot;（第 499 行），仓库里没有对应的评估集。</p>
+<h2 id="四、开发文档-V1-1">四、开发文档 V1.1</h2>
+<p>七个功能点固定编号：F0 记忆回溯检索（P0）、F1 对话式书签检索（P1）、F2 标签页引用与阅读（P1）、E1 混合上下文（P1）、E2 主动遗忘管理（P2）、E3 场景化恢复（P2）、E4 知识闭环（P2）。</p>
+<p>技术选型总览（第 29–37 行）比产品文档更具体，其中&quot;向量索引：WASM 向量库（如 hnswlib-wasm）+ IndexedDB&quot;和&quot;模型调度：本地小模型 + 云端大模型&quot;是整个架构层的承诺。模块划分给了 11 个模块，包括 <code>ui/popup</code>、<code>ui/options</code>、<code>bg/message-router</code>、<code>bg/indexer</code>、<code>bg/extractor</code>、<code>bg/privacy</code>、<code>bg/recommender</code>、<code>bg/closure</code>、<code>core/embedder</code>、<code>core/vector-store</code>、<code>core/ranker</code>、<code>ai/llm</code>。</p>
+<p>内部消息接口原文列了 9 种：<code>SEARCH_HISTORY</code>、<code>SEARCH_BOOKMARKS</code>、<code>READ_TAB</code>、<code>EXTRACT_TAB</code>、<code>MIXED_QUERY</code>、<code>GET_INDEX_STATUS</code>、<code>PAUSE_INDEX</code>/<code>CLEAR_INDEX</code>、<code>ADD_BLOCKLIST</code>、<code>GET_RECOMMEND</code>。源码里的 <code>message-router</code> 实际挂了 17 种，命名与这里不完全对应。</p>
+<p>IndexedDB 设计四张表（第 204–209 行）：<code>entries</code>（主键 <code>id</code>，索引 <code>source</code>、<code>lastVisitTime</code>、<code>title</code>）、<code>blocklist</code>（<code>domain</code>）、<code>settings</code>（<code>key</code>）、<code>conversations</code>（可选，<code>id</code>）。<code>conversations</code> 标了&quot;可选&quot;，最终没有实现，这也是会话状态只能留在 React state 里的直接来源。</p>
+<p><code>Settings</code> 四个字段值得原样记录，因为它们是隐私承诺的落点：<code>indexEnabled</code>（索引总开关）、<code>historyDays</code>（历史索引回溯天数）、<code>cloudEnabled</code>（是否允许云端推理）、<code>defaultBlocklist</code>（默认黑名单域）。</p>
+<p>性能与容量验收表（第 307–312 行）：单页索引体积约 4KB、缓存命中检索延迟 ≤ 100ms、嵌入生成 1–3 条/秒、万级历史条目要求增量索引且候选集收敛。隐私验收的四条要求分别是嵌入本地完成、云端推理前取得同意、默认黑名单覆盖敏感站点、一键暂停与清空后数据可验证删除。</p>
+<h2 id="五、记忆回溯检索开发设计书-V1-2">五、记忆回溯检索开发设计书 V1.2</h2>
+<p>这是四份文档里与实现关系最紧的一份，也是上一篇最重要的原文来源。</p>
+<p>原文把问题定义为&quot;功能意图 → 站点内容&quot;的语义鸿沟（第 29 行）：用户说&quot;我要做什么&quot;，页面写&quot;我是什么&quot;。它给了两组对照句——用户侧是&quot;我想要那个能把图片变成像素画的网站&quot;，页面侧是 “Pixelate your photos online — free image pixelator”，并直接断言这两组文本在向量空间里的相似度往往不高。</p>
+<table>
+<thead>
+<tr>
+<th>模糊层</th>
+<th>具体表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户描述模糊</td>
+<td>&quot;AI 聚合平台&quot;没有区分度</td>
+</tr>
+<tr>
+<td>站点内容稀薄</td>
+<td>正文只有一行，抓不到功能细节（SPA 站点）</td>
+</tr>
+<tr>
+<td>类别词泛化</td>
+<td>&quot;AI&quot;在任何 AI 站点都出现，向量区分度极低</td>
+</tr>
+</tbody>
+</table>
+<p>核心原则那句可以直接引：不要拿用户原话直接检索，先把用户描述翻译成&quot;站点能力&quot;，再匹配（第 56 行）。</p>
+<p>功能画像字段的原文定义用 snake_case（第 79–89 行）：<code>functional_summary</code>、<code>action_tags</code>、<code>input_types</code>、<code>output_types</code>、<code>site_category</code>、<code>key_differentiator</code>、<code>model_count</code>、<code>is_free</code>、<code>requires_login</code>。源码在此基础上多出 <code>operationStyle</code> 与 <code>source</code>，前者在原文里只以&quot;操作方式（一键/参数）&quot;的形式出现在追问维度表中。</p>
+<p>抽取管线的原文（第 93–101 行）：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">页面加载
+  → 抽取 title &#x2F; meta &#x2F; H1 &#x2F; 功能按钮文案
+  → LLM 生成 functional_summary（一句话说清&quot;这个站能干什么&quot;）
+  → 抽取 input_types &#x2F; output_types &#x2F; action_tags
+  → 判定 site_category（工具&#x2F;文章&#x2F;论坛&#x2F;电商&#x2F;...）
+  → 提取 key_differentiator（从标题和描述中识别区分性特征）
+  → 存入功能画像索引</code></pre></div></figure>
+<p>原文为 SPA 站点专门给了&quot;仅凭标题生成画像&quot;的例子：<code>title</code> 为 “AI Model Hub – AI Chat, AI Image, AI Video &amp; 500+ AI Models”，推导出功能摘要、&quot;多模型聚合&quot;和 <code>model_count: 500+</code>。这条设计后来被降级——源码的 <code>buildProfile()</code> 用正则与词表做同样的事，LLM 只补候选集前 6 条。</p>
+<p>多路召回按五个方向生成 query（第 120–126 行）：类别语言、功能语言、产品语言、使用场景、同义表达。融合排序表给的是定性权重（第 130–137 行）：</p>
+<table>
+<thead>
+<tr>
+<th>通道</th>
+<th>匹配什么</th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>功能摘要匹配</td>
+<td>用户功能描述 ↔ <code>functional_summary</code></td>
+<td>高</td>
+</tr>
+<tr>
+<td>输入输出匹配</td>
+<td>“图片→像素画” ↔ <code>input/output types</code></td>
+<td>高</td>
+</tr>
+<tr>
+<td>站点类型匹配</td>
+<td>“网站/工具” ↔ <code>site_category</code></td>
+<td>中</td>
+</tr>
+<tr>
+<td>关键区分特征匹配</td>
+<td>“聚合” ↔ <code>key_differentiator</code></td>
+<td>高</td>
+</tr>
+<tr>
+<td>行为信号匹配</td>
+<td>用户是否用过、停留多久</td>
+<td>中</td>
+</tr>
+<tr>
+<td>文本向量匹配</td>
+<td>兜底语义相似</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<p>第 9.4 节才给出数值（第 416–420 行）：</p>
+<figure><div class="code-wrapper"><pre class="language-none"><code class="language-none">score &#x3D; 0.5 × 功能摘要匹配
+      + 0.3 × 输入输出匹配
+      + 0.1 × 站点类型匹配
+      + 0.1 × 文本向量相似</code></pre></div></figure>
+<p>源码的 <code>scoreOne()</code> 与这个公式一致，额外把&quot;关键区分特征&quot;并入了功能摘要匹配，并追加行为分项（时间衰减 ≤0.06 + 频次 ≤0.04）。</p>
+<p>泛化词降权那段原文很直接：识别 query 里的停用词/泛化词（AI、平台、工具、网站），降低它们的权重，把权重给区分性词（聚合、500+、多模型、Chat/Image/Video 统一）；检索应当对准&quot;聚合&quot;这类区分词，&quot;AI&quot;本身不提供区分信息（第 143–145 行）。</p>
+<p>多轮对话的核心循环（第 153–162 行）是一个 while 结构：更新 <code>MemoryProfile</code>、用约束过滤并检索、判断收敛（候选 ≤3 且置信度高则呈现，有高信息增益维度则追问，候选多且无高增益维度则切时间线）、等待反馈。第一轮的要求是&quot;按功能特征分组，让用户判断专门 vs 通用&quot;，原文给了六条结果的示例：两个&quot;专门做像素画&quot;的、两个&quot;通用图片编辑含像素化&quot;的、两个&quot;其他图像转换&quot;的。</p>
+<p>追问口径有一张对照表（第 190–194 行）：</p>
+<table>
+<thead>
+<tr>
+<th>不要问</th>
+<th>要问</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“你还记得标题吗”</td>
+<td>“它是专门做这个的，还是通用工具”</td>
+</tr>
+<tr>
+<td>“页面是什么颜色”</td>
+<td>“操作是一键完成，还是有很多参数”</td>
+</tr>
+<tr>
+<td>“大概什么时候看的”</td>
+<td>“你记得它能批量处理吗”</td>
+</tr>
+</tbody>
+</table>
+<p>依据句是&quot;用户对功能的记忆，远比对内容和外观的记忆可靠&quot;（第 196 行）。</p>
+<p><code>MemoryProfile</code> 原文结构（第 232–257 行）分三块：<code>constraints</code>（<code>time_range</code>、<code>content_type</code>、<code>topic_keywords</code>、<code>source_hint</code>、<code>visual_hint</code>、<code>site_function</code>、<code>site_category</code>）、<code>behavior_signals</code>（<code>min_dwell_time</code>、<code>had_scroll</code>、<code>had_copy</code>）、候选集状态（<code>candidates</code>、<code>rejected</code>、<code>confirmed_features</code>、<code>uncertainty</code>）。源码保留了前三类，把 <code>behavior_signals</code> 合进了打分项，<code>uncertainty</code> 被 <code>asked</code> 与 <code>pending</code> 取代；第 259 行写的&quot;从 <code>uncertainty</code> 里挑一个信息增益最大的维度去问&quot;，在实现中变成了固定顺序的瀑布。</p>
+<p>追问优先级表（第 267–275 行）是上一篇&quot;固定决策树&quot;评价的直接对照物：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>信息增益</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>站点功能（聚合/单一）</td>
+<td>极高</td>
+<td>直接区分站点类型，砍掉大部分候选</td>
+</tr>
+<tr>
+<td>时间范围</td>
+<td>极高</td>
+<td>直接过滤掉大部分历史记录</td>
+</tr>
+<tr>
+<td>域名/站点名片段</td>
+<td>极高</td>
+<td>最强精确信号</td>
+</tr>
+<tr>
+<td>内容形式（文章/视频/代码）</td>
+<td>高</td>
+<td>区分站点类型</td>
+</tr>
+<tr>
+<td>操作方式（一键/参数）</td>
+<td>中</td>
+<td>区分同功能站点的差异</td>
+</tr>
+<tr>
+<td>主题关键词</td>
+<td>中</td>
+<td>已有初步语义匹配</td>
+</tr>
+<tr>
+<td>视觉特征（颜色/布局）</td>
+<td>低</td>
+<td>难以索引，用户也难描述准</td>
+</tr>
+</tbody>
+</table>
+<p>第 8 节的案例是 <code>dyvip.lk888.ai</code>：标题 “AI Model Hub – AI Chat, AI Image, AI Video &amp; 500+ AI Models”，正文只有一行。用户说&quot;找一个 AI 聚合平台站点&quot;后，理想流程是先按类型分三组呈现，用户选&quot;多模型聚合平台&quot;，再追问&quot;能同时做对话、图像、视频，还是只做一种&quot;，最后命中。案例启示表的六条里，三条直接对应实现选择：别用类别词做检索要用功能特征、标题是功能型站点最可靠的信号、泛化词要降权区分词要升权。</p>
+<p>落地优先级用 P0/P1/P2 三档列了 12 项。P0 是功能画像索引、功能意图解析、多路召回、多轮对话状态管理、硬约束过滤；P1 是功能优先排序、按功能分组呈现、结果反馈闭环、功能对比呈现；P2 是时间线视图、行为信号接入、泛化词降权。值得注意的反差：泛化词降权在设计里是 P2，在源码里却是最先落地的能力。</p>
+<p>结尾那段&quot;核心认知&quot;把根本原因归到单轮描述的容量上——一次说清楚的信息量本就有限，与用户表达是否到位关系不大；多轮对话的价值，是把&quot;一次性说清楚&quot;变成&quot;一步步逼近&quot;（第 451 行）。</p>
+<h2 id="六、手动验证清单">六、手动验证清单</h2>
+<p>清单是 2026-09-22 版本，范围覆盖 F0/F1/F2、E1 与隐私黑名单，共 12 条用例：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>功能</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>隐私黑名单默认展示</td>
+<td>见默认黑名单（银行/邮箱/登录/密码管理器/支付），标注&quot;默认&quot;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>手动添加域名</td>
+<td>新增&quot;手动&quot;项，该域名不再参与索引与检索</td>
+</tr>
+<tr>
+<td>3</td>
+<td>移除默认项</td>
+<td>该项消失，索引/检索范围恢复</td>
+</tr>
+<tr>
+<td>4</td>
+<td>F0 历史检索</td>
+<td>返回带 <code>[历史]</code> 来源、匹配理由、访问次数与时间的卡片</td>
+</tr>
+<tr>
+<td>5</td>
+<td>F0 正文抽取</td>
+<td>第二次搜索同一主题时结果质量更高</td>
+</tr>
+<tr>
+<td>6</td>
+<td>F1 书签检索</td>
+<td>返回书签结果并展示 folder 路径</td>
+</tr>
+<tr>
+<td>7</td>
+<td>F2 标签页总结</td>
+<td>返回总结</td>
+</tr>
+<tr>
+<td>8</td>
+<td>F2 内容查找与溯源</td>
+<td>返回精炼答案 + &quot;原文出处&quot;片段</td>
+</tr>
+<tr>
+<td>9</td>
+<td>F2 一键跳转</td>
+<td>滚动到对应段落并高亮约 3 秒</td>
+</tr>
+<tr>
+<td>10</td>
+<td>E1 混合上下文</td>
+<td>回答带三种来源标注，引用来源可点击</td>
+</tr>
+<tr>
+<td>11</td>
+<td>E1 无结果降级</td>
+<td>明确提示&quot;未找到相关内容&quot;，不报错</td>
+</tr>
+<tr>
+<td>12</td>
+<td>隐私控制</td>
+<td>暂停/清空即时生效</td>
+</tr>
+</tbody>
+</table>
+<p>注意事项里有六条，其中三条被上一篇引用过：正文抽取依赖匿名访问，正文少于 50 字即标记已处理并降级为标题检索；offscreen 产物约 590KB 属正常；<code>src/shared/constants.ts</code> 明文预置了 DeepSeek Key，“仓库提交/分享前务必移除”（第 46 行）。最后这条说明作者清楚风险，但当前快照仍带着占位 Key。</p>
+<h2 id="七、原文与实现的对照索引">七、原文与实现的对照索引</h2>
+<p>上一篇的每条落差判断都能在两个位置找到依据：设计文档的承诺句，和对应的实现位置。</p>
+<table>
+<thead>
+<tr>
+<th>原文主张</th>
+<th>原文位置</th>
+<th>实现事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WASM 向量库 + IndexedDB</td>
+<td>开发文档第 35 行</td>
+<td>无向量库，全量读取后暴力 cosine</td>
+</tr>
+<tr>
+<td>多路召回，多组 query 各做向量检索</td>
+<td>V1.2 第 118–126 行</td>
+<td>多组 query 只参与词面匹配，embedding 只用一条</td>
+</tr>
+<tr>
+<td>功能摘要与关键特征为主排序</td>
+<td>V1.2 第 139 行</td>
+<td>权重 0.5 落在功能摘要，符合原意</td>
+</tr>
+<tr>
+<td>从 <code>uncertainty</code> 里挑信息增益最大的维度追问</td>
+<td>V1.2 第 259 行</td>
+<td>固定优先级瀑布，不按候选分布计算</td>
+</tr>
+<tr>
+<td>索引期用 LLM 生成画像</td>
+<td>V1.2 第 96 行</td>
+<td>索引期纯启发式，LLM 只补前 6 条候选</td>
+</tr>
+<tr>
+<td><code>conversations</code> 存储（可选）</td>
+<td>开发文档第 209 行</td>
+<td>未实现，会话状态在 React state</td>
+</tr>
+<tr>
+<td><code>indexEnabled</code> / <code>cloudEnabled</code></td>
+<td>开发文档第 197–199 行</td>
+<td>字段存在，主链路不读取</td>
+</tr>
+<tr>
+<td>历史索引回溯天数可配</td>
+<td>开发文档第 198 行</td>
+<td><code>historyDays</code> 从未读取，固定 1,000 条</td>
+</tr>
+<tr>
+<td>默认预置 Key 需移除</td>
+<td>手动验证清单第 46 行</td>
+<td>快照仍带占位 Key</td>
+</tr>
+</tbody>
+</table>
+<p>上表的&quot;实现事实&quot;一列来自对 <code>src/</code> 的静态阅读，没有运行构建或扩展，也没有做检索质量评测。原文中属于目标值而非实测值的部分（4KB/页、50ms、1–3 条/秒、Top-3 命中率 70%），这里保留原样并标注来源，不能当作已验证的性能数据。</p>
+</div>
+<hr>
+<div>
+<div class="post-metas my-3">
+<div class="post-meta mr-3 d-flex align-items-center">
+<i class="iconfont icon-category"></i>
+<span class="category-chains">
+<span class="category-chain">
+<a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-chain-item">技术分析</a>
+</span>
+</span>
+</div>
+<div class="post-meta">
+<i class="iconfont icon-tags"></i>
+<a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A9%E5%B1%95/" class="print-no-link">#浏览器扩展</a>
+<a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="print-no-link">#源码分析</a>
+<a href="/tags/%E8%AE%B0%E5%BF%86%E6%A8%A1%E5%9E%8B/" class="print-no-link">#记忆模型</a>
+</div>
+</div>
+<div class="license-box my-3">
+<div class="license-title">
+<div>飞签原文整理：四份设计文档与一份推广文案</div>
+<div>https://blog.fulequn.online/2026/11/feiqian-source-digest/</div>
+</div>
+<div class="license-meta">
+<div class="license-meta-item">
+<div>作者</div>
+<div>Fulequn</div>
+</div>
+<div class="license-meta-item license-meta-date">
+<div>发布于</div>
+<div>2026年11月15日</div>
+</div>
+<div class="license-meta-item">
+<div>许可协议</div>
+<div>
+<a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+<span class="hint--top hint--rounded" aria-label="BY - 署名">
+<i class="iconfont icon-cc-by"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+<div class="license-icon iconfont"></div>
+</div>
+<div class="post-prevnext my-3">
+<article class="post-prev col-6">
+</article>
+<article class="post-next col-6">
+<a href="/2026/11/feiqian-memory-model-analysis/" title="飞签记忆模型分析：三层记忆、功能画像与规则追问">
+<span class="hidden-mobile">飞签记忆模型分析：三层记忆、功能画像与规则追问</span>
+<span class="visible-mobile">下一篇</span>
+<i class="iconfont icon-arrowright"></i>
+</a>
+</article>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<div class="side-col d-none d-lg-block col-lg-2">
+<aside class="sidebar" style="margin-left:-1rem">
+<div id="toc">
+<p class="toc-header">
+<i class="iconfont icon-list"></i>
+<span>目录</span>
+</p>
+<div class="toc-body" id="toc-body"></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+<i class="iconfont icon-arrowup" aria-hidden="true"></i>
+</a>
+<div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header text-center">
+<h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+<button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body mx-3">
+<div class="md-form mb-5">
+<input type="text" id="local-search-input" class="form-control validate">
+<label data-error="x" data-success="v" for="local-search-input">关键词</label>
+</div>
+<div class="list-group" id="local-search-result"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-inner">
+<div class="footer-content">
+<a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备2026055803号-1</a>
+</div>
+</div>
+</footer>
+<script src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css">
+<script>NProgress.configure({showSpinner:!1,trickleSpeed:100}),NProgress.start(),window.addEventListener("load",function(){NProgress.done()})</script>
+<script src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+<script>!function(t,e){var i=Fluid.plugins.typing,n=e.getElementById("subtitle");n&&i&&i(n.getAttribute("data-typed-text"))}(window,document)</script>
+<script src="/js/img-lazyload.js"></script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js",function(){var t=jQuery("#toc");if(0!==t.length&&window.tocbot){var o=jQuery("#board-ctn").offset().top,e=Object.assign({tocSelector:"#toc-body",contentSelector:".markdown-body",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",scrollSmooth:!0,includeTitleTags:!0,headingsOffset:-o},CONFIG.toc);l()&&(e.collapseDepth=6),window.tocbot.init(e),t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s(),Fluid.events.registerRefreshCallback(function(){if("tocbot"in window){tocbot.refresh();var t=jQuery("#toc");if(0===t.length||!tocbot)return;t.find(".toc-list-item").length>0&&t.css("visibility","visible"),c(),s()}})}function l(){return CONFIG.toc&&!0===CONFIG.toc.expand_all}function c(){l()&&jQuery("#toc-body .tocbot-is-collapsed").removeClass("tocbot-is-collapsed")}function i(t,o){var e=t.children(".toc-toggle");if(0!==e.length){var l=o.hasClass("tocbot-is-collapsed");e.toggleClass("toc-toggle-collapsed",l).toggleClass("toc-toggle-expanded",!l)}}function s(){l()&&(jQuery("#toc-body .toc-list-item").each(function(){var t=jQuery(this),o=t.children("ol");0!==o.length?(0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>'),i(t,o)):0===t.children(".toc-toggle").length&&t.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>')}),jQuery("#toc-body").off("click.tocToggle").on("click.tocToggle",".toc-toggle",function(t){t.preventDefault(),t.stopPropagation();var o=jQuery(this).parent(".toc-list-item"),e=o.children("ol");0!==e.length&&(e.toggleClass("tocbot-is-collapsed"),i(o,e))}),window.__tocToggleObserver||(window.__tocToggleObserver=new MutationObserver(function(t){t.forEach(function(t){if("attributes"===t.type&&"class"===t.attributeName){var o=jQuery(t.target),e=o.parent(".toc-list-item");0!==e.length&&i(e,o)}})}),jQuery("#toc-body ol").each(function(){window.__tocToggleObserver.observe(this,{attributes:!0})})))}})</script>
+<script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+<script>Fluid.plugins.codeWidget()</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js",function(){window.anchors.options={placement:CONFIG.anchorjs.placement,visible:CONFIG.anchorjs.visible},CONFIG.anchorjs.icon&&(window.anchors.options.icon=CONFIG.anchorjs.icon);var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(window.anchors.options.class="anchorjs-link-left"),window.anchors.add(o.join(", ")),Fluid.events.registerRefreshCallback(function(){if("anchors"in window){anchors.removeAll();var n=(CONFIG.anchorjs.element||"h1,h2,h3,h4,h5,h6").split(","),o=[];for(var s of n)o.push(".markdown-body > "+s.trim());"left"===CONFIG.anchorjs.placement&&(anchors.options.class="anchorjs-link-left"),anchors.add(o.join(", "))}})})</script>
+<script>Fluid.utils.createScript("https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js",function(){Fluid.plugins.fancyBox()})</script>
+<script>Fluid.plugins.imageCaption()</script>
+<script src="/js/local-search.js"></script>
+<script src="/js/boot.js"></script>
+<noscript>
+<div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+</noscript>
+</body>
+</html>
